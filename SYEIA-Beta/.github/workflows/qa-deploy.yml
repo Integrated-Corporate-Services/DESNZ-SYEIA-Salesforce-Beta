@@ -1,0 +1,82 @@
+name: qa-deploy
+
+on:
+  push:
+    branches: [ develop ]
+
+permissions:
+  contents: write
+
+jobs:
+  deploy-qa:
+    runs-on: ubuntu-latest
+    environment: QA
+    env:
+      SF_CLIENT_ID: ${{ secrets.SF_CLIENT_ID }}
+      SFDX_JWT_KEY: ${{ secrets.SFDX_JWT_KEY }}
+      SF_USERNAME_QA: ${{ secrets.SF_USERNAME_QA }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install SF CLI and jq
+        run: |
+          npm install --global @salesforce/cli
+          sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Decode JWT key
+        run: |
+          echo "$SFDX_JWT_KEY" | base64 -d > server.key
+          chmod 600 server.key
+
+      - name: Authenticate QA
+        run: |
+          sf org login jwt --username "$SF_USERNAME_QA" \
+                           --client-id "$SF_CLIENT_ID" \
+                           --jwt-key-file server.key \
+                           --instance-url https://test.salesforce.com \
+                           --alias QA_SANDBOX --set-default
+
+      - name: Validate (checkonly)
+        run: |
+          sf project deploy start --manifest manifest/package.xml \
+            --target-org QA_SANDBOX --test-level RunLocalTests \
+            --wait 60 --dry-run --json > deploy-results-qa-check.json
+          cat deploy-results-qa-check.json | jq '.status,.result'
+
+      - name: Deploy (real)
+        run: |
+          sf project deploy start --manifest manifest/package.xml \
+            --target-org QA_SANDBOX --test-level RunLocalTests \
+            --wait 60 --json > deploy-results-qa.json
+          cat deploy-results-qa.json | jq '.status,.result'
+
+      - name: Run all tests
+        run: |
+          mkdir -p test-results
+          sfdx force:apex:test:run -u QA_SANDBOX -l RunLocalTests -w 60 -c --json > test-results/apex.json
+          ORG_COV=$(jq -r '.result.summary.orgWideCoverage' test-results/apex.json)
+          echo "Org-wide coverage: $ORG_COV%" >> $GITHUB_STEP_SUMMARY
+          FAILURES=$(jq -r '.result.summary.failing' test-results/apex.json)
+          if (( FAILURES > 0 )); then
+            echo "There are failing tests"; exit 1;
+          fi
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-deploy-artifacts
+          path: |
+            deploy-results-qa.json
+            test-results/apex.json
+
+      - name: Create QA tag
+        run: |
+          SHORTSHA=$(git rev-parse --short HEAD)
+          TAG="qa-$(date +%Y%m%d)-$SHORTSHA"
+          git tag -a "$TAG" -m "QA deploy $TAG"
+          git push origin "$TAG"
+          echo "Created tag $TAG" >> $GITHUB_STEP_SUMMARY
