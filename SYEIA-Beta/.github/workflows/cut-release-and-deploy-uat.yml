@@ -1,0 +1,104 @@
+
+name: cut-release-and-deploy-uat
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g., 1.3.0)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  cut-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create release branch from develop
+        run: |
+          VER="${{ inputs.version }}"
+          git fetch origin
+          git checkout -b "release/${VER}" origin/develop
+          git push -u origin "release/${VER}"
+
+      - name: Open PR to main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VER="${{ inputs.version }}"
+          gh pr create --base main --head "release/${VER}" \
+            --title "Release ${VER}" \
+            --body "Auto-generated PR to prepare ${VER} for production readiness."
+
+  deploy-uat:
+    runs-on: ubuntu-latest
+    needs: cut-release
+    environment: UAT
+    env:
+      SF_CLIENT_ID: ${{ secrets.SF_CLIENT_ID }}
+      SFDX_JWT_KEY: ${{ secrets.SFDX_JWT_KEY }}
+      SF_USERNAME_UAT: ${{ secrets.SF_USERNAME_UAT }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install SF CLI and jq
+        run: |
+          npm install --global @salesforce/cli
+          sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Decode JWT key
+        run: |
+          echo "$SFDX_JWT_KEY" | base64 -d > server.key
+          chmod 600 server.key
+
+      - name: Authenticate UAT
+        run: |
+          sf org login jwt --username "$SF_USERNAME_UAT" \
+                           --client-id "$SF_CLIENT_ID" \
+                           --jwt-key-file server.key \
+                           --instance-url https://test.salesforce.com \
+                           --alias UAT_SANDBOX --set-default
+
+      - name: Validate (checkonly) to UAT
+        run: |
+          sf project deploy start --manifest manifest/package.xml \
+            --target-org UAT_SANDBOX --test-level RunLocalTests \
+            --wait 60 --dry-run --json > deploy-results-uat-check.json
+          cat deploy-results-uat-check.json | jq '.status,.result'
+
+      - name: Deploy to UAT (post-approval)
+        run: |
+          sf project deploy start --manifest manifest/package.xml \
+            --target-org UAT_SANDBOX --test-level RunLocalTests \
+            --wait 60 --json > deploy-results-uat.json
+          cat deploy-results-uat.json | jq '.status,.result'
+
+      - name: Run all tests (UAT)
+        run: |
+          mkdir -p test-results
+          sfdx force:apex:test:run -u UAT_SANDBOX -l RunLocalTests -w 60 -c --json > test-results/apex.json
+          ORG_COV=$(jq -r '.result.summary.orgWideCoverage' test-results/apex.json)
+          echo "UAT Org-wide coverage: $ORG_COV%" >> $GITHUB_STEP_SUMMARY
+          FAILURES=$(jq -r '.result.summary.failing' test-results/apex.json)
+          if (( FAILURES > 0 )); then
+            echo "There are failing tests"; exit 1;
+          fi
+
+      - name: Generate GitHub Release notes (pre-release)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VER="${{ inputs.version }}"
+          gh release create "v${VER}" --generate-notes --prerelease || echo "Release may already exist"
+          echo "Release v${VER} created/updated" >> $GITHUB_STEP_SUMMARY
