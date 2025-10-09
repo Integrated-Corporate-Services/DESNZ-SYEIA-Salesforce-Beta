@@ -54,6 +54,8 @@ jobs:
 
       - name: Validate (checkonly)
         run: |
+          echo pwd
+          echo ls -al
           cd ../SYEIA-Beta
           sf project deploy start --manifest manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --dry-run --json > deploy-results-qa.json
           echo pwd
