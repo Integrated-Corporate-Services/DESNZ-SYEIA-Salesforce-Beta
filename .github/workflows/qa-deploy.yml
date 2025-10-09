@@ -54,9 +54,8 @@ jobs:
 
       - name: Validate (checkonly)
         run: |
-          sf project deploy start --manifest manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --dry-run --json > deploy-results-qa-check.json
-          cat deploy-results-qa-check.json | jq '.status,.result'
-
+          sf project deploy start --manifest manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --dry-run --json
+          
       - name: Deploy (real)
         run: |
           sf project deploy start --manifest manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --json > deploy-results-qa.json
