@@ -54,8 +54,7 @@ jobs:
 
       - name: Validate (checkonly)
         run: |
-          sf project deploy start --manifest ../../SYEIA-Beta/manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --dry-run --json > deploy-results-qa.json
-          cat deploy-results-qa.json
+          sf project deploy start --manifest ../../SYEIA-Beta/manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --dry-run --json
           
       - name: Deploy (real)
         run: |
