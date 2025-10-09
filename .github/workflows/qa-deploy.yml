@@ -29,8 +29,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: QA
     env:
-      # SF_CLIENT_ID: ${{ secrets.SF_CLIENT_ID }}
-      # SFDX_JWT_KEY: ${{ secrets.SFDX_JWT_KEY }}
       SF_USERNAME_QA: ${{ secrets.SF_USERNAME_QA }}
     steps:
       - uses: actions/checkout@v4
@@ -56,16 +54,12 @@ jobs:
 
       - name: Validate (checkonly)
         run: |
-          sf project deploy start --manifest manifest/package.xml \
-            --target-org QA_SANDBOX --test-level RunLocalTests \
-            --wait 60 --dry-run --json > deploy-results-qa-check.json
+          sf project deploy start --manifest manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --dry-run --json > deploy-results-qa-check.json
           cat deploy-results-qa-check.json | jq '.status,.result'
 
       - name: Deploy (real)
         run: |
-          sf project deploy start --manifest manifest/package.xml \
-            --target-org QA_SANDBOX --test-level RunLocalTests \
-            --wait 60 --json > deploy-results-qa.json
+          sf project deploy start --manifest manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --json > deploy-results-qa.json
           cat deploy-results-qa.json | jq '.status,.result'
 
       - name: Run all tests
