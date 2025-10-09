@@ -1,0 +1,120 @@
+name: validate
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - 'release/*'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    env:
+      SF_CLIENT_ID: ${{ secrets.SF_CLIENT_ID }}
+      SFDX_JWT_KEY: ${{ secrets.SFDX_JWT_KEY }}
+      SF_USERNAME_QA: ${{ secrets.SF_USERNAME_QA }}
+      SF_USERNAME_UAT: ${{ secrets.SF_USERNAME_UAT }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Java (for PMD)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install SF CLI
+        run: |
+          npm install --global @salesforce/cli
+
+      - name: Install project deps (eslint, etc.)
+        run: |
+          npm ci || npm install
+
+      - name: Install jq (JSON parsing)
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Determine target environment (QA for develop, UAT for release/*)
+        run: |
+          if [[ "${{ github.base_ref }}" == release/* ]]; then
+            echo "TARGET_ENV=UAT" >> $GITHUB_ENV
+            echo "SF_USERNAME=${SF_USERNAME_UAT}" >> $GITHUB_ENV
+            echo "ALIAS=UAT_SANDBOX" >> $GITHUB_ENV
+          else
+            echo "TARGET_ENV=QA" >> $GITHUB_ENV
+            echo "SF_USERNAME=${SF_USERNAME_QA}" >> $GITHUB_ENV
+            echo "ALIAS=QA_SANDBOX" >> $GITHUB_ENV
+          fi
+
+      - name: Decode JWT key
+        run: |
+          echo "$SFDX_JWT_KEY" | base64 -d > server.key
+          chmod 600 server.key
+
+      - name: Authenticate with JWT
+        run: |
+          sf org login jwt --username "$SF_USERNAME" 
+                           --client-id "$SF_CLIENT_ID" 
+                           --jwt-key-file server.key 
+                           --instance-url https://test.salesforce.com 
+                           --alias "$ALIAS" --set-default
+
+      - name: PMD (Apex)
+        run: |
+          ./scripts/pmd.sh
+
+      - name: ESLint (LWC)
+        run: |
+          npx eslint "force-app/**/lwc/**/*.js"
+
+      - name: Validate (checkonly) deploy to ${{ env.TARGET_ENV }}
+        run: |
+          mkdir -p deploy-results
+          sf project deploy start 
+            --manifest manifest/package.xml 
+            --target-org "$ALIAS" 
+            --test-level RunLocalTests 
+            --ignore-errors 
+            --wait 60 
+            --dry-run 
+            --json > deploy-results/checkonly.json
+          cat deploy-results/checkonly.json | jq '.status,.result'
+
+      - name: Run Apex tests (json) and compute org-wide coverage
+        run: |
+          mkdir -p test-results
+          sfdx force:apex:test:run -u "$ALIAS" -l RunLocalTests -w 60 -c --json > test-results/apex.json
+          cat test-results/apex.json | jq '.result.summary'
+          ORG_COV=$(jq -r '.result.summary.orgWideCoverage' test-results/apex.json)
+          echo "ORG_COVERAGE=$ORG_COV" >> $GITHUB_ENV
+          if [ "$ORG_COV" = "null" ]; then ORG_COV=0; fi
+          echo "Org-wide coverage: $ORG_COV%"
+          if (( $(printf "%.0f" "$ORG_COV") < 75 )); then
+            echo "Coverage below 75%"; exit 1;
+          fi
+          FAILURES=$(jq -r '.result.summary.failing' test-results/apex.json)
+          if (( FAILURES > 0 )); then
+            echo "There are failing tests"; exit 1;
+          fi
+
+      - name: Post summary to PR
+        if: always()
+        run: |
+          {
+            echo "### Validation Summary"
+            echo ""
+            echo "- Target: **${{ env.TARGET_ENV }}**"
+            echo "- Org-wide Coverage: **${{ env.ORG_COVERAGE }}%**"
+            echo "- PMD & ESLint: Completed"
+            echo "- Deployment: **checkonly**"
+          } >> $GITHUB_STEP_SUMMARY
