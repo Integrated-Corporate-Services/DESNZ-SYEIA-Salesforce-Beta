@@ -54,11 +54,13 @@ jobs:
 
       - name: Validate (checkonly)
         run: |
-          sf project deploy start --manifest ../SYEIA-Beta/manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --dry-run --json > deploy-results-qa.json
+          cd ../SYEIA-Beta
+          sf project deploy start --manifest manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --dry-run --json > deploy-results-qa.json
+          echo pwd
           
       - name: Deploy (real)
         run: |
-          sf project deploy start --manifest ../SYEIA-Beta/manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --json > deploy-results-qa.json
+          sf project deploy start --manifest manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --json > deploy-results-qa.json
           cat deploy-results-qa.json
 
       - name: Run all tests
