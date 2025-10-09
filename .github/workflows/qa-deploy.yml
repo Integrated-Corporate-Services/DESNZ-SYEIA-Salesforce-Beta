@@ -31,14 +31,14 @@ jobs:
         run: |
           # echo "$SFDX_JWT_KEY" | base64 -d > server.key
           # chmod 600 server.key
-          echo "${{ secrets.SFDX_AUTH_URL_QA }}" > sfdxurl.txt
+          echo "${{ secrets.SFDX_AUTH_URL_QA }}" > qaSfdxurl.txt
 
       - name: Authenticate QA
         run: |
-          sf org login jwt --username "$SF_USERNAME_QA" \
-                           --sfdx-url-file sfdxurl.txt \
-                           --instance-url https://test.salesforce.com \
-                           --alias QA_SANDBOX --set-default
+          sf org login sfdx-url \
+              --sfdx-url-file qaSfdxurl.txt \
+              --instance-url https://test.salesforce.com \
+              --alias QA_SANDBOX --set-default
 
       - name: Validate (checkonly)
         run: |
