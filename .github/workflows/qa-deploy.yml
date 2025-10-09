@@ -3,6 +3,12 @@ name: qa-deploy
 on:
   push:
     branches: [ develop ]
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: 'Deploy to QA'
+        required: true
+        type: boolean
 
 permissions:
   contents: write
