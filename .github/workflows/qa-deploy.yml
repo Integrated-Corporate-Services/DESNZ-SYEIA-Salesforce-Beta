@@ -5,10 +5,21 @@ on:
     branches: [ develop ]
   workflow_dispatch:
     inputs:
-      deploy:
-        description: 'Deploy to QA'
+      environment:
+        description: 'Target environment'
         required: true
-        type: boolean
+        type: choice
+        options:
+          - Dev1
+          - Dev2
+          - QA
+          - UAT
+          - Prod
+      ref:
+        description: 'Git ref to deploy (branch, tag, or commit SHA)'
+        required: false
+        default: 'develop'
+        type: string
 
 permissions:
   contents: write
