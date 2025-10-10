@@ -54,8 +54,11 @@ jobs:
 
       - name: Validate (checkonly)
         run: |
+          pwd
+          ls -al
           cd ../../
           pwd
+          ls -al
           MANIFEST_PATH=$(realpath ./SYEIA-Beta/manifest/package.xml)
           sf project deploy start --manifest "$MANIFEST_PATH" --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --dry-run --json
           
