@@ -2,23 +2,11 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
 		<members>*</members>
-		<name>AnimationRule</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>ApexClass</name>
 	</types>
 	<types>
 		<members>*</members>
 		<name>ApexComponent</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ApexPage</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ApexTestSuite</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -38,15 +26,7 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>Audience</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>AuraDefinitionBundle</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>AuthProvider</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -55,42 +35,6 @@
 	<types>
 		<members>*</members>
 		<name>BrandingSet</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CallCenter</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CampaignInfluenceModel</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>Certificate</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ChannelLayout</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ChatterExtension</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CleanDataService</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>Community</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ConnectedApp</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ContentAsset</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -114,15 +58,7 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>CustomObjectTranslation</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>CustomPermission</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CustomSite</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -130,17 +66,7 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>DataCategoryGroup</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>DelegateGroup</name>
-	</types>
-	<types>
-		<members>MyStore1</members>
-		<members>PayNow1</members>
-		<members>Site_Service_Messaging_for_Web_813501211</members>
-		<name>DigitalExperienceConfig</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -149,14 +75,6 @@
 	<types>
 		<members>Case</members>
 		<name>EscalationRules</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ExperienceBundle</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ExternalDataSource</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -192,23 +110,11 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>KeywordList</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>Layout</name>
 	</types>
 	<types>
 		<members>*</members>
 		<name>LightningComponentBundle</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>LightningExperienceTheme</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ManagedTopics</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -236,47 +142,11 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>PlatformCachePartition</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>PlatformEventChannel</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>PlatformEventChannelMember</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>PostTemplate</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>PresenceDeclineReason</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>Profile</name>
 	</types>
 	<types>
 		<members>*</members>
-		<name>ProfilePasswordPolicy</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ProfileSessionSetting</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>Prompt</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>Queue</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>QueueRoutingConfig</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -299,18 +169,6 @@
 	<types>
 		<members>*</members>
 		<name>Role</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ServiceChannel</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ServicePresenceStatus</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>Settings</name>
 	</types>
 	<types>
 		<members>*</members>
