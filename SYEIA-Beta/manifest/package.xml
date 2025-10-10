@@ -61,6 +61,10 @@
 		<name>CustomTab</name>
 	</types>
 	<types>
+		<members>Case__c</members>
+		<name>CustomObject</name>
+	</types>
+	<types>
 		<members>*</members>
 		<name>DelegateGroup</name>
 	</types>
