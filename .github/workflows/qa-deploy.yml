@@ -61,13 +61,14 @@ jobs:
           ls -al
           cd ./manifest
           pwd
+          cat package.xml
           ls -al
           MANIFEST_PATH=$(realpath ./SYEIA-Beta/manifest/package.xml)
           sf project deploy start --manifest "$MANIFEST_PATH" --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --dry-run --json
           
       - name: Deploy (real)
         run: |
-          sf project deploy start --manifest ../../SYEIA-Beta/manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --json > deploy-results-qa.json
+          sf project deploy start --manifest ./SYEIA-Beta/manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --json > deploy-results-qa.json
           cat deploy-results-qa.json
 
       - name: Run all tests
