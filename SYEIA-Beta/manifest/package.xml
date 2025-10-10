@@ -153,16 +153,6 @@
 		<name>QuickAction</name>
 	</types>
 	<types>
-		<members>AdyenAccountManagementTestAPI</members>
-		<members>AdyenCheckoutTestAPI</members>
-		<members>AdyenOAuthTestAPI</members>
-		<members>PaypalProductionAPI</members>
-		<members>PaypalSandboxAPI</members>
-		<members>StripeAPI</members>
-		<members>StripeConnectAPI</members>
-		<name>RemoteSiteSetting</name>
-	</types>
-	<types>
 		<members>*</members>
 		<name>ReportType</name>
 	</types>
