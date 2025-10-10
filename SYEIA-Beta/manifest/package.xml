@@ -73,10 +73,6 @@
 		<name>DuplicateRule</name>
 	</types>
 	<types>
-		<members>Case</members>
-		<name>EscalationRules</name>
-	</types>
-	<types>
 		<members>*</members>
 		<name>FlexiPage</name>
 	</types>
