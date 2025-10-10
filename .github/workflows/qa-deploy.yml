@@ -54,14 +54,7 @@ jobs:
 
       - name: Validate (checkonly)
         run: |
-          pwd
-          ls -al
-          cd ./SYEIA-Beta
-          pwd
-          ls -al
-          cd ./manifest
-          pwd
-          cat package.xml
+          find . -name "package.xml"
           ls -al
           sf project deploy start --manifest ./SYEIA-Beta/manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --dry-run --json
           
