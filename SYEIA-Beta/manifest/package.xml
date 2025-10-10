@@ -2,14 +2,6 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
 		<members>*</members>
-		<name>ActionLinkGroupTemplate</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ActionPlanTemplate</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>AnimationRule</name>
 	</types>
 	<types>
@@ -19,10 +11,6 @@
 	<types>
 		<members>*</members>
 		<name>ApexComponent</name>
-	</types>
-	<types>
-		<members>apexEmailNotifications</members>
-		<name>ApexEmailNotifications</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -39,11 +27,6 @@
 	<types>
 		<members>*</members>
 		<name>AppMenu</name>
-	</types>
-	<types>
-		<members>ISE_IDV</members>
-		<members>PtyRelaGrp</members>
-		<name>ApplicationSubtypeDefinition</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -72,15 +55,6 @@
 	<types>
 		<members>*</members>
 		<name>BrandingSet</name>
-	</types>
-	<types>
-		<members>GroupAudit</members>
-		<members>IDV_Audit</members>
-		<name>BusinessProcessTypeDefinition</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CMSConnectSource</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -112,14 +86,6 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>CommunityTemplateDefinition</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CommunityThemeDefinition</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>ConnectedApp</name>
 	</types>
 	<types>
@@ -128,27 +94,11 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>CorsWhitelistOrigin</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CspTrustedSite</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>CustomApplication</name>
 	</types>
 	<types>
 		<members>*</members>
 		<name>CustomApplicationComponent</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CustomFeedFilter</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CustomHelpMenuSection</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -482,10 +432,6 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>CustomPageWebLink</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>CustomPermission</name>
 	</types>
 	<types>
@@ -505,12 +451,6 @@
 		<name>DelegateGroup</name>
 	</types>
 	<types>
-		<members>site/MyStore1</members>
-		<members>site/PayNow1</members>
-		<members>site/Site_Service_Messaging_for_Web_813501211</members>
-		<name>DigitalExperienceBundle</name>
-	</types>
-	<types>
 		<members>MyStore1</members>
 		<members>PayNow1</members>
 		<members>Site_Service_Messaging_for_Web_813501211</members>
@@ -521,19 +461,6 @@
 		<name>DuplicateRule</name>
 	</types>
 	<types>
-		<members>*</members>
-		<name>EclairGeoData</name>
-	</types>
-	<types>
-		<members>EmailToCase</members>
-		<members>EmailToSalesforce</members>
-		<name>EmailServicesFunction</name>
-	</types>
-	<types>
-		<members>Service_Messaging_for_Web</members>
-		<name>EmbeddedServiceConfig</name>
-	</types>
-	<types>
 		<members>Case</members>
 		<name>EscalationRules</name>
 	</types>
@@ -542,27 +469,8 @@
 		<name>ExperienceBundle</name>
 	</types>
 	<types>
-		<members>ISE_IDVAudit</members>
-		<members>PartyRelationshipGroupAuditLog</members>
-		<name>ExplainabilityActionDefinition</name>
-	</types>
-	<types>
-		<members>ISE_IDVAudit</members>
-		<members>PartyRelationshipGroupAuditLog</members>
-		<name>ExplainabilityActionVersion</name>
-	</types>
-	<types>
 		<members>*</members>
 		<name>ExternalDataSource</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ExternalServiceRegistration</name>
-	</types>
-	<types>
-		<members>Rule5c4a5a68a33998bac19bcdbc32a79486121e445445102657b3028af95dc1f004</members>
-		<members>Rule8f6672944a7dfe57a65db7b8500ae2bd0d521b61380f7d418ec16eb1cc739f52</members>
-		<name>FieldRestrictionRule</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -575,26 +483,6 @@
 	<types>
 		<members>*</members>
 		<name>FlowDefinition</name>
-	</types>
-	<types>
-		<members>OpportunityAmount</members>
-		<name>ForecastingSourceDefinition</name>
-	</types>
-	<types>
-		<members>LineItemQuantityProductDate</members>
-		<members>LineItemRevenueProductDate</members>
-		<members>OpportunityAmount</members>
-		<members>OpportunityLineItemQuantity</members>
-		<members>OpportunityLineItemRevenue</members>
-		<members>OpportunityQuantity</members>
-		<members>OpportunityQuantityProductDate</members>
-		<members>OpportunityRevenue</members>
-		<members>OpportunityRevenueProductDate</members>
-		<name>ForecastingType</name>
-	</types>
-	<types>
-		<members>OpportunityAmount</members>
-		<name>ForecastingTypeSource</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -617,14 +505,6 @@
 		<name>HomePageLayout</name>
 	</types>
 	<types>
-		<members>IframeWhiteListUrlSettings</members>
-		<name>IframeWhiteListUrlSettings</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>InstalledPackage</name>
-	</types>
-	<types>
 		<members>*</members>
 		<name>KeywordList</name>
 	</types>
@@ -642,16 +522,6 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>LightningMessageChannel</name>
-	</types>
-	<types>
-		<members>cms_document</members>
-		<members>cms_image</members>
-		<members>news</members>
-		<name>ManagedContentType</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>ManagedTopics</name>
 	</types>
 	<types>
@@ -664,10 +534,6 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>MyDomainDiscoverableLogin</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>NamedCredential</name>
 	</types>
 	<types>
@@ -676,49 +542,11 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>Network</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>NetworkBranding</name>
-	</types>
-	<types>
-		<members>NotificationTypeConfig</members>
-		<name>NotificationTypeConfig</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>OauthCustomScope</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>PathAssistant</name>
 	</types>
 	<types>
 		<members>*</members>
 		<name>PermissionSet</name>
-	</types>
-	<types>
-		<members>force__Benefit_Management_Caseworker</members>
-		<members>force__CommerceUsers</members>
-		<members>force__Commerce_Shopper</members>
-		<members>force__EmployeeHubUserPSG</members>
-		<members>force__Enablement_Resources_Manager</members>
-		<members>force__GeneralUsers</members>
-		<members>force__Grantmaking_Manager</members>
-		<members>force__HRServiceWorkspaceUserPSG</members>
-		<members>force__Investigative_Case_Management_Officer</members>
-		<members>force__Licensing_Permitting_Officer</members>
-		<members>force__MarketingUsers</members>
-		<members>force__Public_Sector_Solutions_Admin</members>
-		<members>force__SalesUsers</members>
-		<members>force__ServiceUsers</members>
-		<members>force__Social_Program_Management_Caseworker</members>
-		<members>force__Talent_Recruitment_Management_Specialist</members>
-		<members>force__UnifiedCatalogAdminPsl</members>
-		<members>force__UnifiedCatalogAgentPsl</members>
-		<members>force__UnifiedCatalogCommunityUserPsl</members>
-		<name>PermissionSetGroup</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -739,10 +567,6 @@
 	<types>
 		<members>*</members>
 		<name>PresenceDeclineReason</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>PresenceUserConfig</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -773,18 +597,6 @@
 		<name>QuickAction</name>
 	</types>
 	<types>
-		<members>*</members>
-		<name>RecommendationStrategy</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>RecordActionDeployment</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>RedirectWhitelistUrl</name>
-	</types>
-	<types>
 		<members>AdyenAccountManagementTestAPI</members>
 		<members>AdyenCheckoutTestAPI</members>
 		<members>AdyenOAuthTestAPI</members>
@@ -801,14 +613,6 @@
 	<types>
 		<members>*</members>
 		<name>Role</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>SamlSsoConfig</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>Scontrol</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -832,52 +636,7 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>SiteDotCom</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>Skill</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>StandardValueSetTranslation</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>StaticResource</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>SynonymDictionary</name>
-	</types>
-	<types>
-		<members>Employee_Timeline</members>
-		<name>TimelineObjectDefinition</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>TopicsForObjects</name>
-	</types>
-	<types>
-		<members>MyStore.Customer_Members</members>
-		<members>MyStore.Members_without_contribution</members>
-		<members>MyStore.Partner_and_Customer_members</members>
-		<members>PayNow.Customer_Members</members>
-		<members>PayNow.Members_without_contribution</members>
-		<members>PayNow.Partner_and_Customer_members</members>
-		<members>Site_Service_Messaging_for_Web_81350121.Customer_Members</members>
-		<members>Site_Service_Messaging_for_Web_81350121.Members_without_contribution</members>
-		<members>Site_Service_Messaging_for_Web_81350121.Partner_and_Customer_members</members>
-		<name>UserCriteria</name>
-	</types>
-	<types>
-		<members>Sales</members>
-		<members>Service</members>
-		<name>WaveAnalyticAssetCollection</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>WorkSkillRouting</name>
 	</types>
 	<types>
 		<members>*</members>
