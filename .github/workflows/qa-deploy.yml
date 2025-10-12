@@ -21,9 +21,12 @@ on:
         default: 'develop'
         type: string
 
+  
+
 permissions:
   contents: write
 
+  
 jobs:
   deploy-qa:
     runs-on: ubuntu-latest
@@ -32,7 +35,28 @@ jobs:
       SF_USERNAME_QA: ${{ secrets.SF_USERNAME_QA }}
     steps:
       - uses: actions/checkout@v4
+      - name: Validate user-provided ref exists
+        run: |
+          git fetch --all --tags
 
+          REF="${{ github.event.inputs.ref }}"
+          if [ -z "$REF" ]; then
+            echo "No ref input provided. Defaulting to 'develop'"
+            REF="develop"
+          fi
+
+          echo "Validating ref: $REF"
+
+          if git rev-parse --verify --quiet "origin/$REF" >/dev/null; then
+            echo "Branch $REF found on origin."
+            git checkout "$REF"
+          elif git rev-parse --verify --quiet "$REF" >/dev/null; then
+            echo "Commit or tag $REF found."
+            git checkout "$REF"
+          else
+            echo "::error::The specified ref '$REF' does not exist as a branch, tag, or commit."
+            exit 1
+          fi
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
