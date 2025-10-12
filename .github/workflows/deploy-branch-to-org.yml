@@ -19,12 +19,9 @@ on:
         default: 'develop'
         type: string
 
-  
-
 permissions:
   contents: write
 
-  
 jobs:
   deploy-branch-to-org:
     runs-on: ubuntu-latest
@@ -102,10 +99,9 @@ jobs:
 
       - name: Decode Oauth URL file
         run: |
-          echo "${{ secrets.SFDX_AUTH_URL_QA }}" > qaSfdxurl.txt
-          if [[ "$TARGET_ENV" == "Dev2" ]]; then
-            echo "Authenticating with Dev2 org..."
-            echo "$SFDX_AUTH_URL_Dev2" > dev2Sfdxurl.txt
+          if [[ "$TARGET_ENV" == "DEV2" ]]; then
+            echo "Authenticating with DEV2 org..."
+            echo "$SFDX_AUTH_URL_DEV2" > dev2Sfdxurl.txt
             sf org login sfdx-url \
               --sfdx-url-file dev2Sfdxurl.txt \
               --alias "$ALIAS" \
