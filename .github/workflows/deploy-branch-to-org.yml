@@ -25,7 +25,7 @@ permissions:
 jobs:
   deploy-branch-to-org:
     runs-on: ubuntu-latest
-  
+    environment: QA
     env:
       SF_USERNAME_QA: ${{ secrets.SF_USERNAME_QA }}
       SF_USERNAME_DEV2: ${{ secrets.SF_USERNAME_DEV2 }}
@@ -105,6 +105,7 @@ jobs:
             echo "Authenticating with DEV2 org..."
           
             echo "${{ secrets.SFDX_AUTH_URL_DEV2 }}" > dev2Sfdxurl.txt
+            
             # echo "$SFDX_AUTH_URL_DEV2" > dev2Sfdxurl.txt
             echo "ALIAS=DEV2_SANDBOX" >> $GITHUB_ENV
             sf org display --target-org "$ALIAS"
