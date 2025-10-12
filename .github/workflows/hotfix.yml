@@ -37,20 +37,16 @@ jobs:
 
       - name: Validate (checkonly)
         run: |
-          PACKAGE_XML_PATH=$(find . -name "package.xml" | head -n 1)
-          echo "Found package.xml at: $PACKAGE_XML_PATH"
           cd ./SYEIA-Beta
-          sf project deploy start --manifest "$PACKAGE_XML_PATH" \
+          sf project deploy start --manifest manifest/package.xml \
             --target-org UAT_SANDBOX --test-level RunLocalTests \
             --wait 60 --dry-run --json > deploy-results-uat-check.json
           cat deploy-results-uat-check.json | jq '.status,.result'
 
       - name: Deploy (UAT)
         run: |
-          PACKAGE_XML_PATH=$(find . -name "package.xml" | head -n 1)
-          echo "Found package.xml at: $PACKAGE_XML_PATH"
           cd ./SYEIA-Beta
-          sf project deploy start --manifest "$PACKAGE_XML_PATH" \
+          sf project deploy start --manifest manifest/package.xml \
             --target-org UAT_SANDBOX --test-level RunLocalTests \
             --wait 60 --json > deploy-results-uat.json
           cat deploy-results-uat.json | jq '.status,.result'
