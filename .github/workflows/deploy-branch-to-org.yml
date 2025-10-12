@@ -8,8 +8,8 @@ on:
         required: true
         type: choice
         options:
-          - Dev1
-          - Dev2
+          - DEV1
+          - DEV2
           - QA
           - UAT
           - Prod
