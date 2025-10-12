@@ -57,14 +57,14 @@ jobs:
           PACKAGE_XML_PATH=$(find . -name "package.xml" | head -n 1)
           echo "Found package.xml at: $PACKAGE_XML_PATH"
           cd ./SYEIA-Beta
-          sf project deploy start --manifest "$PACKAGE_XML_PATH" --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --dry-run --json
+          sf project deploy start --manifest $PACKAGE_XML_PATH --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --dry-run --json
           
       - name: Deploy (real)
         run: |
           PACKAGE_XML_PATH=$(find . -name "package.xml" | head -n 1)
           echo "Found package.xml at: $PACKAGE_XML_PATH"
           cd ./SYEIA-Beta
-          sf project deploy start --manifest "$PACKAGE_XML_PATH" --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --json > deploy-results-qa.json
+          sf project deploy start --manifest manifest.package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --json > deploy-results-qa.json
           cat deploy-results-qa.json
 
       - name: Run all tests
