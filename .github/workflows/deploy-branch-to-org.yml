@@ -29,7 +29,6 @@ jobs:
   deploy-branch-to-org:
     runs-on: ubuntu-latest
   
-    environment: QA
     env:
       SF_USERNAME_QA: ${{ secrets.SF_USERNAME_QA }}
       SF_USERNAME_Dev2: ${{ secrets.SF_USERNAME_Dev2 }}
@@ -89,7 +88,7 @@ jobs:
               exit 1
               ;;
           esac
-        
+          echo "Set ALIAS to $ALIAS"
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
