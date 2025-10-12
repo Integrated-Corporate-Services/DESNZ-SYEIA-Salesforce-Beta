@@ -64,9 +64,6 @@ jobs:
 
       - name: Authenticate with URL file
         run: |
-          # sf org login sfdx-url \
-          #     --sfdx-url-file qaSfdxurl.txt \
-          #     --alias "$ALIAS" --set-default
           if [[ "$TARGET_ENV" == "QA" ]]; then
             echo "Authenticating with QA org..."
             echo "$SFDX_AUTH_URL_QA" | base64 -d > qaSfdxurl.txt
@@ -94,11 +91,10 @@ jobs:
 
       - name: Validate (checkonly) deploy to ${{ env.TARGET_ENV }}
         run: |
-          PACKAGE_XML_PATH=$(find . -name "package.xml" | head -n 1)
-          echo "Found package.xml at: $PACKAGE_XML_PATH"
           cd ./SYEIA-Beta
           mkdir -p deploy-results
-          sf project deploy start --manifest manifest/package.xml \
+          sf project deploy start \
+            --manifest manifest/package.xml \
             --target-org "$ALIAS" \
             --test-level RunLocalTests \
             --ignore-errors \
