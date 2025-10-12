@@ -98,13 +98,12 @@ jobs:
           echo "Found package.xml at: $PACKAGE_XML_PATH"
           cd ./SYEIA-Beta
           mkdir -p deploy-results
-          sf project deploy start --manifest "$PACKAGE_XML_PATH"
-            --manifest manifest/package.xml 
-            --target-org "$ALIAS" 
-            --test-level RunLocalTests 
-            --ignore-errors 
-            --wait 60 
-            --dry-run 
+          sf project deploy start --manifest manifest/package.xml \
+            --target-org "$ALIAS" \
+            --test-level RunLocalTests \
+            --ignore-errors \
+            --wait 60 \
+            --dry-run \
             --json > deploy-results/checkonly.json
           cat deploy-results/checkonly.json | jq '.status,.result'
 
