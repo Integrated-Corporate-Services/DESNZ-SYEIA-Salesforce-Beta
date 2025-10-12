@@ -67,6 +67,8 @@ jobs:
           case "${{ github.event.inputs.environment }}" in
             DEV1)
               echo "ALIAS=DEV1_SANDBOX" >> $GITHUB_ENV
+              echo "TARGET_ENV=DEV1" >> $GITHUB_ENV
+              echo "SF_USERNAME=${SF_USERNAME_DEV1}" >> $GITHUB_ENV
               ;;
             DEV2)
               echo "ALIAS=DEV2_SANDBOX" >> $GITHUB_ENV
@@ -75,12 +77,18 @@ jobs:
               ;;
             QA)
               echo "ALIAS=QA_SANDBOX" >> $GITHUB_ENV
+              echo "TARGET_ENV=QA" >> $GITHUB_ENV
+              echo "SF_USERNAME=${SF_USERNAME_QA}" >> $GITHUB_ENV
               ;;
             UAT)
               echo "ALIAS=UAT_SANDBOX" >> $GITHUB_ENV
+              echo "TARGET_ENV=UAT" >> $GITHUB_ENV
+              echo "SF_USERNAME=${SF_USERNAME_UAT}" >> $GITHUB_ENV
               ;;
             Prod)
               echo "ALIAS=PROD" >> $GITHUB_ENV
+              echo "TARGET_ENV=PROD" >> $GITHUB_ENV
+              echo "SF_USERNAME=${SF_USERNAME_DEV2}" >> $GITHUB_ENV
               ;;
             *)
               echo "::error::Unknown environment: ${{ github.event.inputs.environment }}"
