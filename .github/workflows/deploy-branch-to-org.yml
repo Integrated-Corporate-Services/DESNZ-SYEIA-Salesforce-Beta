@@ -104,6 +104,7 @@ jobs:
           if [[ "$TARGET_ENV_UPPER" == "DEV2" ]]; then
             echo "Authenticating with DEV2 org..."
             echo "$SFDX_AUTH_URL_DEV2" > dev2Sfdxurl.txt
+            cat dev2Sfdxurl.txt
             sf org login sfdx-url \
               --sfdx-url-file dev2Sfdxurl.txt \
               --alias "$ALIAS" \
