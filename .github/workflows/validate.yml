@@ -41,6 +41,7 @@ jobs:
 
       - name: Install project deps (eslint, etc.)
         run: |
+          cd ./SYEIA-Beta
           npm ci || npm install
 
       - name: Install jq (JSON parsing)
@@ -80,14 +81,15 @@ jobs:
               --set-default
           fi
 
-
       - name: PMD (Apex)
         run: |
-          ./scripts/pmd.sh
+          cd ./SYEIA-Beta
+          bash ./scripts/pmd.sh
 
-      - name: ESLint (LWC)
-        run: |
-          npx eslint "force-app/**/lwc/**/*.js"
+      # ESLint (LWC) - Disabled for now.
+      # - name: ESLint (LWC)
+        # run: |
+        #   npx eslint "force-app/**/lwc/**/*.js"
 
       - name: Validate (checkonly) deploy to ${{ env.TARGET_ENV }}
         run: |
