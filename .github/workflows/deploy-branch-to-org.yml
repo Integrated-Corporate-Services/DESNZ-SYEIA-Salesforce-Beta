@@ -1,0 +1,109 @@
+name: sandbox-Refresh-deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        type: choice
+        options:
+          - Dev1
+          - Dev2
+          - QA
+          - UAT
+          - Prod
+      ref:
+        description: 'Git ref to deploy (branch, tag, or commit SHA)'
+        required: false
+        default: 'develop'
+        type: string
+
+  
+
+permissions:
+  contents: write
+
+  
+jobs:
+  deploy-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate user-provided ref exists
+        run: |
+          git fetch --all --tags
+
+          REF="${{ github.event.inputs.ref }}"
+          if [ -z "$REF" ]; then
+            echo "No ref input provided. Defaulting to 'develop'"
+            REF="develop"
+          fi
+
+          echo "Validating ref: $REF"
+
+          if git rev-parse --verify --quiet "origin/$REF" >/dev/null; then
+            echo "Branch $REF found on origin."
+            git checkout "$REF"
+          elif git rev-parse --verify --quiet "$REF" >/dev/null; then
+            echo "Commit or tag $REF found."
+            git checkout "$REF"
+          else
+            echo "::error::The specified ref '$REF' does not exist as a branch, tag, or commit."
+            exit 1
+          fi
+
+        
+      environment: QA
+        env:
+          SF_USERNAME_QA: ${{ secrets.SF_USERNAME_QA }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install SF CLI and jq
+        run: |
+          npm install --global @salesforce/cli
+          sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Decode Oauth URL file
+        run: |
+          echo "${{ secrets.SFDX_AUTH_URL_QA }}" > qaSfdxurl.txt
+
+      - name: Authenticate QA
+        run: |
+          sf org login sfdx-url \
+              --sfdx-url-file qaSfdxurl.txt \
+              --alias QA_SANDBOX --set-default
+
+      - name: Validate (checkonly)
+        run: |
+          PACKAGE_XML_PATH=$(find . -name "package.xml" | head -n 1)
+          echo "Found package.xml at: $PACKAGE_XML_PATH"
+          cd ./SYEIA-Beta
+          sf project deploy start --manifest manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --dry-run --json
+          
+      - name: Deploy (real)
+        run: |
+          cd ./SYEIA-Beta
+          sf project deploy start --manifest manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --json > deploy-results-qa.json
+          cat deploy-results-qa.json
+
+      - name: Run all tests
+        run: |
+          mkdir -p test-results
+          sfdx force:apex:test:run -u QA_SANDBOX -l RunLocalTests -w 60 -c --json > test-results/apex.json
+          ORG_COV=$(jq -r '.result.summary.orgWideCoverage' test-results/apex.json)
+          echo "Org-wide coverage: $ORG_COV%" >> $GITHUB_STEP_SUMMARY
+          FAILURES=$(jq -r '.result.summary.failing' test-results/apex.json)
+          if (( FAILURES > 0 )); then
+            echo "There are failing tests"; exit 1;
+          fi
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-deploy-artifacts
+          path: |
+            deploy-results-qa.json
+            test-results/apex.json
