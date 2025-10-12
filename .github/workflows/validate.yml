@@ -81,7 +81,6 @@ jobs:
               --set-default
           fi
 
-
       - name: PMD (Apex)
         run: |
           ./scripts/pmd.sh
