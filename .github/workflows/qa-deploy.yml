@@ -85,6 +85,8 @@ jobs:
 
       - name: Create QA tag
         run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           SHORTSHA=$(git rev-parse --short HEAD)
           TAG="qa-$(date +%Y%m%d)-$SHORTSHA"
           git tag -a "$TAG" -m "QA deploy $TAG"
