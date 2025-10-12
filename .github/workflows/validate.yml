@@ -89,7 +89,7 @@ jobs:
         run: |
           npx eslint "force-app/**/lwc/**/*.js"
 
-      - name: Validate (checkonly) deploy to ${{ env.TARGET_ENV }}
+      - name: Validate (checkonly) deploy to $TARGET_ENV
         run: |
           cd ./SYEIA-Beta
           mkdir -p deploy-results
