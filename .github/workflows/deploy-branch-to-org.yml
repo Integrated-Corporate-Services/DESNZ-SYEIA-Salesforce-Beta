@@ -66,25 +66,29 @@ jobs:
             exit 1
           fi
 
-      - name: Determine target environment (QA, UAT, Dev1, Dev2)
+      - name: Set Salesforce org alias
         run: |
-          if [[ "${{ github.event.inputs.environment }}" == Dev2 ]]; then
-            echo "TARGET_ENV=DEV2" >> $GITHUB_ENV
-            echo "SF_USERNAME=${SF_USERNAME_Dev2}" >> $GITHUB_ENV
-            echo "ALIAS=DEV2_SANDBOX" >> $GITHUB_ENV
-          else if [[ "${{ github.event.inputs.environment }}" == Dev1 ]]; then
-            echo "TARGET_ENV=DEV1" >> $GITHUB_ENV
-            echo "SF_USERNAME=${SF_USERNAME_DEV1}" >> $GITHUB_ENV
-            echo "ALIAS=DEV1_SANDBOX" >> $GITHUB_ENV
-          else if [[ "${{ github.event.inputs.environment }}" == QA ]]; then
-            echo "TARGET_ENV=QA" >> $GITHUB_ENV
-            echo "SF_USERNAME=${SF_USERNAME_QA}" >> $GITHUB_ENV
-            echo "ALIAS=QA_SANDBOX" >> $GITHUB_ENV
-          else if [[ "${{ github.event.inputs.environment }}" == UAT ]]; then
-            echo "TARGET_ENV=UAT" >> $GITHUB_ENV
-            echo "SF_USERNAME=${SF_USERNAME_UAT}" >> $GITHUB_ENV
-            echo "ALIAS=UAT_SANDBOX" >> $GITHUB_ENV
-          fi
+          case "${{ github.event.inputs.environment }}" in
+            DEV1)
+              echo "ALIAS=DEV1_SANDBOX" >> $GITHUB_ENV
+              ;;
+            DEV2)
+              echo "ALIAS=DEV2_SANDBOX" >> $GITHUB_ENV
+              ;;
+            QA)
+              echo "ALIAS=QA_SANDBOX" >> $GITHUB_ENV
+              ;;
+            UAT)
+              echo "ALIAS=UAT_SANDBOX" >> $GITHUB_ENV
+              ;;
+            Prod)
+              echo "ALIAS=PROD" >> $GITHUB_ENV
+              ;;
+            *)
+              echo "::error::Unknown environment: ${{ github.event.inputs.environment }}"
+              exit 1
+              ;;
+          esac
         
       - uses: actions/setup-node@v4
         with:
