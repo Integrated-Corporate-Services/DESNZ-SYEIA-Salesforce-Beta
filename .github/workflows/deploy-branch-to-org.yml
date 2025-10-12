@@ -28,7 +28,7 @@ jobs:
   
     env:
       SF_USERNAME_QA: ${{ secrets.SF_USERNAME_QA }}
-      SF_USERNAME_Dev2: ${{ secrets.SF_USERNAME_Dev2 }}
+      SF_USERNAME_DEV2: ${{ secrets.SF_USERNAME_DEV2 }}
       SF_USERNAME_DEV1: ${{ secrets.SF_USERNAME_DEV1 }}
       SF_USERNAME_UAT: ${{ secrets.SF_USERNAME_UAT }}
 
