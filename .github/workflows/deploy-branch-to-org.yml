@@ -100,6 +100,7 @@ jobs:
       - name: Decode Oauth URL file
         run: |
           TARGET_ENV_UPPER=$(echo "$TARGET_ENV" | tr '[:lower:]' '[:upper:]')
+
           if [[ "$TARGET_ENV_UPPER" == "DEV2" ]]; then
             echo "Authenticating with DEV2 org..."
             echo "$SFDX_AUTH_URL_DEV2" > dev2Sfdxurl.txt
@@ -107,31 +108,36 @@ jobs:
               --sfdx-url-file dev2Sfdxurl.txt \
               --alias "$ALIAS" \
               --set-default
-          else if [[ "$TARGET_ENV_UPPER" == "DEV1" ]]; then
+          
+          elif [[ "$TARGET_ENV_UPPER" == "DEV1" ]]; then
             echo "Authenticating with DEV1 org..."
             echo "$SFDX_AUTH_URL_DEV1" > dev1Sfdxurl.txt
             sf org login sfdx-url \
               --sfdx-url-file dev1Sfdxurl.txt \
               --alias "$ALIAS" \
               --set-default
-          else if [[ "$TARGET_ENV_UPPER" == "QA" ]]; then
+          
+          elif [[ "$TARGET_ENV_UPPER" == "QA" ]]; then
             echo "Authenticating with QA org..."
             echo "$SFDX_AUTH_URL_QA" > qaSfdxurl.txt
             sf org login sfdx-url \
               --sfdx-url-file qaSfdxurl.txt \
               --alias "$ALIAS" \
               --set-default
-          else if [[ "$TARGET_ENV_UPPER" == "UAT" ]]; then
+          
+          elif [[ "$TARGET_ENV_UPPER" == "UAT" ]]; then
             echo "Authenticating with UAT org..."
             echo "$SFDX_AUTH_URL_UAT" > uatSfdxurl.txt
             sf org login sfdx-url \
               --sfdx-url-file uatSfdxurl.txt \
               --alias "$ALIAS" \
               --set-default
+          
           else
             echo "::error::Unknown environment: $TARGET_ENV_UPPER"
             exit 1
           fi
+
 
       - name: Validate (checkonly)
         run: |
