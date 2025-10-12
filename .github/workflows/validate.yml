@@ -60,7 +60,7 @@ jobs:
 
       - name: Decode URL Access file
         run: |
-          echo "$SFDX_AUTH_URL_QA" | base64 -d > qaSfdxurl.txt
+          echo "$SFDX_AUTH_URL_QA" > qaSfdxurl.txt
 
       - name: Authenticate with URL file
         run: |
