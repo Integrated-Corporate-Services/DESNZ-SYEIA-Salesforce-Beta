@@ -106,8 +106,9 @@ jobs:
           
             echo "${{ secrets.SFDX_AUTH_URL_DEV2 }}" > dev2Sfdxurl.txt
             # echo "$SFDX_AUTH_URL_DEV2" > dev2Sfdxurl.txt
+            echo "ALIAS=DEV2_SANDBOX" >> $GITHUB_ENV
             sf org display --target-org "$ALIAS"
-            sf org login --instance-url https://test.salesforce.com \
+            sf org login sfdx-url \
               --sfdx-url-file dev2Sfdxurl.txt \
               --alias "$ALIAS" \
               --set-default
