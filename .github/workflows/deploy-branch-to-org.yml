@@ -73,6 +73,8 @@ jobs:
               ;;
             DEV2)
               echo "ALIAS=DEV2_SANDBOX" >> $GITHUB_ENV
+              echo "TARGET_ENV=DEV2" >> $GITHUB_ENV
+              echo "SF_USERNAME=${SF_USERNAME_DEV2}" >> $GITHUB_ENV
               ;;
             QA)
               echo "ALIAS=QA_SANDBOX" >> $GITHUB_ENV
