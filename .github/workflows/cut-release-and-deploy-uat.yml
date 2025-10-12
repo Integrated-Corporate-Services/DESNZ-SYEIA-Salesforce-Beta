@@ -17,9 +17,38 @@ jobs:
   cut-release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: main
+
+      - name: Create pull request
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}  # Not GITHUB_TOKEN
+        run: |
+          VER="sprint-beta-TEST1.2"
+          BRANCH="release/${VER}"
+      
+          git fetch --all
+      
+          # Verify that the branch exists and differs from main
+          if ! git show-ref --verify --quiet "refs/remotes/origin/$BRANCH"; then
+            echo "::error::Branch $BRANCH does not exist."
+            exit 1
+          fi
+      
+          # Optional: check if there are actual changes
+          if git diff --quiet origin/main..origin/$BRANCH; then
+            echo "::warning::No changes between main and $BRANCH — skipping PR creation."
+            exit 0
+          fi
+      
+          gh pr create --base main --head "$BRANCH" \
+            --title "Release ${VER}" \
+            --body "Auto-generated PR to prepare ${VER} for production readiness."
+
+
 
       - name: Create release branch from develop
         run: |
