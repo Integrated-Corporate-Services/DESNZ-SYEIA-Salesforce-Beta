@@ -97,15 +97,18 @@ jobs:
           npm install --global @salesforce/cli
           sudo apt-get update && sudo apt-get install -y jq
 
-      - name: Decode Oauth URL file
+      - name: Decode OAuth URL file
         run: |
           TARGET_ENV_UPPER=$(echo "$TARGET_ENV" | tr '[:lower:]' '[:upper:]')
 
           if [[ "$TARGET_ENV_UPPER" == "DEV2" ]]; then
             echo "Authenticating with DEV2 org..."
-            echo "$SFDX_AUTH_URL_DEV2" > dev2Sfdxurl.txt
-            cat sfdx-url
-            sf org login sfdx-url \
+          
+            echo "${{ secrets.SFDX_AUTH_URL_DEV2 }}" > dev2Sfdxurl.txt
+            # echo "$SFDX_AUTH_URL_DEV2" > dev2Sfdxurl.txt
+            export ALIAS="DEV2_SANDBOX"
+            sf org display --target-org "$ALIAS"
+            sf org login --instance-url https://test.salesforce.com \
               --sfdx-url-file dev2Sfdxurl.txt \
               --alias "$ALIAS" \
               --set-default
