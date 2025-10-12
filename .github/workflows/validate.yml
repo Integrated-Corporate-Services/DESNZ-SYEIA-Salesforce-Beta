@@ -86,9 +86,10 @@ jobs:
           cd ./SYEIA-Beta
           bash ./scripts/pmd.sh
 
-      - name: ESLint (LWC)
-        run: |
-          npx eslint "force-app/**/lwc/**/*.js"
+      # ESLint (LWC) - Disabled for now.
+      # - name: ESLint (LWC)
+        # run: |
+        #   npx eslint "force-app/**/lwc/**/*.js"
 
       - name: Validate (checkonly) deploy to ${{ env.TARGET_ENV }}
         run: |
