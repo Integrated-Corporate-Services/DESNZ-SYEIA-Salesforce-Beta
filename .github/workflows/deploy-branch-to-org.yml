@@ -1,0 +1,176 @@
+name: refresh-sandbox-deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        type: choice
+        options:
+          - DEV1
+          - DEV2
+          - QA
+          - UAT
+          - Prod
+      ref:
+        description: 'Git ref to deploy (branch, tag, or commit SHA)'
+        required: true
+        default: 'develop'
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  deploy-branch-to-org:
+    runs-on: ubuntu-latest
+    environment: QA
+    env:
+      SF_USERNAME_QA: ${{ secrets.SF_USERNAME_QA }}
+      SF_USERNAME_DEV2: ${{ secrets.SF_USERNAME_DEV2 }}
+      SF_USERNAME_DEV1: ${{ secrets.SF_USERNAME_DEV1 }}
+      SF_USERNAME_UAT: ${{ secrets.SF_USERNAME_UAT }}
+
+      # Auth URLs for sandboxes
+      SFDX_AUTH_URL_Dev2 : ${{ secrets.SFDX_AUTH_URL_DEV2 }}
+      SFDX_AUTH_URL_DEV1 : ${{ secrets.SFDX_AUTH_URL_DEV1 }}
+      SFDX_AUTH_URL_QA : ${{ secrets.SFDX_AUTH_URL_QA }}
+      SFDX_AUTH_URL_UAT : ${{ secrets.SFDX_AUTH_URL_UAT }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate user-provided ref exists
+        run: |
+          git fetch --all --tags
+
+          REF="${{ github.event.inputs.ref }}"
+          if [ -z "$REF" ]; then
+            echo "No ref input provided. Defaulting to 'develop'"
+            REF="develop"
+          fi
+
+          echo "Validating ref: $REF"
+
+          if git rev-parse --verify --quiet "origin/$REF" >/dev/null; then
+            echo "Branch $REF found on origin."
+            git checkout "$REF"
+          elif git rev-parse --verify --quiet "$REF" >/dev/null; then
+            echo "Commit or tag $REF found."
+            git checkout "$REF"
+          else
+            echo "::error::The specified ref '$REF' does not exist as a branch, tag, or commit."
+            exit 1
+          fi
+
+      - name: Set Salesforce org alias
+        run: |
+          case "${{ github.event.inputs.environment }}" in
+            DEV1)
+              echo "ALIAS=DEV1_SANDBOX" >> $GITHUB_ENV
+              echo "TARGET_ENV=DEV1" >> $GITHUB_ENV
+              echo "SF_USERNAME=${SF_USERNAME_DEV1}" >> $GITHUB_ENV
+              ;;
+            DEV2)
+              echo "ALIAS=DEV2_SANDBOX" >> $GITHUB_ENV
+              echo "TARGET_ENV=DEV2" >> $GITHUB_ENV
+              echo "SF_USERNAME=${SF_USERNAME_DEV2}" >> $GITHUB_ENV
+              ;;
+            QA)
+              echo "ALIAS=QA_SANDBOX" >> $GITHUB_ENV
+              echo "TARGET_ENV=QA" >> $GITHUB_ENV
+              echo "SF_USERNAME=${SF_USERNAME_QA}" >> $GITHUB_ENV
+              ;;
+            UAT)
+              echo "ALIAS=UAT_SANDBOX" >> $GITHUB_ENV
+              echo "TARGET_ENV=UAT" >> $GITHUB_ENV
+              echo "SF_USERNAME=${SF_USERNAME_UAT}" >> $GITHUB_ENV
+              ;;
+            Prod)
+              echo "ALIAS=PROD" >> $GITHUB_ENV
+              echo "TARGET_ENV=PROD" >> $GITHUB_ENV
+              echo "SF_USERNAME=${SF_USERNAME_DEV2}" >> $GITHUB_ENV
+              ;;
+            *)
+              echo "::error::Unknown environment: ${{ github.event.inputs.environment }}"
+              exit 1
+              ;;
+          esac
+          echo "Set ALIAS to $ALIAS"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install SF CLI and jq
+        run: |
+          npm install --global @salesforce/cli
+          sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Decode OAuth URL file
+        run: |
+          TARGET_ENV_UPPER=$(echo "$TARGET_ENV" | tr '[:lower:]' '[:upper:]')
+
+          if [[ "$TARGET_ENV_UPPER" == "DEV2" ]]; then
+            echo "Authenticating with DEV2 org..."
+          
+            echo "${{ secrets.SFDX_AUTH_URL_DEV2 }}" > dev2Sfdxurl.txt
+            
+            # echo "$SFDX_AUTH_URL_DEV2" > dev2Sfdxurl.txt
+            echo "ALIAS=DEV2_SANDBOX" >> $GITHUB_ENV
+            sf org login sfdx-url \
+              --sfdx-url-file dev2Sfdxurl.txt \
+              --alias "$ALIAS" \
+              --set-default
+          
+          elif [[ "$TARGET_ENV_UPPER" == "DEV1" ]]; then
+            echo "Authenticating with DEV1 org..."
+            echo "$SFDX_AUTH_URL_DEV1" > dev1Sfdxurl.txt
+            sf org login sfdx-url \
+              --sfdx-url-file dev1Sfdxurl.txt \
+              --alias "$ALIAS" \
+              --set-default
+          
+          elif [[ "$TARGET_ENV_UPPER" == "QA" ]]; then
+            echo "Authenticating with QA org..."
+            echo "$SFDX_AUTH_URL_QA" > qaSfdxurl.txt
+            sf org login sfdx-url \
+              --sfdx-url-file qaSfdxurl.txt \
+              --alias "$ALIAS" \
+              --set-default
+          
+          elif [[ "$TARGET_ENV_UPPER" == "UAT" ]]; then
+            echo "Authenticating with UAT org..."
+            echo "$SFDX_AUTH_URL_UAT" > uatSfdxurl.txt
+            sf org login sfdx-url \
+              --sfdx-url-file uatSfdxurl.txt \
+              --alias "$ALIAS" \
+              --set-default
+          
+          else
+            echo "::error::Unknown environment: $TARGET_ENV_UPPER"
+            exit 1
+          fi
+
+
+      - name: Validate (checkonly)
+        run: |
+          PACKAGE_XML_PATH=$(find . -name "package.xml" | head -n 1)
+          echo "Found package.xml at: $PACKAGE_XML_PATH"
+          cd ./SYEIA-Beta
+          sf project deploy start --manifest manifest/package.xml --target-org "$ALIAS" --test-level RunLocalTests --wait 60 --dry-run --json
+          
+      - name: Deploy (real)
+        run: |
+          cd ./SYEIA-Beta
+          sf project deploy start --manifest manifest/package.xml --target-org "$ALIAS" --test-level RunLocalTests --wait 60 --json > deploy-results-qa.json
+          cat deploy-results-qa.json
+
+      - name: Run all tests
+        run: |
+          mkdir -p test-results
+          sfdx force:apex:test:run -u QA_SANDBOX -l RunLocalTests -w 60 -c --json > test-results/apex.json
+          ORG_COV=$(jq -r '.result.summary.orgWideCoverage' test-results/apex.json)
+          echo "Org-wide coverage: $ORG_COV%" >> $GITHUB_STEP_SUMMARY
+          FAILURES=$(jq -r '.result.summary.failing' test-results/apex.json)
+          if (( FAILURES > 0 )); then
+            echo "There are failing tests"; exit 1;
+          fi
