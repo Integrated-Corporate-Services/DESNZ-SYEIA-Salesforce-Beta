@@ -41,6 +41,7 @@ jobs:
 
       - name: Install project deps (eslint, etc.)
         run: |
+          cd ./SYEIA-Beta
           npm ci || npm install
 
       - name: Install jq (JSON parsing)
