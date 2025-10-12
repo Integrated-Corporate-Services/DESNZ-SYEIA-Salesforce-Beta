@@ -83,8 +83,8 @@ jobs:
 
       - name: PMD (Apex)
         run: |
-          ./scripts/pmd.sh
-        working-directory: DESNZ-SYEIA-Salesforce-Beta
+          cd ./SYEIA-Beta
+          bash ./scripts/pmd.sh
 
       - name: ESLint (LWC)
         run: |
