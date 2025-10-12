@@ -14,8 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: UAT
     env:
-      SF_CLIENT_ID: ${{ secrets.SF_CLIENT_ID }}
-      SFDX_JWT_KEY: ${{ secrets.SFDX_JWT_KEY }}
+      SFDX_AUTH_URL_UAT : ${{ secrets.SFDX_AUTH_URL_UAT }}
       SF_USERNAME_UAT: ${{ secrets.SF_USERNAME_UAT }}
     steps:
       - uses: actions/checkout@v4
@@ -29,18 +28,16 @@ jobs:
           npm install --global @salesforce/cli
           sudo apt-get update && sudo apt-get install -y jq
 
-      - name: Decode JWT key and auth UAT
+      - name: Decode URL and auth UAT
         run: |
-          echo "$SFDX_JWT_KEY" | base64 -d > server.key
-          chmod 600 server.key
-          sf org login jwt --username "$SF_USERNAME_UAT" \
-                           --client-id "$SF_CLIENT_ID" \
-                           --jwt-key-file server.key \
-                           --instance-url https://test.salesforce.com \
-                           --alias UAT_SANDBOX --set-default
+          echo "${{ secrets.SFDX_AUTH_URL_UAT }}" > uatSfdxurl.txt
+          sf org login sfdx-url \
+              --sfdx-url-file uatSfdxurl.txt \
+              --alias UAT_SANDBOX --set-default
 
       - name: Validate (checkonly)
         run: |
+          cd ./SYEIA-Beta
           sf project deploy start --manifest manifest/package.xml \
             --target-org UAT_SANDBOX --test-level RunLocalTests \
             --wait 60 --dry-run --json > deploy-results-uat-check.json
@@ -48,6 +45,7 @@ jobs:
 
       - name: Deploy (UAT)
         run: |
+          cd ./SYEIA-Beta
           sf project deploy start --manifest manifest/package.xml \
             --target-org UAT_SANDBOX --test-level RunLocalTests \
             --wait 60 --json > deploy-results-uat.json
@@ -55,6 +53,7 @@ jobs:
 
       - name: Run tests (UAT)
         run: |
+          cd ./SYEIA-Beta
           sfdx force:apex:test:run -u UAT_SANDBOX -l RunLocalTests -w 60 -c --json > test-results.json
           FAILURES=$(jq -r '.result.summary.failing' test-results.json)
           if (( FAILURES > 0 )); then exit 1; fi

@@ -2,35 +2,11 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
 		<members>*</members>
-		<name>ActionLinkGroupTemplate</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ActionPlanTemplate</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>AnimationRule</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>ApexClass</name>
 	</types>
 	<types>
 		<members>*</members>
 		<name>ApexComponent</name>
-	</types>
-	<types>
-		<members>apexEmailNotifications</members>
-		<name>ApexEmailNotifications</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ApexPage</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ApexTestSuite</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -39,11 +15,6 @@
 	<types>
 		<members>*</members>
 		<name>AppMenu</name>
-	</types>
-	<types>
-		<members>ISE_IDV</members>
-		<members>PtyRelaGrp</members>
-		<name>ApplicationSubtypeDefinition</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -55,15 +26,7 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>Audience</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>AuraDefinitionBundle</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>AuthProvider</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -72,67 +35,6 @@
 	<types>
 		<members>*</members>
 		<name>BrandingSet</name>
-	</types>
-	<types>
-		<members>GroupAudit</members>
-		<members>IDV_Audit</members>
-		<name>BusinessProcessTypeDefinition</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CMSConnectSource</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CallCenter</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CampaignInfluenceModel</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>Certificate</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ChannelLayout</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ChatterExtension</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CleanDataService</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>Community</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CommunityTemplateDefinition</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CommunityThemeDefinition</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ConnectedApp</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ContentAsset</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CorsWhitelistOrigin</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CspTrustedSite</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -144,14 +46,6 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>CustomFeedFilter</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CustomHelpMenuSection</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>CustomLabels</name>
 	</types>
 	<types>
@@ -159,338 +53,8 @@
 		<name>CustomMetadata</name>
 	</types>
 	<types>
-		<members>Account</members>
-		<members>AccountBrand</members>
-		<members>AccountContactRole</members>
-		<members>Accreditation</members>
-		<members>ActionPlan</members>
-		<members>ActionPlanItemDependency</members>
-		<members>ActionPlanTmplItmAssessmentInd</members>
-		<members>ActionPlnTmplItmDependency</members>
-		<members>Activity</members>
-		<members>Address</members>
-		<members>AgentWork</members>
-		<members>AgentWorkSkill</members>
-		<members>AnalyticsUserAttrFuncTkn</members>
-		<members>ApprovalSubmission</members>
-		<members>ApprovalSubmissionDetail</members>
-		<members>ApprovalWorkItem</members>
-		<members>AssessmentIndDefinedValue</members>
-		<members>AssessmentIndValue</members>
-		<members>AssessmentIndicatorDefinition</members>
-		<members>AssessmentTask</members>
-		<members>AssessmentTaskContentDocument</members>
-		<members>AssessmentTaskDefinition</members>
-		<members>AssessmentTaskIndDefinition</members>
-		<members>AssessmentTaskOrder</members>
-		<members>Asset</members>
-		<members>AssetRelationship</members>
-		<members>AssistantProgress</members>
-		<members>AssociatedLocation</members>
-		<members>AsyncOperationTracker</members>
-		<members>AttrPicklistExcludedValue</members>
-		<members>AttributeCategory</members>
-		<members>AttributeCategoryAttribute</members>
-		<members>AttributeDefinition</members>
-		<members>AttributePicklist</members>
-		<members>AttributePicklistValue</members>
-		<members>AuditTrailFileExport</members>
-		<members>AuthApplicationAsset</members>
-		<members>AuthApplicationPlace</members>
-		<members>AuthFormRequestRecord</members>
-		<members>AuthLocationAccessSchedule</members>
-		<members>AuthorizationForm</members>
-		<members>AuthorizationFormConsent</members>
-		<members>AuthorizationFormDataUse</members>
-		<members>AuthorizationFormText</members>
-		<members>Award</members>
-		<members>BatchJob</members>
-		<members>BatchJobPart</members>
-		<members>BatchJobPartFailedRecord</members>
-		<members>BoardCertification</members>
-		<members>BusRegAuthTypeDependency</members>
-		<members>BusRegAuthorizationType</members>
-		<members>BusinessBrand</members>
-		<members>BusinessLicense</members>
-		<members>BusinessLicenseApplication</members>
-		<members>BusinessMilestone</members>
-		<members>BusinessProfile</members>
-		<members>BusinessType</members>
-		<members>CalcMatrixColumnRange</members>
-		<members>CalcProcStepRelationship</members>
-		<members>CalculationMatrix</members>
-		<members>CalculationMatrixColumn</members>
-		<members>CalculationMatrixRow</members>
-		<members>CalculationMatrixVersion</members>
-		<members>CalculationProcedure</members>
-		<members>CalculationProcedureStep</members>
-		<members>CalculationProcedureVariable</members>
-		<members>CalculationProcedureVersion</members>
-		<members>Campaign</members>
-		<members>CampaignMember</members>
-		<members>Case</members>
-		<members>CaseContactRole</members>
-		<members>CaseParticipant</members>
-		<members>CaseRelatedIssue</members>
-		<members>ChangeRequest</members>
-		<members>ChangeRequestRelatedIssue</members>
-		<members>ChangeRequestRelatedItem</members>
-		<members>ChatterActivity</members>
-		<members>CollaborationGroup</members>
-		<members>CollaborationGroupMember</members>
-		<members>CommSubscription</members>
-		<members>CommSubscriptionChannelType</members>
-		<members>CommSubscriptionConsent</members>
-		<members>CommSubscriptionTiming</members>
-		<members>ComplaintCase</members>
-		<members>ComplaintParticipant</members>
-		<members>Contact</members>
-		<members>ContactPointAddress</members>
-		<members>ContactPointConsent</members>
-		<members>ContactPointEmail</members>
-		<members>ContactPointPhone</members>
-		<members>ContactPointTypeConsent</members>
-		<members>ContactProfile</members>
-		<members>ContactRequest</members>
-		<members>ContentVersion</members>
-		<members>Contract</members>
-		<members>ContractContactRole</members>
-		<members>CourseOffering</members>
-		<members>Customer</members>
-		<members>DTRecordsetReplica</members>
-		<members>DataUseLegalBasis</members>
-		<members>DataUsePurpose</members>
-		<members>DecisionTblFileImportData</members>
-		<members>DigitalSignature</members>
-		<members>DocGenerationQueryResult</members>
-		<members>DocTemplateSectionCondition</members>
-		<members>DocumentChecklistItem</members>
-		<members>DocumentDecisionRequirement</members>
-		<members>DocumentEnvelope</members>
-		<members>DocumentGenerationProcess</members>
-		<members>DocumentRecipient</members>
-		<members>DocumentTemplate</members>
-		<members>DocumentTemplateContentDoc</members>
-		<members>DocumentTemplateSection</members>
-		<members>DocumentTemplateToken</members>
-		<members>DuplicateRecordItem</members>
-		<members>DuplicateRecordSet</members>
-		<members>EmailMessage</members>
-		<members>EmpUserProvisionProcessErr</members>
-		<members>EngagementAttendee</members>
-		<members>EngagementChannelType</members>
-		<members>EngagementInteraction</members>
-		<members>EngagementInterface</members>
-		<members>EngagementTopic</members>
-		<members>Event</members>
-		<members>Examination</members>
-		<members>ExchangeUserMapping</members>
-		<members>ExpressionFilter</members>
-		<members>ExpressionFilterCriteria</members>
-		<members>ExpressionSet</members>
-		<members>ExpressionSetVersion</members>
-		<members>ExternalEventMapping</members>
-		<members>FeedItem</members>
-		<members>FlowOrchestrationInstance</members>
-		<members>FlowOrchestrationLog</members>
-		<members>FlowOrchestrationStageInstance</members>
-		<members>FlowOrchestrationStepInstance</members>
-		<members>FlowOrchestrationWorkItem</members>
-		<members>ForecastingAdjustment</members>
-		<members>ForecastingCategoryMapping</members>
-		<members>ForecastingCustomData</members>
-		<members>ForecastingOwnerAdjustment</members>
-		<members>ForecastingQuota</members>
-		<members>ForecastingTypeToCategory</members>
-		<members>GeneratedDocument</members>
-		<members>GeneratedDocumentSection</members>
-		<members>GenericVisitTask</members>
-		<members>GenericVisitTaskContext</members>
-		<members>GnrcVstKeyPerformanceInd</members>
-		<members>GnrcVstTaskContextRelation</members>
-		<members>Idea</members>
-		<members>Image</members>
-		<members>Incident</members>
-		<members>IncidentRelatedItem</members>
-		<members>Individual</members>
-		<members>IndividualApplication</members>
-		<members>InfoAuthRequestForm</members>
-		<members>InfoAuthorizationRequest</members>
-		<members>InspectionAssessmentInd</members>
-		<members>InspectionType</members>
-		<members>IntegrationProviderAttr</members>
-		<members>IntegrationProviderDcsnRqmt</members>
-		<members>IntegrationProviderDef</members>
-		<members>IntegrationProviderExecution</members>
-		<members>JournalType</members>
-		<members>Knowledge__kav</members>
-		<members>Lead</members>
-		<members>LinkedArticle</members>
-		<members>Location</members>
-		<members>LocationTrustMeasure</members>
-		<members>MLModel</members>
-		<members>MLModelFactor</members>
-		<members>MLModelFactorComponent</members>
-		<members>Macro</members>
-		<members>MacroAction</members>
-		<members>MacroInstruction</members>
-		<members>MacroUsage</members>
-		<members>MultipartyInfoAuthRequest</members>
-		<members>NetworkMember</members>
-		<members>NetworkMemberChunk</members>
-		<members>OmniComponentErrorLog</members>
-		<members>OmniDataPack</members>
-		<members>OmniDataTransform</members>
-		<members>OmniDataTransformItem</members>
-		<members>OmniESignatureTemplate</members>
-		<members>OmniProcess</members>
-		<members>OmniProcessCompilation</members>
-		<members>OmniProcessElement</members>
-		<members>OmniProcessTransientData</members>
-		<members>OmniScriptSavedSession</members>
-		<members>OmniUiCard</members>
-		<members>Opportunity</members>
-		<members>OpportunityCompetitor</members>
-		<members>OpportunityContactRole</members>
-		<members>OpportunityLineItem</members>
-		<members>OpportunityRelatedDeleteLog</members>
-		<members>Order</members>
-		<members>OrderItem</members>
-		<members>OrgMetricScanResult</members>
-		<members>OrgMetricScanSummary</members>
-		<members>PartnerRole</members>
-		<members>PartyConsent</members>
-		<members>PartyExpense</members>
-		<members>PartyFinancialAsset</members>
-		<members>PartyIncome</members>
-		<members>PendingServiceRouting</members>
-		<members>PersonDisability</members>
-		<members>PersonEducation</members>
-		<members>PersonEmployment</members>
-		<members>PersonExamination</members>
-		<members>PersonLifeEvent</members>
-		<members>Polygon</members>
-		<members>PreliminaryApplicationRef</members>
-		<members>Pricebook2</members>
-		<members>PricebookEntry</members>
-		<members>Problem</members>
-		<members>ProblemIncident</members>
-		<members>ProblemRelatedItem</members>
-		<members>ProcessException</members>
-		<members>Product2</members>
-		<members>ProductAttributeDefinition</members>
-		<members>ProductAvailabilityProjection</members>
-		<members>ProductCatalog</members>
-		<members>ProductCategory</members>
-		<members>ProductCategoryDisqual</members>
-		<members>ProductCategoryProduct</members>
-		<members>ProductCategoryQualification</members>
-		<members>ProductClassification</members>
-		<members>ProductClassificationAttr</members>
-		<members>ProductComponentGroup</members>
-		<members>ProductComponentGrpOverride</members>
-		<members>ProductConfigFlowAssignment</members>
-		<members>ProductConfigurationFlow</members>
-		<members>ProductDisqualification</members>
-		<members>ProductFulfillmentLocation</members>
-		<members>ProductQualification</members>
-		<members>ProductRelComponentOverride</members>
-		<members>ProductRelatedComponent</members>
-		<members>ProductRelationshipType</members>
-		<members>ProductSellingModel</members>
-		<members>ProfileSkill</members>
-		<members>ProfileSkillEndorsement</members>
-		<members>ProfileSkillUser</members>
-		<members>PromptAction</members>
-		<members>PromptError</members>
-		<members>PublicApplicationParticipant</members>
-		<members>PublicComplaint</members>
-		<members>QuickText</members>
-		<members>QuickTextUsage</members>
-		<members>Quote</members>
-		<members>QuoteLineItem</members>
-		<members>ReceivedDocument</members>
-		<members>ReceivedDocumentType</members>
-		<members>Recommendation</members>
-		<members>RecordAction</members>
-		<members>RecordActnSelItemExtrc</members>
-		<members>RecordAlert</members>
-		<members>RecordAlertActionableTarget</members>
-		<members>RecordMergeHistory</members>
-		<members>RecurrenceSchedule</members>
-		<members>RegAuthorizationTypeProduct</members>
-		<members>RegulatoryAuthority</members>
-		<members>RegulatoryAuthorizationType</members>
-		<members>RegulatoryCode</members>
-		<members>RegulatoryCodeAssessmentInd</members>
-		<members>RegulatoryCodeViolation</members>
-		<members>RegulatoryTrxnFee</members>
-		<members>RegulatoryTrxnFeeItem</members>
-		<members>RelationshipGraphView</members>
-		<members>RevenueAsyncOperation</members>
-		<members>RevenueTransactionErrorLog</members>
-		<members>Seller</members>
-		<members>ServiceResource</members>
-		<members>ServiceResourceSkill</members>
-		<members>SetupDataSynchronization</members>
-		<members>SignatureTask</members>
-		<members>SignatureTaskLineItem</members>
-		<members>Site</members>
-		<members>SkillRequirement</members>
-		<members>SocialPersona</members>
-		<members>SocialPost</members>
-		<members>Solution</members>
-		<members>StreamActivityAccess</members>
-		<members>StreamingChannel</members>
-		<members>TableauHostMapping</members>
-		<members>Task</members>
-		<members>Topic</members>
-		<members>TopicAssignment</members>
-		<members>TrainingCourseParticipant</members>
-		<members>TransactionJournal</members>
-		<members>TrnCourse</members>
-		<members>UnitOfMeasure</members>
-		<members>User</members>
-		<members>UserCapabilityPreference</members>
-		<members>UserEsignVendorIdentifier</members>
-		<members>UserExternalCredential</members>
-		<members>UserLocalWebServerIdentity</members>
-		<members>UserPrioritizedRecord</members>
-		<members>UserProvisioningRequest</members>
-		<members>UserServicePresence</members>
-		<members>ViolationEnforcementAction</members>
-		<members>ViolationType</members>
-		<members>ViolationTypeAssessmentInd</members>
-		<members>Visit</members>
-		<members>VisitedParty</members>
-		<members>Visitor</members>
-		<members>WorkBadge</members>
-		<members>WorkBadgeDefinition</members>
-		<members>WorkOrder</members>
-		<members>WorkOrderLineItem</members>
-		<members>WorkPlan</members>
-		<members>WorkPlanTemplate</members>
-		<members>WorkPlanTemplateEntry</members>
-		<members>WorkStep</members>
-		<members>WorkStepTemplate</members>
-		<members>WorkThanks</members>
-		<name>CustomObject</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CustomObjectTranslation</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CustomPageWebLink</name>
-	</types>
-	<types>
 		<members>*</members>
 		<name>CustomPermission</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CustomSite</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -498,71 +62,11 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>DataCategoryGroup</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>DelegateGroup</name>
-	</types>
-	<types>
-		<members>site/MyStore1</members>
-		<members>site/PayNow1</members>
-		<members>site/Site_Service_Messaging_for_Web_813501211</members>
-		<name>DigitalExperienceBundle</name>
-	</types>
-	<types>
-		<members>MyStore1</members>
-		<members>PayNow1</members>
-		<members>Site_Service_Messaging_for_Web_813501211</members>
-		<name>DigitalExperienceConfig</name>
 	</types>
 	<types>
 		<members>*</members>
 		<name>DuplicateRule</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>EclairGeoData</name>
-	</types>
-	<types>
-		<members>EmailToCase</members>
-		<members>EmailToSalesforce</members>
-		<name>EmailServicesFunction</name>
-	</types>
-	<types>
-		<members>Service_Messaging_for_Web</members>
-		<name>EmbeddedServiceConfig</name>
-	</types>
-	<types>
-		<members>Case</members>
-		<name>EscalationRules</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ExperienceBundle</name>
-	</types>
-	<types>
-		<members>ISE_IDVAudit</members>
-		<members>PartyRelationshipGroupAuditLog</members>
-		<name>ExplainabilityActionDefinition</name>
-	</types>
-	<types>
-		<members>ISE_IDVAudit</members>
-		<members>PartyRelationshipGroupAuditLog</members>
-		<name>ExplainabilityActionVersion</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ExternalDataSource</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ExternalServiceRegistration</name>
-	</types>
-	<types>
-		<members>Rule5c4a5a68a33998bac19bcdbc32a79486121e445445102657b3028af95dc1f004</members>
-		<members>Rule8f6672944a7dfe57a65db7b8500ae2bd0d521b61380f7d418ec16eb1cc739f52</members>
-		<name>FieldRestrictionRule</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -575,26 +79,6 @@
 	<types>
 		<members>*</members>
 		<name>FlowDefinition</name>
-	</types>
-	<types>
-		<members>OpportunityAmount</members>
-		<name>ForecastingSourceDefinition</name>
-	</types>
-	<types>
-		<members>LineItemQuantityProductDate</members>
-		<members>LineItemRevenueProductDate</members>
-		<members>OpportunityAmount</members>
-		<members>OpportunityLineItemQuantity</members>
-		<members>OpportunityLineItemRevenue</members>
-		<members>OpportunityQuantity</members>
-		<members>OpportunityQuantityProductDate</members>
-		<members>OpportunityRevenue</members>
-		<members>OpportunityRevenueProductDate</members>
-		<name>ForecastingType</name>
-	</types>
-	<types>
-		<members>OpportunityAmount</members>
-		<name>ForecastingTypeSource</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -617,42 +101,12 @@
 		<name>HomePageLayout</name>
 	</types>
 	<types>
-		<members>IframeWhiteListUrlSettings</members>
-		<name>IframeWhiteListUrlSettings</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>InstalledPackage</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>KeywordList</name>
-	</types>
-	<types>
 		<members>*</members>
 		<name>Layout</name>
 	</types>
 	<types>
 		<members>*</members>
 		<name>LightningComponentBundle</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>LightningExperienceTheme</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>LightningMessageChannel</name>
-	</types>
-	<types>
-		<members>cms_document</members>
-		<members>cms_image</members>
-		<members>news</members>
-		<name>ManagedContentType</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ManagedTopics</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -664,31 +118,11 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>MyDomainDiscoverableLogin</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>NamedCredential</name>
 	</types>
 	<types>
 		<members>*</members>
 		<name>NavigationMenu</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>Network</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>NetworkBranding</name>
-	</types>
-	<types>
-		<members>NotificationTypeConfig</members>
-		<name>NotificationTypeConfig</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>OauthCustomScope</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -699,66 +133,8 @@
 		<name>PermissionSet</name>
 	</types>
 	<types>
-		<members>force__Benefit_Management_Caseworker</members>
-		<members>force__CommerceUsers</members>
-		<members>force__Commerce_Shopper</members>
-		<members>force__EmployeeHubUserPSG</members>
-		<members>force__Enablement_Resources_Manager</members>
-		<members>force__GeneralUsers</members>
-		<members>force__Grantmaking_Manager</members>
-		<members>force__HRServiceWorkspaceUserPSG</members>
-		<members>force__Investigative_Case_Management_Officer</members>
-		<members>force__Licensing_Permitting_Officer</members>
-		<members>force__MarketingUsers</members>
-		<members>force__Public_Sector_Solutions_Admin</members>
-		<members>force__SalesUsers</members>
-		<members>force__ServiceUsers</members>
-		<members>force__Social_Program_Management_Caseworker</members>
-		<members>force__Talent_Recruitment_Management_Specialist</members>
-		<members>force__UnifiedCatalogAdminPsl</members>
-		<members>force__UnifiedCatalogAgentPsl</members>
-		<members>force__UnifiedCatalogCommunityUserPsl</members>
-		<name>PermissionSetGroup</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>PlatformCachePartition</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>PlatformEventChannel</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>PlatformEventChannelMember</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>PostTemplate</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>PresenceDeclineReason</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>PresenceUserConfig</name>
-	</types>
-	<types>
 		<members>*</members>
 		<name>Profile</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ProfilePasswordPolicy</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ProfileSessionSetting</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>Prompt</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -766,33 +142,7 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>QueueRoutingConfig</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>QuickAction</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>RecommendationStrategy</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>RecordActionDeployment</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>RedirectWhitelistUrl</name>
-	</types>
-	<types>
-		<members>AdyenAccountManagementTestAPI</members>
-		<members>AdyenCheckoutTestAPI</members>
-		<members>AdyenOAuthTestAPI</members>
-		<members>PaypalProductionAPI</members>
-		<members>PaypalSandboxAPI</members>
-		<members>StripeAPI</members>
-		<members>StripeConnectAPI</members>
-		<name>RemoteSiteSetting</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -804,26 +154,6 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>SamlSsoConfig</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>Scontrol</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ServiceChannel</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ServicePresenceStatus</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>Settings</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>SharingRules</name>
 	</types>
 	<types>
@@ -832,52 +162,7 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>SiteDotCom</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>Skill</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>StandardValueSetTranslation</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>StaticResource</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>SynonymDictionary</name>
-	</types>
-	<types>
-		<members>Employee_Timeline</members>
-		<name>TimelineObjectDefinition</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>TopicsForObjects</name>
-	</types>
-	<types>
-		<members>MyStore.Customer_Members</members>
-		<members>MyStore.Members_without_contribution</members>
-		<members>MyStore.Partner_and_Customer_members</members>
-		<members>PayNow.Customer_Members</members>
-		<members>PayNow.Members_without_contribution</members>
-		<members>PayNow.Partner_and_Customer_members</members>
-		<members>Site_Service_Messaging_for_Web_81350121.Customer_Members</members>
-		<members>Site_Service_Messaging_for_Web_81350121.Members_without_contribution</members>
-		<members>Site_Service_Messaging_for_Web_81350121.Partner_and_Customer_members</members>
-		<name>UserCriteria</name>
-	</types>
-	<types>
-		<members>Sales</members>
-		<members>Service</members>
-		<name>WaveAnalyticAssetCollection</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>WorkSkillRouting</name>
 	</types>
 	<types>
 		<members>*</members>

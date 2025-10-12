@@ -3,6 +3,23 @@ name: qa-deploy
 on:
   push:
     branches: [ develop ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        type: choice
+        options:
+          - Dev1
+          - Dev2
+          - QA
+          - UAT
+          - Prod
+      ref:
+        description: 'Git ref to deploy (branch, tag, or commit SHA)'
+        required: false
+        default: 'develop'
+        type: string
 
 permissions:
   contents: write
@@ -12,8 +29,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: QA
     env:
-      # SF_CLIENT_ID: ${{ secrets.SF_CLIENT_ID }}
-      # SFDX_JWT_KEY: ${{ secrets.SFDX_JWT_KEY }}
       SF_USERNAME_QA: ${{ secrets.SF_USERNAME_QA }}
     steps:
       - uses: actions/checkout@v4
@@ -27,10 +42,8 @@ jobs:
           npm install --global @salesforce/cli
           sudo apt-get update && sudo apt-get install -y jq
 
-      - name: Decode JWT key
+      - name: Decode Oauth URL file
         run: |
-          # echo "$SFDX_JWT_KEY" | base64 -d > server.key
-          # chmod 600 server.key
           echo "${{ secrets.SFDX_AUTH_URL_QA }}" > qaSfdxurl.txt
 
       - name: Authenticate QA
@@ -41,17 +54,16 @@ jobs:
 
       - name: Validate (checkonly)
         run: |
-          sf project deploy start --manifest manifest/package.xml \
-            --target-org QA_SANDBOX --test-level RunLocalTests \
-            --wait 60 --dry-run --json > deploy-results-qa-check.json
-          cat deploy-results-qa-check.json | jq '.status,.result'
-
+          PACKAGE_XML_PATH=$(find . -name "package.xml" | head -n 1)
+          echo "Found package.xml at: $PACKAGE_XML_PATH"
+          cd ./SYEIA-Beta
+          sf project deploy start --manifest manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --dry-run --json
+          
       - name: Deploy (real)
         run: |
-          sf project deploy start --manifest manifest/package.xml \
-            --target-org QA_SANDBOX --test-level RunLocalTests \
-            --wait 60 --json > deploy-results-qa.json
-          cat deploy-results-qa.json | jq '.status,.result'
+          cd ./SYEIA-Beta
+          sf project deploy start --manifest manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --json > deploy-results-qa.json
+          cat deploy-results-qa.json
 
       - name: Run all tests
         run: |
@@ -74,6 +86,8 @@ jobs:
 
       - name: Create QA tag
         run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           SHORTSHA=$(git rev-parse --short HEAD)
           TAG="qa-$(date +%Y%m%d)-$SHORTSHA"
           git tag -a "$TAG" -m "QA deploy $TAG"
