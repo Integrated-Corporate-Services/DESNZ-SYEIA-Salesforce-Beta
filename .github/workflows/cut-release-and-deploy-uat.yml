@@ -30,7 +30,7 @@ jobs:
 
       - name: Open PR to main
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           VER="${{ inputs.version }}"
           gh pr create --base main --head "release/${VER}" \
@@ -95,7 +95,7 @@ jobs:
 
       - name: Generate GitHub Release notes (pre-release)
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           VER="${{ inputs.version }}"
           gh release create "v${VER}" --generate-notes --prerelease || echo "Release may already exist"
