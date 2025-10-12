@@ -66,14 +66,14 @@ jobs:
         run: |
           if [[ "$TARGET_ENV" == "QA" ]]; then
             echo "Authenticating with QA org..."
-            echo "$SFDX_AUTH_URL_QA" | base64 -d > qaSfdxurl.txt
+            echo "$SFDX_AUTH_URL_QA" > qaSfdxurl.txt
             sf org login sfdx-url \
               --sfdx-url-file qaSfdxurl.txt \
               --alias "$ALIAS" \
               --set-default
           else
             echo "Authenticating with UAT org..."
-            echo "$SFDX_AUTH_URL_UAT" | base64 -d > uatSfdxurl.txt
+            echo "$SFDX_AUTH_URL_UAT" > uatSfdxurl.txt
             sf org login sfdx-url \
               --sfdx-url-file uatSfdxurl.txt \
               --alias "$ALIAS" \
