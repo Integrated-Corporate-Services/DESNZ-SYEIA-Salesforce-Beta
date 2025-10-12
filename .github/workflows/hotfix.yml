@@ -60,7 +60,7 @@ jobs:
 
       - name: Open back-merge PRs
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
         run: |
           BR="${GITHUB_REF_NAME}"
           # PR into develop
