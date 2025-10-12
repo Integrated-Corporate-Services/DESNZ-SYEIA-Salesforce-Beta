@@ -26,8 +26,21 @@ permissions:
 
   
 jobs:
-  deploy-qa:
+  deploy-branch-to-org:
     runs-on: ubuntu-latest
+  
+    environment: QA
+    env:
+      SF_USERNAME_QA: ${{ secrets.SF_USERNAME_QA }}
+      SF_USERNAME_Dev2: ${{ secrets.SF_USERNAME_Dev2 }}
+      SF_USERNAME_DEV1: ${{ secrets.SF_USERNAME_DEV1 }}
+      SF_USERNAME_UAT: ${{ secrets.SF_USERNAME_UAT }}
+
+      # Auth URLs for sandboxes
+      SFDX_AUTH_URL_Dev2 : ${{ secrets.SFDX_AUTH_URL_Dev2 }}
+      SFDX_AUTH_URL_DEV1 : ${{ secrets.SFDX_AUTH_URL_DEV1 }}
+      SFDX_AUTH_URL_QA : ${{ secrets.SFDX_AUTH_URL_QA }}
+      SFDX_AUTH_URL_UAT : ${{ secrets.SFDX_AUTH_URL_UAT }}
     steps:
       - uses: actions/checkout@v4
       - name: Validate user-provided ref exists
@@ -53,10 +66,26 @@ jobs:
             exit 1
           fi
 
+      - name: Determine target environment (QA, UAT, Dev1, Dev2)
+        run: |
+          if [[ "${{ github.event.inputs.environment }}" == Dev2 ]]; then
+            echo "TARGET_ENV=DEV2" >> $GITHUB_ENV
+            echo "SF_USERNAME=${SF_USERNAME_Dev2}" >> $GITHUB_ENV
+            echo "ALIAS=DEV2_SANDBOX" >> $GITHUB_ENV
+          else if [[ "${{ github.event.inputs.environment }}" == Dev1 ]]; then
+            echo "TARGET_ENV=DEV1" >> $GITHUB_ENV
+            echo "SF_USERNAME=${SF_USERNAME_DEV1}" >> $GITHUB_ENV
+            echo "ALIAS=DEV1_SANDBOX" >> $GITHUB_ENV
+          else if [[ "${{ github.event.inputs.environment }}" == QA ]]; then
+            echo "TARGET_ENV=QA" >> $GITHUB_ENV
+            echo "SF_USERNAME=${SF_USERNAME_QA}" >> $GITHUB_ENV
+            echo "ALIAS=QA_SANDBOX" >> $GITHUB_ENV
+          else if [[ "${{ github.event.inputs.environment }}" == UAT ]]; then
+            echo "TARGET_ENV=UAT" >> $GITHUB_ENV
+            echo "SF_USERNAME=${SF_USERNAME_UAT}" >> $GITHUB_ENV
+            echo "ALIAS=UAT_SANDBOX" >> $GITHUB_ENV
+          fi
         
-      environment: QA
-        env:
-          SF_USERNAME_QA: ${{ secrets.SF_USERNAME_QA }}
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -69,24 +98,47 @@ jobs:
       - name: Decode Oauth URL file
         run: |
           echo "${{ secrets.SFDX_AUTH_URL_QA }}" > qaSfdxurl.txt
-
-      - name: Authenticate QA
-        run: |
-          sf org login sfdx-url \
+          if [[ "$TARGET_ENV" == "Dev2" ]]; then
+            echo "Authenticating with Dev2 org..."
+            echo "$SFDX_AUTH_URL_Dev2" > dev2Sfdxurl.txt
+            sf org login sfdx-url \
+              --sfdx-url-file dev2Sfdxurl.txt \
+              --alias "$ALIAS" \
+              --set-default
+          else if [[ "$TARGET_ENV" == "DEV1" ]]; then
+            echo "Authenticating with DEV1 org..."
+            echo "$SFDX_AUTH_URL_DEV1" > dev1Sfdxurl.txt
+            sf org login sfdx-url \
+              --sfdx-url-file dev1Sfdxurl.txt \
+              --alias "$ALIAS" \
+              --set-default
+          else if [[ "$TARGET_ENV" == "QA" ]]; then
+            echo "Authenticating with QA org..."
+            echo "$SFDX_AUTH_URL_QA" > qaSfdxurl.txt
+            sf org login sfdx-url \
               --sfdx-url-file qaSfdxurl.txt \
-              --alias QA_SANDBOX --set-default
+              --alias "$ALIAS" \
+              --set-default
+          else if [[ "$TARGET_ENV" == "UAT" ]]; then
+            echo "Authenticating with UAT org..."
+            echo "$SFDX_AUTH_URL_UAT" > uatSfdxurl.txt
+            sf org login sfdx-url \
+              --sfdx-url-file uatSfdxurl.txt \
+              --alias "$ALIAS" \
+              --set-default
+          fi
 
       - name: Validate (checkonly)
         run: |
           PACKAGE_XML_PATH=$(find . -name "package.xml" | head -n 1)
           echo "Found package.xml at: $PACKAGE_XML_PATH"
           cd ./SYEIA-Beta
-          sf project deploy start --manifest manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --dry-run --json
+          sf project deploy start --manifest manifest/package.xml --target-org "$ALIAS" --test-level RunLocalTests --wait 60 --dry-run --json
           
       - name: Deploy (real)
         run: |
           cd ./SYEIA-Beta
-          sf project deploy start --manifest manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --json > deploy-results-qa.json
+          sf project deploy start --manifest manifest/package.xml --target-org "$ALIAS" --test-level RunLocalTests --wait 60 --json > deploy-results-qa.json
           cat deploy-results-qa.json
 
       - name: Run all tests
@@ -99,11 +151,3 @@ jobs:
           if (( FAILURES > 0 )); then
             echo "There are failing tests"; exit 1;
           fi
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: qa-deploy-artifacts
-          path: |
-            deploy-results-qa.json
-            test-results/apex.json
