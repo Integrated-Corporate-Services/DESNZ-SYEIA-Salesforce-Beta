@@ -15,8 +15,11 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     env:
+      SFDX_AUTH_URL_QA : ${{ secrets.SFDX_AUTH_URL_QA }}
+      SFDX_AUTH_URL_UAT : ${{ secrets.SFDX_AUTH_URL_UAT }}
       SF_USERNAME_QA: ${{ secrets.SF_USERNAME_QA }}
       SF_USERNAME_UAT: ${{ secrets.SF_USERNAME_UAT }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -61,9 +64,25 @@ jobs:
 
       - name: Authenticate with URL file
         run: |
-          sf org login sfdx-url \
+          # sf org login sfdx-url \
+          #     --sfdx-url-file qaSfdxurl.txt \
+          #     --alias "$ALIAS" --set-default
+          if [[ "$TARGET_ENV" == "QA" ]]; then
+            echo "Authenticating with QA org..."
+            echo "$SFDX_AUTH_URL_QA" | base64 -d > qaSfdxurl.txt
+            sf org login sfdx-url \
               --sfdx-url-file qaSfdxurl.txt \
-              --alias QA_SANDBOX --set-default
+              --alias "$ALIAS" \
+              --set-default
+          else
+            echo "Authenticating with UAT org..."
+            echo "$SFDX_AUTH_URL_UAT" | base64 -d > uatSfdxurl.txt
+            sf org login sfdx-url \
+              --sfdx-url-file uatSfdxurl.txt \
+              --alias "$ALIAS" \
+              --set-default
+          fi
+
 
       - name: PMD (Apex)
         run: |
