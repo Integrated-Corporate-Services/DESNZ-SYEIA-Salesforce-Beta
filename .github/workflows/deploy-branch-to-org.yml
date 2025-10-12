@@ -33,7 +33,7 @@ jobs:
       SF_USERNAME_UAT: ${{ secrets.SF_USERNAME_UAT }}
 
       # Auth URLs for sandboxes
-      SFDX_AUTH_URL_Dev2 : ${{ secrets.SFDX_AUTH_URL_Dev2 }}
+      SFDX_AUTH_URL_Dev2 : ${{ secrets.SFDX_AUTH_URL_DEV2 }}
       SFDX_AUTH_URL_DEV1 : ${{ secrets.SFDX_AUTH_URL_DEV1 }}
       SFDX_AUTH_URL_QA : ${{ secrets.SFDX_AUTH_URL_QA }}
       SFDX_AUTH_URL_UAT : ${{ secrets.SFDX_AUTH_URL_UAT }}
