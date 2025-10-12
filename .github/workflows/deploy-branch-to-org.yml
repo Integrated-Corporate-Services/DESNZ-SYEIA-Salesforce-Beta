@@ -129,7 +129,7 @@ jobs:
               --alias "$ALIAS" \
               --set-default
           else
-            echo "::error::Unknown environment: $TARGET_ENV"
+            echo "::error::Unknown environment: $TARGET_ENV_UPPER"
             exit 1
           fi
 
