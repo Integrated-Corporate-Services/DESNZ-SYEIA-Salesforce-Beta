@@ -53,6 +53,23 @@
 		<name>CustomMetadata</name>
 	</types>
 	<types>
+		<members>Asset_Information__c</members>
+		<members>Address__c</members>
+		<members>Asset_Information__c</members>
+		<members>Case_Email_Config__mdt</members>
+		<members>Case_Party__c</members>
+		<members>Case__c</members>
+		<members>Contact__c</members>
+		<members>Consultation_Organisation__c</members>
+		<members>Consultation_Response__c</members>
+		<members>Related_Case__c</members>
+		<members>Party__c</members>
+		<members>Route_Point__c</members>
+		<members>Route__c</members>
+		<members>Sensitive_Area_Check__c</members>
+		<name>CustomObject</name>
+	</types>
+	<types>
 		<members>*</members>
 		<name>CustomPermission</name>
 	</types>
@@ -168,5 +185,5 @@
 		<members>*</members>
 		<name>Workflow</name>
 	</types>
-	<version>64.0</version>
+	<version>65.0</version>
 </Package>
