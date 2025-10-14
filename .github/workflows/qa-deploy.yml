@@ -3,27 +3,10 @@ name: qa-deploy
 on:
   push:
     branches: [ develop ]
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Target environment'
-        required: true
-        type: choice
-        options:
-          - Dev1
-          - Dev2
-          - QA
-          - UAT
-          - Prod
-      ref:
-        description: 'Git ref to deploy (branch, tag, or commit SHA)'
-        required: false
-        default: 'develop'
-        type: string
-
+  
 permissions:
   contents: write
-
+  
 jobs:
   deploy-qa:
     runs-on: ubuntu-latest
@@ -32,7 +15,7 @@ jobs:
       SF_USERNAME_QA: ${{ secrets.SF_USERNAME_QA }}
     steps:
       - uses: actions/checkout@v4
-
+      
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
