@@ -27,7 +27,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}  # Not GITHUB_TOKEN
         run: |
-          VER="sprint-beta-TEST1.2"
+          VER="${{ inputs.version }}"
           BRANCH="release/${VER}"
       
           git fetch --all
