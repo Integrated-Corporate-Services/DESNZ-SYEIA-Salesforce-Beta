@@ -56,7 +56,8 @@
 		<name>CustomLabels</name>
 	</types>
 	<types>
-		<members>*</members>
+		<members>Environment_Setting__mdt</members>
+		<members>Case_Email_Config__mdt</members>
 		<name>CustomMetadata</name>
 	</types>
 	<types>
