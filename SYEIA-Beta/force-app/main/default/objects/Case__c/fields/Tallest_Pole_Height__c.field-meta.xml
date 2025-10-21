@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tallest_Pole_Height__c</fullName>
+    <description>What is the height of the tallest proposed pole?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>What is the height of the tallest proposed pole?</inlineHelpText>
+    <label>Tallest Pole Height (Metres)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>
