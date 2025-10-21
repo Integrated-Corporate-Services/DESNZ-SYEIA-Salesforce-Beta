@@ -6,6 +6,9 @@
 	</types>
 	<types>
 		<members>Case__c</members>
+		<members>Payment__c</members>
+		<members>Route__c</members>
+		<members>Related_Case__c</members>
 		<name>CustomObject</name>
 	</types>
 	<types>
