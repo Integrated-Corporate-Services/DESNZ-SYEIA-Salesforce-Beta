@@ -118,14 +118,6 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>MatchingRules</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ModerationRule</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>NamedCredential</name>
 	</types>
 	<types>
@@ -175,6 +167,10 @@
 	<types>
 		<members>*</members>
 		<name>Workflow</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>CustomField</name>
 	</types>
 	<version>64.0</version>
 </Package>
