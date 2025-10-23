@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Overdue Cases</label>
+    <protected>false</protected>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Hours_Threshold__c</field>
+        <value xsi:type="xsd:double">48.0</value>
+    </values>
+    <values>
+        <field>Queue_Name__c</field>
+        <value xsi:type="xsd:string">New Cases</value>
+    </values>
+    <values>
+        <field>Recipient_Email__c</field>
+        <value xsi:type="xsd:string">cameron.ofoluwa@ics.gov.uk</value>
+    </values>
+    <values>
+        <field>Template_Id__c</field>
+        <value xsi:type="xsd:string">42e9c0b5-6a7c-4300-b773-d00252857d0d</value>
+    </values>
+</CustomMetadata>
