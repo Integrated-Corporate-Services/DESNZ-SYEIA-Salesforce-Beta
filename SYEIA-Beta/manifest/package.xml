@@ -58,6 +58,7 @@
 		<members>Payment__c</members>
 		<members>Related_Case__c</members>
 		<members>Route__c</members>
+		<members>Party__c</members>
 		<name>CustomObject</name>
 	</types>
 	<types>
