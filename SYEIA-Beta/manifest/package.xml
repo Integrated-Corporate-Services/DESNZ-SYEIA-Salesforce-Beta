@@ -13,8 +13,7 @@
 		<name>CustomApplication</name>
 	</types>
 	<types>
-		<members>Case_Email_Config__mdt</members>
-		<members>Environment_Setting__mdt</members>
+		<members>*</members>
 		<name>CustomMetadata</name>
 	</types>
 	<types>
