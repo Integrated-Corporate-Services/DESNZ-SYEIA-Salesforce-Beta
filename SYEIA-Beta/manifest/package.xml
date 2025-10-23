@@ -54,9 +54,14 @@
 		<name>CustomMetadata</name>
 	</types>
 	<types>
+		<members>*</members>
+		<name>CustomField</name>
+	</types>
+	<types>
 		<members>Case__c</members>
 		<members>Payment__c</members>
 		<members>Related_Case__c</members>
+		<members>Route_Point__c</members>
 		<members>Route__c</members>
 		<members>Party__c</members>
 		<name>CustomObject</name>
