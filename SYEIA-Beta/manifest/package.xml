@@ -70,7 +70,7 @@
 		<name>PathAssistant</name>
 	</types>
 	<types>
-		<members>*</members>
+		<members>New_Cases</members>
 		<name>Queue</name>
 	</types>
 	<types>
