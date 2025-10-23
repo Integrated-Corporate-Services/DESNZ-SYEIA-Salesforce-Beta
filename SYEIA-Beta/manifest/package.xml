@@ -9,6 +9,10 @@
 		<name>BrandingSet</name>
 	</types>
 	<types>
+		<members>Energy_Infrastructure_Planning</members>
+		<name>CustomApplication</name>
+	</types>
+	<types>
 		<members>*</members>
 		<name>CustomMetadata</name>
 	</types>
