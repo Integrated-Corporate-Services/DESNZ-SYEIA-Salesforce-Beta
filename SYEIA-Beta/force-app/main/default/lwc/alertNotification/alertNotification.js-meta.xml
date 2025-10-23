@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>
+        lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__AppPage,lightning__HomePage,lightning__RecordPage">
+            <property name="alertHeading" type="String" default="Alert Heading"
+                label="Alert Heading"
+                description="The heading text of the alert" />
+            <property name="alertMessage" type="String"
+                label="Alert Message (Optional)"
+                description="Additional message text for the alert" />
+            <property name="alertTheme" type="String" default="info"
+                label="Alert Theme"
+                description="Visual theme of the alert"
+                datasource="info,success,warning,error,offline" />
+            <property name="showIcon" type="Boolean" default="true"
+                label="Show Icon"
+                description="Display icon in the alert" />
+            <property name="isDismissible" type="Boolean" default="false"
+                label="Show Close Button"
+                description="Allow users to dismiss the alert" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

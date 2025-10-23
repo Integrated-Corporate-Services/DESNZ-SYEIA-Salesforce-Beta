@@ -86,9 +86,6 @@
                         <valueListItems>
                             <value>ChangeOwnerOne</value>
                         </valueListItems>
-                        <valueListItems>
-                            <value>Case__c.Generate_Consent_Letter_Flow</value>
-                        </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
                 <componentInstanceProperties>

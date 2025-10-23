@@ -1,0 +1,28 @@
+<template>
+    <div class={alertClass} role="alert">
+        <span class="slds-assistive-text">{alertTheme}</span>
+        <template if:true={showIcon}>
+            <span class="slds-icon_container slds-icon-utility-user slds-m-right_small">
+                <lightning-icon icon-name={iconName} alternative-text={alertTheme} variant={iconVariant}
+                    size="x-small"></lightning-icon>
+            </span>
+        </template>
+        <h2>
+            {alertHeading}
+            <template if:true={hasMessage}>
+                <lightning-formatted-rich-text value={alertMessage}>
+                </lightning-formatted-rich-text>
+            </template>
+        </h2>
+        <template if:true={isDismissible}>
+            <div class="slds-notify__close">
+                <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close"
+                    onclick={handleClose}>
+                    <lightning-icon icon-name="utility:close" alternative-text="Close" variant="inverse"
+                        size="small"></lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+            </div>
+        </template>
+    </div>
+</template>
