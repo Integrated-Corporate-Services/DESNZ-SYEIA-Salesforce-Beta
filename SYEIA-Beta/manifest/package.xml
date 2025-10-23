@@ -74,10 +74,6 @@
 		<name>Queue</name>
 	</types>
 	<types>
-		<members>*</members>
-		<name>QuickAction</name>
-	</types>
-	<types>
 		<members>Case__c.Lock_Rejected_Case</members>
 		<members>Case__c.Validate_DNO_Party_Type</members>
 		<name>ValidationRule</name>
