@@ -4,19 +4,16 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
-                    <name>actionNames</name>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
                     <name>collapsed</name>
                     <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>enableActionsConfiguration</name>
-                    <value>true</value>
+                    <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>enableActionsInNative</name>
-                    <value>true</value>
+                    <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>hideChatterActions</name>
@@ -59,9 +56,89 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Party_Type__c</fieldItem>
+                <identifier>RecordParty_Type_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Email__c</fieldItem>
+                <identifier>RecordEmail_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-27e9bc49-625c-46a4-b31f-06005c94fe78</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
             <componentInstance>
-                <componentName>force:detailPanel</componentName>
-                <identifier>force_detailPanel</identifier>
+                <componentName>flexipage:blankSpace</componentName>
+                <identifier>flexipage_blankSpace</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Phone__c</fieldItem>
+                <identifier>RecordPhone_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-25cb2ac3-c88f-495e-8eb0-77553f314a75</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-27e9bc49-625c-46a4-b31f-06005c94fe78</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-25cb2ac3-c88f-495e-8eb0-77553f314a75</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column2</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-a9dffb79-6ac9-480a-ada8-52cc616240c1</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>columns</name>
+                    <value>Facet-a9dffb79-6ac9-480a-ada8-52cc616240c1</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>@@@SFDCInformationSFDC@@@</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:fieldSection</componentName>
+                <identifier>flexipage_fieldSection</identifier>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>
@@ -106,20 +183,6 @@
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>decorate</name>
-                    <value>true</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>richTextValue</name>
-                    <value>&lt;p&gt;test - tl&lt;/p&gt;</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:richText</componentName>
-                <identifier>flexipage_richText</identifier>
-            </componentInstance>
-        </itemInstances>
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
@@ -195,9 +258,9 @@
         <name>sidebar</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>Application - Tree Lopping</masterLabel>
+    <masterLabel>Individual Party Record Page</masterLabel>
     <parentFlexiPage>flexipage__default_rec_L</parentFlexiPage>
-    <sobjectType>Case__c</sobjectType>
+    <sobjectType>Party__c</sobjectType>
     <template>
         <name>flexipage:recordHomeTemplateDesktop</name>
     </template>

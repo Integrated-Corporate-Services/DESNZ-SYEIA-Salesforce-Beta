@@ -67,11 +67,15 @@
         <profile>Admin</profile>
     </profileActionOverrides>
     <tabs>Case_Management_Dashboard</tabs>
+    <tabs>Document_Approval_Request__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Energy_Infrastructure_Planning_Console_UtilityBar</utilityBar>
     <workspaceConfig>
         <mappings>
             <tab>Case_Management_Dashboard</tab>
+        </mappings>
+        <mappings>
+            <tab>Document_Approval_Request__c</tab>
         </mappings>
     </workspaceConfig>
 </CustomApplication>

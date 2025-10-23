@@ -5,13 +5,6 @@
 		<name>ApexClass</name>
 	</types>
 	<types>
-		<members>Case__c</members>
-		<members>Payment__c</members>
-		<members>Route__c</members>
-		<members>Related_Case__c</members>
-		<name>CustomObject</name>
-	</types>
-	<types>
 		<members>*</members>
 		<name>ApexComponent</name>
 	</types>
@@ -56,9 +49,16 @@
 		<name>CustomLabels</name>
 	</types>
 	<types>
-		<members>Environment_Setting__mdt</members>
 		<members>Case_Email_Config__mdt</members>
+		<members>Environment_Setting__mdt</members>
 		<name>CustomMetadata</name>
+	</types>
+	<types>
+		<members>Case__c</members>
+		<members>Payment__c</members>
+		<members>Related_Case__c</members>
+		<members>Route__c</members>
+		<name>CustomObject</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -165,12 +165,13 @@
 		<name>StaticResource</name>
 	</types>
 	<types>
-		<members>*</members>
-		<name>Workflow</name>
+		<members>Case__c.Lock_Rejected_Case</members>
+		<members>Case__c.Validate_DNO_Party_Type</members>
+		<name>ValidationRule</name>
 	</types>
 	<types>
 		<members>*</members>
-		<name>CustomField</name>
+		<name>Workflow</name>
 	</types>
-	<version>64.0</version>
+	<version>65.0</version>
 </Package>

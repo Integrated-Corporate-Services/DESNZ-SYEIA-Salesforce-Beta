@@ -828,43 +828,6 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
-                    <name>direction</name>
-                    <value>ltr</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>display</name>
-                    <value>Display OmniScript on page</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>inlineLabel</name>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>inlineVariant</name>
-                    <value>brand</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>language</name>
-                    <value>English</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>subType</name>
-                    <value>Amend</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>theme</name>
-                    <value>lightning</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>type</name>
-                    <value>docGenConsentLetter</value>
-                </componentInstanceProperties>
-                <componentName>runtime_omnistudio:omniscript</componentName>
-                <identifier>runtime_omnistudio_omniscript</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
                     <name>parentFieldApiName</name>
                     <value>Case__c.Id</value>
                 </componentInstanceProperties>
