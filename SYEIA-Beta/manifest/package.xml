@@ -2,35 +2,7 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
 		<members>*</members>
-		<name>ApexClass</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ApexComponent</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ApexTrigger</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>AppMenu</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ApprovalProcess</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>AssignmentRules</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>AuraDefinitionBundle</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>AutoResponseRules</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -39,14 +11,6 @@
 	<types>
 		<members>*</members>
 		<name>CustomApplication</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CustomApplicationComponent</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CustomLabels</name>
 	</types>
 	<types>
 		<members>Case_Email_Config__mdt</members>
@@ -64,11 +28,10 @@
 		<members>Route_Point__c</members>
 		<members>Route__c</members>
 		<members>Party__c</members>
+		<members>Case_Party__c</members>
+		<members>Asset_Information__c</members>
+		<members>Address__c</members>
 		<name>CustomObject</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CustomPermission</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -76,35 +39,7 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>DelegateGroup</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>DuplicateRule</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>FlexiPage</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>Flow</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>FlowDefinition</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>GlobalValueSet</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>GlobalValueSetTranslation</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>Group</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -124,23 +59,11 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>NamedCredential</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>NavigationMenu</name>
 	</types>
 	<types>
 		<members>*</members>
 		<name>PathAssistant</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>PermissionSet</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>Profile</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -151,33 +74,9 @@
 		<name>QuickAction</name>
 	</types>
 	<types>
-		<members>*</members>
-		<name>ReportType</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>Role</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>SharingRules</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>SharingSet</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>StaticResource</name>
-	</types>
-	<types>
 		<members>Case__c.Lock_Rejected_Case</members>
 		<members>Case__c.Validate_DNO_Party_Type</members>
 		<name>ValidationRule</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>Workflow</name>
 	</types>
 	<version>65.0</version>
 </Package>
