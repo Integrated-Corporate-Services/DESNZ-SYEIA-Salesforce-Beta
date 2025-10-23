@@ -35,6 +35,8 @@
 		<members>Case_Party__c</members>
 		<members>Asset_Information__c</members>
 		<members>Address__c</members>
+		<members>Case_Email_Config__mdt</members>
+		<members>Environment_Setting__mdt</members>
 		<name>CustomObject</name>
 	</types>
 	<types>
