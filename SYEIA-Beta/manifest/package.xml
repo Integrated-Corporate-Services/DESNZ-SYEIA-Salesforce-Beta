@@ -9,7 +9,7 @@
 		<name>BrandingSet</name>
 	</types>
 	<types>
-		<members>*</members>
+		<members>Energy_Infrastructure_Planning</members>
 		<name>CustomApplication</name>
 	</types>
 	<types>
@@ -20,6 +20,10 @@
 	<types>
 		<members>*</members>
 		<name>CustomField</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>ContentAsset</name>
 	</types>
 	<types>
 		<members>Case__c</members>
