@@ -2,11 +2,11 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
 		<members>*</members>
-		<name>BrandingSet</name>
+		<name>AppMenu</name>
 	</types>
 	<types>
-		<members>Energy_Infrastructure_Planning</members>
-		<name>CustomApplication</name>
+		<members>*</members>
+		<name>BrandingSet</name>
 	</types>
 	<types>
 		<members>*</members>
