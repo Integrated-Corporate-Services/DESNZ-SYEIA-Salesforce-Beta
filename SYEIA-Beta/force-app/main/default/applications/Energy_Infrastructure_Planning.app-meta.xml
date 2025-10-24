@@ -91,42 +91,6 @@
         <pageOrSobjectType>Party__c</pageOrSobjectType>
         <recordType>Party__c.Organisation</recordType>
         <type>Flexipage</type>
-        <profile>Case Officer</profile>
-    </profileActionOverrides>
-    <profileActionOverrides>
-        <actionName>View</actionName>
-        <content>Organisation_Party_Record_Page</content>
-        <formFactor>Large</formFactor>
-        <pageOrSobjectType>Party__c</pageOrSobjectType>
-        <recordType>Party__c.Organisation</recordType>
-        <type>Flexipage</type>
-        <profile>Case Officer</profile>
-    </profileActionOverrides>
-    <profileActionOverrides>
-        <actionName>View</actionName>
-        <content>Organisation_Party_Record_Page</content>
-        <formFactor>Small</formFactor>
-        <pageOrSobjectType>Party__c</pageOrSobjectType>
-        <recordType>Party__c.Organisation</recordType>
-        <type>Flexipage</type>
-        <profile>Decision Manager</profile>
-    </profileActionOverrides>
-    <profileActionOverrides>
-        <actionName>View</actionName>
-        <content>Organisation_Party_Record_Page</content>
-        <formFactor>Large</formFactor>
-        <pageOrSobjectType>Party__c</pageOrSobjectType>
-        <recordType>Party__c.Organisation</recordType>
-        <type>Flexipage</type>
-        <profile>Decision Manager</profile>
-    </profileActionOverrides>
-    <profileActionOverrides>
-        <actionName>View</actionName>
-        <content>Organisation_Party_Record_Page</content>
-        <formFactor>Small</formFactor>
-        <pageOrSobjectType>Party__c</pageOrSobjectType>
-        <recordType>Party__c.Organisation</recordType>
-        <type>Flexipage</type>
         <profile>Admin</profile>
     </profileActionOverrides>
     <profileActionOverrides>
@@ -145,42 +109,6 @@
         <pageOrSobjectType>Party__c</pageOrSobjectType>
         <recordType>Party__c.Individual</recordType>
         <type>Flexipage</type>
-        <profile>Case Officer</profile>
-    </profileActionOverrides>
-    <profileActionOverrides>
-        <actionName>View</actionName>
-        <content>Individual_Party_Record_Page</content>
-        <formFactor>Large</formFactor>
-        <pageOrSobjectType>Party__c</pageOrSobjectType>
-        <recordType>Party__c.Individual</recordType>
-        <type>Flexipage</type>
-        <profile>Case Officer</profile>
-    </profileActionOverrides>
-    <profileActionOverrides>
-        <actionName>View</actionName>
-        <content>Individual_Party_Record_Page</content>
-        <formFactor>Small</formFactor>
-        <pageOrSobjectType>Party__c</pageOrSobjectType>
-        <recordType>Party__c.Individual</recordType>
-        <type>Flexipage</type>
-        <profile>Decision Manager</profile>
-    </profileActionOverrides>
-    <profileActionOverrides>
-        <actionName>View</actionName>
-        <content>Individual_Party_Record_Page</content>
-        <formFactor>Large</formFactor>
-        <pageOrSobjectType>Party__c</pageOrSobjectType>
-        <recordType>Party__c.Individual</recordType>
-        <type>Flexipage</type>
-        <profile>Decision Manager</profile>
-    </profileActionOverrides>
-    <profileActionOverrides>
-        <actionName>View</actionName>
-        <content>Individual_Party_Record_Page</content>
-        <formFactor>Small</formFactor>
-        <pageOrSobjectType>Party__c</pageOrSobjectType>
-        <recordType>Party__c.Individual</recordType>
-        <type>Flexipage</type>
         <profile>Admin</profile>
     </profileActionOverrides>
     <profileActionOverrides>
@@ -191,38 +119,6 @@
         <recordType>Party__c.Individual</recordType>
         <type>Flexipage</type>
         <profile>Admin</profile>
-    </profileActionOverrides>
-    <profileActionOverrides>
-        <actionName>View</actionName>
-        <content>Individual_Party_Record_Page</content>
-        <formFactor>Small</formFactor>
-        <pageOrSobjectType>Party__c</pageOrSobjectType>
-        <type>Flexipage</type>
-        <profile>Case Officer</profile>
-    </profileActionOverrides>
-    <profileActionOverrides>
-        <actionName>View</actionName>
-        <content>Individual_Party_Record_Page</content>
-        <formFactor>Large</formFactor>
-        <pageOrSobjectType>Party__c</pageOrSobjectType>
-        <type>Flexipage</type>
-        <profile>Case Officer</profile>
-    </profileActionOverrides>
-    <profileActionOverrides>
-        <actionName>View</actionName>
-        <content>Individual_Party_Record_Page</content>
-        <formFactor>Small</formFactor>
-        <pageOrSobjectType>Party__c</pageOrSobjectType>
-        <type>Flexipage</type>
-        <profile>Decision Manager</profile>
-    </profileActionOverrides>
-    <profileActionOverrides>
-        <actionName>View</actionName>
-        <content>Individual_Party_Record_Page</content>
-        <formFactor>Large</formFactor>
-        <pageOrSobjectType>Party__c</pageOrSobjectType>
-        <type>Flexipage</type>
-        <profile>Decision Manager</profile>
     </profileActionOverrides>
     <profileActionOverrides>
         <actionName>View</actionName>
