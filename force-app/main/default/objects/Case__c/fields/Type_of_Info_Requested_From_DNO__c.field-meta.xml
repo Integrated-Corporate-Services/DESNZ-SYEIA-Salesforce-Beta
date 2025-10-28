@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type_of_Info_Requested_From_DNO__c</fullName>
+    <label>Type of Info Requested From DNO</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Clarification of mapping/plans</fullName>
+                <default>false</default>
+                <label>Clarification of mapping/plans</label>
+            </value>
+            <value>
+                <fullName>Correct Form B</fullName>
+                <default>false</default>
+                <label>Correct Form B</label>
+            </value>
+            <value>
+                <fullName>Correct grid coordinates</fullName>
+                <default>false</default>
+                <label>Correct grid coordinates</label>
+            </value>
+            <value>
+                <fullName>Date of when works will start</fullName>
+                <default>false</default>
+                <label>Date of when works will start</label>
+            </value>
+            <value>
+                <fullName>Ecological survey</fullName>
+                <default>false</default>
+                <label>Ecological survey</label>
+            </value>
+            <value>
+                <fullName>Fee payment</fullName>
+                <default>false</default>
+                <label>Fee payment</label>
+            </value>
+            <value>
+                <fullName>HRA</fullName>
+                <default>false</default>
+                <label>HRA</label>
+            </value>
+            <value>
+                <fullName>Have wayleaves been obtained</fullName>
+                <default>false</default>
+                <label>Have wayleaves been obtained</label>
+            </value>
+            <value>
+                <fullName>Method statement</fullName>
+                <default>false</default>
+                <label>Method statement</label>
+            </value>
+            <value>
+                <fullName>Published Adverts for 132kV and above</fullName>
+                <default>false</default>
+                <label>Published Adverts for 132kV and above</label>
+            </value>
+            <value>
+                <fullName>Statutory Consulation - Historic England</fullName>
+                <default>false</default>
+                <label>Statutory Consulation - Historic England</label>
+            </value>
+            <value>
+                <fullName>Statutory Consultation - EA</fullName>
+                <default>false</default>
+                <label>Statutory Consultation - EA</label>
+            </value>
+            <value>
+                <fullName>Statutory consulation - AONB unit</fullName>
+                <default>false</default>
+                <label>Statutory consulation - AONB unit</label>
+            </value>
+            <value>
+                <fullName>Statutory consultation - Natural England</fullName>
+                <default>false</default>
+                <label>Statutory consultation - Natural England</label>
+            </value>
+            <value>
+                <fullName>Statutory consultation - Natural Resources Wales</fullName>
+                <default>false</default>
+                <label>Statutory consultation - Natural Resources Wales</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

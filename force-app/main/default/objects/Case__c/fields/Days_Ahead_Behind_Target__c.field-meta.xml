@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Days_Ahead_Behind_Target__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    AND(
+        NOT(ISBLANK(Date_Consent_Sent_to_DNO__c)),
+        NOT(ISBLANK(Target_Completion_Date__c))
+    ),
+    Target_Completion_Date__c - Date_Consent_Sent_to_DNO__c,
+    NULL
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Shows how many days ahead or behind the consent was sent compared to the target completion date. Positive values mean ahead of schedule, negative values mean behind.</inlineHelpText>
+    <label>Days Ahead / Behind Target</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

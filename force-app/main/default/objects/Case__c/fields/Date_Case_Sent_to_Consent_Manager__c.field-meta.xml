@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Date_Case_Sent_to_Consent_Manager__c</fullName>
+    <description>Used in the pre-application assessment (for S37) to indicate when the case was sent to a Consent Manager for clearance.</description>
+    <inlineHelpText>The date the case was sent to a Consent Manager for clearance.</inlineHelpText>
+    <label>Date Case Sent to Consent Manager</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>
