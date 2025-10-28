@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type_of_Application__c</fullName>
+    <label>Type of Application</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Connection to low-carbon technology</fullName>
+                <default>false</default>
+                <label>Connection to low-carbon technology</label>
+            </value>
+            <value>
+                <fullName>Diversion</fullName>
+                <default>false</default>
+                <label>Diversion</label>
+            </value>
+            <value>
+                <fullName>New line</fullName>
+                <default>false</default>
+                <label>New line</label>
+            </value>
+            <value>
+                <fullName>New pole</fullName>
+                <default>false</default>
+                <label>New pole</label>
+            </value>
+            <value>
+                <fullName>Pole replacement</fullName>
+                <default>false</default>
+                <label>Pole replacement</label>
+            </value>
+            <value>
+                <fullName>Rebuild existing line</fullName>
+                <default>false</default>
+                <label>Rebuild existing line</label>
+            </value>
+            <value>
+                <fullName>Single-service line to multi-service</fullName>
+                <default>false</default>
+                <label>Single-service line to multi-service</label>
+            </value>
+            <value>
+                <fullName>Solar farm connection</fullName>
+                <default>false</default>
+                <label>Solar farm connection</label>
+            </value>
+            <value>
+                <fullName>Substation connection</fullName>
+                <default>false</default>
+                <label>Substation connection</label>
+            </value>
+            <value>
+                <fullName>Upgrade line (e.g. 2 to 3-phase)</fullName>
+                <default>false</default>
+                <label>Upgrade line (e.g. 2 to 3-phase)</label>
+            </value>
+            <value>
+                <fullName>Upgrade PMT</fullName>
+                <default>false</default>
+                <label>Upgrade PMT</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
