@@ -22,27 +22,7 @@
         <name>Approval_Outcome</name>
     </approvalStep>
     <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
-    <finalApprovalActions>
-        <action>
-            <name>Set_Approval_Date_to_NOW</name>
-            <type>FieldUpdate</type>
-        </action>
-        <action>
-            <name>Set_Approver_Id_to_User_Id</name>
-            <type>FieldUpdate</type>
-        </action>
-        <action>
-            <name>Set_Status_to_Approved</name>
-            <type>FieldUpdate</type>
-        </action>
-    </finalApprovalActions>
     <finalApprovalRecordLock>true</finalApprovalRecordLock>
-    <finalRejectionActions>
-        <action>
-            <name>Set_Status_to_Rejected</name>
-            <type>FieldUpdate</type>
-        </action>
-    </finalRejectionActions>
     <finalRejectionRecordLock>false</finalRejectionRecordLock>
     <label>Letter Document Approval Process</label>
     <processOrder>1</processOrder>

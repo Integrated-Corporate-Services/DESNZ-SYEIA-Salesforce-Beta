@@ -202,12 +202,12 @@
 		<name>FlexiPage</name>
 	</types>
 	<types>
+		<members>Case_After_Save</members>
 		<members>Case_Before_Save</members>
 		<members>Document_Approval_Request_After_Save</members>
 		<members>Screen_DocGen_S37_Consent_Letter</members>
 		<members>Screen_Reject_Case_Flow</members>
 		<members>Screen_Withdrawal_Request_Process_Guide</members>
-		<members>Subflow_Case_Withdrawal_Process</members>
 		<members>Subflow_File_Approval_Process_Next_Steps</members>
 		<members>Subflow_Notify_Approvers_About_New_Request</members>
 		<name>Flow</name>
@@ -229,13 +229,8 @@
 		<name>Queue</name>
 	</types>
 	<types>
-		<members>Document_Approval_Request__c.Set_Approval_Date_to_NOW</members>
-		<members>Document_Approval_Request__c.Set_Approver_Id_to_User_Id</members>
-		<members>Document_Approval_Request__c.Set_Approver_to_User</members>
-		<members>Document_Approval_Request__c.Set_Status_to_Approved</members>
-		<members>Document_Approval_Request__c.Set_Status_to_Pending</members>
-		<members>Document_Approval_Request__c.Set_Status_to_Rejected</members>
-		<name>WorkflowFieldUpdate</name>
+		<members>Document_Approval_Request__c</members>
+		<name>Workflow</name>
 	</types>
 	<version>65.0</version>
 </Package>
