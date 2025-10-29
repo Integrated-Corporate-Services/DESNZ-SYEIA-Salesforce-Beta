@@ -44,12 +44,6 @@
         </action>
     </finalRejectionActions>
     <finalRejectionRecordLock>false</finalRejectionRecordLock>
-    <initialSubmissionActions>
-        <action>
-            <name>Set_Status_to_Pending</name>
-            <type>FieldUpdate</type>
-        </action>
-    </initialSubmissionActions>
     <label>Letter Document Approval Process</label>
     <processOrder>1</processOrder>
     <recordEditability>AdminOnly</recordEditability>
