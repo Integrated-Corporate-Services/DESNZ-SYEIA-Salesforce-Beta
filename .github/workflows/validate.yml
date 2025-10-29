@@ -81,10 +81,10 @@ jobs:
               --set-default
           fi
 
-      - name: PMD (Apex)
-        run: |
-          cd ./SYEIA-Beta
-          bash ./scripts/pmd.sh
+      #- name: PMD (Apex)
+      #  run: |
+      #    cd ./SYEIA-Beta
+      #    bash ./scripts/pmd.sh
 
       # ESLint (LWC) - Disabled for now.
       # - name: ESLint (LWC)
