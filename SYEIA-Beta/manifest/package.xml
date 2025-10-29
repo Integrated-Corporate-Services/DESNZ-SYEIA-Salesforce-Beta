@@ -194,17 +194,6 @@
 		<name>Flow</name>
 	</types>
 	<types>
-		<members>Case_Before_Save</members>
-		<members>Document_Approval_Request_After_Save</members>
-		<members>Screen_DocGen_S37_Consent_Letter</members>
-		<members>Screen_Reject_Case_Flow</members>
-		<members>Screen_Withdrawal_Request_Process_Guide</members>
-		<members>Subflow_Case_Withdrawal_Process</members>
-		<members>Subflow_File_Approval_Process_Next_Steps</members>
-		<members>Subflow_Notify_Approvers_About_New_Request</members>
-		<name>FlowDefinition</name>
-	</types>
-	<types>
 		<members>PS_Case_Management_Suite</members>
 		<members>PS_Document_Generation</members>
 		<members>PS_Gov_UK_Notify</members>
