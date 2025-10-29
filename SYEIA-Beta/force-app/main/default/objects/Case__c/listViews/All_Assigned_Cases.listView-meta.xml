@@ -14,5 +14,10 @@
         <field>OWNER.FIRST_NAME</field>
         <operation>notEqual</operation>
     </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Rejected,Withdrawn</value>
+    </filters>
     <label>All Assigned Cases</label>
 </ListView>

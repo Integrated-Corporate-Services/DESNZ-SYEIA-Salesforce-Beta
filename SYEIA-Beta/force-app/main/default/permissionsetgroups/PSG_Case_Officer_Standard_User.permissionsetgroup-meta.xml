@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSetGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>The standard Permission Set Group for Case Officers</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>PSG - Case Officer (Standard User)</label>
+    <permissionSets>PS_Case_Management_Suite</permissionSets>
+    <permissionSets>PS_Document_Generation</permissionSets>
+    <permissionSets>PS_Gov_UK_Notify</permissionSets>
+    <permissionSets>PS_Withdraw_Case</permissionSets>
+    <permissionSets>force__DocGenUser</permissionSets>
+    <permissionSets>force__OmniStudioExecution</permissionSets>
+    <status>Updated</status>
+</PermissionSetGroup>

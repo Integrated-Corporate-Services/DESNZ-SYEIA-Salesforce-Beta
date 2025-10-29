@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Active_Withdrawal_Request</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF( AND(ISCHANGED( Status__c ), Pending_Withdrawal_Request_Count__c &gt; 0), true, false )</errorConditionFormula>
+    <errorMessage>The status of this case cannot be updated whilst a pending withdrawal request still exists.</errorMessage>
+</ValidationRule>

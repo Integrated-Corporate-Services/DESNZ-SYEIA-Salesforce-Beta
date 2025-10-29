@@ -9,5 +9,10 @@
     <columns>LAST_UPDATE</columns>
     <columns>Decision_Deadline_Display__c</columns>
     <filterScope>Mine</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Withdrawn,Rejected</value>
+    </filters>
     <label>Your Cases</label>
 </ListView>

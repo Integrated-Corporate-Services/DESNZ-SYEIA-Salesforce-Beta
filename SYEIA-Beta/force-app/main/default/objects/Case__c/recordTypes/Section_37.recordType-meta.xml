@@ -495,15 +495,15 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Consultation</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>In-Progress</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Requested More Information</fullName>
+            <fullName>Withdrawal Requested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Withdrawn</fullName>
             <default>false</default>
         </values>
     </picklistValues>
