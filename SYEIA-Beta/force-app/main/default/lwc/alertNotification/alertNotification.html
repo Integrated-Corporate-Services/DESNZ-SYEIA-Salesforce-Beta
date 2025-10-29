@@ -1,5 +1,6 @@
 <template>
-    <div class={alertClass} role="alert">
+    <div class={alertClass} role="alert"
+        style="border-radius: var( --slds-c-card-radius-border, var(--slds-s-container-radius-border, var(--slds-g-radius-border-2)));">
         <span class="slds-assistive-text">{alertTheme}</span>
         <template if:true={showIcon}>
             <span class="slds-icon_container slds-icon-utility-user slds-m-right_small">
