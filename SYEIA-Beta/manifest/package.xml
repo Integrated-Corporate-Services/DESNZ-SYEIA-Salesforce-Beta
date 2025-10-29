@@ -191,8 +191,13 @@
 		<name>CustomObject</name>
 	</types>
 	<types>
+		<members>*</members>
+		<name>CustomPermission</name>
+	</types>
+	<types>
 		<members>Consultation_Record_Page</members>
 		<members>Consultation_Response_Record_Page</members>
+		<members>Document_Record_Page</members>
 		<members>Withdrawal_Request_Record_Page</members>
 		<name>FlexiPage</name>
 	</types>
@@ -222,6 +227,15 @@
 		<members>Document_Approvers</members>
 		<members>New_Cases</members>
 		<name>Queue</name>
+	</types>
+	<types>
+		<members>Document_Approval_Request__c.Set_Approval_Date_to_NOW</members>
+		<members>Document_Approval_Request__c.Set_Approver_Id_to_User_Id</members>
+		<members>Document_Approval_Request__c.Set_Approver_to_User</members>
+		<members>Document_Approval_Request__c.Set_Status_to_Approved</members>
+		<members>Document_Approval_Request__c.Set_Status_to_Pending</members>
+		<members>Document_Approval_Request__c.Set_Status_to_Rejected</members>
+		<name>WorkflowFieldUpdate</name>
 	</types>
 	<version>65.0</version>
 </Package>
