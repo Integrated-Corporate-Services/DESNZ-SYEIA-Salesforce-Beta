@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
-    <description>This action updates the payment record from related object</description>
+    <description>This action updates the payment record from related object.</description>
     <label>Update Payment Record</label>
     <optionsCreateFeedItem>false</optionsCreateFeedItem>
     <quickActionLayout>

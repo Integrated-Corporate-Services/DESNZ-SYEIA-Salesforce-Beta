@@ -10,6 +10,7 @@
 	</types>
 	<types>
 		<members>Case__c.Generate_Consent_Letter_Flow</members>
+		<members>Payment__c.Update_Payment_Record</members>
 		<name>QuickAction</name>
 	</types>
 	<version>65.0</version>
