@@ -81,7 +81,7 @@ jobs:
               --set-default
           fi
 
-      #- name: PMD (Apex)
+      # - name: PMD (Apex)
       #  run: |
       #    cd ./SYEIA-Beta
       #    bash ./scripts/pmd.sh

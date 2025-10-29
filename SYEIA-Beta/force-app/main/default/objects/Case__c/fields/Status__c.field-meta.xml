@@ -31,14 +31,24 @@
                 <label>Requested More Information</label>
             </value>
             <value>
-                <fullName>Completed</fullName>
+                <fullName>Withdrawal Requested</fullName>
                 <default>false</default>
-                <label>Completed</label>
+                <label>Withdrawal Requested</label>
+            </value>
+            <value>
+                <fullName>Withdrawn</fullName>
+                <default>false</default>
+                <label>Withdrawn</label>
             </value>
             <value>
                 <fullName>Rejected</fullName>
                 <default>false</default>
                 <label>Rejected</label>
+            </value>
+            <value>
+                <fullName>Completed</fullName>
+                <default>false</default>
+                <label>Completed</label>
             </value>
         </valueSetDefinition>
     </valueSet>
