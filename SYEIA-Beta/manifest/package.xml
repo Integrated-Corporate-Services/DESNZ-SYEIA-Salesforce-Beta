@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
-		<members>Application_Section_37</members>
-		<name>FlexiPage</name>
+		<members>Case_Management_Dashboard</members>
+		<name>CustomTab</name>
 	</types>
 	<types>
-		<members>*</members>
-		<name>LightningComponentBundle</name>
+		<members>Admin</members>
+		<members>Case Officer</members>
+		<members>Decision Manager</members>
+		<name>Profile</name>
 	</types>
 	<types>
-		<members>Case__c.Generate_Consent_Letter_Flow</members>
-		<members>Payment__c.Update_Payment_Record</members>
-		<name>QuickAction</name>
+		<members>UAP_Profile_Case_Officer</members>
+		<members>UAP_Profile_System_Administrator</members>
+		<name>UserAccessPolicy</name>
 	</types>
 	<version>65.0</version>
 </Package>
