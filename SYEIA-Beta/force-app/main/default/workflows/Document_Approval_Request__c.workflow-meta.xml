@@ -4,7 +4,7 @@
         <fullName>Set_Approval_Date_to_NOW</fullName>
         <field>Approval_Date__c</field>
         <formula>NOW()</formula>
-        <name>Set Approval Date to NOW()</name>
+        <name>Set Approval Date to NOW().</name>
         <notifyAssignee>false</notifyAssignee>
         <operation>Formula</operation>
         <protected>false</protected>
@@ -14,7 +14,7 @@
         <fullName>Set_Approver_Id_to_User_Id</fullName>
         <field>Approver_Id__c</field>
         <formula>$User.Id</formula>
-        <name>Set Approver Id to User Id</name>
+        <name>Set Approver Id to User Id.</name>
         <notifyAssignee>false</notifyAssignee>
         <operation>Formula</operation>
         <protected>false</protected>
@@ -24,7 +24,7 @@
         <fullName>Set_Approver_to_User</fullName>
         <field>Approval_Comments__c</field>
         <formula>$User.Id</formula>
-        <name>Set Approver to User</name>
+        <name>Set Approver to User.</name>
         <notifyAssignee>false</notifyAssignee>
         <operation>Formula</operation>
         <protected>false</protected>
@@ -34,7 +34,7 @@
         <fullName>Set_Status_to_Approved</fullName>
         <field>Approval_Status__c</field>
         <literalValue>Approved</literalValue>
-        <name>Set Status to Approved</name>
+        <name>Set Status to Approved.</name>
         <notifyAssignee>false</notifyAssignee>
         <operation>Literal</operation>
         <protected>false</protected>
@@ -44,7 +44,7 @@
         <fullName>Set_Status_to_Pending</fullName>
         <field>Approval_Status__c</field>
         <literalValue>Pending</literalValue>
-        <name>Set Status to Pending</name>
+        <name>Set Status to Pending.</name>
         <notifyAssignee>false</notifyAssignee>
         <operation>Literal</operation>
         <protected>false</protected>
@@ -54,7 +54,7 @@
         <fullName>Set_Status_to_Rejected</fullName>
         <field>Approval_Status__c</field>
         <literalValue>Rejected</literalValue>
-        <name>Set Status to Rejected</name>
+        <name>Set Status to Rejected.</name>
         <notifyAssignee>false</notifyAssignee>
         <operation>Literal</operation>
         <protected>false</protected>
