@@ -37,6 +37,7 @@
 		<members>Case_Party__c.Case__c</members>
 		<members>Case_Party__c.Party__c</members>
 		<members>Case_Party__c.Type__c</members>
+		<members>Case__c.Actual_Completed_Date_Time__c</members>
 		<members>Case__c.AWS_Application_Id__c</members>
 		<members>Case__c.Accept_Consultees_Recommendations__c</members>
 		<members>Case__c.Accept_Local_Authority_Conditions__c</members>
