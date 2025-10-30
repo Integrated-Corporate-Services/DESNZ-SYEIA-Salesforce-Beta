@@ -223,7 +223,7 @@
 		<name>UserAccessPolicy</name>
 	</types>
 	<types>
-		<members>*</members>
+		<members>*</members> 
 		<name>FlexiPage</name>
 	</types>
 	<types>
