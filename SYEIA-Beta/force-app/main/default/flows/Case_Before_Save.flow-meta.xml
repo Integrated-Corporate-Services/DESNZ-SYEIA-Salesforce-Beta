@@ -2,6 +2,55 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>65.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Assign_Case_Actual_Completed_Date_Time</name>
+        <label>Assign Case Actual Completed Date/Time</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Actual_Completed_Date_Time__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>varNow</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Decision_Case_Status_Updated_To_Complete</name>
+        <label>Decision Case Status Updated To Complete</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Case_Completed</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>WasSet</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Case_Actual_Completed_Date_Time</targetReference>
+            </connector>
+            <label>Case Completed</label>
+        </rules>
+    </decisions>
     <decisions>
         <name>Has_DNO_Lookup_Value_Changed</name>
         <label>Has DNO Lookup Value Changed</label>
@@ -39,6 +88,9 @@
         <label>Is Case New or Updated</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Decision_Case_Status_Updated_To_Complete</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>Record Is Updated</defaultConnectorLabel>
         <rules>
             <name>Record_Is_New</name>
@@ -85,11 +137,18 @@
             <label>Failed To Find RT</label>
         </rules>
     </decisions>
+    <description>SYEIA-77</description>
     <environments>Default</environments>
     <formulas>
         <name>formula_IsNew</name>
         <dataType>Boolean</dataType>
         <expression>ISNEW()</expression>
+    </formulas>
+    <formulas>
+        <description>Gets the timestamp</description>
+        <name>varNow</name>
+        <dataType>DateTime</dataType>
+        <expression>NOW()</expression>
     </formulas>
     <interviewLabel>Case - Before Save {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Case - Before Save</label>
@@ -221,6 +280,7 @@
         <connector>
             <targetReference>Has_DNO_Lookup_Value_Changed</targetReference>
         </connector>
+        <filterFormula>{!$Permission.Bypass_Flow} == false</filterFormula>
         <object>Case__c</object>
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordBeforeSave</triggerType>
