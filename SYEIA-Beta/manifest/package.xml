@@ -104,6 +104,10 @@
 		<members>Case__c.Vegetation_Clearance_Required__c</members>
 		<members>Case__c.Why_Have_All_Wayleaves_Not_Been_Obtained__c</members>
 		<members>Case__c.Works_Comply_With_ESQCR__c</members>
+		<members>Case_Note__c.Case__c</members>
+		<members>Case_Note__c.Comment__c</members>
+		<members>Case_Note__c.Lock_Note__c</members>
+		<members>Case_Note__c.Name</members>
 		<members>Consultation_Response__c.Comments_from_Responder__c</members>
 		<members>Consultation_Response__c.Conditions_Not_Accepted_Reason__c</members>
 		<members>Consultation_Response__c.Consultation_Conditions_Accepted__c</members>
@@ -177,6 +181,7 @@
 		<members>Asset_Information__c</members>
 		<members>Case_Party__c</members>
 		<members>Case__c</members>
+		<members>Case_Note__c</members>
 		<members>Consultation_Organisation__c</members>
 		<members>Consultation_Response__c</members>
 		<members>Consultation__c</members>
@@ -191,10 +196,15 @@
 		<name>CustomObject</name>
 	</types>
 	<types>
+    <members>*</members>
+    <name>Layout</name>
+</types>
+	<types>
 		<members>*</members> 
 		<name>Flow</name>
 	</types>
 	<types>
+		<members>PS_Read_Write_Locked_Case_Notes</members>
 		<members>PS_Case_Management_Suite</members>
 		<members>PS_Document_Generation</members>
 		<members>PS_Gov_UK_Notify</members>
