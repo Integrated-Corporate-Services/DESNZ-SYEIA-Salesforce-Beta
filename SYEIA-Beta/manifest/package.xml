@@ -107,7 +107,6 @@
 		<members>Case_Note__c.Case__c</members>
 		<members>Case_Note__c.Comment__c</members>
 		<members>Case_Note__c.Lock_Note__c</members>
-		<members>Case_Note__c.Name</members>
 		<members>Consultation_Response__c.Comments_from_Responder__c</members>
 		<members>Consultation_Response__c.Conditions_Not_Accepted_Reason__c</members>
 		<members>Consultation_Response__c.Consultation_Conditions_Accepted__c</members>
