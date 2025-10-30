@@ -234,5 +234,9 @@
 		<members>*</members>
 		<name>QuickAction</name>
 	</types>
+	<types>
+		<members>Case__c.*</members>
+		<name>ListView</name>
+	</types>
 	<version>65.0</version>
 </Package>
