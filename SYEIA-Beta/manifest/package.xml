@@ -211,7 +211,7 @@
 		<name>PermissionSet</name>
 	</types>
 	<types>
-		<members>PSG_Case_Officer_Standard_User</members>
+		<members>*</members>
 		<name>PermissionSetGroup</name>
 	</types>
 	<types>
