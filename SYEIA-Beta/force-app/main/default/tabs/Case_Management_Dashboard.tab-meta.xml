@@ -2,6 +2,7 @@
 <CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
     <description>Created by Lightning App Builder</description>
     <flexiPage>Case_Management_Dashboard</flexiPage>
+    <icon>SharedDocuments/CACFBACJA9e6e807c7d674c17be4bfd3e64bd54c4.png</icon>
     <label>Case Management Dashboard</label>
-    <motif>Custom13: Box</motif>
+    <motif>Custom107: TV Widescreen</motif>
 </CustomTab>
