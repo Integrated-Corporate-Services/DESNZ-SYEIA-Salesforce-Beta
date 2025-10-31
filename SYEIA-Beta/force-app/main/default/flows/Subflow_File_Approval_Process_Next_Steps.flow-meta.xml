@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
-        <name>Generate_Document</name>
-        <label>Generate Document</label>
+        <name>Generate_Approved_Consent_Letter</name>
+        <label>Generate Approved Consent Letter</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <actionName>DocGen_DocumentGenerationWrapper</actionName>
@@ -27,6 +27,45 @@
             <name>templateContentVersionId</name>
             <value>
                 <elementReference>Get_S37_Consent_Letter_DocumentTemplateContentDoc.LatestContentVersionId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>tokenData</name>
+            <value>
+                <elementReference>formula_tokenData</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>DocGen_DocumentGenerationWrapper</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Generate_Approved_Screening_Decision_Letter</name>
+        <label>Generate Approved Screening Decision Letter</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>DocGen_DocumentGenerationWrapper</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Get_Consent_Letter_NotificationType</targetReference>
+        </connector>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>documentTitle</name>
+            <value>
+                <elementReference>triggeringRecord.Document_Title__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>referenceObject</name>
+            <value>
+                <elementReference>triggeringRecord.Case__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>templateContentVersionId</name>
+            <value>
+                <elementReference>Get_S37_Screening_Decision_Letter_DocumentTemplateContentDoc.LatestContentVersionId</elementReference>
             </value>
         </inputParameters>
         <inputParameters>
@@ -131,9 +170,68 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Get_S37_Consent_Letter_DocumentTemplate</targetReference>
+                <targetReference>Split_on_Case_Type</targetReference>
             </connector>
             <label>Approved</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Split_on_Case_Type</name>
+        <label>Split on Case Type</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Out of range</defaultConnectorLabel>
+        <rules>
+            <name>S37</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>triggeringRecord.Case__r.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Section 37</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Split_on_Document_Type</targetReference>
+            </connector>
+            <label>S37</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Split_on_Document_Type</name>
+        <label>Split on Document Type</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>None</defaultConnectorLabel>
+        <rules>
+            <name>Consent_Letter</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>triggeringRecord.Document_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Consent Letter</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_S37_Consent_Letter_DocumentTemplate</targetReference>
+            </connector>
+            <label>Consent Letter</label>
+        </rules>
+        <rules>
+            <name>Screening_Decision_Letter</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>triggeringRecord.Document_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Screening Decision Letter</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_S37_Screening_Decision_Letter_DocumentTemplate</targetReference>
+            </connector>
+            <label>Screening Decision Letter</label>
         </rules>
     </decisions>
     <description>This subflow handles the next steps once a Document Approval Request has either been approved or rejected</description>
@@ -242,7 +340,7 @@
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Generate_Document</targetReference>
+            <targetReference>Generate_Approved_Consent_Letter</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -250,6 +348,48 @@
             <operator>EqualTo</operator>
             <value>
                 <elementReference>Get_S37_Consent_Letter_DocumentTemplate.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>DocumentTemplateContentDoc</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_S37_Screening_Decision_Letter_DocumentTemplate</name>
+        <label>Get S37 Screening Decision Letter DocumentTemplate</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_S37_Screening_Decision_Letter_DocumentTemplateContentDoc</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>S37_Screening_Decision_Letter</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>DocumentTemplate</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_S37_Screening_Decision_Letter_DocumentTemplateContentDoc</name>
+        <label>Get S37 Screening Decision Letter DocumentTemplateContentDoc</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Generate_Approved_Screening_Decision_Letter</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DocumentTemplateId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_S37_Screening_Decision_Letter_DocumentTemplate.Id</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>

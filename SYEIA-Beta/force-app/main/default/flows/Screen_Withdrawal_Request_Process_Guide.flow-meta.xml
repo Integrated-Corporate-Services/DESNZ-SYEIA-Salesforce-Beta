@@ -1,5 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Send_Request_Approved_to_Applicant</name>
+        <label>Send Request Approved to Applicant</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>GovUKNotifyInvocable</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>personalisationJson</name>
+            <value>
+                <elementReference>formula_EmailPersonalisation</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientEmail</name>
+            <value>
+                <elementReference>Get_Case_Record.DNO__r.Email__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>templateId</name>
+            <value>
+                <stringValue>bbb54e45-2601-4225-b498-77c5ddce846d</stringValue>
+            </value>
+        </inputParameters>
+        <nameSegment>GovUKNotifyInvocable</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Request_Rejected_to_Applicant</name>
+        <label>Send Request Rejected to Applicant</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>GovUKNotifyInvocable</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>personalisationJson</name>
+            <value>
+                <elementReference>formula_EmailPersonalisation</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientEmail</name>
+            <value>
+                <elementReference>Get_Case_Record.DNO__r.Email__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>templateId</name>
+            <value>
+                <stringValue>bbb54e45-2601-4225-b498-77c5ddce846d</stringValue>
+            </value>
+        </inputParameters>
+        <nameSegment>GovUKNotifyInvocable</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
     <apiVersion>65.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <choices>
@@ -73,6 +133,13 @@
     </decisions>
     <description>This screen flow will guide case officers through a withdrawal request; capturing information and providing them the ability to approve / reject the request.</description>
     <environments>Default</environments>
+    <formulas>
+        <name>formula_EmailPersonalisation</name>
+        <dataType>String</dataType>
+        <expression>&quot;{\&quot;desnz_ref\&quot;:\&quot;&quot; &amp; {!Get_Case_Record.Name} &amp; 
+&quot;\&quot;,\&quot;withdrawal_request_reason\&quot;:\&quot;&quot; &amp; &apos;Approved&apos; &amp; 
+&quot;\&quot;}&quot;</expression>
+    </formulas>
     <interviewLabel>Screen - Withdrawal Process Guide {!$Flow.CurrentDateTime}</interviewLabel>
     <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
     <label>Screen - Withdrawal Request Process Guide</label>
@@ -149,6 +216,9 @@
         <label>Update Case To In-Progress</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <connector>
+            <targetReference>Send_Request_Rejected_to_Applicant</targetReference>
+        </connector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -170,6 +240,9 @@
         <label>Update Case To Withdrawn</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <connector>
+            <targetReference>Send_Request_Approved_to_Applicant</targetReference>
+        </connector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>

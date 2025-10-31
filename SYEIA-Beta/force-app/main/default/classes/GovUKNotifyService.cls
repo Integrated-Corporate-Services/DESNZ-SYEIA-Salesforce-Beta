@@ -49,18 +49,28 @@ public class GovUKNotifyService {
 
     @TestVisible
     private static HttpResponse makeCallout(String endpoint, String method, String body) {
-        // Retrieve settings for JWT generation from Custom Settings
-        NotifyApiSettings__c settings = NotifyApiSettings__c.getInstance();
+        // Retrieve config from Custom Metadata
+        GOV_UK_Notify_Config__mdt config =
+            [
+                SELECT
+                    Issuer_UUID__c,
+                    Secret_Key__c
+                FROM GOV_UK_Notify_Config__mdt
+                WHERE Label = 'Production'
+                LIMIT 1
+            ];
 
-        System.debug('Notify API Settings retrieved: ' + (settings != null ? 'Found' : 'Not Found'));
-
-        // Validate settings exist and contain required fields
-        if (settings == null || String.isBlank(settings.Issuer_UUID__c) || String.isBlank(settings.Secret_Key__c)) {
-            throw new NotifyException('Notify API settings are not configured properly. Please check NotifyApiSettings__c custom setting.');
+        if (config == null) {
+            throw new NotifyException(
+                'GOV.UK Notify config not found in metadata'
+            );
         }
 
         // Generate JWT token for authentication
-        String jwtToken = JWTGenerator.generateToken(settings.Issuer_UUID__c, settings.Secret_Key__c);
+        String jwtToken = JWTGenerator.generateToken(
+            config.Issuer_UUID__c,
+            config.Secret_Key__c
+        );
 
         // Prepare HTTP request
         HttpRequest request = new HttpRequest();

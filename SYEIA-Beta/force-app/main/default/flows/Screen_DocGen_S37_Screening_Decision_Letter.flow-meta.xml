@@ -26,7 +26,7 @@
         <inputParameters>
             <name>templateContentVersionId</name>
             <value>
-                <elementReference>Get_S37_Consent_Letter_DocumentTemplateContentDoc.LatestContentVersionId</elementReference>
+                <elementReference>Get_S37_Screening_Decision_Letter_DocumentTemplateContentDoc.LatestContentVersionId</elementReference>
             </value>
         </inputParameters>
         <inputParameters>
@@ -70,7 +70,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Get_S37_Consent_Letter_DocumentTemplate</targetReference>
+            <targetReference>Get_S37_Screening_Decision_Letter_DocumentTemplate</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -117,7 +117,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <targetReference>Get_S37_Consent_Letter_DocumentTemplate</targetReference>
+            <targetReference>Get_S37_Screening_Decision_Letter_DocumentTemplate</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>No</defaultConnectorLabel>
         <rules>
@@ -147,17 +147,10 @@
         <defaultConnectorLabel>Approval Not Requested</defaultConnectorLabel>
         <rules>
             <name>Approval_Requested</name>
-            <conditionLogic>or</conditionLogic>
+            <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>Request_Approval.value</leftValueReference>
                 <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Request_Approval.value</leftValueReference>
-                <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
                 </rightValue>
@@ -179,17 +172,10 @@
         <defaultConnectorLabel>Approval Not Requested</defaultConnectorLabel>
         <rules>
             <name>Approval_Requested_Final</name>
-            <conditionLogic>or</conditionLogic>
+            <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>Request_Approval.value</leftValueReference>
                 <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Request_Approval.value</leftValueReference>
-                <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
                 </rightValue>
@@ -200,7 +186,6 @@
             <label>Approval Requested</label>
         </rules>
     </decisions>
-    <description>Screen Flow to generate an S37 Consent Letter</description>
     <environments>Default</environments>
     <formulas>
         <name>formula_ApplicationDate</name>
@@ -318,7 +303,7 @@ TEXT(YEAR(TODAY()))</expression>
     <formulas>
         <name>formula_DocumentTitle</name>
         <dataType>String</dataType>
-        <expression>&apos;Consent Letter-&apos; &amp; {!Get_Case_Using_recordId.Name} &amp; &apos;-&apos; &amp; TEXT(TODAY())</expression>
+        <expression>&apos;Screening Decision Letter - &apos; &amp; {!Get_Case_Using_recordId.Name} &amp; &apos; - &apos; &amp; TEXT(TODAY())</expression>
     </formulas>
     <formulas>
         <name>formula_EcologySurveyNumber</name>
@@ -394,17 +379,17 @@ TEXT(YEAR(TODAY()))</expression>
         <name>formula_TokenDataUserBlock</name>
         <dataType>String</dataType>
         <expression>IF(
-  {!Request_Approval.value} = false,
-  /* FALSE branch: User_* */
-  &apos;&quot;User_Title&quot;: &quot;&apos; &amp; {!$User.Title} &amp; &apos;&quot;,&apos;
-  &amp; &apos;&quot;User_Salutation&quot;: &quot;&apos; &amp; TEXT({!$User.Salutations__c}) &amp; &apos;&quot;,&apos;
-  &amp; &apos;&quot;User_First_Name&quot;: &quot;&apos; &amp; {!$User.FirstName} &amp; &apos;&quot;,&apos;
-  &amp; &apos;&quot;User_Last_Name&quot;: &quot;&apos; &amp; {!$User.LastName} &amp; &apos;&quot;,&apos;,
+  {!Request_Approval.value},
   /* TRUE branch: SUB_* */
   &apos;&quot;SUB_User_Title&quot;: &quot;SUB_WITH_APPROVER_TITLE&quot;,&apos;
   &amp; &apos;&quot;SUB_User_Salutation&quot;: &quot;SUB_WITH_APPROVER_SALUTATION&quot;,&apos;
   &amp; &apos;&quot;SUB_User_First_Name&quot;: &quot;SUB_WITH_APPROVER_FIRST_NAME&quot;,&apos;
-  &amp; &apos;&quot;SUB_User_Last_Name&quot;: &quot;SUB_WITH_APPROVER_LAST_NAME&quot;,&apos;
+  &amp; &apos;&quot;SUB_User_Last_Name&quot;: &quot;SUB_WITH_APPROVER_LAST_NAME&quot;,&apos;,
+  /* FALSE branch: User_* (no leading &amp; on first line) */
+  &apos;&quot;User_Title&quot;: &quot;&apos; &amp; {!$User.Title} &amp; &apos;&quot;,&apos;
+  &amp; &apos;&quot;User_Salutation&quot;: &quot;&apos; &amp; TEXT({!$User.Salutations__c}) &amp; &apos;&quot;,&apos;
+  &amp; &apos;&quot;User_First_Name&quot;: &quot;&apos; &amp; {!$User.FirstName} &amp; &apos;&quot;,&apos;
+  &amp; &apos;&quot;User_Last_Name&quot;: &quot;&apos; &amp; {!$User.LastName} &amp; &apos;&quot;,&apos;
 )</expression>
     </formulas>
     <formulas>
@@ -476,9 +461,8 @@ TEXT(YEAR(TODAY()))</expression>
   NULL
 )</expression>
     </formulas>
-    <interviewLabel>DocGen - Generate Consent Letter {!$Flow.CurrentDateTime}</interviewLabel>
-    <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
-    <label>Screen - DocGen - S37 Consent Letter</label>
+    <interviewLabel>Screen - DocGen - S37 Screening Decision Letter {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Screen - DocGen - S37 Screening Decision Letter</label>
     <loops>
         <name>Loop_Group_Members</name>
         <label>Loop Group Members</label>
@@ -541,7 +525,7 @@ TEXT(YEAR(TODAY()))</expression>
         <inputAssignments>
             <field>Document_Type__c</field>
             <value>
-                <stringValue>Consent Letter</stringValue>
+                <stringValue>Screening Decision Letter</stringValue>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -709,20 +693,20 @@ TEXT(YEAR(TODAY()))</expression>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <name>Get_S37_Consent_Letter_DocumentTemplate</name>
-        <label>Get S37 Consent Letter DocumentTemplate</label>
+        <name>Get_S37_Screening_Decision_Letter_DocumentTemplate</name>
+        <label>Get S37 Screening Decision Letter DocumentTemplate</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Get_S37_Consent_Letter_DocumentTemplateContentDoc</targetReference>
+            <targetReference>Get_S37_Screening_Decision_Letter_DocumentTemplateContentDoc</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Name</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>S37_Consent_Letter</stringValue>
+                <stringValue>S37_Screening_Decision_Letter</stringValue>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -730,8 +714,8 @@ TEXT(YEAR(TODAY()))</expression>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <name>Get_S37_Consent_Letter_DocumentTemplateContentDoc</name>
-        <label>Get S37 Consent Letter DocumentTemplateContentDoc</label>
+        <name>Get_S37_Screening_Decision_Letter_DocumentTemplateContentDoc</name>
+        <label>Get S37 Screening Decision Letter DocumentTemplateContentDoc</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
@@ -743,7 +727,7 @@ TEXT(YEAR(TODAY()))</expression>
             <field>DocumentTemplateId</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>Get_S37_Consent_Letter_DocumentTemplate.Id</elementReference>
+                <elementReference>Get_S37_Screening_Decision_Letter_DocumentTemplate.Id</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -882,12 +866,6 @@ TEXT(YEAR(TODAY()))</expression>
                     <stringValue>Approver Not Required</stringValue>
                 </value>
             </inputParameters>
-            <inputParameters>
-                <name>value</name>
-                <value>
-                    <booleanValue>true</booleanValue>
-                </value>
-            </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
@@ -1014,7 +992,7 @@ TEXT(YEAR(TODAY()))</expression>
                 </conditions>
             </visibilityRule>
         </fields>
-        <nextOrFinishButtonLabel>Generate Consent Letter</nextOrFinishButtonLabel>
+        <nextOrFinishButtonLabel>Generate Screening Decision Letter</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
     </screens>
@@ -1609,7 +1587,7 @@ TEXT(YEAR(TODAY()))</expression>
         <allowPause>false</allowPause>
         <fields>
             <name>Copy_1_of_Final_Record_Creation_Screen_Approval_Titl</name>
-            <fieldText>&lt;h1&gt;&lt;strong&gt;The Consent Letter has been successfully created.&lt;/strong&gt;&lt;/h1&gt;</fieldText>
+            <fieldText>&lt;h1&gt;&lt;strong&gt;The &lt;/strong&gt;&lt;strong style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Screening Decision&lt;/strong&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt; &lt;/span&gt;&lt;strong&gt;Letter has been successfully created.&lt;/strong&gt;&lt;/h1&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -1622,7 +1600,7 @@ TEXT(YEAR(TODAY()))</expression>
         </fields>
         <fields>
             <name>Copy_1_of_Final_Record_Creation_Screen_Approval_Subtitle</name>
-            <fieldText>&lt;p&gt;The Consent Letter should now appear within the &lt;strong&gt;Documents&lt;/strong&gt; tab on the Case.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you do not see the Consent Letter straight away, your page might need to refreshed.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;The &lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Screening Decision &lt;/span&gt;Letter should now appear within the &lt;strong&gt;Documents&lt;/strong&gt; tab on the Case.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you do not see the &lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Screening Decision &lt;/span&gt;Letter straight away, your page might need to refreshed.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -1647,7 +1625,7 @@ TEXT(YEAR(TODAY()))</expression>
         <allowPause>false</allowPause>
         <fields>
             <name>Final_Record_Creation_Screen_Approval_Titl</name>
-            <fieldText>&lt;h1&gt;&lt;strong&gt;The Consent Letter has been successfully created.&lt;/strong&gt;&lt;/h1&gt;</fieldText>
+            <fieldText>&lt;h1&gt;&lt;strong&gt;The Screening Decision Letter has been successfully created.&lt;/strong&gt;&lt;/h1&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -1660,7 +1638,7 @@ TEXT(YEAR(TODAY()))</expression>
         </fields>
         <fields>
             <name>Final_Record_Creation_Screen_Approval_Subtitle</name>
-            <fieldText>&lt;p&gt;Please use the link below to access and review the &lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Consent Letter &lt;/span&gt;before submitting it for final approval.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The Consent Letter will only appear in the &lt;strong&gt;Documents&lt;/strong&gt; tab on the Case once it has been approved by an approver.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Please use the link below to access and review the Screening Decision Letter&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt; Letter &lt;/span&gt;before submitting it for final approval.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The &lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Screening Decision &lt;/span&gt;Letter will only appear in the &lt;strong&gt;Documents&lt;/strong&gt; tab on the Case once it has been approved by an approver.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -1695,7 +1673,7 @@ TEXT(YEAR(TODAY()))</expression>
             <targetReference>Does_User_Have_Bypass_Approval_CP</targetReference>
         </connector>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <variables>
         <name>DV_AvoidBirdBreeding</name>
         <dataType>String</dataType>

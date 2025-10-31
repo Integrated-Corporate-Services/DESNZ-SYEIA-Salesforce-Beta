@@ -34,13 +34,16 @@
 		<members>Case_Email_Config__mdt.Queue_Name__c</members>
 		<members>Case_Email_Config__mdt.Recipient_Email__c</members>
 		<members>Case_Email_Config__mdt.Template_Id__c</members>
+		<members>Case_Note__c.Case__c</members>
+		<members>Case_Note__c.Comment__c</members>
+		<members>Case_Note__c.Lock_Note__c</members>
 		<members>Case_Party__c.Case__c</members>
 		<members>Case_Party__c.Party__c</members>
 		<members>Case_Party__c.Type__c</members>
-		<members>Case__c.Actual_Completed_Date_Time__c</members>
 		<members>Case__c.AWS_Application_Id__c</members>
 		<members>Case__c.Accept_Consultees_Recommendations__c</members>
 		<members>Case__c.Accept_Local_Authority_Conditions__c</members>
+		<members>Case__c.Actual_Completed_Date_Time__c</members>
 		<members>Case__c.Additional_Info_Requested_From_DNO__c</members>
 		<members>Case__c.Applicant_Reference__c</members>
 		<members>Case__c.Application_Fee_Paid__c</members>
@@ -79,6 +82,7 @@
 		<members>Case__c.Name_of_LPA__c</members>
 		<members>Case__c.Overdue_Email_Sent__c</members>
 		<members>Case__c.Payment__c</members>
+		<members>Case__c.Pending_Withdrawal_Request_Count__c</members>
 		<members>Case__c.Pre_existing_Routes_Storage_Used__c</members>
 		<members>Case__c.Project_Description__c</members>
 		<members>Case__c.Project_name__c</members>
@@ -103,10 +107,8 @@
 		<members>Case__c.UK_Energy_Portal_Link__c</members>
 		<members>Case__c.Vegetation_Clearance_Required__c</members>
 		<members>Case__c.Why_Have_All_Wayleaves_Not_Been_Obtained__c</members>
+		<members>Case__c.Withdrawal_Request_Count__c</members>
 		<members>Case__c.Works_Comply_With_ESQCR__c</members>
-		<members>Case_Note__c.Case__c</members>
-		<members>Case_Note__c.Comment__c</members>
-		<members>Case_Note__c.Lock_Note__c</members>
 		<members>Consultation_Response__c.Comments_from_Responder__c</members>
 		<members>Consultation_Response__c.Conditions_Not_Accepted_Reason__c</members>
 		<members>Consultation_Response__c.Consultation_Conditions_Accepted__c</members>
@@ -130,10 +132,14 @@
 		<members>Document_Approval_Request__c.Approver__c</members>
 		<members>Document_Approval_Request__c.Case__c</members>
 		<members>Document_Approval_Request__c.Document_Title__c</members>
+		<members>Document_Approval_Request__c.Document_Type__c</members>
 		<members>Document_Approval_Request__c.File_Id__c</members>
+		<members>Document_Approval_Request__c.Related_Case_Type__c</members>
 		<members>Document_Approval_Request__c.Requesting_User__c</members>
 		<members>Document_Approval_Request__c.Token_Data__c</members>
 		<members>Environment_Setting__mdt.Base_URL__c</members>
+		<members>GOV_UK_Notify_Config__mdt.Issuer_UUID__c</members>
+		<members>GOV_UK_Notify_Config__mdt.Secret_Key__c</members>
 		<members>Knowledge__kav.ArticleBody__c</members>
 		<members>NotifyAPISettings__c.Issuer_UUID__c</members>
 		<members>NotifyAPISettings__c.Secret_Key__c</members>
@@ -162,13 +168,17 @@
 		<members>Route__c.Tolerance__c</members>
 		<members>Route__c.Total_Route_Points__c</members>
 		<members>User.Salutations__c</members>
-		<members>Withdrawal_Request__c.Case__c</members>
 		<members>Withdrawal_Request__c.Actioned_By__c</members>
 		<members>Withdrawal_Request__c.Actioned_On__c</members>
+		<members>Withdrawal_Request__c.Case__c</members>
 		<members>Withdrawal_Request__c.Rejection_Reason__c</members>
 		<members>Withdrawal_Request__c.Status__c</members>
 		<members>Withdrawal_Request__c.Withdrawal_Request_Reason__c</members>
 		<name>CustomField</name>
+	</types>
+	<types>
+		<members>GOV_UK_Notify_Config.Production</members>
+		<name>CustomMetadata</name>
 	</types>
 	<types>
 		<members>Consent_Letter_Approved</members>
@@ -178,13 +188,14 @@
 	<types>
 		<members>Address__c</members>
 		<members>Asset_Information__c</members>
+		<members>Case_Note__c</members>
 		<members>Case_Party__c</members>
 		<members>Case__c</members>
-		<members>Case_Note__c</members>
 		<members>Consultation_Organisation__c</members>
 		<members>Consultation_Response__c</members>
 		<members>Consultation__c</members>
 		<members>Document_Approval_Request__c</members>
+		<members>GOV_UK_Notify_Config__mdt</members>
 		<members>Party__c</members>
 		<members>Payment__c</members>
 		<members>Related_Case__c</members>
@@ -195,51 +206,84 @@
 		<name>CustomObject</name>
 	</types>
 	<types>
-    <members>*</members>
-    <name>Layout</name>
-</types>
-	<types>
-		<members>*</members> 
-		<name>Flow</name>
+		<members>*</members>
+		<name>CustomPermission</name>
 	</types>
 	<types>
-		<members>PS_Read_Write_Locked_Case_Notes</members>
-		<members>PS_Case_Management_Suite</members>
-		<members>PS_Document_Generation</members>
-		<members>PS_Gov_UK_Notify</members>
-		<members>PS_Withdraw_Case</members>
-		<name>PermissionSet</name>
+		<members>Address__c</members>
+		<members>Asset_Information__c</members>
+		<members>Case_Management_Dashboard</members>
+		<members>Case__c</members>
+		<members>Document_Approval_Request__c</members>
+		<members>Related_Case__c</members>
+		<members>Route__c</members>
+		<members>Withdrawal_Request__c</members>
+		<name>CustomTab</name>
+	</types>
+	<types>
+		<members>SharedDocuments/AssCasesTab.png</members>
+		<members>SharedDocuments/AssetsTab.png</members>
+		<members>SharedDocuments/CMDTab.png</members>
+		<members>SharedDocuments/CaseTab.png</members>
+		<members>SharedDocuments/DARTab.png</members>
+		<members>SharedDocuments/PathTab.png</members>
+		<members>SharedDocuments/WRTab.png</members>
+		<name>Document</name>
 	</types>
 	<types>
 		<members>*</members>
-		<name>PermissionSetGroup</name>
-	</types>
-	<types>
-		<members>Document_Approvers</members>
-		<members>New_Cases</members>
-		<name>Queue</name>
-	</types>
-	<types>
-		<members>UAP_Profile_Case_Officer</members>
-		<members>UAP_Profile_System_Administrator</members>
-		<name>UserAccessPolicy</name>
-	</types>
-	<types>
-		<members>*</members> 
 		<name>FlexiPage</name>
 	</types>
 	<types>
 		<members>*</members>
-		<name>CustomPermission</name>
+		<name>Flow</name>
+	</types>
+	<types>
+		<members>PG_Section_37</members>
+		<name>Group</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>Layout</name>
+	</types>
+	<types>
+		<members>Case_Note__c.*</members>
+		<members>Case__c.*</members>
+		<name>ListView</name>
+	</types>
+	<types>
+		<members>PS_Case_Management_Suite</members>
+		<members>PS_Document_Generation</members>
+		<members>PS_Gov_UK_Notify</members>
+		<members>PS_Read_Write_Locked_Case_Notes</members>
+		<members>PS_Withdraw_Case</members>
+		<name>PermissionSet</name>
+	</types>
+	<types>
+		<members>Case Officer</members>
+		<name>Profile</name>
+	</types>
+	<types>
+		<members>Document_Approvers</members>
+		<members>New_Cases_S37</members>
+		<name>Queue</name>
 	</types>
 	<types>
 		<members>*</members>
 		<name>QuickAction</name>
 	</types>
 	<types>
-		<members>Case__c.*</members>
-		<members>Case_Note__c.*</members>
-		<name>ListView</name>
+		<members>Case__c.Share_S37_Cases_With_S37_Group_Members</members>
+		<name>SharingCriteriaRule</name>
+	</types>
+	<types>
+		<members>Case__c</members>
+		<name>SharingRules</name>
+	</types>
+	<types>
+		<members>UAP_Profile_Case_Officer</members>
+		<members>UAP_Profile_System_Administrator</members>
+		<name>UserAccessPolicy</name>
 	</types>
 	<version>65.0</version>
 </Package>
