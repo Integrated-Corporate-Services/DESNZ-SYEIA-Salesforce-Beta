@@ -39,7 +39,7 @@
 		<members>Case_Email_Config__mdt.Recipient_Email__c</members>
 		<members>Case_Email_Config__mdt.Template_Id__c</members>
 		<members>Case_Note__c.Case__c</members>
-		<members>Case_Note__c.Comment__c</members>
+		<members>Case_Note__c.Comment__c</members> 
 		<members>Case_Note__c.Lock_Note__c</members>
 		<members>Case_Party__c.Case__c</members>
 		<members>Case_Party__c.Party__c</members>
