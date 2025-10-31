@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
     <customObject>true</customObject>
-    <icon>SharedDocuments/CACFBACJAe1e40d1007694f959c0452637d6a1758.png</icon>
+    <icon>SharedDocuments/WRTab.png</icon>
     <motif>Custom213: TV Widescreen</motif>
 </CustomTab>
