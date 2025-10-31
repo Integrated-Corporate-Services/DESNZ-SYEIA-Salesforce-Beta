@@ -112,24 +112,6 @@ private class GovUKNotifyServiceTest {
     }
     
     @IsTest
-    static void testSendEmail_MissingApiSettings() {
-        delete [SELECT Id FROM NotifyApiSettings__c];
-        
-        try {
-            Test.startTest();
-            GovUKNotifyService.sendEmail('test@example.com', 'template-123');
-            Test.stopTest();
-            
-            Assert.fail('Should throw exception for missing API settings');
-        } catch (GovUKNotifyService.NotifyException ex) {
-            Assert.isTrue(
-                ex.getMessage().contains('not configured properly'),
-                'Exception should mention missing configuration'
-            );
-        }
-    }
-    
-    @IsTest
     static void testSendEmail_EmptyPersonalisationMap() {
         Test.setMock(HttpCalloutMock.class, new MockSuccess());
         

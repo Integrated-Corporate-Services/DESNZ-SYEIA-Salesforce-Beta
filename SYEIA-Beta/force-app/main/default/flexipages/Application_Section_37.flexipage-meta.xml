@@ -146,12 +146,36 @@
                     <valueList>
                         <valueListItems>
                             <value>Edit</value>
+                            <visibilityRule>
+                                <criteria>
+                                    <leftValue>{!Record.Case_Owner__c}</leftValue>
+                                    <operator>NE</operator>
+                                    <rightValue>New Cases</rightValue>
+                                </criteria>
+                            </visibilityRule>
                         </valueListItems>
                         <valueListItems>
                             <value>ChangeOwnerOne</value>
                         </valueListItems>
                         <valueListItems>
                             <value>Case__c.Generate_Consent_Letter_Flow</value>
+                            <visibilityRule>
+                                <criteria>
+                                    <leftValue>{!Record.Case_Owner__c}</leftValue>
+                                    <operator>NE</operator>
+                                    <rightValue>New Cases</rightValue>
+                                </criteria>
+                            </visibilityRule>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Case__c.Generate_S37_Screening_Letter</value>
+                            <visibilityRule>
+                                <criteria>
+                                    <leftValue>{!Record.Case_Owner__c}</leftValue>
+                                    <operator>NE</operator>
+                                    <rightValue>New Cases</rightValue>
+                                </criteria>
+                            </visibilityRule>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
@@ -872,6 +896,9 @@
                             <value>NAME</value>
                         </valueListItems>
                         <valueListItems>
+                            <value>Document_Type__c</value>
+                        </valueListItems>
+                        <valueListItems>
                             <value>Document_Title__c</value>
                         </valueListItems>
                         <valueListItems>
@@ -984,7 +1011,7 @@
                 <identifier>RecordPayment_rQuantity_cField</identifier>
             </fieldInstance>
         </itemInstances>
-        <name>Facet-b0d323df-d132-47e6-81dd-46981d2a2e71</name>
+        <name>Facet-u8aw0tgjfd9</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -1012,7 +1039,7 @@
                 <identifier>RecordPayment_rSubtotal_cField</identifier>
             </fieldInstance>
         </itemInstances>
-        <name>Facet-4f0165e9-2202-46d6-819f-cdda2b3532b9</name>
+        <name>Facet-fuc85t22wl</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -1020,23 +1047,23 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>body</name>
-                    <value>Facet-b0d323df-d132-47e6-81dd-46981d2a2e71</value>
+                    <value>Facet-u8aw0tgjfd9</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
-                <identifier>flexipage_column3</identifier>
+                <identifier>flexipage_column23</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
                     <name>body</name>
-                    <value>Facet-4f0165e9-2202-46d6-819f-cdda2b3532b9</value>
+                    <value>Facet-fuc85t22wl</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
-                <identifier>flexipage_column4</identifier>
+                <identifier>flexipage_column24</identifier>
             </componentInstance>
         </itemInstances>
-        <name>Facet-3966979f-85b6-4a7e-95e7-e0f72382b8b3</name>
+        <name>Facet-rkc5nfepesf</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -1046,7 +1073,7 @@
                 <identifier>RecordPayment_rDescription_cField</identifier>
             </fieldInstance>
         </itemInstances>
-        <name>Facet-16e93bb8-f910-41ee-9b7d-2e0f5050b67f</name>
+        <name>Facet-3b09b046-f0ed-422f-833e-d159b0b8e784</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -1054,13 +1081,13 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>body</name>
-                    <value>Facet-16e93bb8-f910-41ee-9b7d-2e0f5050b67f</value>
+                    <value>Facet-3b09b046-f0ed-422f-833e-d159b0b8e784</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
-                <identifier>flexipage_column23</identifier>
+                <identifier>flexipage_column3</identifier>
             </componentInstance>
         </itemInstances>
-        <name>Facet-455921dd-bf18-431f-bc5a-88ef5e0a100b</name>
+        <name>Facet-2d7f2cc6-de42-4023-badf-a01923dab89c</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -1068,7 +1095,7 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>columns</name>
-                    <value>Facet-3966979f-85b6-4a7e-95e7-e0f72382b8b3</value>
+                    <value>Facet-rkc5nfepesf</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>horizontalAlignment</name>
@@ -1079,14 +1106,14 @@
                     <value>Invoice Summary</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
-                <identifier>flexipage_fieldSection2</identifier>
+                <identifier>flexipage_fieldSection12</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
                     <name>columns</name>
-                    <value>Facet-455921dd-bf18-431f-bc5a-88ef5e0a100b</value>
+                    <value>Facet-2d7f2cc6-de42-4023-badf-a01923dab89c</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>horizontalAlignment</name>
@@ -1097,7 +1124,7 @@
                     <value>Description</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
-                <identifier>flexipage_fieldSection12</identifier>
+                <identifier>flexipage_fieldSection2</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-db71897a-6f66-4f5a-8309-b6a8bfea3b1c</name>
@@ -1874,7 +1901,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListLabel</name>
-                    <value>Associated Applications</value>
+                    <value>Associated Cases</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>showActionBar</name>
@@ -1966,15 +1993,15 @@
                     <name>actionNames</name>
                     <valueList>
                         <valueListItems>
-                            <value>Case_Note__c.Lock</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>MassChangeOwner</value>
-                        </valueListItems>
-                        <valueListItems>
                             <value>New</value>
                         </valueListItems>
+                        <valueListItems>
+                            <value>Case_Note__c.Lock</value>
+                        </valueListItems>
                     </valueList>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>adminFilters</name>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>maxRecordsToDisplay</name>
