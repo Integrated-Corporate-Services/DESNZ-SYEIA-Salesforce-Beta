@@ -221,16 +221,6 @@
 		<name>CustomTab</name>
 	</types>
 	<types>
-		<members>SharedDocuments/AssCasesTab.png</members>
-		<members>SharedDocuments/AssetsTab.png</members>
-		<members>SharedDocuments/CMDTab.png</members>
-		<members>SharedDocuments/CaseTab.png</members>
-		<members>SharedDocuments/DARTab.png</members>
-		<members>SharedDocuments/PathTab.png</members>
-		<members>SharedDocuments/WRTab.png</members>
-		<name>Document</name>
-	</types>
-	<types>
 		<members>*</members>
 		<name>FlexiPage</name>
 	</types>
