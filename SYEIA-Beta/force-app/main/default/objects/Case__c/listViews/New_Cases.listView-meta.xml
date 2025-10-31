@@ -7,5 +7,5 @@
     <columns>Date_of_Application_Display__c</columns>
     <filterScope>Queue</filterScope>
     <label>New Cases</label>
-    <queue>New_Cases</queue>
+    <queue>New_Cases_S37</queue>
 </ListView>
