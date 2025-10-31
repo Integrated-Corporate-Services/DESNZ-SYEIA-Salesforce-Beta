@@ -214,8 +214,10 @@
 		<members>Asset_Information__c</members>
 		<members>Case_Management_Dashboard</members>
 		<members>Case__c</members>
+		<members>Document_Approval_Request__c</members>
 		<members>Related_Case__c</members>
 		<members>Route__c</members>
+		<members>Withdrawal_Request__c</members>
 		<name>CustomTab</name>
 	</types>
 	<types>
@@ -248,7 +250,9 @@
 		<name>PermissionSet</name>
 	</types>
 	<types>
+		<members>Admin</members>
 		<members>Case Officer</members>
+		<members>Decision Manager</members>
 		<name>Profile</name>
 	</types>
 	<types>
