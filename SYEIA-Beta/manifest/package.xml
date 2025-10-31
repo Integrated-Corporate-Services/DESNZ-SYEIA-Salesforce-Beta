@@ -16,6 +16,10 @@
 		<name>ApprovalProcess</name>
 	</types>
 	<types>
+		<members>Energy_Infrastructure_Planning</members>
+		<name>CustomApplication</name>
+	</types>
+	<types>
 		<members>Address__c.Address_Line1__c</members>
 		<members>Address__c.Address_Line_2__c</members>
 		<members>Address__c.Country__c</members>
