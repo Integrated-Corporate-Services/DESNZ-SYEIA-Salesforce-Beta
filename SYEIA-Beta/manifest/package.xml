@@ -39,7 +39,7 @@
 		<members>Case_Email_Config__mdt.Recipient_Email__c</members>
 		<members>Case_Email_Config__mdt.Template_Id__c</members>
 		<members>Case_Note__c.Case__c</members>
-		<members>Case_Note__c.Comment__c</members> 
+		<members>Case_Note__c.Comment__c</members>
 		<members>Case_Note__c.Lock_Note__c</members>
 		<members>Case_Party__c.Case__c</members>
 		<members>Case_Party__c.Party__c</members>
@@ -229,7 +229,16 @@
 		<name>FlexiPage</name>
 	</types>
 	<types>
-		<members>*</members>
+		<members>Case_After_Save</members>
+		<members>Case_Before_Save</members>
+		<members>Document_Approval_Request_After_Save</members>
+		<members>Screen_DocGen_S37_Consent_Letter</members>
+		<members>Screen_DocGen_S37_Screening_Decision_Letter</members>
+		<members>Screen_Reject_Case_Flow</members>
+		<members>Screen_Withdrawal_Request_Process_Guide</members>
+		<members>Subflow_Create_Withdrawal_Request</members>
+		<members>Subflow_File_Approval_Process_Next_Steps</members>
+		<members>Subflow_Notify_Approvers_About_New_Request</members>
 		<name>Flow</name>
 	</types>
 	<types>
@@ -241,17 +250,27 @@
 		<name>Layout</name>
 	</types>
 	<types>
-		<members>Case_Note__c.*</members>
-		<members>Case__c.*</members>
+		<members>Case__c.All_Assigned_Cases</members>
+		<members>Case__c.New_Cases</members>
+		<members>Case__c.Your_Cases</members>
 		<name>ListView</name>
 	</types>
 	<types>
+		<members>Document_Approval_Path</members>
+		<name>PathAssistant</name>
+	</types>
+	<types>
+		<members>PS_Bypass_DocGen_Approval</members>
 		<members>PS_Case_Management_Suite</members>
 		<members>PS_Document_Generation</members>
 		<members>PS_Gov_UK_Notify</members>
 		<members>PS_Read_Write_Locked_Case_Notes</members>
 		<members>PS_Withdraw_Case</members>
 		<name>PermissionSet</name>
+	</types>
+	<types>
+		<members>PSG_Case_Officer_Standard_User</members>
+		<name>PermissionSetGroup</name>
 	</types>
 	<types>
 		<members>Admin</members>
