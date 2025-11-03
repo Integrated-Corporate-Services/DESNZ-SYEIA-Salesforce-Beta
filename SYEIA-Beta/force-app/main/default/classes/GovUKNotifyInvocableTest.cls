@@ -1,6 +1,13 @@
 @IsTest
 private class GovUKNotifyInvocableTest {
     
+    @TestSetup
+    static void setupTestData() {
+        // Create test Case
+        Case__c testCase = new Case__c();
+        insert testCase;
+    }
+    
     @IsTest
     static void testSendNotifyEmail_Success() {
         Case__c testCase = [SELECT Id FROM Case__c LIMIT 1];
