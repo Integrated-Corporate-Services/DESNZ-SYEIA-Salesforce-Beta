@@ -11,7 +11,7 @@
 		<members>JWTGeneratorTest</members>
 		<name>ApexClass</name>
 	</types>
-	<types>
+	<types> 
 		<members>*</members>
 		<name>ApprovalProcess</name>
 	</types>
