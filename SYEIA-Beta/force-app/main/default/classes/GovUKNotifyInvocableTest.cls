@@ -1,20 +1,6 @@
 @IsTest
 private class GovUKNotifyInvocableTest {
     
-    @TestSetup
-    static void setupTestData() {
-        // Create test API settings
-        NotifyApiSettings__c settings = new NotifyApiSettings__c(
-            Issuer_UUID__c = 'test-issuer-uuid-1234',
-            Secret_Key__c = 'test-secret-key-5678'
-        );
-        insert settings;
-        
-        // Create test Case
-        Case__c testCase = new Case__c();
-        insert testCase;
-    }
-    
     @IsTest
     static void testSendNotifyEmail_Success() {
         Case__c testCase = [SELECT Id FROM Case__c LIMIT 1];

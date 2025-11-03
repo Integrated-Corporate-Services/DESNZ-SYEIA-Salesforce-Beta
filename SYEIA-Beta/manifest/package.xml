@@ -145,8 +145,6 @@
 		<members>GOV_UK_Notify_Config__mdt.Issuer_UUID__c</members>
 		<members>GOV_UK_Notify_Config__mdt.Secret_Key__c</members>
 		<members>Knowledge__kav.ArticleBody__c</members>
-		<members>NotifyAPISettings__c.Issuer_UUID__c</members>
-		<members>NotifyAPISettings__c.Secret_Key__c</members>
 		<members>Party__c.Email__c</members>
 		<members>Party__c.Party_Type__c</members>
 		<members>Party__c.Phone__c</members>
