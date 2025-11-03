@@ -1,15 +1,6 @@
 @IsTest
 private class GovUKNotifyServiceTest {
     
-    @TestSetup
-    static void setupTestData() {
-        NotifyApiSettings__c settings = new NotifyApiSettings__c(
-            Issuer_UUID__c = 'test-issuer-uuid-1234',
-            Secret_Key__c = 'test-secret-key-5678'
-        );
-        insert settings;
-    }
-    
     @IsTest
     static void testSendEmail_Success() {
         Test.setMock(HttpCalloutMock.class, new MockSuccess());
