@@ -66,9 +66,13 @@ jobs:
             exit 0
           fi
 
-          # Create the PR if it doesn't exist
+           # Try to create PR; if already exists, skip gracefully
           gh pr create --base main --head "$BRANCH" \
             --title "Release ${VER}" \
-            --body "Auto-generated PR to prepare ${VER} for production readiness."
+            --body "Auto-generated PR to prepare ${VER} for production readiness." \
+            || {
+              echo "ℹ️ PR already exists for $BRANCH → main — skipping.";
+              exit 0;
+            }
 
           echo "✅ Created PR for $BRANCH → main"
