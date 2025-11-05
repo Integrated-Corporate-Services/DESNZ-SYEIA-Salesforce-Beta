@@ -337,6 +337,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>User.Salutations__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Withdrawal_Request__c.Actioned_By__c</field>
         <readable>true</readable>
     </fieldPermissions>
