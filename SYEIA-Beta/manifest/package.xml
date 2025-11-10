@@ -51,6 +51,7 @@
 		<members>Case__c.Additional_Info_Requested_From_DNO__c</members>
 		<members>Case__c.Applicant_Reference__c</members>
 		<members>Case__c.Application_Fee_Paid__c</members>
+		<members>Case__c.Application_Type__c</members>
 		<members>Case__c.CPO_Attached_To_This_Project__c</members>
 		<members>Case__c.CPO_Submitted__c</members>
 		<members>Case__c.Case_Owner__c</members>
@@ -175,6 +176,7 @@
 		<members>Route__c.Tolerance_Required__c</members>
 		<members>Route__c.Tolerance__c</members>
 		<members>Route__c.Total_Route_Points__c</members>
+		<members>Sensitive_Area_Check__c.Case__c</members>
 		<members>Sensitive_Area_Check__c.Consultation__c</members>
 		<members>User.Salutations__c</members>
 		<members>Withdrawal_Request__c.Actioned_By__c</members>
