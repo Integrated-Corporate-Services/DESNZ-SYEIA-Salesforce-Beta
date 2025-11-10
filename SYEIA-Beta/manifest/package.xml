@@ -11,7 +11,7 @@
 		<members>JWTGeneratorTest</members>
 		<name>ApexClass</name>
 	</types>
-	<types> 
+	<types>
 		<members>*</members>
 		<name>ApprovalProcess</name>
 	</types>
@@ -123,10 +123,16 @@
 		<members>Consultation_Response__c.Has_Objection__c</members>
 		<members>Consultation_Response__c.Out_of_Date__c</members>
 		<members>Consultation_Response__c.Recommendations_Not_Accepted_Reason__c</members>
+		<members>Consultation__c.Case_Officers_Email_Address__c</members>
 		<members>Consultation__c.Case__c</members>
+		<members>Consultation__c.Completed_On__c</members>
 		<members>Consultation__c.Consultation_Completed_Offline__c</members>
+		<members>Consultation__c.Consultation_Location__c</members>
 		<members>Consultation__c.Consultation_Type__c</members>
+		<members>Consultation__c.Contact_Email_Address__c</members>
+		<members>Consultation__c.Contact_Name__c</members>
 		<members>Consultation__c.Created_At__c</members>
+		<members>Consultation__c.Department_Name__c</members>
 		<members>Consultation__c.Sent_At__c</members>
 		<members>Consultation__c.Status__c</members>
 		<members>Document_Approval_Request__c.Approval_Comments__c</members>
@@ -169,6 +175,7 @@
 		<members>Route__c.Tolerance_Required__c</members>
 		<members>Route__c.Tolerance__c</members>
 		<members>Route__c.Total_Route_Points__c</members>
+		<members>Sensitive_Area_Check__c.Consultation__c</members>
 		<members>User.Salutations__c</members>
 		<members>Withdrawal_Request__c.Actioned_By__c</members>
 		<members>Withdrawal_Request__c.Actioned_On__c</members>
@@ -216,9 +223,11 @@
 		<members>Asset_Information__c</members>
 		<members>Case_Management_Dashboard</members>
 		<members>Case__c</members>
+		<members>Consultation__c</members>
 		<members>Document_Approval_Request__c</members>
 		<members>Related_Case__c</members>
 		<members>Route__c</members>
+		<members>Sensitive_Area_Check__c</members>
 		<members>Withdrawal_Request__c</members>
 		<name>CustomTab</name>
 	</types>
@@ -229,7 +238,9 @@
 	<types>
 		<members>Case_After_Save</members>
 		<members>Case_Before_Save</members>
+		<members>Consultation_Before_Save</members>
 		<members>Document_Approval_Request_After_Save</members>
+		<members>Screen_Create_New_Internal_Consultation</members>
 		<members>Screen_DocGen_S37_Consent_Letter</members>
 		<members>Screen_DocGen_S37_Screening_Decision_Letter</members>
 		<members>Screen_Reject_Case_Flow</members>
@@ -254,6 +265,7 @@
 		<name>ListView</name>
 	</types>
 	<types>
+		<members>Consultation_Internal</members>
 		<members>Document_Approval_Path</members>
 		<name>PathAssistant</name>
 	</types>

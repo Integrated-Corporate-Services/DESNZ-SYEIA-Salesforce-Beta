@@ -240,6 +240,114 @@
         <type>Flexipage</type>
         <profile>Admin</profile>
     </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Consultation_Internal</content>
+        <formFactor>Small</formFactor>
+        <pageOrSobjectType>Consultation__c</pageOrSobjectType>
+        <recordType>Consultation__c.Internal_Consultation</recordType>
+        <type>Flexipage</type>
+        <profile>Case Officer</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Consultation_Internal</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Consultation__c</pageOrSobjectType>
+        <recordType>Consultation__c.Internal_Consultation</recordType>
+        <type>Flexipage</type>
+        <profile>Case Officer</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Consultation_Internal</content>
+        <formFactor>Small</formFactor>
+        <pageOrSobjectType>Consultation__c</pageOrSobjectType>
+        <recordType>Consultation__c.Internal_Consultation</recordType>
+        <type>Flexipage</type>
+        <profile>Decision Manager</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Consultation_Internal</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Consultation__c</pageOrSobjectType>
+        <recordType>Consultation__c.Internal_Consultation</recordType>
+        <type>Flexipage</type>
+        <profile>Decision Manager</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Consultation_Internal</content>
+        <formFactor>Small</formFactor>
+        <pageOrSobjectType>Consultation__c</pageOrSobjectType>
+        <recordType>Consultation__c.Internal_Consultation</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Consultation_Internal</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Consultation__c</pageOrSobjectType>
+        <recordType>Consultation__c.Internal_Consultation</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Consultation_External</content>
+        <formFactor>Small</formFactor>
+        <pageOrSobjectType>Consultation__c</pageOrSobjectType>
+        <recordType>Consultation__c.External_Consultation</recordType>
+        <type>Flexipage</type>
+        <profile>Case Officer</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Consultation_External</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Consultation__c</pageOrSobjectType>
+        <recordType>Consultation__c.External_Consultation</recordType>
+        <type>Flexipage</type>
+        <profile>Case Officer</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Consultation_External</content>
+        <formFactor>Small</formFactor>
+        <pageOrSobjectType>Consultation__c</pageOrSobjectType>
+        <recordType>Consultation__c.External_Consultation</recordType>
+        <type>Flexipage</type>
+        <profile>Decision Manager</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Consultation_External</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Consultation__c</pageOrSobjectType>
+        <recordType>Consultation__c.External_Consultation</recordType>
+        <type>Flexipage</type>
+        <profile>Decision Manager</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Consultation_External</content>
+        <formFactor>Small</formFactor>
+        <pageOrSobjectType>Consultation__c</pageOrSobjectType>
+        <recordType>Consultation__c.External_Consultation</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Consultation_External</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Consultation__c</pageOrSobjectType>
+        <recordType>Consultation__c.External_Consultation</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
     <tabs>Case_Management_Dashboard</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Energy_Infrastructure_Planning_UtilityBar</utilityBar>
