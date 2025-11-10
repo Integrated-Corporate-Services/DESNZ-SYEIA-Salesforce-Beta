@@ -27,6 +27,7 @@
 		<members>Address__c.Postcode__c</members>
 		<members>Address__c.Town_City__c</members>
 		<members>Asset_Information__c.Case__c</members>
+		<members>Asset_Information__c.Description__c</members>
 		<members>Asset_Information__c.Line_Length__c</members>
 		<members>Asset_Information__c.Line_Type__c</members>
 		<members>Asset_Information__c.Line_Voltage__c</members>
@@ -51,6 +52,7 @@
 		<members>Case__c.Additional_Info_Requested_From_DNO__c</members>
 		<members>Case__c.Applicant_Reference__c</members>
 		<members>Case__c.Application_Fee_Paid__c</members>
+		<members>Case__c.Application_Statement__c</members>
 		<members>Case__c.Application_Type__c</members>
 		<members>Case__c.CPO_Attached_To_This_Project__c</members>
 		<members>Case__c.CPO_Submitted__c</members>
@@ -59,7 +61,9 @@
 		<members>Case__c.Comments_to_Support_Application__c</members>
 		<members>Case__c.Completion_Status__c</members>
 		<members>Case__c.Consent_Issued_On_Schedule__c</members>
+		<members>Case__c.Contract_Why_Do_You_Believe_This_Is_So__c</members>
 		<members>Case__c.County__c</members>
+		<members>Case__c.Current_Landowner_Signed_Wayleave__c</members>
 		<members>Case__c.DNO_Name__c</members>
 		<members>Case__c.DNO__c</members>
 		<members>Case__c.Date_Application_Was_Sent_to_MoD__c</members>
@@ -73,13 +77,21 @@
 		<members>Case__c.Days_Ahead_Behind_Target__c</members>
 		<members>Case__c.Decision_Deadline_Display__c</members>
 		<members>Case__c.Decision_Deadline_Formula__c</members>
+		<members>Case__c.Does_Application_Include_a_Title_Plan__c</members>
 		<members>Case__c.Earliest_Expected_Start_Date_Display__c</members>
 		<members>Case__c.Earliest_Expected_Start_Date__c</members>
+		<members>Case__c.Equipment_Visible_from_Public_Road__c</members>
 		<members>Case__c.Excavation_Works_Required__c</members>
 		<members>Case__c.Full_EIA_Process_or_Screening_Opinion__c</members>
 		<members>Case__c.Has_DNO_Published_Planning_Notices__c</members>
 		<members>Case__c.Have_All_Wayleaves_Been_Obtained__c</members>
 		<members>Case__c.Is_The_Mapping_Complete__c</members>
+		<members>Case__c.Is_a_New_Contract_Implied__c</members>
+		<members>Case__c.Land_Location__c</members>
+		<members>Case__c.Land_Reference__c</members>
+		<members>Case__c.Land_Registry_Reference_Number__c</members>
+		<members>Case__c.Land__c</members>
+		<members>Case__c.Landowner_Inherited_a_Necessary__c</members>
 		<members>Case__c.Latest_Expected_Start_Date_Display__c</members>
 		<members>Case__c.Latest_Expected_Start_Date__c</members>
 		<members>Case__c.Mapping_Owner__c</members>
@@ -91,6 +103,7 @@
 		<members>Case__c.Pre_existing_Routes_Storage_Used__c</members>
 		<members>Case__c.Project_Description__c</members>
 		<members>Case__c.Project_name__c</members>
+		<members>Case__c.Reason_for_Not_Submitting_a_Title_Plan__c</members>
 		<members>Case__c.Reason_for_Rejecting_Consultees_Advice__c</members>
 		<members>Case__c.Reason_for_Rejecting_Planning_Conditions__c</members>
 		<members>Case__c.Rejected_By__c</members>
@@ -111,9 +124,16 @@
 		<members>Case__c.Type_of_Project__c</members>
 		<members>Case__c.UK_Energy_Portal_Link__c</members>
 		<members>Case__c.Vegetation_Clearance_Required__c</members>
+		<members>Case__c.Wayleave_Payments_Accepted_by_Grantor__c</members>
+		<members>Case__c.Wayleave_Payments_Previously_to_Grantor__c</members>
+		<members>Case__c.What3Words__c</members>
 		<members>Case__c.Why_Have_All_Wayleaves_Not_Been_Obtained__c</members>
 		<members>Case__c.Withdrawal_Request_Count__c</members>
 		<members>Case__c.Works_Comply_With_ESQCR__c</members>
+		<members>Case__c.Written_Removal_Notice_Been_Given__c</members>
+		<members>Case__c.Written_Removal_Notice_Issue_Date__c</members>
+		<members>Case__c.Written_Termination_Notice_Been_Given__c</members>
+		<members>Case__c.Written_Termination_Notice_Issue_Date__c</members>
 		<members>Consultation_Response__c.Comments_from_Responder__c</members>
 		<members>Consultation_Response__c.Conditions_Not_Accepted_Reason__c</members>
 		<members>Consultation_Response__c.Consultation_Conditions_Accepted__c</members>
@@ -152,10 +172,17 @@
 		<members>GOV_UK_Notify_Config__mdt.Issuer_UUID__c</members>
 		<members>GOV_UK_Notify_Config__mdt.Secret_Key__c</members>
 		<members>Knowledge__kav.ArticleBody__c</members>
+		<members>NotifyAPISettings__c.Issuer_UUID__c</members>
+		<members>NotifyAPISettings__c.Secret_Key__c</members>
+		<members>Party__c.Case__c</members>
 		<members>Party__c.Email__c</members>
+		<members>Party__c.First_Name__c</members>
+		<members>Party__c.Land_Ownership_Type__c</members>
+		<members>Party__c.Last_Name__c</members>
 		<members>Party__c.Party_Type__c</members>
 		<members>Party__c.Phone__c</members>
 		<members>Party__c.Representative__c</members>
+		<members>Party__c.Salutation__c</members>
 		<members>Payment__c.Case__c</members>
 		<members>Payment__c.Description__c</members>
 		<members>Payment__c.Invoice_Date__c</members>
@@ -292,7 +319,9 @@
 	</types>
 	<types>
 		<members>Document_Approvers</members>
+		<members>New_Cases_Necessary_Wayleaves</members>
 		<members>New_Cases_S37</members>
+		<members>New_Cases_Tree_Lopping</members>
 		<name>Queue</name>
 	</types>
 	<types>

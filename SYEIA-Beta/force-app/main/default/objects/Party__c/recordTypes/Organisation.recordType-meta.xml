@@ -4,25 +4,47 @@
     <active>true</active>
     <label>Organisation</label>
     <picklistValues>
+        <picklist>Land_Ownership_Type__c</picklist>
+        <values>
+            <fullName>Occupier</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Owner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Owner%2FOccupier</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Party_Type__c</picklist>
         <values>
             <fullName>DNO</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Individual</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Land Owner</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Lawyer</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Organisation</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Salutation__c</picklist>
+        <values>
+            <fullName>Dr</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Miss</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mr</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mrs</fullName>
             <default>false</default>
         </values>
     </picklistValues>
