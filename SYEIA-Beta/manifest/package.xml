@@ -280,7 +280,9 @@
 		<name>Flow</name>
 	</types>
 	<types>
+		<members>PG_Necessary_Wayleaves</members>
 		<members>PG_Section_37</members>
+		<members>PG_Tree_Lopping</members>
 		<name>Group</name>
 	</types>
 	<types>
