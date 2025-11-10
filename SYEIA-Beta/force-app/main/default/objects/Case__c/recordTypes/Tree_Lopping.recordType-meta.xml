@@ -57,6 +57,17 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Application_Type__c</picklist>
+        <values>
+            <fullName>Existing Line</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Line</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>CPO_Attached_To_This_Project__c</picklist>
         <values>
             <fullName>No</fullName>
@@ -307,6 +318,39 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Current_Landowner_Signed_Wayleave__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Does_Application_Include_a_Title_Plan__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Equipment_Visible_from_Public_Road__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Excavation_Works_Required__c</picklist>
         <values>
             <fullName>No</fullName>
@@ -352,6 +396,50 @@
     </picklistValues>
     <picklistValues>
         <picklist>Is_The_Mapping_Complete__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Is_a_New_Contract_Implied__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Land_Location__c</picklist>
+        <values>
+            <fullName>England</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wales</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Land__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Landowner_Inherited_a_Necessary__c</picklist>
         <values>
             <fullName>No</fullName>
             <default>false</default>
@@ -650,7 +738,51 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Wayleave_Payments_Accepted_by_Grantor__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Wayleave_Payments_Previously_to_Grantor__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Works_Comply_With_ESQCR__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Written_Removal_Notice_Been_Given__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Written_Termination_Notice_Been_Given__c</picklist>
         <values>
             <fullName>No</fullName>
             <default>false</default>

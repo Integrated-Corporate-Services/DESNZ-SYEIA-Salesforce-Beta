@@ -109,6 +109,45 @@
         </rules>
     </decisions>
     <decisions>
+        <name>Owner_Changed_From_Unassigned_to_Assigned</name>
+        <label>Owner Changed From Unassigned to Assigned</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Has_DNO_Lookup_Value_Changed</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Owner_Changed</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.OwnerId</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Acknowledged</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Acknowledged</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Status_to_In_Progress</targetReference>
+            </connector>
+            <label>Owner Changed</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Record_Type_Retrieved</name>
         <label>Record Type Retrieved?</label>
         <locationX>0</locationX>
@@ -228,6 +267,22 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
+        <name>Set_Status_to_In_Progress</name>
+        <label>Set Status to In Progress</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Has_DNO_Lookup_Value_Changed</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>In-Progress</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
         <name>Update_DNO_Name</name>
         <label>Update DNO Name</label>
         <locationX>0</locationX>
@@ -278,7 +333,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Has_DNO_Lookup_Value_Changed</targetReference>
+            <targetReference>Owner_Changed_From_Unassigned_to_Assigned</targetReference>
         </connector>
         <filterFormula>{!$Permission.Bypass_Flow} == false</filterFormula>
         <object>Case__c</object>

@@ -26,14 +26,19 @@
                 <label>DNO</label>
             </value>
             <value>
-                <fullName>Land Owner</fullName>
+                <fullName>Landowner</fullName>
                 <default>false</default>
-                <label>Land Owner</label>
+                <label>Landowner</label>
             </value>
             <value>
                 <fullName>Lawyer</fullName>
                 <default>false</default>
                 <label>Lawyer</label>
+            </value>
+            <value>
+                <fullName>Landowner Representative</fullName>
+                <default>false</default>
+                <label>Landowner Representative</label>
             </value>
         </valueSetDefinition>
     </valueSet>

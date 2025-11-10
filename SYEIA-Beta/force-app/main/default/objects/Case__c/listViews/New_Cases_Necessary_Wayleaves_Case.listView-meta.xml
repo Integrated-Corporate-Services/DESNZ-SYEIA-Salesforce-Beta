@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_Cases_Necessary_Wayleaves_Case</fullName>
+    <filterScope>Queue</filterScope>
+    <label>New Cases</label>
+    <queue>New_Cases_Necessary_Wayleaves</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>
