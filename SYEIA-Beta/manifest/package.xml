@@ -317,8 +317,6 @@
 		<members>Consultation__c-Consultation Layout</members>
 		<members>Document_Approval_Request__c-Document Layout</members>
 		<members>Environment_Setting__mdt-Environment Setting Layout</members>
-		<members>GOV_UK_Notify_Config__mdt-GOV UK Notify Config Layout</members>
-		<members>Individual-Individual Layout</members>
 		<members>Party__c-Party Layout</members>
 		<members>Payment__c-Payment Layout</members>
 		<members>Related_Case__c-Related Application Layout</members>
