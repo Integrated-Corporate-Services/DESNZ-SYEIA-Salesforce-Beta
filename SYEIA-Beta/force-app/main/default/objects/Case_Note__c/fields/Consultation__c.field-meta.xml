@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Case__c</fullName>
+    <fullName>Consultation__c</fullName>
     <deleteConstraint>Cascade</deleteConstraint>
-    <description>Case relating to the case.</description>
-    <inlineHelpText>Case relating to the case.</inlineHelpText>
-    <label>Case</label>
-    <referenceTo>Case__c</referenceTo>
+    <description>Lookup to the related Consultation record</description>
+    <label>Consultation</label>
+    <referenceTo>Consultation__c</referenceTo>
     <relationshipLabel>Case Notes</relationshipLabel>
     <relationshipName>Case_Notes</relationshipName>
     <required>false</required>

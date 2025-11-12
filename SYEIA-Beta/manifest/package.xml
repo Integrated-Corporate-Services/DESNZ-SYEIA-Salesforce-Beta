@@ -41,7 +41,9 @@
 		<members>Case_Email_Config__mdt.Template_Id__c</members>
 		<members>Case_Note__c.Case__c</members>
 		<members>Case_Note__c.Comment__c</members>
+		<members>Case_Note__c.Consultation__c</members>
 		<members>Case_Note__c.Lock_Note__c</members>
+		<members>Case_Note__c.Related_Object__c</members>
 		<members>Case_Party__c.Case__c</members>
 		<members>Case_Party__c.Party__c</members>
 		<members>Case_Party__c.Type__c</members>
@@ -261,7 +263,25 @@
 		<name>CustomTab</name>
 	</types>
 	<types>
-		<members>*</members>
+		<members>Address_Record_Page</members>
+		<members>Application_Necessary_Wayleaves</members>
+		<members>Application_Section_37</members>
+		<members>Application_Tree_Lopping</members>
+		<members>Case_Management_Dashboard</members>
+		<members>Case_Note_Record_Page</members>
+		<members>Case_Record_Page</members>
+		<members>Consultation_External</members>
+		<members>Consultation_Internal</members>
+		<members>Consultation_Record_Page</members>
+		<members>Consultation_Response_Record_Page</members>
+		<members>Energy_Infrastructure_Planning_Home</members>
+		<members>Energy_Infrastructure_Planning_UtilityBar</members>
+		<members>Individual_Party_Record_Page</members>
+		<members>Organisation_Party_Record_Page</members>
+		<members>Payments_Home_Default</members>
+		<members>Route_Record_Page</members>
+		<members>Sensitive_Area_Check_Record_Page</members>
+		<members>Withdrawal_Request_Record_Page</members>
 		<name>FlexiPage</name>
 	</types>
 	<types>
@@ -286,7 +306,27 @@
 		<name>Group</name>
 	</types>
 	<types>
-		<members>*</members>
+		<members>Address__c-Address Layout</members>
+		<members>Asset_Information__c-Asset Information Layout</members>
+		<members>Case_Email_Config__mdt-Case Email Config Layout</members>
+		<members>Case_Note__c-Case Note Layout</members>
+		<members>Case_Party__c-Case Party Layout</members>
+		<members>Case__c-Application Layout</members>
+		<members>Consultation_Organisation__c-Consultation Organisation Layout</members>
+		<members>Consultation_Response__c-Consultation Response Layout</members>
+		<members>Consultation__c-Consultation Layout</members>
+		<members>Document_Approval_Request__c-Document Layout</members>
+		<members>Environment_Setting__mdt-Environment Setting Layout</members>
+		<members>GOV_UK_Notify_Config__mdt-GOV UK Notify Config Layout</members>
+		<members>Individual-Individual Layout</members>
+		<members>Party__c-Party Layout</members>
+		<members>Payment__c-Payment Layout</members>
+		<members>Related_Case__c-Related Application Layout</members>
+		<members>Route_Point__c-Route Grid Reference Layout</members>
+		<members>Route__c-Route Layout</members>
+		<members>Sensitive_Area_Check__c-Sensitive Area Check Layout</members>
+		<members>User-User Layout</members>
+		<members>Withdrawal_Request__c-Withdrawal Request Layout</members>
 		<name>Layout</name>
 	</types>
 	<types>
