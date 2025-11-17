@@ -130,6 +130,7 @@
 		<members>Case__c.Wayleave_Payments_Previously_to_Grantor__c</members>
 		<members>Case__c.What3Words__c</members>
 		<members>Case__c.Why_Have_All_Wayleaves_Not_Been_Obtained__c</members>
+		<members>Case__c.Withdrawal_Date_Time__c</members>
 		<members>Case__c.Withdrawal_Request_Count__c</members>
 		<members>Case__c.Works_Comply_With_ESQCR__c</members>
 		<members>Case__c.Written_Removal_Notice_Been_Given__c</members>
@@ -380,6 +381,10 @@
 		<members>UAP_Profile_Case_Officer</members>
 		<members>UAP_Profile_System_Administrator</members>
 		<name>UserAccessPolicy</name>
+	</types>
+	<types>
+		<members>Case__c.Prevent_Edit_When_Archived</members>
+		<name>ValidationRule</name>
 	</types>
 	<version>65.0</version>
 </Package>
