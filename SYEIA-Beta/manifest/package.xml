@@ -298,6 +298,7 @@
 		<members>Subflow_Create_Withdrawal_Request</members>
 		<members>Subflow_File_Approval_Process_Next_Steps</members>
 		<members>Subflow_Notify_Approvers_About_New_Request</members>
+		<members>Case_Scheduled_Daily_Batch</members>
 		<name>Flow</name>
 	</types>
 	<types>
