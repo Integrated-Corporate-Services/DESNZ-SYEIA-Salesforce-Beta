@@ -17,6 +17,8 @@
 	</types>
 	<types>
 		<members>Energy_Infrastructure_Planning</members>
+		<members>NWL_Energy_Infrastructure_Planning</members>
+		<members>TL_Energy_Infrastructure_Planning</members>
 		<name>CustomApplication</name>
 	</types>
 	<types>
@@ -92,7 +94,6 @@
 		<members>Case__c.Land_Location__c</members>
 		<members>Case__c.Land_Reference__c</members>
 		<members>Case__c.Land_Registry_Reference_Number__c</members>
-		<members>Case__c.Land__c</members>
 		<members>Case__c.Landowner_Inherited_a_Necessary__c</members>
 		<members>Case__c.Latest_Expected_Start_Date_Display__c</members>
 		<members>Case__c.Latest_Expected_Start_Date__c</members>
@@ -120,17 +121,18 @@
 		<members>Case__c.Subject_To_An_EIA__c</members>
 		<members>Case__c.Tallest_Pole_Height__c</members>
 		<members>Case__c.Target_Completion_Date__c</members>
+		<members>Case__c.Task_Deadline__c</members>
 		<members>Case__c.Time_to_Decision__c</members>
 		<members>Case__c.Type_of_Application__c</members>
 		<members>Case__c.Type_of_Info_Requested_From_DNO__c</members>
 		<members>Case__c.Type_of_Project__c</members>
 		<members>Case__c.UK_Energy_Portal_Link__c</members>
+		<members>Case__c.Upcoming_Task__c</members>
 		<members>Case__c.Vegetation_Clearance_Required__c</members>
 		<members>Case__c.Wayleave_Payments_Accepted_by_Grantor__c</members>
 		<members>Case__c.Wayleave_Payments_Previously_to_Grantor__c</members>
 		<members>Case__c.What3Words__c</members>
 		<members>Case__c.Why_Have_All_Wayleaves_Not_Been_Obtained__c</members>
-		<members>Case__c.Withdrawal_Date_Time__c</members>
 		<members>Case__c.Withdrawal_Request_Count__c</members>
 		<members>Case__c.Works_Comply_With_ESQCR__c</members>
 		<members>Case__c.Written_Removal_Notice_Been_Given__c</members>
@@ -254,6 +256,8 @@
 		<members>Address__c</members>
 		<members>Asset_Information__c</members>
 		<members>Case_Management_Dashboard</members>
+		<members>Case_Management_Dashboard_NWL</members>
+		<members>Case_Management_Dashboard_TL</members>
 		<members>Case__c</members>
 		<members>Consultation__c</members>
 		<members>Document_Approval_Request__c</members>
@@ -269,6 +273,8 @@
 		<members>Application_Section_37</members>
 		<members>Application_Tree_Lopping</members>
 		<members>Case_Management_Dashboard</members>
+		<members>Case_Management_Dashboard_NWL</members>
+		<members>Case_Management_Dashboard_TL</members>
 		<members>Case_Note_Record_Page</members>
 		<members>Case_Record_Page</members>
 		<members>Consultation_External</members>
@@ -278,10 +284,12 @@
 		<members>Energy_Infrastructure_Planning_Home</members>
 		<members>Energy_Infrastructure_Planning_UtilityBar</members>
 		<members>Individual_Party_Record_Page</members>
+		<members>NWL_Energy_Infrastructure_Planning_Home</members>
 		<members>Organisation_Party_Record_Page</members>
 		<members>Payments_Home_Default</members>
 		<members>Route_Record_Page</members>
 		<members>Sensitive_Area_Check_Record_Page</members>
+		<members>TL_Energy_Infrastructure_Planning_Home</members>
 		<members>Withdrawal_Request_Record_Page</members>
 		<name>FlexiPage</name>
 	</types>
@@ -298,7 +306,9 @@
 		<members>Subflow_Create_Withdrawal_Request</members>
 		<members>Subflow_File_Approval_Process_Next_Steps</members>
 		<members>Subflow_Notify_Approvers_About_New_Request</members>
-		<members>Case_Scheduled_Daily_Batch</members>
+		<members>Subflow_Recalculate_Case_Tasks</members>
+		<members>Task_After_Delete</members>
+		<members>Task_After_Save</members>
 		<name>Flow</name>
 	</types>
 	<types>
@@ -331,8 +341,14 @@
 	</types>
 	<types>
 		<members>Case__c.All_Assigned_Cases</members>
+		<members>Case__c.All_Assigned_Cases_NWL</members>
+		<members>Case__c.All_Assigned_Cases_TL</members>
 		<members>Case__c.New_Cases</members>
+		<members>Case__c.New_Cases_Necessary_Wayleaves_Case</members>
+		<members>Case__c.New_Cases_Tree_Lopping_Case</members>
 		<members>Case__c.Your_Cases</members>
+		<members>Case__c.Your_Cases_NWL</members>
+		<members>Case__c.Your_Cases_TL</members>
 		<name>ListView</name>
 	</types>
 	<types>

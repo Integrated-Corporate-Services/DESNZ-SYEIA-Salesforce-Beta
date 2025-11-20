@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Your_Cases_NWL</fullName>
+    <booleanFilter>1 AND 2</booleanFilter>
+    <columns>NAME</columns>
+    <columns>Case_Type__c</columns>
+    <columns>DNO__c</columns>
+    <columns>Status__c</columns>
+    <columns>Upcoming_Task__c</columns>
+    <columns>Task_Deadline__c</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Withdrawn,Rejected,Completed</value>
+    </filters>
+    <filters>
+        <field>Case_Type__c</field>
+        <operation>equals</operation>
+        <value>Necessary Wayleaves</value>
+    </filters>
+    <label>Your Cases</label>
+</ListView>
