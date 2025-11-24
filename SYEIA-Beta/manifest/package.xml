@@ -36,6 +36,7 @@
 		<members>Asset_Information__c.Poles_Being_Added__c</members>
 		<members>Asset_Information__c.Poles_Being_Removed__c</members>
 		<members>Asset_Information__c.Standard_Specification_Reference_Number__c</members>
+		<members>Asset_Information__c.TORI_NOI_Code__c</members>
 		<members>Case_Email_Config__mdt.Active__c</members>
 		<members>Case_Email_Config__mdt.Hours_Threshold__c</members>
 		<members>Case_Email_Config__mdt.Queue_Name__c</members>
@@ -53,7 +54,10 @@
 		<members>Case__c.Accept_Consultees_Recommendations__c</members>
 		<members>Case__c.Accept_Local_Authority_Conditions__c</members>
 		<members>Case__c.Actual_Completed_Date_Time__c</members>
+		<members>Case__c.Adding_or_Replacing_Any_Overhead_Lines__c</members>
+		<members>Case__c.Adding_or_Replacing_Any_Poles__c</members>
 		<members>Case__c.Additional_Info_Requested_From_DNO__c</members>
+		<members>Case__c.Any_Chemical_Treatments_Proposed__c</members>
 		<members>Case__c.Applicant_Reference__c</members>
 		<members>Case__c.Application_Fee_Paid__c</members>
 		<members>Case__c.Application_Statement__c</members>
@@ -62,6 +66,7 @@
 		<members>Case__c.CPO_Submitted__c</members>
 		<members>Case__c.Case_Owner__c</members>
 		<members>Case__c.Case_Type__c</members>
+		<members>Case__c.Comments_On_Added_Replaced_Poles__c</members>
 		<members>Case__c.Comments_to_Support_Application__c</members>
 		<members>Case__c.Completion_Status__c</members>
 		<members>Case__c.Consent_Issued_On_Schedule__c</members>
@@ -81,25 +86,40 @@
 		<members>Case__c.Days_Ahead_Behind_Target__c</members>
 		<members>Case__c.Decision_Deadline_Display__c</members>
 		<members>Case__c.Decision_Deadline_Formula__c</members>
+		<members>Case__c.Description_Of_Overhead_Lines__c</members>
+		<members>Case__c.Description__c</members>
+		<members>Case__c.Details_Of_Access_Storage_Sites__c</members>
+		<members>Case__c.Details_Of_Equipment_Removal__c</members>
+		<members>Case__c.Details_Of_Excavation_Works__c</members>
+		<members>Case__c.Details_Of_Vegetation_Clearance__c</members>
 		<members>Case__c.Does_Application_Include_a_Title_Plan__c</members>
 		<members>Case__c.Earliest_Expected_Start_Date_Display__c</members>
 		<members>Case__c.Earliest_Expected_Start_Date__c</members>
 		<members>Case__c.Equipment_Visible_from_Public_Road__c</members>
+		<members>Case__c.Estimated_Duration_Of_Works__c</members>
 		<members>Case__c.Excavation_Works_Required__c</members>
 		<members>Case__c.Full_EIA_Process_or_Screening_Opinion__c</members>
+		<members>Case__c.General_Comments__c</members>
 		<members>Case__c.Has_DNO_Published_Planning_Notices__c</members>
 		<members>Case__c.Have_All_Wayleaves_Been_Obtained__c</members>
+		<members>Case__c.Invoice_Date__c</members>
+		<members>Case__c.Invoice_Reference__c</members>
+		<members>Case__c.Is_Any_Existing_Equipment_Being_Removed__c</members>
 		<members>Case__c.Is_The_Mapping_Complete__c</members>
 		<members>Case__c.Is_a_New_Contract_Implied__c</members>
 		<members>Case__c.Land_Location__c</members>
 		<members>Case__c.Land_Reference__c</members>
+		<members>Case__c.Land_Registered_With_Registry__c</members>
 		<members>Case__c.Land_Registry_Reference_Number__c</members>
 		<members>Case__c.Landowner_Inherited_a_Necessary__c</members>
 		<members>Case__c.Latest_Expected_Start_Date_Display__c</members>
 		<members>Case__c.Latest_Expected_Start_Date__c</members>
 		<members>Case__c.Mapping_Owner__c</members>
+		<members>Case__c.Materials_For_New_Poles_Pylons__c</members>
 		<members>Case__c.MoD_Checks_Required__c</members>
 		<members>Case__c.Name_of_LPA__c</members>
+		<members>Case__c.Number_Of_Poles_Being_Added__c</members>
+		<members>Case__c.Number_Of_Poles_Being_Replaced__c</members>
 		<members>Case__c.Overdue_Email_Sent__c</members>
 		<members>Case__c.Payment__c</members>
 		<members>Case__c.Pending_Withdrawal_Request_Count__c</members>
@@ -113,6 +133,7 @@
 		<members>Case__c.Rejected_On__c</members>
 		<members>Case__c.Rejection_Reason__c</members>
 		<members>Case__c.Related_CPO_Details__c</members>
+		<members>Case__c.Road_Closures_Or_Traffic_Calming__c</members>
 		<members>Case__c.Screening_Fee_Paid__c</members>
 		<members>Case__c.Screening_Needed__c</members>
 		<members>Case__c.Screening_Published_on_GOV_UK__c</members>
@@ -129,6 +150,7 @@
 		<members>Case__c.UK_Energy_Portal_Link__c</members>
 		<members>Case__c.Upcoming_Task__c</members>
 		<members>Case__c.Vegetation_Clearance_Required__c</members>
+		<members>Case__c.Vehicles_Required_On_Site__c</members>
 		<members>Case__c.Wayleave_Payments_Accepted_by_Grantor__c</members>
 		<members>Case__c.Wayleave_Payments_Previously_to_Grantor__c</members>
 		<members>Case__c.What3Words__c</members>
@@ -205,6 +227,7 @@
 		<members>Route_Point__c.Route__c</members>
 		<members>Route_Point__c.Sequence_Number__c</members>
 		<members>Route__c.Case__c</members>
+		<members>Route__c.Disconnected_Route_Justification__c</members>
 		<members>Route__c.Tolerance_Required__c</members>
 		<members>Route__c.Tolerance__c</members>
 		<members>Route__c.Total_Route_Points__c</members>

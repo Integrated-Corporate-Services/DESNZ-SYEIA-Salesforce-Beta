@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>AWS_Application_Id__c</fullName>
-    <description>The Id of the Application for AWS RDS.</description>
-    <externalId>true</externalId>
-    <label>AWS Application Id</label>
+    <fullName>Estimated_Duration_Of_Works__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>How long is estimated for the works to take place</inlineHelpText>
+    <label>Estimated Duration Of Works</label>
     <length>255</length>
     <required>false</required>
     <trackHistory>false</trackHistory>

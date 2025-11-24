@@ -429,8 +429,192 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
+                <fieldItem>Record.Adding_or_Replacing_Any_Poles__c</fieldItem>
+                <identifier>RecordAdding_or_Replacing_Any_Poles_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Any_Chemical_Treatments_Proposed__c</fieldItem>
+                <identifier>RecordAny_Chemical_Treatments_Proposed_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Number_Of_Poles_Being_Replaced__c</fieldItem>
+                <identifier>RecordNumber_Of_Poles_Being_Replaced_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-cac6f3d6-7f84-480f-9d1a-1e44c6c1e021</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Materials_For_New_Poles_Pylons__c</fieldItem>
+                <identifier>RecordMaterials_For_New_Poles_Pylons_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Number_Of_Poles_Being_Added__c</fieldItem>
+                <identifier>RecordNumber_Of_Poles_Being_Added_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Comments_On_Added_Replaced_Poles__c</fieldItem>
+                <identifier>RecordComments_On_Added_Replaced_Poles_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-1ff8495f-7ef4-4da8-953e-743917d8438e</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-cac6f3d6-7f84-480f-9d1a-1e44c6c1e021</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column4</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-1ff8495f-7ef4-4da8-953e-743917d8438e</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column25</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-7eaa8d4e-837d-4160-9a7b-df18f7ed013c</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Adding_or_Replacing_Any_Overhead_Lines__c</fieldItem>
+                <identifier>RecordAdding_or_Replacing_Any_Overhead_Lines_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Estimated_Duration_Of_Works__c</fieldItem>
+                <identifier>RecordEstimated_Duration_Of_Works_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Road_Closures_Or_Traffic_Calming__c</fieldItem>
+                <identifier>RecordRoad_Closures_Or_Traffic_Calming_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-cec513f7-ee6a-470c-909c-d87a87930295</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Description_Of_Overhead_Lines__c</fieldItem>
+                <identifier>RecordDescription_Of_Overhead_Lines_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Vehicles_Required_On_Site__c</fieldItem>
+                <identifier>RecordVehicles_Required_On_Site_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-65ecfd4a-358b-480e-aa26-01273a41b82d</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-cec513f7-ee6a-470c-909c-d87a87930295</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column26</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-65ecfd4a-358b-480e-aa26-01273a41b82d</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column27</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-3faac684-b476-4725-9da5-28d47f1d33ca</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Excavation_Works_Required__c</fieldItem>
                 <identifier>RecordExcavation_Works_Required_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Vegetation_Clearance_Required__c</fieldItem>
+                <identifier>RecordVegetation_Clearance_Required_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -443,6 +627,26 @@
                 <identifier>RecordPre_existing_Routes_Storage_Used_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Is_Any_Existing_Equipment_Being_Removed__c</fieldItem>
+                <identifier>RecordIs_Any_Existing_Equipment_Being_Removed_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.General_Comments__c</fieldItem>
+                <identifier>RecordGeneral_Comments_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-609044a5-d452-438a-a6a7-08e0d3635e43</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -453,8 +657,38 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Vegetation_Clearance_Required__c</fieldItem>
-                <identifier>RecordVegetation_Clearance_Required_cField</identifier>
+                <fieldItem>Record.Details_Of_Excavation_Works__c</fieldItem>
+                <identifier>RecordDetails_Of_Excavation_Works_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Details_Of_Vegetation_Clearance__c</fieldItem>
+                <identifier>RecordDetails_Of_Vegetation_Clearance_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Details_Of_Access_Storage_Sites__c</fieldItem>
+                <identifier>RecordDetails_Of_Access_Storage_Sites_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Details_Of_Equipment_Removal__c</fieldItem>
+                <identifier>RecordDetails_Of_Equipment_Removal_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-fbd70c6d-e8b6-4fcf-a41d-0cee5d926046</name>
@@ -761,6 +995,42 @@
                         <rightValue>Yes</rightValue>
                     </criteria>
                 </visibilityRule>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>columns</name>
+                    <value>Facet-7eaa8d4e-837d-4160-9a7b-df18f7ed013c</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>Poles Being Added or Removed</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:fieldSection</componentName>
+                <identifier>flexipage_fieldSection13</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>columns</name>
+                    <value>Facet-3faac684-b476-4725-9da5-28d47f1d33ca</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>Overhead Lines Being Added or Removed</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:fieldSection</componentName>
+                <identifier>flexipage_fieldSection14</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>

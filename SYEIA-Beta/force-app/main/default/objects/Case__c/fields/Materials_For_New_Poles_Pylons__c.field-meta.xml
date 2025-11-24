@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>AWS_Application_Id__c</fullName>
-    <description>The Id of the Application for AWS RDS.</description>
-    <externalId>true</externalId>
-    <label>AWS Application Id</label>
+    <fullName>Materials_For_New_Poles_Pylons__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>What materials will be used for the new poles/pylons?</inlineHelpText>
+    <label>Materials For New Poles/Pylons?</label>
     <length>255</length>
     <required>false</required>
     <trackHistory>false</trackHistory>
