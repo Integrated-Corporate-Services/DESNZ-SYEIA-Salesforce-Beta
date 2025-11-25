@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
-		<members>*</members>
+		<members>CommunitiesLandingControllerTest</members>
+		<members>CommunitiesLoginControllerTest</members>
+		<members>ChangePasswordControllerTest</members>
+		<members>CommunitiesSelfRegConfirmControllerTest</members>
+		<members>DocGen_DocumentGenerationWrapper</members>
+		<members>DocGen_DocumentGenerationWrapperTest</members>
+		<members>GovUKNotifyInvocable</members>
+		<members>GovUKNotifyInvocableTest</members>
+		<members>GovUKNotifyService</members>
+		<members>GovUKNotifyServiceTest</members>
+		<members>JWTGenerator</members>
+		<members>JWTGeneratorTest</members>
+		<members>InboundRequestTriggerHandler</members>
+		<members>InboundRequestTriggerHelper</members>
+		<members>InboundRequestTriggerHelperTest</members>
+		<members>S37ApplicationDTO</members>
+		<members>S37ApplicationDTOTest</members>
+		<members>GW_CustomCase</members>
+		<members>TriggerHandler</members>
 		<name>ApexClass</name>
+	</types>
+	<types>
+		<members>InboundRequestTrigger</members>
+		<name>ApexTrigger</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -42,6 +64,7 @@
 		<members>Case_Party__c.Case__c</members>
 		<members>Case_Party__c.Party__c</members>
 		<members>Case_Party__c.Type__c</members>
+		<members>Case_Party__c.Application_Party_Id__c</members>
 		<members>Case__c.AWS_Application_Id__c</members>
 		<members>Case__c.Accept_Consultees_Recommendations__c</members>
 		<members>Case__c.Accept_Local_Authority_Conditions__c</members>
@@ -181,6 +204,7 @@
 		<members>Party__c.Phone__c</members>
 		<members>Party__c.Representative__c</members>
 		<members>Party__c.Salutation__c</members>
+		<members>Party__c.Application_Party_Id__c</members>
 		<members>Payment__c.Case__c</members>
 		<members>Payment__c.Description__c</members>
 		<members>Payment__c.Invoice_Date__c</members>
@@ -197,12 +221,19 @@
 		<members>Route_Point__c.Northing__c</members>
 		<members>Route_Point__c.Route__c</members>
 		<members>Route_Point__c.Sequence_Number__c</members>
+		<members>Route_Point__c.Route_Id__c</members>
+		<members>Route_Point__c.Route_Point_Id__c</members>
 		<members>Route__c.Case__c</members>
 		<members>Route__c.Tolerance_Required__c</members>
 		<members>Route__c.Tolerance__c</members>
 		<members>Route__c.Total_Route_Points__c</members>
+		<members>Route__c.Route_Id__c</members>
 		<members>Sensitive_Area_Check__c.Case__c</members>
 		<members>Sensitive_Area_Check__c.Consultation__c</members>
+		<members>Inbound_Request__c.Status__c</members>
+		<members>Inbound_Request__c.Payload__c</members>
+		<members>Inbound_Request__c.External_System__c</members>
+		<members>Inbound_Request__c.Error_Log_Text__c</members>
 		<members>User.Salutations__c</members>
 		<members>Withdrawal_Request__c.Actioned_By__c</members>
 		<members>Withdrawal_Request__c.Actioned_On__c</members>
@@ -239,6 +270,7 @@
 		<members>Route__c</members>
 		<members>Sensitive_Area_Check__c</members>
 		<members>Withdrawal_Request__c</members>
+		<members>Inbound_Request__c</members>
 		<name>CustomObject</name>
 	</types>
 	<types>
