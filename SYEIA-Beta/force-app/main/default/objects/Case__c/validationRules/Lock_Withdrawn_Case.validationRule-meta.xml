@@ -3,6 +3,9 @@
     <fullName>Lock_Withdrawn_Case</fullName>
     <active>true</active>
     <description>Prevent any edits to a Case if the Status__c is marked as &apos;Withdrawn&apos;</description>
-    <errorConditionFormula>ISPICKVAL(PRIORVALUE(Status__c), &quot;Withdrawn&quot;)</errorConditionFormula>
+    <errorConditionFormula>AND(
+				ISPICKVAL(PRIORVALUE(Status__c), &quot;Withdrawn&quot;),
+				NOT($Profile.Name = &quot;System Administrator&quot;)
+)</errorConditionFormula>
     <errorMessage>This case has been marked as Withdrawn and can no longer be edited.</errorMessage>
 </ValidationRule>

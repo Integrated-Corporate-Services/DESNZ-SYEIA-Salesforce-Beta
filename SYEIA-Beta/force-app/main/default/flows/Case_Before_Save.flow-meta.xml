@@ -15,6 +15,20 @@
             </value>
         </assignmentItems>
     </assignments>
+    <assignments>
+        <description>Sets the withdrawal date and time.</description>
+        <name>Assign_Case_Withdrawal_Date_Time</name>
+        <label>Assign Case Withdrawal Date/Time</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Withdrawal_Date_Time__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>varNow</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
     <decisions>
         <name>Decision_Case_Status_Updated_To_Complete</name>
         <label>Decision Case Status Updated To Complete</label>
@@ -49,6 +63,35 @@
                 <targetReference>Assign_Case_Actual_Completed_Date_Time</targetReference>
             </connector>
             <label>Case Completed</label>
+        </rules>
+        <rules>
+            <name>Case_Withdrawn</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Withdrawn</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>WasSet</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Withdrawn</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Case_Withdrawal_Date_Time</targetReference>
+            </connector>
+            <label>Case Withdrawn</label>
         </rules>
     </decisions>
     <decisions>
@@ -109,45 +152,6 @@
         </rules>
     </decisions>
     <decisions>
-        <name>Owner_Changed_From_Unassigned_to_Assigned</name>
-        <label>Owner Changed From Unassigned to Assigned</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <defaultConnector>
-            <targetReference>Has_DNO_Lookup_Value_Changed</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
-        <rules>
-            <name>Owner_Changed</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>$Record.OwnerId</leftValueReference>
-                <operator>IsChanged</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>$Record__Prior.Status__c</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <stringValue>Acknowledged</stringValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>$Record.Status__c</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <stringValue>Acknowledged</stringValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Set_Status_to_In_Progress</targetReference>
-            </connector>
-            <label>Owner Changed</label>
-        </rules>
-    </decisions>
-    <decisions>
         <name>Record_Type_Retrieved</name>
         <label>Record Type Retrieved?</label>
         <locationX>0</locationX>
@@ -176,7 +180,7 @@
             <label>Failed To Find RT</label>
         </rules>
     </decisions>
-    <description>SYEIA-77</description>
+    <description>SYEIA-77, SYEIA-619</description>
     <environments>Default</environments>
     <formulas>
         <name>formula_IsNew</name>
@@ -231,7 +235,7 @@
             <field>DeveloperName</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>New_Cases_S37</stringValue>
+                <stringValue>New_Cases</stringValue>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -266,22 +270,6 @@
         <object>RecordType</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
-    <recordUpdates>
-        <name>Set_Status_to_In_Progress</name>
-        <label>Set Status to In Progress</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <connector>
-            <targetReference>Has_DNO_Lookup_Value_Changed</targetReference>
-        </connector>
-        <inputAssignments>
-            <field>Status__c</field>
-            <value>
-                <stringValue>In-Progress</stringValue>
-            </value>
-        </inputAssignments>
-        <inputReference>$Record</inputReference>
-    </recordUpdates>
     <recordUpdates>
         <name>Update_DNO_Name</name>
         <label>Update DNO Name</label>
@@ -333,14 +321,14 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Owner_Changed_From_Unassigned_to_Assigned</targetReference>
+            <targetReference>Has_DNO_Lookup_Value_Changed</targetReference>
         </connector>
         <filterFormula>{!$Permission.Bypass_Flow} == false</filterFormula>
         <object>Case__c</object>
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordBeforeSave</triggerType>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <variables>
         <name>var_RecordTypeID</name>
         <dataType>String</dataType>

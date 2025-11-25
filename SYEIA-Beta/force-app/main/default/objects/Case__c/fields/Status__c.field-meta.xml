@@ -50,6 +50,11 @@
                 <default>false</default>
                 <label>Completed</label>
             </value>
+            <value>
+                <fullName>Archived</fullName>
+                <default>false</default>
+                <label>Archived</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>
