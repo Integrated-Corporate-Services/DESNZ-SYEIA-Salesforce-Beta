@@ -193,37 +193,37 @@ public class S37ApplicationDTO {
     }
 
     public class SupportingDocument {
-        public String title;
-        public String file_id;
-        public String category;
-        public String virtual_folder;
-        public String description;
-        public String document_id;
-        public String added_at;
-        public String added_by;
-        public String subcategory;
+        // public String title;
+        // public String file_id;
+        // public String category;
+        // public String virtual_folder;
+        // public String description;
+        // public String document_id;
+        // public String added_at;
+        // public String added_by;
+        // public String subcategory;
     }
 
     public class SupportingQuestions {
-        public String id;
-        public Boolean wayleaves_obtained;
-        public String wayleaves_not_obtained_reason;
-        public Boolean esqcr_2002_compliance_confirmed;
-        public Boolean has_additional_supporting_documents;
-        public String applicant_supporting_comments;
-        public String applicationId;
+        // public String id;
+        // public Boolean wayleaves_obtained;
+        // public String wayleaves_not_obtained_reason;
+        // public Boolean esqcr_2002_compliance_confirmed;
+        // public Boolean has_additional_supporting_documents;
+        // public String applicant_supporting_comments;
+        // public String applicationId;
     }
 
     // --- EIA Fees ---
     public class EiaFees {
-        public String eia_id;
-        public Boolean screening_only;
-        public Boolean requires_full_eia;
-        public Boolean is_eia_development;
-        public String created_at;
-        public String created_by;
-        public String updated_at;
-        public String updated_by;
+        // public String eia_id;
+        // public Boolean screening_only;
+        // public Boolean requires_full_eia;
+        // public Boolean is_eia_development;
+        // public String created_at;
+        // public String created_by;
+        // public String updated_at;
+        // public String updated_by;
     }
 
     public static S37ApplicationDTO parse(String json) {
