@@ -9,6 +9,12 @@
 		<members>GovUKNotifyServiceTest</members>
 		<members>JWTGenerator</members>
 		<members>JWTGeneratorTest</members>
+		<members>InboundRequestTriggerHandler</members>
+		<members>InboundRequestTriggerHelper</members>
+		<members>InboundRequestTriggerHelperTest</members>
+		<members>S37ApplicationDTO</members>
+		<members>GW_CustomCase</members>
+		<members>TriggerHandler</members>
 		<name>ApexClass</name>
 	</types>
 	<types>
@@ -207,6 +213,11 @@
 		<members>Route__c.Total_Route_Points__c</members>
 		<members>Sensitive_Area_Check__c.Case__c</members>
 		<members>Sensitive_Area_Check__c.Consultation__c</members>
+		<members>Inbound_Request__c.Status__c</members>
+		<members>Inbound_Request__c.Payload__c</members>
+		<members>Inbound_Request__c.External_System__c</members>
+		<members>Inbound_Request__c.Error_Log_Text__c</members>
+		<members>Inbound_Request__c.Name</members>
 		<members>User.Salutations__c</members>
 		<members>Withdrawal_Request__c.Actioned_By__c</members>
 		<members>Withdrawal_Request__c.Actioned_On__c</members>
@@ -243,6 +254,7 @@
 		<members>Route__c</members>
 		<members>Sensitive_Area_Check__c</members>
 		<members>Withdrawal_Request__c</members>
+		<members>Inbound_Request__c</members>
 		<name>CustomObject</name>
 	</types>
 	<types>
