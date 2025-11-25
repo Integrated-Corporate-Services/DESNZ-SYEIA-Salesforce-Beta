@@ -19,7 +19,7 @@
 	</types>
 	<types>
 		<members>InboundRequestTrigger</members>
-		<name>ApexClass</name>
+		<name>ApexTrigger</name>
 	</types>
 	<types>
 		<members>*</members>
