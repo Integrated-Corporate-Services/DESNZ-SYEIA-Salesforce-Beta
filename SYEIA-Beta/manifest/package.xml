@@ -57,6 +57,7 @@
 		<members>Case_Party__c.Case__c</members>
 		<members>Case_Party__c.Party__c</members>
 		<members>Case_Party__c.Type__c</members>
+		<members>Case_Party__c.Application_Party_Id__c</members>
 		<members>Case__c.AWS_Application_Id__c</members>
 		<members>Case__c.Accept_Consultees_Recommendations__c</members>
 		<members>Case__c.Accept_Local_Authority_Conditions__c</members>
@@ -195,6 +196,7 @@
 		<members>Party__c.Phone__c</members>
 		<members>Party__c.Representative__c</members>
 		<members>Party__c.Salutation__c</members>
+		<members>Party__c.Application_Party_Id__c</members>
 		<members>Payment__c.Case__c</members>
 		<members>Payment__c.Description__c</members>
 		<members>Payment__c.Invoice_Date__c</members>
@@ -211,10 +213,13 @@
 		<members>Route_Point__c.Northing__c</members>
 		<members>Route_Point__c.Route__c</members>
 		<members>Route_Point__c.Sequence_Number__c</members>
+		<members>Route_Point__c.Route_Id__c</members>
+		<members>Route_Point__c.Route_Point_Id__c</members>
 		<members>Route__c.Case__c</members>
 		<members>Route__c.Tolerance_Required__c</members>
 		<members>Route__c.Tolerance__c</members>
 		<members>Route__c.Total_Route_Points__c</members>
+		<members>Route__c.Route_Id__c</members>
 		<members>Sensitive_Area_Check__c.Case__c</members>
 		<members>Sensitive_Area_Check__c.Consultation__c</members>
 		<members>Inbound_Request__c.Status__c</members>
