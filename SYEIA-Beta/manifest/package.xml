@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
-		<members>DocGen_DocumentGenerationWrapper</members>
-		<members>DocGen_DocumentGenerationWrapperTest</members>
-		<members>GovUKNotifyInvocable</members>
-		<members>GovUKNotifyInvocableTest</members>
-		<members>GovUKNotifyService</members>
-		<members>GovUKNotifyServiceTest</members>
-		<members>JWTGenerator</members>
-		<members>JWTGeneratorTest</members>
+		<members>*</members>
 		<name>ApexClass</name>
 	</types>
 	<types>
