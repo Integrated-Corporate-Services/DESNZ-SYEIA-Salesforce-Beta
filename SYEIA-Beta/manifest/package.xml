@@ -18,6 +18,10 @@
 		<name>ApexClass</name>
 	</types>
 	<types>
+		<members>InboundRequestTrigger</members>
+		<name>ApexClass</name>
+	</types>
+	<types>
 		<members>*</members>
 		<name>ApprovalProcess</name>
 	</types>
