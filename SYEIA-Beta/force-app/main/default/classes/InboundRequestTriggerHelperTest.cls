@@ -56,6 +56,8 @@ private class InboundRequestTriggerHelperTest {
         Test.stopTest();
 
         Assert.areEqual(2, [SELECT COUNT() FROM Case__c], 'Case__c records should be inserted successfully.');
+        Case__c caseRecord = [SELECT Id, Applicant_Reference__c FROM Case__c WHERE Inbound_Request__c = :inboundRequests[0].Id LIMIT 1];
+        Assert.areEqual('PlanRef-001', caseRecord.Applicant_Reference__c, 'Case__c records should be inserted successfully.');
     }
 
 
