@@ -1,4 +1,4 @@
-trigger InboundRequestTrigger on Inbound_Request__c (before insert, after insert) {
+trigger InboundRequestTrigger on Inbound_Request__c (before insert, after insert, before update, after update, before delete, after delete, after undelete) {
     System.debug('InboundRequestTrigger triggered for ' + Trigger.operationType + ' operation on Inbound_Request__c');
     // if (Org_Specific_Setting__mdt.getInstance('Run_All_Triggers')?.Value__c == true) {
         TriggerHandler handler = new InboundRequestTriggerHandler(Trigger.isExecuting, Trigger.size);
