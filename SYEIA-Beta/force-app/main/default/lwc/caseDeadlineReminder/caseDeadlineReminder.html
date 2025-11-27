@@ -1,0 +1,36 @@
+<template>
+    <lightning-card title="Deadline Approaching & Overdue Cases" icon-name="utility:notification">
+
+        <template if:true={cases}>
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th>Name</th>
+                        <th>Decision Deadline</th>
+                        <th>Action Needed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={cases} for:item="c">
+                        <tr key={c.id}>
+                            <td>
+                                <a href={c.caseLink} target="_blank">
+                                    {c.name}
+                                </a> 
+                            </td>
+                            <td>
+                                {c.decisionDeadline}
+                            </td>
+                            <td>{c.actionNeeded}</td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </template>
+
+        <template if:false={cases}>
+            <p class="slds-p-around_medium">No notifications found.</p>
+        </template>
+
+    </lightning-card>
+</template>
