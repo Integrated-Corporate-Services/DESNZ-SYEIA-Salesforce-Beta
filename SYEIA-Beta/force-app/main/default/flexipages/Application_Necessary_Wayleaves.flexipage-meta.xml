@@ -133,9 +133,6 @@
                             </visibilityRule>
                         </valueListItems>
                         <valueListItems>
-                            <value>Case__c.Generate_Document</value>
-                        </valueListItems>
-                        <valueListItems>
                             <value>Case__c.Reject_Case</value>
                             <visibilityRule>
                                 <booleanFilter>1 OR 2</booleanFilter>
