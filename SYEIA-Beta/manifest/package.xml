@@ -137,7 +137,6 @@
 		<members>Case__c.Mapping_Owner__c</members>
 		<members>Case__c.Materials_For_New_Poles_Pylons__c</members>
 		<members>Case__c.MoD_Checks_Required__c</members>
-		<members>Case__c.Materials_For_New_Poles__c</members>
 		<members>Case__c.Name_of_LPA__c</members>
 		<members>Case__c.Number_Of_Poles_Being_Added__c</members>
 		<members>Case__c.Number_Of_Poles_Being_Replaced__c</members>
