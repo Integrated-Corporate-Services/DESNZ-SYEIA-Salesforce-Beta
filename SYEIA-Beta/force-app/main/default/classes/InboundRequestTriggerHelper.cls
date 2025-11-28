@@ -28,7 +28,8 @@ public with sharing class InboundRequestTriggerHelper {
     }
 
     public void processInboundRequest(List<Inbound_Request__c> newInboundRequest, Map<Id, sObject> newInboundRequestMap) {
-        System.debug('Executing Process Inbound Request 1');
+        Utilities.logMethodEntry('processInboundRequest');
+        System.debug('Executing Process Inbound Request Method');
         Map<Id, Map<String, List<SObject>>> objectRecordMaps = new Map<Id, Map<String, List<SObject>>>();
 
         // process the payload from new Inbound_Request__c records
@@ -50,13 +51,16 @@ public with sharing class InboundRequestTriggerHelper {
         try {
             commitRecords(objectRecordMaps);
         } catch (Exception e) {
-            System.debug('Error committing records: ' + e.getMessage());
+            Utilities.log('Error committing records: ' + Utilities.formatException(e));
         }
+        Utilities.logMethodExit('processInboundRequest');
+        System.debug('Completed Processing Inbound Requests');
     }
 
 
     // Additional helper methods can be
     private static void commitRecords(Map<Id, Map<String, List<SObject>>> objectRecordMaps) {
+        Utilities.logMethodEntry('commitRecords');
         
         // Implementation for committing records to the database
 
@@ -176,10 +180,14 @@ public with sharing class InboundRequestTriggerHelper {
             }
         }
         commitRecord(errorMessagesMap, sensitiveAreaCheckRecordsToInsert);
+
+
+        Utilities.logMethodExit('commitRecord');
         System.debug('Sensitive Area Check Records committed successfully.');
     }
 
     private static void commitRecord(Map<Id, List<String>> errorMessagesMap, List<SObject> recordsToInsert) {
+        Utilities.logMethodEntry('commitRecord');
         // Implementation for committing a single record to the database
         Savepoint sp = Database.setSavePoint();
 
@@ -208,32 +216,42 @@ public with sharing class InboundRequestTriggerHelper {
             }
             updateInboundRequestStatus(errorMapString);
         }
+        Utilities.logMethodExit('commitRecord');
     }
 
     private static void getErrorMessageOnInboundRequest(Map<Id, List<String>> errorMessagesMap, Id inboundReqId, List<Database.Error> errorObject) {
+        Utilities.logMethodEntry('getErrorMessageOnInboundRequest');
         List<String> errorMessageList = errorMessagesMap.containsKey(inboundReqId) ? errorMessagesMap.get(inboundReqId) : new List<String>();
         for (Database.Error err : errorObject) {
             String errorMessage = 'Error Code: ' + err.getStatusCode() + ' - Message: ' + err.getMessage();
             errorMessageList.add(errorMessage);
         }
         errorMessagesMap.put(inboundReqId, errorMessageList);
+        Utilities.logMethodExit('getErrorMessageOnInboundRequest');
     }
 
     @future
 	public static void updateInboundRequestStatus(Map<Id, String> errorMessages) {
-        List<Inbound_Request__c> inboundRequestsToUpdate = new List<Inbound_Request__c>();
-        for (Id inboundReqId : errorMessages.keySet()) {
-            Inbound_Request__c inboundReq = new Inbound_Request__c(Id = inboundReqId);
-            String errors = errorMessages.get(inboundReqId);
-            if (errors != '') {
-                inboundReq.Status__c = 'Failed';
-                inboundReq.Error_Log_Text__c += errors;
-            } else {
-                inboundReq.Status__c = 'Processed';
+        Utilities.logMethodEntry('updateInboundRequestStatus');
+        try {
+            List<Inbound_Request__c> inboundRequestsToUpdate = new List<Inbound_Request__c>();
+            for (Id inboundReqId : errorMessages.keySet()) {
+                Inbound_Request__c inboundReq = new Inbound_Request__c(Id = inboundReqId);
+                String errors = errorMessages.get(inboundReqId);
+                if (errors != '') {
+                    inboundReq.Status__c = 'Failed';
+                    inboundReq.Error_Log_Text__c += errors;
+                } else {
+                    inboundReq.Status__c = 'Processed';
+                }
+                inboundRequestsToUpdate.add(inboundReq);
             }
-            inboundRequestsToUpdate.add(inboundReq);
+            update inboundRequestsToUpdate;
+        } catch (Exception ex) {
+            Utilities.log(Utilities.formatException(ex));
         }
-        update inboundRequestsToUpdate;
+        
+        Utilities.logMethodExit('updateInboundRequestStatus');
 	}
 
 }
