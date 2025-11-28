@@ -68,7 +68,7 @@ public with sharing class InboundRequestTriggerHelper {
         Map<Id, List<Sensitive_Area_Check__c>> sensitiveAreaCheckToInsertMap = new Map<Id, List<Sensitive_Area_Check__c>>();
 
         // Error messages on Inbound request level
-        Map<Id, String> errorMessagesMap = new Map<Id, String>();
+        Map<Id, List<String>> errorMessagesMap = new Map<Id, List<String>>();
 
         List<Case__c> caseToUpdateList = new List<Case__c>();
 
@@ -82,13 +82,14 @@ public with sharing class InboundRequestTriggerHelper {
 
             // error catcher 
             if (casesToInsert.isEmpty()) {
-                errorMessagesMap.put(inboundReqId, 'No Case records to insert for Inbound Request: ' + inboundReqId);
+                // errorMessagesMap.put(inboundReqId, new List<String>{'No Case records to insert for Inbound Request: ' + inboundReqId});
             } else {
-                errorMessagesMap.put(inboundReqId, '');
+                errorMessagesMap.put(inboundReqId, new List<String>());
             }
         }
 
         Map<Id, sObject> insertCaseResultMap, insertRouteResultMap, insertRoutePointResultMap = new Map<Id, sObject>();
+        Id inboundReqId = null;
         commitRecord(errorMessagesMap, casesToInsert);
         System.debug('Case Records committed successfully.');
 
@@ -178,42 +179,44 @@ public with sharing class InboundRequestTriggerHelper {
         System.debug('Sensitive Area Check Records committed successfully.');
     }
 
-    private static void commitRecord(Map<Id, String> errorMessagesMap, List<SObject> recordsToInsert) {
+    private static void commitRecord(Map<Id, List<String>> errorMessagesMap, List<SObject> recordsToInsert) {
         // Implementation for committing a single record to the database
         Savepoint sp = Database.setSavePoint();
 
         // insert all records
         Database.SaveResult[] results = Database.insert(recordsToInsert, false);
         String errorMessages = '';
-        Map<Id, String> errorMap = new Map<Id, String>();
+        Map<Id, List<String>> errorMap = new Map<Id, List<String>>();
         for (Database.SaveResult result : results) {
             if (!result.isSuccess()) {
+                // result.getId()
                 System.debug('Error inserting record: ' + result.getErrors()[0].getMessage());
-                getErrorMessageOnInboundRequest(errorMap, recordsToInsert[0].Id, result.getErrors());
+                List<Id> errorIdList = new List<Id>();
+                errorIdList.addAll(errorMap.keySet());
+
+                getErrorMessageOnInboundRequest(errorMap, errorIdList[0], result.getErrors());
                 Database.rollback(sp);
                 System.debug('Rolling back transaction due to errors.');
             }
         }
         if (!errorMap.isEmpty()) {
-            updateInboundRequestStatus(errorMap);
+            Map<Id, String> errorMapString = new Map<Id, String>();
+            for (Id inboundReqId : errorMap.keySet()) {
+                List<String> errorList = errorMap.get(inboundReqId);
+                String combinedErrors = String.join(errorList, '; ');
+                errorMapString.put(inboundReqId, combinedErrors);
+            }
+            updateInboundRequestStatus(errorMapString);
         }
     }
 
-    private static void getErrorMessageOnInboundRequest(Map<Id, String> errorMessagesMap, Id inboundReqId, List<Database.Error> errorObject) {
-        // for (Database.Error err : errorObject) {
-        //     String errorMessage = 'Error Code: ' + err.getStatusCode() + ' - Message: ' + err.getMessage();
-        //     appendErrorMessage(errorMessagesMap, inboundReqId, errorMessage);
-        // }   
-        // if (errorMessagesMap.containsKey(inboundReqId)) {
-        //     String existingErrors = errorMessagesMap.get(inboundReqId);
-        //     existingErrors += errorMessage + '\n';
-        //     if(existingErrors.length() > 32000) {
-        //         existingErrors = existingErrors.substring(0, 32000);
-        //     }
-        //     errorMessagesMap.put(inboundReqId, existingErrors);
-        // } else {
-        //     errorMessagesMap.put(inboundReqId, errorMessage + '\n');
-        // }
+    private static void getErrorMessageOnInboundRequest(Map<Id, List<String>> errorMessagesMap, Id inboundReqId, List<Database.Error> errorObject) {
+        List<String> errorMessageList = errorMessagesMap.containsKey(inboundReqId) ? errorMessagesMap.get(inboundReqId) : new List<String>();
+        for (Database.Error err : errorObject) {
+            String errorMessage = 'Error Code: ' + err.getStatusCode() + ' - Message: ' + err.getMessage();
+            errorMessageList.add(errorMessage);
+        }
+        errorMessagesMap.put(inboundReqId, errorMessageList);
     }
 
     @future

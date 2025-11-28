@@ -70,6 +70,7 @@
 		<members>Case__c.Accept_Local_Authority_Conditions__c</members>
 		<members>Case__c.Actual_Completed_Date_Time__c</members>
 		<members>Case__c.Additional_Info_Requested_From_DNO__c</members>
+		<members>Case__c.Adding_Or_Replacing_Any_Overhead_Poles__c</members>
 		<members>Case__c.Applicant_Reference__c</members>
 		<members>Case__c.Application_Fee_Paid__c</members>
 		<members>Case__c.Application_Statement__c</members>
@@ -115,6 +116,7 @@
 		<members>Case__c.Latest_Expected_Start_Date__c</members>
 		<members>Case__c.Mapping_Owner__c</members>
 		<members>Case__c.MoD_Checks_Required__c</members>
+		<members>Case__c.Materials_For_New_Poles__c</members>
 		<members>Case__c.Name_of_LPA__c</members>
 		<members>Case__c.Overdue_Email_Sent__c</members>
 		<members>Case__c.Payment__c</members>
