@@ -40,6 +40,12 @@
                 <default>false</default>
                 <label>Landowner Representative</label>
             </value>
+            <value>
+                <fullName>Grantor</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Grantor</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

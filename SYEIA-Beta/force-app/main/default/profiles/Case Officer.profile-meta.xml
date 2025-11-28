@@ -6,6 +6,16 @@
         <visible>true</visible>
     </applicationVisibilities>
     <applicationVisibilities>
+        <application>NWL_Energy_Infrastructure_Planning</application>
+        <default>false</default>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>TL_Energy_Infrastructure_Planning</application>
+        <default>false</default>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
         <application>standard__AllTabSet</application>
         <default>false</default>
         <visible>false</visible>
@@ -162,10 +172,6 @@
     </applicationVisibilities>
     <custom>true</custom>
     <description>The standard profile for all Case Officers. For Super User (Case Officer) users  please assign this profile as well as the &apos;Case Officer - Super User&apos; Permission Set Group</description>
-    <layoutAssignments>
-        <layout>Case__c-Application Layout</layout>
-        <recordType>Case__c.Section_37</recordType>
-    </layoutAssignments>
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>Case__c.Necessary_Wayleaves</recordType>
@@ -180,6 +186,16 @@
         <default>false</default>
         <recordType>Case__c.Tree_Lopping</recordType>
         <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Consultation__c.External_Consultation</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Consultation__c.Internal_Consultation</recordType>
+        <visible>false</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>false</default>
@@ -204,12 +220,24 @@
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
+        <tab>Case_Management_Dashboard_NWL</tab>
+        <visibility>Hidden</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>Case_Management_Dashboard_TL</tab>
+        <visibility>Hidden</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
         <tab>Case__c</tab>
         <visibility>Hidden</visibility>
     </tabVisibilities>
     <tabVisibilities>
+        <tab>Consultation__c</tab>
+        <visibility>Hidden</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
         <tab>Document_Approval_Request__c</tab>
-        <visibility>DefaultOn</visibility>
+        <visibility>Hidden</visibility>
     </tabVisibilities>
     <tabVisibilities>
         <tab>Related_Case__c</tab>
@@ -220,8 +248,12 @@
         <visibility>Hidden</visibility>
     </tabVisibilities>
     <tabVisibilities>
+        <tab>Sensitive_Area_Check__c</tab>
+        <visibility>Hidden</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
         <tab>Withdrawal_Request__c</tab>
-        <visibility>DefaultOn</visibility>
+        <visibility>Hidden</visibility>
     </tabVisibilities>
     <userLicense>Salesforce</userLicense>
     <userPermissions>
