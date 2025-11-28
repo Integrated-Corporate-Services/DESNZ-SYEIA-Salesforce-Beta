@@ -54,7 +54,7 @@ public with sharing class GW_CustomCase {
         caseRecord.AWS_Application_Id__c = s37AppDTO.applicationId;
         caseRecord.Number_Of_Poles_Being_Added__c = s37AppDTO.sections.worksOverview?.polesAdded;
         caseRecord.Comments_to_Support_Application__c = s37AppDTO.sections.worksOverview.poleComments;
-        caseRecord.Materials_For_New_Poles__c = s37AppDTO.sections.worksOverview.poleMaterial != null ? Integer.valueOf(s37AppDTO.sections.worksOverview.poleMaterial) : null;
+        caseRecord.Materials_For_New_Poles_Pylons__c = s37AppDTO.sections.worksOverview.poleMaterial != null ? String.valueOf(s37AppDTO.sections.worksOverview.poleMaterial) : null;
         caseRecord.Number_Of_Poles_Being_Replaced__c = s37AppDTO.sections.worksOverview.polesReplaced != null ? Integer.valueOf(s37AppDTO.sections.worksOverview.polesReplaced) : null;
         caseRecord.General_Comments__c = s37AppDTO.sections.worksOverview.generalComments;
         caseRecord.Vehicles_Required_On_Site__c = s37AppDTO.sections.worksOverview.vehiclesRequired;
