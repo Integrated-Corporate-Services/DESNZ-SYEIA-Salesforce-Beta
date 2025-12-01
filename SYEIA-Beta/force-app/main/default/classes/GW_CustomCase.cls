@@ -327,7 +327,7 @@ public with sharing class GW_CustomCase {
                 caseParty.Case__c = caseRecord.Id;
                 caseParty.Party__c = partyRecord.Id;
                 caseParty.Application_Party_Id__c = Utilities.isNullOrBlank(record.application_party_id) ? null : record.application_party_id;
-                caseParty.Name = '' + Utilities.isNullOrBlank(caseRecord.Name) ? null : caseRecord.Name + ' - ' + Utilities.isNullOrBlank(partyRecord.Name) ? null : partyRecord.Name;
+                caseParty.Name = '' + caseRecord.Name + ' - ' + partyRecord.Name;
 
                 //Representative Details
                 // Party__c representativeParty = new Party__c();
