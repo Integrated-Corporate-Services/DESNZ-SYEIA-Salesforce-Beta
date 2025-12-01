@@ -94,26 +94,26 @@ public with sharing class GW_CustomCase {
         }
 
         try {
-            caseRecord.Number_Of_Poles_Being_Added__c = appWorksOverview.polesAdded;
-            caseRecord.Comments_to_Support_Application__c = appWorksOverview.poleComments;
-            caseRecord.Materials_For_New_Poles_Pylons__c = appWorksOverview.poleMaterial != null ? String.valueOf(appWorksOverview.poleMaterial) : null;
-            caseRecord.Number_Of_Poles_Being_Replaced__c = appWorksOverview.polesReplaced != null ? Integer.valueOf(appWorksOverview.polesReplaced) : null;
-            caseRecord.General_Comments__c = appWorksOverview.generalComments;
-            caseRecord.Vehicles_Required_On_Site__c = appWorksOverview.vehiclesRequired;
-            caseRecord.Estimated_Duration_Of_Works__c = appWorksOverview.estimatedDuration != null ? String.valueOf(appWorksOverview.estimatedDuration) : null;
-            caseRecord.Excavation_Works_Required__c = appWorksOverview.excavationRequired != null && appWorksOverview.excavationRequired == true ? 'Yes' : 'No';
-            caseRecord.Details_Of_Excavation_Works__c = appWorksOverview.excavationDetails;
-            caseRecord.Any_Chemical_Treatments_Proposed__c = appWorksOverview.chemicalTreatments != null ? String.valueOf(appWorksOverview.chemicalTreatments) : null;
-            caseRecord.Details_Of_Equipment_Removal__c = appWorksOverview.removalDescription;
-            caseRecord.Details_Of_Access_Storage_Sites__c = appWorksOverview.accessRoutesDetails;
-            caseRecord.Road_Closures_Or_Traffic_Calming__c = appWorksOverview.roadClosuresRequired != null && appWorksOverview.roadClosuresRequired == true ? 'Yes' : 'No';
-            caseRecord.Adding_Or_Replacing_Any_Overhead_Lines__c = appWorksOverview.addingOrReplacingLines != null && appWorksOverview.addingOrReplacingLines == true ? 'Yes' : 'No';
-            caseRecord.Adding_Or_Replacing_Any_Overhead_Poles__c = appWorksOverview.addingOrReplacingPoles != null && appWorksOverview.addingOrReplacingPoles == true ? 'Yes' : 'No';
-            caseRecord.Description_Of_Overhead_Lines__c = appWorksOverview.overheadLineDescription;
-            caseRecord.Is_Any_Existing_Equipment_Being_Removed__c = appWorksOverview.removingExistingEquipment != null && appWorksOverview.removingExistingEquipment == true ? 'Yes' : 'No';
-            caseRecord.Pre_existing_Routes_Storage_Used__c = appWorksOverview.usingExistingAccessRoutes != null && appWorksOverview.usingExistingAccessRoutes == true ? 'Yes' : 'No';
-            caseRecord.Details_Of_Vegetation_Clearance__c = appWorksOverview.vegetationClearanceDetails;
-            caseRecord.Vegetation_Clearance_Required__c = appWorksOverview.vegetationClearanceRequired != null && appWorksOverview.vegetationClearanceRequired == true ? 'Yes' : 'No';
+            caseRecord.Number_Of_Poles_Being_Added__c = Utilities.isNullOrBlank(appWorksOverview.polesAdded) ? null : Integer.valueOf(appWorksOverview.polesAdded);
+            caseRecord.Comments_to_Support_Application__c = Utilities.isNullOrBlank(appWorksOverview.poleComments) ? null : String.valueOf(appWorksOverview.poleComments);
+            caseRecord.Materials_For_New_Poles_Pylons__c = Utilities.isNullOrBlank(appWorksOverview.poleMaterial) ? null : String.valueOf(appWorksOverview.poleMaterial);
+            caseRecord.Number_Of_Poles_Being_Replaced__c = Utilities.isNullOrBlank(appWorksOverview.polesReplaced) ? null : Integer.valueOf(appWorksOverview.polesReplaced);
+            caseRecord.General_Comments__c = Utilities.isNullOrBlank(appWorksOverview.generalComments) ? null : String.valueOf(appWorksOverview.generalComments);
+            caseRecord.Vehicles_Required_On_Site__c = Utilities.isNullOrBlank(appWorksOverview.vehiclesRequired) ? null : String.valueOf(appWorksOverview.vehiclesRequired);
+            caseRecord.Estimated_Duration_Of_Works__c = Utilities.isNullOrBlank(appWorksOverview.estimatedDuration) ? null : String.valueOf(appWorksOverview.estimatedDuration);
+            caseRecord.Excavation_Works_Required__c = Utilities.isNullOrBlank(appWorksOverview.excavationRequired) ? null : (appWorksOverview.excavationRequired == true ? 'Yes' : 'No');
+            caseRecord.Details_Of_Excavation_Works__c = Utilities.isNullOrBlank(appWorksOverview.excavationDetails) ? null : String.valueOf(appWorksOverview.excavationDetails);
+            caseRecord.Any_Chemical_Treatments_Proposed__c = Utilities.isNullOrBlank(appWorksOverview.chemicalTreatments) ? null : String.valueOf(appWorksOverview.chemicalTreatments);
+            caseRecord.Details_Of_Equipment_Removal__c = Utilities.isNullOrBlank(appWorksOverview.removalDescription) ? null : String.valueOf(appWorksOverview.removalDescription);
+            caseRecord.Details_Of_Access_Storage_Sites__c = Utilities.isNullOrBlank(appWorksOverview.accessRoutesDetails) ? null : String.valueOf(appWorksOverview.accessRoutesDetails);
+            caseRecord.Road_Closures_Or_Traffic_Calming__c = Utilities.isNullOrBlank(appWorksOverview.roadClosuresRequired) ? null : (appWorksOverview.roadClosuresRequired == true ? 'Yes' : 'No');
+            caseRecord.Adding_Or_Replacing_Any_Overhead_Lines__c = Utilities.isNullOrBlank(appWorksOverview.addingOrReplacingLines) ? null : (appWorksOverview.addingOrReplacingLines == true ? 'Yes' : 'No');
+            caseRecord.Adding_Or_Replacing_Any_Overhead_Poles__c = Utilities.isNullOrBlank(appWorksOverview.addingOrReplacingPoles) ? null : (appWorksOverview.addingOrReplacingPoles == true ? 'Yes' : 'No');
+            caseRecord.Description_Of_Overhead_Lines__c = Utilities.isNullOrBlank(appWorksOverview.overheadLineDescription) ? null : String.valueOf(appWorksOverview.overheadLineDescription);
+            caseRecord.Is_Any_Existing_Equipment_Being_Removed__c = Utilities.isNullOrBlank(appWorksOverview.removingExistingEquipment) ? null : (appWorksOverview.removingExistingEquipment == true ? 'Yes' : 'No');
+            caseRecord.Pre_existing_Routes_Storage_Used__c = Utilities.isNullOrBlank(appWorksOverview.usingExistingAccessRoutes) ? null : (appWorksOverview.usingExistingAccessRoutes == true ? 'Yes' : 'No');
+            caseRecord.Details_Of_Vegetation_Clearance__c = Utilities.isNullOrBlank(appWorksOverview.vegetationClearanceDetails) ? null : String.valueOf(appWorksOverview.vegetationClearanceDetails);
+            caseRecord.Vegetation_Clearance_Required__c = Utilities.isNullOrBlank(appWorksOverview.vegetationClearanceRequired) ? null : (appWorksOverview.vegetationClearanceRequired == true ? 'Yes' : 'No');
         } catch (Exception ex) {
             Utilities.log(Utilities.formatException(ex));
         }
@@ -123,7 +123,7 @@ public with sharing class GW_CustomCase {
 
     private static void s37_populateEiaDetails(Case__c caseRecord, S37ApplicationDTO.EiaFees appEiaDetails) {
         Utilities.logMethodEntry('s37_populateEiaDetails');
-        if (appEiaDetails == null) {
+        if (appEiaDetails == null || Utilities.isNullOrBlank(appEiaDetails)) {
             Utilities.log('appEiaDetails is empty');
             Utilities.logMethodExit('s37_populateEiaDetails');
             return;
@@ -133,9 +133,9 @@ public with sharing class GW_CustomCase {
                 
             // Populate fields based on appEiaDetails
             if (appEiaDetails != null) {
-                if (appEiaDetails.requires_full_eia != null && appEiaDetails.requires_full_eia == true) {
+                if (appEiaDetails.requires_full_eia != null && Utilities.isNullOrBlank(appEiaDetails.requires_full_eia) == false && appEiaDetails.requires_full_eia == true) {
                     caseRecord.Full_EIA_Process_or_Screening_Opinion__c = 'Full EIA Process';
-                } else if (appEiaDetails.screening_only != null && appEiaDetails.screening_only == true) {
+                } else if (appEiaDetails.screening_only != null && Utilities.isNullOrBlank(appEiaDetails.screening_only) == false && appEiaDetails.screening_only == true) {
                     caseRecord.Full_EIA_Process_or_Screening_Opinion__c = 'Screening Opinion';
                 } else {
                     caseRecord.Full_EIA_Process_or_Screening_Opinion__c = null;
@@ -151,7 +151,7 @@ public with sharing class GW_CustomCase {
 
     private static void s37_populateNetworkOperatorDetails(Case__c caseRecord, S37ApplicationDTO.NetworkOperator appNetworkOperator) {
         Utilities.logMethodEntry('s37_populateNetworkOperatorDetails');
-        if (appNetworkOperator == null) {
+        if (appNetworkOperator == null || Utilities.isNullOrBlank(appNetworkOperator)) {
             Utilities.log('appNetworkOperator is empty');
             Utilities.logMethodExit('s37_populateNetworkOperatorDetails');
             return;
@@ -161,8 +161,8 @@ public with sharing class GW_CustomCase {
                 
             // Populate fields based on appNetworkOperator
             if (appNetworkOperator != null) {
-                caseRecord.Applicant_Reference__c = appNetworkOperator.details.operator_ref;
-                caseRecord.Date_of_Application__c = appNetworkOperator.details.submitted_at != null ? Date.valueOf(appNetworkOperator.details.submitted_at.substring(0,10)) : null;
+                caseRecord.Applicant_Reference__c = Utilities.isNullOrBlank(appNetworkOperator.details.operator_ref) ? null : appNetworkOperator.details.operator_ref;
+                caseRecord.Date_of_Application__c = Utilities.isNullOrBlank(appNetworkOperator.details.submitted_at) ? null : Date.valueOf(appNetworkOperator.details.submitted_at.substring(0,10));
                 // caseRecord.Network_Operator_Phone__c = appNetworkOperator.contact_phone;
                 // caseRecord.Network_Operator_Email__c = appNetworkOperator.contact_email;
             }
@@ -174,7 +174,7 @@ public with sharing class GW_CustomCase {
 
     private static void s37_PopulateProjectDetails(Case__c caseRecord, S37ApplicationDTO.ProjectDetails appProjectDetails) {
         Utilities.logMethodEntry('s37_PopulateProjectDetails');
-        if (appProjectDetails == null) {
+        if (appProjectDetails == null || Utilities.isNullOrBlank(appProjectDetails)) {
             Utilities.log('appProjectDetails is empty');
             Utilities.logMethodExit('s37_PopulateProjectDetails');
             return;
@@ -185,24 +185,35 @@ public with sharing class GW_CustomCase {
             // project details
             if (appProjectDetails != null) {
                 // core project details
-                caseRecord.Project_Name__c = appProjectDetails.overview.project_details.project_name;
-                caseRecord.Project_Description__c = appProjectDetails.overview.project_details.project_description;
+                caseRecord.Project_Name__c = Utilities.isNullOrBlank(appProjectDetails.overview.project_details.project_name) ? null : appProjectDetails.overview.project_details.project_name;
+                caseRecord.Project_Description__c = Utilities.isNullOrBlank(appProjectDetails.overview.project_details.project_description) ? null : appProjectDetails.overview.project_details.project_description;
                 // caseRecord.Related_CPO_Details__c = appProjectDetails.overview.application_project_overview.;
                 // caseRecord.Plan_Reference__c = appProjectDetails.overview.application_project_overview.plan_reference;
 
                 // project overview
-                caseRecord.Tallest_Pole_Height__c = appProjectDetails.overview.application_project_overview.max_structure_height_m;
+                caseRecord.Tallest_Pole_Height__c = Utilities.isNullOrBlank(appProjectDetails.overview.application_project_overview.max_structure_height_m) ? null : appProjectDetails.overview.application_project_overview.max_structure_height_m;
                 // caseRecord.Applicant_Reference__c = appProjectDetails.overview.application_project_overview.plan_reference;
-                caseRecord.Earliest_Expected_Start_Date__c = Date.newInstance(
-                    appProjectDetails.overview.application_project_overview.earliest_work_start_date_year,
-                    appProjectDetails.overview.application_project_overview.earliest_work_start_date_month,
-                    1
-                );
-                caseRecord.Latest_Expected_Start_Date__c = Date.newInstance(
-                    appProjectDetails.overview.application_project_overview.latest_work_start_date_year,
-                    appProjectDetails.overview.application_project_overview.latest_work_start_date_month,
-                    1
-                );
+                if (Utilities.isNullOrBlank(appProjectDetails.overview.application_project_overview.earliest_work_start_date_year) == false &&
+                    Utilities.isNullOrBlank(appProjectDetails.overview.application_project_overview.earliest_work_start_date_month) == false) {
+                    caseRecord.Earliest_Expected_Start_Date__c = Date.newInstance(
+                        appProjectDetails.overview.application_project_overview.earliest_work_start_date_year,
+                        appProjectDetails.overview.application_project_overview.earliest_work_start_date_month,
+                        1
+                    );
+                }
+                // caseRecord.Earliest_Expected_Start_Date__c = Date.newInstance(
+                //     appProjectDetails.overview.application_project_overview.earliest_work_start_date_year,
+                //     appProjectDetails.overview.application_project_overview.earliest_work_start_date_month,
+                //     1
+                // );
+                if (Utilities.isNullOrBlank(appProjectDetails.overview.application_project_overview.latest_work_start_date_year) == false &&
+                    Utilities.isNullOrBlank(appProjectDetails.overview.application_project_overview.latest_work_start_date_month) == false) {
+                    caseRecord.Latest_Expected_Start_Date__c = Date.newInstance(
+                        appProjectDetails.overview.application_project_overview.latest_work_start_date_year,
+                        appProjectDetails.overview.application_project_overview.latest_work_start_date_month,
+                        1
+                    );
+                }
             }
         } catch (Exception ex) {
             Utilities.log(Utilities.formatException(ex));
@@ -213,7 +224,7 @@ public with sharing class GW_CustomCase {
 
     private static Map<String, List<SObject>> s37_PopulateRoutes(Case__c caseRecord, List<S37ApplicationDTO.Route> appRouteList) {
         Utilities.logMethodEntry('s37_PopulateRoutes');
-        if (appRouteList == null) {
+        if (appRouteList == null || Utilities.isNullOrBlank(appRouteList) || appRouteList.isEmpty()) {
             Utilities.log('appRouteList is empty');
             Utilities.logMethodExit('s37_PopulateRoutes');
             return new Map<String, List<SObject>>();
@@ -226,10 +237,10 @@ public with sharing class GW_CustomCase {
 
             for (S37ApplicationDTO.Route appRoute : appRouteList) {
                 Route__c routeRecord = new Route__c();
-                routeRecord.Name = appRoute.routeName;
-                routeRecord.Disconnected_Route_Justification__c = appRoute.disconnectedroute_justification;
+                routeRecord.Name = Utilities.isNullOrBlank(appRoute.routeName) ? null : appRoute.routeName;
+                routeRecord.Disconnected_Route_Justification__c = Utilities.isNullOrBlank(appRoute.disconnectedroute_justification) ? null : appRoute.disconnectedroute_justification;
                 routeRecord.Case__c = caseRecord.Id;
-                routeRecord.Route_Id__c = appRoute.route_id;
+                routeRecord.Route_Id__c = Utilities.isNullOrBlank(appRoute.route_id) ? null : appRoute.route_id;
                 routePointsMap.get('Route_Point__c').addAll(s37_PopulateRoutePoints(routeRecord, appRoute.gridPoints));
                 routePointsMap.get('Route__c').add(routeRecord);
             }
@@ -246,7 +257,7 @@ public with sharing class GW_CustomCase {
 
     private static List<Route_Point__c> s37_PopulateRoutePoints(Route__c routeRecord, List<S37ApplicationDTO.GridPoint> appGridPointList) {
         Utilities.logMethodEntry('s37_PopulateRoutePoints');
-        if (appGridPointList == null) {
+        if (appGridPointList == null || Utilities.isNullOrBlank(appGridPointList) || appGridPointList.isEmpty()) {
             Utilities.log('appGridPointList is empty');
             Utilities.logMethodExit('s37_PopulateRoutePoints');
             return null;
@@ -257,11 +268,11 @@ public with sharing class GW_CustomCase {
             List<Route_Point__c> routePointRecords = new List<Route_Point__c>();
             for (S37ApplicationDTO.GridPoint appGridPoint : appGridPointList) {
                 Route_Point__c routePointRecord = new Route_Point__c();
-                routePointRecord.Northing__c = String.valueOf(appGridPoint.northing);
-                routePointRecord.Easting__c = String.valueOf(appGridPoint.easting);
+                routePointRecord.Northing__c = Utilities.isNullOrBlank(appGridPoint.northing) ? null : String.valueOf(appGridPoint.northing);
+                routePointRecord.Easting__c = Utilities.isNullOrBlank(appGridPoint.easting) ? null : String.valueOf(appGridPoint.easting);
                 routePointRecord.Route__c = routeRecord.Id;
                 routePointRecord.Route_Id__c = routeRecord.Route_Id__c;
-                routePointRecord.Route_Point_Id__c = appGridPoint.point_id;
+                routePointRecord.Route_Point_Id__c = Utilities.isNullOrBlank(appGridPoint.point_id) ? null : appGridPoint.point_id;
                 routePointRecords.add(routePointRecord);
             }
             Utilities.logMethodExit('s37_PopulateRoutePoints');
@@ -276,6 +287,11 @@ public with sharing class GW_CustomCase {
     public static  Map<String, List<SObject>> s37_PopulateCaseFieldsFromParty(Case__c caseRecord, List<S37ApplicationDTO.ApplicationParty> appPartyList) {
         
         Utilities.logMethodEntry('s37_PopulateCaseFieldsFromParty');
+        if (appPartyList == null || Utilities.isNullOrBlank(appPartyList) || appPartyList.isEmpty()) {
+            Utilities.log('appPartyList is empty');
+            Utilities.logMethodExit('s37_PopulateCaseFieldsFromParty');
+            return new Map<String, List<SObject>>();
+        }
 
         try {
             List<Party__c> partyRecords = new List<Party__c>();
@@ -290,18 +306,18 @@ public with sharing class GW_CustomCase {
                 partyRecord.RecordTypeId = Schema.SObjectType.Party__c.getRecordTypeInfosByDeveloperName().get('Organisation').getRecordTypeId();
 
                 partyRecord.Party_Type__c = record.role == 'Applicant' ? 'DNO' : 'Organisation';
-                partyRecord.Name = record.organisation_name ?? record.person_name;
-                partyRecord.Email__c = record.email;
-                partyRecord.Phone__c = record.phone;
-                partyRecord.Is_Primary__c = record.is_primary;
-                partyRecord.Application_Party_Id__c = record.application_party_id;
+                partyRecord.Name = Utilities.isNullOrBlank(record.organisation_name) ? (Utilities.isNullOrBlank(record.person_name) ? null : record.person_name) : record.organisation_name;
+                partyRecord.Email__c = Utilities.isNullOrBlank(record.email) ? null : record.email;
+                partyRecord.Phone__c = Utilities.isNullOrBlank(record.phone) ? null : record.phone;
+                partyRecord.Is_Primary__c = Utilities.isNullOrBlank(record.is_primary) ? null : record.is_primary;
+                partyRecord.Application_Party_Id__c = Utilities.isNullOrBlank(record.application_party_id) ? null : record.application_party_id;
 
                 Address__c addressRecord = new Address__c();
-                addressRecord.Address_Line1__c = record.line1 != null ? record.line1 : null;
-                addressRecord.Address_Line_2__c = record.line2 != null ? record.line2 : null;
-                addressRecord.Town_City__c = record.town_city != null ? record.town_city : null;
-                addressRecord.Postcode__c = record.postcode != null ? record.postcode : null;
-                addressRecord.Country__c = record.country != null ? record.country : null;
+                addressRecord.Address_Line1__c = Utilities.isNullOrBlank(record.line1) ? null : record.line1;
+                addressRecord.Address_Line_2__c = Utilities.isNullOrBlank(record.line2) ? null : record.line2;
+                addressRecord.Town_City__c = Utilities.isNullOrBlank(record.town_city) ? null : record.town_city;
+                addressRecord.Postcode__c = Utilities.isNullOrBlank(record.postcode) ? null : record.postcode;
+                addressRecord.Country__c = Utilities.isNullOrBlank(record.country) ? null : record.country;
                 if (record.is_primary) {
                     caseRecord.DNO__c = partyRecord.Id;
                 }
@@ -310,8 +326,8 @@ public with sharing class GW_CustomCase {
                 Case_Party__c caseParty = new Case_Party__c();
                 caseParty.Case__c = caseRecord.Id;
                 caseParty.Party__c = partyRecord.Id;
-                caseParty.Application_Party_Id__c = record.application_party_id;
-                caseParty.Name = '' + caseRecord.Name + ' - ' + partyRecord.Name;
+                caseParty.Application_Party_Id__c = Utilities.isNullOrBlank(record.application_party_id) ? null : record.application_party_id;
+                caseParty.Name = '' + Utilities.isNullOrBlank(caseRecord.Name) ? null : caseRecord.Name + ' - ' + Utilities.isNullOrBlank(partyRecord.Name) ? null : partyRecord.Name;
 
                 //Representative Details
                 // Party__c representativeParty = new Party__c();
@@ -340,7 +356,7 @@ public with sharing class GW_CustomCase {
 
     public static Sensitive_Area_Check__c S37_PopulateSensitiveAreaCheckDetails(Case__c caseRecord, S37ApplicationDTO.SensitiveAreaReview sensitiveAreaReview) {
         Utilities.logMethodEntry('S37_PopulateSensitiveAreaCheckDetails');
-        if (sensitiveAreaReview == null) {
+        if (sensitiveAreaReview == null || Utilities.isNullOrBlank(sensitiveAreaReview)) {
             Utilities.log('sensitiveAreaReview is empty');
             Utilities.logMethodExit('S37_PopulateSensitiveAreaCheckDetails');
             return null;
