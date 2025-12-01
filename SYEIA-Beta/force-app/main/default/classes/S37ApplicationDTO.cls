@@ -6,13 +6,11 @@ public class S37ApplicationDTO {
     public String applicationId;
     public Sections sections;
 
-    @JsonIgnoreUnknown
     public class Metadata {
         public String source;
         public Integer schemaVersion;
     }
 
-    @JsonIgnoreUnknown
     public class Sections {
         public Location location;
         public List<Object> parishes;
@@ -28,12 +26,10 @@ public class S37ApplicationDTO {
     }
 
     // --- Location ---
-    @JsonIgnoreUnknown
     public class Location {
         public List<Route> routes;
     }
 
-    @JsonIgnoreUnknown
     public class Route {
         public String route_id;
         public String routeName;
@@ -41,7 +37,6 @@ public class S37ApplicationDTO {
         public String disconnectedroute_justification;
     }
 
-    @JsonIgnoreUnknown
     public class GridPoint {
         public String point_id;
         public Integer easting;
@@ -49,7 +44,6 @@ public class S37ApplicationDTO {
     }
 
     // --- Works Overview ---
-    @JsonIgnoreUnknown
     public class WorksOverview {
         public String createdBy;
         public String lastUpdatedBy;
@@ -77,13 +71,11 @@ public class S37ApplicationDTO {
     }
 
     // --- Sensitive Areas ---
-    @JsonIgnoreUnknown
     public class SensitiveAreaChecks {
         public String application_id;
         public List<String> layers;
     }
 
-    @JsonIgnoreUnknown
     public class SensitiveAreaReview {
         public String id;
         public String route_id;
@@ -97,12 +89,10 @@ public class S37ApplicationDTO {
     }
 
     // --- Project Details ---
-    @JsonIgnoreUnknown
     public class ProjectDetails {
         public Overview overview;
     }
 
-    @JsonIgnoreUnknown
     public class Overview {
         public ProjectDetailsInner project_details;
         public ApplicationProjectOverview application_project_overview;
@@ -110,7 +100,6 @@ public class S37ApplicationDTO {
         public List<ApplicationRelation> application_relations;
     }
 
-    @JsonIgnoreUnknown
     public class ProjectDetailsInner {
         public String project_id;
         public String project_name;
@@ -120,7 +109,6 @@ public class S37ApplicationDTO {
         public String updated_at;
     }
 
-    @JsonIgnoreUnknown
     public class ApplicationProjectOverview {
         public String plan_reference;
         public Double max_structure_height_m;
@@ -130,7 +118,6 @@ public class S37ApplicationDTO {
         public Integer latest_work_start_date_month;
     }
 
-    @JsonIgnoreUnknown
     public class PlanDocument {
         public String title;
         public String description;
@@ -143,7 +130,6 @@ public class S37ApplicationDTO {
         public String subcategory;
     }
 
-    @JsonIgnoreUnknown
     public class ApplicationRelation {
         public String application_relation_id;
         public String project_name;
@@ -154,7 +140,6 @@ public class S37ApplicationDTO {
     }
 
     // --- Asset Information ---
-    @JsonIgnoreUnknown
     public class AssetInformation {
         public String asset_id;
         public String asset_type;
@@ -169,12 +154,10 @@ public class S37ApplicationDTO {
     }
 
     // --- Network Operator ---
-    @JsonIgnoreUnknown
     public class NetworkOperator {
         public Details details;
     }
 
-    @JsonIgnoreUnknown
     public class Details {
         public String operator_ref;
         public String created_at;
@@ -183,7 +166,6 @@ public class S37ApplicationDTO {
     }
 
     // --- Application Party ---
-    @JsonIgnoreUnknown
     public class ApplicationParty {
         public String application_party_id;
         public String role;
@@ -205,13 +187,11 @@ public class S37ApplicationDTO {
     }
 
     // --- Supporting Information ---
-    @JsonIgnoreUnknown
     public class SupportingInformation {
         public List<SupportingDocument> supportingDocuments;
         public SupportingQuestions supportingQuestions;
     }
 
-    @JsonIgnoreUnknown
     public class SupportingDocument {
         public String title;
         public String file_id;
@@ -224,7 +204,6 @@ public class S37ApplicationDTO {
         public String subcategory;
     }
 
-    @JsonIgnoreUnknown
     public class SupportingQuestions {
         public String id;
         public Boolean wayleaves_obtained;
@@ -236,7 +215,6 @@ public class S37ApplicationDTO {
     }
 
     // --- EIA Fees ---
-    @JsonIgnoreUnknown
     public class EiaFees {
         public String eia_id;
         public Boolean screening_only;

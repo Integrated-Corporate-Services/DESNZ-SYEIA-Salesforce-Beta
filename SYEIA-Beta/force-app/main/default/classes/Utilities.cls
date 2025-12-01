@@ -30,4 +30,41 @@ public with sharing class Utilities {
     public static void logMethodExit(String methodName) {
         System.debug(LoggingLevel.INFO, ' --- Exiting Method: ' + methodName + ' --- ');
     }
+
+    /**
+     * Returns true if the input value is:
+     * - null
+     * - an empty string
+     * - only whitespace characters
+     */
+    public static Boolean isNullOrBlank(Object value) {
+        // Null is always blank
+        if (value == null) return true;
+
+        // If Boolean, false is NOT blank — treat only null as blank
+        if (value instanceof Boolean) {
+            return false; 
+        }
+
+        // If Number, not blank (unless null, handled above)
+        if (value instanceof Integer ||
+            value instanceof Long ||
+            value instanceof Decimal ||
+            value instanceof Double) {
+            return false;
+        }
+
+        // Convert to string and test
+        try {
+            String s = String.valueOf(value);
+            if (s == null) return true;
+
+            // Replace isEmpty with a safe comparison
+            return s.trim() == '';
+        }
+        catch (Exception ex) {
+            // If conversion fails, treat as blank
+            return true;
+        }
+    }
 }
