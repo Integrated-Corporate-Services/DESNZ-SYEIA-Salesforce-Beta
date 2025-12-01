@@ -41,6 +41,9 @@ public with sharing class InboundRequestTriggerHelper {
                     // Further processing logic here
                     objectRecordMaps.put(inboundReq.Id, GW_CustomCase.createS37CaseFromAWS(s37App, inboundReq));
                 } catch (Exception e) {
+                    Map<Id, String> errorMessages = new Map<Id, String>();
+                    errorMessages.put(inboundReq.Id, 'Error parsing payload: ' + Utilities.formatException(e));
+	                updateInboundRequestStatus(errorMessages);
                     Utilities.log('Error parsing payload for Inbound Request ' + inboundReq.Id + ': ' + Utilities.formatException(e));
                     System.debug('Error parsing payload for Inbound Request ' + inboundReq.Id + ': ' + e.getMessage());
                     return;
