@@ -7,7 +7,7 @@ public with sharing class Utilities {
 
     /**
      * @description  Wraps an exception into an easy-to-read message.
-     */
+    */
     public static String formatException(Exception e) {
         return e == null ? 'Unknown error.' :
             'Exception: ' + e.getMessage() +
