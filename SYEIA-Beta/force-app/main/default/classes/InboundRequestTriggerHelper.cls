@@ -41,13 +41,20 @@ public with sharing class InboundRequestTriggerHelper {
                     // Further processing logic here
                     objectRecordMaps.put(inboundReq.Id, GW_CustomCase.createS37CaseFromAWS(s37App, inboundReq));
                 } catch (Exception e) {
+                    Utilities.log('Error parsing payload for Inbound Request ' + inboundReq.Id + ': ' + Utilities.formatException(e));
                     System.debug('Error parsing payload for Inbound Request ' + inboundReq.Id + ': ' + e.getMessage());
+                    return;
                 }
             } else {
                 System.debug('No payload found for Inbound Request: ' + inboundReq.Id);
             }
         }
 
+        if (objectRecordMaps.isEmpty()) {
+            Utilities.log('No valid Inbound Requests to process.');
+            Utilities.logMethodExit('processInboundRequest');
+            return;
+        }
         try {
             commitRecords(objectRecordMaps);
         } catch (Exception e) {
