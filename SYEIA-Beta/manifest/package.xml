@@ -20,6 +20,7 @@
 		<members>S37ApplicationDTO</members>
 		<members>S37ApplicationDTOTest</members>
 		<members>TriggerHandler</members>
+		<members>Utilities</members>
 		<name>ApexClass</name>
 	</types>
 	<types>
