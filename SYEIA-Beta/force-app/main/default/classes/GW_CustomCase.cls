@@ -15,7 +15,10 @@ public with sharing class GW_CustomCase {
             Map<String, List<SObject>> routes = s37_PopulateRoutes(newCase, s37AppDTO.sections.location.routes);
 
             caseRecordAndRelatedRecords.put('Case__c', new List<SObject>{newCase});
-            caseRecordAndRelatedRecords.putAll(routes);
+            if (routes != null) {
+                caseRecordAndRelatedRecords.putAll(routes);
+            }
+            
             caseRecordAndRelatedRecords.putAll(s37_PopulateCaseFieldsFromParty(newCase, s37AppDTO.sections.application_party));
 
             Sensitive_Area_Check__c sensitiveAreaReviewRecord = S37_PopulateSensitiveAreaCheckDetails(newCase, s37AppDTO.sections.sensitiveAreaReview);
@@ -94,8 +97,11 @@ public with sharing class GW_CustomCase {
         }
 
         try {
+            System.debug('Populating Works Overview fields from Application DTO: ' + String.isBlank(appWorksOverview.poleComments));
+            System.debug('Populating Works Overview fields from Application DTO: ' + Utilities.isNullOrBlank(appWorksOverview.poleComments));
+
             caseRecord.Number_Of_Poles_Being_Added__c = Utilities.isNullOrBlank(appWorksOverview.polesAdded) ? null : Integer.valueOf(appWorksOverview.polesAdded);
-            caseRecord.Comments_to_Support_Application__c = Utilities.isNullOrBlank(appWorksOverview.poleComments) ? null : String.valueOf(appWorksOverview.poleComments);
+            caseRecord.Comments_to_Support_Application__c = String.isBlank(appWorksOverview.poleComments) ? null : String.valueOf(appWorksOverview.poleComments);
             caseRecord.Materials_For_New_Poles_Pylons__c = Utilities.isNullOrBlank(appWorksOverview.poleMaterial) ? null : String.valueOf(appWorksOverview.poleMaterial);
             caseRecord.Number_Of_Poles_Being_Replaced__c = Utilities.isNullOrBlank(appWorksOverview.polesReplaced) ? null : Integer.valueOf(appWorksOverview.polesReplaced);
             caseRecord.General_Comments__c = Utilities.isNullOrBlank(appWorksOverview.generalComments) ? null : String.valueOf(appWorksOverview.generalComments);
@@ -196,8 +202,8 @@ public with sharing class GW_CustomCase {
                 if (Utilities.isNullOrBlank(appProjectDetails.overview.application_project_overview.earliest_work_start_date_year) == false &&
                     Utilities.isNullOrBlank(appProjectDetails.overview.application_project_overview.earliest_work_start_date_month) == false) {
                     caseRecord.Earliest_Expected_Start_Date__c = Date.newInstance(
-                        appProjectDetails.overview.application_project_overview.earliest_work_start_date_year,
-                        appProjectDetails.overview.application_project_overview.earliest_work_start_date_month,
+                        Integer.valueOf(appProjectDetails.overview.application_project_overview.earliest_work_start_date_year),
+                        Integer.valueOf(appProjectDetails.overview.application_project_overview.earliest_work_start_date_month),
                         1
                     );
                 }
@@ -209,8 +215,8 @@ public with sharing class GW_CustomCase {
                 if (Utilities.isNullOrBlank(appProjectDetails.overview.application_project_overview.latest_work_start_date_year) == false &&
                     Utilities.isNullOrBlank(appProjectDetails.overview.application_project_overview.latest_work_start_date_month) == false) {
                     caseRecord.Latest_Expected_Start_Date__c = Date.newInstance(
-                        appProjectDetails.overview.application_project_overview.latest_work_start_date_year,
-                        appProjectDetails.overview.application_project_overview.latest_work_start_date_month,
+                        Integer.valueOf(appProjectDetails.overview.application_project_overview.latest_work_start_date_year),
+                        Integer.valueOf(appProjectDetails.overview.application_project_overview.latest_work_start_date_month),
                         1
                     );
                 }
