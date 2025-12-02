@@ -50,13 +50,13 @@ public class S37ApplicationDTO {
         public String applicationId;
         public Integer polesAdded;
         public Integer polesReplaced;
-        public Integer poleMaterial;
+        public String poleMaterial;
         public String poleComments;
         public String vehiclesRequired;
-        public Integer estimatedDuration;
+        public String estimatedDuration;
         public Boolean excavationRequired;
         public String excavationDetails;
-        public Integer chemicalTreatments;
+        public String chemicalTreatments;
         public String removalDescription;
         public String accessRoutesDetails;
         public Boolean roadClosuresRequired;
@@ -112,10 +112,10 @@ public class S37ApplicationDTO {
     public class ApplicationProjectOverview {
         public String plan_reference;
         public Double max_structure_height_m;
-        public Integer earliest_work_start_date_year;
-        public Integer earliest_work_start_date_month;
-        public Integer latest_work_start_date_year;
-        public Integer latest_work_start_date_month;
+        public String earliest_work_start_date_year;
+        public String earliest_work_start_date_month;
+        public String latest_work_start_date_year;
+        public String latest_work_start_date_month;
     }
 
     public class PlanDocument {
