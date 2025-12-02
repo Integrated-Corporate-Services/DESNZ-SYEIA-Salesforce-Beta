@@ -231,7 +231,6 @@ public with sharing class InboundRequestTriggerHelper {
             System.debug('No Sensitive Area Check to Insert Map found.');
         }
 
-
         Utilities.logMethodExit('commitRecord');
         System.debug('Sensitive Area Check Records committed successfully.');
     }
