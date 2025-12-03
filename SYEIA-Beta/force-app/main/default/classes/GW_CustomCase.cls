@@ -196,11 +196,7 @@ public with sharing class GW_CustomCase {
                         1
                     );
                 }
-                // caseRecord.Earliest_Expected_Start_Date__c = Date.newInstance(
-                //     appProjectDetails.overview.application_project_overview.earliest_work_start_date_year,
-                //     appProjectDetails.overview.application_project_overview.earliest_work_start_date_month,
-                //     1
-                // );
+                
                 if (Utilities.isNullOrBlank(appProjectDetails.overview.application_project_overview.latest_work_start_date_year) == false &&
                     Utilities.isNullOrBlank(appProjectDetails.overview.application_project_overview.latest_work_start_date_month) == false) {
                     caseRecord.Latest_Expected_Start_Date__c = Date.newInstance(
@@ -291,6 +287,7 @@ public with sharing class GW_CustomCase {
         try {
             List<Party__c> partyRecords = new List<Party__c>();
             List<Case_Party__c> casePartyRecords = new List<Case_Party__c>();
+            List<Address__c> addressRecords = new List<Address__c>();
 
             Map<String, List<SObject>> casePartyMap = new Map<String, List<SObject>>();
             // Populate fields based on appParty
@@ -304,8 +301,9 @@ public with sharing class GW_CustomCase {
                 partyRecord.Name = Utilities.isNullOrBlank(record.organisation_name) ? (Utilities.isNullOrBlank(record.person_name) ? null : record.person_name) : record.organisation_name;
                 partyRecord.Email__c = Utilities.isNullOrBlank(record.email) ? null : record.email;
                 partyRecord.Phone__c = Utilities.isNullOrBlank(record.phone) ? null : record.phone;
-                partyRecord.Is_Primary__c = Utilities.isNullOrBlank(record.is_primary) ? null : record.is_primary;
+                partyRecord.Is_Primary__c = Utilities.isNullOrBlank(record.is_primary) ? false : record.is_primary;
                 partyRecord.Application_Party_Id__c = Utilities.isNullOrBlank(record.application_party_id) ? null : record.application_party_id;
+                partyRecord.Person_Identification__c = Utilities.isNullOrBlank(record.person_id) ? null : record.person_id;
 
                 Address__c addressRecord = new Address__c();
                 addressRecord.Address_Line1__c = Utilities.isNullOrBlank(record.line1) ? null : record.line1;
@@ -313,6 +311,7 @@ public with sharing class GW_CustomCase {
                 addressRecord.Town_City__c = Utilities.isNullOrBlank(record.town_city) ? null : record.town_city;
                 addressRecord.Postcode__c = Utilities.isNullOrBlank(record.postcode) ? null : record.postcode;
                 addressRecord.Country__c = Utilities.isNullOrBlank(record.country) ? null : record.country;
+                addressRecord.Application_Party_Identification__c = Utilities.isNullOrBlank(record.application_party_id) ? null : record.application_party_id;
                 if (record.is_primary) {
                     caseRecord.DNO__c = partyRecord.Id;
                 }
@@ -325,20 +324,23 @@ public with sharing class GW_CustomCase {
                 caseParty.Name = '' + caseRecord.Name + ' - ' + partyRecord.Name;
 
                 //Representative Details
-                // Party__c representativeParty = new Party__c();
-                // representativeParty.Name = record.person_name;
-                // representativeParty.Email__c = record.email;
-                // representativeParty.Phone__c = record.phone;
-                // representativeParty.Party_Type__c = representativeParty.Id;
-                // representativeParty.RecordTypeId = Schema.SObjectType.Party__c.getRecordTypeInfosByDeveloperName().get('Representative').getRecordTypeId();
+                Party__c representativeParty = new Party__c();
+                representativeParty.Name = Utilities.isNullOrBlank(record.person_name) ? null : record.person_name;
+                representativeParty.Email__c = Utilities.isNullOrBlank(record.email) ? null : record.email;
+                representativeParty.Phone__c = Utilities.isNullOrBlank(record.phone) ? null : record.phone;
+                representativeParty.Party_Type__c = 'Individual';
+                representativeParty.RecordTypeId = Schema.SObjectType.Party__c.getRecordTypeInfosByDeveloperName().get('Individual').getRecordTypeId();
+                representativeParty.Person_Identification__c = Utilities.isNullOrBlank(record.person_id) ? null : record.person_id;
 
                 
                 casePartyRecords.add(caseParty);
                 partyRecords.add(partyRecord);
-                // partyRecords.add(representativeParty);
+                addressRecords.add(addressRecord);
+                partyRecords.add(representativeParty);
             }
             casePartyMap.put('Party__c', partyRecords);
             casePartyMap.put('Case_Party__c', casePartyRecords);
+            casePartyMap.put('Address__c', addressRecords);
 
             Utilities.logMethodExit('s37_PopulateCaseFieldsFromParty');
             return casePartyMap;

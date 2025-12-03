@@ -79,6 +79,7 @@ public with sharing class InboundRequestTriggerHelper {
         Map<Id, List<Route_Point__c>> routePointsToInsertMap = new Map<Id, List<Route_Point__c>>();
         Map<Id, List<Party__c>> partyToInsertMap = new Map<Id, List<Party__c>>();
         Map<Id, List<Case_Party__c>> casePartyToInsertMap = new Map<Id, List<Case_Party__c>>();
+        Map<Id, List<Address__c>> addressToInsertMap = new Map<Id, List<Address__c>>();
         Map<Id, List<Sensitive_Area_Check__c>> sensitiveAreaCheckToInsertMap = new Map<Id, List<Sensitive_Area_Check__c>>();
         Map<Id, List<Asset_Information__c>> assetInformationToInsertMap = new Map<Id, List<Asset_Information__c>>();
 
@@ -92,6 +93,7 @@ public with sharing class InboundRequestTriggerHelper {
             routesToInsertMap.put(inboundReqId, (List<Route__c>) objectRecordMaps.get(inboundReqId).get('Route__c'));
             routePointsToInsertMap.put(inboundReqId, (List<Route_Point__c>) objectRecordMaps.get(inboundReqId).get('Route_Point__c'));
             partyToInsertMap.put(inboundReqId, (List<Party__c>) objectRecordMaps.get(inboundReqId).get('Party__c'));
+            addressToInsertMap.put(inboundReqId, (List<Address__c>) objectRecordMaps.get(inboundReqId).get('Address__c'));
             casePartyToInsertMap.put(inboundReqId, (List<Case_Party__c>) objectRecordMaps.get(inboundReqId).get('Case_Party__c'));
             sensitiveAreaCheckToInsertMap.put(inboundReqId, (List<Sensitive_Area_Check__c>) objectRecordMaps.get(inboundReqId).get('Sensitive_Area_Check__c'));
             assetInformationToInsertMap.put(inboundReqId, (List<Asset_Information__c>) objectRecordMaps.get(inboundReqId).get('Asset_Information__c'));
@@ -111,6 +113,7 @@ public with sharing class InboundRequestTriggerHelper {
 
         // assign parent case to Route and insert 
         List<Route__c> routeListToInsert = new List<Route__c>();
+        Map<Id, Case__c> caseMap = new Map<Id, Case__c>([SELECT Id, Inbound_Request__c FROM Case__c WHERE Inbound_Request__c IN :objectRecordMaps.keySet()]);
         List<Case__c> caseRecList = [SELECT Id, Inbound_Request__c FROM Case__c WHERE Inbound_Request__c IN :objectRecordMaps.keySet()];
 
         if (routesToInsertMap != null) {
@@ -168,51 +171,95 @@ public with sharing class InboundRequestTriggerHelper {
                 if (partyToInsertMap.get(caseRec.Inbound_Request__c) == null || partyToInsertMap.get(caseRec.Inbound_Request__c).isEmpty()) {
                     continue;
                 }
-                partyRecordsToInsert.addAll(partyToInsertMap.get(caseRec.Inbound_Request__c));
+                for (Party__c partyRec : partyToInsertMap.get(caseRec.Inbound_Request__c)) {
+                    partyRec.Case__c = caseRec.Id;
+                    partyRecordsToInsert.add(partyRec);
+                }
             }
             commitRecord(errorMessagesMap,partyRecordsToInsert);
             System.debug('Party Records committed successfully.');
 
             // insert Case Party records
+            // partyRecordsToInsert.clear();
+            // partyRecordsToInsert = [SELECT Id, Application_Party_Id__c, Is_Primary__c FROM Party__c WHERE Application_Party_Id__c IN :partyRecordsToInsert];
             List<Case_Party__c> casePartyRecordsToInsert = new List<Case_Party__c>();
-            for(Case__c caseRec : caseRecList) {
-                System.debug('Processing Case Record for Case Party: ' + caseRec);
-                if(casePartyToInsertMap.get(caseRec.Inbound_Request__c) == null) {
+            List<Address__c> addressRecordsToInsert = new List<Address__c>();
+            List<Party__c> updatePartyRecords = new List<Party__c>();
+            Map<String, Id> partyRepresentativesMap = new Map<String, Id>();
+            Map<Id, String> partyOrganisationMap = new Map<Id, String>();
+            for(Party__c partyRec : [
+                    SELECT Id, Application_Party_Id__c, Is_Primary__c, Case__r.Id, Case__r.Inbound_Request__c, Person_Identification__c, RecordTypeId
+                    FROM Party__c 
+                    WHERE Case__r.Inbound_Request__c IN :partyToInsertMap.keySet()
+                ]
+            ) {
+                if(Utilities.isNullOrBlank(partyRec.Person_Identification__c) == false) {
+                    if (partyRec.RecordTypeId == Schema.SObjectType.Party__c.getRecordTypeInfosByDeveloperName().get('Individual').getRecordTypeId()) {
+                        partyRepresentativesMap.put(partyRec.Person_Identification__c, partyRec.Id);
+                    }
+                    if (partyRec.RecordTypeId == Schema.SObjectType.Party__c.getRecordTypeInfosByDeveloperName().get('Organisation').getRecordTypeId()) {
+                        partyOrganisationMap.put(partyRec.Id, partyRec.Person_Identification__c);
+                    }
+                }
+                System.debug('Processing Case Record for Case Party: ' + partyRec);
+                if(casePartyToInsertMap.get(partyRec.Case__r.Inbound_Request__c) == null) {
                     continue;
                 }
-                for (Case_Party__c casePartyRec : casePartyToInsertMap.get(caseRec.Inbound_Request__c)) {
-                    casePartyRec.Case__c = caseRec.Id;
-                    if (partyToInsertMap.get(caseRec.Inbound_Request__c) == null) {
-                        continue;
+                for (Case_Party__c casePartyRec : casePartyToInsertMap.get(partyRec.Case__r.Inbound_Request__c)) {
+                    if (partyRec.RecordTypeId == Schema.SObjectType.Party__c.getRecordTypeInfosByDeveloperName().get('Organisation').getRecordTypeId()){
+                        casePartyRec.Case__c = partyRec.Case__r.Id;
+                        casePartyRec.Party__c = partyRec.Id;
+                        casePartyRecordsToInsert.add(casePartyRec);
                     }
-                    for (Party__c partyRecord: partyToInsertMap.get(caseRec.Inbound_Request__c)) {
-                        System.debug('Matching Party Record for Case Party: ' + partyToInsertMap.get(caseRec.Inbound_Request__c));
-                        if (partyRecord.Application_Party_Id__c == casePartyRec.Application_Party_Id__c) {
-                            System.debug('Party Ids match: ' + partyRecord.Application_Party_Id__c + ' == ' + casePartyRec.Application_Party_Id__c);
-                            casePartyRec.Party__c = partyRecord.Id;
-                        }
+                }
+
+                // address records can be inserted here similarly
+                for (Address__c addressRec : addressToInsertMap.get(partyRec.Case__r.Inbound_Request__c)) {
+                    if(addressRec.Party__c == null 
+                        && addressRec.Application_Party_Identification__c != null && partyRec.Application_Party_Id__c != null 
+                        && addressRec.Application_Party_Identification__c == partyRec.Application_Party_Id__c
+                        && partyRec.RecordTypeId == Schema.SObjectType.Party__c.getRecordTypeInfosByDeveloperName().get('Organisation').getRecordTypeId()) {
+                        addressRec.Party__c = partyRec.Id;
+                        addressRecordsToInsert.add(addressRec);
                     }
-                    casePartyRecordsToInsert.add(casePartyRec);
                 }
             }
+            System.debug('Case Party Records to Insert: ' + casePartyRecordsToInsert);
+            System.debug('Address Records to Insert: ' + addressRecordsToInsert);
             
             commitRecord(errorMessagesMap,casePartyRecordsToInsert);
             System.debug('Case Party Records committed successfully.');
+            commitRecord(errorMessagesMap,addressRecordsToInsert);
+            System.debug('Address Records committed successfully.');
 
             // update case record with DNO lookup
-            for (Case__c caseRec : caseRecList) {
-                if (partyToInsertMap.get(caseRec.Inbound_Request__c) == null) {
-                    continue;
+            for (Party__c partyRecord : [
+                    SELECT Id, Is_Primary__c, Case__r.Id, Case__r.Inbound_Request__c, Representative__c, Person_Identification__c 
+                    FROM Party__c 
+                    WHERE Case__r.Inbound_Request__c IN :partyToInsertMap.keySet()
+                ]
+            ) {
+                System.debug('Processing Case Record for Case Party: ' + partyRecord);
+                if (partyRecord.Is_Primary__c == true) {
+                    Case__c caseRec = new Case__c(Id = partyRecord.Case__r.Id);
+                    caseRec.DNO__c = partyRecord.Id;
+                    caseToUpdateList.add(caseRec);
                 }
-                for (Party__c partyRec : partyToInsertMap.get(caseRec.Inbound_Request__c)) {
-                    if (partyRec.Is_Primary__c) {
-                        caseRec.DNO__c = partyRec.Id;
-                        caseToUpdateList.add(caseRec);
-                    }
+
+                if(partyOrganisationMap.containsKey(partyRecord.Id)) {
+                    Party__c partyRep = new Party__c(Id = partyRecord.Id);
+                    partyRecord.Representative__c = partyRepresentativesMap.get(partyOrganisationMap.get(partyRecord.Id));
+                    updatePartyRecords.add(partyRecord);
                 }
             }
-            update caseToUpdateList;
-            System.debug('Case Records updated successfully with DNO lookup.');
+            if (!updatePartyRecords.isEmpty()) {
+                update updatePartyRecords;
+                System.debug('Party Records updated successfully with Representative lookup. ' + updatePartyRecords);
+            }
+            if (!caseToUpdateList.isEmpty()) {
+                update caseToUpdateList;
+                System.debug('Case Records updated successfully with DNO lookup. ' + caseToUpdateList);
+            }
         } else {
             System.debug('No Party to Insert Map found.');
         }
@@ -304,6 +351,12 @@ public with sharing class InboundRequestTriggerHelper {
 
     private static void getErrorMessageOnInboundRequest(Map<Id, List<String>> errorMessagesMap, Id inboundReqId, List<Database.Error> errorObject) {
         Utilities.logMethodEntry('getErrorMessageOnInboundRequest');
+
+        if(inboundReqId == null) {
+            Utilities.log('Inbound Request Id is null in getErrorMessageOnInboundRequest');
+            Utilities.logMethodExit('getErrorMessageOnInboundRequest');
+            return;
+        }
         List<String> errorMessageList = errorMessagesMap.containsKey(inboundReqId) ? errorMessagesMap.get(inboundReqId) : new List<String>();
         for (Database.Error err : errorObject) {
             String errorMessage = 'Error Code: ' + err.getStatusCode() + ' - Message: ' + err.getMessage();
