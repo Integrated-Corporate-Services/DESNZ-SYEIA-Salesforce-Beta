@@ -18,11 +18,12 @@ public with sharing class GW_CustomCase {
             if (routes != null) {
                 caseRecordAndRelatedRecords.putAll(routes);
             }
-            
+            // application parties
             caseRecordAndRelatedRecords.putAll(s37_PopulateCaseFieldsFromParty(newCase, s37AppDTO.sections.application_party));
-
-            Sensitive_Area_Check__c sensitiveAreaReviewRecord = S37_PopulateSensitiveAreaCheckDetails(newCase, s37AppDTO.sections.sensitiveAreaReview);
-            caseRecordAndRelatedRecords.put('Sensitive_Area_Check__c', new List<SObject>{sensitiveAreaReviewRecord});
+            // sensitive area checks
+            caseRecordAndRelatedRecords.put('Sensitive_Area_Check__c', S37_PopulateSensitiveAreaCheckDetails(newCase, s37AppDTO.sections.sensitiveAreaChecks));
+            // asset information
+            caseRecordAndRelatedRecords.put('Asset_Information__c', s37_populateAssetInformation(newCase, s37AppDTO.sections.assetInformation));
             
             Utilities.logMethodExit('createS37CaseFromAWS');
             return caseRecordAndRelatedRecords;
@@ -36,25 +37,6 @@ public with sharing class GW_CustomCase {
         Utilities.logMethodExit('createS37CaseFromAWS');
         return null;
     }
-
-	@future
-	public static void updateInboundRequestStatus(Id inboundReqId, String errorMessages) {
-        Utilities.logMethodEntry('updateInboundRequestStatus');
-        try{
-            Inbound_Request__c inboundReq = [SELECT Id, Status__c FROM Inbound_Request__c WHERE Id = :inboundReqId];
-            if (errorMessages != '') {
-                inboundReq.Status__c = 'Failed';
-                inboundReq.Error_Log_Text__c = errorMessages;
-            } else {
-                inboundReq.Status__c = 'Processed';
-            }
-            update inboundReq;
-        } catch(Exception e){
-            Utilities.log(Utilities.formatException(e));
-        }
-        Utilities.logMethodExit('updateInboundRequestStatus');
-	}
-
 
     // helper methods
     private static Case__c s37_PopulateCaseFields(Case__c caseRecord, S37ApplicationDTO s37AppDTO) {
@@ -83,6 +65,9 @@ public with sharing class GW_CustomCase {
         // eia details
         s37_populateEiaDetails(caseRecord, s37AppDTO.sections.eiaFees);
 
+        // supporting information
+        s37_populateSupportingInformation(caseRecord, s37AppDTO.sections.supportingInformation);
+
         Utilities.logMethodExit('s37_PopulateCaseFields');
         return caseRecord;
     }
@@ -97,8 +82,6 @@ public with sharing class GW_CustomCase {
         }
 
         try {
-            System.debug('Populating Works Overview fields from Application DTO: ' + String.isBlank(appWorksOverview.poleComments));
-            System.debug('Populating Works Overview fields from Application DTO: ' + Utilities.isNullOrBlank(appWorksOverview.poleComments));
 
             caseRecord.Number_Of_Poles_Being_Added__c = Utilities.isNullOrBlank(appWorksOverview.polesAdded) ? null : Integer.valueOf(appWorksOverview.polesAdded);
             caseRecord.Comments_to_Support_Application__c = String.isBlank(appWorksOverview.poleComments) ? null : String.valueOf(appWorksOverview.poleComments);
@@ -139,13 +122,19 @@ public with sharing class GW_CustomCase {
                 
             // Populate fields based on appEiaDetails
             if (appEiaDetails != null) {
-                if (appEiaDetails.requires_full_eia != null && Utilities.isNullOrBlank(appEiaDetails.requires_full_eia) == false && appEiaDetails.requires_full_eia == true) {
+                if (Utilities.isNullOrBlank(appEiaDetails.requires_full_eia) == false 
+                    && appEiaDetails.requires_full_eia == true
+                ) {
                     caseRecord.Full_EIA_Process_or_Screening_Opinion__c = 'Full EIA Process';
-                } else if (appEiaDetails.screening_only != null && Utilities.isNullOrBlank(appEiaDetails.screening_only) == false && appEiaDetails.screening_only == true) {
+                } else if (Utilities.isNullOrBlank(appEiaDetails.screening_only) == false 
+                && appEiaDetails.screening_only == true) {
                     caseRecord.Full_EIA_Process_or_Screening_Opinion__c = 'Screening Opinion';
                 } else {
                     caseRecord.Full_EIA_Process_or_Screening_Opinion__c = null;
                 }
+
+                // subject to EIA
+                caseRecord.Subject_To_An_EIA__c = Utilities.isNullOrBlank(appEiaDetails.is_eia_development) ? null : (appEiaDetails.is_eia_development == true ? 'Yes' : 'No');
                 
                 // caseRecord.EIA_Screening_Opinion_Date__c = appEiaDetails.eia_screening_opinion_date != null ? Date.valueOf(appEiaDetails.eia_screening_opinion_date.substring(0,10)) : null;
             }
@@ -360,26 +349,92 @@ public with sharing class GW_CustomCase {
         return null;
     }
 
-    public static Sensitive_Area_Check__c S37_PopulateSensitiveAreaCheckDetails(Case__c caseRecord, S37ApplicationDTO.SensitiveAreaReview sensitiveAreaReview) {
+    public static List<Sensitive_Area_Check__c> S37_PopulateSensitiveAreaCheckDetails(Case__c caseRecord, S37ApplicationDTO.SensitiveAreaChecks sensitiveAreaChecks) {
         Utilities.logMethodEntry('S37_PopulateSensitiveAreaCheckDetails');
-        if (sensitiveAreaReview == null || Utilities.isNullOrBlank(sensitiveAreaReview)) {
-            Utilities.log('sensitiveAreaReview is empty');
+        if (sensitiveAreaChecks == null 
+            || Utilities.isNullOrBlank(sensitiveAreaChecks) 
+            || sensitiveAreaChecks.layers == null 
+            || sensitiveAreaChecks.layers.isEmpty()
+        ) {
+            Utilities.log('sensitiveAreaChecks is empty');
             Utilities.logMethodExit('S37_PopulateSensitiveAreaCheckDetails');
             return null;
         }
         
+        List<Sensitive_Area_Check__c> sensitiveAreaCheckRecordList = new List<Sensitive_Area_Check__c>();
         try {
-            // Populate fields based on sensitiveAreaCheck
-            Sensitive_Area_Check__c sensitiveAreaCheckRecord = new Sensitive_Area_Check__c();
-            sensitiveAreaCheckRecord.Case__c = caseRecord.Id;
+            for (String layer : sensitiveAreaChecks.layers) {
+                System.debug('Sensitive Area Layer: ' + layer);
+                // Populate fields based on sensitiveAreaCheck
+                Sensitive_Area_Check__c sensitiveAreaCheckRecord = new Sensitive_Area_Check__c();
+                sensitiveAreaCheckRecord.Case__c = caseRecord.Id;
+                sensitiveAreaCheckRecord.Name = layer;
 
+                sensitiveAreaCheckRecordList.add(sensitiveAreaCheckRecord);
+            }
             Utilities.logMethodExit('S37_PopulateSensitiveAreaCheckDetails');
-            return sensitiveAreaCheckRecord;
+            return sensitiveAreaCheckRecordList;
             
         } catch (Exception ex) {
             Utilities.log(Utilities.formatException(ex));
         }
         Utilities.logMethodExit('S37_PopulateSensitiveAreaCheckDetails');
+        return null;
+    }
+
+    public static void s37_populateSupportingInformation(Case__c caseRecord, S37ApplicationDTO.SupportingInformation appSupportingInfo) {
+        Utilities.logMethodEntry('s37_populateSupportingInformation');
+        if (appSupportingInfo == null || Utilities.isNullOrBlank(appSupportingInfo)) {
+            Utilities.log('appSupportingInfo is empty');
+            Utilities.logMethodExit('s37_populateSupportingInformation');
+            return;
+        }
+
+        try {
+            // Populate fields based on appSupportingInfo
+            if (appSupportingInfo != null) {
+                caseRecord.Have_All_Wayleaves_Been_Obtained__c = Utilities.isNullOrBlank(appSupportingInfo.supportingQuestions.wayleaves_obtained) ? null : ( appSupportingInfo.supportingQuestions.wayleaves_obtained == true ? 'Yes' : 'No' );
+                caseRecord.Comments_to_Support_Application__c = Utilities.isNullOrBlank(appSupportingInfo.supportingQuestions.applicant_supporting_comments) ? null : appSupportingInfo.supportingQuestions.applicant_supporting_comments;
+                caseRecord.Why_Have_All_Wayleaves_Not_Been_Obtained__c = Utilities.isNullOrBlank(appSupportingInfo.supportingQuestions.wayleaves_not_obtained_reason) ? null : appSupportingInfo.supportingQuestions.wayleaves_not_obtained_reason;
+                caseRecord.Works_Comply_With_ESQCR__c = Utilities.isNullOrBlank(appSupportingInfo.supportingQuestions.esqcr_2002_compliance_confirmed) ? null : (appSupportingInfo.supportingQuestions.esqcr_2002_compliance_confirmed == true ? 'Yes' : 'No');
+            }
+        } catch (Exception ex) {
+            Utilities.log(Utilities.formatException(ex));
+        }
+        Utilities.logMethodExit('s37_populateSupportingInformation');
+    }
+
+    public static List<Asset_Information__c> s37_populateAssetInformation(Case__c caseRecord, List<S37ApplicationDTO.AssetInformation> appAssetInfoList) {
+        Utilities.logMethodEntry('s37_populateAssetInformation');
+        if (appAssetInfoList == null || Utilities.isNullOrBlank(appAssetInfoList)) {
+            Utilities.log('appAssetInfoList is empty');
+            Utilities.logMethodExit('s37_populateAssetInformation');
+            return null;
+        }
+
+        try {
+            List<Asset_Information__c> assetInfoRecords = new List<Asset_Information__c>();
+
+            for( S37ApplicationDTO.AssetInformation asset : appAssetInfoList ) {
+                System.debug('Existing Asset Details: ' + asset);
+                // Populate fields based on asset
+
+                Asset_Information__c assetInfoRecord = new Asset_Information__c();
+                assetInfoRecord.Case__c = caseRecord.Id;
+                assetInfoRecord.TORI_NOI_Code__c = Utilities.isNullOrBlank(asset.tori_noi) ? null : asset.tori_noi;
+                assetInfoRecord.Line_Type__c = Utilities.isNullOrBlank(asset.asset_type) ? null : asset.asset_type;
+                assetInfoRecord.Description__c = Utilities.isNullOrBlank(asset.description) ? null : asset.description;
+                assetInfoRecord.Standard_Specification_Reference_Number__c = Utilities.isNullOrBlank(asset.asset_reference) ? null : asset.asset_reference;
+                assetInfoRecords.add( assetInfoRecord );
+            }
+
+            Utilities.logMethodExit('s37_populateAssetInformation');
+            return assetInfoRecords;
+
+        } catch (Exception ex) {
+            Utilities.log(Utilities.formatException(ex));
+        }
+        Utilities.logMethodExit('s37_populateAssetInformation');
         return null;
     }
 

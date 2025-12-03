@@ -80,6 +80,7 @@ public with sharing class InboundRequestTriggerHelper {
         Map<Id, List<Party__c>> partyToInsertMap = new Map<Id, List<Party__c>>();
         Map<Id, List<Case_Party__c>> casePartyToInsertMap = new Map<Id, List<Case_Party__c>>();
         Map<Id, List<Sensitive_Area_Check__c>> sensitiveAreaCheckToInsertMap = new Map<Id, List<Sensitive_Area_Check__c>>();
+        Map<Id, List<Asset_Information__c>> assetInformationToInsertMap = new Map<Id, List<Asset_Information__c>>();
 
         // Error messages on Inbound request level
         Map<Id, List<String>> errorMessagesMap = new Map<Id, List<String>>();
@@ -93,6 +94,7 @@ public with sharing class InboundRequestTriggerHelper {
             partyToInsertMap.put(inboundReqId, (List<Party__c>) objectRecordMaps.get(inboundReqId).get('Party__c'));
             casePartyToInsertMap.put(inboundReqId, (List<Case_Party__c>) objectRecordMaps.get(inboundReqId).get('Case_Party__c'));
             sensitiveAreaCheckToInsertMap.put(inboundReqId, (List<Sensitive_Area_Check__c>) objectRecordMaps.get(inboundReqId).get('Sensitive_Area_Check__c'));
+            assetInformationToInsertMap.put(inboundReqId, (List<Asset_Information__c>) objectRecordMaps.get(inboundReqId).get('Asset_Information__c'));
 
             // error catcher 
             if (casesToInsert.isEmpty()) {
@@ -115,7 +117,10 @@ public with sharing class InboundRequestTriggerHelper {
             System.debug('Routes to Insert Map: ' + routesToInsertMap);
             
             for (Case__c caseRec : caseRecList) {
-                if (caseRec.Inbound_Request__c == null || !routesToInsertMap.containsKey(caseRec.Inbound_Request__c) || routesToInsertMap.get(caseRec.Inbound_Request__c) == null || routesToInsertMap.get(caseRec.Inbound_Request__c).isEmpty() ) {
+                if (caseRec.Inbound_Request__c == null 
+                    || !routesToInsertMap.containsKey(caseRec.Inbound_Request__c) 
+                    || routesToInsertMap.get(caseRec.Inbound_Request__c) == null 
+                    || routesToInsertMap.get(caseRec.Inbound_Request__c).isEmpty() ) {
                     continue;
                 }
                 for (Route__c routeRec : routesToInsertMap.get(caseRec.Inbound_Request__c)) {
@@ -218,17 +223,46 @@ public with sharing class InboundRequestTriggerHelper {
             
             List<Sensitive_Area_Check__c> sensitiveAreaCheckRecordsToInsert = new List<Sensitive_Area_Check__c>();
             for (Case__c caseRec : caseRecList) {
-                if(sensitiveAreaCheckToInsertMap.get(caseRec.Inbound_Request__c) == null) {
+                if(sensitiveAreaCheckToInsertMap.get(caseRec.Inbound_Request__c) == null
+                    || !sensitiveAreaCheckToInsertMap.containsKey(caseRec.Inbound_Request__c) 
+                    || sensitiveAreaCheckToInsertMap.get(caseRec.Inbound_Request__c).isEmpty() ) {
                     continue;
                 }
                 for(Sensitive_Area_Check__c sensitiveAreaCheckRec : sensitiveAreaCheckToInsertMap.get(caseRec.Inbound_Request__c)) {
-                    sensitiveAreaCheckRec.Case__c = caseRec.Id;
+                    sensitiveAreaCheckRec.Case__c = sensitiveAreaCheckRec.Case__c ?? caseRec.Id;
                     sensitiveAreaCheckRecordsToInsert.add(sensitiveAreaCheckRec);
                 }
             }
-            commitRecord(errorMessagesMap, sensitiveAreaCheckRecordsToInsert);
+            if (!sensitiveAreaCheckRecordsToInsert.isEmpty()) {
+                System.debug('Sensitive Area Check Records to Insert: ' + sensitiveAreaCheckRecordsToInsert);
+                commitRecord(errorMessagesMap, sensitiveAreaCheckRecordsToInsert);
+            }
         } else {
             System.debug('No Sensitive Area Check to Insert Map found.');
+        }
+
+        // asset information records can be committed here similarly
+        if (assetInformationToInsertMap != null) {
+            System.debug('Asset Information to Insert Map: ' + assetInformationToInsertMap);
+            
+            List<Asset_Information__c> assetInformationRecordsToInsert = new List<Asset_Information__c>();
+            for (Case__c caseRec : caseRecList) {
+                if(assetInformationToInsertMap.get(caseRec.Inbound_Request__c) == null
+                    || !assetInformationToInsertMap.containsKey(caseRec.Inbound_Request__c) 
+                    || assetInformationToInsertMap.get(caseRec.Inbound_Request__c).isEmpty() ) {
+                    continue;
+                }
+                for(Asset_Information__c assetInformationRec : assetInformationToInsertMap.get(caseRec.Inbound_Request__c)) {
+                    assetInformationRec.Case__c = assetInformationRec.Case__c ?? caseRec.Id;
+                    assetInformationRecordsToInsert.add(assetInformationRec);
+                }
+            }
+            if (!assetInformationRecordsToInsert.isEmpty()) {
+                System.debug('Asset Information Records to Insert: ' + assetInformationRecordsToInsert);
+                commitRecord(errorMessagesMap, assetInformationRecordsToInsert);
+            }
+        } else {
+            System.debug('No Asset Information to Insert Map found.');
         }
 
         Utilities.logMethodExit('commitRecord');
@@ -251,7 +285,7 @@ public with sharing class InboundRequestTriggerHelper {
                 List<Id> errorIdList = new List<Id>();
                 errorIdList.addAll(errorMap.keySet());
 
-                getErrorMessageOnInboundRequest(errorMap, errorIdList[0], result.getErrors());
+                getErrorMessageOnInboundRequest(errorMap, errorIdList.isEmpty() ? null : errorIdList[0], result.getErrors());
                 Database.rollback(sp);
                 System.debug('Rolling back transaction due to errors.');
             }
