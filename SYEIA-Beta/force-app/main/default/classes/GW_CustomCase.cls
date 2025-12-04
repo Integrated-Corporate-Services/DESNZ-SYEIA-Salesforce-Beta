@@ -135,8 +135,6 @@ public with sharing class GW_CustomCase {
 
                 // subject to EIA
                 caseRecord.Subject_To_An_EIA__c = Utilities.isNullOrBlank(appEiaDetails.is_eia_development) ? null : (appEiaDetails.is_eia_development == true ? 'Yes' : 'No');
-                
-                // caseRecord.EIA_Screening_Opinion_Date__c = appEiaDetails.eia_screening_opinion_date != null ? Date.valueOf(appEiaDetails.eia_screening_opinion_date.substring(0,10)) : null;
             }
         } catch (Exception ex) {
             Utilities.log(Utilities.formatException(ex));
