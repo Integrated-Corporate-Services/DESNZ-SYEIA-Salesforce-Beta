@@ -141,18 +141,6 @@ public class S37ApplicationDTO {
 
     // --- Asset Information ---
     public class AssetInformation {
-        // public String asset_id;
-        // public String asset_type;
-        // public String tori_noi;
-        // public String asset_reference;
-        // public String description;
-        // public Boolean is_existing;
-        // public String created_at;
-        // public String created_by;
-        // public String last_updated_at;
-        // public String last_updated_by;
-
-
         public String asset_id;
         public String line_type;
         public String created_at;
