@@ -421,10 +421,12 @@ public with sharing class GW_CustomCase {
 
                 Asset_Information__c assetInfoRecord = new Asset_Information__c();
                 assetInfoRecord.Case__c = caseRecord.Id;
-                assetInfoRecord.TORI_NOI_Code__c = Utilities.isNullOrBlank(asset.tori_noi) ? null : asset.tori_noi;
-                assetInfoRecord.Line_Type__c = Utilities.isNullOrBlank(asset.asset_type) ? null : asset.asset_type;
+                assetInfoRecord.TORI_NOI_Code__c = Utilities.isNullOrBlank(asset.tori_noi_code) ? null : asset.tori_noi_code;
+                assetInfoRecord.Line_Type__c = Utilities.isNullOrBlank(asset.type_of_line) ? null : asset.type_of_line;
                 assetInfoRecord.Description__c = Utilities.isNullOrBlank(asset.description) ? null : asset.description;
-                assetInfoRecord.Standard_Specification_Reference_Number__c = Utilities.isNullOrBlank(asset.asset_reference) ? null : asset.asset_reference;
+                assetInfoRecord.Standard_Specification_Reference_Number__c = Utilities.isNullOrBlank(asset.standard_specification_reference_number) ? null : asset.standard_specification_reference_number;
+                assetInfoRecord.Line_Length__c = Utilities.isNullOrBlank(asset.line_length) ? null : Integer.valueOf(asset.line_length);
+                assetInfoRecord.Line_Voltage__c = Utilities.isNullOrBlank(asset.line_voltage) ? null : asset.line_voltage;
                 assetInfoRecords.add( assetInfoRecord );
             }
 
