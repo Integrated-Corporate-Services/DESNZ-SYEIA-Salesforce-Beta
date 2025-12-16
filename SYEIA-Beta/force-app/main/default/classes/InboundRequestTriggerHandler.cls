@@ -1,40 +1,46 @@
+/**
+ * @description Trigger handler for Inbound_Request__c object.
+ *              Implements TriggerHandler interface and delegates to InboundRequestTriggerHelper.
+ */
 public class InboundRequestTriggerHandler implements TriggerHandler {
-    private boolean triggerIsExecuting;
-    private integer triggerSize;
-    public InboundRequestTriggerHelper helper;
-
-    public InboundRequestTriggerHandler(boolean triggerIsExecuting, integer triggerSize) {
+    
+    private Boolean triggerIsExecuting;
+    private Integer triggerSize;
+    private InboundRequestTriggerHelper helper;
+    
+    public InboundRequestTriggerHandler(Boolean triggerIsExecuting, Integer triggerSize) {
         this.triggerIsExecuting = triggerIsExecuting;
         this.triggerSize = triggerSize;
         this.helper = new InboundRequestTriggerHelper();
     }
     
-    public void beforeInsert(List<Inbound_Request__c> newInboundRequest) {
+    public void beforeInsert(List<SObject> newRecords) {
         helper.processBeforeInsert();
     }
-
-    public void beforeUpdate(List<Inbound_Request__c> oldInboundRequest, List<Inbound_Request__c> newInboundRequest, Map<ID, SObject> oldInboundRequestMap, Map<ID, SObject> newInboundRequestMap) {
+    
+    public void beforeUpdate(List<SObject> oldRecords, List<SObject> newRecords, 
+                             Map<Id, SObject> oldRecordMap, Map<Id, SObject> newRecordMap) {
         helper.processBeforeUpdate();
     }
-
-    public void beforeDelete(List<Inbound_Request__c> oldInboundRequest, Map<ID, SObject> oldInboundRequestMap) { 
+    
+    public void beforeDelete(List<SObject> oldRecords, Map<Id, SObject> oldRecordMap) {
         helper.processBeforeDelete();
     }
-
-    public void afterInsert(List<Inbound_Request__c> newInboundRequest, Map<ID, SObject> newInboundRequestMap) {
-        helper.processInboundRequest(newInboundRequest, newInboundRequestMap);
+    
+    public void afterInsert(List<SObject> newRecords, Map<Id, SObject> newRecordMap) {
+        helper.processAfterInsert((List<Inbound_Request__c>) newRecords, newRecordMap);
     }
-
-    public void afterUpdate(List<Inbound_Request__c> oldInboundRequest, List<Inbound_Request__c> newInboundRequest, Map<ID, SObject> oldInboundRequestMap, Map<ID, SObject> newInboundRequestMap) {
+    
+    public void afterUpdate(List<SObject> oldRecords, List<SObject> newRecords, 
+                            Map<Id, SObject> oldRecordMap, Map<Id, SObject> newRecordMap) {
         helper.processAfterUpdate();
     }
-
-    public void afterDelete(List<Inbound_Request__c> oldInboundRequest, Map<ID, SObject> oldInboundRequestMap) {
+    
+    public void afterDelete(List<SObject> oldRecords, Map<Id, SObject> oldRecordMap) {
         helper.processAfterDelete();
     }
-
-    public void afterUndelete(List<Inbound_Request__c> newInboundRequest, Map<ID, SObject> newInboundRequestMap) {  
+    
+    public void afterUndelete(List<SObject> newRecords, Map<Id, SObject> newRecordMap) {
         helper.processAfterUndelete();
     }
-
 }
