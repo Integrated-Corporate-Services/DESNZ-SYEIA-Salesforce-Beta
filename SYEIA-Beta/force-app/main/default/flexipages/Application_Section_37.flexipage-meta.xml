@@ -2032,10 +2032,10 @@
                             <value>Line_Voltage__c</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>Poles_Being_Added__c</value>
+                            <value>TORI_NOI_Code__c</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>Poles_Being_Removed__c</value>
+                            <value>Standard_Specification_Reference_Number__c</value>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>

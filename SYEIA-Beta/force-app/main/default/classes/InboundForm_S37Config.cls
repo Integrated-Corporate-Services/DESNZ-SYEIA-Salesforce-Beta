@@ -248,12 +248,12 @@ public class InboundForm_S37Config {
         return routePoints;
     }
     
-    // ----- Parties Collection -----
+    // ----- Parties Collection (DNO from Network Operator) -----
     private static InboundForm_MappingConfig.CollectionConfig getPartiesConfig() {
         InboundForm_MappingConfig.CollectionConfig parties = 
             new InboundForm_MappingConfig.CollectionConfig()
                 .setCollectionName('Parties')
-                .setJsonPath('sections.application_party')
+                .setJsonPath('sections.networkOperator.details.application_party')
                 .setTargetObject('Party__c')
                 .setTargetRecordType('Organisation')
                 .setParentLookupField('Case__c')
@@ -261,10 +261,6 @@ public class InboundForm_S37Config {
         
         parties.addFieldMapping(
             InboundForm_MappingConfig.stringField('organisation_name', 'Name'));
-        parties.addFieldMapping(
-            InboundForm_MappingConfig.stringField('email', 'Email__c'));
-        parties.addFieldMapping(
-            InboundForm_MappingConfig.stringField('phone', 'Phone__c'));
         parties.addFieldMapping(
             InboundForm_MappingConfig.booleanField('is_primary', 'Is_Primary__c'));
         parties.addFieldMapping(
@@ -275,12 +271,12 @@ public class InboundForm_S37Config {
         return parties;
     }
     
-    // ----- Addresses Collection -----
+    // ----- Addresses Collection (DNO Address from Network Operator) -----
     private static InboundForm_MappingConfig.CollectionConfig getAddressesConfig() {
         InboundForm_MappingConfig.CollectionConfig addresses = 
             new InboundForm_MappingConfig.CollectionConfig()
                 .setCollectionName('Addresses')
-                .setJsonPath('sections.application_party')
+                .setJsonPath('sections.networkOperator.details.application_party')
                 .setTargetObject('Address__c')
                 .setParentLookupField('Party__c')
                 .setParentCollection('Parties')
@@ -331,18 +327,16 @@ public class InboundForm_S37Config {
                 .setProcessingOrder(60);
         
         assets.addFieldMapping(
-            InboundForm_MappingConfig.stringField('asset_type', 'Line_Type__c'));
-        assets.addFieldMapping(
             InboundForm_MappingConfig.decimalField('line_length', 'Line_Length__c'));
         assets.addFieldMapping(
             InboundForm_MappingConfig.stringField('line_voltage', 'Line_Voltage__c'));
         assets.addFieldMapping(
             InboundForm_MappingConfig.stringField('type_of_line', 'Line_Type__c'));
         assets.addFieldMapping(
-            InboundForm_MappingConfig.stringField('tori_noi', 'TORI_NOI_Code__c'));
+            InboundForm_MappingConfig.stringField('tori_noi_code', 'TORI_NOI_Code__c'));
         assets.addFieldMapping(
             InboundForm_MappingConfig.stringField(
-                'asset_reference', 
+                'standard_specification_reference_number', 
                 'Standard_Specification_Reference_Number__c'
             ));
         assets.addFieldMapping(

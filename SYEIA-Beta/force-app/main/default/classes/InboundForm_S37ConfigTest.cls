@@ -214,7 +214,7 @@ private class InboundForm_S37ConfigTest {
         
         Test.startTest();
         Assert.isNotNull(partiesConfig, 'Parties collection should exist');
-        Assert.areEqual('sections.application_party', partiesConfig.jsonPath, 
+        Assert.areEqual('sections.networkOperator.details.application_party', partiesConfig.jsonPath, 
             'Parties JSON path should match');
         Assert.areEqual('Party__c', partiesConfig.targetObject, 
             'Parties target object should be Party__c');
