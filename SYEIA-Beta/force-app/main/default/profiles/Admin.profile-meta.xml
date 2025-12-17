@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <custom>false</custom>
+    <applicationVisibilities>
+        <application>Case_Management_Suite</application>
+        <default>true</default>
+        <visible>true</visible>
+    </applicationVisibilities>
     <tabVisibilities>
         <tab>Case_Management_Dashboard</tab>
         <visibility>DefaultOn</visibility>

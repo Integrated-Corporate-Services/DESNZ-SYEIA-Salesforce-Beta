@@ -2,6 +2,6 @@
 <CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
     <description>Created by Lightning App Builder</description>
     <flexiPage>Case_Management_Dashboard_NWL</flexiPage>
-    <label>Case Management Dashboard</label>
-    <motif>Custom26: Flag</motif>
+    <label>Necessary Wayleaves</label>
+    <motif>Custom10: Moon</motif>
 </CustomTab>
