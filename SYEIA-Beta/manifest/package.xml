@@ -44,6 +44,11 @@
 		<name>ApprovalProcess</name>
 	</types>
 	<types>
+		<members>*</members>
+		<name>ContentAsset</name>
+	</types>
+	<types>
+		<members>Case_Management_Suite</members>
 		<members>Energy_Infrastructure_Planning</members>
 		<members>NWL_Energy_Infrastructure_Planning</members>
 		<members>TL_Energy_Infrastructure_Planning</members>
@@ -360,6 +365,7 @@
 		<members>Case_Management_Dashboard</members>
 		<members>Case_Management_Dashboard_NWL</members>
 		<members>Case_Management_Dashboard_TL</members>
+		<members>Case_Management_Suite_UtilityBar</members>
 		<members>Case_Note_Record_Page</members>
 		<members>Case_Record_Page</members>
 		<members>Consultation_External</members>
