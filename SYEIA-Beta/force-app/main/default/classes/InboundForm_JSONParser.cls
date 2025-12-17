@@ -200,14 +200,25 @@ public class InboundForm_JSONParser {
     
     /**
      * Get list of maps at path (for array of objects)
+     * Also handles single objects by wrapping them in a list
      */
     public List<Map<String, Object>> getObjectList(String path) {
-        List<Object> rawList = getList(path);
+        Object value = getValue(path);
         List<Map<String, Object>> result = new List<Map<String, Object>>();
         
-        for (Object item : rawList) {
-            if (item instanceof Map<String, Object>) {
-                result.add((Map<String, Object>) item);
+        // Handle single object - wrap in list
+        if (value instanceof Map<String, Object>) {
+            result.add((Map<String, Object>) value);
+            return result;
+        }
+        
+        // Handle array of objects
+        if (value instanceof List<Object>) {
+            List<Object> rawList = (List<Object>) value;
+            for (Object item : rawList) {
+                if (item instanceof Map<String, Object>) {
+                    result.add((Map<String, Object>) item);
+                }
             }
         }
         
