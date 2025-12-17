@@ -44,6 +44,10 @@
 		<name>ApprovalProcess</name>
 	</types>
 	<types>
+		<members>*</members>
+		<name>ContentAsset</name>
+	</types>
+	<types>
 		<members>Case_Management_Suite</members>
 		<members>Energy_Infrastructure_Planning</members>
 		<members>NWL_Energy_Infrastructure_Planning</members>
