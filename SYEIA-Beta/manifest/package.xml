@@ -44,9 +44,7 @@
 		<name>ApprovalProcess</name>
 	</types>
 	<types>
-		<members>Energy_Infrastructure_Planning</members>
-		<members>NWL_Energy_Infrastructure_Planning</members>
-		<members>TL_Energy_Infrastructure_Planning</members>
+		<members>Case_Management_Suite</members>
 		<name>CustomApplication</name>
 	</types>
 	<types>
