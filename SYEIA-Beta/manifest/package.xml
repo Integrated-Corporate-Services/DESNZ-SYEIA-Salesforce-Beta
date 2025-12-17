@@ -162,6 +162,7 @@
 		<members>Case__c.Overdue_Email_Sent__c</members>
 		<members>Case__c.Payment__c</members>
 		<members>Case__c.Pending_Withdrawal_Request_Count__c</members>
+		<members>Case__c.Plan_Reference__c</members>
 		<members>Case__c.Pre_existing_Routes_Storage_Used__c</members>
 		<members>Case__c.Project_Description__c</members>
 		<members>Case__c.Project_name__c</members>
