@@ -149,6 +149,21 @@ public class InboundForm_S37Config {
             'Tallest_Pole_Height__c'
         ));
         
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'sections.projectDetails.overview.application_project_overview.plan_reference', 
+            'Plan_Reference__c'
+        ));
+        
+        config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
+            'sections.projectDetails.overview.hasRelatedCpo', 
+            'CPO_Submitted__c'
+        ));
+        
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'sections.projectDetails.overview.relatedCpoDetails', 
+            'Related_CPO_Details__c'
+        ));
+        
         // ----- Network Operator Section -----
         config.addFieldMapping(InboundForm_MappingConfig.stringField(
             'sections.networkOperator.details.operator_ref', 

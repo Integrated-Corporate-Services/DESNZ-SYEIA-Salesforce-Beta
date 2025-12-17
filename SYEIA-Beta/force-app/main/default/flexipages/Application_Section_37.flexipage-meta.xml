@@ -285,8 +285,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Tallest_Pole_Height__c</fieldItem>
-                <identifier>RecordTallest_Pole_Height_cField</identifier>
+                <fieldItem>Record.Plan_Reference__c</fieldItem>
+                <identifier>RecordPlan_Reference_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -305,8 +305,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Type_of_Info_Requested_From_DNO__c</fieldItem>
-                <identifier>RecordType_of_Info_Requested_From_DNO__cField</identifier>
+                <fieldItem>Record.Tallest_Pole_Height__c</fieldItem>
+                <identifier>RecordTallest_Pole_Height_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-7c8acf1e-b2f3-4618-93e2-b2eb06e9f7a6</name>
@@ -341,6 +341,16 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Latest_Expected_Start_Date_Display__c</fieldItem>
                 <identifier>RecordLatest_Expected_Start_Date_Display_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Type_of_Info_Requested_From_DNO__c</fieldItem>
+                <identifier>RecordType_of_Info_Requested_From_DNO__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-2e37690e-59a9-41e8-bbeb-1a08394f0d79</name>
