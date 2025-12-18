@@ -31,6 +31,8 @@
 		<members>InboundRequestTriggerHelperTest</members>
 		<members>JWTGenerator</members>
 		<members>JWTGeneratorTest</members>
+		<members>JitHandler</members>
+		<members>JitHandlerTest</members>
 		<members>TriggerHandler</members>
 		<members>Utilities</members>
 		<name>ApexClass</name>
