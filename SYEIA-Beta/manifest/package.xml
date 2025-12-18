@@ -51,9 +51,6 @@
 	</types>
 	<types>
 		<members>Case_Management_Suite</members>
-		<members>Energy_Infrastructure_Planning</members>
-		<members>NWL_Energy_Infrastructure_Planning</members>
-		<members>TL_Energy_Infrastructure_Planning</members>
 		<name>CustomApplication</name>
 	</types>
 	<types>
@@ -135,7 +132,6 @@
 		<members>Case__c.Does_Application_Include_a_Title_Plan__c</members>
 		<members>Case__c.Earliest_Expected_Start_Date_Display__c</members>
 		<members>Case__c.Earliest_Expected_Start_Date__c</members>
-		<members>Case__c.Equipment_Visible_from_Public_Road__c</members>
 		<members>Case__c.Estimated_Duration_Of_Works__c</members>
 		<members>Case__c.Excavation_Works_Required__c</members>
 		<members>Case__c.Full_EIA_Process_or_Screening_Opinion__c</members>
@@ -148,10 +144,6 @@
 		<members>Case__c.Is_Any_Existing_Equipment_Being_Removed__c</members>
 		<members>Case__c.Is_The_Mapping_Complete__c</members>
 		<members>Case__c.Is_a_New_Contract_Implied__c</members>
-		<members>Case__c.Land_Location__c</members>
-		<members>Case__c.Land_Reference__c</members>
-		<members>Case__c.Land_Registered_With_Registry__c</members>
-		<members>Case__c.Land_Registry_Reference_Number__c</members>
 		<members>Case__c.Landowner_Inherited_a_Necessary__c</members>
 		<members>Case__c.Latest_Expected_Start_Date_Display__c</members>
 		<members>Case__c.Latest_Expected_Start_Date__c</members>
@@ -375,16 +367,12 @@
 		<members>Consultation_Internal</members>
 		<members>Consultation_Record_Page</members>
 		<members>Consultation_Response_Record_Page</members>
-		<members>Energy_Infrastructure_Planning_Home</members>
-		<members>Energy_Infrastructure_Planning_UtilityBar</members>
 		<members>Individual_Party_Record_Page</members>
 		<members>Land_Record_Page</members>
-		<members>NWL_Energy_Infrastructure_Planning_Home</members>
 		<members>Organisation_Party_Record_Page</members>
 		<members>Payments_Home_Default</members>
 		<members>Route_Record_Page</members>
 		<members>Sensitive_Area_Check_Record_Page</members>
-		<members>TL_Energy_Infrastructure_Planning_Home</members>
 		<members>Withdrawal_Request_Record_Page</members>
 		<name>FlexiPage</name>
 	</types>
