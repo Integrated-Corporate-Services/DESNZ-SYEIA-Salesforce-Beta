@@ -51,9 +51,6 @@
 	</types>
 	<types>
 		<members>Case_Management_Suite</members>
-		<members>Energy_Infrastructure_Planning</members>
-		<members>NWL_Energy_Infrastructure_Planning</members>
-		<members>TL_Energy_Infrastructure_Planning</members>
 		<name>CustomApplication</name>
 	</types>
 	<types>
@@ -375,16 +372,12 @@
 		<members>Consultation_Internal</members>
 		<members>Consultation_Record_Page</members>
 		<members>Consultation_Response_Record_Page</members>
-		<members>Energy_Infrastructure_Planning_Home</members>
-		<members>Energy_Infrastructure_Planning_UtilityBar</members>
 		<members>Individual_Party_Record_Page</members>
 		<members>Land_Record_Page</members>
-		<members>NWL_Energy_Infrastructure_Planning_Home</members>
 		<members>Organisation_Party_Record_Page</members>
 		<members>Payments_Home_Default</members>
 		<members>Route_Record_Page</members>
 		<members>Sensitive_Area_Check_Record_Page</members>
-		<members>TL_Energy_Infrastructure_Planning_Home</members>
 		<members>Withdrawal_Request_Record_Page</members>
 		<name>FlexiPage</name>
 	</types>
