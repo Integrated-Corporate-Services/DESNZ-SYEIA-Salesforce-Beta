@@ -252,11 +252,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Case__c.Equipment_Visible_from_Public_Road__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Case__c.Estimated_Duration_Of_Works__c</field>
         <readable>true</readable>
     </fieldPermissions>
