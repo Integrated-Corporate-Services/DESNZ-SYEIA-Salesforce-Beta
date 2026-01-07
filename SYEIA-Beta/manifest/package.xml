@@ -469,6 +469,9 @@
 		<name>QuickAction</name>
 	</types>
 	<types>
+		<members>Case__c.Necessary_Wayleaves</members>
+		<members>Case__c.Section_37</members>
+		<members>Case__c.Tree_Lopping</members>
 		<members>Party__c.Individual</members>
 		<members>Party__c.Organisation</members>
 		<name>RecordType</name>
