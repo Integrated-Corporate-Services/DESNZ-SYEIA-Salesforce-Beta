@@ -35,6 +35,28 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Adding_or_Replacing_Any_Overhead_Lines__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Adding_or_Replacing_Any_Poles__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Additional_Info_Requested_From_DNO__c</picklist>
         <values>
             <fullName>No</fullName>
@@ -121,6 +143,17 @@
     </picklistValues>
     <picklistValues>
         <picklist>Consent_Issued_On_Schedule__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Counter_Notice_Given_by_the_Landowner__c</picklist>
         <values>
             <fullName>No</fullName>
             <default>false</default>
@@ -340,17 +373,6 @@
         </values>
     </picklistValues>
     <picklistValues>
-        <picklist>Equipment_Visible_from_Public_Road__c</picklist>
-        <values>
-            <fullName>No</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Yes</fullName>
-            <default>false</default>
-        </values>
-    </picklistValues>
-    <picklistValues>
         <picklist>Excavation_Works_Required__c</picklist>
         <values>
             <fullName>No</fullName>
@@ -384,7 +406,29 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Has_a_21_Day_Notice_Been_Served__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Have_All_Wayleaves_Been_Obtained__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Is_Any_Existing_Equipment_Being_Removed__c</picklist>
         <values>
             <fullName>No</fullName>
             <default>false</default>
@@ -417,28 +461,6 @@
         </values>
     </picklistValues>
     <picklistValues>
-        <picklist>Land_Location__c</picklist>
-        <values>
-            <fullName>England</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Wales</fullName>
-            <default>false</default>
-        </values>
-    </picklistValues>
-    <picklistValues>
-        <picklist>Land__c</picklist>
-        <values>
-            <fullName>No</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Yes</fullName>
-            <default>false</default>
-        </values>
-    </picklistValues>
-    <picklistValues>
         <picklist>Landowner_Inherited_a_Necessary__c</picklist>
         <values>
             <fullName>No</fullName>
@@ -461,7 +483,29 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Payment_Method__c</picklist>
+        <values>
+            <fullName>BACS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Credit Card</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Pre_existing_Routes_Storage_Used__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Road_Closures_Or_Traffic_Calming__c</picklist>
         <values>
             <fullName>No</fullName>
             <default>false</default>
@@ -575,6 +619,10 @@
         <picklist>Status__c</picklist>
         <values>
             <fullName>Acknowledged</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In-Progress</fullName>
             <default>false</default>
         </values>
         <values>

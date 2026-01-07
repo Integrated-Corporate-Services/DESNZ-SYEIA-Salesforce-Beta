@@ -88,7 +88,6 @@
 		<members>Case__c.Accept_Consultees_Recommendations__c</members>
 		<members>Case__c.Accept_Local_Authority_Conditions__c</members>
 		<members>Case__c.Actual_Completed_Date_Time__c</members>
-		<members>Case__c.Adding_Or_Replacing_Any_Overhead_Poles__c</members>
 		<members>Case__c.Adding_or_Replacing_Any_Overhead_Lines__c</members>
 		<members>Case__c.Adding_or_Replacing_Any_Poles__c</members>
 		<members>Case__c.Additional_Info_Requested_From_DNO__c</members>
@@ -470,6 +469,9 @@
 		<name>QuickAction</name>
 	</types>
 	<types>
+		<members>Case__c.Necessary_Wayleaves</members>
+		<members>Case__c.Section_37</members>
+		<members>Case__c.Tree_Lopping</members>
 		<members>Party__c.Individual</members>
 		<members>Party__c.Organisation</members>
 		<name>RecordType</name>
