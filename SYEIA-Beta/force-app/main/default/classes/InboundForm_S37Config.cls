@@ -105,7 +105,7 @@ public class InboundForm_S37Config {
         
         config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
             'sections.worksOverview.addingOrReplacingPoles', 
-            'Adding_Or_Replacing_Any_Overhead_Poles__c'
+            'Adding_or_Replacing_Any_Poles__c'
         ));
         
         config.addFieldMapping(InboundForm_MappingConfig.stringField(
