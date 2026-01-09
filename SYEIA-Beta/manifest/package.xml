@@ -251,8 +251,6 @@
 		<members>Negotiation__c.Additional_Comments__c</members>
 		<members>Negotiation__c.Case__c</members>
 		<members>Negotiation__c.Start_Date_of_Any_Negotiations__c</members>
-		<members>NotifyAPISettings__c.Issuer_UUID__c</members>
-		<members>NotifyAPISettings__c.Secret_Key__c</members>
 		<members>Party__c.Application_Party_Id__c</members>
 		<members>Party__c.Case__c</members>
 		<members>Party__c.Email__c</members>
@@ -494,4 +492,4 @@
 		<name>ValidationRule</name>
 	</types>
 	<version>65.0</version>
-</Package>
+</Package> 
