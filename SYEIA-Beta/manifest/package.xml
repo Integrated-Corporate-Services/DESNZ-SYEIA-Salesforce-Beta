@@ -7,10 +7,12 @@
 		<members>CommunitiesSelfRegConfirmControllerTest</members>
 		<members>DocGen_DocumentGenerationWrapper</members>
 		<members>DocGen_DocumentGenerationWrapperTest</members>
-		<members>GovUKNotifyInvocable</members>
-		<members>GovUKNotifyInvocableTest</members>
-		<members>GovUKNotifyService</members>
-		<members>GovUKNotifyServiceTest</members>
+		<members>GovUKNotify_Invocable</members>
+		<members>GovUKNotify_InvocableTest</members>
+		<members>GovUKNotify_JWTGenerator</members>
+		<members>GovUKNotify_JWTGeneratorTest</members>
+		<members>GovUKNotify_Service</members>
+		<members>GovUKNotify_ServiceTest</members>
 		<members>InboundForm_ConfigRegistry</members>
 		<members>InboundForm_ConfigRegistryTest</members>
 		<members>InboundForm_JSONParser</members>
@@ -409,6 +411,7 @@
 		<members>Consultation__c-Consultation Layout</members>
 		<members>Document_Approval_Request__c-Document Layout</members>
 		<members>Environment_Setting__mdt-Environment Setting Layout</members>
+		<members>GOV_UK_Notify_Config__mdt-GOV UK Notify Config Layout</members>
 		<members>Party__c-Party Layout</members>
 		<members>Payment__c-Payment Layout</members>
 		<members>Related_Case__c-Related Application Layout</members>
@@ -430,6 +433,10 @@
 		<members>Case__c.Your_Cases_NWL</members>
 		<members>Case__c.Your_Cases_TL</members>
 		<name>ListView</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>NamedCredential</name>
 	</types>
 	<types>
 		<members>Consultation_Internal</members>
@@ -491,5 +498,5 @@
 		<members>Case__c.Prevent_Edit_When_Archived</members>
 		<name>ValidationRule</name>
 	</types>
-	<version>65.0</version>
-</Package> 
+	<version>66.0</version>
+</Package>

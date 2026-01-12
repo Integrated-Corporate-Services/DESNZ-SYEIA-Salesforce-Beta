@@ -5,7 +5,7 @@
         <label>Send Request Approved to Applicant</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <actionName>GovUKNotifyInvocable</actionName>
+        <actionName>GovUKNotify_Invocable</actionName>
         <actionType>apex</actionType>
         <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
@@ -26,7 +26,7 @@
                 <stringValue>bbb54e45-2601-4225-b498-77c5ddce846d</stringValue>
             </value>
         </inputParameters>
-        <nameSegment>GovUKNotifyInvocable</nameSegment>
+        <nameSegment>GovUKNotify_Invocable</nameSegment>
         <offset>0</offset>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
@@ -35,7 +35,7 @@
         <label>Send Request Rejected to Applicant</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <actionName>GovUKNotifyInvocable</actionName>
+        <actionName>GovUKNotify_Invocable</actionName>
         <actionType>apex</actionType>
         <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
@@ -56,7 +56,7 @@
                 <stringValue>bbb54e45-2601-4225-b498-77c5ddce846d</stringValue>
             </value>
         </inputParameters>
-        <nameSegment>GovUKNotifyInvocable</nameSegment>
+        <nameSegment>GovUKNotify_Invocable</nameSegment>
         <offset>0</offset>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
