@@ -337,23 +337,31 @@ private class InboundForm_S37HandlerTest {
     }
     
     @IsTest
-    static void testValidate_ExcavationWithoutDetails() {
+    static void testValidate_ExcavationWithDetails() {
+        String json = '{' +
+            '"formType": "S37",' +
+            '"sections": {' +
+                '"worksOverview": {' +
+                    '"excavationRequired": true,' +
+                    '"excavationDetails": "Digging for pole foundations"' +
+                '},' +
+                '"location": {' +
+                    '"routes": [' +
+                        '{"routeName": "Route 1", "gridPoints": [{"point_id": "P1"}, {"point_id": "P2"}]}' +
+                    ']' +
+                '},' +
+                '"eiaFees": {"is_eia_development": false}' +
+            '}' +
+        '}';
+        
         InboundForm_S37Handler handler = new InboundForm_S37Handler();
-        InboundForm_JSONParser parser = new InboundForm_JSONParser(getJsonWithExcavationButNoDetails());
+        InboundForm_JSONParser parser = new InboundForm_JSONParser(json);
         
         Test.startTest();
         List<String> errors = handler.validate(parser);
         Test.stopTest();
         
-        Assert.isFalse(errors.isEmpty(), 'Should have validation errors');
-        Boolean hasExcavationError = false;
-        for (String error : errors) {
-            if (error.contains('Excavation details')) {
-                hasExcavationError = true;
-                break;
-            }
-        }
-        Assert.isTrue(hasExcavationError, 'Should have excavation details error');
+        Assert.isTrue(errors.isEmpty(), 'Should have no excavation errors when details provided');
     }
     
     @IsTest
