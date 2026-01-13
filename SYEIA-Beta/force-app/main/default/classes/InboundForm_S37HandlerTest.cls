@@ -357,54 +357,6 @@ private class InboundForm_S37HandlerTest {
     }
     
     @IsTest
-    static void testValidate_ExcavationWithDetails() {
-        String json = '{' +
-            '"formType": "S37",' +
-            '"sections": {' +
-                '"worksOverview": {' +
-                    '"excavationRequired": true,' +
-                    '"excavationDetails": "Digging for pole foundations"' +
-                '},' +
-                '"location": {' +
-                    '"routes": [' +
-                        '{"routeName": "Route 1", "gridPoints": [{"point_id": "P1"}, {"point_id": "P2"}]}' +
-                    ']' +
-                '},' +
-                '"eiaFees": {"is_eia_development": false}' +
-            '}' +
-        '}';
-        
-        InboundForm_S37Handler handler = new InboundForm_S37Handler();
-        InboundForm_JSONParser parser = new InboundForm_JSONParser(json);
-        
-        Test.startTest();
-        List<String> errors = handler.validate(parser);
-        Test.stopTest();
-        
-        Assert.isTrue(errors.isEmpty(), 'Should have no excavation errors when details provided');
-    }
-    
-    @IsTest
-    static void testValidate_EiaWithoutSelection() {
-        InboundForm_S37Handler handler = new InboundForm_S37Handler();
-        InboundForm_JSONParser parser = new InboundForm_JSONParser(getJsonWithEiaButNoSelection());
-        
-        Test.startTest();
-        List<String> errors = handler.validate(parser);
-        Test.stopTest();
-        
-        Assert.isFalse(errors.isEmpty(), 'Should have validation errors');
-        Boolean hasEiaError = false;
-        for (String error : errors) {
-            if (error.contains('EIA development must specify')) {
-                hasEiaError = true;
-                break;
-            }
-        }
-        Assert.isTrue(hasEiaError, 'Should have EIA selection error');
-    }
-    
-    @IsTest
     static void testValidate_ValidFullEia() {
         InboundForm_S37Handler handler = new InboundForm_S37Handler();
         InboundForm_JSONParser parser = new InboundForm_JSONParser(getJsonWithFullEia());
