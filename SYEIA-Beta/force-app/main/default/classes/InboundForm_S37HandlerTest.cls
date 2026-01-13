@@ -337,26 +337,6 @@ private class InboundForm_S37HandlerTest {
     }
     
     @IsTest
-    static void testValidate_ExcavationWithoutDetails() {
-        InboundForm_S37Handler handler = new InboundForm_S37Handler();
-        InboundForm_JSONParser parser = new InboundForm_JSONParser(getJsonWithExcavationButNoDetails());
-        
-        Test.startTest();
-        List<String> errors = handler.validate(parser);
-        Test.stopTest();
-        
-        Assert.isFalse(errors.isEmpty(), 'Should have validation errors');
-        Boolean hasExcavationError = false;
-        for (String error : errors) {
-            if (error.contains('Excavation details')) {
-                hasExcavationError = true;
-                break;
-            }
-        }
-        Assert.isTrue(hasExcavationError, 'Should have excavation details error');
-    }
-    
-    @IsTest
     static void testValidate_ExcavationWithDetails() {
         String json = '{' +
             '"formType": "S37",' +
@@ -382,26 +362,6 @@ private class InboundForm_S37HandlerTest {
         Test.stopTest();
         
         Assert.isTrue(errors.isEmpty(), 'Should have no excavation errors when details provided');
-    }
-    
-    @IsTest
-    static void testValidate_EiaWithoutSelection() {
-        InboundForm_S37Handler handler = new InboundForm_S37Handler();
-        InboundForm_JSONParser parser = new InboundForm_JSONParser(getJsonWithEiaButNoSelection());
-        
-        Test.startTest();
-        List<String> errors = handler.validate(parser);
-        Test.stopTest();
-        
-        Assert.isFalse(errors.isEmpty(), 'Should have validation errors');
-        Boolean hasEiaError = false;
-        for (String error : errors) {
-            if (error.contains('EIA development must specify')) {
-                hasEiaError = true;
-                break;
-            }
-        }
-        Assert.isTrue(hasEiaError, 'Should have EIA selection error');
     }
     
     @IsTest

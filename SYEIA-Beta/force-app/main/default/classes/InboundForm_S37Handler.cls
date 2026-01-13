@@ -10,8 +10,6 @@ public class InboundForm_S37Handler implements InboundForm_Processor.IFormHandle
         List<String> errors = new List<String>();
         
         validateRoutes(parser, errors);
-        validateExcavation(parser, errors);
-        validateEIA(parser, errors);
         
         return errors;
     }
@@ -22,6 +20,7 @@ public class InboundForm_S37Handler implements InboundForm_Processor.IFormHandle
     public void afterBuild(InboundForm_JSONParser parser, Map<String, List<SObject>> records) {
         processCaseRecords(parser, records);
         processPartyRecords(records);
+        processRouteRecords(parser, records);
     }
     
     /**
@@ -77,36 +76,6 @@ public class InboundForm_S37Handler implements InboundForm_Processor.IFormHandle
         }
     }
     
-    /**
-     * Validate excavation details
-     */
-    private void validateExcavation(InboundForm_JSONParser parser, List<String> errors) {
-        Boolean excavationRequired = parser.getBoolean('sections.worksOverview.excavationRequired');
-        String excavationDetails = parser.getString('sections.worksOverview.excavationDetails');
-        
-        if (excavationRequired == true && String.isBlank(excavationDetails)) {
-            errors.add('Excavation details are required when excavation is marked as required');
-        }
-    }
-    
-    /**
-     * Validate EIA section
-     */
-    private void validateEIA(InboundForm_JSONParser parser, List<String> errors) {
-        Boolean isEiaDevelopment = parser.getBoolean('sections.eiaFees.is_eia_development');
-        
-        if (isEiaDevelopment != true) {
-            return; // No further EIA validation needed
-        }
-        
-        Boolean requiresFullEia = parser.getBoolean('sections.eiaFees.requires_full_eia');
-        Boolean screeningOnly = parser.getBoolean('sections.eiaFees.screening_only');
-        
-        if (requiresFullEia != true && screeningOnly != true) {
-            errors.add('EIA development must specify either Full EIA Process or Screening Only');
-        }
-    }
-    
     // ========================================================================
     // POST-BUILD PROCESSING
     // ========================================================================
@@ -152,6 +121,40 @@ public class InboundForm_S37Handler implements InboundForm_Processor.IFormHandle
             Party__c party = (Party__c) record;
             if (party.Is_Primary__c == true) {
                 party.Party_Type__c = 'DNO';
+            }
+        }
+    }
+    
+    /**
+     * Process Route records after build
+     * Enriches Route__c records with tolerance data from sections.sensitiveAreaChecks
+     */
+    private void processRouteRecords(InboundForm_JSONParser parser, 
+                                      Map<String, List<SObject>> records) {
+        if (!records.containsKey('Route__c')) {
+            return;
+        }
+        
+        // Get tolerance values from sections.sensitiveAreaChecks
+        Boolean toleranceRequired = parser.getBoolean('sections.sensitiveAreaChecks.tolerance_required');
+        Decimal toleranceValue = parser.getDecimal('sections.sensitiveAreaChecks.tolerance_value');
+        
+        // Convert Yes/No boolean to string for ToleranceRequired__c field
+        String toleranceRequiredValue = null;
+        if (toleranceRequired != null) {
+            toleranceRequiredValue = toleranceRequired ? 'Yes' : 'No';
+        }
+        
+        // Apply tolerance values to all Route records
+        for (SObject record : records.get('Route__c')) {
+            Route__c route = (Route__c) record;
+            
+            if (toleranceRequiredValue != null) {
+                route.Tolerance_Required__c = toleranceRequiredValue;
+            }
+            
+            if (toleranceValue != null) {
+                route.Tolerance__c = toleranceValue;
             }
         }
     }
