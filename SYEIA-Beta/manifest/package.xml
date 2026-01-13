@@ -31,8 +31,6 @@
 		<members>InboundRequestTriggerHandlerTest</members>
 		<members>InboundRequestTriggerHelper</members>
 		<members>InboundRequestTriggerHelperTest</members>
-		<members>JWTGenerator</members>
-		<members>JWTGeneratorTest</members>
 		<members>JitHandler</members>
 		<members>JitHandlerTest</members>
 		<members>TriggerHandler</members>
