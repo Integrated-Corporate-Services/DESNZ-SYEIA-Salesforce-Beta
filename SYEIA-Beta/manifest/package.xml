@@ -343,6 +343,7 @@
 		<members>Case__c</members>
 		<members>Consultation__c</members>
 		<members>Document_Approval_Request__c</members>
+		<members>Inbound_Request__c</members>
 		<members>Related_Case__c</members>
 		<members>Route__c</members>
 		<members>Sensitive_Area_Check__c</members>
@@ -410,6 +411,7 @@
 		<members>Document_Approval_Request__c-Document Layout</members>
 		<members>Environment_Setting__mdt-Environment Setting Layout</members>
 		<members>GOV_UK_Notify_Config__mdt-GOV UK Notify Config Layout</members>
+		<members>Inbound_Request__c-Inbound Request Layout</members>
 		<members>Party__c-Party Layout</members>
 		<members>Payment__c-Payment Layout</members>
 		<members>Related_Case__c-Related Application Layout</members>
@@ -430,6 +432,7 @@
 		<members>Case__c.Your_Cases</members>
 		<members>Case__c.Your_Cases_NWL</members>
 		<members>Case__c.Your_Cases_TL</members>
+		<members>Inbound_Request__c.All</members>
 		<name>ListView</name>
 	</types>
 	<types>
@@ -496,5 +499,5 @@
 		<members>Case__c.Prevent_Edit_When_Archived</members>
 		<name>ValidationRule</name>
 	</types>
-	<version>65.0</version>
+	<version>66.0</version>
 </Package>
