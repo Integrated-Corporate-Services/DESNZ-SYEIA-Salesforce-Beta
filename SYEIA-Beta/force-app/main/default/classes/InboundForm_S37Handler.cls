@@ -163,13 +163,20 @@ public class InboundForm_S37Handler implements InboundForm_Processor.IFormHandle
      * Handle EIA field logic
      */
     private void handleEIAFields(InboundForm_JSONParser parser, Case__c caseRecord) {
-        Boolean requiresFullEia = parser.getBoolean('sections.eiaFees.requires_full_eia');
+        Boolean isEiaDevelopment = parser.getBoolean('sections.eiaFees.is_eia_development');
         Boolean screeningOnly = parser.getBoolean('sections.eiaFees.screening_only');
         
-        if (requiresFullEia == true) {
-            caseRecord.Full_EIA_Process_or_Screening_Opinion__c = 'Full EIA Process';
-        } else if (screeningOnly == true) {
-            caseRecord.Full_EIA_Process_or_Screening_Opinion__c = 'Screening Opinion';
+        if (screeningOnly == true) {
+            // Both scenarios require Subject_To_An_EIA__c = 'Yes'
+            caseRecord.Subject_To_An_EIA__c = 'Yes';
+            
+            if (isEiaDevelopment == true) {
+                // is_eia_development = true AND screening_only = true
+                caseRecord.Full_EIA_Process_or_Screening_Opinion__c = 'Full EIA Process';
+            } else if (isEiaDevelopment == false) {
+                // is_eia_development = false AND screening_only = true
+                caseRecord.Full_EIA_Process_or_Screening_Opinion__c = 'EIA Screening Opinion';
+            }
         }
     }
     
