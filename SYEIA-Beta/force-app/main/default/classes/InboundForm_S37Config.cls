@@ -175,12 +175,6 @@ public class InboundForm_S37Config {
             'Date_of_Application__c'
         ));
         
-        // ----- EIA Section -----
-        config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
-            'sections.eiaFees.is_eia_development', 
-            'Subject_To_An_EIA__c'
-        ));
-        
         // ----- Supporting Information Section -----
         config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
             'sections.supportingInformation.supportingQuestions.wayleaves_obtained', 

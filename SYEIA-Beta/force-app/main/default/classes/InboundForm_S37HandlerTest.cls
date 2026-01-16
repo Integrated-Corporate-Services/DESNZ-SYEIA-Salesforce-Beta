@@ -149,8 +149,7 @@ private class InboundForm_S37HandlerTest {
                 '},' +
                 '"eiaFees": {' +
                     '"is_eia_development": true,' +
-                    '"requires_full_eia": true,' +
-                    '"screening_only": false' +
+                    '"screening_only": true' +
                 '}' +
             '}' +
         '}';
@@ -170,8 +169,7 @@ private class InboundForm_S37HandlerTest {
                     ']' +
                 '},' +
                 '"eiaFees": {' +
-                    '"is_eia_development": true,' +
-                    '"requires_full_eia": false,' +
+                    '"is_eia_development": false,' +
                     '"screening_only": true' +
                 '}' +
             '}' +
@@ -470,8 +468,8 @@ private class InboundForm_S37HandlerTest {
         handler.afterBuild(parser, records);
         Test.stopTest();
         
-        Assert.areEqual('Screening Opinion', testCase.Full_EIA_Process_or_Screening_Opinion__c, 
-            'EIA field should be Screening Opinion');
+        Assert.areEqual('EIA Screening Opinion', testCase.Full_EIA_Process_or_Screening_Opinion__c, 
+            'EIA field should be EIA Screening Opinion');
     }
     
     @IsTest
