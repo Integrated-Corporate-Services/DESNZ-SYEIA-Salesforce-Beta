@@ -52,7 +52,7 @@ jobs:
       - name: Deploy (real)
         run: |
           cd ./SYEIA-Beta
-          sf project deploy start --manifest manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --json > deploy-results-qa.json
+          sf project deploy start --manifest manifest/package.xml --pre-destructive-changes manifest/destructiveChanges/destructiveChangesPre.xml --post-destructive-changes manifest/destructiveChanges/destructiveChangesPost.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --json > deploy-results-qa.json
           cat deploy-results-qa.json
 
       - name: Run all tests
