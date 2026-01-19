@@ -37,6 +37,7 @@ jobs:
 
       - name: Print Out Destructive Changes
         run: |
+          cd ./SYEIA-Beta
           echo "--- PRE Destructive Changes ---"
           cat manifest/destructiveChanges/destructiveChangesPre.xml
           echo "--- POST Destructive Changes ---"
