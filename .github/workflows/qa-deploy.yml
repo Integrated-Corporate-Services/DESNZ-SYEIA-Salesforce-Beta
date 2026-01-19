@@ -35,6 +35,13 @@ jobs:
               --sfdx-url-file qaSfdxurl.txt \
               --alias QA_SANDBOX --set-default
 
+      - name: Print Out Destructive Changes
+        run: |
+          echo "--- PRE Destructive Changes ---"
+          cat manifest/destructiveChanges/destructiveChangesPre.xml
+          echo "--- POST Destructive Changes ---"
+          cat manifest/destructiveChanges/destructiveChangesPost.xml
+
       - name: Validate (checkonly)
         run: |
           PACKAGE_XML_PATH=$(find . -name "package.xml" | head -n 1)
