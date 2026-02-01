@@ -538,5 +538,5 @@
 		<members>Case__c.Prevent_Edit_When_Archived</members>
 		<name>ValidationRule</name>
 	</types>
-	<version>66.0</version>
+	<version>65.0</version>
 </Package>
