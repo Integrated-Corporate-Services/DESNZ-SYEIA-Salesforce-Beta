@@ -1,6 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
     <sharingCriteriaRules>
+        <fullName>Share_Case_NWL</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Share Case NWL</description>
+        <label>Share Case NWL</label>
+        <sharedTo>
+            <group>PG_Necessary_Wayleaves</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Case_Type__c</field>
+            <operation>equals</operation>
+            <value>Necessary Wayleaves</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Case_S37</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Share Case S37 records</description>
+        <label>Share Case S37</label>
+        <sharedTo>
+            <group>PG_Section_37</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Case_Type__c</field>
+            <operation>equals</operation>
+            <value>Section 37</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Case_TL</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Share TL cases</description>
+        <label>Share Case TL</label>
+        <sharedTo>
+            <group>PG_Tree_Lopping</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Case_Type__c</field>
+            <operation>equals</operation>
+            <value>Tree Lopping</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
         <fullName>Share_S37_Cases_With_S37_Group_Members</fullName>
         <accessLevel>Read</accessLevel>
         <label>Share S37 Cases With S37 Group Members</label>

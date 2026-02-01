@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Case_Type_Access__c</fullName>
+    <description>This identifies the case type the user should have access to.</description>
+    <inlineHelpText>This identifies the case type the user should have access to.</inlineHelpText>
+    <label>Case Type Access</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>S37</fullName>
+                <default>false</default>
+                <label>S37</label>
+            </value>
+            <value>
+                <fullName>NWL</fullName>
+                <default>false</default>
+                <label>NWL</label>
+            </value>
+            <value>
+                <fullName>TL</fullName>
+                <default>false</default>
+                <label>TL</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

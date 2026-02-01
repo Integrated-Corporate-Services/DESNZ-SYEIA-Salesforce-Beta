@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UserAccessPolicy xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <booleanFilter xsi:nil="true"/>
+    <description>Used to grant Super User required access.</description>
+    <masterLabel>UAP - Persona Super User</masterLabel>
+    <order>30</order>
+    <status>Design</status>
+</UserAccessPolicy>
