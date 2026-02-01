@@ -506,6 +506,16 @@
 		<name>RecordType</name>
 	</types>
 	<types>
+		<members>CEO</members>
+		<members>Case_Officers</members>
+		<members>Decision_Managers_Team_Leaders</members>
+		<members>Finance</members>
+		<members>Legal</members>
+		<members>PEDW</members>
+		<members>PINS</members>
+		<name>Role</name>
+	</types>
+	<types>
 		<members>Case__c.Share_S37_Cases_With_S37_Group_Members</members>
 		<name>SharingCriteriaRule</name>
 	</types>
@@ -537,5 +547,5 @@
 		<members>Case__c.Prevent_Edit_When_Archived</members>
 		<name>ValidationRule</name>
 	</types>
-	<version>65.0</version>
+	<version>66.0</version>
 </Package>
