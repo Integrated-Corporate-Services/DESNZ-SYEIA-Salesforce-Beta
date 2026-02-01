@@ -513,7 +513,6 @@
 		<members>Address__c</members>
 		<members>Case_Note__c</members>
 		<members>Case__c</members>
-		<members>Consultation_Organisation__c</members>
 		<members>Inbound_Request__c</members>
 		<members>Party__c</members>
 		<members>Payment__c</members>
