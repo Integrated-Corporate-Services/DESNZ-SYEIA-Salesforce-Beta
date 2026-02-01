@@ -358,11 +358,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Case__c.Next_Steps__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Case__c.Number_Of_Poles_Being_Added__c</field>
         <readable>true</readable>
     </fieldPermissions>
