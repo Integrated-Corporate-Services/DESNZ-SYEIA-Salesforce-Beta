@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UserAccessPolicy xmlns="http://soap.sforce.com/2006/04/metadata">
+    <booleanFilter>1 AND 2</booleanFilter>
+    <description>Used to grant PEDW required access.</description>
+    <masterLabel>UAP - Persona PEDW</masterLabel>
+    <order>70</order>
+    <status>Design</status>
+    <userAccessPolicyActions>
+        <action>Grant</action>
+        <target>PSG_PEDW</target>
+        <type>PermissionSetGroup</type>
+    </userAccessPolicyActions>
+    <userAccessPolicyFilters>
+        <operation>equals</operation>
+        <sortOrder>1</sortOrder>
+        <target>Base Employee</target>
+        <type>Profile</type>
+    </userAccessPolicyFilters>
+    <userAccessPolicyFilters>
+        <columnName>Persona__c</columnName>
+        <operation>equals</operation>
+        <sortOrder>2</sortOrder>
+        <target>User</target>
+        <type>User</type>
+        <value>PEDW</value>
+    </userAccessPolicyFilters>
+</UserAccessPolicy>

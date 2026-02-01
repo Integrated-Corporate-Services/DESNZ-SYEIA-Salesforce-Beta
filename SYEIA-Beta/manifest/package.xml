@@ -289,6 +289,8 @@
 		<members>Route__c.Total_Route_Points__c</members>
 		<members>Sensitive_Area_Check__c.Case__c</members>
 		<members>Sensitive_Area_Check__c.Consultation__c</members>
+		<members>User.Case_Type_Access__c</members>
+		<members>User.Persona__c</members>
 		<members>User.Salutations__c</members>
 		<members>Withdrawal_Request__c.Actioned_By__c</members>
 		<members>Withdrawal_Request__c.Actioned_On__c</members>
@@ -393,6 +395,10 @@
 		<name>Flow</name>
 	</types>
 	<types>
+		<members>PG_External_PEDW</members>
+		<members>PG_External_PINS</members>
+		<members>PG_Internal_Finance</members>
+		<members>PG_Internal_Legal</members>
 		<members>PG_Necessary_Wayleaves</members>
 		<members>PG_Section_37</members>
 		<members>PG_Tree_Lopping</members>
@@ -445,8 +451,15 @@
 		<name>PathAssistant</name>
 	</types>
 	<types>
+		<members>PS_AWS_API_Integration</members>
 		<members>PS_Bypass_DocGen_Approval</members>
+		<members>PS_Case_Create_Edit</members>
+		<members>PS_Case_Delete</members>
 		<members>PS_Case_Management_Suite</members>
+		<members>PS_Case_Manual_Share</members>
+		<members>PS_Case_Read</members>
+		<members>PS_Case_Reassign</members>
+		<members>PS_Document_Approve</members>
 		<members>PS_Document_Generation</members>
 		<members>PS_Gov_UK_Notify</members>
 		<members>PS_Read_Write_Locked_Case_Notes</members>
@@ -455,10 +468,17 @@
 	</types>
 	<types>
 		<members>PSG_Case_Officer_Standard_User</members>
+		<members>PSG_Decision_Manager</members>
+		<members>PSG_Finance</members>
+		<members>PSG_Legal</members>
+		<members>PSG_PEDW</members>
+		<members>PSG_PINS</members>
+		<members>PSG_Super_User</members>
 		<name>PermissionSetGroup</name>
 	</types>
 	<types>
 		<members>Admin</members>
+		<members>Base Employee</members>
 		<members>Case Officer</members>
 		<members>Decision Manager</members>
 		<name>Profile</name>
@@ -468,6 +488,9 @@
 		<members>New_Cases_Necessary_Wayleaves</members>
 		<members>New_Cases_S37</members>
 		<members>New_Cases_Tree_Lopping</members>
+		<members>Queue_NWL_Cases</members>
+		<members>Queue_S37_Cases</members>
+		<members>Queue_TL_Cases</members>
 		<name>Queue</name>
 	</types>
 	<types>
@@ -487,11 +510,27 @@
 		<name>SharingCriteriaRule</name>
 	</types>
 	<types>
+		<members>Address__c</members>
+		<members>Case_Note__c</members>
 		<members>Case__c</members>
+		<members>Consultation_Organisation__c</members>
+		<members>Inbound_Request__c</members>
+		<members>Party__c</members>
+		<members>Payment__c</members>
+		<members>Related_Case__c</members>
 		<name>SharingRules</name>
 	</types>
 	<types>
-		<members>UAP_Profile_Case_Officer</members>
+		<members>PSG_Finance</members>
+		<members>UAP_Case_Type_NWL</members>
+		<members>UAP_Case_Type_S37</members>
+		<members>UAP_Case_Type_TL</members>
+		<members>UAP_Persona_Case_Officer</members>
+		<members>UAP_Persona_Decision_Manager</members>
+		<members>UAP_Persona_Legal</members>
+		<members>UAP_Persona_PEDW</members>
+		<members>UAP_Persona_PINS</members>
+		<members>UAP_Persona_Super_User</members>
 		<members>UAP_Profile_System_Administrator</members>
 		<name>UserAccessPolicy</name>
 	</types>
@@ -499,5 +538,5 @@
 		<members>Case__c.Prevent_Edit_When_Archived</members>
 		<name>ValidationRule</name>
 	</types>
-	<version>65.0</version>
+	<version>66.0</version>
 </Package>

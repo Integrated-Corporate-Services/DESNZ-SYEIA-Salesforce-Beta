@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UserAccessPolicy xmlns="http://soap.sforce.com/2006/04/metadata">
+    <booleanFilter>1 AND 2</booleanFilter>
+    <description>Used to grant legal the required access.</description>
+    <masterLabel>UAP - Persona Legal</masterLabel>
+    <order>40</order>
+    <status>Design</status>
+    <userAccessPolicyActions>
+        <action>Grant</action>
+        <target>PSG_Legal</target>
+        <type>PermissionSetGroup</type>
+    </userAccessPolicyActions>
+    <userAccessPolicyFilters>
+        <operation>equals</operation>
+        <sortOrder>1</sortOrder>
+        <target>Base Employee</target>
+        <type>Profile</type>
+    </userAccessPolicyFilters>
+    <userAccessPolicyFilters>
+        <columnName>Persona__c</columnName>
+        <operation>equals</operation>
+        <sortOrder>2</sortOrder>
+        <target>User</target>
+        <type>User</type>
+        <value>Legal</value>
+    </userAccessPolicyFilters>
+</UserAccessPolicy>
