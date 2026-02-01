@@ -506,13 +506,7 @@
 		<name>RecordType</name>
 	</types>
 	<types>
-		<members>CEO</members>
-		<members>Case_Officers</members>
-		<members>Decision_Managers_Team_Leaders</members>
-		<members>Finance</members>
-		<members>Legal</members>
-		<members>PEDW</members>
-		<members>PINS</members>
+		<members>*</members>
 		<name>Role</name>
 	</types>
 	<types>
