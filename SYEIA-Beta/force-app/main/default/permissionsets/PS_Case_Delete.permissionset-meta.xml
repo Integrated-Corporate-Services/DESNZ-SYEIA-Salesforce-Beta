@@ -348,11 +348,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Case__c.Materials_For_New_Poles__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Case__c.MoD_Checks_Required__c</field>
         <readable>true</readable>
     </fieldPermissions>
