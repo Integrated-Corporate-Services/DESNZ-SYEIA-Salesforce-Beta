@@ -506,6 +506,10 @@
 		<name>RecordType</name>
 	</types>
 	<types>
+		<members>*</members>
+		<name>Role</name>
+	</types>
+	<types>
 		<members>Case__c.Share_S37_Cases_With_S37_Group_Members</members>
 		<name>SharingCriteriaRule</name>
 	</types>
