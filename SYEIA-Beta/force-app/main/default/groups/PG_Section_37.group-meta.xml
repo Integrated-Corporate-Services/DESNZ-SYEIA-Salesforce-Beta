@@ -2,5 +2,5 @@
 <Group xmlns="http://soap.sforce.com/2006/04/metadata">
     <description>Grants access to Section 37 Cases</description>
     <doesIncludeBosses>true</doesIncludeBosses>
-    <name>PG Section 37</name>
+    <name>PG - Section 37</name>
 </Group>
