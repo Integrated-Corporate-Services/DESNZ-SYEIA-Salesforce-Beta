@@ -127,8 +127,7 @@ private class InboundForm_S37HandlerTest {
                 '},' +
                 '"eiaFees": {' +
                     '"is_eia_development": true,' +
-                    '"requires_full_eia": false,' +
-                    '"screening_only": false' +
+                    '"screening_only": true' +
                 '}' +
             '}' +
         '}';
