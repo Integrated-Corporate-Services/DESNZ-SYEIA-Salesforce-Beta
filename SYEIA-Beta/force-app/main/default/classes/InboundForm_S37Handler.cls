@@ -178,7 +178,7 @@ public class InboundForm_S37Handler implements InboundForm_Processor.IFormHandle
                 caseRecord.Full_EIA_Process_or_Screening_Opinion__c = 'EIA Screening Opinion';
             }
         } else {
-            // Both scenarios require Subject_To_An_EIA__c = 'No'
+            // Scenario where screening_only = false
             caseRecord.Subject_To_An_EIA__c = 'No';
         }
     }
