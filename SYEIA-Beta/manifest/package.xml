@@ -5,6 +5,9 @@
 		<members>CommunitiesLandingControllerTest</members>
 		<members>CommunitiesLoginControllerTest</members>
 		<members>CommunitiesSelfRegConfirmControllerTest</members>
+		<members>ContentVersionTriggerHandler</members>
+		<members>ContentVersionTriggerHelper</members>
+		<members>ContentVersionTriggerHelperTest</members>
 		<members>DocGen_DocumentGenerationWrapper</members>
 		<members>DocGen_DocumentGenerationWrapperTest</members>
 		<members>GovUKNotify_Invocable</members>
@@ -38,6 +41,7 @@
 		<name>ApexClass</name>
 	</types>
 	<types>
+		<members>ContentVersionTrigger</members>
 		<members>InboundRequestTrigger</members>
 		<name>ApexTrigger</name>
 	</types>
