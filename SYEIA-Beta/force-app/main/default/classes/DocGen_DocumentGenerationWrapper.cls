@@ -1,4 +1,8 @@
-public class DocGen_DocumentGenerationWrapper {
+/**
+ * Invocable action for generating documents via Salesforce Document Generation.
+ * Creates DocumentGenerationProcess records for use with OmniStudio Document Generation.
+ */
+public without sharing class DocGen_DocumentGenerationWrapper {
     
     @InvocableMethod(label='Generate Document' description='Creates a DocumentGenerationProcess record and returns its ID')
     public static List<String> generateDocument(List<DocumentGenerationRequest> requests) {
@@ -22,39 +26,14 @@ public class DocGen_DocumentGenerationWrapper {
             RequestText = requestText,
             ReferenceObject = request.referenceObject,
             TokenData = request.tokenData,
-            // TokenData = '{}',
             DocGenApiVersionType = documentDocGenApiVersionType
         );
-
-        try{
-            System.debug('DocumentGenerationProcess to insert: ' + documentGenerationProcessToInsert);
         
-            insert documentGenerationProcessToInsert;
-
-            System.debug('DocumentGenerationProcess created: ' + documentGenerationProcessToInsert);
-            List<DocumentGenerationProcess> dgpRecordList = [
-                SELECT Id, Type, Status, RequestText, ReferenceObject, TokenData, DocGenApiVersionType 
-                FROM DocumentGenerationProcess 
-                WHERE Id = :documentGenerationProcessToInsert.Id
-            ];
-            System.debug('Retrieved DocumentGenerationProcess: ' + dgpRecordList);
-
-            if (!dgpRecordList.isEmpty()) {
-                Id documentGenerationProcessId = dgpRecordList[0].Id;
-                documentGenerationProcessIds.add(documentGenerationProcessId);
-                return documentGenerationProcessIds;
-            } 
-            // else {
-            //     System.debug('No DocumentGenerationProcess record found after insertion.');
-            //     throw new AuraHandledException('Failed to create DocumentGenerationProcess record.');
-            // }
-        } catch(Exception e){
-            System.debug('Error occurred: ' + e.getMessage());
-            System.debug('Stack Trace: ' + e.getStackTraceString());
-            throw new AuraHandledException('Error preparing DocumentGenerationProcess: ' + e.getMessage()); 
-        }
+        insert documentGenerationProcessToInsert;
+        
+        documentGenerationProcessIds.add(documentGenerationProcessToInsert.Id);
+        
         return documentGenerationProcessIds;
-        
     }
     
     public class DocumentGenerationRequest {
