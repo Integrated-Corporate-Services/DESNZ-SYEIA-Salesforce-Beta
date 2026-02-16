@@ -399,6 +399,8 @@
 		<name>Flow</name>
 	</types>
 	<types>
+		<members>PG_Case_Officer</members>
+        <members>PG_Decision_Manager</members>
 		<members>PG_External_PEDW</members>
 		<members>PG_External_PINS</members>
 		<members>PG_Internal_Finance</members>
