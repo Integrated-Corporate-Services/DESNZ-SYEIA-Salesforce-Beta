@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
+	<types>
+		<members>Case__c.Share_Case_NWL</members>
+		<members>Case__c.Share_S37_Cases_With_S37_Group_Members</members>
+		<members>Case__c.Share_Case_S37</members>
+		<members>Case__c.Share_Case_TL</members>
+		<name>SharingCriteriaRule</name>
+	</types>
 	<version>65.0</version>
 </Package>
