@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Admin_Edit_On_Status</fullName>
+    <active>false</active>
+    <description>Prevents System Administrators from editing records when the Status is currently &apos;In-Progress&apos; Acknowledged, Completed, Withdrawn.</description>
+    <errorConditionFormula>AND(
+OR(
+ISPICKVAL(PRIORVALUE(Status__c), &quot;Acknowledged&quot;),
+ISPICKVAL(PRIORVALUE(Status__c), &quot;In-Progress&quot;),
+ISPICKVAL(PRIORVALUE(Status__c), &quot;Completed&quot;),
+ISPICKVAL(PRIORVALUE(Status__c), &quot;Withdrawn&quot;)
+),
+($Profile.Name = &quot;System Administrator&quot;)
+)</errorConditionFormula>
+    <errorMessage>You do not have permission to edit this record.</errorMessage>
+</ValidationRule>
