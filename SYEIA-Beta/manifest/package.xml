@@ -399,6 +399,8 @@
 		<name>Flow</name>
 	</types>
 	<types>
+		<members>PG_Case_Officer</members>
+        <members>PG_Decision_Manager</members>
 		<members>PG_External_PEDW</members>
 		<members>PG_External_PINS</members>
 		<members>PG_Internal_Finance</members>
@@ -514,7 +516,10 @@
 		<name>Role</name>
 	</types>
 	<types>
-		<members>Case__c.Share_S37_Cases_With_S37_Group_Members</members>
+		<members>Case__c.Share_on_Status_To_CO</members>
+		<members>Case__c.Share_on_Status_To_DM</members>
+		<members>Case__c.Share_on_Status_To_Finance</members>
+		<members>Case__c.Share_on_Status_To_Legal</members>
 		<name>SharingCriteriaRule</name>
 	</types>
 	<types>
