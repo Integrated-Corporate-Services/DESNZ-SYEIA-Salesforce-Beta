@@ -22,6 +22,9 @@ public class InboundForm_JSONParser {
                 this.rootMap = new Map<String, Object>();
             }
         } catch (Exception e) {
+            Logger.error('Failed to parse JSON string: ' + e.getMessage());
+            Logger.setScenario('InboundForm_JSONParser.constructor');
+            Logger.saveLog();
             throw new JSONParserException('Failed to parse JSON: ' + e.getMessage());
         }
     }
@@ -140,6 +143,10 @@ public class InboundForm_JSONParser {
             }
             return Date.valueOf(value);
         } catch (Exception e) {
+            Logger.error('Failed to parse date from path "' + path + '": ' + e.getMessage());
+            Logger.setScenario('InboundForm_JSONParser.getDate');
+            Logger.saveLog();
+
             System.debug(LoggingLevel.WARN, 
                 'Failed to parse date from path "' + path + '": ' + value);
             return null;
@@ -181,6 +188,9 @@ public class InboundForm_JSONParser {
             
             return DateTime.valueOfGmt(normalized);
         } catch (Exception e) {
+            Logger.error('Failed to parse datetime from path "' + path + '": ' + e.getMessage());
+            Logger.setScenario('InboundForm_JSONParser.getDateTime');
+            Logger.saveLog();
             System.debug(LoggingLevel.WARN, 
                 'Failed to parse datetime from path "' + path + '": ' + value);
             return null;

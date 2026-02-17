@@ -31,7 +31,9 @@ public with sharing class GovUKNotify_Invocable {
             } catch (Exception e) {
                 result.success = false;
                 result.errorMessage = e.getMessage();
-                System.debug(LoggingLevel.ERROR, 'Error queuing GOV.UK Notify email: ' + e.getMessage());
+                Logger.error('Error queuing GOV.UK Notify email: ' + e.getMessage());
+                Logger.setScenario('GovUKNotify_Invocable.sendNotifyEmail');
+                Logger.saveLog();
             }
 
             results.add(result);
@@ -76,6 +78,9 @@ public with sharing class GovUKNotify_Invocable {
             System.debug(LoggingLevel.INFO, 'JSON repair successful');
             return repaired;
         } catch (Exception e) {
+            Logger.error('JSON repair failed: ' + e.getMessage());
+            Logger.setScenario('GovUKNotify_Invocable.sanitiseJson');
+            Logger.saveLog();
             throw new NotifyException('Invalid personalisation JSON format: ' + e.getMessage());
         }
     }
@@ -202,8 +207,9 @@ public with sharing class GovUKNotify_Invocable {
                     System.debug(LoggingLevel.ERROR, 'GOV.UK Notify failed. Status: ' + response.statusCode);
                 }
             } catch (Exception e) {
-                System.debug(LoggingLevel.ERROR, 'Queueable error: ' + e.getMessage());
-                System.debug(LoggingLevel.ERROR, 'Stack trace: ' + e.getStackTraceString());
+                Logger.error('Error sending GOV.UK Notify email: ' + e.getMessage());
+                Logger.setScenario('GovUKNotify_Invocable.GovUkNotifyQueueable.execute');
+                Logger.saveLog();
             }
         }
         
@@ -242,6 +248,9 @@ public with sharing class GovUKNotify_Invocable {
                 update caseToUpdate;
                 System.debug(LoggingLevel.INFO, 'Updated Case: ' + caseId);
             } catch (Exception e) {
+                Logger.error('Error updating Case: ' + e.getMessage());
+                Logger.setScenario('GovUKNotify_Invocable.GovUkNotifyQueueable.updateCaseEmailSent');
+                Logger.saveLog();
                 System.debug(LoggingLevel.ERROR, 'Error updating Case: ' + e.getMessage());
             }
         }

@@ -24,8 +24,14 @@ public class DocGen_DocumentGenerationWrapper {
             TokenData = request.tokenData,
             DocGenApiVersionType = documentDocGenApiVersionType
         );
-        
-        insert documentGenerationProcessToInsert;
+        try{
+            insert documentGenerationProcessToInsert;
+        } catch (Exception e) {
+            Logger.error('Error inserting DocumentGenerationProcess: ' + e.getMessage());
+            Logger.setScenario('DocGen_DocumentGenerationWrapper.generateDocument');
+            Logger.saveLog();
+            throw e; // Re-throw the exception after logging
+        }
         
         documentGenerationProcessIds.add(documentGenerationProcessToInsert.Id);
         

@@ -33,6 +33,9 @@ public class JitHandler implements Auth.SamlJitHandler {
         String assertion
     ) {
         if (String.isBlank(federationIdentifier)) {
+            Logger.error('Federation Identifier is missing in SAML assertion');
+             Logger.setScenario('JitHandler.createUser');
+             Logger.saveLog();
             throw new JitException('Federation Identifier is required for user creation.');
         }
         
@@ -79,6 +82,9 @@ public class JitHandler implements Auth.SamlJitHandler {
         String assertion
     ) {
         if (userId == null) {
+            Logger.error('User Id is missing for update during JIT provisioning');
+             Logger.setScenario('JitHandler.updateUser');
+             Logger.saveLog();
             throw new JitException('User Id is required for user update.');
         }
         

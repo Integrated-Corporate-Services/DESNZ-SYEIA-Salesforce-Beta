@@ -178,7 +178,7 @@ public class InboundForm_S37Handler implements InboundForm_Processor.IFormHandle
                 caseRecord.Full_EIA_Process_or_Screening_Opinion__c = 'EIA Screening Opinion';
             }
         } else {
-            // Both scenarios require Subject_To_An_EIA__c = 'No'
+            // Scenario where screening_only = false
             caseRecord.Subject_To_An_EIA__c = 'No';
         }
     }
@@ -219,6 +219,10 @@ public class InboundForm_S37Handler implements InboundForm_Processor.IFormHandle
                 1
             );
         } catch (Exception e) {
+            Logger.error('Error building date from year=' + year + ', month=' + month);
+            Logger.error('Exception message: ' + e.getMessage());
+            Logger.setScenario('InboundForm_Processor.buildDateFromYearMonth');
+            Logger.saveLog();
             System.debug(LoggingLevel.WARN, 
                 'Error building date from year=' + year + ', month=' + month + 
                 ': ' + e.getMessage());
@@ -273,6 +277,9 @@ public class InboundForm_S37Handler implements InboundForm_Processor.IFormHandle
                 awsIdToCaseIdMap.put(c.AWS_Application_Id__c, c.Id);
             }
         } catch (Exception e) {
+            Logger.error('Error querying for related cases: ' + e.getMessage());
+            Logger.setScenario('InboundForm_S37Handler.processApplicationRelations');
+            Logger.saveLog();
             System.debug(LoggingLevel.ERROR, 'Error querying for related cases: ' + e.getMessage());
             result.addWarning('Error querying for related cases: ' + e.getMessage());
             return;
@@ -346,6 +353,9 @@ public class InboundForm_S37Handler implements InboundForm_Processor.IFormHandle
             update caseToUpdate;
             System.debug(LoggingLevel.INFO, 'Set DNO__c on Case ' + caseId + ' to Party ' + dnoPartyId);
         } catch (Exception e) {
+            Logger.error('Error setting DNO on Case: ' + e.getMessage());
+            Logger.setScenario('InboundForm_S37Handler.setDNOOnCase');
+            Logger.saveLog();
             System.debug(LoggingLevel.ERROR, 'Error setting DNO on Case: ' + e.getMessage());
         }
     }

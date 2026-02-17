@@ -204,6 +204,7 @@ public with sharing class InboundRequestTriggerHelper {
             return;
         }
         
+        Logger.info('Reprocessing ' + requestIds.size() + ' inbound requests');
         System.debug(LoggingLevel.INFO, 
             'Reprocessing ' + requestIds.size() + ' inbound requests');
         
@@ -218,6 +219,7 @@ public with sharing class InboundRequestTriggerHelper {
         ];
         
         if (requests.isEmpty()) {
+            Logger.warn('No Inbound Requests found for reprocessing');
             System.debug(LoggingLevel.WARN, 'No records found for reprocessing');
             return;
         }
@@ -245,6 +247,8 @@ public with sharing class InboundRequestTriggerHelper {
             
             if (result.success) {
                 successCount++;
+                Logger.info('Successfully processed Inbound Request: ' + reqId + 
+                    ' (Form Type: ' + result.formType + ')');
                 System.debug(LoggingLevel.INFO, 
                     'Successfully processed Inbound Request: ' + reqId + 
                     ' (Form Type: ' + result.formType + ')');
@@ -255,6 +259,7 @@ public with sharing class InboundRequestTriggerHelper {
                 System.debug(LoggingLevel.ERROR, 
                     'Failed to process Inbound Request ' + reqId + ': ' + 
                     String.join(result.errors, '; '));
+                Logger.error('Failed to process Inbound Request ' + reqId + ': ' + String.join(result.errors, '; '));
             }
         }
         
@@ -271,6 +276,9 @@ public with sharing class InboundRequestTriggerHelper {
         if (!failureDetails.isEmpty()) {
             System.debug(LoggingLevel.ERROR, 
                 '=== Failure Details ===' +
+                '\n' + String.join(failureDetails, '\n') +
+                '\n=======================');
+            Logger.error('=== Failure Details ===' +
                 '\n' + String.join(failureDetails, '\n') +
                 '\n=======================');
         }
