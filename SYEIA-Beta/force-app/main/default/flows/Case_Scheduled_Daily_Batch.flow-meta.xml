@@ -1,5 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Case_Batch_Add_Nebula_Log</name>
+        <label>Case Batch Add Nebula Log</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>FlowRecordLogEntry</actionName>
+        <actionType>apex</actionType>
+        <dataTypeMappings>
+            <typeName>T__record</typeName>
+            <typeValue>Case__c</typeValue>
+        </dataTypeMappings>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>faultMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>flowName</name>
+            <value>
+                <stringValue>Case_Scheduled_Daily_Batch</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>loggingLevelName</name>
+            <value>
+                <stringValue>WARN</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>message</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>record</name>
+            <value>
+                <elementReference>$Record</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveLog</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <nameSegment>FlowRecordLogEntry</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
     <apiVersion>65.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <decisions>
@@ -31,7 +83,8 @@
             <label>Is Set Status To Archived</label>
         </rules>
     </decisions>
-    <description>This Batch Flow runs everyday to process Case Batch jobs.</description>
+    <description>This Batch Flow runs everyday to process Case Batch jobs.
+Nebula Logger.</description>
     <environments>Default</environments>
     <formulas>
         <description>This is used to determine when the withdrawn date is greater than 3 months.</description>
@@ -70,6 +123,9 @@
         <label>Update Case Application</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <faultConnector>
+            <targetReference>Case_Batch_Add_Nebula_Log</targetReference>
+        </faultConnector>
         <inputAssignments>
             <field>Status__c</field>
             <value>
@@ -86,7 +142,9 @@
         </connector>
         <object>Case__c</object>
         <schedule>
+            <dayOfMonthToRun>0</dayOfMonthToRun>
             <frequency>Daily</frequency>
+            <frequencyNumber>0</frequencyNumber>
             <startDate>2025-11-13</startDate>
             <startTime>07:45:00.000Z</startTime>
         </schedule>
