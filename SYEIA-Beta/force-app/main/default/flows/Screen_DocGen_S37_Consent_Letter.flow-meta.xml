@@ -141,6 +141,66 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
     <actionCalls>
+        <name>Group_Nebula_Logger</name>
+        <label>Group Nebula Logger</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>FlowLogEntry</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>faultMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>flowName</name>
+            <value>
+                <stringValue>Screen_DocGen_S37_Consent_Letter</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>loggingLevelName</name>
+            <value>
+                <stringValue>ERROR</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>message</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recordId</name>
+        </inputParameters>
+        <inputParameters>
+            <name>saveLog</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveMethodName</name>
+        </inputParameters>
+        <inputParameters>
+            <name>scenario</name>
+        </inputParameters>
+        <inputParameters>
+            <name>shouldThrowFaultMessageException</name>
+        </inputParameters>
+        <inputParameters>
+            <name>tagsString</name>
+        </inputParameters>
+        <inputParameters>
+            <name>topics</name>
+        </inputParameters>
+        <nameSegment>FlowLogEntry</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
         <description>Save Nebula log error.</description>
         <name>Screen_DocGen_S37_Nebula_Logger</name>
         <label>Screen DocGen S37 Nebula Logger</label>
@@ -680,6 +740,10 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Set_refereneObjectId_to_Document_Id</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Group_Nebula_Logger</targetReference>
+        </faultConnector>
         <inputAssignments>
             <field>Approval_Status__c</field>
             <value>
@@ -845,6 +909,9 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Get_Group_Members</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Group_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Name</field>
@@ -866,6 +933,10 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Loop_Group_Members</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Group_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>GroupId</field>
