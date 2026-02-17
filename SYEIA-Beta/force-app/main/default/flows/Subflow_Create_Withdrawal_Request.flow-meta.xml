@@ -1,5 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Get_Case_Using_DESNZReference_Nebula_Logger</name>
+        <label>Get Case Using DESNZReference Nebula Logger</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>FlowLogEntry</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>faultMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>flowName</name>
+            <value>
+                <stringValue>Subflow_Create_Withdrawal_Request</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>loggingLevelName</name>
+            <value>
+                <stringValue>ERROR</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>message</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recordId</name>
+            <value>
+                <elementReference>Get_Case_Using_var_DESNZReference.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveLog</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveMethodName</name>
+        </inputParameters>
+        <inputParameters>
+            <name>scenario</name>
+        </inputParameters>
+        <inputParameters>
+            <name>shouldThrowFaultMessageException</name>
+        </inputParameters>
+        <inputParameters>
+            <name>tagsString</name>
+        </inputParameters>
+        <inputParameters>
+            <name>topics</name>
+        </inputParameters>
+        <nameSegment>FlowLogEntry</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Update_Case_Status_Nebula_Logger</name>
+        <label>Update Case Status Nebula Logger</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>FlowRecordLogEntry</actionName>
+        <actionType>apex</actionType>
+        <dataTypeMappings>
+            <typeName>T__record</typeName>
+            <typeValue>Case__c</typeValue>
+        </dataTypeMappings>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>faultMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>flowName</name>
+            <value>
+                <stringValue>Subflow_Create_Withdrawal_Request</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>loggingLevelName</name>
+            <value>
+                <stringValue>ERROR</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>message</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveLog</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <nameSegment>FlowRecordLogEntry</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
     <apiVersion>65.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <decisions>
@@ -88,6 +197,10 @@
         <label>Create Withdrawal Request Record</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Update_Case_Status_Nebula_Logger</targetReference>
+        </faultConnector>
         <inputAssignments>
             <field>Case__c</field>
             <value>
@@ -118,6 +231,9 @@
         <connector>
             <targetReference>Check_Case_Status</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Get_Case_Using_DESNZReference_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Name</field>
@@ -138,6 +254,9 @@
         <connector>
             <targetReference>Create_Withdrawal_Request_Record</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Update_Case_Status_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>

@@ -7,6 +7,9 @@
         <locationY>0</locationY>
         <actionName>GovUKNotify_Invocable</actionName>
         <actionType>apex</actionType>
+        <faultConnector>
+            <targetReference>Send_Request_To_Applicant_Nebula_Logger</targetReference>
+        </faultConnector>
         <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
             <name>personalisationJson</name>
@@ -37,6 +40,10 @@
         <locationY>0</locationY>
         <actionName>GovUKNotify_Invocable</actionName>
         <actionType>apex</actionType>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Send_Request_To_Applicant_Nebula_Logger</targetReference>
+        </faultConnector>
         <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
             <name>personalisationJson</name>
@@ -57,6 +64,69 @@
             </value>
         </inputParameters>
         <nameSegment>GovUKNotify_Invocable</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Request_To_Applicant_Nebula_Logger</name>
+        <label>Send Request To Applicant Nebula Logger</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>FlowLogEntry</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>faultMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>flowName</name>
+            <value>
+                <stringValue>Screen_Withdrawal_Request_Process_Guide</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>loggingLevelName</name>
+            <value>
+                <stringValue>ERROR</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>message</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recordId</name>
+            <value>
+                <elementReference>Get_Case_Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveLog</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveMethodName</name>
+        </inputParameters>
+        <inputParameters>
+            <name>scenario</name>
+        </inputParameters>
+        <inputParameters>
+            <name>shouldThrowFaultMessageException</name>
+        </inputParameters>
+        <inputParameters>
+            <name>tagsString</name>
+        </inputParameters>
+        <inputParameters>
+            <name>topics</name>
+        </inputParameters>
+        <nameSegment>FlowLogEntry</nameSegment>
         <offset>0</offset>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
@@ -131,7 +201,8 @@
             <label>Withdrawal Requested</label>
         </rules>
     </decisions>
-    <description>This screen flow will guide case officers through a withdrawal request; capturing information and providing them the ability to approve / reject the request.</description>
+    <description>This screen flow will guide case officers through a withdrawal request; capturing information and providing them the ability to approve / reject the request.
+Add Nebula Logger</description>
     <environments>Default</environments>
     <formulas>
         <name>formula_EmailPersonalisation</name>

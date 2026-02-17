@@ -10,6 +10,9 @@
         <connector>
             <targetReference>Was_Approval_Requested_Final</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Generate_Document_Nebula_Logger</targetReference>
+        </faultConnector>
         <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
             <name>documentTitle</name>
@@ -36,6 +39,162 @@
             </value>
         </inputParameters>
         <nameSegment>DocGen_DocumentGenerationWrapper</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Generate_Document_Nebula_Logger</name>
+        <label>Generate Document Nebula Logger</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>FlowLogEntry</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Screen_DocGen_S37_Nebula_Logger</targetReference>
+        </connector>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>faultMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>flowName</name>
+            <value>
+                <stringValue>Screen_DocGen_S37_Consent_Letter</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>loggingLevelName</name>
+            <value>
+                <stringValue>ERROR</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>message</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recordId</name>
+            <value>
+                <elementReference>Get_Case_Using_recordId.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveLog</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <nameSegment>FlowLogEntry</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Get_S37_Consent_Letter_DocumentTemplate_Nebula_Logger</name>
+        <label>Get S37 Consent Letter DocumentTemplate Nebula Logger</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>FlowLogEntry</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Screen_DocGen_S37_Nebula_Logger</targetReference>
+        </connector>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>faultMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>flowName</name>
+            <value>
+                <stringValue>Screen_DocGen_S37_Consent_Letter</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>loggingLevelName</name>
+            <value>
+                <stringValue>ERROR</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>message</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>scenario</name>
+            <value>
+                <stringValue>Get S37 Consent Letter DocumentTemplate</stringValue>
+            </value>
+        </inputParameters>
+        <nameSegment>FlowLogEntry</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <description>Save Nebula log error.</description>
+        <name>Screen_DocGen_S37_Nebula_Logger</name>
+        <label>Screen DocGen S37 Nebula Logger</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>Logger</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <nameSegment>Logger</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <actionCalls>
+        <name>Update_Document_Approval_Nebula_Log</name>
+        <label>Update Document Approval Nebula Log</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>FlowLogEntry</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Screen_DocGen_S37_Nebula_Logger</targetReference>
+        </connector>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>faultMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>flowName</name>
+            <value>
+                <stringValue>Screen_DocGen_S37_Consent_Letter</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>loggingLevelName</name>
+            <value>
+                <stringValue>ERROR</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>message</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>FlowLogEntry</nameSegment>
         <offset>0</offset>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
@@ -200,7 +359,8 @@
             <label>Approval Requested</label>
         </rules>
     </decisions>
-    <description>Screen Flow to generate an S37 Consent Letter</description>
+    <description>Screen Flow to generate an S37 Consent Letter.
+Nebula Logger</description>
     <environments>Default</environments>
     <formulas>
         <name>formula_ApplicationDate</name>
@@ -568,6 +728,10 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Get_Group</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Get_S37_Consent_Letter_DocumentTemplate_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Address_Line1__c</field>
@@ -589,6 +753,10 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Get_Address</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Get_S37_Consent_Letter_DocumentTemplate_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Case__c</field>
@@ -610,6 +778,10 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Get_Asset_Using_reordId</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Get_S37_Consent_Letter_DocumentTemplate_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -717,6 +889,9 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Get_S37_Consent_Letter_DocumentTemplateContentDoc</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Get_S37_Consent_Letter_DocumentTemplate_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Name</field>
@@ -738,6 +913,10 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Get_Case_Using_recordId</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Get_S37_Consent_Letter_DocumentTemplate_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>DocumentTemplateId</field>
@@ -759,6 +938,10 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Condition_Library</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Get_S37_Consent_Letter_DocumentTemplate_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -786,6 +969,9 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Final_Record_Creation_Screen_Approval</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Update_Document_Approval_Nebula_Log</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -1607,6 +1793,9 @@ TEXT(YEAR(TODAY()))</expression>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Screen_DocGen_S37_Nebula_Logger</targetReference>
+        </connector>
         <fields>
             <name>Copy_1_of_Final_Record_Creation_Screen_Approval_Titl</name>
             <fieldText>&lt;h1&gt;&lt;strong&gt;The Consent Letter has been successfully created.&lt;/strong&gt;&lt;/h1&gt;</fieldText>
@@ -1645,6 +1834,9 @@ TEXT(YEAR(TODAY()))</expression>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Screen_DocGen_S37_Nebula_Logger</targetReference>
+        </connector>
         <fields>
             <name>Final_Record_Creation_Screen_Approval_Titl</name>
             <fieldText>&lt;h1&gt;&lt;strong&gt;The Consent Letter has been successfully created.&lt;/strong&gt;&lt;/h1&gt;</fieldText>
