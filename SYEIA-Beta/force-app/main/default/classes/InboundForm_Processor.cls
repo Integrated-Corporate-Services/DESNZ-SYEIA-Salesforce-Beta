@@ -179,13 +179,20 @@ public with sharing class InboundForm_Processor {
                 try {
                     handler.afterBuild(parser, result.createdRecords);
                 } catch (Exception e) {
+                    Logger.error('Error in afterBuild handler: ' + e.getMessage());
+                    Logger.setScenario('InboundForm_Processor.afterBuild');
                     System.debug(LoggingLevel.WARN, 'After-build handler error: ' + e.getMessage());
                 }
             }
             
         } catch (Exception e) {
+            Logger.error('Error processing request: ' + e.getMessage());
+            Logger.setScenario('InboundForm_Processor.processRequest');
             result.addError('Processing error: ' + e.getMessage() + 
                 ' [Line: ' + e.getLineNumber() + ']');
+        }
+        finally{
+            Logger.saveLog();
         }
         
         return result;
@@ -247,6 +254,9 @@ public with sharing class InboundForm_Processor {
             return record;
             
         } catch (Exception e) {
+            Logger.error('Error building primary record: ' + e.getMessage());
+            Logger.setScenario('InboundForm_Processor.buildPrimaryRecord');
+            Logger.saveLog();
             result.addError('Error building primary record: ' + e.getMessage());
             return null;
         }
@@ -272,6 +282,9 @@ public with sharing class InboundForm_Processor {
             } catch (Exception e) {
                 result.addError('Error processing collection ' + collConfig.collectionName + 
                     ': ' + e.getMessage());
+                Logger.error('Error processing collection ' + collConfig.collectionName + ': ' + e.getMessage());
+                Logger.setScenario('InboundForm_Processor.buildChildRecords');
+                Logger.saveLog();
             }
         }
     }
@@ -412,6 +425,9 @@ public with sharing class InboundForm_Processor {
                 }
                 
             } catch (Exception e) {
+                Logger.error('Error mapping ' + mapping.jsonPath + ' to ' + mapping.targetField + ': ' + e.getMessage());
+                Logger.setScenario('InboundForm_Processor.applyFieldMappings');
+                Logger.saveLog();
                 System.debug(LoggingLevel.WARN, 
                     'Error mapping ' + mapping.jsonPath + ' to ' + mapping.targetField + 
                     ': ' + e.getMessage());
@@ -597,6 +613,9 @@ public with sharing class InboundForm_Processor {
             }
             return Date.valueOf(strValue);
         } catch (Exception e) {
+            Logger.error('Failed to parse date: ' + strValue + '. Error: ' + e.getMessage());
+            Logger.setScenario('InboundForm_Processor.convertToDate');
+            Logger.saveLog();
             System.debug(LoggingLevel.WARN, 'Failed to parse date: ' + strValue);
             return null;
         }
@@ -638,6 +657,9 @@ public with sharing class InboundForm_Processor {
             
             return DateTime.valueOfGmt(normalized);
         } catch (Exception e) {
+            Logger.error('Failed to parse datetime: ' + strValue + '. Error: ' + e.getMessage());
+            Logger.setScenario('InboundForm_Processor.convertToDateTime');
+            Logger.saveLog();
             System.debug(LoggingLevel.WARN, 'Failed to parse datetime: ' + strValue);
             return null;
         }
@@ -669,6 +691,9 @@ public with sharing class InboundForm_Processor {
                 }
             }
         } catch (Exception e) {
+            Logger.error('Failed to convert default value: ' + defaultValue + ' for type: ' + dataType + '. Error: ' + e.getMessage());
+            Logger.setScenario('InboundForm_Processor.convertDefault');
+            Logger.saveLog();
             return defaultValue;
         }
     }
@@ -1112,6 +1137,10 @@ public with sharing class InboundForm_Processor {
         
         if (!statusUpdates.isEmpty()) {
             Id jobId = System.enqueueJob(new InboundForm_StatusUpdateQueueable(statusUpdates));
+            //logging is handled in the queueable class, but we can log the enqueueing here
+            Logger.info('Enqueued status update job: ' + jobId + 
+                ' for ' + statusUpdates.size() + ' records');
+            Logger.saveLog();
             System.debug(LoggingLevel.INFO, 'Enqueued status update job: ' + jobId + 
                 ' for ' + statusUpdates.size() + ' records');
         }

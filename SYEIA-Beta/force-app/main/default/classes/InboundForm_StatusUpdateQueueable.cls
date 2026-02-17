@@ -34,6 +34,8 @@ public class InboundForm_StatusUpdateQueueable implements Queueable, Database.Al
         Id jobId = ctx.getJobId();
         System.debug(LoggingLevel.INFO, 'StatusUpdateQueueable executing: JobId=' + jobId + 
             ', Records=' + statusUpdates.size() + ', RetryCount=' + retryCount);
+        Logger.info('StatusUpdateQueueable executing: JobId=' + jobId + 
+            ', Records=' + statusUpdates.size() + ', RetryCount=' + retryCount);
         
         // Attach finalizer for error handling
         System.attachFinalizer(new StatusUpdateFinalizer(statusUpdates, retryCount));
@@ -79,6 +81,8 @@ public class InboundForm_StatusUpdateQueueable implements Queueable, Database.Al
                 for (Database.Error err : results[i].getErrors()) {
                     String errorMsg = err.getStatusCode() + ': ' + err.getMessage();
                     errorMessages.add(errorMsg);
+                    Logger.error('Failed to update Inbound_Request__c ' + recordsToUpdate[i].Id + ': ' + errorMsg);
+                    Logger.setScenario('InboundForm_StatusUpdateQueueable.execute');
                     System.debug(LoggingLevel.ERROR, 
                         'Failed to update Inbound_Request__c ' + recordsToUpdate[i].Id + ': ' + errorMsg);
                 }
@@ -94,8 +98,12 @@ public class InboundForm_StatusUpdateQueueable implements Queueable, Database.Al
             }
         }
         
+        Logger.info('StatusUpdateQueueable complete: Success=' + successCount + 
+            ', Failed=' + failureCount + ', Retryable=' + failedUpdates.size());
+        Logger.setScenario('InboundForm_StatusUpdateQueueable.execute');
         System.debug(LoggingLevel.INFO, 'StatusUpdateQueueable complete: Success=' + successCount + 
             ', Failed=' + failureCount + ', Retryable=' + failedUpdates.size());
+
         
         // Queue retry for retryable failures if within retry limit
         if (!failedUpdates.isEmpty() && retryCount < MAX_RETRIES) {
@@ -104,8 +112,13 @@ public class InboundForm_StatusUpdateQueueable implements Queueable, Database.Al
             // Max retries exceeded, log permanent failures
             for (StatusUpdateData failed : failedUpdates) {
                 logPermanentFailure(failed, new List<String>{ 'Max retries exceeded: ' + failed.lastError });
+                Logger.error('Max retries exceeded for Inbound_Request__c ' + failed.recordId + ': ' + failed.lastError);
+                Logger.setScenario('InboundForm_StatusUpdateQueueable.execute');
             }
         }
+        
+        // save all logs
+        Logger.saveLog();
     }
     
     /**
@@ -147,15 +160,21 @@ public class InboundForm_StatusUpdateQueueable implements Queueable, Database.Al
             Id retryJobId = System.enqueueJob(
                 new InboundForm_StatusUpdateQueueable(failedUpdates, retryCount + 1)
             );
+            Logger.info('Queued retry job: ' + retryJobId + 
+                ' for ' + failedUpdates.size() + ' records (attempt ' + (retryCount + 2) + ')');
             System.debug(LoggingLevel.INFO, 'Queued retry job: ' + retryJobId + 
                 ' for ' + failedUpdates.size() + ' records (attempt ' + (retryCount + 2) + ')');
         } catch (Exception e) {
             System.debug(LoggingLevel.ERROR, 'Failed to queue retry: ' + e.getMessage());
+            Logger.error('Failed to queue retry: ' + e.getMessage());
+            Logger.setScenario('InboundForm_StatusUpdateQueueable.queueRetry');
             // Log all as permanent failures
             for (StatusUpdateData failed : failedUpdates) {
+                Logger.error('Retry failed for Inbound_Request__c ' + failed.recordId + ': ' + e.getMessage());
                 logPermanentFailure(failed, new List<String>{ 'Retry queue failed: ' + e.getMessage() });
             }
         }
+        Logger.saveLog();
     }
     
     /**

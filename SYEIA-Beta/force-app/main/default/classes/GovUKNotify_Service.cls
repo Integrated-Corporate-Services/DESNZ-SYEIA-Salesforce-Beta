@@ -36,9 +36,15 @@ public class GovUKNotify_Service {
             return parseResponse(response);
             
         } catch (NotifyException e) {
+            Logger.error('NotifyException: ' + e.getMessage());
+            Logger.setScenario('GovUKNotify_Service.sendEmail');
             throw e;
         } catch (Exception e) {
+            Logger.error('Failed to send email via GOV.UK Notify: ' + e.getMessage());
+            Logger.setScenario('GovUKNotify_Service.sendEmail');
             throw new NotifyException('Failed to send email via GOV.UK Notify: ' + e.getMessage(), e);
+        } finally{
+            Logger.saveLog();
         }
     }
     
@@ -112,6 +118,9 @@ public class GovUKNotify_Service {
             }
         } catch (Exception e) {
             errorMessage += ': ' + response.getBody();
+            Logger.error('Failed to parse error response: ' + e.getMessage());
+            Logger.setScenario('GovUKNotify_Service.handleHttpError');
+            Logger.saveLog();
         }
         throw new NotifyException(errorMessage);
     }
@@ -163,6 +172,9 @@ public class GovUKNotify_Service {
                 System.debug(LoggingLevel.INFO, 'GOV.UK Notify - Notification ID: ' + result.notificationId);
             } catch (Exception e) {
                 System.debug(LoggingLevel.WARN, 'Could not parse response body: ' + e.getMessage());
+                Logger.error('Failed to parse GOV.UK Notify response: ' + e.getMessage());
+                Logger.setScenario('GovUKNotify_Service.parseResponse');
+                Logger.saveLog();
             }
         }
 

@@ -86,7 +86,9 @@ public class ContentVersionTriggerHelper {
         try { 
             enforceBlockedExtensions(newRecords);
         } catch (Exception ex) {
-            Utilities.logMethodExit('ContentVersionTriggerHelper.processBeforeInsert');
+            Logger.error('Error in processBeforeInsert: ' + ex.getMessage());
+            Logger.setScenario('processBeforeInsert');
+            Logger.saveLog();
             throw ex; // Re-throw to ensure transaction awareness
         }
     }
@@ -96,7 +98,9 @@ public class ContentVersionTriggerHelper {
         try { 
             enforceBlockedExtensions(newRecords);
         } catch (Exception ex) {
-            Utilities.logMethodExit('ContentVersionTriggerHelper.processBeforeUpdate');
+            Logger.error('Error in processBeforeUpdate: ' + ex.getMessage());
+            Logger.setScenario('processBeforeUpdate');
+            Logger.saveLog();
             throw ex; // Re-throw to ensure transaction awareness
         }
     }
@@ -146,41 +150,4 @@ public class ContentVersionTriggerHelper {
         }
         Utilities.logMethodExit('ContentVersionTriggerHelper.enforceBlockedExtensions');
     }
-
-    /**
-     * Process records that may need reprocessing (explicit retry)
-     * This bypasses the processed check for intentional retries
-     */
-    // public void reprocessRequests(Set<Id> requestIds) {
-    //     if (requestIds == null || requestIds.isEmpty()) {
-    //         return;
-    //     }
-        
-    //     System.debug(LoggingLevel.INFO, 
-    //         'Reprocessing ' + requestIds.size() + ' ContentVersion records. IDs: ' + String.join(new List<Id>(requestIds), ','));
-        
-    //     // Remove from processed set to allow reprocessing
-    //     processedRequestIds.removeAll(requestIds);
-        
-    //     // Query fresh records
-    //     List<ContentVersion> requests = [
-    //         SELECT Id
-    //         FROM ContentVersion
-    //         WHERE Id IN :requestIds
-    //     ];
-        
-    //     if (requests.isEmpty()) {
-    //         System.debug(LoggingLevel.WARN, 'No records found for reprocessing');
-    //         return;
-    //     }
-        
-    //     // Build map for processing
-    //     Map<Id, SObject> requestMap = new Map<Id, SObject>();
-    //     for (ContentVersion req : requests) {
-    //         requestMap.put(req.Id, req);
-    //     }
-        
-    //     // Process
-    //     processAfterInsert(requests, requestMap);
-    // }
 }
