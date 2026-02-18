@@ -10,6 +10,10 @@
         <connector>
             <targetReference>Get_Consent_Letter_NotificationType</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Get_S37_Template_Nebula_Logger</targetReference>
+        </faultConnector>
         <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
             <name>documentTitle</name>
@@ -49,6 +53,10 @@
         <connector>
             <targetReference>Get_Consent_Letter_NotificationType</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Get_S37_Template_Nebula_Logger</targetReference>
+        </faultConnector>
         <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
             <name>documentTitle</name>
@@ -79,12 +87,127 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
     <actionCalls>
+        <name>Get_S37_Template_Nebula_Logger</name>
+        <label>Get S37 Template Nebula Logger</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>FlowLogEntry</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>faultMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>flowName</name>
+            <value>
+                <stringValue>Subflow_File_Approval_Process_Next_Steps</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>loggingLevelName</name>
+            <value>
+                <stringValue>ERROR</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>message</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recordId</name>
+            <value>
+                <elementReference>triggeringRecord.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveLog</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <nameSegment>FlowLogEntry</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Get_User_From_Approver_Nebula_Logger</name>
+        <label>Get User From Approver Nebula Logger</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>FlowLogEntry</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>faultMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>flowName</name>
+            <value>
+                <stringValue>Subflow_File_Approval_Process_Next_Steps</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>loggingLevelName</name>
+            <value>
+                <stringValue>ERROR</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>message</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recordId</name>
+            <value>
+                <elementReference>triggeringRecord.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveLog</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveMethodName</name>
+        </inputParameters>
+        <inputParameters>
+            <name>scenario</name>
+        </inputParameters>
+        <inputParameters>
+            <name>shouldThrowFaultMessageException</name>
+        </inputParameters>
+        <inputParameters>
+            <name>tagsString</name>
+        </inputParameters>
+        <inputParameters>
+            <name>topics</name>
+        </inputParameters>
+        <nameSegment>FlowLogEntry</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
         <name>Notify_Case_Officer_That_File_Is_Approved</name>
         <label>Notify Case Officer That File Is Approved</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <actionName>customNotificationAction</actionName>
         <actionType>customNotificationAction</actionType>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Get_S37_Template_Nebula_Logger</targetReference>
+        </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>customNotifTypeId</name>
@@ -234,7 +357,8 @@
             <label>Screening Decision Letter</label>
         </rules>
     </decisions>
-    <description>This subflow handles the next steps once a Document Approval Request has either been approved or rejected</description>
+    <description>This subflow handles the next steps once a Document Approval Request has either been approved or rejected.
+Nebula Logger</description>
     <environments>Default</environments>
     <formulas>
         <name>formula_NotificationBody</name>
@@ -300,6 +424,10 @@
         <connector>
             <targetReference>Add_Requesting_User_to_CollectionOfUserIds</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Get_S37_Template_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>DeveloperName</field>
@@ -321,6 +449,9 @@
         <connector>
             <targetReference>Get_S37_Consent_Letter_DocumentTemplateContentDoc</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Get_S37_Template_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Name</field>
@@ -342,6 +473,10 @@
         <connector>
             <targetReference>Generate_Approved_Consent_Letter</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Get_S37_Template_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>DocumentTemplateId</field>
@@ -363,6 +498,10 @@
         <connector>
             <targetReference>Get_S37_Screening_Decision_Letter_DocumentTemplateContentDoc</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Get_S37_Template_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Name</field>
@@ -384,6 +523,10 @@
         <connector>
             <targetReference>Generate_Approved_Screening_Decision_Letter</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Get_S37_Template_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>DocumentTemplateId</field>
@@ -405,6 +548,9 @@
         <connector>
             <targetReference>Assign_Approver_Lookup_Id</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Get_User_From_Approver_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -425,6 +571,10 @@
         <connector>
             <targetReference>Has_File_Been_Approved</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Get_User_From_Approver_Nebula_Logger</targetReference>
+        </faultConnector>
         <inputReference>triggeringRecord</inputReference>
     </recordUpdates>
     <start>

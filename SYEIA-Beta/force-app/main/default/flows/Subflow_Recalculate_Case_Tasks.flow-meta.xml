@@ -1,5 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Reschedule_Update_Case_Nebula_Log</name>
+        <label>Reschedule Update Case Nebula Log</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>FlowLogEntry</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>faultMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>flowName</name>
+            <value>
+                <stringValue>Subflow_Recalculate_Case_Tasks</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>loggingLevelName</name>
+            <value>
+                <stringValue>ERROR</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>message</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recordId</name>
+            <value>
+                <elementReference>var_CaseId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveLog</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <nameSegment>FlowLogEntry</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
     <apiVersion>65.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
@@ -81,6 +129,7 @@
             <label>Task Found</label>
         </rules>
     </decisions>
+    <description>Nebula Logger</description>
     <environments>Default</environments>
     <interviewLabel>Subflow - Recalculate Case Tasks {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Subflow - Recalculate Case Tasks</label>
@@ -112,6 +161,10 @@
         <connector>
             <targetReference>Task_Found</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Reschedule_Update_Case_Nebula_Log</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>WhatId</field>
@@ -159,6 +212,9 @@
         <label>Update Case</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <faultConnector>
+            <targetReference>Reschedule_Update_Case_Nebula_Log</targetReference>
+        </faultConnector>
         <inputReference>var_CaseToUpdate</inputReference>
     </recordUpdates>
     <start>
