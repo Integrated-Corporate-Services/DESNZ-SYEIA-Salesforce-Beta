@@ -276,6 +276,10 @@
 		<members>Payment__c.Payment_Method__c</members>
 		<members>Payment__c.Quantity__c</members>
 		<members>Payment__c.Subtotal__c</members>
+		<members>Project_Target_Completion_Date_Conifg__mdt.Full_EIA_Duration_Days__c</members>
+		<members>Project_Target_Completion_Date_Conifg__mdt.No_screening_needed_Duration_Days__c</members>
+		<members>Project_Target_Completion_Date_Conifg__mdt.Screening_needed_NL_Duration_Days__c</members>
+		<members>Project_Target_Completion_Date_Conifg__mdt.Screening_needed_Duration_Days__c</members>
 		<members>Related_Case__c.Child_Case__c</members>
 		<members>Related_Case__c.Operator_Reference_Child_Case__c</members>
 		<members>Related_Case__c.Parent_Case__c</members>
@@ -306,6 +310,7 @@
 	</types>
 	<types>
 		<members>GOV_UK_Notify_Config.Production</members>
+		<members>Project_Target_Completion_Date_Conifg__mdt.Project_Target_Duration_Days</members>
 		<name>CustomMetadata</name>
 	</types>
 	<types>
@@ -329,6 +334,7 @@
 		<members>Negotiation__c</members>
 		<members>Party__c</members>
 		<members>Payment__c</members>
+        <members>Project_Target_Completion_Date_Conifg__mdt</members>
 		<members>Related_Case__c</members>
 		<members>Route_Point__c</members>
 		<members>Route__c</members>
@@ -426,6 +432,7 @@
 		<members>Inbound_Request__c-Inbound Request Layout</members>
 		<members>Party__c-Party Layout</members>
 		<members>Payment__c-Payment Layout</members>
+		<members>Project_Target_Completion_Date_Conifg__mdt-Project Target Completion Date Layout</members>
 		<members>Related_Case__c-Related Application Layout</members>
 		<members>Route_Point__c-Route Grid Reference Layout</members>
 		<members>Route__c-Route Layout</members>
