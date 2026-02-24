@@ -486,7 +486,6 @@
 	<types>
 		<members>Admin</members>
 		<members>Base Employee</members>
-		<members>Case Officer</members>
 		<members>Decision Manager</members>
 		<name>Profile</name>
 	</types>
