@@ -762,19 +762,19 @@
     <picklistValues>
         <picklist>Type_of_Project__c</picklist>
         <values>
-            <fullName>Low risk %28IRZ%29</fullName>
+            <fullName>Full EIA</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Low risk %28no screening needed%29</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Screening %28National Landscapes%29</fullName>
+            <fullName>No screening needed</fullName>
             <default>false</default>
         </values>
         <values>
             <fullName>Screening needed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Screening needed %28National Landscapes%29</fullName>
             <default>false</default>
         </values>
     </picklistValues>
