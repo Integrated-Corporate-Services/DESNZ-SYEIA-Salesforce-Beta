@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
+        <name>Approval_Error_Nebula_Logger</name>
+        <label>Approval Error Nebula Logger</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>FlowLogEntry</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>faultMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>flowName</name>
+            <value>
+                <stringValue>Screen_DocGen_S37_Screening_Decision_Letter</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>loggingLevelName</name>
+            <value>
+                <stringValue>ERROR</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>message</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recordId</name>
+            <value>
+                <elementReference>$Flow.CurrentRecord</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveLog</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <nameSegment>FlowLogEntry</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
         <name>Generate_Document</name>
         <label>Generate Document</label>
         <locationX>0</locationX>
@@ -10,6 +58,9 @@
         <connector>
             <targetReference>Was_Approval_Requested_Final</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Generate_Document_Nebula_Logger</targetReference>
+        </faultConnector>
         <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
             <name>documentTitle</name>
@@ -36,6 +87,69 @@
             </value>
         </inputParameters>
         <nameSegment>DocGen_DocumentGenerationWrapper</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Generate_Document_Nebula_Logger</name>
+        <label>Generate Document Nebula Logger</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>FlowLogEntry</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>faultMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>flowName</name>
+            <value>
+                <stringValue>Screen_DocGen_S37_Screening_Decision_Letter</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>loggingLevelName</name>
+            <value>
+                <stringValue>ERROR</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>message</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveLog</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveMethodName</name>
+        </inputParameters>
+        <inputParameters>
+            <name>scenario</name>
+        </inputParameters>
+        <inputParameters>
+            <name>shouldThrowFaultMessageException</name>
+        </inputParameters>
+        <inputParameters>
+            <name>tagsString</name>
+        </inputParameters>
+        <inputParameters>
+            <name>topics</name>
+        </inputParameters>
+        <nameSegment>FlowLogEntry</nameSegment>
         <offset>0</offset>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
@@ -504,6 +618,10 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Set_refereneObjectId_to_Document_Id</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Generate_Document_Nebula_Logger</targetReference>
+        </faultConnector>
         <inputAssignments>
             <field>Approval_Status__c</field>
             <value>
@@ -552,6 +670,10 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Get_Group</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Generate_Document_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Address_Line1__c</field>
@@ -573,6 +695,10 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Get_Address</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Generate_Document_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Case__c</field>
@@ -594,6 +720,10 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Get_Asset_Using_reordId</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Generate_Document_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -615,6 +745,10 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Update_Document_Approval_Record</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Approval_Error_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -636,6 +770,10 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Get_ContentVersion</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Approval_Error_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -657,6 +795,10 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Get_Group_Members</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Generate_Document_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Name</field>
@@ -678,6 +820,10 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Loop_Group_Members</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Generate_Document_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>GroupId</field>
@@ -701,6 +847,10 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Get_S37_Screening_Decision_Letter_DocumentTemplateContentDoc</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Generate_Document_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Name</field>
@@ -722,6 +872,10 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Get_Case_Using_recordId</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Generate_Document_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>DocumentTemplateId</field>
@@ -743,6 +897,10 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Condition_Library</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Generate_Document_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -770,6 +928,9 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Final_Record_Creation_Screen_Approval</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Approval_Error_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -1673,7 +1834,7 @@ TEXT(YEAR(TODAY()))</expression>
             <targetReference>Does_User_Have_Bypass_Approval_CP</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <name>DV_AvoidBirdBreeding</name>
         <dataType>String</dataType>

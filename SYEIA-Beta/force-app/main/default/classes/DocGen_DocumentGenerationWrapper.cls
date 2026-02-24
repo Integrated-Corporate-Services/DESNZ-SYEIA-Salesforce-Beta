@@ -26,6 +26,7 @@ public class DocGen_DocumentGenerationWrapper {
         );
         try{
             insert documentGenerationProcessToInsert;
+            Logger.warn('Inserted DocumentGenerationProcess with Id: ' + documentGenerationProcessToInsert.Id);
         } catch (Exception e) {
             Logger.error('Error inserting DocumentGenerationProcess: ' + e.getMessage());
             Logger.setScenario('DocGen_DocumentGenerationWrapper.generateDocument');
