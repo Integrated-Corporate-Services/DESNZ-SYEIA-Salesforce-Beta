@@ -11,24 +11,24 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Low risk (IRZ)</fullName>
-                <default>false</default>
-                <label>Low risk (IRZ)</label>
-            </value>
-            <value>
-                <fullName>Low risk (no screening needed)</fullName>
-                <default>false</default>
-                <label>Low risk (no screening needed)</label>
-            </value>
-            <value>
-                <fullName>Screening (National Landscapes)</fullName>
-                <default>false</default>
-                <label>Screening (National Landscapes)</label>
-            </value>
-            <value>
                 <fullName>Screening needed</fullName>
                 <default>false</default>
                 <label>Screening needed</label>
+            </value>
+            <value>
+                <fullName>No screening needed</fullName>
+                <default>false</default>
+                <label>No screening needed</label>
+            </value>
+            <value>
+                <fullName>Screening needed (National Landscapes)</fullName>
+                <default>false</default>
+                <label>Screening needed (National Landscapes)</label>
+            </value>
+            <value>
+                <fullName>Full EIA</fullName>
+                <default>false</default>
+                <label>Full EIA</label>
             </value>
         </valueSetDefinition>
     </valueSet>
