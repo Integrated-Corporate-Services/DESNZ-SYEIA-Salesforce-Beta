@@ -309,8 +309,8 @@
 		<name>CustomField</name>
 	</types>
 	<types>
-		<members>GOV_UK_Notify_Config.Production</members>
 		<members>Project_Target_Completion_Date_Conifg__mdt.Project_Target_Duration_Days</members>
+		<members>GOV_UK_Notify_Config.Production</members>
 		<name>CustomMetadata</name>
 	</types>
 	<types>
