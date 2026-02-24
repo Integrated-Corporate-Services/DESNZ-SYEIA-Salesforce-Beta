@@ -388,6 +388,7 @@
 		<members>Screen_Create_New_Internal_Consultation</members>
 		<members>Screen_DocGen_S37_Consent_Letter</members>
 		<members>Screen_DocGen_S37_Screening_Decision_Letter</members>
+		<members>Screen_Document_Library</members>
 		<members>Screen_Reject_Case_Flow</members>
 		<members>Screen_Withdrawal_Request_Process_Guide</members>
 		<members>Subflow_Create_Withdrawal_Request</members>
