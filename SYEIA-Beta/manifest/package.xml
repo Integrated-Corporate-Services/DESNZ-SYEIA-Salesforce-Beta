@@ -310,6 +310,7 @@
 	</types>
 	<types>
 		<members>GOV_UK_Notify_Config.Production</members>
+		<members>Project_Target_Completion_Date_Conifg.Project_Target_Duration_Days</members>
 		<name>CustomMetadata</name>
 	</types>
 	<types>
