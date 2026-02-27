@@ -315,6 +315,7 @@
 	<types>
 		<members>Consent_Letter_Approved</members>
 		<members>Notify_File_Approvers</members>
+		<members>Unassigned_Case_Notifications</members>
 		<name>CustomNotificationType</name>
 	</types>
 	<types>
@@ -388,6 +389,7 @@
 	<types>
 		<members>Case_After_Save</members>
 		<members>Case_Before_Save</members>
+		<members>Case_Unassigned_Case_Notifications</members>
 		<members>Consultation_Before_Save</members>
 		<members>Document_Approval_Request_After_Save</members>
 		<members>Screen_Create_New_Internal_Consultation</members>
