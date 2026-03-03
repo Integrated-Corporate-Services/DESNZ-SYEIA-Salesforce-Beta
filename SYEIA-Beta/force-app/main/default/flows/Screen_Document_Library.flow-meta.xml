@@ -195,6 +195,16 @@
         <dataType>String</dataType>
     </choices>
     <choices>
+        <name>choice_S37_Consent_Letter</name>
+        <choiceText>Consent Letter</choiceText>
+        <dataType>Boolean</dataType>
+    </choices>
+    <choices>
+        <name>choice_S37_Screening_Decision_Letter</name>
+        <choiceText>Screening Decision Letter</choiceText>
+        <dataType>Boolean</dataType>
+    </choices>
+    <choices>
         <name>S37_Consent_Letter_Choice</name>
         <choiceText>Consent Letter&lt;span style=&quot;color: rgb(24, 24, 24);&quot;&gt;&lt;span class=&quot;ql-cursor&quot;&gt;﻿&lt;/span&gt;&lt;/span&gt;</choiceText>
         <dataType>String</dataType>
@@ -299,10 +309,10 @@
             <name>S37_Consent_Letter</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>S37_Document_Library_CS</leftValueReference>
-                <operator>EqualTo</operator>
+                <leftValueReference>choice_S37_Consent_Letter</leftValueReference>
+                <operator>WasSelected</operator>
                 <rightValue>
-                    <elementReference>S37_Consent_Letter_Choice</elementReference>
+                    <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
@@ -314,10 +324,10 @@
             <name>S37_Screening_Letter</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>S37_Document_Library_CS</leftValueReference>
-                <operator>EqualTo</operator>
+                <leftValueReference>choice_S37_Screening_Decision_Letter</leftValueReference>
+                <operator>WasSelected</operator>
                 <rightValue>
-                    <elementReference>S37_Screening_Letter_Choice</elementReference>
+                    <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
@@ -494,10 +504,10 @@
             <targetReference>S37_Document_Choice</targetReference>
         </connector>
         <fields>
-            <name>S37_Document_Library_CS</name>
-            <choiceReferences>S37_Consent_Letter_Choice</choiceReferences>
-            <choiceReferences>S37_Screening_Letter_Choice</choiceReferences>
-            <dataType>String</dataType>
+            <name>S37_Document_Library_Header</name>
+            <choiceReferences>choice_S37_Consent_Letter</choiceReferences>
+            <choiceReferences>choice_S37_Screening_Decision_Letter</choiceReferences>
+            <dataType>Boolean</dataType>
             <fieldText>S37 Document Library</fieldText>
             <fieldType>RadioButtons</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
