@@ -172,6 +172,36 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assign_SAR_Name</name>
+        <label>Assign SAR Name</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>varListSAR_Names</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue> • </stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varListSAR_Names</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_SAR_Records.Name</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varListSAR_Names</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_SAR_Records</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Bypass_Approval</name>
         <label>Bypass Approval?</label>
         <locationX>0</locationX>
@@ -302,6 +332,11 @@
     </decisions>
     <environments>Default</environments>
     <formulas>
+        <name>form_SAR_Names</name>
+        <dataType>String</dataType>
+        <expression>&quot;( • ) &quot; &amp; {!Transform_SAR_Name} &amp; BR()</expression>
+    </formulas>
+    <formulas>
         <name>formula_ApplicationDate</name>
         <dataType>String</dataType>
         <expression>TEXT(
@@ -338,37 +373,37 @@ TEXT(YEAR({!Get_Case_Using_recordId.Date_of_Application__c}))</expression>
         <name>formula_AvoidBirdBreedingNumber</name>
         <dataType>String</dataType>
         <expression>IF(
-  {!IncludeAvoidBirdBreeding.value},
+  {!IncludeHRA_Conducted.value},
   IF(
     AND(
       {!IncludeNaturalEnglandNRWAssent.value},
-      {!IncludeOutstandingWayleaves.value},
+      {!IncludeLPA_Consultation.value},
       {!IncludeHistoricEnglandCadwConsent.value},
       {!IncludeEcologySurvey.value}
     ),
     &quot;7. &quot;,
     IF(
       OR(
-        AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeOutstandingWayleaves.value}, {!IncludeHistoricEnglandCadwConsent.value}),
-        AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeOutstandingWayleaves.value}, {!IncludeEcologySurvey.value}),
+        AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeLPA_Consultation.value}, {!IncludeHistoricEnglandCadwConsent.value}),
+        AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeLPA_Consultation.value}, {!IncludeEcologySurvey.value}),
         AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeHistoricEnglandCadwConsent.value}, {!IncludeEcologySurvey.value}),
-        AND({!IncludeOutstandingWayleaves.value}, {!IncludeHistoricEnglandCadwConsent.value}, {!IncludeEcologySurvey.value})
+        AND({!IncludeLPA_Consultation.value}, {!IncludeHistoricEnglandCadwConsent.value}, {!IncludeEcologySurvey.value})
       ),
       &quot;6. &quot;,
       IF(
         OR(
-          AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeOutstandingWayleaves.value}),
+          AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeLPA_Consultation.value}),
           AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeHistoricEnglandCadwConsent.value}),
           AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeEcologySurvey.value}),
-          AND({!IncludeOutstandingWayleaves.value}, {!IncludeHistoricEnglandCadwConsent.value}),
-          AND({!IncludeOutstandingWayleaves.value}, {!IncludeEcologySurvey.value}),
+          AND({!IncludeLPA_Consultation.value}, {!IncludeHistoricEnglandCadwConsent.value}),
+          AND({!IncludeLPA_Consultation.value}, {!IncludeEcologySurvey.value}),
           AND({!IncludeHistoricEnglandCadwConsent.value}, {!IncludeEcologySurvey.value})
         ),
         &quot;5. &quot;,
         IF(
           OR(
             {!IncludeNaturalEnglandNRWAssent.value},
-            {!IncludeOutstandingWayleaves.value},
+            {!IncludeLPA_Consultation.value},
             {!IncludeHistoricEnglandCadwConsent.value},
             {!IncludeEcologySurvey.value}
           ),
@@ -427,21 +462,21 @@ TEXT(YEAR(TODAY()))</expression>
   IF(
     AND(
       {!IncludeNaturalEnglandNRWAssent.value},
-      {!IncludeOutstandingWayleaves.value},
+      {!IncludeLPA_Consultation.value},
       {!IncludeHistoricEnglandCadwConsent.value}
     ),
     &quot;6. &quot;,
     IF(
       OR(
-        AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeOutstandingWayleaves.value}),
+        AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeLPA_Consultation.value}),
         AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeHistoricEnglandCadwConsent.value}),
-        AND({!IncludeOutstandingWayleaves.value}, {!IncludeHistoricEnglandCadwConsent.value})
+        AND({!IncludeLPA_Consultation.value}, {!IncludeHistoricEnglandCadwConsent.value})
       ),
       &quot;5. &quot;,
       IF(
         OR(
           {!IncludeNaturalEnglandNRWAssent.value},
-          {!IncludeOutstandingWayleaves.value},
+          {!IncludeLPA_Consultation.value},
           {!IncludeHistoricEnglandCadwConsent.value}
         ),
         &quot;4. &quot;,
@@ -458,10 +493,10 @@ TEXT(YEAR(TODAY()))</expression>
         <expression>IF(
   {!IncludeHistoricEnglandCadwConsent.value},
   IF(
-    AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeOutstandingWayleaves.value}),
+    AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeLPA_Consultation.value}),
     &quot;5. &quot;,
     IF(
-      OR({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeOutstandingWayleaves.value}),
+      OR({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeLPA_Consultation.value}),
       &quot;4. &quot;,
       &quot;3. &quot;
     )
@@ -472,7 +507,7 @@ TEXT(YEAR(TODAY()))</expression>
     <formulas>
         <name>formula_NaturalEnglandNRWAssentNumber</name>
         <dataType>String</dataType>
-        <expression>IF({!IncludeNaturalEnglandNRWAssent.value},IF({!IncludeOutstandingWayleaves.value}, &apos;4. &apos;, &apos;3. &apos;), null)</expression>
+        <expression>IF({!IncludeNaturalEnglandNRWAssent.value},IF({!IncludeLPA_Consultation.value}, &apos;4. &apos;, &apos;3. &apos;), null)</expression>
     </formulas>
     <formulas>
         <name>formula_NotificationBody</name>
@@ -482,12 +517,12 @@ TEXT(YEAR(TODAY()))</expression>
     <formulas>
         <name>formula_OutstandingWayleavesNumber</name>
         <dataType>String</dataType>
-        <expression>IF({!IncludeOutstandingWayleaves.value}, &apos;3. &apos;, null)</expression>
+        <expression>IF({!IncludeLPA_Consultation.value}, &apos;3. &apos;, null)</expression>
     </formulas>
     <formulas>
         <name>formula_TokenData</name>
         <dataType>String</dataType>
-        <expression>&apos;{&apos; &amp; {!formula_TokenDataUserBlock} &amp; &apos;  &quot;Asset_Line_Voltage&quot;: &quot;&apos; &amp; TEXT({!Get_Asset_Using_reordId.Line_Voltage__c}) &amp; &apos;&quot;,  &quot;Application_Date&quot;: &quot;&apos; &amp; {!formula_ApplicationDate} &amp; &apos;&quot;,  &quot;DESNZ_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Name} &amp; &apos;&quot;,  &quot;Operator_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Applicant_Reference__c} &amp; &apos;&quot;, &quot;DNO_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Name} &amp; &apos;&quot;,  &quot;DNO_Address_Line1&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line1__c} &amp; &apos;&quot;,  &quot;DNO_Address_Line2&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line_2__c} &amp; &apos;&quot;,  &quot;DNO_Address_TownCity&quot;: &quot;&apos; &amp; {!Get_Address.Town_City__c} &amp; &apos;&quot;,  &quot;DNO_Address_Postcode&quot;: &quot;&apos; &amp; {!Get_Address.Postcode__c} &amp; &apos;&quot;,  &quot;Current_Date&quot;: &quot;&apos; &amp; {!formula_CurrentDate} &amp; &apos;&quot;,  &quot;IF_IncludeOutstandingWayleaves&quot;: &apos; &amp; IF({!IncludeOutstandingWayleaves.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Outstanding_Wayleaves&quot;: &quot;&apos; &amp; {!formula_OutstandingWayleavesNumber} &amp; {!Outstanding_Wayleaves} &amp; &apos;&quot;,  &quot;Outstanding_Wayleaves_Reason&quot;: &quot;&apos; &amp; {!Outstanding_Wayleaves_Reason} &amp; &apos;&quot;,  &quot;IF_IncludeNaturalEnglandNRWAssent&quot;: &apos; &amp; IF({!IncludeNaturalEnglandNRWAssent.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Natural_England_NRW_Assent&quot;: &quot;&apos; &amp; {!formula_NaturalEnglandNRWAssentNumber} &amp; {!Natural_England_NRW_Assent} &amp; &apos;&quot;,  &quot;Natural_England_NRW_Assent_Reason&quot;: &quot;&apos; &amp; {!Natural_England_NRW_Assent_Reason} &amp; &apos;&quot;,  &quot;IF_IncludeHistoricEnglandCadwConsent&quot;: &apos; &amp; IF({!IncludeHistoricEnglandCadwConsent.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Historic_England_Cadw_Consent&quot;: &quot;&apos; &amp; {!formula_HistoricEnglandCadwConsentNumber} &amp; {!Historic_England_Cadw_Consent} &amp; &apos;&quot;,  &quot;Historic_England_Cadw_Consent_Reason&quot;: &quot;&apos; &amp; {!Historic_England_Cadw_Consent_Reason} &amp; &apos;&quot;,  &quot;IF_IncludeEcologySurvey&quot;: &apos; &amp; IF({!IncludeEcologySurvey.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Ecology_Survey&quot;: &quot;&apos; &amp; {!formula_EcologySurveyNumber} &amp; {!Ecology_Survey} &amp; &apos;&quot;,  &quot;Ecology_Survey_Reason&quot;: &quot;&apos; &amp; {!Ecology_Survey_Reason} &amp; &apos;&quot;,  &quot;IF_IncludeAvoidBirdFeeding&quot;: &apos; &amp; IF({!IncludeAvoidBirdBreeding.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Avoiding_Bird_Breeding&quot;: &quot;&apos; &amp; {!formula_AvoidBirdBreedingNumber} &amp; {!Avoiding_Bird_Breeding} &amp; &apos;&quot;,  &quot;Avoiding_Bird_Breeding_Reason&quot;: &quot;&apos; &amp; {!Avoiding_Bird_Breeding_Reason} &amp; &apos;&quot;,  &quot;IF_IncludeTreeProtection&quot;: &apos; &amp; IF({!IncludeTreeProtection.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Tree_Protection&quot;: &quot;&apos; &amp; {!formula_TreeProtectionNumber} &amp; {!Tree_Protection} &amp; &apos;&quot;,  &quot;Tree_Protection_Reason&quot;: &quot;&apos; &amp; {!Tree_Protection_Reason} &amp; &apos;&quot; }&apos;</expression>
+        <expression>&apos;{&apos; &amp; {!formula_TokenDataUserBlock} &amp; &apos;  &quot;Asset_Line_Voltage&quot;: &quot;&apos; &amp; TEXT({!Get_Asset_Using_reordId.Line_Voltage__c}) &amp; &apos;&quot;,  &quot;Application_Date&quot;: &quot;&apos; &amp; {!formula_ApplicationDate} &amp; &apos;&quot;,  &quot;DESNZ_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Name} &amp; &apos;&quot;,  &quot;Operator_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Applicant_Reference__c} &amp; &apos;&quot;, &quot;DNO_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Name} &amp; &apos;&quot;,  &quot;DNO_Address_Line1&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line1__c} &amp; &apos;&quot;,  &quot;DNO_Address_Line2&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line_2__c} &amp; &apos;&quot;,  &quot;DNO_Address_TownCity&quot;: &quot;&apos; &amp; {!Get_Address.Town_City__c} &amp; &apos;&quot;,  &quot;DNO_Address_Postcode&quot;: &quot;&apos; &amp; {!Get_Address.Postcode__c} &amp; &apos;&quot;,  &quot;Current_Date&quot;: &quot;&apos; &amp; {!formula_CurrentDate} &amp; &apos;&quot;,  &quot;IF_IncludeOutstandingWayleaves&quot;: &apos; &amp; IF({!IncludeLPA_Consultation.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Outstanding_Wayleaves&quot;: &quot;&apos; &amp; {!formula_OutstandingWayleavesNumber} &amp; {!LPA_Consultation_Text} &amp; &apos;&quot;,  &quot;Outstanding_Wayleaves_Reason&quot;: &quot;&apos; &amp; {!Outstanding_Wayleaves_Reason} &amp; &apos;&quot;,  &quot;IF_IncludeNaturalEnglandNRWAssent&quot;: &apos; &amp; IF({!IncludeNaturalEnglandNRWAssent.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Natural_England_NRW_Assent&quot;: &quot;&apos; &amp; {!formula_NaturalEnglandNRWAssentNumber} &amp; {!Natural_England_NRW_Assent_noHRA} &amp; &apos;&quot;,  &quot;Natural_England_NRW_Assent_Reason&quot;: &quot;&apos; &amp; {!Natural_England_NRW_Assent_Reason} &amp; &apos;&quot;,  &quot;IF_IncludeHistoricEnglandCadwConsent&quot;: &apos; &amp; IF({!IncludeHistoricEnglandCadwConsent.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Historic_England_Cadw_Consent&quot;: &quot;&apos; &amp; {!formula_HistoricEnglandCadwConsentNumber} &amp; {!Historic_England_Cadw_Consultation_Consent} &amp; &apos;&quot;,  &quot;Historic_England_Cadw_Consent_Reason&quot;: &quot;&apos; &amp; {!Historic_England_Cadw_Consent_Reason} &amp; &apos;&quot;,  &quot;IF_IncludeEcologySurvey&quot;: &apos; &amp; IF({!IncludeEcologySurvey.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Ecology_Survey&quot;: &quot;&apos; &amp; {!formula_EcologySurveyNumber} &amp; {!Ecology_Survey} &amp; &apos;&quot;,  &quot;Ecology_Survey_Reason&quot;: &quot;&apos; &amp; {!Ecology_Survey_Reason} &amp; &apos;&quot;,  &quot;IF_IncludeAvoidBirdFeeding&quot;: &apos; &amp; IF({!IncludeHRA_Conducted.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Avoiding_Bird_Breeding&quot;: &quot;&apos; &amp; {!formula_AvoidBirdBreedingNumber} &amp; {!HRA_Conducted} &amp; &apos;&quot;,  &quot;Avoiding_Bird_Breeding_Reason&quot;: &quot;&apos; &amp; {!txt_Natural_England_NRW_Consultation_HRA} &amp; &apos;&quot;,  &quot;IF_IncludeTreeProtection&quot;: &apos; &amp; IF({!IncludeHRA_Conclusion_No_Appropriate_Assessment.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Tree_Protection&quot;: &quot;&apos; &amp; {!formula_TreeProtectionNumber} &amp; {!txt_HRA_Conclusion_No_appropriate_assessment} &amp; &apos;&quot;,  &quot;Tree_Protection_Reason&quot;: &quot;&apos; &amp; {!txt_HRA_Conclusion_appropriate_assessment} &amp; &apos;&quot;, &quot;Applicant_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Representative__r.Name} &amp; &apos;&quot;, &quot;Project_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Project_name__c} &amp; &apos;&quot;, &quot;Proposed_Development&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Project_Description__c} &amp; &apos;&quot;, &quot;LPA_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Name_of_LPA__c} &amp; &apos;&quot;, &quot;HRA_Conclusion_With_Assessment&quot;: &quot;&apos; &amp; {!txt_HRA_Conclusion_appropriate_assessment} &amp; &apos;&quot;, &quot;Sensitive_Area_Check_List&quot;: &quot;&apos; &amp; {!varListSAR_Names} &amp; &apos;&quot;  }&apos;</expression>
     </formulas>
     <formulas>
         <name>formula_TokenDataUserBlock</name>
@@ -510,59 +545,59 @@ TEXT(YEAR(TODAY()))</expression>
         <name>formula_TreeProtectionNumber</name>
         <dataType>String</dataType>
         <expression>IF(
-  {!IncludeTreeProtection.value},
+  {!IncludeHRA_Conclusion_No_Appropriate_Assessment.value},
   IF(
     AND(
       {!IncludeNaturalEnglandNRWAssent.value},
-      {!IncludeOutstandingWayleaves.value},
+      {!IncludeLPA_Consultation.value},
       {!IncludeHistoricEnglandCadwConsent.value},
-      {!IncludeAvoidBirdBreeding.value},
+      {!IncludeHRA_Conducted.value},
       {!IncludeEcologySurvey.value}
     ),
     &quot;8. &quot;,
     IF(
       OR(
-        AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeOutstandingWayleaves.value}, {!IncludeHistoricEnglandCadwConsent.value}, {!IncludeAvoidBirdBreeding.value}),
-        AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeOutstandingWayleaves.value}, {!IncludeHistoricEnglandCadwConsent.value}, {!IncludeEcologySurvey.value}),
-        AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeOutstandingWayleaves.value}, {!IncludeAvoidBirdBreeding.value}, {!IncludeEcologySurvey.value}),
-        AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeHistoricEnglandCadwConsent.value}, {!IncludeAvoidBirdBreeding.value}, {!IncludeEcologySurvey.value}),
-        AND({!IncludeOutstandingWayleaves.value}, {!IncludeHistoricEnglandCadwConsent.value}, {!IncludeAvoidBirdBreeding.value}, {!IncludeEcologySurvey.value})
+        AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeLPA_Consultation.value}, {!IncludeHistoricEnglandCadwConsent.value}, {!IncludeHRA_Conducted.value}),
+        AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeLPA_Consultation.value}, {!IncludeHistoricEnglandCadwConsent.value}, {!IncludeEcologySurvey.value}),
+        AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeLPA_Consultation.value}, {!IncludeHRA_Conducted.value}, {!IncludeEcologySurvey.value}),
+        AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeHistoricEnglandCadwConsent.value}, {!IncludeHRA_Conducted.value}, {!IncludeEcologySurvey.value}),
+        AND({!IncludeLPA_Consultation.value}, {!IncludeHistoricEnglandCadwConsent.value}, {!IncludeHRA_Conducted.value}, {!IncludeEcologySurvey.value})
       ),
       &quot;7. &quot;,
       IF(
         OR(
-          AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeOutstandingWayleaves.value}, {!IncludeHistoricEnglandCadwConsent.value}),
-          AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeOutstandingWayleaves.value}, {!IncludeAvoidBirdBreeding.value}),
-          AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeOutstandingWayleaves.value}, {!IncludeEcologySurvey.value}),
-          AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeHistoricEnglandCadwConsent.value}, {!IncludeAvoidBirdBreeding.value}),
+          AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeLPA_Consultation.value}, {!IncludeHistoricEnglandCadwConsent.value}),
+          AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeLPA_Consultation.value}, {!IncludeHRA_Conducted.value}),
+          AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeLPA_Consultation.value}, {!IncludeEcologySurvey.value}),
+          AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeHistoricEnglandCadwConsent.value}, {!IncludeHRA_Conducted.value}),
           AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeHistoricEnglandCadwConsent.value}, {!IncludeEcologySurvey.value}),
-          AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeAvoidBirdBreeding.value}, {!IncludeEcologySurvey.value}),
-          AND({!IncludeOutstandingWayleaves.value}, {!IncludeHistoricEnglandCadwConsent.value}, {!IncludeAvoidBirdBreeding.value}),
-          AND({!IncludeOutstandingWayleaves.value}, {!IncludeHistoricEnglandCadwConsent.value}, {!IncludeEcologySurvey.value}),
-          AND({!IncludeOutstandingWayleaves.value}, {!IncludeAvoidBirdBreeding.value}, {!IncludeEcologySurvey.value}),
-          AND({!IncludeHistoricEnglandCadwConsent.value}, {!IncludeAvoidBirdBreeding.value}, {!IncludeEcologySurvey.value})
+          AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeHRA_Conducted.value}, {!IncludeEcologySurvey.value}),
+          AND({!IncludeLPA_Consultation.value}, {!IncludeHistoricEnglandCadwConsent.value}, {!IncludeHRA_Conducted.value}),
+          AND({!IncludeLPA_Consultation.value}, {!IncludeHistoricEnglandCadwConsent.value}, {!IncludeEcologySurvey.value}),
+          AND({!IncludeLPA_Consultation.value}, {!IncludeHRA_Conducted.value}, {!IncludeEcologySurvey.value}),
+          AND({!IncludeHistoricEnglandCadwConsent.value}, {!IncludeHRA_Conducted.value}, {!IncludeEcologySurvey.value})
         ),
         &quot;6. &quot;,
         IF(
           OR(
-            AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeOutstandingWayleaves.value}),
+            AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeLPA_Consultation.value}),
             AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeHistoricEnglandCadwConsent.value}),
-            AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeAvoidBirdBreeding.value}),
+            AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeHRA_Conducted.value}),
             AND({!IncludeNaturalEnglandNRWAssent.value}, {!IncludeEcologySurvey.value}),
-            AND({!IncludeOutstandingWayleaves.value}, {!IncludeHistoricEnglandCadwConsent.value}),
-            AND({!IncludeOutstandingWayleaves.value}, {!IncludeAvoidBirdBreeding.value}),
-            AND({!IncludeOutstandingWayleaves.value}, {!IncludeEcologySurvey.value}),
-            AND({!IncludeHistoricEnglandCadwConsent.value}, {!IncludeAvoidBirdBreeding.value}),
+            AND({!IncludeLPA_Consultation.value}, {!IncludeHistoricEnglandCadwConsent.value}),
+            AND({!IncludeLPA_Consultation.value}, {!IncludeHRA_Conducted.value}),
+            AND({!IncludeLPA_Consultation.value}, {!IncludeEcologySurvey.value}),
+            AND({!IncludeHistoricEnglandCadwConsent.value}, {!IncludeHRA_Conducted.value}),
             AND({!IncludeHistoricEnglandCadwConsent.value}, {!IncludeEcologySurvey.value}),
-            AND({!IncludeAvoidBirdBreeding.value}, {!IncludeEcologySurvey.value})
+            AND({!IncludeHRA_Conducted.value}, {!IncludeEcologySurvey.value})
           ),
           &quot;5. &quot;,
           IF(
             OR(
               {!IncludeNaturalEnglandNRWAssent.value},
-              {!IncludeOutstandingWayleaves.value},
+              {!IncludeLPA_Consultation.value},
               {!IncludeHistoricEnglandCadwConsent.value},
-              {!IncludeAvoidBirdBreeding.value},
+              {!IncludeHRA_Conducted.value},
               {!IncludeEcologySurvey.value}
             ),
             &quot;4. &quot;,
@@ -589,6 +624,20 @@ TEXT(YEAR(TODAY()))</expression>
         </nextValueConnector>
         <noMoreValuesConnector>
             <targetReference>Get_Users_From_Group_Members</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>Loop_SAR_Records</name>
+        <label>Loop SAR Records</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>Get_SAR_Using_recordId</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Assign_SAR_Name</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Get_Address</targetReference>
         </noMoreValuesConnector>
     </loops>
     <processMetadataValues>
@@ -693,7 +742,7 @@ TEXT(YEAR(TODAY()))</expression>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Get_Address</targetReference>
+            <targetReference>Get_SAR_Using_recordId</targetReference>
         </connector>
         <faultConnector>
             <isGoTo>true</isGoTo>
@@ -886,6 +935,31 @@ TEXT(YEAR(TODAY()))</expression>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>DocumentTemplateContentDoc</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_SAR_Using_recordId</name>
+        <label>Get SAR Using recordId</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Transform_SAR_Name</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Generate_Document_Nebula_Logger</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Case__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Sensitive_Area_Check__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
@@ -1195,13 +1269,13 @@ TEXT(YEAR(TODAY()))</expression>
             </styleProperties>
         </fields>
         <fields>
-            <name>IncludeOutstandingWayleaves</name>
+            <name>IncludeLPA_Consultation</name>
             <extensionName>flowruntime:toggle</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
                 <name>label</name>
                 <value>
-                    <stringValue>Outstanding Wayleaves</stringValue>
+                    <stringValue>LPA Consultation</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -1229,11 +1303,11 @@ TEXT(YEAR(TODAY()))</expression>
             </styleProperties>
         </fields>
         <fields>
-            <name>Outstanding_Wayleaves</name>
+            <name>LPA_Consultation_Text</name>
             <defaultValue>
-                <stringValue>{!DV_OutstandingWayleaves}</stringValue>
+                <stringValue>{!DV_LPA_Consultation}</stringValue>
             </defaultValue>
-            <fieldText>Outstanding Wayleaves</fieldText>
+            <fieldText>LPA_Consultation</fieldText>
             <fieldType>LargeTextArea</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
@@ -1248,7 +1322,7 @@ TEXT(YEAR(TODAY()))</expression>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
-                    <leftValueReference>IncludeOutstandingWayleaves.value</leftValueReference>
+                    <leftValueReference>IncludeLPA_Consultation.value</leftValueReference>
                     <operator>EqualTo</operator>
                     <rightValue>
                         <booleanValue>true</booleanValue>
@@ -1276,10 +1350,17 @@ TEXT(YEAR(TODAY()))</expression>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
-                    <leftValueReference>IncludeOutstandingWayleaves.value</leftValueReference>
+                    <leftValueReference>IncludeLPA_Consultation.value</leftValueReference>
                     <operator>EqualTo</operator>
                     <rightValue>
                         <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+                <conditions>
+                    <leftValueReference>$Flow.CurrentRecord</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <stringValue>456546546</stringValue>
                     </rightValue>
                 </conditions>
             </visibilityRule>
@@ -1319,11 +1400,11 @@ TEXT(YEAR(TODAY()))</expression>
             </styleProperties>
         </fields>
         <fields>
-            <name>Natural_England_NRW_Assent</name>
+            <name>Natural_England_NRW_Assent_noHRA</name>
             <defaultValue>
                 <stringValue>{!DV_NaturalEnglandNRWAssent}</stringValue>
             </defaultValue>
-            <fieldText>Natural England/NRW Assent</fieldText>
+            <fieldText>Natural England/NRW Assent (no HRA)</fieldText>
             <fieldType>LargeTextArea</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
@@ -1372,6 +1453,13 @@ TEXT(YEAR(TODAY()))</expression>
                         <booleanValue>true</booleanValue>
                     </rightValue>
                 </conditions>
+                <conditions>
+                    <leftValueReference>$Flow.CurrentRecord</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <stringValue>dfgdfsgfdgdfgdf</stringValue>
+                    </rightValue>
+                </conditions>
             </visibilityRule>
         </fields>
         <fields>
@@ -1381,7 +1469,7 @@ TEXT(YEAR(TODAY()))</expression>
             <inputParameters>
                 <name>label</name>
                 <value>
-                    <stringValue>Historic England/Cadw Consent</stringValue>
+                    <stringValue>Historic England/Cadw Consent Consultation &amp; Consent</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -1409,11 +1497,11 @@ TEXT(YEAR(TODAY()))</expression>
             </styleProperties>
         </fields>
         <fields>
-            <name>Historic_England_Cadw_Consent</name>
+            <name>Historic_England_Cadw_Consultation_Consent</name>
             <defaultValue>
                 <stringValue>{!DV_HistoricEnglandCadwConsent}</stringValue>
             </defaultValue>
-            <fieldText>Historic England/Cadw Consent</fieldText>
+            <fieldText>Historic England/Cadw Consultation &amp; Consent</fieldText>
             <fieldType>LargeTextArea</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
@@ -1460,6 +1548,13 @@ TEXT(YEAR(TODAY()))</expression>
                     <operator>EqualTo</operator>
                     <rightValue>
                         <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+                <conditions>
+                    <leftValueReference>$Flow.CurrentRecord</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <stringValue>34534534sfsdf</stringValue>
                     </rightValue>
                 </conditions>
             </visibilityRule>
@@ -1555,13 +1650,13 @@ TEXT(YEAR(TODAY()))</expression>
             </visibilityRule>
         </fields>
         <fields>
-            <name>IncludeAvoidBirdBreeding</name>
+            <name>IncludeHRA_Conducted</name>
             <extensionName>flowruntime:toggle</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
                 <name>label</name>
                 <value>
-                    <stringValue>Avoiding Bird Breeding (Where No Eco Survey Has Been Conducted)</stringValue>
+                    <stringValue>HRA Conducted</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -1589,11 +1684,11 @@ TEXT(YEAR(TODAY()))</expression>
             </styleProperties>
         </fields>
         <fields>
-            <name>Avoiding_Bird_Breeding</name>
+            <name>HRA_Conducted</name>
             <defaultValue>
-                <stringValue>{!DV_AvoidBirdBreeding}</stringValue>
+                <stringValue>{!DV_HRA_Conducted}</stringValue>
             </defaultValue>
-            <fieldText>Avoiding Bird Breeding</fieldText>
+            <fieldText>HRA Conducted</fieldText>
             <fieldType>LargeTextArea</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
@@ -1608,7 +1703,7 @@ TEXT(YEAR(TODAY()))</expression>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
-                    <leftValueReference>IncludeAvoidBirdBreeding.value</leftValueReference>
+                    <leftValueReference>IncludeHRA_Conducted.value</leftValueReference>
                     <operator>EqualTo</operator>
                     <rightValue>
                         <booleanValue>true</booleanValue>
@@ -1617,41 +1712,13 @@ TEXT(YEAR(TODAY()))</expression>
             </visibilityRule>
         </fields>
         <fields>
-            <name>Avoiding_Bird_Breeding_Reason</name>
-            <defaultValue>
-                <stringValue>{!DV_AvoidBirdBreeding_Reason}</stringValue>
-            </defaultValue>
-            <fieldText>Avoiding Bird Breeding Reason</fieldText>
-            <fieldType>LargeTextArea</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>false</isRequired>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-            <visibilityRule>
-                <conditionLogic>and</conditionLogic>
-                <conditions>
-                    <leftValueReference>IncludeAvoidBirdBreeding.value</leftValueReference>
-                    <operator>EqualTo</operator>
-                    <rightValue>
-                        <booleanValue>true</booleanValue>
-                    </rightValue>
-                </conditions>
-            </visibilityRule>
-        </fields>
-        <fields>
-            <name>IncludeTreeProtection</name>
+            <name>tog_Natural_England_NRW_Consultation_HRA</name>
             <extensionName>flowruntime:toggle</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
                 <name>label</name>
                 <value>
-                    <stringValue>Tree Protection (Where No Recommendations Have Been Made in an Eco Survey)</stringValue>
+                    <stringValue>Natural England/NRW Consultation (HRA)</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -1679,11 +1746,11 @@ TEXT(YEAR(TODAY()))</expression>
             </styleProperties>
         </fields>
         <fields>
-            <name>Tree_Protection</name>
+            <name>txt_Natural_England_NRW_Consultation_HRA</name>
             <defaultValue>
-                <stringValue>{!DV_TreeProtection}</stringValue>
+                <stringValue>{!DV_Natural_England_NRW_Consultation_HRA}</stringValue>
             </defaultValue>
-            <fieldText>Tree Protection</fieldText>
+            <fieldText>Natural England/NRW Consultation (HRA)</fieldText>
             <fieldType>LargeTextArea</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
@@ -1698,7 +1765,7 @@ TEXT(YEAR(TODAY()))</expression>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
-                    <leftValueReference>IncludeTreeProtection.value</leftValueReference>
+                    <leftValueReference>tog_Natural_England_NRW_Consultation_HRA.value</leftValueReference>
                     <operator>EqualTo</operator>
                     <rightValue>
                         <booleanValue>true</booleanValue>
@@ -1707,11 +1774,45 @@ TEXT(YEAR(TODAY()))</expression>
             </visibilityRule>
         </fields>
         <fields>
-            <name>Tree_Protection_Reason</name>
+            <name>IncludeHRA_Conclusion_No_Appropriate_Assessment</name>
+            <extensionName>flowruntime:toggle</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>HRA Conclusion (no appropriate assessment)</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageToggleActive</name>
+                <value>
+                    <stringValue>Included</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageToggleInactive</name>
+                <value>
+                    <stringValue>Excluded</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>txt_HRA_Conclusion_No_appropriate_assessment</name>
             <defaultValue>
-                <stringValue>{!DV_TreeProtection_Reason}</stringValue>
+                <stringValue>{!DV_HRA_Consultation_No_Appropriate_Assessment}</stringValue>
             </defaultValue>
-            <fieldText>Tree Protection Reason</fieldText>
+            <fieldText>HRA Conclusion (no appropriate assessment)</fieldText>
             <fieldType>LargeTextArea</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
@@ -1726,7 +1827,255 @@ TEXT(YEAR(TODAY()))</expression>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
-                    <leftValueReference>IncludeTreeProtection.value</leftValueReference>
+                    <leftValueReference>IncludeHRA_Conclusion_No_Appropriate_Assessment.value</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>tog_HRA_Conclusion_appropriate_assessment</name>
+            <extensionName>flowruntime:toggle</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>HRA Conclusion (appropriate assessment)</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageToggleActive</name>
+                <value>
+                    <stringValue>Included</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageToggleInactive</name>
+                <value>
+                    <stringValue>Excluded</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>txt_HRA_Conclusion_appropriate_assessment</name>
+            <defaultValue>
+                <stringValue>{!DV_HRA_Conclusion_Appropriate_Assessment}</stringValue>
+            </defaultValue>
+            <fieldText>HRA Conclusion (appropriate assessment)</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>tog_HRA_Conclusion_appropriate_assessment.value</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>tog_public_notices_no_response</name>
+            <extensionName>flowruntime:toggle</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Public Notices (no responses)</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageToggleActive</name>
+                <value>
+                    <stringValue>Included</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageToggleInactive</name>
+                <value>
+                    <stringValue>Excluded</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>txt_Public_Notices_no_responses</name>
+            <defaultValue>
+                <stringValue>{!DV_Public_Notices_No_Responses}</stringValue>
+            </defaultValue>
+            <fieldText>Public Notices (no responses)</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>tog_public_notices_no_response.value</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>tog_public_notices_response</name>
+            <extensionName>flowruntime:toggle</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Public Notices (responses)</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageToggleActive</name>
+                <value>
+                    <stringValue>Included</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageToggleInactive</name>
+                <value>
+                    <stringValue>Excluded</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>txt_Public_Notices_responses</name>
+            <defaultValue>
+                <stringValue>{!DV_Public_Notices_Response}</stringValue>
+            </defaultValue>
+            <fieldText>Public Notices (responses)</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>tog_public_notices_response.value</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>tog_Minor_Modification_NL_NP</name>
+            <extensionName>flowruntime:toggle</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Minor modification (National Landscapes/National Parks)</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageToggleActive</name>
+                <value>
+                    <stringValue>Included</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageToggleInactive</name>
+                <value>
+                    <stringValue>Excluded</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>txt_Minor_modification_National_Landscapes_National_Parks</name>
+            <defaultValue>
+                <stringValue>{!DV_Minor_Modification_NL_NP}</stringValue>
+            </defaultValue>
+            <fieldText>Minor modification (National Landscapes/National Parks)</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>tog_Minor_Modification_NL_NP.value</leftValueReference>
                     <operator>EqualTo</operator>
                     <rightValue>
                         <booleanValue>true</booleanValue>
@@ -1835,6 +2184,27 @@ TEXT(YEAR(TODAY()))</expression>
         </connector>
     </start>
     <status>Active</status>
+    <transforms>
+        <name>Transform_SAR_Name</name>
+        <label>Transform SAR Name</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Loop_SAR_Records</targetReference>
+        </connector>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <scale>0</scale>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+        <transformValues>
+            <transformValueActions>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>Get_SAR_Using_recordId[$EachItem].Name</elementReference>
+                </value>
+            </transformValueActions>
+        </transformValues>
+    </transforms>
     <variables>
         <name>DV_AvoidBirdBreeding</name>
         <dataType>String</dataType>
@@ -1862,7 +2232,7 @@ TEXT(YEAR(TODAY()))</expression>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <value>
-            <stringValue>During the Development, the Applicant shall adhere to all recommendations outlined in section [section number] of the [report title] report issued by [official title of ecology company] on [date] (reference: [report reference]).</stringValue>
+            <stringValue>An ecology survey was conducted in [month, year] by [name of ecology contractor] on behalf of the applicant and the subsequent [title of report] was issued on [date] (reference: [reference number]). The survey identified [details of habitats and species]. A number of recommendations to mitigate the limited impacts on protected species and habitats were outlined - these will be followed by the Applicant during the proposed development.</stringValue>
         </value>
     </variables>
     <variables>
@@ -1882,7 +2252,7 @@ TEXT(YEAR(TODAY()))</expression>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <value>
-            <stringValue>During the Development, the Company shall adhere to all conditions outlined in the Scheduled Monument Consent issued by Historic England/Cadw in [date] (reference: [ref number]).</stringValue>
+            <stringValue>The Applicant consulted with Historic England/Cadw, who concluded on [date] that [conclusions] and issued consent for the works to be carried out between [dates] (reference: [reference number])</stringValue>
         </value>
     </variables>
     <variables>
@@ -1896,13 +2266,73 @@ TEXT(YEAR(TODAY()))</expression>
         </value>
     </variables>
     <variables>
+        <name>DV_HRA_Conclusion_Appropriate_Assessment</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>Having considered [documents provided] the Secretary of State considers there may be likely significant effects on a National Site Network site under the Conservation of Habitats and Species Regulations 2017.  This is due to [effects] on [features and sites].  The Secretary of State has considered whether there could be an Adverse Effect on Integrity of the protected site. [Detail about the mitigation, what is it? how is it secured?] In light of the proposed mitigation, the Secretary of State is satisfied that there will be no Adverse Effect on Integrity of the protected site, and this is beyond all reasonable scientific doubt.</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>DV_HRA_Conducted</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>A Habitats Regulations Assessment (&quot;the HRA&quot;) was completed in [date] by [company that carried out HRA] (reference: [reference number])</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>DV_HRA_Consultation_No_Appropriate_Assessment</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>Having considered the [documents provided], the Secretary of State is satisfied that there will be no likely significant effects on any National Site Network site under the Conservation of Habitats and Species Regulations 2017.  This is due to [the lack of any realistic effect pathways (distance, lack of connectivity between the works and protected site)].</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>DV_LPA_Consultation</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>The Applicant consulted with the LPA concluded that [conclusions] and raised no objections to the proposed development. (reference: [LPA reference number])</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>DV_Minor_Modification_NL_NP</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>The proposed development is a minor modification to an existing piece of infrastructure and is likely to have minimal visual impact on the National Landscape/National Park in which it is situated.</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>DV_Natural_England_NRW_Consultation_HRA</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>The HRA was submitted to Natural England/Natural Resources Wales, who concluded on [date] that [conclusions] and issued assent for the works to be carried out between [dates] (reference: [reference number])</stringValue>
+        </value>
+    </variables>
+    <variables>
         <name>DV_NaturalEnglandNRWAssent</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <value>
-            <stringValue>The Development shall be carried out between [dates] in accordance with unconditional/conditional assent issued by Natural England/Natural Resources Wales on [date] (reference: [ref number]). The Development shall not be carried out out with the aforementioned dates without further consultation with Natural England.  </stringValue>
+            <stringValue>The Applicant consulted Natural England/Natural Resources Wales, who concluded on [date] that [conclusions] and issued assent for the works to be carried out between [dates] (reference: [reference number])</stringValue>
         </value>
     </variables>
     <variables>
@@ -1916,16 +2346,6 @@ TEXT(YEAR(TODAY()))</expression>
         </value>
     </variables>
     <variables>
-        <name>DV_OutstandingWayleaves</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <value>
-            <stringValue>The Development shall not commence until all required land rights are agreed and in    place. The Company shall confirm in writing to the Secretary of State that all wayleave    permissions have been granted and the Development shall not commence until    permission is granted in writing by the Secretary of State.  </stringValue>
-        </value>
-    </variables>
-    <variables>
         <name>DV_OutstandingWayleaves_Reason</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
@@ -1933,6 +2353,26 @@ TEXT(YEAR(TODAY()))</expression>
         <isOutput>false</isOutput>
         <value>
             <stringValue>To comply with Schedule 8 of the 1989 Act  </stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>DV_Public_Notices_No_Responses</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>Public Notices regarding the proposed development were posted in local newspapers on [date] &amp; [date].  No representations were received regarding the proposed development by the deadline of [date].</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>DV_Public_Notices_Response</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>Public Notices regarding the proposed development were posted in local newspapers on [date] &amp; [date].  [Number] representations were received regarding the proposed development by the deadline of [date]. [details on the nature of the responses]</stringValue>
         </value>
     </variables>
     <variables>
@@ -1983,6 +2423,14 @@ TEXT(YEAR(TODAY()))</expression>
         <name>var_CollectionOfUserIds</name>
         <dataType>String</dataType>
         <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>This holds the list of Sensitive Area Check Names in a bullet point format</description>
+        <name>varListSAR_Names</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
     </variables>
