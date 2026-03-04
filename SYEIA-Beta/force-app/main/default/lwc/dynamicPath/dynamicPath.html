@@ -1,0 +1,36 @@
+<template>
+  <!-- Custom card wrapper with reduced height -->
+  <div class="slds-card" style="padding:0.75rem;"> <!-- smaller top/bottom padding -->
+    
+    <!-- Main container: flex for progress + button -->
+    <div style="display:flex; align-items:center; width:100%; gap:1rem;">
+      
+      <!-- Progress path container -->
+      <div style="flex:1; min-width:0;">
+        <lightning-progress-indicator 
+          current-step={currentValue} 
+          type="path" 
+          style="width:100%;">
+          <template for:each={stages} for:item="stage">
+            <lightning-progress-step
+              key={stage.value}
+              label={stage.value}
+              value={stage.value}
+              onclick={handleStageSelect}>
+            </lightning-progress-step>
+          </template>
+        </lightning-progress-indicator>
+      </div>
+
+      <!-- Button container -->
+<lightning-button
+    class="slds-button_small"
+    variant="brand"
+    label="Mark Status as Complete"
+    icon-name="utility:check"
+    icon-position="left"
+    onclick={handleUpdateStatus}>
+</lightning-button>
+    </div>
+  </div>
+</template>
