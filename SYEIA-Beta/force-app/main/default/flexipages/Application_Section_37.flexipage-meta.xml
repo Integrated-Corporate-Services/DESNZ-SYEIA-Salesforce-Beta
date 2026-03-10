@@ -148,18 +148,18 @@
                             <value>ChangeOwnerOne</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>Case__c.Generate_Consent_Letter_Flow</value>
+                            <value>Case__c.Generate_Document</value>
                             <visibilityRule>
                                 <booleanFilter>1 AND 2</booleanFilter>
-                                <criteria>
-                                    <leftValue>{!Record.Case_Owner__c}</leftValue>
-                                    <operator>NE</operator>
-                                    <rightValue>New Cases</rightValue>
-                                </criteria>
                                 <criteria>
                                     <leftValue>{!Record.Status__c}</leftValue>
                                     <operator>EQUAL</operator>
                                     <rightValue>In-Progress</rightValue>
+                                </criteria>
+                                <criteria>
+                                    <leftValue>{!Record.Case_Owner__c}</leftValue>
+                                    <operator>NE</operator>
+                                    <rightValue>New Cases</rightValue>
                                 </criteria>
                             </visibilityRule>
                         </valueListItems>
@@ -1131,7 +1131,15 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListComponentOverride</name>
-                    <value>GRID</value>
+                    <value>ADVGRID</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>rowsToDisplay</name>
+                    <value>10</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showActionBar</name>
+                    <value>true</value>
                 </componentInstanceProperties>
                 <componentName>force:relatedListSingleContainer</componentName>
                 <identifier>force_relatedListSingleContainer</identifier>
