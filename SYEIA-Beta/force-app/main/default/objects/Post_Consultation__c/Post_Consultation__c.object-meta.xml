@@ -143,25 +143,24 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>This holds the payment information of the application</description>
-    <enableActivities>true</enableActivities>
+    <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableLicensing>false</enableLicensing>
-    <enableReports>true</enableReports>
-    <enableSearch>true</enableSearch>
+    <enableReports>false</enableReports>
+    <enableSearch>false</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <externalSharingModel>Private</externalSharingModel>
-    <label>Payment</label>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <label>Post Consultation</label>
     <nameField>
-        <displayFormat>P-{0000}</displayFormat>
-        <label>Payment Name</label>
+        <displayFormat>PC-{0000}</displayFormat>
+        <label>Post Consultation Name</label>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Payments</pluralLabel>
+    <pluralLabel>Post Consultations</pluralLabel>
     <searchLayouts></searchLayouts>
-    <sharingModel>Private</sharingModel>
+    <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>
