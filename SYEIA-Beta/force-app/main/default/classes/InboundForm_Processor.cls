@@ -764,25 +764,17 @@ public with sharing class InboundForm_Processor {
         List<SObject> allPrimaryRecords = new List<SObject>();
         for (ProcessingResult result : results) {
             if (result.createdRecords.containsKey(config.primaryObject)) {
-		        system.debug('var  result.createdRecords.get(config.primaryObject) >> ' + result.createdRecords.get(config.primaryObject));
                 allPrimaryRecords.addAll(result.createdRecords.get(config.primaryObject));
             }
         }
-        system.debug('var before allPrimaryRecords >> ' + allPrimaryRecords);
 
         if (!allPrimaryRecords.isEmpty()) {
             Database.SaveResult[] saveResults = Database.insert(allPrimaryRecords, false);
-            system.debug('var saveResults >> ' + saveResults);
             logDmlErrors(saveResults, config.primaryObject);
         }
-        system.debug('var allPrimaryRecords >> ' + allPrimaryRecords);
-        system.debug('var config >> ' + config);
-         system.debug('var config.primaryObject >> ' + config.primaryObject);
-
 
         // Build inbound to primary map for linking child records
         Map<Id, Id> inboundToPrimaryMap = buildInboundToPrimaryMap(allPrimaryRecords, config);
-        system.debug('var inboundToPrimaryMap >> ' + inboundToPrimaryMap);
 
         // Step 1.5: Call afterPrimaryInsert handler for each result
         // This allows handlers to create records that need the primary record ID (e.g., Related_Case__c)
@@ -884,8 +876,6 @@ public with sharing class InboundForm_Processor {
                 if (!result.success) continue;
                 
                 Id primaryId = inboundToPrimaryMap.get(result.inboundRequestId);
-                system.debug('var result.inboundRequestId >> ' + result.inboundRequestId);
-                system.debug('var primaryId >> ' + primaryId);
 
                 if (primaryId != null) {
                     try {
