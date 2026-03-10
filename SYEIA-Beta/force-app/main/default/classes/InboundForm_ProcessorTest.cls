@@ -133,6 +133,51 @@ private class InboundForm_ProcessorTest {
         '}';
     }
     
+	private static String getJsonWithParishData() {
+        return '{' +
+            '"formType": "S37",' +
+            '"applicationId": "APP-PARISH-001",' +
+            '"sections": {' +
+                '"location": {' +
+                    '"routes": [' +
+                        '{"routeName": "Route 1", "route_id": "R001", ' +
+                        '"gridPoints": [{"point_id": "P1", "easting": "100", "northing": "200"},' +
+                        '{"point_id": "P2", "easting": "101", "northing": "201"}]}' +
+                    ']' +
+                '},' +
+                '"eiaFees": {"is_eia_development": false},' +
+                    '"parishes": [' +
+      				'{ "id": "72edf333-94d4-4345-9e44-8642e5e5ceda","country": "England","lpa_code": "E07000110",'+
+        			'"created_at": "2026-03-06T16: 44: 02.551Z","created_by": "a3333333-3333-3333-3333-333333333333",'+
+        			'"parish_code": "E04004962","parish_name": "Leeds","application_id": "ba7a201f-ade7-4b1d-9ce4-5aad21f9c763"},'+
+      				'{"id": "e86ca2ae-f517-469b-9d6c-6ec3bc9d3f9e","country": "England","lpa_code": "E07000129",'+
+        			'"created_at": "2026-03-06T16: 44: 02.551Z","created_by": "a3333333-3333-3333-3333-333333333333",'+
+        			'"parish_code": "E04012265","parish_name": "Leicester Forest East","application_id": "ba7a201f-ade7-4b1d-9ce4-5aad21f9c763"}'+
+                    ']' +
+                '}'+
+            '}';
+    }
+    
+	private static String getJsonWithPaymentData() {
+        return '{' +
+            '"formType": "S37",' +
+            '"applicationId": "APP-PARISH-001",' +
+            '"sections": {' +
+                '"location": {' +
+                    '"routes": [' +
+                        '{"routeName": "Route 1", "route_id": "R001", ' +
+                        '"gridPoints": [{"point_id": "P1", "easting": "100", "northing": "200"},' +
+                        '{"point_id": "P2", "easting": "101", "northing": "201"}]}' +
+                    ']' +
+                '},' +
+                '"eiaFees": {"is_eia_development": false},' +
+                '"payment": { "kind": "card","status": "success","user_id": "a3333333-3333-3333-3333-333333333333",'+
+                '"provider": "govuk-pay","created_at": "2026-03-06T17: 25: 15.894Z","payment_id": "sjh48miu0q7vh8mb85dsn08pif",'+
+                '"total_amount": "£1277.50"}'+
+                '}'+
+            '}';
+    }
+    
     // ========================================================================
     // TEST SETUP
     // ========================================================================
@@ -575,6 +620,54 @@ private class InboundForm_ProcessorTest {
         
         InboundForm_Processor.ProcessingResult result = results.get(request.Id);
         Assert.isTrue(result.success, 'Should succeed with party data');
+    }
+    
+    @IsTest
+    static void testProcessRequests_WithParishData() {
+        InboundForm_Processor.clearAllCaches();
+        InboundForm_ConfigRegistry.clearCache();
+        
+        Inbound_Request__c request = new Inbound_Request__c(
+            Payload__c = getJsonWithParishData(),
+            Status__c = 'Received'
+        );
+        insert request;
+        
+        List<Inbound_Request__c> requests = new List<Inbound_Request__c>{
+            [SELECT Id, Payload__c FROM Inbound_Request__c WHERE Id = :request.Id]
+        };
+        
+        Test.startTest();
+        Map<Id, InboundForm_Processor.ProcessingResult> results = 
+            InboundForm_Processor.processRequests(requests);
+        Test.stopTest();
+        
+        InboundForm_Processor.ProcessingResult result = results.get(request.Id);
+        Assert.isTrue(result.success, 'Should succeed with parishes data');
+    }
+    
+    @IsTest
+    static void testProcessRequests_WithPaymentData() {
+        InboundForm_Processor.clearAllCaches();
+        InboundForm_ConfigRegistry.clearCache();
+        
+        Inbound_Request__c request = new Inbound_Request__c(
+            Payload__c = getJsonWithPaymentData(),
+            Status__c = 'Received'
+        );
+        insert request;
+        
+        List<Inbound_Request__c> requests = new List<Inbound_Request__c>{
+            [SELECT Id, Payload__c FROM Inbound_Request__c WHERE Id = :request.Id]
+        };
+        
+        Test.startTest();
+        Map<Id, InboundForm_Processor.ProcessingResult> results = 
+            InboundForm_Processor.processRequests(requests);
+        Test.stopTest();
+        
+        InboundForm_Processor.ProcessingResult result = results.get(request.Id);
+        Assert.isTrue(result.success, 'Should succeed with parishes data');
     }
     
     @IsTest

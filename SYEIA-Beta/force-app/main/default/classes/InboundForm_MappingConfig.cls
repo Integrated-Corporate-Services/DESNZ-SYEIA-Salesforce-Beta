@@ -259,6 +259,7 @@ public class InboundForm_MappingConfig {
         STRING_TYPE,
         INTEGER_TYPE,
         DECIMAL_TYPE,
+        CURRENCY_TYPE,
         BOOLEAN_TYPE,
         BOOLEAN_YES_NO,
         DATE_TYPE,
@@ -287,6 +288,10 @@ public class InboundForm_MappingConfig {
     
     public static FieldMapping yesNoField(String jsonPath, String targetField) {
         return new FieldMapping(jsonPath, targetField, DataType.BOOLEAN_YES_NO);
+    }
+
+    public static FieldMapping currencyField(String jsonPath, String targetField) {
+        return new FieldMapping(jsonPath, targetField, DataType.CURRENCY_TYPE);
     }
     
     public static FieldMapping dateField(String jsonPath, String targetField) {

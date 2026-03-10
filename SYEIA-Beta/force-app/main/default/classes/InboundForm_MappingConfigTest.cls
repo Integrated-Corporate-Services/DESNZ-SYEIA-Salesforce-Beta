@@ -406,6 +406,8 @@ private class InboundForm_MappingConfigTest {
             InboundForm_MappingConfig.DataType.BOOLEAN_TYPE;
         InboundForm_MappingConfig.DataType yesNoType = 
             InboundForm_MappingConfig.DataType.BOOLEAN_YES_NO;
+        InboundForm_MappingConfig.DataType currencyType = 
+            InboundForm_MappingConfig.DataType.CURRENCY_TYPE;
         InboundForm_MappingConfig.DataType dateType = 
             InboundForm_MappingConfig.DataType.DATE_TYPE;
         InboundForm_MappingConfig.DataType dtType = 
@@ -417,6 +419,7 @@ private class InboundForm_MappingConfigTest {
         Assert.isNotNull(decType, 'DECIMAL_TYPE should exist');
         Assert.isNotNull(boolType, 'BOOLEAN_TYPE should exist');
         Assert.isNotNull(yesNoType, 'BOOLEAN_YES_NO should exist');
+        Assert.isNotNull(currencyType, 'CURRENCY_TYPE should exist');
         Assert.isNotNull(dateType, 'DATE_TYPE should exist');
         Assert.isNotNull(dtType, 'DATETIME_TYPE should exist');
     }
