@@ -208,6 +208,10 @@ public class InboundForm_S37Config {
         config.addCollection(getAddressesConfig());
         config.addCollection(getSensitiveAreaChecksConfig());
         config.addCollection(getAssetInformationConfig());
+        config.addCollection(getConsultationConfig());
+        config.addCollection(getConsultationResponseConfig());
+        config.addCollection(getParishConfig());
+        config.addCollection(getPaymentConfig());
     }
     
     // ----- Routes Collection -----
@@ -352,5 +356,97 @@ public class InboundForm_S37Config {
             InboundForm_MappingConfig.stringField('description', 'Description__c'));
         
         return assets;
+    }
+
+    // ----- Consultations Collection -----
+    private static InboundForm_MappingConfig.CollectionConfig getConsultationConfig() {
+        InboundForm_MappingConfig.CollectionConfig consultations = 
+            new InboundForm_MappingConfig.CollectionConfig()
+                .setCollectionName('consultations')
+                .setJsonPath('sections.consultations')
+                .setTargetObject('Consultation__c')
+                .setParentLookupField('Case__c')
+                .setParentLinkSfField('Consultation_Id__c')
+                .setProcessingOrder(70);
+        
+        consultations.addFieldMapping(InboundForm_MappingConfig.stringField('id', 'Name'));
+        consultations.addFieldMapping(InboundForm_MappingConfig.stringField('id', 'Consultation_Id__c'));
+        consultations.addFieldMapping(InboundForm_MappingConfig.dateField('dateClosed', 'Completed_On__c'));
+        consultations.addFieldMapping(InboundForm_MappingConfig.stringField('offline', 'Consultation_Completed_Offline__c'));
+        consultations.addFieldMapping(InboundForm_MappingConfig.stringField('consultationType', 'Consultation_Type__c'));
+        consultations.addFieldMapping(InboundForm_MappingConfig.stringField('consulteeEmailAddress', 'Contact_Email_Address__c'));
+        consultations.addFieldMapping(InboundForm_MappingConfig.dateTimeField('createdAt', 'Created_At__c'));
+        consultations.addFieldMapping(InboundForm_MappingConfig.stringField('status', 'Status__c'));
+
+        return consultations;
+    }
+
+// ----- Consultation Response Collection (Nested) -----
+    private static InboundForm_MappingConfig.CollectionConfig getConsultationResponseConfig() {
+        InboundForm_MappingConfig.CollectionConfig consultationResponses = 
+            new InboundForm_MappingConfig.CollectionConfig()
+                .setCollectionName('consultationResponses')
+                .setJsonPath('sections.consultations')
+                .setTargetObject('Consultation_Response__c')
+                .setParentLookupField('Consultation__c')
+                .setParentCollection('consultations')
+                .setParentLinkJsonField('id')
+                .setParentLinkSfField('Consultation_Response_Id__c')
+                .setChildLinkSfField('Consultation_Response_Id__c')
+                .setIsNestedArray(false)
+                .setProcessingOrder(80);
+        
+        consultationResponses.addFieldMapping(
+            InboundForm_MappingConfig.stringField('id', 'Consultation_Response_Id__c'));
+        consultationResponses.addFieldMapping(
+            InboundForm_MappingConfig.stringField('respondingConsulteeName', 'Full_Name_of_Responder__c'));
+        consultationResponses.addFieldMapping(
+            InboundForm_MappingConfig.stringField('respondingConsulteeEmail', 'Email_of_Responder__c'));
+        
+        return consultationResponses;
+    }
+
+    // ----- Parish Collection -----
+    private static InboundForm_MappingConfig.CollectionConfig getParishConfig() {
+        InboundForm_MappingConfig.CollectionConfig parishes = 
+            new InboundForm_MappingConfig.CollectionConfig()
+                .setCollectionName('parishes')
+                .setJsonPath('sections.parishes')
+                .setTargetObject('Parish__c')
+                .setParentLookupField('Case__c')
+                .setParentLinkSfField('Parish_Id__c')
+                .setProcessingOrder(90);
+        
+        parishes.addFieldMapping(InboundForm_MappingConfig.stringField('id', 'Parish_Id__c'));
+        parishes.addFieldMapping(InboundForm_MappingConfig.stringField('country', 'Country__c'));
+        parishes.addFieldMapping(InboundForm_MappingConfig.stringField('lpa_code', 'LPA_Code__c'));
+        parishes.addFieldMapping(InboundForm_MappingConfig.stringField('created_at', 'Created_at__c'));
+        parishes.addFieldMapping(InboundForm_MappingConfig.stringField('created_by', 'Created_by__c'));
+        parishes.addFieldMapping(InboundForm_MappingConfig.stringField('parish_code', 'Parish_Code__c'));
+        parishes.addFieldMapping(InboundForm_MappingConfig.stringField('parish_name', 'Name'));
+
+        return parishes;
+    }
+
+    // ----- Payment Collection -----
+    private static InboundForm_MappingConfig.CollectionConfig getPaymentConfig() {
+        InboundForm_MappingConfig.CollectionConfig payments = 
+            new InboundForm_MappingConfig.CollectionConfig()
+                .setCollectionName('payments')
+                .setJsonPath('sections.payment')
+                .setTargetObject('Payment__c')
+                .setParentLookupField('Case__c')
+                .setParentLinkSfField('Payment_Id__c')
+                .setProcessingOrder(100);
+        
+        payments.addFieldMapping(InboundForm_MappingConfig.stringField('payment_id', 'Payment_Id__c'));
+        payments.addFieldMapping(InboundForm_MappingConfig.stringField('kind', 'Payment_Method__c'));
+        payments.addFieldMapping(InboundForm_MappingConfig.currencyField('total_amount', 'Total_Amount__c'));
+        payments.addFieldMapping(InboundForm_MappingConfig.stringField('status', 'Status__c'));
+        payments.addFieldMapping(InboundForm_MappingConfig.stringField('user_id', 'User_Id__c'));
+        payments.addFieldMapping(InboundForm_MappingConfig.stringField('provider', 'Provider__c'));
+        payments.addFieldMapping(InboundForm_MappingConfig.dateTimeField('created_at', 'Created_at__c'));
+
+        return payments;
     }
 }

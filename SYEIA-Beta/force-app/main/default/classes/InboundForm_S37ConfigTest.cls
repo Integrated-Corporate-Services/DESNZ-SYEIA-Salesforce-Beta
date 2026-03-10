@@ -309,4 +309,46 @@ private class InboundForm_S37ConfigTest {
             'Parties should be processed before Addresses');
         Test.stopTest();
     }
+    
+    @IsTest
+    static void testGetConfig_PaymentCollection() {
+        InboundForm_MappingConfig.FormTypeConfig config = InboundForm_S37Config.getConfig();
+        
+        InboundForm_MappingConfig.CollectionConfig paymentsConfig = null;
+        for (InboundForm_MappingConfig.CollectionConfig coll : config.collections) {
+            if (coll.collectionName == 'Payments') {
+                paymentsConfig = coll;
+                break;
+            }
+        }
+        
+        Test.startTest();
+        Assert.isNotNull(paymentsConfig, 'Payments collection should exist');
+        Assert.areEqual('sections.payment', paymentsConfig.jsonPath, 
+            'Payment JSON path should match');
+        Assert.areEqual('Payment__c', paymentsConfig.targetObject, 
+            'Parties target object should be Payment__c');
+        Test.stopTest();
+    }
+    
+    @IsTest
+    static void testGetConfig_ParishCollection() {
+        InboundForm_MappingConfig.FormTypeConfig config = InboundForm_S37Config.getConfig();
+        
+        InboundForm_MappingConfig.CollectionConfig parishesConfig = null;
+        for (InboundForm_MappingConfig.CollectionConfig coll : config.collections) {
+            if (coll.collectionName == 'parishes') {
+                parishesConfig = coll;
+                break;
+            }
+        }
+        
+        Test.startTest();
+        Assert.isNotNull(parishesConfig, 'parishes collection should exist');
+        Assert.areEqual('sections.parishes', parishesConfig.jsonPath, 
+            'Payment JSON path should match');
+        Assert.areEqual('Parish__c', parishesConfig.targetObject, 
+            'parishes target object should be Parish__c');
+        Test.stopTest();
+    }
 }

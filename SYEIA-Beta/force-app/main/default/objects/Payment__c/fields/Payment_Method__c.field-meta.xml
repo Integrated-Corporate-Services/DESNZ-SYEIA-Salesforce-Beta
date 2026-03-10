@@ -20,6 +20,11 @@
                 <default>false</default>
                 <label>Credit Card</label>
             </value>
+            <value>
+                <fullName>Debit Card</fullName>
+                <default>false</default>
+                <label>Debit Card</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

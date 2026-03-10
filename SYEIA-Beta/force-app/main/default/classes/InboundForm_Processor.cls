@@ -4,6 +4,7 @@
  */
 public with sharing class InboundForm_Processor {
     
+    
     // Schema cache to avoid repeated getGlobalDescribe calls
     private static Map<String, Schema.SObjectType> sObjectTypeCache = 
         new Map<String, Schema.SObjectType>();
@@ -532,6 +533,9 @@ public with sharing class InboundForm_Processor {
                 if (boolVal == null) return null;
                 return boolVal ? mapping.booleanTrueValue : mapping.booleanFalseValue;
             }
+            when CURRENCY_TYPE {
+                return convertToCurrency(value);
+            }
             when DATE_TYPE {
                 return convertToDate(value);
             }
@@ -593,6 +597,26 @@ public with sharing class InboundForm_Processor {
             if (strVal == 'false' || strVal == 'no' || strVal == '0') return false;
         }
         return null;
+    }
+
+    /**
+     * Convert value to Currency (Decimal)
+     */
+    private static Decimal convertToCurrency(Object value) {
+        if (value == null) return null;
+        if (value instanceof Decimal) return (Decimal)value;
+        if (value instanceof Double) return Decimal.valueOf((Double)value);
+        if (value instanceof Integer) return Decimal.valueOf((Integer)value);
+
+        String strValue = String.valueOf(value).trim();
+
+        if (String.isBlank(strValue)) return null;
+        strValue = strValue.replaceAll('[£$€]','').replace(',','').trim();
+        try {
+            return Decimal.valueOf((String) strValue);
+        } catch (Exception e) {
+            return null;
+        }
     }
     
     /**
@@ -733,7 +757,7 @@ public with sharing class InboundForm_Processor {
     private static void commitFormTypeRecordsConsolidated(String formType, List<ProcessingResult> results) {
         InboundForm_MappingConfig.FormTypeConfig config = 
             InboundForm_ConfigRegistry.getConfig(formType);
-        
+
         if (config == null) return;
         
         // Step 1: Insert all primary records (single DML)
@@ -743,15 +767,15 @@ public with sharing class InboundForm_Processor {
                 allPrimaryRecords.addAll(result.createdRecords.get(config.primaryObject));
             }
         }
-        
+
         if (!allPrimaryRecords.isEmpty()) {
             Database.SaveResult[] saveResults = Database.insert(allPrimaryRecords, false);
             logDmlErrors(saveResults, config.primaryObject);
         }
-        
+
         // Build inbound to primary map for linking child records
         Map<Id, Id> inboundToPrimaryMap = buildInboundToPrimaryMap(allPrimaryRecords, config);
-        
+
         // Step 1.5: Call afterPrimaryInsert handler for each result
         // This allows handlers to create records that need the primary record ID (e.g., Related_Case__c)
         IFormHandler handler = getHandler(config);
@@ -852,6 +876,7 @@ public with sharing class InboundForm_Processor {
                 if (!result.success) continue;
                 
                 Id primaryId = inboundToPrimaryMap.get(result.inboundRequestId);
+
                 if (primaryId != null) {
                     try {
                         // Filter inserted records to only those belonging to this result's primary record
