@@ -70,9 +70,9 @@ private class DocGen_DocumentGenerationWrapperTest {
 
     DocumentGenerationProcess process = createdProcesses[0];
     Assert.areEqual(
-      'GenerateAndConvert',
+      'Generate',
       process.Type,
-      'Type should be GenerateAndConvert'
+      'Type should be Generate'
     );
     Assert.areEqual(
       'InProgress',

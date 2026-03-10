@@ -10,7 +10,7 @@ public class DocGen_DocumentGenerationWrapper {
         
         DocumentGenerationRequest request = requests[0];
         
-        String documentType = 'GenerateAndConvert';
+        String documentType = 'Generate';//'GenerateAndConvert' - For both generation and conversion (PDF), 'Generate' - For generation only, 'Convert' - For conversion only
         String documentStatus = 'InProgress';
         String documentDocGenApiVersionType = 'Advanced';
         
