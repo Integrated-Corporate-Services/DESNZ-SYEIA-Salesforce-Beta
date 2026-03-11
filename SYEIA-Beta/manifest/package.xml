@@ -203,6 +203,7 @@
 		<members>Consultation_Response__c.Conditions_Not_Accepted_Reason__c</members>
 		<members>Consultation_Response__c.Consultation_Conditions_Accepted__c</members>
 		<members>Consultation_Response__c.Consultation_Recommendations_Accepted__c</members>
+		<members>Consultation_Response__c.Consultation_Response_Id__c</members>
 		<members>Consultation_Response__c.Consultation__c</members>
 		<members>Consultation_Response__c.Email_of_Responder__c</members>
 		<members>Consultation_Response__c.Full_Name_of_Responder__c</members>
@@ -213,6 +214,7 @@
 		<members>Consultation__c.Case__c</members>
 		<members>Consultation__c.Completed_On__c</members>
 		<members>Consultation__c.Consultation_Completed_Offline__c</members>
+		<members>Consultation__c.Consultation_Id__c</members>
 		<members>Consultation__c.Consultation_Location__c</members>
 		<members>Consultation__c.Consultation_Type__c</members>
 		<members>Consultation__c.Contact_Email_Address__c</members>
@@ -255,6 +257,14 @@
 		<members>Negotiation__c.Additional_Comments__c</members>
 		<members>Negotiation__c.Case__c</members>
 		<members>Negotiation__c.Start_Date_of_Any_Negotiations__c</members>
+		<members>Parish__c.Case__c</members>
+		<members>Parish__c.Country__c</members>
+		<members>Parish__c.Created_at__c</members>
+		<members>Parish__c.Created_by__c</members>
+		<members>Parish__c.LPA_Code__c</members>
+		<members>Parish__c.Parish_Id__c</members>
+		<members>Parish__c.Parish_Code__c</members>
+		<members>Parish__c.Parish_Name__c</members>
 		<members>Party__c.Application_Party_Id__c</members>
 		<members>Party__c.Case__c</members>
 		<members>Party__c.Email__c</members>
@@ -268,14 +278,32 @@
 		<members>Party__c.Representative__c</members>
 		<members>Party__c.Salutation__c</members>
 		<members>Payment__c.Case__c</members>
+		<members>Payment__c.Created_at__c</members>
 		<members>Payment__c.Description__c</members>
 		<members>Payment__c.Invoice_Date__c</members>
 		<members>Payment__c.Invoice_Reference__c</members>
 		<members>Payment__c.Item_Reference__c</members>
 		<members>Payment__c.Payment_Date__c</members>
+		<members>Payment__c.Payment_Id__c</members>
 		<members>Payment__c.Payment_Method__c</members>
+		<members>Payment__c.Provider__c</members>
 		<members>Payment__c.Quantity__c</members>
+		<members>Payment__c.Status__c</members>
 		<members>Payment__c.Subtotal__c</members>
+		<members>Payment__c.Total_Amount__c</members>
+		<members>Payment__c.User_Id__c</members>
+		<members>Post_Consultation__c.Case__c</members>
+		<members>Post_Consultation__c.CON_Recommendations_Not_Accepted_Reason__c</members>
+		<members>Post_Consultation__c.Consultees_Recommendations_Accepted__c</members>
+		<members>Post_Consultation__c.Consultees_Recommendations_Made__c</members>
+		<members>Post_Consultation__c.Created_At__c</members>
+		<members>Post_Consultation__c.Created_By__c</members>
+		<members>Post_Consultation__c.IPA_Conditions_Accepted__c</members>
+		<members>Post_Consultation__c.IPA_Conditions_Imposed__c</members>
+		<members>Post_Consultation__c.IPA_Conditions_Not_Accepted_Reason__c</members>
+		<members>Post_Consultation__c.Last_Updated_At__c</members>
+		<members>Post_Consultation__c.Last_Updated_By__c</members>
+		<members>Post_Consultation__c.Post_Consultation_Id__c</members>
 		<members>Project_Target_Completion_Date_Conifg__mdt.Full_EIA_Duration_Days__c</members>
 		<members>Project_Target_Completion_Date_Conifg__mdt.No_screening_needed_Duration_Days__c</members>
 		<members>Project_Target_Completion_Date_Conifg__mdt.Screening_needed_NL_Duration_Days__c</members>
@@ -333,7 +361,9 @@
 		<members>Land__c</members>
 		<members>Negotiation__c</members>
 		<members>Party__c</members>
+		<members>Parish__c</members>
 		<members>Payment__c</members>
+		<members>Post_Consultation__c</members>		
         <members>Project_Target_Completion_Date_Conifg__mdt</members>
 		<members>Related_Case__c</members>
 		<members>Route_Point__c</members>
