@@ -3,7 +3,7 @@
     <fullName>DNO_Name__c</fullName>
     <description>Hidden field that is populated with the DNO Name to allow it to be searchable in the global search</description>
     <externalId>false</externalId>
-    <label>DNO</label>
+    <label>Company Name</label>
     <length>255</length>
     <required>false</required>
     <trackHistory>false</trackHistory>
