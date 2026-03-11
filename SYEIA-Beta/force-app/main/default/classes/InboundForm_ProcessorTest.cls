@@ -178,6 +178,58 @@ private class InboundForm_ProcessorTest {
             '}';
     }
     
+    private static String getJsonWithPostConsultationData() {
+        return '{' +
+            '"formType": "S37",' +
+            '"applicationId": "APP-PARISH-001",' +
+            '"sections": {' +
+                '"location": {' +
+                    '"routes": [' +
+                        '{"routeName": "Route 1", "route_id": "R001", ' +
+                        '"gridPoints": [{"point_id": "P1", "easting": "100", "northing": "200"},' +
+                        '{"point_id": "P2", "easting": "101", "northing": "201"}]}' +
+                    ']' +
+                '},' +
+                '"eiaFees": {"is_eia_development": false},' +
+                '"postConsultationOutcome": { "id": "5b1c00ec-42dc-4067-8908-3e2b6a515736","created_at": "2026-03-06T16: 44: 59.449Z",' +
+      			'"created_by": "a3333333-3333-3333-3333-333333333333","application_id": "ba7a201f-ade7-4b1d-9ce4-5aad21f9c763",'+
+  				'"last_updated_at": "2026-03-06T16: 45: 46.025Z","last_updated_by": "a3333333-3333-3333-3333-333333333333",'+	
+      			'"lpa_conditions_imposed": true,"lpa_conditions_accepted": false,"consultees_recommendations_made": true,'+
+      			'"lpa_conditions_not_accepted_reason": "testing","consultees_recommendations_accepted": false,'+
+      			'"consultees_recommendations_not_accepted_reason": "testing last"'+
+    			'}'+
+             '}'+
+          '}';
+    }
+    
+	private static String getJsonWithConsultationData() {
+        return '{' +
+            '"formType": "S37",' +
+            '"applicationId": "APP-PARISH-001",' +
+            '"sections": {' +
+                '"location": {' +
+                    '"routes": [' +
+                        '{"routeName": "Route 1", "route_id": "R001", ' +
+                        '"gridPoints": [{"point_id": "P1", "easting": "100", "northing": "200"},' +
+                        '{"point_id": "P2", "easting": "101", "northing": "201"}]}' +
+                    ']' +
+                '},' +
+                '"eiaFees": {"is_eia_development": false},' +
+                '"consultations": [ {"id": "3986b302-a822-49fd-8583-00d546580c63","sentAt": "2026-06-11T23: 00: 00.000Z",' +
+        		'"sentBy": null,"status": "Closed","offline": false,"closedAt": null,"closedBy": null,"createdAt": "2026-03-06T16: 44: 02.598Z",'+
+				'"createdBy": "a3333333-3333-3333-3333-333333333333","dateClosed": "2026-03-06T17: 06: 58.350Z","roundLabel": "Initial round",'+
+				'"secondDate": null,"roundNumber": 1,"applicationId": "ba7a201f-ade7-4b1d-9ce4-5aad21f9c763","closeComments": "test",'+
+        		'"lastUpdatedAt": "2026-03-06T17: 06: 58.350Z","lastUpdatedBy": "a3333333-3333-3333-3333-333333333333","otherConsultee": null,'+
+        		'"deliveryChannel": null,"notRequiredDocs": [],"objectionRaised": true,"consultationType": "LPA","notRequiredReason": null,'+
+        		'"dateRequestCreated": "2026-06-11T23: 00: 00.000Z","allDocumentsUploaded": false,"consulteeEmailAddress": null,'+
+				'"consulteeEmailMessage": null,"consultationRequestSent": true,"consulteeOrganisationId": "b0311f09-b1b0-4cff-8dc4-23969d854061",'+
+				'"respondingConsulteeName": "test","respondingConsulteeEmail": "test@eample.com","consulteeOrganisationName": "St Albans City and District Council"'+
+				'}]'+
+                '}'+
+            '}';
+    }
+    
+    
     // ========================================================================
     // TEST SETUP
     // ========================================================================
@@ -667,7 +719,55 @@ private class InboundForm_ProcessorTest {
         Test.stopTest();
         
         InboundForm_Processor.ProcessingResult result = results.get(request.Id);
-        Assert.isTrue(result.success, 'Should succeed with parishes data');
+        Assert.isTrue(result.success, 'Should succeed with Payment data');
+    }
+    
+    @IsTest
+    static void testProcessRequests_WithConsultationData() {
+        InboundForm_Processor.clearAllCaches();
+        InboundForm_ConfigRegistry.clearCache();
+        
+        Inbound_Request__c request = new Inbound_Request__c(
+            Payload__c = getJsonWithConsultationData(),
+            Status__c = 'Received'
+        );
+        insert request;
+        
+        List<Inbound_Request__c> requests = new List<Inbound_Request__c>{
+            [SELECT Id, Payload__c FROM Inbound_Request__c WHERE Id = :request.Id]
+        };
+        
+        Test.startTest();
+        Map<Id, InboundForm_Processor.ProcessingResult> results = 
+            InboundForm_Processor.processRequests(requests);
+        Test.stopTest();
+        
+        InboundForm_Processor.ProcessingResult result = results.get(request.Id);
+        Assert.isTrue(result.success, 'Should succeed with Post Consultation data');
+    }
+    
+    @IsTest
+    static void testProcessRequests_WithPostConsultationData() {
+        InboundForm_Processor.clearAllCaches();
+        InboundForm_ConfigRegistry.clearCache();
+        
+        Inbound_Request__c request = new Inbound_Request__c(
+            Payload__c = getJsonWithPostConsultationData(),
+            Status__c = 'Received'
+        );
+        insert request;
+        
+        List<Inbound_Request__c> requests = new List<Inbound_Request__c>{
+            [SELECT Id, Payload__c FROM Inbound_Request__c WHERE Id = :request.Id]
+        };
+        
+        Test.startTest();
+        Map<Id, InboundForm_Processor.ProcessingResult> results = 
+            InboundForm_Processor.processRequests(requests);
+        Test.stopTest();
+        
+        InboundForm_Processor.ProcessingResult result = results.get(request.Id);
+        Assert.isTrue(result.success, 'Should succeed with Consultation data');
     }
     
     @IsTest

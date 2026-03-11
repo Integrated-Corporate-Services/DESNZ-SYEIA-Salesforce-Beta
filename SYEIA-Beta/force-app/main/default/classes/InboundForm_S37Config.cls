@@ -212,6 +212,7 @@ public class InboundForm_S37Config {
         config.addCollection(getConsultationResponseConfig());
         config.addCollection(getParishConfig());
         config.addCollection(getPaymentConfig());
+        config.addCollection(getPostConsultationOutcomeConfig());        
     }
     
     // ----- Routes Collection -----
@@ -420,7 +421,7 @@ public class InboundForm_S37Config {
         parishes.addFieldMapping(InboundForm_MappingConfig.stringField('id', 'Parish_Id__c'));
         parishes.addFieldMapping(InboundForm_MappingConfig.stringField('country', 'Country__c'));
         parishes.addFieldMapping(InboundForm_MappingConfig.stringField('lpa_code', 'LPA_Code__c'));
-        parishes.addFieldMapping(InboundForm_MappingConfig.stringField('created_at', 'Created_at__c'));
+        parishes.addFieldMapping(InboundForm_MappingConfig.dateTimeField('created_at', 'Created_at__c'));
         parishes.addFieldMapping(InboundForm_MappingConfig.stringField('created_by', 'Created_by__c'));
         parishes.addFieldMapping(InboundForm_MappingConfig.stringField('parish_code', 'Parish_Code__c'));
         parishes.addFieldMapping(InboundForm_MappingConfig.stringField('parish_name', 'Name'));
@@ -448,5 +449,42 @@ public class InboundForm_S37Config {
         payments.addFieldMapping(InboundForm_MappingConfig.dateTimeField('created_at', 'Created_at__c'));
 
         return payments;
+    }
+
+    // ----- Post Consultation Outcome Collection -----
+    private static InboundForm_MappingConfig.CollectionConfig getPostConsultationOutcomeConfig() {
+        InboundForm_MappingConfig.CollectionConfig postConOutcomes = 
+            new InboundForm_MappingConfig.CollectionConfig()
+                .setCollectionName('postConsultationOutcomes')
+                .setJsonPath('sections.postConsultationOutcome')
+                .setTargetObject('Post_Consultation__c')
+                .setParentLookupField('Case__c')
+                .setParentLinkSfField('Post_Consultation_Id__c')
+                .setProcessingOrder(100);
+        
+        postConOutcomes.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'id', 'Post_Consultation_Id__c'));
+        postConOutcomes.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'consultees_recommendations_not_accepted_reason', 'CON_Recommendations_Not_Accepted_Reason__c'));
+        postConOutcomes.addFieldMapping(InboundForm_MappingConfig.booleanField(
+            'consultees_recommendations_accepted','Consultees_Recommendations_Accepted__c'));
+        postConOutcomes.addFieldMapping(InboundForm_MappingConfig.booleanField(
+            'consultees_recommendations_made','Consultees_Recommendations_Made__c'));
+        postConOutcomes.addFieldMapping(InboundForm_MappingConfig.dateTimeField(
+            'created_at', 'Created_At__c'));
+        postConOutcomes.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'created_by', 'Created_By__c'));
+        postConOutcomes.addFieldMapping(InboundForm_MappingConfig.booleanField(
+            'lpa_conditions_accepted', 'IPA_Conditions_Accepted__c'));
+        postConOutcomes.addFieldMapping(InboundForm_MappingConfig.booleanField(
+            'lpa_conditions_imposed', 'IPA_Conditions_Imposed__c'));
+        postConOutcomes.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'lpa_conditions_not_accepted_reason', 'IPA_Conditions_Not_Accepted_Reason__c'));
+        postConOutcomes.addFieldMapping(InboundForm_MappingConfig.dateTimeField(
+            'last_updated_at', 'Last_Updated_At__c'));
+        postConOutcomes.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'last_updated_by', 'Last_Updated_By__c'));
+
+        return postConOutcomes;
     }
 }
