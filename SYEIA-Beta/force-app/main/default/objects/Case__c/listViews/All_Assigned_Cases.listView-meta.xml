@@ -6,6 +6,7 @@
     <columns>Applicant_Reference__c</columns>
     <columns>Case_Type__c</columns>
     <columns>DNO_Name__c</columns>
+    <columns>Status__c</columns>
     <columns>Date_of_Application_Display__c</columns>
     <columns>LAST_UPDATE</columns>
     <columns>Decision_Deadline_Display__c</columns>
