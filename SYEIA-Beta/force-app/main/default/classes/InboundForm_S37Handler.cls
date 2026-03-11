@@ -38,6 +38,8 @@ public class InboundForm_S37Handler implements InboundForm_Processor.IFormHandle
      */
     public void afterAllInserts(Id primaryCaseId, Map<String, List<SObject>> insertedRecords) {
         setDNOOnCase(primaryCaseId, insertedRecords);
+        setPaymentOnCase(primaryCaseId, insertedRecords);
+        setPostConsultationsCase(primaryCaseId, insertedRecords);
     }
     
     // ========================================================================
@@ -357,6 +359,91 @@ public class InboundForm_S37Handler implements InboundForm_Processor.IFormHandle
             Logger.setScenario('InboundForm_S37Handler.setDNOOnCase');
             Logger.saveLog();
             System.debug(LoggingLevel.ERROR, 'Error setting DNO on Case: ' + e.getMessage());
+        }
+    }
+
+    
+    // ========================================================================
+    // Populate Payment Lookup on Case PROCESSING
+    // ========================================================================
+    
+    /**
+     * Set the Payment__c field on Case__c to the Payment__c sObject record
+     */
+    private void setPaymentOnCase(Id caseId, Map<String, List<SObject>> insertedRecords) {
+        if (!insertedRecords.containsKey('Payment__c')) {
+            return;
+        }
+        
+        Id paymentId = null;
+        for (SObject record : insertedRecords.get('Payment__c')) {
+            Payment__c payment = (Payment__c) record;
+            if (payment.Id != null) {
+                paymentId = payment.Id;
+                break;
+            }
+        }
+        
+        if (paymentId == null) {
+            System.debug(LoggingLevel.DEBUG, 'No Payment founnd to set Payment__c on Case');
+            return;
+        }
+        
+        // Update the Case with the DNO Party Id
+        try {
+            Case__c caseToUpdate = new Case__c(
+                Id = caseId,
+                Payment__c = paymentId
+            );
+            update caseToUpdate;
+            System.debug(LoggingLevel.INFO, 'Set Payment__c on Case ' + caseId + ' to Payment ' + paymentId);
+        } catch (Exception e) {
+            Logger.error('Error setting Payment on Case: ' + e.getMessage());
+            Logger.setScenario('InboundForm_S37Handler.setPaymentOnCase');
+            Logger.saveLog();
+            System.debug(LoggingLevel.ERROR, 'Error setting Payment__c on Case: ' + e.getMessage());
+        }
+    }
+
+    // ========================================================================
+    // Populate Post_Consultation__c Lookup on Case PROCESSING
+    // ========================================================================
+    
+    /**
+     * Set the Post_Consultation__c field on Case__c to the Post_Consultation__c sObject record
+     */
+    private void setPostConsultationsCase(Id caseId, Map<String, List<SObject>> insertedRecords) {
+        if (!insertedRecords.containsKey('Post_Consultation__c')) {
+            return;
+        }
+        
+        Id postConsultationId = null;
+        for (SObject record : insertedRecords.get('Post_Consultation__c')) {
+            Post_Consultation__c postConsultation = (Post_Consultation__c) record;
+            if (postConsultation.Id != null) {
+                postConsultationId = postConsultation.Id;
+                break;
+            }
+        }
+        
+        if (postConsultationId == null) {
+            System.debug(LoggingLevel.DEBUG, 'No Post Consultation founnd to set Post_Consultation__c on Case');
+            return;
+        }
+        
+        // Update the Case with the Post_Consultation__c Id
+        try {
+            Case__c caseToUpdate = new Case__c(
+                Id = caseId,
+                Post_Consultation__c = postConsultationId
+            );
+            update caseToUpdate;
+            System.debug(LoggingLevel.INFO, 'Set Post_Consultation__c on Case ' + caseId + ' to Post Consultation ' + postConsultationId);
+        } catch (Exception e) {
+            Logger.error('Error setting Post Consultation on Case: ' + e.getMessage());
+            Logger.setScenario('InboundForm_S37Handler.setPaymentOnCase');
+            Logger.saveLog();
+            System.debug(LoggingLevel.ERROR, 'Error setting Post_Consultation__c on Case: ' + e.getMessage());
         }
     }
 }
