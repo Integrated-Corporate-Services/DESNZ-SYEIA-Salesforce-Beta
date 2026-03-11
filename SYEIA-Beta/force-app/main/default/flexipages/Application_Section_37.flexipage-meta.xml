@@ -27,12 +27,8 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Project_name__c</fieldItem>
-                <identifier>RecordProject_name_cField</identifier>
+                <fieldItem>Record.DNO__r.Representative__c</fieldItem>
+                <identifier>RecordDNO_rRepresentative_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -43,12 +39,6 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.DNO__c</fieldItem>
                 <identifier>RecordDNO_cField2</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.DNO__r.Representative__c</fieldItem>
-                <identifier>RecordDNO_rRepresentative_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -67,8 +57,28 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.UK_Energy_Portal_Link__c</fieldItem>
-                <identifier>RecordUK_Energy_Portal_Link_cField</identifier>
+                <fieldItem>Record.Project_name__c</fieldItem>
+                <identifier>RecordProject_name_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Type_of_Project__c</fieldItem>
+                <identifier>RecordType_of_Project_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Case_Owner__c</fieldItem>
+                <identifier>RecordCase_Owner_cField3</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-285aaa07-d58d-4598-b93b-76fb427ea701</name>
