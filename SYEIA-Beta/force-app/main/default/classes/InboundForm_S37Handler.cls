@@ -44,10 +44,10 @@ public class InboundForm_S37Handler implements InboundForm_Processor.IFormHandle
         setPaymentOnCase(caseToUpdate, insertedRecords);
         setPostConsultationsCase(caseToUpdate, insertedRecords);
 
-                // Update the Case with the DNO Party Id
+        // Update the Case with the DNO Party Id, Payment Id and PostConsultation Id
         try {
             update caseToUpdate;
-            System.debug(LoggingLevel.INFO, 'Set DNO__c on Case ' +  caseToUpdate);
+            System.debug(LoggingLevel.INFO, 'Set DNO__c, Payment__c, Post_Consultation__c on Case ' +  caseToUpdate);
         } catch (Exception e) {
             Logger.error('Error setting DNO, Payment and PostConsultation on Case: ' + e.getMessage());
             Logger.setScenario('InboundForm_S37Handler.afterAllInserts');
