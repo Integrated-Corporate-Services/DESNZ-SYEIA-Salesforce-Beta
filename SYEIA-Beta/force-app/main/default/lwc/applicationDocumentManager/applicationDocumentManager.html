@@ -1,0 +1,73 @@
+<template>
+    <lightning-card title="Applicant Files">
+
+        <lightning-button
+            label="Load Files"
+            onclick={loadFiles}>
+        </lightning-button>
+
+        <template if:true={files}>
+            <div class="slds-grid slds-wrap slds-m-top_medium">
+
+                <template for:each={files} for:item="file">
+
+                    <div key={file.name}
+                         class="slds-col slds-size_1-of-2 slds-p-around_small">
+
+                        <lightning-file-card
+                            title={file.name}
+                            description={file.sizeLabel}>
+                        </lightning-file-card>
+                    </div>
+
+                </template>
+
+            </div>
+        </template>
+
+    </lightning-card>
+
+    <!-- <lightning-card title="Files">
+        <template if:true={files}>
+
+            
+            <lightning-datatable
+                        key-field="Id"
+                        data={files}
+                        columns={columns}
+                        onrowaction={handleRowAction}>
+                    </lightning-datatable> -->
+
+            <!-- <ul class="slds-m-around_medium">
+                <template for:each={files} for:item="file">
+                    <li key={file.Id} class="slds-m-bottom_small">
+                        <strong>{file.Title}</strong>
+                        <lightning-button
+                            label="Preview"
+                            variant="base"
+                            data-id={file.ContentDocumentId}
+                            onclick={previewFile}
+                            class="slds-m-left_small">
+                        </lightning-button>
+
+                        <lightning-button
+                            label="Download"
+                            variant="base"
+                            data-id={file.Id}
+                            onclick={downloadFile}
+                            class="slds-m-left_small">
+                        </lightning-button>
+                    </li>
+
+                    
+
+                </template>
+            </ul>  -->
+
+        <!-- </template>
+        <template if:false={files}>
+            <p class="slds-m-around_medium">No files found.</p>
+        </template>
+        
+    </lightning-card>  -->
+</template>
