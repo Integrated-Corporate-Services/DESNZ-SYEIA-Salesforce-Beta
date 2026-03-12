@@ -37,7 +37,23 @@ public class InboundForm_S37Handler implements InboundForm_Processor.IFormHandle
      * Handles updates that need child record IDs, such as setting DNO__c on Case
      */
     public void afterAllInserts(Id primaryCaseId, Map<String, List<SObject>> insertedRecords) {
-        setDNOOnCase(primaryCaseId, insertedRecords);
+        
+        Case__c caseToUpdate = new Case__c(Id = primaryCaseId);
+
+        setDNOOnCase(caseToUpdate, insertedRecords);
+        setPaymentOnCase(caseToUpdate, insertedRecords);
+        setPostConsultationsCase(caseToUpdate, insertedRecords);
+
+        // Update the Case with the DNO Party Id, Payment Id and PostConsultation Id
+        try {
+            update caseToUpdate;
+            System.debug(LoggingLevel.INFO, 'Set DNO__c, Payment__c, Post_Consultation__c on Case ' +  caseToUpdate);
+        } catch (Exception e) {
+            Logger.error('Error setting DNO, Payment and PostConsultation on Case: ' + e.getMessage());
+            Logger.setScenario('InboundForm_S37Handler.afterAllInserts');
+            Logger.saveLog();
+            System.debug(LoggingLevel.ERROR, 'Error setting DNO, Payment and PostConsultation on Case: ' + e.getMessage());
+        }
     }
     
     // ========================================================================
@@ -324,7 +340,7 @@ public class InboundForm_S37Handler implements InboundForm_Processor.IFormHandle
     /**
      * Set the DNO__c field on Case__c to the primary Party__c record
      */
-    private void setDNOOnCase(Id caseId, Map<String, List<SObject>> insertedRecords) {
+    private void setDNOOnCase(Case__c primaryCase, Map<String, List<SObject>> insertedRecords) {
         if (!insertedRecords.containsKey('Party__c')) {
             return;
         }
@@ -346,17 +362,90 @@ public class InboundForm_S37Handler implements InboundForm_Processor.IFormHandle
         
         // Update the Case with the DNO Party Id
         try {
-            Case__c caseToUpdate = new Case__c(
-                Id = caseId,
-                DNO__c = dnoPartyId
-            );
-            update caseToUpdate;
-            System.debug(LoggingLevel.INFO, 'Set DNO__c on Case ' + caseId + ' to Party ' + dnoPartyId);
+            primaryCase.DNO__c = dnoPartyId;
+            System.debug(LoggingLevel.INFO, 'Set DNO__c on Case ' + primaryCase.Id + ' to Party ' + dnoPartyId);
         } catch (Exception e) {
             Logger.error('Error setting DNO on Case: ' + e.getMessage());
             Logger.setScenario('InboundForm_S37Handler.setDNOOnCase');
             Logger.saveLog();
             System.debug(LoggingLevel.ERROR, 'Error setting DNO on Case: ' + e.getMessage());
+        }
+    }
+
+    
+    // ========================================================================
+    // Populate Payment Lookup on Case PROCESSING
+    // ========================================================================
+    
+    /**
+     * Set the Payment__c field on Case__c to the Payment__c sObject record
+     */
+    private void setPaymentOnCase(Case__c primaryCase, Map<String, List<SObject>> insertedRecords) {
+        if (!insertedRecords.containsKey('Payment__c')) {
+            return;
+        }
+        
+        Id paymentId = null;
+        for (SObject record : insertedRecords.get('Payment__c')) {
+            Payment__c payment = (Payment__c) record;
+            if (payment.Id != null) {
+                paymentId = payment.Id;
+                break;
+            }
+        }
+        
+        if (paymentId == null) {
+            System.debug(LoggingLevel.DEBUG, 'No Payment founnd to set Payment__c on Case');
+            return;
+        }
+        
+        // Update the Case with the Payment Id
+        try {
+            primaryCase.Payment__c = paymentId;
+            System.debug(LoggingLevel.INFO, 'Set Payment__c on Case ' + primaryCase.Id + ' to Payment ' + paymentId);
+        } catch (Exception e) {
+            Logger.error('Error setting Payment on Case: ' + e.getMessage());
+            Logger.setScenario('InboundForm_S37Handler.setPaymentOnCase');
+            Logger.saveLog();
+            System.debug(LoggingLevel.ERROR, 'Error setting Payment__c on Case: ' + e.getMessage());
+        }
+    }
+
+    // ========================================================================
+    // Populate Post_Consultation__c Lookup on Case PROCESSING
+    // ========================================================================
+    
+    /**
+     * Set the Post_Consultation__c field on Case__c to the Post_Consultation__c sObject record
+     */
+    private void setPostConsultationsCase(Case__c primaryCase, Map<String, List<SObject>> insertedRecords) {
+        if (!insertedRecords.containsKey('Post_Consultation__c')) {
+            return;
+        }
+        
+        Id postConsultationId = null;
+        for (SObject record : insertedRecords.get('Post_Consultation__c')) {
+            Post_Consultation__c postConsultation = (Post_Consultation__c) record;
+            if (postConsultation.Id != null) {
+                postConsultationId = postConsultation.Id;
+                break;
+            }
+        }
+        
+        if (postConsultationId == null) {
+            System.debug(LoggingLevel.DEBUG, 'No Post Consultation founnd to set Post_Consultation__c on Case');
+            return;
+        }
+        
+        // Update the Case with the Post_Consultation__c Id
+        try {
+                primaryCase.Post_Consultation__c = postConsultationId;
+                System.debug(LoggingLevel.INFO, 'Set Post_Consultation__c on Case ' + primaryCase.Id + ' to Post Consultation ' + postConsultationId);
+        } catch (Exception e) {
+            Logger.error('Error setting Post Consultation on Case: ' + e.getMessage());
+            Logger.setScenario('InboundForm_S37Handler.setPostConsultationsCase');
+            Logger.saveLog();
+            System.debug(LoggingLevel.ERROR, 'Error setting Post_Consultation__c on Case: ' + e.getMessage());
         }
     }
 }
