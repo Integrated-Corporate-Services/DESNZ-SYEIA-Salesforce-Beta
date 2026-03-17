@@ -8,7 +8,6 @@
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
-        <controllingField>Application_Journey_Status__c</controllingField>
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
@@ -97,41 +96,5 @@
                 <label>Invalid</label>
             </value>
         </valueSetDefinition>
-        <valueSettings>
-            <controllingFieldValue>Happy Path</controllingFieldValue>
-            <valueName>Acknowledged</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Happy Path</controllingFieldValue>
-            <valueName>In-Progress</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Happy Path</controllingFieldValue>
-            <valueName>Consultation</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Happy Path</controllingFieldValue>
-            <valueName>Completed</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Edge Case Path</controllingFieldValue>
-            <valueName>Requested More Information</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Edge Case Path</controllingFieldValue>
-            <valueName>Withdrawal Requested</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Edge Case Path</controllingFieldValue>
-            <valueName>Withdrawn</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Edge Case Path</controllingFieldValue>
-            <valueName>Rejected</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Edge Case Path</controllingFieldValue>
-            <valueName>Archived</valueName>
-        </valueSettings>
-    </valueSet>
+     </valueSet>
 </CustomField>
