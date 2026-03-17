@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
+		<members>Application_StatusUpdateQueueable</members>
+		<members>Application_StatusUpdateQueueableTest</members>
+		<members>ApplicationStatusService</members>
+		<members>ApplicationStatusServiceTest</members>
+		<members>CaseTriggerHandler</members>
+		<members>CaseTriggerHandlerTest</members>
+		<members>CaseTriggerHelper</members>
+		<members>CaseTriggerHelperTest</members>
 		<members>ChangePasswordControllerTest</members>
 		<members>CommunitiesLandingControllerTest</members>
 		<members>CommunitiesLoginControllerTest</members>
@@ -36,11 +44,13 @@
 		<members>InboundRequestTriggerHelperTest</members>
 		<members>JitHandler</members>
 		<members>JitHandlerTest</members>
+		<members>OAuthTokenService</members>
 		<members>TriggerHandler</members>
 		<members>Utilities</members>
 		<name>ApexClass</name>
 	</types>
 	<types>
+		<members>CaseTrigger</members>
 		<members>ContentVersionTrigger</members>
 		<members>InboundRequestTrigger</members>
 		<name>ApexTrigger</name>
@@ -65,6 +75,8 @@
 		<members>Address__c.Full_Address__c</members>
 		<members>Address__c.Postcode__c</members>
 		<members>Address__c.Town_City__c</members>
+		<members>Application_Status_Mapping__mdt.AWS_Status__c</members>
+		<members>Application_Status_Mapping__mdt.Salesforce_Status__c</members>
 		<members>Asset_Information__c.Case__c</members>
 		<members>Asset_Information__c.Description__c</members>
 		<members>Asset_Information__c.Line_Length__c</members>
@@ -323,6 +335,10 @@
 		<members>Route__c.Tolerance_Required__c</members>
 		<members>Route__c.Tolerance__c</members>
 		<members>Route__c.Total_Route_Points__c</members>
+		<members>SalesforceSettings__c.client_id__c</members>
+		<members>SalesforceSettings__c.client_secret__c</members>
+		<members>SalesforceSettings__c.Endpoint_Url__c</members>
+		<members>SalesforceSettings__c.grant_type__c</members>
 		<members>Sensitive_Area_Check__c.Case__c</members>
 		<members>Sensitive_Area_Check__c.Consultation__c</members>
 		<members>User.Case_Type_Access__c</members>
@@ -338,6 +354,17 @@
 	</types>
 	<types>
 		<members>GOV_UK_Notify_Config.Production</members>
+		<members>Application_Status_Mapping__mdt.Application_Received</members>
+		<members>Application_Status_Mapping__mdt.Archived</members>
+		<members>Application_Status_Mapping__mdt.Decision_Issued</members>
+		<members>Application_Status_Mapping__mdt.Further_Information_requested</members>
+		<members>Application_Status_Mapping__mdt.In_Abeyance</members>
+		<members>Application_Status_Mapping__mdt.In_progress</members>
+		<members>Application_Status_Mapping__mdt.In_Review</members>
+		<members>Application_Status_Mapping__mdt.Invalid</members>
+		<members>Application_Status_Mapping__mdt.Representation_Stage</members>
+		<members>Application_Status_Mapping__mdt.Submitted_for_approval</members>
+		<members>Application_Status_Mapping__mdt.Withdrawn</members>
 		<name>CustomMetadata</name>
 	</types>
 	<types>
@@ -348,6 +375,7 @@
 	</types>
 	<types>
 		<members>Address__c</members>
+		<members>Application_Status_Mapping__mdt</members>
 		<members>Asset_Information__c</members>
 		<members>Case_Note__c</members>
 		<members>Case_Party__c</members>
@@ -368,6 +396,7 @@
 		<members>Related_Case__c</members>
 		<members>Route_Point__c</members>
 		<members>Route__c</members>
+		<members>SalesforceSettings__c</members>
 		<members>Sensitive_Area_Check__c</members>
 		<members>Withdrawal_Request__c</members>
 		<name>CustomObject</name>
