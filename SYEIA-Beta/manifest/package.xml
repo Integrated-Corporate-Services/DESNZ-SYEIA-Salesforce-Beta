@@ -354,17 +354,17 @@
 	</types>
 	<types>
 		<members>GOV_UK_Notify_Config.Production</members>
-		<members>Application_Status_Mapping__mdt.Application_Received</members>
-		<members>Application_Status_Mapping__mdt.Archived</members>
-		<members>Application_Status_Mapping__mdt.Decision_Issued</members>
-		<members>Application_Status_Mapping__mdt.Further_Information_requested</members>
-		<members>Application_Status_Mapping__mdt.In_Abeyance</members>
-		<members>Application_Status_Mapping__mdt.In_progress</members>
-		<members>Application_Status_Mapping__mdt.In_Review</members>
-		<members>Application_Status_Mapping__mdt.Invalid</members>
-		<members>Application_Status_Mapping__mdt.Representation_Stage</members>
-		<members>Application_Status_Mapping__mdt.Submitted_for_approval</members>
-		<members>Application_Status_Mapping__mdt.Withdrawn</members>
+		<members>Application_Status_Mapping.Application_Received</members>
+		<members>Application_Status_Mapping.Archived</members>
+		<members>Application_Status_Mapping.Decision_Issued</members>
+		<members>Application_Status_Mapping.Further_Information_requested</members>
+		<members>Application_Status_Mapping.In_Abeyance</members>
+		<members>Application_Status_Mapping.In_progress</members>
+		<members>Application_Status_Mapping.In_Review</members>
+		<members>Application_Status_Mapping.Invalid</members>
+		<members>Application_Status_Mapping.Representation_Stage</members>
+		<members>Application_Status_Mapping.Submitted_for_approval</members>
+		<members>Application_Status_Mapping.Withdrawn</members>
 		<name>CustomMetadata</name>
 	</types>
 	<types>
