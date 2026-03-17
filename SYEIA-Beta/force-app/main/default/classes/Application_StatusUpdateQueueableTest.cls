@@ -1,6 +1,17 @@
 @IsTest
 public class Application_StatusUpdateQueueableTest {
-
+    
+    @testSetup
+    static void createSalesforceSetting(){
+        SalesforceSettings__c settings = new SalesforceSettings__c(
+            SetupOwnerId = UserInfo.getOrganizationId(), // KEY LINE
+            Endpoint_Url__c = 'https://saas-page-9942--devsyeia2.sandbox.my.salesforce.com/services/oauth2/token',
+            client_id__c ='3MVG92ZJW.xbfBW3MVG92ZJW.xbfBW3MVG92ZJW.xbfBW3MVG92ZJW.xbfBW',
+            client_secret__c='6A05AF344FD291BD6A05AF344FD291BD6A05AF344FD291BD6A05AF344FD291BD',
+            grant_type__c = 'client_credentials'
+        );
+        insert settings;
+    }
     // Mock HTTP callout for getAccessToken()
     class MockHttpResponseGenerator implements HttpCalloutMock {
         public HTTPResponse respond(HTTPRequest req) {
@@ -79,7 +90,7 @@ public class Application_StatusUpdateQueueableTest {
     static void testExecuteWithChunking() {
         Test.setMock(HttpCalloutMock.class, new MockHttpResponseGenerator());
 
-        List<Case__c> cases = GetCasesWithInProgress(100); // 100 to trigger chunking
+        List<Case__c> cases = GetCasesWithInProgress(99); // 100 to trigger chunking
         List<Id> caseIds = new List<Id>();
         for(Case__c c : cases) caseIds.add(c.Id);
 

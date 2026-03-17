@@ -1,6 +1,28 @@
 @IsTest
 public class CaseTriggerHandlerTest {
 
+    @testSetup
+    static void createSalesforceSetting(){
+        SalesforceSettings__c settings = new SalesforceSettings__c(
+            SetupOwnerId = UserInfo.getOrganizationId(), // KEY LINE
+            Endpoint_Url__c = 'https://saas-page-9942--devsyeia2.sandbox.my.salesforce.com/services/oauth2/token',
+            client_id__c ='3MVG92ZJW.xbfBW3MVG92ZJW.xbfBW3MVG92ZJW.xbfBW3MVG92ZJW.xbfBW',
+            client_secret__c='6A05AF344FD291BD6A05AF344FD291BD6A05AF344FD291BD6A05AF344FD291BD',
+            grant_type__c = 'client_credentials'
+        );
+        insert settings;
+    }
+    
+    // Mock HTTP callout for getAccessToken()
+    class MockHttpResponseGenerator implements HttpCalloutMock {
+        public HTTPResponse respond(HTTPRequest req) {
+            HttpResponse res = new HttpResponse();
+            res.setStatusCode(200);
+            res.setBody('{"access_token":"mock_token"}');
+            return res;
+        }
+    }
+    
     // Utility method to create test Case__c records
     private static List<Case__c> createCases(Integer count) {
         List<Case__c> cases = new List<Case__c>();
@@ -33,6 +55,9 @@ public class CaseTriggerHandlerTest {
 
     @IsTest
     static void testBeforeUpdate() {
+        
+        Test.setMock(HttpCalloutMock.class, new MockHttpResponseGenerator());
+        
         List<Case__c> cases = createCases(2);
         insert cases;
 
@@ -81,6 +106,9 @@ public class CaseTriggerHandlerTest {
 
     @IsTest
     static void testAfterUpdate() {
+        
+        Test.setMock(HttpCalloutMock.class, new MockHttpResponseGenerator());
+
         List<Case__c> cases = createCases(2);
         insert cases;
 
