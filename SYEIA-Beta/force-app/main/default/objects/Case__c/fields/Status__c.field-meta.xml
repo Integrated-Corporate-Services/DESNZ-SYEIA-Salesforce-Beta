@@ -8,6 +8,7 @@
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
+        <controllingField>Application_Journey_Status__c</controllingField>
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
@@ -55,6 +56,82 @@
                 <default>false</default>
                 <label>Archived</label>
             </value>
+            <value>
+                <fullName>Application Received</fullName>
+                <default>false</default>
+                <label>Application Received</label>
+            </value>
+            <value>
+                <fullName>In Review</fullName>
+                <default>false</default>
+                <label>In Review</label>
+            </value>
+            <value>
+                <fullName>Further Information requested</fullName>
+                <default>false</default>
+                <label>Further Information requested</label>
+            </value>
+            <value>
+                <fullName>In Abeyance</fullName>
+                <default>false</default>
+                <label>In Abeyance</label>
+            </value>
+            <value>
+                <fullName>Representation Stage</fullName>
+                <default>false</default>
+                <label>Representation Stage</label>
+            </value>
+            <value>
+                <fullName>Submitted for approval</fullName>
+                <default>false</default>
+                <label>Submitted for approval</label>
+            </value>
+            <value>
+                <fullName>Decision Issued</fullName>
+                <default>false</default>
+                <label>Decision Issued</label>
+            </value>
+            <value>
+                <fullName>Invalid</fullName>
+                <default>false</default>
+                <label>Invalid</label>
+            </value>
         </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Happy Path</controllingFieldValue>
+            <valueName>Acknowledged</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Happy Path</controllingFieldValue>
+            <valueName>In-Progress</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Happy Path</controllingFieldValue>
+            <valueName>Consultation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Happy Path</controllingFieldValue>
+            <valueName>Completed</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Edge Case Path</controllingFieldValue>
+            <valueName>Requested More Information</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Edge Case Path</controllingFieldValue>
+            <valueName>Withdrawal Requested</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Edge Case Path</controllingFieldValue>
+            <valueName>Withdrawn</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Edge Case Path</controllingFieldValue>
+            <valueName>Rejected</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Edge Case Path</controllingFieldValue>
+            <valueName>Archived</valueName>
+        </valueSettings>
     </valueSet>
 </CustomField>
