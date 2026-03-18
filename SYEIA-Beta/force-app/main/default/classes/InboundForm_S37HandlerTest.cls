@@ -827,4 +827,88 @@ private class InboundForm_S37HandlerTest {
         Case__c updatedCase = [SELECT DNO__c FROM Case__c WHERE Id = :testCase.Id];
         Assert.isNull(updatedCase.DNO__c, 'DNO__c should not be set when party has no Id');
     }
+    
+    
+    @IsTest
+    static void testAfterAllInserts_Payment() {
+        InboundForm_S37Handler handler = new InboundForm_S37Handler();
+        
+        Case__c testCase = new Case__c(Name = 'Test Case');
+        insert testCase;
+        
+        Payment__c payment = new Payment__c(
+            Case__c = testCase.Id
+        );
+        insert payment;
+        
+        Map<String, List<SObject>> insertedRecords = new Map<String, List<SObject>>{
+            'Payment__c' => new List<SObject>{ payment }
+        };
+        
+        Test.startTest();
+        handler.afterAllInserts(testCase.Id, insertedRecords);
+        Test.stopTest();
+        
+        Case__c updatedCase = [SELECT Payment__c FROM Case__c WHERE Id = :testCase.Id];
+        Assert.areEqual(payment.Id, updatedCase.Payment__c, 'Payment__c should be set');
+    }
+    
+    @IsTest
+    static void testAfterAllInserts_NoPayment() {
+        InboundForm_S37Handler handler = new InboundForm_S37Handler();
+        
+        Case__c testCase = new Case__c(Name = 'Test Case');
+        insert testCase;
+
+        
+        Map<String, List<SObject>> insertedRecords = new Map<String, List<SObject>>();
+        Test.startTest();
+        handler.afterAllInserts(testCase.Id, insertedRecords);
+        Test.stopTest();
+        
+        Case__c updatedCase = [SELECT Payment__c FROM Case__c WHERE Id = :testCase.Id];
+        Assert.isNull(updatedCase.Payment__c, 'Payment__c should not be set');
+    }
+    
+    @IsTest
+    static void testAfterAllInserts_PostConsultation() {
+        InboundForm_S37Handler handler = new InboundForm_S37Handler();
+        
+        Case__c testCase = new Case__c(Name = 'Test Case');
+        insert testCase;
+        
+        Post_Consultation__c postConsultation = new Post_Consultation__c(
+            Case__c = testCase.Id
+        );
+        insert postConsultation;
+        
+        Map<String, List<SObject>> insertedRecords = new Map<String, List<SObject>>{
+            'Post_Consultation__c' => new List<SObject>{ postConsultation }
+        };
+        
+        Test.startTest();
+        handler.afterAllInserts(testCase.Id, insertedRecords);
+        Test.stopTest();
+        
+        Case__c updatedCase = [SELECT Post_Consultation__c FROM Case__c WHERE Id = :testCase.Id];
+        Assert.areEqual(postConsultation.Id, updatedCase.Post_Consultation__c, 'Post_Consultation__c should be set');
+    }
+    
+    @IsTest
+    static void testAfterAllInserts_NoPostConsultation() {
+        InboundForm_S37Handler handler = new InboundForm_S37Handler();
+        
+        Case__c testCase = new Case__c(Name = 'Test Case');
+        insert testCase;
+
+        
+        Map<String, List<SObject>> insertedRecords = new Map<String, List<SObject>>();
+        Test.startTest();
+        handler.afterAllInserts(testCase.Id, insertedRecords);
+        Test.stopTest();
+        
+        Case__c updatedCase = [SELECT Post_Consultation__c FROM Case__c WHERE Id = :testCase.Id];
+        Assert.isNull(updatedCase.Post_Consultation__c, 'Post_Consultation__c should not be set');
+    }
+    
 }

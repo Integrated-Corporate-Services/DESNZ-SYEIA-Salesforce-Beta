@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Salesforce_Status__c</fullName>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Salesforce Status</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Application Received</fullName>
+                <default>true</default>
+                <label>Application Received</label>
+            </value>
+            <value>
+                <fullName>In Review</fullName>
+                <default>false</default>
+                <label>In Review</label>
+            </value>
+            <value>
+                <fullName>Further Information requested</fullName>
+                <default>false</default>
+                <label>Further Information requested</label>
+            </value>
+            <value>
+                <fullName>In-Progress</fullName>
+                <default>false</default>
+                <label>In-Progress</label>
+            </value>
+            <value>
+                <fullName>In Abeyance</fullName>
+                <default>false</default>
+                <label>In Abeyance</label>
+            </value>
+            <value>
+                <fullName>Representation Stage</fullName>
+                <default>false</default>
+                <label>Representation Stage</label>
+            </value>
+            <value>
+                <fullName>Submitted for approval</fullName>
+                <default>false</default>
+                <label>Submitted for approval</label>
+            </value>
+            <value>
+                <fullName>Decision Issued</fullName>
+                <default>false</default>
+                <label>Decision Issued</label>
+            </value>
+            <value>
+                <fullName>Withdrawal Requested</fullName>
+                <default>false</default>
+                <label>Withdrawal Requested</label>
+            </value>
+            <value>
+                <fullName>Withdrawn</fullName>
+                <default>false</default>
+                <label>Withdrawn</label>
+            </value>
+            <value>
+                <fullName>Invalid</fullName>
+                <default>false</default>
+                <label>Invalid</label>
+            </value>
+            <value>
+                <fullName>Archived</fullName>
+                <default>false</default>
+                <label>Archived</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
