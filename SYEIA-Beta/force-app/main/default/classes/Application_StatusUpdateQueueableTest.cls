@@ -47,8 +47,9 @@ public class Application_StatusUpdateQueueableTest {
     static void testConstructorAndEmptyExecute() {
         Application_StatusUpdateQueueable job = new Application_StatusUpdateQueueable(new List<Id>());
         Test.startTest();
-        System.enqueueJob(job);
+        Id jobId = System.enqueueJob(job);
         Test.stopTest();
+        System.assertNotEquals(null, jobId, 'Job ID should not be null');
     }
 
     // -----------------------------
@@ -68,8 +69,9 @@ public class Application_StatusUpdateQueueableTest {
 
         Test.startTest();
         Application_StatusUpdateQueueable job = new Application_StatusUpdateQueueable(caseIds);
-        System.enqueueJob(job);
+        Id jobId = System.enqueueJob(job);
         Test.stopTest();
+        System.assertNotEquals(null, jobId, 'Job ID should not be null');
     }
 
     // -----------------------------
@@ -79,8 +81,9 @@ public class Application_StatusUpdateQueueableTest {
     static void testExecuteWithNullIds() {
         Test.startTest();
         Application_StatusUpdateQueueable job = new Application_StatusUpdateQueueable(null);
-        System.enqueueJob(job);
+        Id jobId = System.enqueueJob(job);
         Test.stopTest();
+        System.assertNotEquals(null, jobId, 'Job ID should not be null');
     }
 
     // -----------------------------
@@ -96,7 +99,8 @@ public class Application_StatusUpdateQueueableTest {
 
         Test.startTest();
         Application_StatusUpdateQueueable job = new Application_StatusUpdateQueueable(caseIds);
-        System.enqueueJob(job);
+        Id jobId = System.enqueueJob(job);
         Test.stopTest();
+        System.assertNotEquals(null, jobId, 'Job ID should not be null');
     }
 }
