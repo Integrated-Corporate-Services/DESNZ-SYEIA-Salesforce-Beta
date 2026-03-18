@@ -1,38 +1,17 @@
 public with sharing class FileController {
-    // @AuraEnabled(cacheable=true)
-    public static List<ContentVersion> getFiles(Id recordId) {
-
-        SET<Id> contentDocumentIdsSet = new SET<Id>();
-        for (ContentDocumentLink cdl : [
-            SELECT ContentDocumentId
-            FROM ContentDocumentLink
-            WHERE LinkedEntityId = :recordId
-        ]) {
-            contentDocumentIdsSet.add(cdl.ContentDocumentId);
-        }
-
-        return [
-            SELECT Id, Title, FileType, ContentDocumentId
-            FROM ContentVersion
-            WHERE ContentDocumentId IN :contentDocumentIdsSet
-            AND IsLatest = true
-            ORDER BY Title
-        ];
-    }
-
-    @AuraEnabled
-    public static String getZipFiles() {
+    
+    @AuraEnabled(cacheable=true)
+    public static String getZipFiles(String applicationId) {
 
         Http http = new Http();
         HttpRequest req = new HttpRequest();
-        String bearerToken = '00DVd000005O3eb!AQEAQJ7ZsjNcnxO9OSqG5I1vb._Pwa.f7W5l855GJ63R7Zr4orIna2W5jSa3AgnJNqoL0lBfdVowJvnNoYLhFEdbhnPJbbvA';
+        String bearerToken = OAuthTokenService.getBearerToken();
 
-        // req.setEndpoint('callout:Files_API');
-        req.setEndpoint('https://api.dev.syeia.energysecurity.gov.uk/backend/api/v1/internal/applications/a79322f2-51c5-4391-ac57-21745bf5ac72/documents/zip'); 
+        req.setEndpoint('callout:Applicant_File_Download/backend/api/v1/internal/applications/' + applicationId + '/documents/download'); 
         req.setMethod('POST');
         req.setHeader('Content-Type', 'application/json');
+        req.setHeader('Accept', 'application/zip');
         req.setHeader('Authorization', 'Bearer ' + bearerToken);
-        // req.setHeader('Idempotency-Key', String.valueOf(Crypto.getRandomLong()));
         req.setHeader('X-Acting-User-Email', UserInfo.getUserEmail());
         req.setHeader('X-Acting-User-Id', UserInfo.getUserId());
         req.setHeader('X-Acting-User-Role', 'desnz_caseworker');
@@ -42,21 +21,85 @@ public with sharing class FileController {
         };
         req.setBody(JSON.serialize(payload));
         
-        Logger.info('Sending request to get zip file for applicationId: ' + applicationId);
         HttpResponse res = null;
-        res = http.send(req);
+        try {
+            res = http.send(req);
+
+            if (res.getStatusCode() != 200) {
+                Logger.error('Failed to download zip file. Status: ' + res.getStatusCode() + ', Response: ' + res.getBody());
+                Logger.saveLog();
+                throw new AuraHandledException('Failed to download zip file. Status: ' + res.getStatusCode());
+            }
+            System.debug('Received response for zip file download. Status: ' + res.getStatusCode());
+            Blob zipBlob = res.getBodyAsBlob();
+            Logger.info('Sent request to download zip file. Status: ' + res.getStatusCode());
+            Logger.saveLog();
+        } catch (Exception e) {
+            Logger.error('Error sending request to download zip file: ' + e.getMessage());
+            Logger.saveLog();
+            throw new AuraHandledException('Error downloading zip file: ' + e.getMessage());
+        }
 
         Blob zipBlob = null;
         zipBlob = res.getBodyAsBlob();
+
         if (zipBlob == null) {
-            Logger.log('Failed to retrieve zip file from the API. Response: ' + res.getBody());
-            Logger.save();
+            Logger.info('Failed to retrieve zip file from the API. Response: ' + res.getBody());
+            Logger.saveLog();
             throw new AuraHandledException('Failed to retrieve zip file from the API.');
         }
 
-        // StaticResource myZip = [SELECT Id, Name, Body FROM StaticResource WHERE Name = 'SampleZipFile' LIMIT 1];
-        // zipBlob = myZip.Body;
-
         return EncodingUtil.base64Encode(zipBlob);
     }
+
+    public class TreeNode {
+        @AuraEnabled public String key;
+        @AuraEnabled public String name;
+        @AuraEnabled public Boolean isFile;
+        @AuraEnabled public Id contentDocumentId;
+        @AuraEnabled public List<TreeNode> children;
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static List<TreeNode> extractZipAndBuildTree(String applicationId) {
+        try{
+
+            String zipBase64 = getZipFiles(applicationId);
+            Blob zipBlob = EncodingUtil.base64Decode(zipBase64);
+            Compression.ZipReader zipReader = new Compression.ZipReader(zipBlob);
+            List<Compression.ZipEntry> entries = zipReader.getEntries();
+            List<TreeNode> nodes = new List<TreeNode>();
+            for (Compression.ZipEntry entry : entries) {
+                // if (entry.isDirectory()) continue;
+                String path = entry.getName();
+                Integer lastSlash = path.lastIndexOf('/');
+                String folderPath = lastSlash > -1 ? path.substring(0, lastSlash) : '';
+                String fileName = lastSlash > -1 ? path.substring(lastSlash+1) : path;
+                Blob fileBlob = zipReader.getEntry(entry.getName()).getContent();
+                // ContentVersion cv = [SELECT Id, ContentDocumentId FROM ContentVersion WHERE Id = 'a00Vd00000Ld19sIAB' LIMIT 1];
+                System.debug('logLevel' + fileBlob);
+                // cv.Title = fileName;
+                // cv.PathOnClient = path;
+                // cv.VersionData = fileBlob;
+                // cv.Description = 'Imported from ZIP path: ' + path;
+                // if (recordId != null) {
+                    // cv.FirstPublishLocationId = 'a00Vd00000Ld19sIAB';
+                // }
+                // insert cv;
+                TreeNode node = new TreeNode();
+                node.key = path;
+                node.name = fileName;
+                node.isFile = true;
+                // node.contentDocumentId = cv.ContentDocumentId;
+                node.children = new List<TreeNode>();
+                nodes.add(node);
+            }
+            return nodes;
+        } catch(Exception ex){
+            System.debug('Error in extractZipAndBuildTree: ' + ex.getMessage());
+            System.debug('Stack trace ' + ex.getStackTraceString());
+            throw new AuraHandledException('Error processing ZIP file: ' + ex.getMessage());
+        }
+    }
+
 }
