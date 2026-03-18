@@ -370,7 +370,7 @@ public class InboundForm_S37Config {
                 .setParentLinkSfField('Consultation_Id__c')
                 .setProcessingOrder(70);
         
-        consultations.addFieldMapping(InboundForm_MappingConfig.stringField('id', 'Name'));
+        consultations.addFieldMapping(InboundForm_MappingConfig.stringField('consulteeOrganisationName', 'Name'));
         consultations.addFieldMapping(InboundForm_MappingConfig.stringField('id', 'Consultation_Id__c'));
         consultations.addFieldMapping(InboundForm_MappingConfig.dateField('dateClosed', 'Completed_On__c'));
         consultations.addFieldMapping(InboundForm_MappingConfig.stringField('offline', 'Consultation_Completed_Offline__c'));
