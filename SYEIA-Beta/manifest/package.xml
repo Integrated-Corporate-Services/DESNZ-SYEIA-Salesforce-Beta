@@ -18,6 +18,8 @@
 		<members>ContentVersionTriggerHelperTest</members>
 		<members>DocGen_DocumentGenerationWrapper</members>
 		<members>DocGen_DocumentGenerationWrapperTest</members>
+		<members>FileController</members>
+		<members>FileControllerTest</members>
 		<members>GovUKNotify_Invocable</members>
 		<members>GovUKNotify_InvocableTest</members>
 		<members>GovUKNotify_JWTGenerator</members>
@@ -517,6 +519,10 @@
 	</types>
 	<types>
 		<members>*</members>
+		<name>LightningComponentBundle</name>
+	</types>
+	<types>
+		<members>*</members>
 		<name>NamedCredential</name>
 	</types>
 	<types>
@@ -598,6 +604,10 @@
 		<members>Payment__c</members>
 		<members>Related_Case__c</members>
 		<name>SharingRules</name>
+	</types>
+	<types>
+		<members>SampleZipFile</members>
+		<name>StaticResource</name>
 	</types>
 	<types>
 		<members>PSG_Finance</members>

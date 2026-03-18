@@ -31,15 +31,24 @@ public with sharing class OAuthTokenService {
 
         req.setBody(body);
 
-        Http http = new Http();
-        HttpResponse res = http.send(req);
+        try {
+            
+            Http http = new Http();
+            HttpResponse res = http.send(req);
 
-        if (res.getStatusCode() != 200) {
-            throw new CalloutException('Token request failed: ' + res.getStatusCode() + ' ' + res.getBody());
+            if (res.getStatusCode() != 200) {
+                Logger.error('Token request failed: ' + res.getStatusCode() + ' ' + res.getBody());
+                throw new CalloutException('Token request failed: ' + res.getStatusCode() + ' ' + res.getBody());
+            }
+
+            TokenResponse tokenRes = (TokenResponse) JSON.deserialize(res.getBody(), TokenResponse.class);
+            
+            return tokenRes.access_token;
+        } catch (Exception e) {
+            Logger.error('Error obtaining OAuth token: ' + e.getStackTraceString());
+            Logger.error('Error logging OAuth token request: ' + e.getMessage());
+            Logger.saveLog();
         }
-
-        TokenResponse tokenRes =
-            (TokenResponse) JSON.deserialize(res.getBody(), TokenResponse.class);
-        return tokenRes.access_token;
+        return null;
     }
 }

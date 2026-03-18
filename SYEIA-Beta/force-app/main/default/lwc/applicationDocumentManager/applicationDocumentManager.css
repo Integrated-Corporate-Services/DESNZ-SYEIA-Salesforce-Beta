@@ -1,0 +1,23 @@
+.custom-table .slds-table th:nth-child(1),
+.custom-table .slds-table td:nth-child(1) {
+    width: 50%;
+    min-width: 200px;
+    max-width: 200px;
+}
+
+.previewText {
+    white-space: pre-wrap;
+    overflow: auto;
+    max-height: 24rem;
+}
+
+.previewImage {
+    max-width: 100%;
+    height: auto;
+}
+
+.previewFrame {
+    width: 100%;
+    height: 24rem;
+    border: 0;
+}
