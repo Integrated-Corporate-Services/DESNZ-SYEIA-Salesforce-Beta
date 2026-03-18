@@ -20,7 +20,7 @@ public with sharing class OAuthTokenService {
             throw new CalloutException('Missing Salesforce settings');
         }
         HttpRequest req = new HttpRequest();
-        req.setEndpoint(URL.getOrgDomainUrl().toExternalForm() + '/services/oauth2/token');
+        req.setEndpoint(settings.Endpoint_Url__c);
         req.setMethod('POST');
         req.setHeader('Content-Type', 'application/x-www-form-urlencoded');
         
