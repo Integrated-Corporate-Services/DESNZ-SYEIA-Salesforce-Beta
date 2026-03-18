@@ -606,6 +606,10 @@
 		<name>SharingRules</name>
 	</types>
 	<types>
+		<members>SampleZipFile</members>
+		<name>StaticResource</name>
+	</types>
+	<types>
 		<members>PSG_Finance</members>
 		<members>UAP_Case_Type_NWL</members>
 		<members>UAP_Case_Type_S37</members>
