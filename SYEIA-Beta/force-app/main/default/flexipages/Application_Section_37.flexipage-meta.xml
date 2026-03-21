@@ -47,16 +47,6 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Case_Owner__c</fieldItem>
-                <identifier>RecordCase_Owner_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
                 <fieldItem>Record.Project_name__c</fieldItem>
                 <identifier>RecordProject_name_cField</identifier>
             </fieldInstance>
@@ -78,7 +68,7 @@
                     <value>none</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Case_Owner__c</fieldItem>
-                <identifier>RecordCase_Owner_cField3</identifier>
+                <identifier>RecordCase_Owner_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-285aaa07-d58d-4598-b93b-76fb427ea701</name>
