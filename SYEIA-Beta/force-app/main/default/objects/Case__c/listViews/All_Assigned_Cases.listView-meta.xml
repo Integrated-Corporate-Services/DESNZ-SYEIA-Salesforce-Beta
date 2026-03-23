@@ -3,7 +3,6 @@
     <fullName>All_Assigned_Cases</fullName>
     <booleanFilter>6 AND ((1 AND 2) OR (3 AND 4 AND 5))</booleanFilter>
     <columns>NAME</columns>
-    <columns>Applicant_Reference__c</columns>
     <columns>Case_Type__c</columns>
     <columns>DNO_Name__c</columns>
     <columns>Status__c</columns>
