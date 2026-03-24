@@ -343,6 +343,16 @@
 		<members>SalesforceSettings__c.grant_type__c</members>
 		<members>Sensitive_Area_Check__c.Case__c</members>
 		<members>Sensitive_Area_Check__c.Consultation__c</members>
+		<members>Sensitive_Area_Review__c.Add_Other_Areas_Choice__c</members>
+		<members>Sensitive_Area_Review__c.Application_Id__c</members>
+		<members>Sensitive_Area_Review__c.Asset_Presence_Option_Id__c</members>
+		<members>Sensitive_Area_Review__c.Case__c</members>
+		<members>Sensitive_Area_Review__c.Other_Sensitive_Areas_Not__c</members>
+		<members>Sensitive_Area_Review__c.Reviewed_at__c</members>
+		<members>Sensitive_Area_Review__c.Reviewed_by__c</members>
+		<members>Sensitive_Area_Review__c.Sensitive_Area_Review_Id__c</members>
+		<members>Sensitive_Area_Review__c.Settings_Id__c</members>
+		<members>Sensitive_Area_Review__c.Updated_at__c</members>
 		<members>User.Case_Type_Access__c</members>
 		<members>User.Persona__c</members>
 		<members>User.Salutations__c</members>
@@ -400,6 +410,7 @@
 		<members>Route__c</members>
 		<members>SalesforceSettings__c</members>
 		<members>Sensitive_Area_Check__c</members>
+        <members>Sensitive_Area_Review__c</members>
 		<members>Withdrawal_Request__c</members>
 		<name>CustomObject</name>
 	</types>
@@ -500,6 +511,7 @@
 		<members>Route_Point__c-Route Grid Reference Layout</members>
 		<members>Route__c-Route Layout</members>
 		<members>Sensitive_Area_Check__c-Sensitive Area Check Layout</members>
+		<members>Sensitive_Area_Review__c-Sensitive Area Review Layout</members>
 		<members>User-User Layout</members>
 		<members>Withdrawal_Request__c-Withdrawal Request Layout</members>
 		<name>Layout</name>
