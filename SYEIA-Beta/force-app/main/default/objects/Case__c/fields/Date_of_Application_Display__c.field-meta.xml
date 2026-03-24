@@ -22,7 +22,7 @@ CASE(
 ) + &quot;-&quot; +
 TEXT(YEAR( Date_of_Application__c ))</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-    <label>Date of Application</label>
+    <label>Date Received</label>
     <required>false</required>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
