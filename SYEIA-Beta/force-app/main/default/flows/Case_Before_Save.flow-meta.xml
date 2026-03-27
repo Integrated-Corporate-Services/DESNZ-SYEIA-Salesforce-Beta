@@ -14,6 +14,9 @@
                 <elementReference>varNow</elementReference>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>Is_Status_Changed</targetReference>
+        </connector>
     </assignments>
     <assignments>
         <name>Assign_Low_Full_EIA_Target_Completion_Date</name>
@@ -30,6 +33,19 @@
         <connector>
             <targetReference>Is_Case_New_or_Updated</targetReference>
         </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Previous_Status</name>
+        <label>Assign Previous Status</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Prior_Application_Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record__Prior.Status__c</elementReference>
+            </value>
+        </assignmentItems>
     </assignments>
     <assignments>
         <name>Assign_Screening_needed_NL_Target_Completion_Date</name>
@@ -189,6 +205,9 @@
         <label>Decision Case Status Updated To Complete</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Is_Status_Changed</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Case_Completed</name>
@@ -278,6 +297,42 @@
         </rules>
     </decisions>
     <decisions>
+        <name>Is_Status_Changed</name>
+        <label>Is Status Changed</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>StatusChanged</name>
+            <conditionLogic>(1 OR 2) AND 3</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_IsNew</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Withdrawn</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Previous_Status</targetReference>
+            </connector>
+            <label>Status Changed</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Is_Type_of_Project_updated</name>
         <label>Is Type of Project updated</label>
         <locationX>0</locationX>
@@ -356,6 +411,9 @@
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
+            <connector>
+                <targetReference>Is_Status_Changed</targetReference>
+            </connector>
             <label>Failed To Find RT</label>
         </rules>
     </decisions>
@@ -503,6 +561,9 @@
         <label>Update Record Type</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <connector>
+            <targetReference>Is_Status_Changed</targetReference>
+        </connector>
         <inputAssignments>
             <field>DNO_Name__c</field>
             <value>
@@ -524,7 +585,7 @@
         <inputAssignments>
             <field>Status__c</field>
             <value>
-                <stringValue>Acknowledged</stringValue>
+                <stringValue>Application Received</stringValue>
             </value>
         </inputAssignments>
         <inputReference>$Record</inputReference>

@@ -69,6 +69,11 @@
                 <default>false</default>
                 <label>Archived</label>
             </value>
+            <value>
+                <fullName>Post Decision</fullName>
+                <default>false</default>
+                <label>Post Decision</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

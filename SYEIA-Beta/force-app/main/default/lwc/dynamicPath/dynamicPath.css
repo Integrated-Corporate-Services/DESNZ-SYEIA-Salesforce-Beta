@@ -1,0 +1,17 @@
+/* Reduce vertical padding for progress indicator and steps */
+.lightning-progress-indicator {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    min-height: 28px !important;
+}
+
+.lightning-progress-step {
+    height: 28px !important;
+    line-height: 28px !important;
+    margin: 0 !important;
+}
+
+/* Reduce card padding to minimal */
+:host > lightning-card {
+    padding: 0.25rem 0.75rem !important;
+}

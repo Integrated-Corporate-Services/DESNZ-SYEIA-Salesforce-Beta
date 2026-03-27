@@ -1,0 +1,42 @@
+<template>
+    <div class="slds-card" style="padding:0.75rem;">
+        <div style="display:flex; align-items:center; width:100%; gap:1rem;">
+
+            <!-- Progress Path -->
+            <div style="flex:1 1 0; min-width:0;">
+                <template if:true={ready}>
+                    <lightning-progress-indicator
+                        key={progressKey}
+                        current-step={displayValue}
+                        type="path"
+                        style="width:100%;">
+
+                        <template for:each={stages} for:item="stage">
+                            <lightning-progress-step
+                                key={stage.value}
+                                label={stage.label}
+                                value={stage.value}
+                                data-value={stage.value}
+                                onclick={handleStageSelect}>
+                            </lightning-progress-step>
+                        </template>
+
+                    </lightning-progress-indicator>
+                </template>
+            </div>
+
+            <!-- Button -->
+            <template if:false={hideButton}>
+                <lightning-button
+                    variant="brand"
+                    label="Mark Status as Complete"
+                    icon-name={buttonIcon}
+                    icon-position="left"
+                    onclick={handleUpdateStatus}
+                    disabled={isButtonDisabled}>
+                </lightning-button>
+            </template>
+
+        </div>
+    </div>
+</template>

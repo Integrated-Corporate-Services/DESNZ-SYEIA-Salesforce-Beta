@@ -3,11 +3,11 @@
     <label>In Progress</label>
     <protected>false</protected>
     <values>
-        <field>AWS_Status__c</field>
-        <value xsi:type="xsd:string">Under review</value>
+        <field>Controlling_Status__c</field>
+        <value xsi:type="xsd:string">In-Progress</value>
     </values>
     <values>
-        <field>Salesforce_Status__c</field>
-        <value xsi:type="xsd:string">In-Progress</value>
+        <field>Path_Statuses__c</field>
+        <value xsi:type="xsd:string">Application Received,Under Review,In-Progress,Submitted for approval,Decision Issued</value>
     </values>
 </CustomMetadata>

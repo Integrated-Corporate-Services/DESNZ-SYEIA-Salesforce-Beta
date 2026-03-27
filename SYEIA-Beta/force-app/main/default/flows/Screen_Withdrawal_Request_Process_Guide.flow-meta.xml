@@ -283,8 +283,8 @@ Add Nebula Logger</description>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
-        <name>Update_Case_To_In_Progress</name>
-        <label>Update Case To In-Progress</label>
+        <name>Update_Case_To_Prior_Application_Status</name>
+        <label>Update Case To Prior Application Status</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
@@ -301,7 +301,7 @@ Add Nebula Logger</description>
         <inputAssignments>
             <field>Status__c</field>
             <value>
-                <stringValue>In-Progress</stringValue>
+                <elementReference>Get_Case_Record.Prior_Application_Status__c</elementReference>
             </value>
         </inputAssignments>
         <object>Case__c</object>
@@ -379,7 +379,7 @@ Add Nebula Logger</description>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Update_Case_To_In_Progress</targetReference>
+            <targetReference>Update_Case_To_Prior_Application_Status</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
