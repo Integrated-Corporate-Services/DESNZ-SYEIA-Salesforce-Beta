@@ -394,7 +394,7 @@
 		<members>Application_Status_Path_Setting.Under_Review</members>
 		<members>Application_Status_Path_Setting.Withdrawal_Requested</members>
 		<members>Application_Status_Path_Setting.Withdrawn</members>
-		<memebrs>Dynamic_Application_Status_Routing.Post_Decision</members>
+		<members>Dynamic_Application_Status_Routing.Post_Decision</members>
 		<members>Mark_Status_as_Complete_Setting.Statuses</members>
 		<members>Prior_Application_Status_Setting.Applicable_Statuses</members>
 		<name>CustomMetadata</name>
@@ -671,5 +671,5 @@
 		<name>ValidationRule</name>
 	</types>
 	<version>65.0</version>
-	
+
 </Package>
