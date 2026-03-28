@@ -18,7 +18,7 @@
 		<members>ContentVersionTriggerHelperTest</members>
 		<members>DocGen_DocumentGenerationWrapper</members>
 		<members>DocGen_DocumentGenerationWrapperTest</members>
-		<members>DynamicPathController</members>
+		<members>DynamicPathController</members> 
 		<members>FileController</members>
 		<members>FileControllerTest</members>
 		<members>GovUKNotify_Invocable</members>
