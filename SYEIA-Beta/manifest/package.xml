@@ -180,7 +180,7 @@
 		<members>Case__c.Pending_Withdrawal_Request_Count__c</members>
 		<members>Case__c.Plan_Reference__c</members>
 		<members>Case__c.Pre_existing_Routes_Storage_Used__c</members>
-		<members>Prior_Application_Status__c</members>
+		<members>Case__c.Prior_Application_Status__c</members>
 		<members>Case__c.Project_Description__c</members>
 		<members>Case__c.Project_name__c</members>
 		<members>Case__c.Reason_for_Not_Submitting_a_Title_Plan__c</members>
@@ -417,7 +417,7 @@
 		<members>Consultation_Response__c</members>
 		<members>Consultation__c</members>
 		<members>Document_Approval_Request__c</members>
-		<members>Dynamic_Application_Status_Routing__mdt</members/>
+		<members>Dynamic_Application_Status_Routing__mdt</members>
 		<members>GOV_UK_Notify_Config__mdt</members>
 		<members>Inbound_Request__c</members>
 		<members>Land__c</members>
