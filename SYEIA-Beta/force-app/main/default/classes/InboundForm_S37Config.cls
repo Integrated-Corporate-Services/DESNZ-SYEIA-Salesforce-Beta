@@ -32,6 +32,12 @@ public class InboundForm_S37Config {
     
     private static void addCaseFieldMappings(InboundForm_MappingConfig.FormTypeConfig config) {
         
+        // ----- Desnz Reference -----
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'desnzRef', 
+            'Name'
+        ));
+
         // ----- Works Overview Section -----
         config.addFieldMapping(InboundForm_MappingConfig.integerField(
             'sections.worksOverview.polesAdded', 
