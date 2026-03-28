@@ -19,6 +19,19 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assign_Decision_Date</name>
+        <label>Assign Decision Date</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Decision_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
         <name>Assign_Low_Full_EIA_Target_Completion_Date</name>
         <label>Assign Low Full EIA Target_Completion_Date</label>
         <locationX>0</locationX>
@@ -46,6 +59,9 @@
                 <elementReference>$Record__Prior.Status__c</elementReference>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>Is_Status_Changed_to_Decision_issued_OR_Withdrawn</targetReference>
+        </connector>
     </assignments>
     <assignments>
         <name>Assign_Screening_needed_NL_Target_Completion_Date</name>
@@ -301,6 +317,9 @@
         <label>Is Status Changed</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Is_Status_Changed_to_Decision_issued_OR_Withdrawn</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>StatusChanged</name>
@@ -330,6 +349,42 @@
                 <targetReference>Assign_Previous_Status</targetReference>
             </connector>
             <label>Status Changed</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Is_Status_Changed_to_Decision_issued_OR_Withdrawn</name>
+        <label>Is Status Changed to Decision issued OR Withdrawn</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Changed_to_Decision_issued_OR_Withdrawn</name>
+            <conditionLogic>1 AND (2 OR 3)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Decision Issued</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Withdrawn</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Decision_Date</targetReference>
+            </connector>
+            <label>Changed to Decision issued OR Withdrawn</label>
         </rules>
     </decisions>
     <decisions>

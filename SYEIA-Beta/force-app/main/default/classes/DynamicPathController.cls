@@ -46,7 +46,7 @@ public with sharing class DynamicPathController {
 
         String finalValue;
 
-        // 1️⃣ Check Dynamic Routing metadata first
+        // Check Dynamic Routing metadata first
         List<Dynamic_Application_Status_Routing__mdt> routing = [
             SELECT Current_Status__c, Next_Status__c
             FROM Dynamic_Application_Status_Routing__mdt
@@ -58,7 +58,7 @@ public with sharing class DynamicPathController {
             finalValue = routing[0].Next_Status__c;
         }
 
-        // 2️⃣ Check Prior Application Status if no routing
+        // Check Prior Application Status if no routing
         if (String.isBlank(finalValue)) {
             List<Prior_Application_Status_Setting__mdt> priorSettings = [
                 SELECT Applicable_Statuses__c
@@ -86,12 +86,12 @@ public with sharing class DynamicPathController {
             }
         }
 
-        // 3️⃣ Fallback to LWC-provided status
+        // Fallback to LWC-provided status
         if (String.isBlank(finalValue)) {
             finalValue = currentStatus;
         }
 
-        // 4️⃣ Validate against picklist
+        // Validate against picklist
         Schema.DescribeFieldResult fieldResult = recordId.getSObjectType().getDescribe()
             .fields.getMap().get(fieldApiName).getDescribe();
 
@@ -108,7 +108,7 @@ public with sharing class DynamicPathController {
             throw new AuraHandledException('Status "' + finalValue + '" is not a valid picklist value.');
         }
 
-        // 5️⃣ Update record dynamically
+        // Update record dynamically
         try {
             SObject record = recordId.getSObjectType().newSObject(recordId);
             record.put(fieldApiName, finalValue);
