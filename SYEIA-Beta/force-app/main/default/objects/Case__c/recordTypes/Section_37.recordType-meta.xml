@@ -676,7 +676,7 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Further Information requested</fullName>
+            <fullName>Further Information Requested</fullName>
             <default>false</default>
         </values>
         <values>
@@ -704,7 +704,7 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Submitted for approval</fullName>
+            <fullName>Submitted for Approval</fullName>
             <default>false</default>
         </values>
         <values>

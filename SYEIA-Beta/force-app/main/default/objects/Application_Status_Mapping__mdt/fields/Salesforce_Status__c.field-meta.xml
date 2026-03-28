@@ -20,9 +20,9 @@
                 <label>In Review</label>
             </value>
             <value>
-                <fullName>Further Information requested</fullName>
+                <fullName>Further Information Requested</fullName>
                 <default>false</default>
-                <label>Further Information requested</label>
+                <label>Further Information Requested</label>
             </value>
             <value>
                 <fullName>In-Progress</fullName>
@@ -40,9 +40,9 @@
                 <label>Representation Stage</label>
             </value>
             <value>
-                <fullName>Submitted for approval</fullName>
+                <fullName>Submitted for Approval</fullName>
                 <default>false</default>
-                <label>Submitted for approval</label>
+                <label>Submitted for Approval</label>
             </value>
             <value>
                 <fullName>Decision Issued</fullName>
