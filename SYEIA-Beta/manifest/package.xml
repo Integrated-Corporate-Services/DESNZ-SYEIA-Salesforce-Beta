@@ -382,6 +382,7 @@
 		<members>Application_Status_Mapping.In_Progress</members>
 		<members>Application_Status_Mapping.In_Review</members>
 		<members>Application_Status_Mapping.Invalid</members>
+		<members>Application_Status_Mapping.Post_Decision</members>
 		<members>Application_Status_Mapping.Representation_Stage</members>
 		<members>Application_Status_Mapping.Submitted_for_Approval</members>
 		<members>Application_Status_Mapping.Withdrawn</members>
