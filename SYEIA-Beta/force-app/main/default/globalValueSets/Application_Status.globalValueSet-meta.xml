@@ -21,9 +21,9 @@
         <label>In Review</label>
     </customValue>
     <customValue>
-        <fullName>Further Information requested</fullName>
+        <fullName>Further Information Requested</fullName>
         <default>false</default>
-        <label>Further Information requested</label>
+        <label>Further Information Requested</label>
     </customValue>
     <customValue>
         <fullName>In-Progress</fullName>
