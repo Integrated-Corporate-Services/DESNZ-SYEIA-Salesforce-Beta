@@ -3,27 +3,10 @@ name: qa-deploy
 on:
   push:
     branches: [ develop ]
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Target environment'
-        required: true
-        type: choice
-        options:
-          - Dev1
-          - Dev2
-          - QA
-          - UAT
-          - Prod
-      ref:
-        description: 'Git ref to deploy (branch, tag, or commit SHA)'
-        required: false
-        default: 'develop'
-        type: string
-
+  
 permissions:
   contents: write
-
+  
 jobs:
   deploy-qa:
     runs-on: ubuntu-latest
@@ -32,7 +15,7 @@ jobs:
       SF_USERNAME_QA: ${{ secrets.SF_USERNAME_QA }}
     steps:
       - uses: actions/checkout@v4
-
+      
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -52,6 +35,14 @@ jobs:
               --sfdx-url-file qaSfdxurl.txt \
               --alias QA_SANDBOX --set-default
 
+      - name: Print Out Destructive Changes
+        run: |
+          cd ./SYEIA-Beta
+          echo "--- PRE Destructive Changes ---"
+          cat manifest/destructiveChanges/destructiveChangesPre.xml
+          echo "--- POST Destructive Changes ---"
+          cat manifest/destructiveChanges/destructiveChangesPost.xml
+
       - name: Validate (checkonly)
         run: |
           PACKAGE_XML_PATH=$(find . -name "package.xml" | head -n 1)
@@ -62,7 +53,7 @@ jobs:
       - name: Deploy (real)
         run: |
           cd ./SYEIA-Beta
-          sf project deploy start --manifest manifest/package.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --json > deploy-results-qa.json
+          sf project deploy start --manifest manifest/package.xml --pre-destructive-changes manifest/destructiveChanges/destructiveChangesPre.xml --post-destructive-changes manifest/destructiveChanges/destructiveChangesPost.xml --target-org QA_SANDBOX --test-level RunLocalTests --wait 60 --json > deploy-results-qa.json
           cat deploy-results-qa.json
 
       - name: Run all tests

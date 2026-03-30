@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Case_Batch_Add_Nebula_Log</name>
+        <label>Case Batch Add Nebula Log</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>FlowRecordLogEntry</actionName>
+        <actionType>apex</actionType>
+        <dataTypeMappings>
+            <typeName>T__record</typeName>
+            <typeValue>Case__c</typeValue>
+        </dataTypeMappings>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>faultMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>flowName</name>
+            <value>
+                <stringValue>Case_Scheduled_Daily_Batch</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>loggingLevelName</name>
+            <value>
+                <stringValue>WARN</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>message</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>record</name>
+            <value>
+                <elementReference>$Record</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveLog</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <nameSegment>FlowRecordLogEntry</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>65.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Decision_Case_Status</name>
+        <label>Decision Case Status</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Is_Set_Status_To_Archived</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Withdrawn</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>IsWithdrawnDateGreaterThan3Months</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Case_Application</targetReference>
+            </connector>
+            <label>Is Set Status To Archived</label>
+        </rules>
+    </decisions>
+    <description>This Batch Flow runs everyday to process Case Batch jobs.
+Nebula Logger.</description>
+    <environments>Default</environments>
+    <formulas>
+        <description>This is used to determine when the withdrawn date is greater than 3 months.</description>
+        <name>IsWithdrawnDateGreaterThan3Months</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(
+  ISBLANK({!$Record.Withdrawal_Date_Time__c}),
+  FALSE,
+  {!$Record.Withdrawal_Date_Time__c}&lt; DATETIMEVALUE(ADDMONTHS(TODAY(), -3))
+)</expression>
+    </formulas>
+    <interviewLabel>Case - Scheduled Daily Batch {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Case - Scheduled Daily Batch</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Update the Case based on conditions</description>
+        <name>Update_Case_Application</name>
+        <label>Update Case Application</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <faultConnector>
+            <targetReference>Case_Batch_Add_Nebula_Log</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>Archived</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Decision_Case_Status</targetReference>
+        </connector>
+        <object>Case__c</object>
+        <schedule>
+            <dayOfMonthToRun>0</dayOfMonthToRun>
+            <frequency>Daily</frequency>
+            <frequencyNumber>0</frequencyNumber>
+            <startDate>2025-11-13</startDate>
+            <startTime>07:45:00.000Z</startTime>
+        </schedule>
+        <triggerType>Scheduled</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

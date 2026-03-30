@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>NWL queue that holds the user within that team.</description>
+    <doesSendEmailToMembers>true</doesSendEmailToMembers>
+    <email>joshua.eze@ics.gov.uk</email>
+    <name>Queue NWL Cases</name>
+    <queueSobject>
+        <sobjectType>Case</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>Case__c</sobjectType>
+    </queueSobject>
+</Queue>

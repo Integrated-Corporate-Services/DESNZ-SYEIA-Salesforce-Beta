@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Assigned_Cases_TL</fullName>
+    <booleanFilter>6 AND ((1 AND 2) OR (3 AND 4 AND 5))</booleanFilter>
+    <columns>NAME</columns>
+    <columns>Applicant_Reference__c</columns>
+    <columns>Case_Type__c</columns>
+    <columns>DNO_Name__c</columns>
+    <columns>Date_of_Application_Display__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>Decision_Deadline_Display__c</columns>
+    <columns>Case_Owner__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OWNER.FIRST_NAME</field>
+        <operation>notEqual</operation>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Rejected,Withdrawn,Completed</value>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Completed</value>
+    </filters>
+    <filters>
+        <field>Actual_Completed_Date_Time__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <filters>
+        <field>Actual_Completed_Date_Time__c</field>
+        <operation>equals</operation>
+        <value>LAST_90_DAYS</value>
+    </filters>
+    <filters>
+        <field>Case_Type__c</field>
+        <operation>equals</operation>
+        <value>Tree Lopping</value>
+    </filters>
+    <label>All Assigned Cases</label>
+</ListView>

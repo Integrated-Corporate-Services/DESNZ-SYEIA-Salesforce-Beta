@@ -1,0 +1,47 @@
+<template>
+    <lightning-card title="Applicant Files">
+
+        <lightning-button
+            label="Get Applicant Files"
+            onclick={loadFiles}
+            class="slds-m-bottom_small">
+        </lightning-button>
+
+        <lightning-button
+            label="Download Selected"
+            title="Download Selected"
+            onclick={handleDownloadSelected}
+            disabled={disableDownloadSelected}
+            class="slds-m-bottom_small">
+        </lightning-button>
+
+        <lightning-button
+            label="Download All"
+            title="Download All"
+            onclick={handleDownloadAll}
+            disabled={disableDownloadAll}
+            class="slds-m-bottom_small">
+        </lightning-button>
+
+        <template lwc:if={hasFiles}>
+            <lightning-datatable
+                key-field="Id"
+                data={files}
+                columns={columns}
+                onrowaction={handleRowAction}
+                onrowselection={handleRowSelection}
+                class="custom-table">
+            </lightning-datatable>
+        </template>
+
+        <template lwc:elseif={hasNotDownloaded}>
+            <p class="slds-m-around_medium">Files are available but not downloaded yet. Please click "Get Applicant Files" to load them.</p>
+        </template>
+
+        <template lwc:else>
+            <p class="slds-m-around_medium">No files found.</p>
+        </template>
+
+    </lightning-card>
+
+</template>

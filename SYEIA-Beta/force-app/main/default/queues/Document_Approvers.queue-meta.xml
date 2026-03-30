@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>List of users who are deemed &apos;approvers&apos; to approve generated documents &amp; letters.</description>
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <name>Document Approvers</name>
+    <queueMembers>
+        <users>
+            <user>joshua.eze@ics.gov.uk</user>
+            <user>narasimha.datla@ics.gov.uk</user>
+            <user>uttara.shende-jujp@force.com</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Case__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>Document_Approval_Request__c</sobjectType>
+    </queueSobject>
+</Queue>

@@ -1,4 +1,3 @@
-
 name: cut-release-and-deploy-uat
 
 on:
@@ -23,109 +22,57 @@ jobs:
           fetch-depth: 0
           ref: main
 
-      - name: Create pull request
-        env:
-          GH_TOKEN: ${{ secrets.GH_PAT }}  # Not GITHUB_TOKEN
+      - name: Create release branch from develop (if not exists)
         run: |
           VER="${{ inputs.version }}"
           BRANCH="release/${VER}"
-      
+
+          git fetch origin
+
+          # Check if the release branch already exists remotely
+          if git ls-remote --exit-code --heads origin "$BRANCH"; then
+            echo "Branch $BRANCH already exists — skipping creation."
+          else
+            echo "Creating new release branch $BRANCH from develop."
+            git checkout -b "$BRANCH" origin/develop
+            git push -u origin "$BRANCH"
+          fi
+
+      - name: Open PR to main (idempotent)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          VER="${{ inputs.version }}"
+          BRANCH="release/${VER}"
+
           git fetch --all
-      
-          # Verify that the branch exists and differs from main
+
+          # Verify branch exists remotely
           if ! git show-ref --verify --quiet "refs/remotes/origin/$BRANCH"; then
-            echo "::error::Branch $BRANCH does not exist."
+            echo "::error::Branch $BRANCH does not exist on remote."
             exit 1
           fi
-      
-          # Optional: check if there are actual changes
+
+          # Check for differences between main and release branch
           if git diff --quiet origin/main..origin/$BRANCH; then
             echo "::warning::No changes between main and $BRANCH — skipping PR creation."
             exit 0
           fi
-      
-          gh pr create --base main --head "$BRANCH" \
-            --title "Release ${VER}" \
-            --body "Auto-generated PR to prepare ${VER} for production readiness."
 
-
-
-      - name: Create release branch from develop
-        run: |
-          VER="${{ inputs.version }}"
-          git fetch origin
-          git checkout -b "release/${VER}" origin/develop
-          git push -u origin "release/${VER}"
-
-      - name: Open PR to main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
-        run: |
-          VER="${{ inputs.version }}"
-          gh pr create --base main --head "release/${VER}" \
-            --title "Release ${VER}" \
-            --body "Auto-generated PR to prepare ${VER} for production readiness."
-
-  deploy-uat:
-    runs-on: ubuntu-latest
-    needs: cut-release
-    environment: UAT
-    env:
-      SFDX_AUTH_URL_UAT : ${{ secrets.SFDX_AUTH_URL_UAT }}
-      SF_USERNAME_UAT: ${{ secrets.SF_USERNAME_UAT }}
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install SF CLI and jq
-        run: |
-          npm install --global @salesforce/cli
-          sudo apt-get update && sudo apt-get install -y jq
-
-      - name: Decode URL key
-        run: |
-          echo "${{ secrets.SFDX_AUTH_URL_UAT }}" > uatSfdxurl.txt
-
-      - name: Authenticate UAT
-        run: |
-          sf org login sfdx-url \
-              --sfdx-url-file uatSfdxurl.txt \
-              --alias UAT_SANDBOX --set-default
-
-      - name: Validate (checkonly) to UAT
-        run: |
-          cd ./SYEIA-Beta
-          sf project deploy start --manifest manifest/package.xml \
-            --target-org UAT_SANDBOX --test-level RunLocalTests \
-            --wait 60 --dry-run --json > deploy-results-uat-check.json
-          cat deploy-results-uat-check.json | jq '.status,.result'
-
-      - name: Deploy to UAT (post-approval)
-        run: |
-          cd ./SYEIA-Beta
-          sf project deploy start --manifest manifest/package.xml \
-            --target-org UAT_SANDBOX --test-level RunLocalTests \
-            --wait 60 --json > deploy-results-uat.json
-          cat deploy-results-uat.json | jq '.status,.result'
-
-      - name: Run all tests (UAT)
-        run: |
-          mkdir -p test-results
-          sfdx force:apex:test:run -u UAT_SANDBOX -l RunLocalTests -w 60 -c --json > test-results/apex.json
-          ORG_COV=$(jq -r '.result.summary.orgWideCoverage' test-results/apex.json)
-          echo "UAT Org-wide coverage: $ORG_COV%" >> $GITHUB_STEP_SUMMARY
-          FAILURES=$(jq -r '.result.summary.failing' test-results/apex.json)
-          if (( FAILURES > 0 )); then
-            echo "There are failing tests"; exit 1;
+          # Check if a PR already exists for this branch
+          EXISTING_PR=$(gh pr list --base main --head "$BRANCH" --json number --jq '.[0].number')
+          if [ -n "$EXISTING_PR" ]; then
+            echo "PR #$EXISTING_PR already exists for $BRANCH — skipping creation."
+            exit 0
           fi
 
-      - name: Generate GitHub Release notes (pre-release)
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
-        run: |
-          VER="${{ inputs.version }}"
-          gh release create "v${VER}" --generate-notes --prerelease || echo "Release may already exist"
-          echo "Release v${VER} created/updated" >> $GITHUB_STEP_SUMMARY
+           # Try to create PR; if already exists, skip gracefully
+          gh pr create --base main --head "$BRANCH" \
+            --title "Release ${VER}" \
+            --body "Auto-generated PR to prepare ${VER} for production readiness." \
+            || {
+              echo "ℹ️ PR already exists for $BRANCH → main — skipping.";
+              exit 0;
+            }
+
+          echo "✅ Created PR for $BRANCH → main"

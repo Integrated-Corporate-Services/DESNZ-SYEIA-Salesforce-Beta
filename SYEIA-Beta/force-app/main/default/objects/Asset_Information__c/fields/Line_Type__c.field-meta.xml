@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Line_Type__c</fullName>
+    <description>The type of line being worked on in the project.</description>
+    <label>Line Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Distribution</fullName>
+                <default>false</default>
+                <label>Distribution</label>
+            </value>
+            <value>
+                <fullName>Transmission</fullName>
+                <default>false</default>
+                <label>Transmission</label>
+            </value>
+            <value>
+                <fullName>High voltage overhead line</fullName>
+                <default>false</default>
+                <label>High voltage overhead line</label>
+            </value>
+            <value>
+                <fullName>Low voltage overhead line</fullName>
+                <default>false</default>
+                <label>Low voltage overhead line</label>
+            </value>
+            <value>
+                <fullName>High voltage overhead line and wooden pole(s)</fullName>
+                <default>false</default>
+                <label>High voltage overhead line and wooden pole(s)</label>
+            </value>
+            <value>
+                <fullName>Low voltage overhead line and wooden pole(s)</fullName>
+                <default>false</default>
+                <label>Low voltage overhead line and wooden pole(s)</label>
+            </value>
+            <value>
+                <fullName>High voltage overhead line and wooden pole(s) and stay(s)</fullName>
+                <default>false</default>
+                <label>High voltage overhead line and wooden pole(s) and stay(s)</label>
+            </value>
+            <value>
+                <fullName>Low voltage overhead line and wooden pole(s) and stay(s)</fullName>
+                <default>false</default>
+                <label>Low voltage overhead line and wooden pole(s) and stay(s)</label>
+            </value>
+            <value>
+                <fullName>High voltage overhead line and steel tower(s)</fullName>
+                <default>false</default>
+                <label>High voltage overhead line and steel tower(s)</label>
+            </value>
+            <value>
+                <fullName>Low voltage overhead line and steel tower(s)</fullName>
+                <default>false</default>
+                <label>Low voltage overhead line and steel tower(s)</label>
+            </value>
+            <value>
+                <fullName>High voltage underground cable</fullName>
+                <default>false</default>
+                <label>High voltage underground cable</label>
+            </value>
+            <value>
+                <fullName>Low voltage underground cable</fullName>
+                <default>false</default>
+                <label>Low voltage underground cable</label>
+            </value>
+            <value>
+                <fullName>High voltage underground cable and wooden pole(s)</fullName>
+                <default>false</default>
+                <label>High voltage underground cable and wooden pole(s)</label>
+            </value>
+            <value>
+                <fullName>Low voltage underground cable and wooden pole(s)</fullName>
+                <default>false</default>
+                <label>Low voltage underground cable and wooden pole(s)</label>
+            </value>
+            <value>
+                <fullName>High voltage underground cable, wooden pole(s) and stay(s)</fullName>
+                <default>false</default>
+                <label>High voltage underground cable, wooden pole(s) and stay(s)</label>
+            </value>
+            <value>
+                <fullName>Low voltage underground cable, wooden pole(s) and stay(s)</fullName>
+                <default>false</default>
+                <label>Low voltage underground cable, wooden pole(s) and stay(s)</label>
+            </value>
+            <value>
+                <fullName>Wooden pole(s)</fullName>
+                <default>false</default>
+                <label>Wooden pole(s)</label>
+            </value>
+            <value>
+                <fullName>Steel tower(s)</fullName>
+                <default>false</default>
+                <label>Steel tower(s)</label>
+            </value>
+            <value>
+                <fullName>Stay(s)</fullName>
+                <default>false</default>
+                <label>Stay(s)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

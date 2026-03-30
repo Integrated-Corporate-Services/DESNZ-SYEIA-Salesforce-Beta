@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Production</label>
+    <protected>false</protected>
+    <values>
+        <field>Issuer_UUID__c</field>
+        <value xsi:type="xsd:string">a18a7313-50a0-4ad5-bbc1-ae967340ebf0</value>
+    </values>
+    <values>
+        <field>Secret_Key__c</field>
+        <value xsi:type="xsd:string">eeecbe6d-4c9f-4b02-bef6-74e5228d8fe6</value>
+    </values>
+</CustomMetadata>

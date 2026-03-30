@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_Cases_Tree_Lopping_Case</fullName>
+    <columns>NAME</columns>
+    <filterScope>Queue</filterScope>
+    <filters>
+        <field>Case_Type__c</field>
+        <operation>equals</operation>
+        <value>Tree Lopping</value>
+    </filters>
+    <label>New Cases</label>
+    <queue>New_Cases_Tree_Lopping</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

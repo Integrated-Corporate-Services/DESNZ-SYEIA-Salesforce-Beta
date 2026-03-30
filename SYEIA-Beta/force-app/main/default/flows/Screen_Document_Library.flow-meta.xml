@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Get_Case_Nebula_Logger</name>
+        <label>Get Case Nebula Logger</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>FlowLogEntry</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>faultMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>flowName</name>
+            <value>
+                <stringValue>Screen_Document_Library</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>loggingLevelName</name>
+            <value>
+                <stringValue>ERROR</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>message</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveLog</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <nameSegment>FlowLogEntry</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>65.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <choices>
+        <name>choice_Decision_Assessment_Form_Internal</name>
+        <choiceText>Decision Assessment Form (Internal)</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW01_General_Letter_Land_Owner</name>
+        <choiceText>NW01. General Letter - LO</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW02_Invalid_Unclear_NTR_Applicant</name>
+        <choiceText>NW02. Invalid - Unclear NTR - Applicant</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW02_Invalid_Unclear_NTR_Land_Owner</name>
+        <choiceText>NW02. Invalid - Unclear NTR - LO</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW03_Invalid_NTT_Only_Applicant</name>
+        <choiceText>NW03. Invalid - NTT only (including implied wayleaves) - Applicant</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW03_Invalid_NTT_Only_Land_Owner</name>
+        <choiceText>NW03. Invalid - NTT only (including implied wayleaves) - LO</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW04_Invalid_New_Lines_Applicant</name>
+        <choiceText>NW04. Invalid (New Lines) - Applicant</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW04_Invalid_New_Lines_Land_Owner</name>
+        <choiceText>NW04. Invalid (New Lines) - LO</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW05_Request_For_Further_Information_Applicant</name>
+        <choiceText>NW05. Request for further information - Applicant</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW05_Request_For_Further_Information_Land_Owner</name>
+        <choiceText>NW05. Request for further information - LO</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW06_Acknowledgement_Letter_Applicant</name>
+        <choiceText>NW06. Acknowledgement letter - Applicant</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW06_Ackowledgement_Letter_Land_Owner</name>
+        <choiceText>NW06. Acknowledgement letter - LO</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW07_Abeyance_Letter_Applicant</name>
+        <choiceText>NW07. Abeyance letter - Applicant</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW07_Abeyance_Letter_Land_Owner</name>
+        <choiceText>NW07. Abeyance letter - LO</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW08_CTWR_Letter_Applicant</name>
+        <choiceText>NW08. CTWR letter - Applicant</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW08_CTWR_Letter_Land_Owner</name>
+        <choiceText>NW08. CTWR letter - LO</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW09_Procedural_Notice_WR_Applicant</name>
+        <choiceText>NW09. Procedural notice (WR) - Applicant</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW09_Procedural_Notice_WR_Land_Owner</name>
+        <choiceText>NW09. Procedural notice (WR) - LO</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW10_Statement_Of_Evidence_Exchange_Applicant</name>
+        <choiceText>NW10. Statement of evidence exchange - Applicant</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW10_Statement_Of_Evidence_Exchange_Land_Owner</name>
+        <choiceText>NW10. Statement of evidence exchange - LO</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW11_Further_Representations_Exchange_Applicant</name>
+        <choiceText>NW11. Further representations exchange - Applicant</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW11_Further_Representations_Exchange_Land_Owner</name>
+        <choiceText>NW11. Further representations exchange - Lo</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW12_Procedural_Notice_OH_Applicant</name>
+        <choiceText>NW12. Procedural notice (OH) - Applicant</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW12_Procedural_Notice_OH_Land_Owner</name>
+        <choiceText>NW12. Procedural notice (OH) - LO</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW13_Decision_Letter_Applicant</name>
+        <choiceText>NW13. Decision letter - Applicant</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW14_Withdrawal_Letter_Applicant</name>
+        <choiceText>NW14. Withdrawal letter - Applicant</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW14_Withdrawal_Letter_Land_Owner</name>
+        <choiceText>NW14. Withdrawal letter - LO</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW_01_General_Letter_Applicant</name>
+        <choiceText>NW01. General Letter - Applicant</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW_Checklist_Existing_Line_Internal</name>
+        <choiceText>NW Checklist (Existing Lines) (internal)</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_NW_Checklist_New_Lines_Internal</name>
+        <choiceText>NW Checklist (New Lines) (Internal)</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>choice_S37_Consent_Letter</name>
+        <choiceText>Consent Letter</choiceText>
+        <dataType>Boolean</dataType>
+    </choices>
+    <choices>
+        <name>choice_S37_Screening_Decision_Letter</name>
+        <choiceText>Screening Decision Letter</choiceText>
+        <dataType>Boolean</dataType>
+    </choices>
+    <choices>
+        <name>S37_Consent_Letter_Choice</name>
+        <choiceText>Consent Letter&lt;span style=&quot;color: rgb(24, 24, 24);&quot;&gt;&lt;span class=&quot;ql-cursor&quot;&gt;﻿&lt;/span&gt;&lt;/span&gt;</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>S37_Screening_Letter_Choice</name>
+        <choiceText>Screening Letter</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <customProperties>
+        <name>ScreenProgressIndicator</name>
+        <value>
+            <stringValue>{&quot;location&quot;:&quot;top&quot;,&quot;type&quot;:&quot;simple&quot;}</stringValue>
+        </value>
+    </customProperties>
+    <decisions>
+        <name>NWLDocument_Choice</name>
+        <label>NWL Document Choice</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Failsafe</defaultConnectorLabel>
+        <rules>
+            <name>Decision_Assessment_Form_Internal</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>choice_Decision_Assessment_Form_Internal</elementReference>
+                </rightValue>
+            </conditions>
+            <label>Decision Assessment Form Internal</label>
+        </rules>
+        <rules>
+            <name>NW_Checklist_Existing_Lines_Internal</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>choice_NW_Checklist_Existing_Line_Internal</elementReference>
+                </rightValue>
+            </conditions>
+            <label>NW Checklist Existing Lines Internal</label>
+        </rules>
+        <rules>
+            <name>NW_Checklist_New_Lines_Internal</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>choice_NW_Checklist_New_Lines_Internal</elementReference>
+                </rightValue>
+            </conditions>
+            <label>NW Checklist New Lines Internal</label>
+        </rules>
+        <rules>
+            <name>NW01_General_Letter_Applicant</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>choice_NW_01_General_Letter_Applicant</elementReference>
+                </rightValue>
+            </conditions>
+            <label>NW01 General Letter - Applicant</label>
+        </rules>
+        <rules>
+            <name>NW01_General_Letter_LO</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>choice_NW01_General_Letter_Land_Owner</elementReference>
+                </rightValue>
+            </conditions>
+            <label>NW01 General Letter - LO</label>
+        </rules>
+        <rules>
+            <name>NW02_Invalid_Unclear_NTR_Applicant</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>choice_NW02_Invalid_Unclear_NTR_Applicant</elementReference>
+                </rightValue>
+            </conditions>
+            <label>NW02 Invalid Unclear NTR - Applicant</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>S37_Document_Choice</name>
+        <label>S37 Document Choice</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Failsafe</defaultConnectorLabel>
+        <rules>
+            <name>S37_Consent_Letter</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>choice_S37_Consent_Letter</leftValueReference>
+                <operator>WasSelected</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Screen_DocGen_S37_Consent_Letter</targetReference>
+            </connector>
+            <label>S37 Consent Letter</label>
+        </rules>
+        <rules>
+            <name>S37_Screening_Letter</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>choice_S37_Screening_Decision_Letter</leftValueReference>
+                <operator>WasSelected</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Screen_DocGen_S37_Screening_Letter</targetReference>
+            </connector>
+            <label>S37 Screening Letter</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Split_on_Case_Type</name>
+        <label>Split on Case Type</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Failsafe</defaultConnectorLabel>
+        <rules>
+            <name>S37</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Case.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Section 37</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>S37_Document_Library</targetReference>
+            </connector>
+            <label>S37</label>
+        </rules>
+        <rules>
+            <name>NWL</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Case.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NWL_Document_Library</targetReference>
+            </connector>
+            <label>NWL</label>
+        </rules>
+        <rules>
+            <name>TL</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Case.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Tree Lopping</stringValue>
+                </rightValue>
+            </conditions>
+            <label>TL</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <interviewLabel>Screen - Document Library {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Screen - Document Library</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordLookups>
+        <name>Get_Case</name>
+        <label>Get Case</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Split_on_Case_Type</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Get_Case_Nebula_Logger</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Case__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <screens>
+        <name>NWL_Document_Library</name>
+        <label>NWL Document Library</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>NWLDocument_Choice</targetReference>
+        </connector>
+        <fields>
+            <name>NWL_Document_Library_CS</name>
+            <choiceReferences>choice_Decision_Assessment_Form_Internal</choiceReferences>
+            <choiceReferences>choice_NW_Checklist_Existing_Line_Internal</choiceReferences>
+            <choiceReferences>choice_NW_Checklist_New_Lines_Internal</choiceReferences>
+            <choiceReferences>choice_NW_01_General_Letter_Applicant</choiceReferences>
+            <choiceReferences>choice_NW01_General_Letter_Land_Owner</choiceReferences>
+            <choiceReferences>choice_NW02_Invalid_Unclear_NTR_Applicant</choiceReferences>
+            <choiceReferences>choice_NW02_Invalid_Unclear_NTR_Land_Owner</choiceReferences>
+            <choiceReferences>choice_NW03_Invalid_NTT_Only_Applicant</choiceReferences>
+            <choiceReferences>choice_NW03_Invalid_NTT_Only_Land_Owner</choiceReferences>
+            <choiceReferences>choice_NW04_Invalid_New_Lines_Applicant</choiceReferences>
+            <choiceReferences>choice_NW04_Invalid_New_Lines_Land_Owner</choiceReferences>
+            <choiceReferences>choice_NW05_Request_For_Further_Information_Applicant</choiceReferences>
+            <choiceReferences>choice_NW05_Request_For_Further_Information_Land_Owner</choiceReferences>
+            <choiceReferences>choice_NW06_Acknowledgement_Letter_Applicant</choiceReferences>
+            <choiceReferences>choice_NW06_Ackowledgement_Letter_Land_Owner</choiceReferences>
+            <choiceReferences>choice_NW07_Abeyance_Letter_Applicant</choiceReferences>
+            <choiceReferences>choice_NW07_Abeyance_Letter_Land_Owner</choiceReferences>
+            <choiceReferences>choice_NW08_CTWR_Letter_Applicant</choiceReferences>
+            <choiceReferences>choice_NW08_CTWR_Letter_Land_Owner</choiceReferences>
+            <choiceReferences>choice_NW09_Procedural_Notice_WR_Applicant</choiceReferences>
+            <choiceReferences>choice_NW09_Procedural_Notice_WR_Land_Owner</choiceReferences>
+            <choiceReferences>choice_NW10_Statement_Of_Evidence_Exchange_Applicant</choiceReferences>
+            <choiceReferences>choice_NW10_Statement_Of_Evidence_Exchange_Land_Owner</choiceReferences>
+            <choiceReferences>choice_NW11_Further_Representations_Exchange_Applicant</choiceReferences>
+            <choiceReferences>choice_NW11_Further_Representations_Exchange_Land_Owner</choiceReferences>
+            <choiceReferences>choice_NW12_Procedural_Notice_OH_Applicant</choiceReferences>
+            <choiceReferences>choice_NW12_Procedural_Notice_OH_Land_Owner</choiceReferences>
+            <choiceReferences>choice_NW13_Decision_Letter_Applicant</choiceReferences>
+            <choiceReferences>choice_NW14_Withdrawal_Letter_Applicant</choiceReferences>
+            <choiceReferences>choice_NW14_Withdrawal_Letter_Land_Owner</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>NWL Document Library</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <nextOrFinishButtonLabel>Next</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>S37_Document_Library</name>
+        <label>S37 Document Library</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>S37_Document_Choice</targetReference>
+        </connector>
+        <fields>
+            <name>S37_Document_Library_Header</name>
+            <choiceReferences>choice_S37_Consent_Letter</choiceReferences>
+            <choiceReferences>choice_S37_Screening_Decision_Letter</choiceReferences>
+            <dataType>Boolean</dataType>
+            <fieldText>S37 Document Library</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <nextOrFinishButtonLabel>Next</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Case</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <subflows>
+        <name>Screen_DocGen_S37_Consent_Letter</name>
+        <label>Screen - DocGen - S37 Consent Letter</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_S37_Consent_Letter</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>Screen_DocGen_S37_Screening_Letter</name>
+        <label>Screen - DocGen - S37 Screening Letter</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_S37_Screening_Decision_Letter</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>
