@@ -30,15 +30,24 @@ public with sharing class DynamicPathController {
     @AuraEnabled
     public static void updateRecordStatus(Id recordId, String fieldApiName, String currentStatus) {
         if (recordId == null) {
+            Logger.error('Error updateRecordStatus: ' + 'Record Id is required');
+            Logger.setScenario('DynamicPathController.updateRecordStatus');
+            Logger.saveLog();
             throw new AuraHandledException('Record Id is required');
         }
         if (String.isBlank(fieldApiName)) {
+            Logger.error('Error updateRecordStatus: ' + 'Field API Name is required');
+            Logger.setScenario('DynamicPathController.updateRecordStatus');
+            Logger.saveLog();
             throw new AuraHandledException('Field API Name is required');
         }
         if (String.isBlank(currentStatus)) {
             // fallback to first picklist value if LWC passes empty
             List<String> picklist = getPicklistValuesByRecord(recordId, fieldApiName);
             if (picklist.isEmpty()) {
+                Logger.error('Error updateRecordStatus: ' + 'No picklist values found for field ' + fieldApiName);
+                Logger.setScenario('DynamicPathController.updateRecordStatus');
+                Logger.saveLog();
                 throw new AuraHandledException('No picklist values found for field ' + fieldApiName);
             }
             currentStatus = picklist[0];
@@ -105,6 +114,9 @@ public with sharing class DynamicPathController {
         }
 
         if (!isValid) {
+            Logger.error('Error updateRecordStatus: ' + 'Status "' + finalValue + '" is not a valid picklist value.');
+            Logger.setScenario('DynamicPathController.updateRecordStatus');
+            Logger.saveLog();
             throw new AuraHandledException('Status "' + finalValue + '" is not a valid picklist value.');
         }
 
@@ -113,8 +125,12 @@ public with sharing class DynamicPathController {
             SObject record = recordId.getSObjectType().newSObject(recordId);
             record.put(fieldApiName, finalValue);
             update record;
+            Logger.warn('Updated Application with Id: ' + record.Id);
         } catch (DmlException e) {
             String errorMessage = e.getNumDml() > 0 ? e.getDmlMessage(0) : e.getMessage();
+            Logger.error('Error updateRecordStatus: ' + e.getMessage());
+            Logger.setScenario('DynamicPathController.updateRecordStatus');
+            Logger.saveLog();
             throw new AuraHandledException(errorMessage);
         }
     }
@@ -122,6 +138,8 @@ public with sharing class DynamicPathController {
     @AuraEnabled(cacheable=true)
     public static List<String> getStatusByCurrentStatus(String status) {
         if (String.isBlank(status)) {
+            Logger.info('getStatusByCurrentStatus' + 'Status is required');
+            Logger.saveLog();
             throw new AuraHandledException('Status is required');
         }
 

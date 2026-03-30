@@ -1,5 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Update_Case_Decision_Date_Log_Entry</name>
+        <label>Update Case Decision Date Log Entry</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>FlowLogEntry</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>faultMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>flowName</name>
+            <value>
+                <stringValue>Update_the_application_status_to_Archived</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>loggingLevelName</name>
+            <value>
+                <stringValue>ERROR</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>message</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recordId</name>
+        </inputParameters>
+        <inputParameters>
+            <name>saveLog</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <nameSegment>FlowLogEntry</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
     <apiVersion>66.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <decisions>
@@ -63,6 +108,9 @@
         <label>Update Case Decision Date</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <faultConnector>
+            <targetReference>Update_Case_Decision_Date_Log_Entry</targetReference>
+        </faultConnector>
         <inputAssignments>
             <field>Status__c</field>
             <value>
@@ -87,7 +135,9 @@
         </filters>
         <object>Case__c</object>
         <schedule>
+            <dayOfMonthToRun>0</dayOfMonthToRun>
             <frequency>Daily</frequency>
+            <frequencyNumber>0</frequencyNumber>
             <startDate>2026-02-27</startDate>
             <startTime>07:16:00.000Z</startTime>
         </schedule>
