@@ -201,6 +201,14 @@ public class InboundForm_S37Config {
             'sections.supportingInformation.supportingQuestions.esqcr_2002_compliance_confirmed', 
             'Works_Comply_With_ESQCR__c'
         ));
+
+        config.addFieldMapping(InboundForm_MappingConfig.IntegerField(
+            'sections.sensitiveAreaChecks.tolerance_value', 
+            'Tolerance_Value__c'));
+
+        config.addFieldMapping(InboundForm_MappingConfig.BooleanField(
+            'sections.sensitiveAreaChecks.tolerance_required', 
+            'Tolerance_Required__c'));
     }
     
     // ========================================================================
