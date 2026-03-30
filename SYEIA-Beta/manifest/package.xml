@@ -18,6 +18,7 @@
 		<members>ContentVersionTriggerHelperTest</members>
 		<members>DocGen_DocumentGenerationWrapper</members>
 		<members>DocGen_DocumentGenerationWrapperTest</members>
+		<members>DynamicPathController</members> 
 		<members>FileController</members>
 		<members>FileControllerTest</members>
 		<members>GovUKNotify_Invocable</members>
@@ -79,6 +80,8 @@
 		<members>Address__c.Town_City__c</members>
 		<members>Application_Status_Mapping__mdt.AWS_Status__c</members>
 		<members>Application_Status_Mapping__mdt.Salesforce_Status__c</members>
+		<members>Application_Status_Path_Setting__mdt.Controlling_Status__c</members>
+		<members>Application_Status_Path_Setting__mdt.Path_Statuses__c</members>
 		<members>Asset_Information__c.Case__c</members>
 		<members>Asset_Information__c.Description__c</members>
 		<members>Asset_Information__c.Line_Length__c</members>
@@ -111,6 +114,7 @@
 		<members>Case__c.Additional_Info_Requested_From_DNO__c</members>
 		<members>Case__c.Any_Chemical_Treatments_Proposed__c</members>
 		<members>Case__c.Applicant_Reference__c</members>
+		<members>Case__c.Application_Journey_Status__c</members>
 		<members>Case__c.Application_Fee_Paid__c</members>
 		<members>Case__c.Application_Statement__c</members>
 		<members>Case__c.Application_Type__c</members>
@@ -127,6 +131,7 @@
 		<members>Case__c.Counter_Notice_Issue_Date__c</members>
 		<members>Case__c.County__c</members>
 		<members>Case__c.Current_Landowner_Signed_Wayleave__c</members>
+		<members>Case__c.Decision_Date__c</members>
 		<members>Case__c.DNO_Name__c</members>
 		<members>Case__c.DNO__c</members>
 		<members>Case__c.Date_Application_Was_Sent_to_MoD__c</members>
@@ -175,6 +180,7 @@
 		<members>Case__c.Pending_Withdrawal_Request_Count__c</members>
 		<members>Case__c.Plan_Reference__c</members>
 		<members>Case__c.Pre_existing_Routes_Storage_Used__c</members>
+		<members>Case__c.Prior_Application_Status__c</members>
 		<members>Case__c.Project_Description__c</members>
 		<members>Case__c.Project_name__c</members>
 		<members>Case__c.Reason_for_Not_Submitting_a_Title_Plan__c</members>
@@ -249,6 +255,8 @@
 		<members>Document_Approval_Request__c.Related_Case_Type__c</members>
 		<members>Document_Approval_Request__c.Requesting_User__c</members>
 		<members>Document_Approval_Request__c.Token_Data__c</members>
+		<members>Dynamic_Application_Status_Routing__mdt.Current_Status__c</members>
+		<members>Dynamic_Application_Status_Routing__mdt.Next_Status__c</members>
 		<members>Environment_Setting__mdt.Base_URL__c</members>
 		<members>GOV_UK_Notify_Config__mdt.Issuer_UUID__c</members>
 		<members>GOV_UK_Notify_Config__mdt.Secret_Key__c</members>
@@ -369,14 +377,27 @@
 		<members>Application_Status_Mapping.Application_Received</members>
 		<members>Application_Status_Mapping.Archived</members>
 		<members>Application_Status_Mapping.Decision_Issued</members>
-		<members>Application_Status_Mapping.Further_Information_requested</members>
+		<members>Application_Status_Mapping.Further_Information_Requested</members>
 		<members>Application_Status_Mapping.In_Abeyance</members>
-		<members>Application_Status_Mapping.In_progress</members>
+		<members>Application_Status_Mapping.In_Progress</members>
 		<members>Application_Status_Mapping.In_Review</members>
 		<members>Application_Status_Mapping.Invalid</members>
+		<members>Application_Status_Mapping.Post_Decision</members>
 		<members>Application_Status_Mapping.Representation_Stage</members>
-		<members>Application_Status_Mapping.Submitted_for_approval</members>
+		<members>Application_Status_Mapping.Submitted_for_Approval</members>
 		<members>Application_Status_Mapping.Withdrawn</members>
+		<members>Application_Status_Path_Setting.Application_Received</members>
+		<members>Application_Status_Path_Setting.Decision_Issued</members>
+		<members>Application_Status_Path_Setting.Further_Information_Requested</members>
+		<members>Application_Status_Path_Setting.In_Progress</members>
+		<members>Application_Status_Path_Setting.Post_Decision</members>
+		<members>Application_Status_Path_Setting.Submitted_for_Approval</members>
+		<members>Application_Status_Path_Setting.Under_Review</members>
+		<members>Application_Status_Path_Setting.Withdrawal_Requested</members>
+		<members>Application_Status_Path_Setting.Withdrawn</members>
+		<members>Dynamic_Application_Status_Routing.Post_Decision</members>
+		<members>Mark_Status_as_Complete_Setting.Statuses</members>
+		<members>Prior_Application_Status_Setting.Applicable_Statuses</members>
 		<name>CustomMetadata</name>
 	</types>
 	<types>
@@ -388,6 +409,7 @@
 	<types>
 		<members>Address__c</members>
 		<members>Application_Status_Mapping__mdt</members>
+		<members>Application_Status_Path_Setting__mdt</members>
 		<members>Asset_Information__c</members>
 		<members>Case_Note__c</members>
 		<members>Case_Party__c</members>
@@ -396,14 +418,17 @@
 		<members>Consultation_Response__c</members>
 		<members>Consultation__c</members>
 		<members>Document_Approval_Request__c</members>
+		<members>Dynamic_Application_Status_Routing__mdt</members>
 		<members>GOV_UK_Notify_Config__mdt</members>
 		<members>Inbound_Request__c</members>
 		<members>Land__c</members>
+		<members>Mark_Status_as_Complete_Setting__mdt</members>
 		<members>Negotiation__c</members>
 		<members>Party__c</members>
 		<members>Parish__c</members>
 		<members>Payment__c</members>
-		<members>Post_Consultation__c</members>		
+		<members>Post_Consultation__c</members>	
+		<members>Prior_Application_Status_Setting__mdt</members>	
         <members>Project_Target_Completion_Date_Conifg__mdt</members>
 		<members>Related_Case__c</members>
 		<members>Route_Point__c</members>
@@ -476,8 +501,13 @@
 		<members>Subflow_Recalculate_Case_Tasks</members>
 		<members>Task_After_Delete</members>
 		<members>Task_After_Save</members>
+		<members>Update_the_application_status_to_Archived</members>
 		<name>Flow</name>
 	</types>
+	<types>
+        <members>Application_Status</members>
+        <name>GlobalValueSet</name>
+    </types>
 	<types>
 		<members>PG_Case_Officer</members>
         <members>PG_Decision_Manager</members>
@@ -632,8 +662,15 @@
 		<name>UserAccessPolicy</name>
 	</types>
 	<types>
-		<members>Case__c.Prevent_Edit_When_Archived</members>
+		<members>Case__c.Active_Withdrawal_Request</members>
+		<members>Case__c.Lock_Case_When_Archived</members>
+		<members>Case__c.Lock_Completed_Case</members>
+		<members>Case__c.Lock_Rejected_Case</members>
+		<members>Case__c.Lock_Withdrawn_Case</members>
+		<members>Case__c.Restrict_Admin_Edit_On_Status</members>
+		<members>Case__c.Validate_DNO_Party_Type</members>
 		<name>ValidationRule</name>
 	</types>
 	<version>65.0</version>
+
 </Package>

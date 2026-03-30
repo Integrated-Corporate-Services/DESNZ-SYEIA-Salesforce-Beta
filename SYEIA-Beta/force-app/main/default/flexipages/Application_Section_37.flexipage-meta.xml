@@ -194,15 +194,22 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
-                    <name>hideUpdateButton</name>
-                    <value>false</value>
+                    <name>fieldApiName</name>
+                    <value>Status__c</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
-                    <name>variant</name>
-                    <value>linear</value>
+                    <name>objectApiName</name>
+                    <value>Case__c</value>
                 </componentInstanceProperties>
-                <componentName>runtime_sales_pathassistant:pathAssistant</componentName>
-                <identifier>runtime_sales_pathassistant_pathAssistant</identifier>
+                <componentName>dynamicPath</componentName>
+                <identifier>c_dynamicPath</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Status__c}</leftValue>
+                        <operator>NE</operator>
+                        <rightValue>Archived</rightValue>
+                    </criteria>
+                </visibilityRule>
             </componentInstance>
         </itemInstances>
         <name>header</name>
@@ -1583,6 +1590,16 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Time_to_Decision__c</fieldItem>
                 <identifier>RecordTime_to_Decision_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Decision_Date__c</fieldItem>
+                <identifier>RecordDecision_Date_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-73374639-1d2c-46a8-a4b8-73cfb21d5f45</name>

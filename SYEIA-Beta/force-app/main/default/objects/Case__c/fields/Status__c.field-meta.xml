@@ -8,6 +8,7 @@
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
+        <controllingField>Application_Journey_Status__c</controllingField>
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
@@ -16,19 +17,54 @@
                 <label>Acknowledged</label>
             </value>
             <value>
+                <fullName>Application Received</fullName>
+                <default>false</default>
+                <label>Application Received</label>
+            </value>
+            <value>
+                <fullName>Under Review</fullName>
+                <default>false</default>
+                <label>Under Review</label>
+            </value>
+            <value>
+                <fullName>In Review</fullName>
+                <default>false</default>
+                <label>In Review</label>
+            </value>
+            <value>
+                <fullName>Further Information Requested</fullName>
+                <default>false</default>
+                <label>Further Information Requested</label>
+            </value>
+            <value>
                 <fullName>In-Progress</fullName>
                 <default>false</default>
                 <label>In-Progress</label>
             </value>
             <value>
-                <fullName>Consultation</fullName>
+                <fullName>In Abeyance</fullName>
                 <default>false</default>
-                <label>Consultation</label>
+                <label>In Abeyance</label>
             </value>
             <value>
-                <fullName>Requested More Information</fullName>
+                <fullName>Representation Stage</fullName>
                 <default>false</default>
-                <label>Requested More Information</label>
+                <label>Representation Stage</label>
+            </value>
+            <value>
+                <fullName>Submitted for Approval</fullName>
+                <default>false</default>
+                <label>Submitted for Approval</label>
+            </value>
+            <value>
+                <fullName>Decision Issued</fullName>
+                <default>false</default>
+                <label>Decision Issued</label>
+            </value>
+            <value>
+                <fullName>Post Decision</fullName>
+                <default>false</default>
+                <label>Post Decision</label>
             </value>
             <value>
                 <fullName>Withdrawal Requested</fullName>
@@ -39,6 +75,21 @@
                 <fullName>Withdrawn</fullName>
                 <default>false</default>
                 <label>Withdrawn</label>
+            </value>
+            <value>
+                <fullName>Invalid</fullName>
+                <default>false</default>
+                <label>Invalid</label>
+            </value>
+            <value>
+                <fullName>Consultation</fullName>
+                <default>false</default>
+                <label>Consultation</label>
+            </value>
+            <value>
+                <fullName>Requested More Information</fullName>
+                <default>false</default>
+                <label>Requested More Information</label>
             </value>
             <value>
                 <fullName>Rejected</fullName>
@@ -55,46 +106,46 @@
                 <default>false</default>
                 <label>Archived</label>
             </value>
-            <value>
-                <fullName>Application Received</fullName>
-                <default>false</default>
-                <label>Application Received</label>
-            </value>
-            <value>
-                <fullName>In Review</fullName>
-                <default>false</default>
-                <label>In Review</label>
-            </value>
-            <value>
-                <fullName>Further Information requested</fullName>
-                <default>false</default>
-                <label>Further Information requested</label>
-            </value>
-            <value>
-                <fullName>In Abeyance</fullName>
-                <default>false</default>
-                <label>In Abeyance</label>
-            </value>
-            <value>
-                <fullName>Representation Stage</fullName>
-                <default>false</default>
-                <label>Representation Stage</label>
-            </value>
-            <value>
-                <fullName>Submitted for approval</fullName>
-                <default>false</default>
-                <label>Submitted for approval</label>
-            </value>
-            <value>
-                <fullName>Decision Issued</fullName>
-                <default>false</default>
-                <label>Decision Issued</label>
-            </value>
-            <value>
-                <fullName>Invalid</fullName>
-                <default>false</default>
-                <label>Invalid</label>
-            </value>
         </valueSetDefinition>
-     </valueSet>
+        <valueSettings>
+            <controllingFieldValue>Happy Path</controllingFieldValue>
+            <valueName>In-Progress</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Happy Path</controllingFieldValue>
+            <valueName>Consultation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Happy Path</controllingFieldValue>
+            <valueName>Completed</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Edge Case Path</controllingFieldValue>
+            <valueName>Further Information Requested</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Edge Case Path</controllingFieldValue>
+            <valueName>Post Decision</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Edge Case Path</controllingFieldValue>
+            <valueName>Withdrawal Requested</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Edge Case Path</controllingFieldValue>
+            <valueName>Withdrawn</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Edge Case Path</controllingFieldValue>
+            <valueName>Requested More Information</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Edge Case Path</controllingFieldValue>
+            <valueName>Rejected</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Edge Case Path</controllingFieldValue>
+            <valueName>Archived</valueName>
+        </valueSettings>
+    </valueSet>
 </CustomField>

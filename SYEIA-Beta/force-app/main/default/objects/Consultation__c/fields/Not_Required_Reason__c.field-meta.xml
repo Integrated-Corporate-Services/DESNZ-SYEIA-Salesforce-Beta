@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Sent_At__c</fullName>
-    <label>Sent At</label>
+    <fullName>Not_Required_Reason__c</fullName>
+    <externalId>false</externalId>
+    <label>Not Required Reason</label>
+    <length>255</length>
     <required>false</required>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
-    <type>DateTime</type>
+    <type>Text</type>
+    <unique>false</unique>
 </CustomField>
