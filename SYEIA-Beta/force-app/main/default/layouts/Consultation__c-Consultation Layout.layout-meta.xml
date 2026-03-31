@@ -76,10 +76,6 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Consultee_Contact_Name__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>Completed_On__c</field>
             </layoutItems>
             <layoutItems>

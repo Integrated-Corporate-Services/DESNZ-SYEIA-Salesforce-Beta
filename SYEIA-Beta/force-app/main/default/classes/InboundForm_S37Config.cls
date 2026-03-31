@@ -395,7 +395,7 @@ public class InboundForm_S37Config {
         consultations.addFieldMapping(InboundForm_MappingConfig.stringField('status', 'Status__c'));
         consultations.addFieldMapping(InboundForm_MappingConfig.dateTimeField('sentAt', 'Sent_At__c'));
         consultations.addFieldMapping(InboundForm_MappingConfig.booleanField('objectionRaised', 'Status__c'));
-        consultations.addFieldMapping(InboundForm_MappingConfig.stringField('consulteeContactName   ', 'Consultee_Contact_Name__c'));
+        consultations.addFieldMapping(InboundForm_MappingConfig.stringField('consulteeContactName', 'Contact_Name__c'));
         consultations.addFieldMapping(InboundForm_MappingConfig.stringField('consulteeOrganisationName', 'Consultee_Organisation_Name__c'));
         consultations.addFieldMapping(InboundForm_MappingConfig.stringField('notRequiredReason', 'Not_Required_Reason__c'));
         return consultations;
