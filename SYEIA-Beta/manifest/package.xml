@@ -92,6 +92,7 @@
 		<members>Asset_Information__c.Poles_Being_Removed__c</members>
 		<members>Asset_Information__c.Standard_Specification_Reference_Number__c</members>
 		<members>Asset_Information__c.TORI_NOI_Code__c</members>
+		<members>AWS_EndPoints__c.Update_Status_Endpoint__c</members>
 		<members>Case_Email_Config__mdt.Active__c</members>
 		<members>Case_Email_Config__mdt.Hours_Threshold__c</members>
 		<members>Case_Email_Config__mdt.Queue_Name__c</members>
@@ -388,6 +389,7 @@
 		<members>Application_Status_Mapping.Post_Decision</members>
 		<members>Application_Status_Mapping.Representation_Stage</members>
 		<members>Application_Status_Mapping.Submitted_for_Approval</members>
+		<members>Application_Status_Mapping.Under_Review</members>
 		<members>Application_Status_Mapping.Withdrawn</members>
 		<members>Application_Status_Path_Setting.Application_Received</members>
 		<members>Application_Status_Path_Setting.Decision_Issued</members>
@@ -414,6 +416,7 @@
 		<members>Application_Status_Mapping__mdt</members>
 		<members>Application_Status_Path_Setting__mdt</members>
 		<members>Asset_Information__c</members>
+		<members>AWS_EndPoints__c</members>
 		<members>Case_Note__c</members>
 		<members>Case_Party__c</members>
 		<members>Case__c</members>
