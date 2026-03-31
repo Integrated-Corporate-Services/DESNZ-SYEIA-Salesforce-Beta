@@ -201,6 +201,8 @@
 		<members>Case__c.Tallest_Pole_Height__c</members>
 		<members>Case__c.Target_Completion_Date__c</members>
 		<members>Case__c.Task_Deadline__c</members>
+		<members>Case__c.Tolerance_Required__c</members>
+		<members>Case__c.Tolerance_Value__c</members>
 		<members>Case__c.Time_to_Decision__c</members>
 		<members>Case__c.Type_of_Application__c</members>
 		<members>Case__c.Type_of_Info_Requested_From_DNO__c</members>
