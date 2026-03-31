@@ -12,6 +12,15 @@ public class Application_StatusUpdateQueueableTest {
         );
         insert settings;
     }
+    
+    static void createAWSSetting(){
+        AWS_EndPoints__c settings = new AWS_EndPoints__c(
+            SetupOwnerId = UserInfo.getOrganizationId(), // KEY LINE
+			Update_Status_Endpoint__c = 'https://test.com/backend/api/v1/internal/applications/{0}/status'
+        );
+        insert settings;
+    }
+
     // Mock HTTP callout for getAccessToken()
     class MockHttpResponseGenerator implements HttpCalloutMock {
         public HTTPResponse respond(HTTPRequest req) {
@@ -46,6 +55,7 @@ public class Application_StatusUpdateQueueableTest {
     @IsTest
     static void testConstructorAndEmptyExecute() {
         Application_StatusUpdateQueueable job = new Application_StatusUpdateQueueable(new List<Id>());
+        createAWSSetting();
         Test.startTest();
         Id jobId = System.enqueueJob(job);
         Test.stopTest();
@@ -58,6 +68,7 @@ public class Application_StatusUpdateQueueableTest {
     @IsTest
     static void testExecuteWithCases() {
         Test.setMock(HttpCalloutMock.class, new MockHttpResponseGenerator());
+        createAWSSetting();
 
         // Create two test cases with In-Progress status
         List<Case__c> cases = GetCasesWithInProgress(2);
@@ -79,6 +90,8 @@ public class Application_StatusUpdateQueueableTest {
     // -----------------------------
     @IsTest
     static void testExecuteWithNullIds() {
+        createAWSSetting();
+
         Test.startTest();
         Application_StatusUpdateQueueable job = new Application_StatusUpdateQueueable(null);
         Id jobId = System.enqueueJob(job);
@@ -92,6 +105,7 @@ public class Application_StatusUpdateQueueableTest {
     @IsTest
     static void testExecuteWithChunking() {
         Test.setMock(HttpCalloutMock.class, new MockHttpResponseGenerator());
+        createAWSSetting();
 
         List<Case__c> cases = GetCasesWithInProgress(99); // 100 to trigger chunking
         List<Id> caseIds = new List<Id>();

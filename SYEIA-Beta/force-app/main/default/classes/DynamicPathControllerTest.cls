@@ -12,6 +12,12 @@ global class DynamicPathControllerTest {
             Status__c = validStatus
         );
         insert testCase;
+        
+        AWS_EndPoints__c settings = new AWS_EndPoints__c(
+            SetupOwnerId = UserInfo.getOrganizationId(), // KEY LINE
+			Update_Status_Endpoint__c = 'https://test.com/backend/api/v1/internal/applications/{0}/status'
+        );
+        insert settings;
     }
     
     @IsTest

@@ -1,12 +1,5 @@
 public with sharing class ApplicationStatusService {
 
-    public static HttpResponse updateApplicationStatus() {
-        String bearerToken = '00DVd000005O3eb!AQEAQJ7ZsjNcnxO9OSqG5I1vb._Pwa.f7W5l855GJ63R7Zr4orIna2W5jSa3AgnJNqoL0lBfdVowJvnNoYLhFEdbhnPJbbvA';
-        String applicationId = 'a79322f2-51c5-4391-ac57-21745bf5ac72';
-        String targetStatus = 'in_abeyance';
-        String reason = 'Application approved by caseworker';
-        return updateApplicationStatus(applicationId, targetStatus, reason, bearerToken);
-    }
     public static HttpResponse updateApplicationStatus(
         String applicationId,
         String targetStatus,
@@ -14,12 +7,13 @@ public with sharing class ApplicationStatusService {
         String bearerToken
     ) {
 
+        AWS_EndPoints__c settings = AWS_EndPoints__c.getOrgDefaults();
+        String endpointUrl = settings.Update_Status_Endpoint__c;         
+        String awsStatusEndpoint = String.format(endpointUrl, new List<String>{applicationId});
+
         HttpRequest req = new HttpRequest();
 
-        req.setEndpoint(
-            'https://api.dev.syeia.energysecurity.gov.uk/backend/api/v1/internal/applications/' 
-            + applicationId + '/status'
-        );
+        req.setEndpoint(awsStatusEndpoint);
 
         req.setMethod('PATCH');
         req.setHeader('Content-Type', 'application/json');
