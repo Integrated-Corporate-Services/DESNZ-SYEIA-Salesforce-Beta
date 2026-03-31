@@ -1,5 +1,14 @@
 @IsTest
 public class ApplicationStatusServiceTest {
+    
+    
+    static void createAWSSetting(){
+        AWS_EndPoints__c settings = new AWS_EndPoints__c(
+            SetupOwnerId = UserInfo.getOrganizationId(), // KEY LINE
+			Update_Status_Endpoint__c = 'https://test.com/backend/api/v1/internal/applications/{0}/status'
+        );
+        insert settings;
+    }
 
     // Mock class for successful HTTP callout
     class MockHttpResponseGenerator implements HttpCalloutMock {
@@ -23,7 +32,8 @@ public class ApplicationStatusServiceTest {
     static void testUpdateApplicationStatus_Success() {
         // Set mock
         Test.setMock(HttpCalloutMock.class, new MockHttpResponseGenerator());
-
+		createAWSSetting();
+        
         String applicationId = '12345';
         String targetStatus = 'In-Progress';
         String reason = 'Testing';
@@ -48,6 +58,7 @@ public class ApplicationStatusServiceTest {
     static void testUpdateApplicationStatus_Exception() {
         // Set mock that throws exception
         Test.setMock(HttpCalloutMock.class, new ExceptionMock());
+		createAWSSetting();
 
         String applicationId = '12345';
         String targetStatus = 'In-Progress';
