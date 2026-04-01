@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lock_Submited_For_Approval_CaseOfficer</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF( 
+    AND(OR(ISPICKVAL(Status__c, &quot;Submitted for approval&quot;),
+    ISPICKVAL(PRIORVALUE(Status__c), &quot;Submitted for approval&quot;)),
+NOT(ISPICKVAL($User.Persona__c, &apos;Decision Manager&apos;))) , true, false )</errorConditionFormula>
+    <errorMessage>This record is read-only while the Case Status is ‘Submitted for approval’.</errorMessage>
+</ValidationRule>

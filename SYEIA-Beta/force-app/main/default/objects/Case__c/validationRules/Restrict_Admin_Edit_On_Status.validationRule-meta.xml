@@ -10,7 +10,8 @@ ISPICKVAL(PRIORVALUE(Status__c), &quot;In-Progress&quot;),
 ISPICKVAL(PRIORVALUE(Status__c), &quot;Completed&quot;),
 ISPICKVAL(PRIORVALUE(Status__c), &quot;Withdrawn&quot;)
 ),
-($Profile.Name = &quot;System Administrator&quot;)
+($Profile.Name = &quot;System Administrator&quot;),
+NOT(ISPICKVAL($User.Persona__c, &apos;Decision Manager&apos;))
 )</errorConditionFormula>
     <errorMessage>You do not have permission to edit this record.</errorMessage>
 </ValidationRule>
