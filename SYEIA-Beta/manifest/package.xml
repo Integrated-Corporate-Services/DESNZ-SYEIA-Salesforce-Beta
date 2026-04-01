@@ -541,6 +541,7 @@
 		<members>GOV_UK_Notify_Config__mdt-GOV UK Notify Config Layout</members>
 		<members>Inbound_Request__c-Inbound Request Layout</members>
 		<members>Party__c-Party Layout</members>
+		<members>Parish__c-Parish Layout</members>
 		<members>Payment__c-Payment Layout</members>
 		<members>Project_Target_Completion_Date_Conifg__mdt-Project Target Completion Date Layout</members>
 		<members>Related_Case__c-Related Application Layout</members>
