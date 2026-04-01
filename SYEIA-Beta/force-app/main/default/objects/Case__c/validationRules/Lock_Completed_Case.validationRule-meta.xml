@@ -5,7 +5,8 @@
     <description>Prevent users from editing the case when the status is &apos;Completed,&apos; excluding DM and TL roles.</description>
     <errorConditionFormula>AND(
 ISPICKVAL(PRIORVALUE(Status__c), &quot;Completed&quot;),
-NOT($UserRole.DeveloperName = &quot;Decision_Managers_Team_Leaders&quot;)
+NOT($UserRole.DeveloperName = &quot;Decision_Managers_Team_Leaders&quot;),
+NOT(ISPICKVAL($User.Persona__c, &apos;Decision Manager&apos;))
 )</errorConditionFormula>
     <errorMessage>This case has been marked as Completed and can no longer be edited.</errorMessage>
 </ValidationRule>
