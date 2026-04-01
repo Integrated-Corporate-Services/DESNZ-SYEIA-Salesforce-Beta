@@ -387,14 +387,14 @@ public class InboundForm_S37Config {
         
         consultations.addFieldMapping(InboundForm_MappingConfig.stringField('consulteeOrganisationName', 'Name'));
         consultations.addFieldMapping(InboundForm_MappingConfig.stringField('id', 'Consultation_Id__c'));
-        consultations.addFieldMapping(InboundForm_MappingConfig.dateField('dateClosed', 'Completed_On__c'));
+        consultations.addFieldMapping(InboundForm_MappingConfig.dateTimeField('dateClosed', 'Completed_On__c'));
         consultations.addFieldMapping(InboundForm_MappingConfig.stringField('offline', 'Consultation_Completed_Offline__c'));
         consultations.addFieldMapping(InboundForm_MappingConfig.stringField('consultationType', 'Consultation_Type__c'));
         consultations.addFieldMapping(InboundForm_MappingConfig.stringField('consulteeEmailAddress', 'Contact_Email_Address__c'));
         consultations.addFieldMapping(InboundForm_MappingConfig.dateTimeField('createdAt', 'Created_At__c'));
         consultations.addFieldMapping(InboundForm_MappingConfig.stringField('status', 'Status__c'));
         consultations.addFieldMapping(InboundForm_MappingConfig.dateTimeField('sentAt', 'Sent_At__c'));
-        consultations.addFieldMapping(InboundForm_MappingConfig.booleanField('objectionRaised', 'Status__c'));
+        consultations.addFieldMapping(InboundForm_MappingConfig.booleanField('objectionRaised', 'Objection_Raised__c'));
         consultations.addFieldMapping(InboundForm_MappingConfig.stringField('consulteeContactName', 'Contact_Name__c'));
         consultations.addFieldMapping(InboundForm_MappingConfig.stringField('consulteeOrganisationName', 'Consultee_Organisation_Name__c'));
         consultations.addFieldMapping(InboundForm_MappingConfig.stringField('notRequiredReason', 'Not_Required_Reason__c'));
