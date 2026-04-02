@@ -391,6 +391,36 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assign_Parish_Name</name>
+        <label>Assign Parish Name</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>varListParishNames</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue> • </stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varListParishNames</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_Parish_Records.Name</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varListParishNames</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Parish_Records</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Bypass_Approval</name>
         <label>Bypass Approval?</label>
         <locationX>0</locationX>
@@ -534,7 +564,8 @@
         </rules>
     </decisions>
     <description>Screen Flow to generate an S37 Consent Letter.
-Nebula Logger</description>
+Nebula Logger
+Get Parishes</description>
     <environments>Default</environments>
     <formulas>
         <name>formula_ApplicationDate</name>
@@ -722,7 +753,7 @@ TEXT(YEAR(TODAY()))</expression>
     <formulas>
         <name>formula_TokenData</name>
         <dataType>String</dataType>
-        <expression>&apos;{&apos; &amp; {!formula_TokenDataUserBlock} &amp; &apos;  &quot;Asset_Line_Voltage&quot;: &quot;&apos; &amp; TEXT({!Get_Asset_Using_reordId.Line_Voltage__c}) &amp; &apos;&quot;,  &quot;Application_Date&quot;: &quot;&apos; &amp; {!formula_ApplicationDate} &amp; &apos;&quot;,  &quot;DESNZ_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Name} &amp; &apos;&quot;,  &quot;Operator_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Applicant_Reference__c} &amp; &apos;&quot;, &quot;DNO_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Name} &amp; &apos;&quot;,  &quot;DNO_Address_Line1&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line1__c} &amp; &apos;&quot;,  &quot;DNO_Address_Line2&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line_2__c} &amp; &apos;&quot;,  &quot;DNO_Address_TownCity&quot;: &quot;&apos; &amp; {!Get_Address.Town_City__c} &amp; &apos;&quot;,  &quot;DNO_Address_Postcode&quot;: &quot;&apos; &amp; {!Get_Address.Postcode__c} &amp; &apos;&quot;,  &quot;Current_Date&quot;: &quot;&apos; &amp; {!formula_CurrentDate} &amp; &apos;&quot;,  &quot;IF_IncludeOutstandingWayleaves&quot;: &apos; &amp; IF({!IncludeOutstandingWayleaves.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Outstanding_Wayleaves&quot;: &quot;&apos; &amp; {!formula_OutstandingWayleavesNumber} &amp; {!Outstanding_Wayleaves} &amp; &apos;&quot;,  &quot;Outstanding_Wayleaves_Reason&quot;: &quot;&apos; &amp; {!Outstanding_Wayleaves_Reason} &amp; &apos;&quot;,  &quot;IF_IncludeNaturalEnglandNRWAssent&quot;: &apos; &amp; IF({!IncludeNaturalEnglandNRWAssent.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Natural_England_NRW_Assent&quot;: &quot;&apos; &amp; {!formula_NaturalEnglandNRWAssentNumber} &amp; {!Natural_England_NRW_Assent} &amp; &apos;&quot;,  &quot;Natural_England_NRW_Assent_Reason&quot;: &quot;&apos; &amp; {!Natural_England_NRW_Assent_Reason} &amp; &apos;&quot;,  &quot;IF_IncludeHistoricEnglandCadwConsent&quot;: &apos; &amp; IF({!IncludeHistoricEnglandCadwConsent.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Historic_England_Cadw_Consent&quot;: &quot;&apos; &amp; {!formula_HistoricEnglandCadwConsentNumber} &amp; {!Historic_England_Cadw_Consent} &amp; &apos;&quot;,  &quot;Historic_England_Cadw_Consent_Reason&quot;: &quot;&apos; &amp; {!Historic_England_Cadw_Consent_Reason} &amp; &apos;&quot;,  &quot;IF_IncludeEcologySurvey&quot;: &apos; &amp; IF({!IncludeEcologySurvey.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Ecology_Survey&quot;: &quot;&apos; &amp; {!formula_EcologySurveyNumber} &amp; {!Ecology_Survey} &amp; &apos;&quot;,  &quot;Ecology_Survey_Reason&quot;: &quot;&apos; &amp; {!Ecology_Survey_Reason} &amp; &apos;&quot;,  &quot;IF_IncludeAvoidBirdFeeding&quot;: &apos; &amp; IF({!IncludeAvoidBirdBreeding.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Avoiding_Bird_Breeding&quot;: &quot;&apos; &amp; {!formula_AvoidBirdBreedingNumber} &amp; {!Avoiding_Bird_Breeding} &amp; &apos;&quot;,  &quot;Avoiding_Bird_Breeding_Reason&quot;: &quot;&apos; &amp; {!Avoiding_Bird_Breeding_Reason} &amp; &apos;&quot;,  &quot;IF_IncludeTreeProtection&quot;: &apos; &amp; IF({!IncludeTreeProtection.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Tree_Protection&quot;: &quot;&apos; &amp; {!formula_TreeProtectionNumber} &amp; {!Tree_Protection} &amp; &apos;&quot;,  &quot;Tree_Protection_Reason&quot;: &quot;&apos; &amp; {!Tree_Protection_Reason} &amp; &apos;&quot; }&apos;</expression>
+        <expression>&apos;{&apos; &amp; {!formula_TokenDataUserBlock} &amp; &apos;  &quot;Asset_Line_Voltage&quot;: &quot;&apos; &amp; TEXT({!Get_Asset_Using_reordId.Line_Voltage__c}) &amp; &apos;&quot;,  &quot;Application_Date&quot;: &quot;&apos; &amp; {!formula_ApplicationDate} &amp; &apos;&quot;,  &quot;DESNZ_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Name} &amp; &apos;&quot;,  &quot;Operator_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Applicant_Reference__c} &amp; &apos;&quot;, &quot;DNO_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Name} &amp; &apos;&quot;,  &quot;DNO_Address_Line1&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line1__c} &amp; &apos;&quot;,  &quot;DNO_Address_Line2&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line_2__c} &amp; &apos;&quot;,  &quot;DNO_Address_TownCity&quot;: &quot;&apos; &amp; {!Get_Address.Town_City__c} &amp; &apos;&quot;,  &quot;DNO_Address_Postcode&quot;: &quot;&apos; &amp; {!Get_Address.Postcode__c} &amp; &apos;&quot;,  &quot;Current_Date&quot;: &quot;&apos; &amp; {!formula_CurrentDate} &amp; &apos;&quot;,  &quot;IF_IncludeOutstandingWayleaves&quot;: &apos; &amp; IF({!IncludeOutstandingWayleaves.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Outstanding_Wayleaves&quot;: &quot;&apos; &amp; {!formula_OutstandingWayleavesNumber} &amp; {!Outstanding_Wayleaves} &amp; &apos;&quot;,  &quot;Outstanding_Wayleaves_Reason&quot;: &quot;&apos; &amp; {!Outstanding_Wayleaves_Reason} &amp; &apos;&quot;,  &quot;IF_IncludeNaturalEnglandNRWAssent&quot;: &apos; &amp; IF({!IncludeNaturalEnglandNRWAssent.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Natural_England_NRW_Assent&quot;: &quot;&apos; &amp; {!formula_NaturalEnglandNRWAssentNumber} &amp; {!Natural_England_NRW_Assent} &amp; &apos;&quot;,  &quot;Natural_England_NRW_Assent_Reason&quot;: &quot;&apos; &amp; {!Natural_England_NRW_Assent_Reason} &amp; &apos;&quot;,  &quot;IF_IncludeHistoricEnglandCadwConsent&quot;: &apos; &amp; IF({!IncludeHistoricEnglandCadwConsent.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Historic_England_Cadw_Consent&quot;: &quot;&apos; &amp; {!formula_HistoricEnglandCadwConsentNumber} &amp; {!Historic_England_Cadw_Consent} &amp; &apos;&quot;,  &quot;Historic_England_Cadw_Consent_Reason&quot;: &quot;&apos; &amp; {!Historic_England_Cadw_Consent_Reason} &amp; &apos;&quot;,  &quot;IF_IncludeEcologySurvey&quot;: &apos; &amp; IF({!IncludeEcologySurvey.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Ecology_Survey&quot;: &quot;&apos; &amp; {!formula_EcologySurveyNumber} &amp; {!Ecology_Survey} &amp; &apos;&quot;,  &quot;Ecology_Survey_Reason&quot;: &quot;&apos; &amp; {!Ecology_Survey_Reason} &amp; &apos;&quot;,  &quot;IF_IncludeAvoidBirdFeeding&quot;: &apos; &amp; IF({!IncludeAvoidBirdBreeding.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Avoiding_Bird_Breeding&quot;: &quot;&apos; &amp; {!formula_AvoidBirdBreedingNumber} &amp; {!Avoiding_Bird_Breeding} &amp; &apos;&quot;,  &quot;Avoiding_Bird_Breeding_Reason&quot;: &quot;&apos; &amp; {!Avoiding_Bird_Breeding_Reason} &amp; &apos;&quot;, &quot;Project_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Project_name__c} &amp; &apos;&quot;, &quot;IF_IncludeTreeProtection&quot;: &apos; &amp; IF({!IncludeTreeProtection.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Tree_Protection&quot;: &quot;&apos; &amp; {!formula_TreeProtectionNumber} &amp; {!Tree_Protection} &amp; &apos;&quot;,  &quot;Tree_Protection_Reason&quot;: &quot;&apos; &amp; {!Tree_Protection_Reason} &amp; &apos;&quot;, &quot;Tolerance_Required_Meters&quot;: &quot;&apos; &amp; TEXT({!Get_Case_Using_recordId.Tolerance_Value__c}) &amp; &apos;&quot;, &quot;Plan_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Plan_Reference__c}  &amp; &apos;&quot;, &quot;Expiration_Duration&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Estimated_Duration_Of_Works__c}  &amp; &apos;&quot;, &quot;Parish_List&quot;: &quot;&apos; &amp; {!varListParishNames} &amp; &apos;&quot;, &quot;LPA_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Name_of_LPA__c} &amp; &apos;&quot;, &quot;IF_RequestApproval&quot;: &apos; &amp; IF({!Request_Approval.value}= true, &quot;true&quot;, &quot;false&quot;) &amp;&apos; }&apos;</expression>
     </formulas>
     <formulas>
         <name>formula_TokenDataUserBlock</name>
@@ -827,6 +858,20 @@ TEXT(YEAR(TODAY()))</expression>
             <targetReference>Get_Users_From_Group_Members</targetReference>
         </noMoreValuesConnector>
     </loops>
+    <loops>
+        <name>Loop_Parish_Records</name>
+        <label>Loop Parish Records</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>Get_Parishes_Using_recordId</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Assign_Parish_Name</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Get_Group</targetReference>
+        </noMoreValuesConnector>
+    </loops>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -904,7 +949,7 @@ TEXT(YEAR(TODAY()))</expression>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Get_Group</targetReference>
+            <targetReference>Get_Parishes_Using_recordId</targetReference>
         </connector>
         <faultConnector>
             <isGoTo>true</isGoTo>
@@ -1069,6 +1114,27 @@ TEXT(YEAR(TODAY()))</expression>
         <object>GroupMember</object>
         <queriedFields>Id</queriedFields>
         <queriedFields>UserOrGroupId</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Parishes_Using_recordId</name>
+        <label>Get Parishes Using recordId</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_Parish_Records</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Case__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Parish__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
@@ -2227,6 +2293,13 @@ TEXT(YEAR(TODAY()))</expression>
         <name>var_CollectionOfUserIds</name>
         <dataType>String</dataType>
         <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>varListParishNames</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
     </variables>
