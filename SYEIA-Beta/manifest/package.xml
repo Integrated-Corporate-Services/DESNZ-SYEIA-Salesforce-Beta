@@ -115,6 +115,7 @@
 		<members>Case__c.Adding_or_Replacing_Any_Poles__c</members>
 		<members>Case__c.Additional_Info_Requested_From_DNO__c</members>
 		<members>Case__c.Any_Chemical_Treatments_Proposed__c</members>
+		<members>Case__c.Applicant_Name_Formula__c</members>
 		<members>Case__c.Applicant_Reference__c</members>
 		<members>Case__c.Application_Journey_Status__c</members>
 		<members>Case__c.Application_Fee_Paid__c</members>
