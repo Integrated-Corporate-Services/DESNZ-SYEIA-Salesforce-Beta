@@ -27,8 +27,12 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.DNO__r.Representative__c</fieldItem>
-                <identifier>RecordDNO_rRepresentative_cField</identifier>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Applicant_Name_Formula__c</fieldItem>
+                <identifier>RecordApplicant_Name_Formula_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -37,8 +41,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.DNO__c</fieldItem>
-                <identifier>RecordDNO_cField2</identifier>
+                <fieldItem>Record.DNO_Name__c</fieldItem>
+                <identifier>RecordDNO_Name_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -173,11 +177,17 @@
                                 </criteria>
                             </visibilityRule>
                         </valueListItems>
+                        <valueListItems>
+                            <value>Share</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>RecordShareHierarchy</value>
+                        </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>numVisibleActions</name>
-                    <value>3</value>
+                    <value>5</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>primaryField</name>
@@ -230,6 +240,26 @@
             <fieldInstance>
                 <fieldItem>Record.DNO__r.Representative__r.Email__c</fieldItem>
                 <identifier>RecordDNO_rRepresentative_rEmail_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Post_Consultation__c</fieldItem>
+                <identifier>RecordPost_Consultation__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Prior_Application_Status__c</fieldItem>
+                <identifier>RecordPrevious_Status__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-d60841c8-bdb9-4567-adcd-f78d5c76798f</name>
