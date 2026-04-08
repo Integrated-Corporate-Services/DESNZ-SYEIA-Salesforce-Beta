@@ -4,7 +4,7 @@
     <description>Defines the status of Application for the record, this value determines the progress of the path. Values are dependant on record type.</description>
     <label>Case Status</label>
     <required>false</required>
-    <trackHistory>false</trackHistory>
+    <trackHistory>true</trackHistory>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
