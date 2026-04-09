@@ -218,6 +218,7 @@ public class InboundForm_S37Config {
     private static void addCollectionConfigs(InboundForm_MappingConfig.FormTypeConfig config) {
         config.addCollection(getRoutesConfig());
         config.addCollection(getRoutePointsConfig());
+        config.addCollection(getRepresentativeConfig());
         config.addCollection(getPartiesConfig());
         config.addCollection(getAddressesConfig());
         config.addCollection(getSensitiveAreaChecksConfig());
@@ -276,16 +277,49 @@ public class InboundForm_S37Config {
         
         return routePoints;
     }
+
+    // ----- Representative Colection  (DNO Representative__c Details) -----
+    private static InboundForm_MappingConfig.CollectionConfig getRepresentativeConfig() {
+        InboundForm_MappingConfig.CollectionConfig representatives = 
+            new InboundForm_MappingConfig.CollectionConfig()
+                .setCollectionName('Representatives')
+                .setJsonPath('sections.networkOperator.details.application_party')
+                .setTargetObject('Party__c')
+                .setTargetRecordType('Individual')
+                .setParentLookupField('Case__c')
+                .setParentLinkSfField('Application_Party_Id__c')
+                .setProcessingOrder(130);
+        
+        representatives.addFieldMapping(
+            InboundForm_MappingConfig.stringField('contact_person_name', 'Name'));
+        representatives.addFieldMapping(
+            InboundForm_MappingConfig.stringField('contact_person_email', 'Email__c'));
+        representatives.addFieldMapping(
+            InboundForm_MappingConfig.stringField('Phone__c', 'contact_person_phone'));
+
+        representatives.addFieldMapping(
+            InboundForm_MappingConfig.stringField(
+                'organisation_id', 
+                'Application_Party_Id__c'
+            ));
+        return representatives;
+    }
     
     // ----- Parties Collection (DNO from Network Operator) -----
     private static InboundForm_MappingConfig.CollectionConfig getPartiesConfig() {
         InboundForm_MappingConfig.CollectionConfig parties = 
             new InboundForm_MappingConfig.CollectionConfig()
                 .setCollectionName('Parties')
+                .setParentLinkSfField('Application_Party_Id__c')
                 .setJsonPath('sections.networkOperator.details.application_party')
                 .setTargetObject('Party__c')
                 .setTargetRecordType('Organisation')
-                .setParentLookupField('Case__c')
+                .setParentLookupField('Representative__c')
+                .setParentCollection('Representatives')
+                .setParentLinkJsonField('organisation_id')
+                .setParentLinkSfField('Application_Party_Id__c')
+                .setChildLinkSfField('Application_Party_Id__c')
+                .setIsNestedArray(false)
                 .setProcessingOrder(30);
         
         parties.addFieldMapping(
@@ -293,7 +327,7 @@ public class InboundForm_S37Config {
         parties.addFieldMapping(
             InboundForm_MappingConfig.booleanField('is_primary', 'Is_Primary__c'));
         parties.addFieldMapping(
-            InboundForm_MappingConfig.stringField('application_party_id', 'Application_Party_Id__c'));
+            InboundForm_MappingConfig.stringField('organisation_id', 'Application_Party_Id__c'));
         parties.addFieldMapping(
             InboundForm_MappingConfig.stringField('person_id', 'Person_Identification__c'));
         
