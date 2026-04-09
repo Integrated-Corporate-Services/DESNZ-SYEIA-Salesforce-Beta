@@ -580,7 +580,7 @@
     <formulas>
         <name>FIR_DateDiffrence_Today</name>
         <dataType>Number</dataType>
-        <expression>DATEVALUE(FurtherInformationStatusUpdatedDateTime )- $Flow.CurrentDate + 1</expression>
+        <expression>$Flow.CurrentDate - DATEVALUE(FurtherInformationStatusUpdatedDateTime ) + 1</expression>
         <scale>0</scale>
     </formulas>
     <formulas>
