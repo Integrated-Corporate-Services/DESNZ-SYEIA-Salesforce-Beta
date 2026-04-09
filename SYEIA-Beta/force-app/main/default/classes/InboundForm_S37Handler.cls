@@ -347,22 +347,26 @@ public class InboundForm_S37Handler implements InboundForm_Processor.IFormHandle
         
         // Find the Party with Is_Primary__c = true
         Id dnoPartyId = null;
+        Id repPartyId = null;
         for (SObject record : insertedRecords.get('Party__c')) {
             Party__c party = (Party__c) record;
             if (party.Is_Primary__c == true && party.Id != null) {
                 dnoPartyId = party.Id;
                 break;
+            }else{
+                repPartyId = party.Id;
             }
-        }
-        
-        if (dnoPartyId == null) {
-            System.debug(LoggingLevel.DEBUG, 'No primary Party found to set as DNO');
-            return;
         }
         
         // Update the Case with the DNO Party Id
         try {
-            primaryCase.DNO__c = dnoPartyId;
+            Party__c dnoPary = [Select Id, Representative__c, Case__c
+                                From Party__c
+                                Where Representative__c =: repPartyId
+                                AND Case__c != null
+                                AND Is_Primary__c = true];
+
+            primaryCase.DNO__c = dnoPary.Id;
             System.debug(LoggingLevel.INFO, 'Set DNO__c on Case ' + primaryCase.Id + ' to Party ' + dnoPartyId);
         } catch (Exception e) {
             Logger.error('Error setting DNO on Case: ' + e.getMessage());
