@@ -11,7 +11,7 @@
         <criteriaItems>
             <field>Status__c</field>
             <operation>equals</operation>
-            <value>Withdrawn,Acknowledged,In-Progress,Completed</value>
+            <value>Withdrawn,In-Progress,Application Received,Completed</value>
         </criteriaItems>
         <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
     </sharingCriteriaRules>
@@ -26,7 +26,7 @@
         <criteriaItems>
             <field>Status__c</field>
             <operation>equals</operation>
-            <value>Withdrawn,Acknowledged,In-Progress,Completed</value>
+            <value>Withdrawn,In-Progress,Application Received,Completed</value>
         </criteriaItems>
         <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
     </sharingCriteriaRules>
@@ -41,7 +41,7 @@
         <criteriaItems>
             <field>Status__c</field>
             <operation>equals</operation>
-            <value>Acknowledged,In-Progress</value>
+            <value>In-Progress,Application Received</value>
         </criteriaItems>
         <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
     </sharingCriteriaRules>
