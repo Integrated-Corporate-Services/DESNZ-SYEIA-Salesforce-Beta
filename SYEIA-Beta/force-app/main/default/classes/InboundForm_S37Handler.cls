@@ -344,38 +344,51 @@ public class InboundForm_S37Handler implements InboundForm_Processor.IFormHandle
         if (!insertedRecords.containsKey('Party__c')) {
             return;
         }
-        
-        // Find the Party with Is_Primary__c = true
-        Id dnoPartyId = null;
-        Id repPartyId = null;
+
+        Id dnoPartyId;
+        Id repPartyId;
+
         for (SObject record : insertedRecords.get('Party__c')) {
             Party__c party = (Party__c) record;
-            if (party.Is_Primary__c == true && party.Id != null) {
+
+            if (party.Is_Primary__c && party.Id != null) {
                 dnoPartyId = party.Id;
                 break;
-            }else{
+            } else if (repPartyId == null && party.Id != null) {
                 repPartyId = party.Id;
             }
         }
-        
-        // Update the Case with the DNO Party Id
-        try {
-            Party__c dnoPary = [Select Id, Representative__c, Case__c
-                                From Party__c
-                                Where Representative__c =: repPartyId
-                                AND Case__c != null
-                                AND Is_Primary__c = true];
 
-            primaryCase.DNO__c = dnoPary.Id;
-            System.debug(LoggingLevel.INFO, 'Set DNO__c on Case ' + primaryCase.Id + ' to Party ' + dnoPartyId);
+        try {
+            if (dnoPartyId == null && repPartyId != null) {
+                List<Party__c> parties = [
+                    SELECT Id
+                    FROM Party__c
+                    WHERE Representative__c = :repPartyId
+                    AND Case__c != null
+                    AND Is_Primary__c = true
+                    LIMIT 1
+                ];
+
+                if (!parties.isEmpty()) {
+                    dnoPartyId = parties[0].Id;
+                }
+            }
+
+            if (dnoPartyId != null) {
+                primaryCase.DNO__c = dnoPartyId;
+                System.debug(LoggingLevel.INFO, 
+                    'Set DNO__c on Case ' + primaryCase.Id + ' to Party ' + dnoPartyId);
+            }
+
         } catch (Exception e) {
             Logger.error('Error setting DNO on Case: ' + e.getMessage());
             Logger.setScenario('InboundForm_S37Handler.setDNOOnCase');
             Logger.saveLog();
-            System.debug(LoggingLevel.ERROR, 'Error setting DNO on Case: ' + e.getMessage());
+            System.debug(LoggingLevel.ERROR, 
+                'Error setting DNO on Case: ' + e.getMessage());
         }
     }
-
     
     // ========================================================================
     // Populate Payment Lookup on Case PROCESSING
