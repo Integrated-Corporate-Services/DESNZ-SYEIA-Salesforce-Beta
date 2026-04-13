@@ -381,13 +381,11 @@
 		<members>GOV_UK_Notify_Config.Production</members>
 		<members>Application_Status_Mapping.Application_Received</members>
 		<members>Application_Status_Mapping.Archived</members>
-		<members>Application_Status_Mapping.Decision_Issued</members>
 		<members>Application_Status_Mapping.Further_Information_Requested</members>
 		<members>Application_Status_Mapping.In_Abeyance</members>
 		<members>Application_Status_Mapping.In_Progress</members>
 		<members>Application_Status_Mapping.In_Review</members>
 		<members>Application_Status_Mapping.Invalid</members>
-		<members>Application_Status_Mapping.Post_Decision</members>
 		<members>Application_Status_Mapping.Representation_Stage</members>
 		<members>Application_Status_Mapping.Submitted_for_Approval</members>
 		<members>Application_Status_Mapping.Under_Review</members>
