@@ -177,7 +177,7 @@ public class InboundForm_S37Config {
         ));
         
         config.addFieldMapping(InboundForm_MappingConfig.dateField(
-            'sections.networkOperator.details.submitted_at', 
+            'submittedAt', 
             'Date_of_Application__c'
         ));
         
