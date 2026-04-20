@@ -79,7 +79,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Is_Status_Changed_to_Decision_issued_OR_Withdrawn</targetReference>
+            <targetReference>Is_Status_Changed_to_Decision_issued</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -357,7 +357,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <targetReference>Is_Status_Changed_to_Decision_issued_OR_Withdrawn</targetReference>
+            <targetReference>Is_Status_Changed_to_Decision_issued</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -427,8 +427,8 @@
         </rules>
     </decisions>
     <decisions>
-        <name>Is_Status_Changed_to_Decision_issued_OR_Withdrawn</name>
-        <label>Is Status Changed to Decision issued OR Withdrawn</label>
+        <name>Is_Status_Changed_to_Decision_issued</name>
+        <label>Is Status Changed to Decision issued</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnector>
@@ -436,8 +436,8 @@
         </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
-            <name>Changed_to_Decision_issued_OR_Withdrawn</name>
-            <conditionLogic>1 AND (2 OR 3)</conditionLogic>
+            <name>Changed_to_Decision_issued</name>
+            <conditionLogic>1 AND 2</conditionLogic>
             <conditions>
                 <leftValueReference>$Record.Status__c</leftValueReference>
                 <operator>IsChanged</operator>
@@ -452,17 +452,10 @@
                     <stringValue>Decision Issued</stringValue>
                 </rightValue>
             </conditions>
-            <conditions>
-                <leftValueReference>$Record.Status__c</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <stringValue>Withdrawn</stringValue>
-                </rightValue>
-            </conditions>
             <connector>
                 <targetReference>Assign_Decision_Date</targetReference>
             </connector>
-            <label>Changed to Decision issued OR Withdrawn</label>
+            <label>Changed to Decision issued</label>
         </rules>
     </decisions>
     <decisions>
