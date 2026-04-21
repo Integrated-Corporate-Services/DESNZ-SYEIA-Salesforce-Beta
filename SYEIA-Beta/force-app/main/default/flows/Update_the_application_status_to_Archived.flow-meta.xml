@@ -48,8 +48,8 @@
     <apiVersion>66.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <decisions>
-        <name>The_90_Days_Check</name>
-        <label>The 90 Days Check</label>
+        <name>The_91_Days_Check</name>
+        <label>The 91 Days Check</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
@@ -67,7 +67,7 @@
                 <leftValueReference>$Flow.CurrentDate</leftValueReference>
                 <operator>GreaterThanOrEqualTo</operator>
                 <rightValue>
-                    <elementReference>DecisionDatePlus90Days</elementReference>
+                    <elementReference>DecisionDatePlus91Days</elementReference>
                 </rightValue>
             </conditions>
             <conditions>
@@ -103,7 +103,7 @@
                 <leftValueReference>$Flow.CurrentDate</leftValueReference>
                 <operator>GreaterThanOrEqualTo</operator>
                 <rightValue>
-                    <elementReference>WithdrawlDatePlus90Days</elementReference>
+                    <elementReference>WithdrawlDatePlus91Days</elementReference>
                 </rightValue>
             </conditions>
             <connector>
@@ -114,14 +114,14 @@
     </decisions>
     <environments>Default</environments>
     <formulas>
-        <name>DecisionDatePlus90Days</name>
+        <name>DecisionDatePlus91Days</name>
         <dataType>Date</dataType>
-        <expression>{!$Record.Decision_Date__c} + 90</expression>
+        <expression>{!$Record.Decision_Date__c} + 91</expression>
     </formulas>
     <formulas>
-        <name>WithdrawlDatePlus90Days</name>
+        <name>WithdrawlDatePlus91Days</name>
         <dataType>Date</dataType>
-        <expression>DATEVALUE({!$Record.Withdrawal_Date_Time__c} ) + 90</expression>
+        <expression>DATEVALUE({!$Record.Withdrawal_Date_Time__c} ) + 91</expression>
     </formulas>
     <interviewLabel>Update the application status to Archived {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Update the application status to Archived</label>
@@ -164,7 +164,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>The_90_Days_Check</targetReference>
+            <targetReference>The_91_Days_Check</targetReference>
         </connector>
         <filterLogic>(1 AND 2) OR (3 AND 4)</filterLogic>
         <filters>
