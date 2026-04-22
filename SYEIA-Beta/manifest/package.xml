@@ -263,13 +263,11 @@
 		<members>Dynamic_Application_Status_Routing__mdt.Current_Status__c</members>
 		<members>Dynamic_Application_Status_Routing__mdt.Next_Status__c</members>
 		<members>Email_Tracking__c.Related_Case__c</members>
-		<members>Email_Tracking__c.Case__c</members>
 		<members>Email_Tracking__c.Document_Type__c</members>
 		<members>Email_Tracking__c.Email_Unique_Key__c</members>
 		<members>Email_Tracking__c.Recipient_Email__c</members>
 		<members>Email_Tracking__c.Recipient_Type__c</members>
 		<members>Email_Tracking__c.Sent_By__c</members>
-		<members>Email_Tracking__c.Name</members>
 		<members>Email_Tracking__c.Sent_Date_Time__c</members>
 		<members>Environment_Setting__mdt.Base_URL__c</members>
 		<members>Further_Information_Requested__c.Additional_Information_Required__c</members>
@@ -279,7 +277,6 @@
 		<members>Further_Information_Requested__c.Date_Information_was_Received__c</members>
 		<members>Further_Information_Requested__c.Date_Information_was_Requested__c</members>
 		<members>Further_Information_Requested__c.Further_Information_Requested_Deadline__c</members>
-		<members>Further_Information_Requested__c.Name</members>
 		<members>Further_Information_Requested__c.Type_of_Information_Requested__c</members>
 		<members>GOV_UK_Notify_Config__mdt.Issuer_UUID__c</members>
 		<members>GOV_UK_Notify_Config__mdt.Secret_Key__c</members>
