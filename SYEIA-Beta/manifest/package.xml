@@ -443,6 +443,8 @@
 		<members>Consultation__c</members>
 		<members>Document_Approval_Request__c</members>
 		<members>Dynamic_Application_Status_Routing__mdt</members>
+		<members>Email_Tracking__c</members>
+        <members>Further_Information_Requested__c</members>
 		<members>GOV_UK_Notify_Config__mdt</members>
 		<members>Inbound_Request__c</members>
 		<members>Land__c</members>
@@ -557,6 +559,8 @@
 		<members>Consultation_Response__c-Consultation Response Layout</members>
 		<members>Consultation__c-Consultation Layout</members>
 		<members>Document_Approval_Request__c-Document Layout</members>
+		<members>Email_Tracking__c-Email Tracking Layout</members>
+		<members>Further_Information_Requested__c-Further Information Requested Layout</members>
 		<members>Environment_Setting__mdt-Environment Setting Layout</members>
 		<members>GOV_UK_Notify_Config__mdt-GOV UK Notify Config Layout</members>
 		<members>Inbound_Request__c-Inbound Request Layout</members>
@@ -571,7 +575,6 @@
 		<members>Sensitive_Area_Review__c-Sensitive Area Review Layout</members>
 		<members>User-User Layout</members>
 		<members>Withdrawal_Request__c-Withdrawal Request Layout</members>
-		<members>Further_Information_Requested__c-Further Information Requested Layout</members>
 		<name>Layout</name>
 	</types>
 	<types>
