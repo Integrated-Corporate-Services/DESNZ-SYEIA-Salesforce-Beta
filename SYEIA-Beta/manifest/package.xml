@@ -21,6 +21,8 @@
 		<members>DynamicPathController</members>
 		<members>DynamicPathControllerTest</members> 
 		<members>FileController</members>
+		<members>JWTGenerator</members>
+		<members>JWTGeneratorTest</members>
 		<members>FileControllerTest</members>
 		<members>GovUKNotify_Invocable</members>
 		<members>GovUKNotify_InvocableTest</members>
