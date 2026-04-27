@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Email_Reminder__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Send email reminder to the case officer.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>Send email reminder to the case officer.</inlineHelpText>
+    <label>Email Reminder</label>
+    <type>Checkbox</type>
+</CustomField>
