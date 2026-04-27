@@ -711,6 +711,6 @@
 		<members>Case__c.Validate_DNO_Party_Type</members>
 		<name>ValidationRule</name>
 	</types>
-	<version>68.0</version>
+	<version>65.0</version>
 
 </Package>
