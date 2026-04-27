@@ -522,8 +522,6 @@
 		<members>Consultation_Before_Save</members>
 		<members>Document_Approval_Request_After_Save</members>
 		<members>Party_Before_Save</members>
-		<members>Screen_Create_New_Further_Information_Requested</members>
-		<members>Screen_Create_New_Internal_Consultation</members>
 		<members>Screen_DocGen_S37_Consent_Letter</members>
 		<members>Screen_DocGen_S37_Screening_Decision_Letter</members>
 		<members>Screen_Document_Library</members>
