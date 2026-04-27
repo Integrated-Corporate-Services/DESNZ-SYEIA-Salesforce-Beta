@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reminders_Sent_Count__c</fullName>
+    <defaultValue>0</defaultValue>
+    <description>This holds the number of times a reminder has been sent.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This holds the number of times a reminder has been sent.</inlineHelpText>
+    <label>Reminders Sent Count</label>
+    <precision>3</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

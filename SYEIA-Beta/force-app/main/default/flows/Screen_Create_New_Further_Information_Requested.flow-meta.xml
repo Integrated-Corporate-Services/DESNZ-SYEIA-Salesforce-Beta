@@ -80,7 +80,7 @@
         <inputParameters>
             <name>senderAddress</name>
             <value>
-                <stringValue>claire.rannard2@energysecurity.gov.uk</stringValue>
+                <stringValue>s37consents@energysecurity.gov.uk</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -146,7 +146,7 @@
         <inputParameters>
             <name>addThreadingTokenToSubject</name>
             <value>
-                <booleanValue>true</booleanValue>
+                <booleanValue>false</booleanValue>
             </value>
         </inputParameters>
         <nameSegment>emailSimple</nameSegment>
