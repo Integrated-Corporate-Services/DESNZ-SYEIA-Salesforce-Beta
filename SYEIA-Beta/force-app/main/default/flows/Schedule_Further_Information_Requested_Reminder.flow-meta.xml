@@ -167,7 +167,7 @@
     <textTemplates>
         <name>temp_FurtherInformationRequestedReminder</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
-        <text>{&quot;applicant_name&quot;:{!$Record.Case__r.Applicant_Name_Formula__c}, &quot;application_reference&quot;:{!$Record.Case__r.Name}, &quot;case_officer_name&quot;:{!$Record.Case__r.Case_Owner__c}, &quot;further_information_deadline_date&quot;{!$Record.Further_Information_Requested_Deadline__c}, &quot;application_type&quot;:{!$Record.Case__r.Application_Type__c}}</text>
+        <text>{&quot;applicant_name&quot;:{!$Record.Case__r.Applicant_Name_Formula__c}, &quot;application_reference&quot;:{!$Record.Case__r.Name}, &quot;case_officer_name&quot;:{!$Record.Case__r.Case_Owner__c}, &quot;further_information_deadline_date&quot;:{!$Record.Further_Information_Requested_Deadline__c}, &quot;application_type&quot;:{!$Record.Case__r.Application_Type__c}}</text>
     </textTemplates>
     <variables>
         <name>varNWLSendEmail</name>
