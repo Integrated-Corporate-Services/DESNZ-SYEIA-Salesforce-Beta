@@ -13,7 +13,7 @@
                 <field>Name</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>Type_of_Information_Requested__c</field>
             </layoutItems>
             <layoutItems>
