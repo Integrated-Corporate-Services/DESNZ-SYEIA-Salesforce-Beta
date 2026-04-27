@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reminder_Sent__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This is used to indicate when a reminder email has been sent to the Applicant.</description>
+    <label>Reminder Sent</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

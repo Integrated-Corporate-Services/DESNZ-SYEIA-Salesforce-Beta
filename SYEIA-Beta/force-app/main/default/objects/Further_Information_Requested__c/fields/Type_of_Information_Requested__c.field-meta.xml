@@ -3,7 +3,7 @@
     <fullName>Type_of_Information_Requested__c</fullName>
     <description>This is used to indicate what type of information requested for.</description>
     <label>Type of Information Requested</label>
-    <required>false</required>
+    <required>true</required>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>

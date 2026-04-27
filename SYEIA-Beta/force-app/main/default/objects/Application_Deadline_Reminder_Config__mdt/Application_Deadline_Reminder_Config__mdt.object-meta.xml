@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>This is used to store the reminder notification settings of NWL, Section 37 and Tree Lopping Applications.</description>
+    <label>Application Deadline Reminder Config</label>
+    <pluralLabel>Application Deadline Reminder Configs</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>
