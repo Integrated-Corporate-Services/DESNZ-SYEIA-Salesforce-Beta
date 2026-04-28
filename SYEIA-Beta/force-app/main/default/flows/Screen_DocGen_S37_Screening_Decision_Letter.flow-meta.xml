@@ -330,7 +330,8 @@
             <label>Approval Requested</label>
         </rules>
     </decisions>
-    <description>Sensitive Area Check Point 2 and 3</description>
+    <description>Sensitive Area Check Point 2 and 3
+Warning Message</description>
     <environments>Default</environments>
     <formulas>
         <name>form_SAR_Names</name>
@@ -1307,6 +1308,19 @@ TEXT(YEAR(TODAY()))</expression>
         <fields>
             <name>Condition_Library_Title</name>
             <fieldText>&lt;h1&gt;&lt;strong&gt;Conditions Library&lt;/strong&gt;&lt;/h1&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>WarmingMessage</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(255, 5, 5);&quot;&gt;If the selected template contains text in square brackets, replace the bracketed text with the appropriate actual value.&lt;/strong&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
