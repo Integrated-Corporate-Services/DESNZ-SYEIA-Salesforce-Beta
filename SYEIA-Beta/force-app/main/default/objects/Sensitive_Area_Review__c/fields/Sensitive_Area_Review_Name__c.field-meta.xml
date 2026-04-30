@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Other_Sensitive_Areas_Not__c</fullName>
+    <fullName>Sensitive_Area_Review_Name__c</fullName>
     <externalId>false</externalId>
-    <label>Other Sensitive Areas Not</label>
-    <length>255</length>
+    <formula>Name</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Sensitive Area Review Name</label>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Text</type>
