@@ -928,11 +928,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Sensitive_Area_Check__c.Case__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Sensitive_Area_Check__c.Sensitive_Area_Check_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
