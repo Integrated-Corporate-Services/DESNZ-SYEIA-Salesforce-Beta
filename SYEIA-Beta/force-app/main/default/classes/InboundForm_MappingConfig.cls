@@ -306,4 +306,9 @@ public class InboundForm_MappingConfig {
         return new FieldMapping(jsonPath, targetField, DataType.STRING_TYPE)
             .setIsRequired(true);
     }
+
+    public static FieldMapping defaultValue(String defaultValue, String targetField) {
+        return new FieldMapping('noJsonPath', targetField, DataType.STRING_TYPE)
+            .setDefaultValue(defaultValue);
+    }
 }
