@@ -423,7 +423,7 @@
 		<members>Application_Status_Path_Setting.Withdrawn</members>
 		<members>Application_Deadline_Reminder_Config.FIR_Applicant_Response_Notification</members>
 		<members>Application_Deadline_Reminder_Config.FIR_Deadline_Notification</members>
-		<members>Application_Deadline_Reminder_Config.FIR_Extended_Notification</members>
+		<members>Application_Deadline_Reminder_Config.FIR_Extended_Deadline_Notification</members>
 		<members>Dynamic_Application_Status_Routing.Post_Decision</members>
 		<members>Mark_Status_as_Complete_Setting.Statuses</members>
 		<members>Prior_Application_Status_Setting.Applicable_Statuses</members>
