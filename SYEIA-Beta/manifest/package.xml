@@ -51,6 +51,7 @@
 		<members>JitHandler</members>
 		<members>JitHandlerTest</members>
 		<members>OAuthTokenService</members>
+		<members>RouteMapController</members>
 		<members>TriggerHandler</members>
 		<members>Utilities</members>
 		<name>ApexClass</name>
