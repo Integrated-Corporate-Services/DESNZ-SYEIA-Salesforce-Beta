@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>FIR Applicant Response Notification</label>
+    <protected>false</protected>
+    <values>
+        <field>Advance_Notice_Days__c</field>
+        <value xsi:type="xsd:double">0.0</value>
+    </values>
+    <values>
+        <field>Application_Completion_Timeframe__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Case_Form__c</field>
+        <value xsi:type="xsd:string">Section 37</value>
+    </values>
+    <values>
+        <field>Email_Reminder__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Gov_Notify_Template_Id__c</field>
+        <value xsi:type="xsd:string">79e8d79c-3034-41f1-8afb-a4597d1b34c5</value>
+    </values>
+    <values>
+        <field>Recipient_Email__c</field>
+        <value xsi:type="xsd:string">joshua.eze@ics.gov.uk</value>
+    </values>
+    <values>
+        <field>Show_in_Reminder_List__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+</CustomMetadata>
