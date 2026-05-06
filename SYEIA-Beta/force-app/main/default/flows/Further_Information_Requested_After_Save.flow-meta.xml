@@ -366,7 +366,7 @@
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <textTemplates>
         <name>CON_FIR_ApplicantRepliedPageReference</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
