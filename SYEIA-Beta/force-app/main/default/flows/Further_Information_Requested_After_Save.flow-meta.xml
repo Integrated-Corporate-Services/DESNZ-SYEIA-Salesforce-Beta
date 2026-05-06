@@ -83,14 +83,16 @@
         <inputParameters>
             <name>emailBody</name>
             <value>
-                <stringValue>&lt;p&gt;Dear Section 37 Team,&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;An applicant has uploaded the additional information you requested for {!$Record.Case__r.Name}}.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;See your case&lt;/strong&gt; {!form_CaseDetailLink}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Do not reply to this email.&lt;/p&gt;</stringValue>
+                <stringValue>Dear Section 37 Team,
+
+An applicant has uploaded the additional information you requested for {!$Record.Case__r.Name}.
+See your case: {!form_CaseDetailLink}.
+
+Do not reply to this email.</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>sendRichBody</name>
-            <value>
-                <booleanValue>true</booleanValue>
-            </value>
         </inputParameters>
         <inputParameters>
             <name>recipientId</name>
@@ -106,15 +108,9 @@
         </inputParameters>
         <inputParameters>
             <name>addThreadingTokenToBody</name>
-            <value>
-                <booleanValue>false</booleanValue>
-            </value>
         </inputParameters>
         <inputParameters>
             <name>addThreadingTokenToSubject</name>
-            <value>
-                <booleanValue>false</booleanValue>
-            </value>
         </inputParameters>
         <nameSegment>emailSimple</nameSegment>
         <offset>0</offset>
@@ -369,7 +365,7 @@
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <textTemplates>
         <name>CON_FIR_ApplicantRepliedPageReference</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
