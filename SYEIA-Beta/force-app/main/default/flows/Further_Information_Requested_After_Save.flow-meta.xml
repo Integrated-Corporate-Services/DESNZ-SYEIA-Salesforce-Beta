@@ -65,7 +65,7 @@
         <inputParameters>
             <name>senderAddress</name>
             <value>
-                <stringValue>claire.rannard2@energysecurity.gov.uk</stringValue>
+                <stringValue>s37consents@energysecurity.gov.uk</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -83,7 +83,7 @@
         <inputParameters>
             <name>emailBody</name>
             <value>
-                <stringValue>&lt;p&gt;Dear Section 37 Team, &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;An applicant has uploaded the additional information you requested for {!$Record.Case__r.Name}}. &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;See your case {!form_CaseDetailLink}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Do not reply to this email.&lt;/p&gt;</stringValue>
+                <stringValue>&lt;p&gt;Dear Section 37 Team,&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;An applicant has uploaded the additional information you requested for {!$Record.Case__r.Name}}.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;See your case&lt;/strong&gt; {!form_CaseDetailLink}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Do not reply to this email.&lt;/p&gt;</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -103,8 +103,11 @@
         </inputParameters>
         <inputParameters>
             <name>logEmailOnSend</name>
+        </inputParameters>
+        <inputParameters>
+            <name>addThreadingTokenToBody</name>
             <value>
-                <booleanValue>true</booleanValue>
+                <booleanValue>false</booleanValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -366,7 +369,7 @@
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <textTemplates>
         <name>CON_FIR_ApplicantRepliedPageReference</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
