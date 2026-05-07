@@ -85,9 +85,9 @@
             <value>
                 <stringValue>Dear Section 37 Team,
 
-An applicant has uploaded the additional information you requested for {!$Record.Case__r.Name}.
-See your case: {!form_CaseDetailLink}.
+An applicant has uploaded the additional information you requested for {!$Record.Case__r.Name}}.
 
+See your case: {!form_CaseDetailLink}.
 Do not reply to this email.</stringValue>
             </value>
         </inputParameters>
