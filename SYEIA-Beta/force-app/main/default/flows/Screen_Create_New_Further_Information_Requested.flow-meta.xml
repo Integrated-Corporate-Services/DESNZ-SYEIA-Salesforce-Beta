@@ -156,6 +156,45 @@
     <apiVersion>66.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
+        <name>Assign_Applicant_Email</name>
+        <label>Assign Applicant Email</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>varApplicantEmail</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_Applicant_Emails</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varApplicantEmail</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>;</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Applicant_Emails</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Content_version_Document</name>
+        <label>Assign Content version Document</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>varContentVersionCollection</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Content_Version</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Send_FIR_Email_Screen</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Assign_ContentDocId</name>
         <label>Assign ContentDocId</label>
         <locationX>0</locationX>
@@ -197,8 +236,22 @@
                 <elementReference>InformationRequiredFromApplicant</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varApplicantEmailCollection</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Get_Case_Record.DNO__r.Email__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varApplicantEmailCollection</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Get_Case_Record.DNO__r.Representative__r.Email__c</elementReference>
+            </value>
+        </assignmentItems>
         <connector>
-            <targetReference>Get_Other_FIR_Records</targetReference>
+            <targetReference>Loop_Applicant_Emails</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -277,6 +330,31 @@
         </value>
     </customProperties>
     <decisions>
+        <name>Decision_Get_Content_Record</name>
+        <label>Decision Get Content Record</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Send_FIR_Email_Screen</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Is_Document_Attached</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>collection_CDLIds</leftValueReference>
+                <operator>IsEmpty</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Content_Version</targetReference>
+            </connector>
+            <label>Is Document Attached?</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Decision_New_FIR</name>
         <label>Decision New FIR</label>
         <locationX>0</locationX>
@@ -301,6 +379,31 @@
             <label>IS New</label>
         </rules>
     </decisions>
+    <decisions>
+        <name>Decision_On_Applicant_Email</name>
+        <label>Decision On Applicant Email</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Assign_Applicant_Email</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Email_Already_Exists</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>varApplicantEmail</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <elementReference>Loop_Applicant_Emails</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Loop_Applicant_Emails</targetReference>
+            </connector>
+            <label>Email Already Exists</label>
+        </rules>
+    </decisions>
     <description>Further Information Requested, applicant</description>
     <environments>Default</environments>
     <formulas>
@@ -316,6 +419,20 @@
     <interviewLabel>Screen - Create New Further Information Requested {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Screen - Create New Further Information Requested</label>
     <loops>
+        <name>Loop_Applicant_Emails</name>
+        <label>Loop Applicant Emails</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>varApplicantEmailCollection</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Decision_On_Applicant_Email</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Get_Other_FIR_Records</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
         <name>Loop_Content_Document_Link</name>
         <label>Loop Content Document Link</label>
         <locationX>0</locationX>
@@ -326,7 +443,7 @@
             <targetReference>Assign_ContentDocId</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
-            <targetReference>Get_Content_Version</targetReference>
+            <targetReference>Decision_Get_Content_Record</targetReference>
         </noMoreValuesConnector>
     </loops>
     <processMetadataValues>
@@ -459,8 +576,12 @@
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Send_FIR_Email_Screen</targetReference>
+            <targetReference>Assign_Content_version_Document</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Log_Error</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>ContentDocumentId</field>
@@ -687,9 +808,15 @@
                 <fields>
                     <name>To_Address_Email</name>
                     <dataType>String</dataType>
+                    <defaultValue>
+                        <elementReference>varApplicantEmail</elementReference>
+                    </defaultValue>
                     <fieldText>To Address</fieldText>
                     <fieldType>InputField</fieldType>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isReadOnly>
+                        <booleanValue>true</booleanValue>
+                    </isReadOnly>
                     <isRequired>true</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -754,34 +881,28 @@
                         </value>
                     </inputParameters>
                     <inputParameters>
-                        <name>shouldDisplayLabel</name>
+                        <name>columns</name>
                         <value>
-                            <booleanValue>true</booleanValue>
+                            <stringValue>[{&quot;apiName&quot;:&quot;Title&quot;,&quot;guid&quot;:&quot;column-00c7&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:0,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Title&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;FileType&quot;,&quot;guid&quot;:&quot;column-c804&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:1,&quot;sortable&quot;:false,&quot;label&quot;:&quot;File Type&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;CreatedDate&quot;,&quot;guid&quot;:&quot;column-50e6&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:2,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Created Date&quot;,&quot;type&quot;:&quot;customDateTime&quot;},{&quot;apiName&quot;:&quot;ContentSize&quot;,&quot;guid&quot;:&quot;column-74bb&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:3,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Size&quot;,&quot;type&quot;:&quot;customRichText&quot;}]</stringValue>
                         </value>
                     </inputParameters>
                     <inputParameters>
                         <name>tableData</name>
                         <value>
-                            <elementReference>Get_Content_Version</elementReference>
+                            <elementReference>varContentVersionCollection</elementReference>
                         </value>
                     </inputParameters>
                     <inputParameters>
                         <name>keyField</name>
                         <value>
-                            <complexValue>{&quot;dataType&quot;:&quot;SObject&quot;,&quot;objectType&quot;:&quot;ContentVersion&quot;,&quot;fieldReferences&quot;:[&quot;Id&quot;],&quot;elementReference&quot;:&quot;Get_Content_Version&quot;}</complexValue>
+                            <complexValue>{&quot;dataType&quot;:&quot;SObject&quot;,&quot;objectType&quot;:&quot;ContentVersion&quot;,&quot;fieldReferences&quot;:[&quot;Id&quot;],&quot;elementReference&quot;:&quot;varContentVersionCollection&quot;}</complexValue>
                             <complexValueType>ComplexObjectFieldDetails</complexValueType>
-                        </value>
-                    </inputParameters>
-                    <inputParameters>
-                        <name>columns</name>
-                        <value>
-                            <stringValue>[{&quot;apiName&quot;:&quot;Title&quot;,&quot;guid&quot;:&quot;column-352f&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:0,&quot;sortable&quot;:true,&quot;label&quot;:&quot;Title&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;FileType&quot;,&quot;guid&quot;:&quot;column-df68&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:1,&quot;sortable&quot;:false,&quot;label&quot;:&quot;File Type&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;CreatedDate&quot;,&quot;guid&quot;:&quot;column-61ef&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:2,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Created Date&quot;,&quot;type&quot;:&quot;customDateTime&quot;},{&quot;apiName&quot;:&quot;ContentSize&quot;,&quot;guid&quot;:&quot;column-8663&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;Size&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:3,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Size&quot;,&quot;type&quot;:&quot;customRichText&quot;}]</stringValue>
                         </value>
                     </inputParameters>
                     <inputParameters>
                         <name>columnReferences</name>
                         <value>
-                            <complexValue>{&quot;dataType&quot;:&quot;SObject&quot;,&quot;objectType&quot;:&quot;ContentVersion&quot;,&quot;fieldReferences&quot;:[&quot;Title&quot;,&quot;FileType&quot;,&quot;CreatedDate&quot;,&quot;ContentSize&quot;],&quot;elementReference&quot;:&quot;Get_Content_Version&quot;}</complexValue>
+                            <complexValue>{&quot;dataType&quot;:&quot;SObject&quot;,&quot;objectType&quot;:&quot;ContentVersion&quot;,&quot;fieldReferences&quot;:[&quot;Title&quot;,&quot;FileType&quot;,&quot;CreatedDate&quot;,&quot;ContentSize&quot;],&quot;elementReference&quot;:&quot;varContentVersionCollection&quot;}</complexValue>
                             <complexValueType>ComplexObjectFieldDetails</complexValueType>
                         </value>
                     </inputParameters>
@@ -839,9 +960,15 @@
                 </value>
             </inputParameters>
             <inputParameters>
-                <name>autoReplaceMap</name>
+                <name>disableAdvancedTools</name>
                 <value>
-                    <booleanValue>false</booleanValue>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>characterLimit</name>
+                <value>
+                    <numberValue>27000.0</numberValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>ResetValues</inputsOnNextNavToAssocScrn>
@@ -894,11 +1021,33 @@
         <objectType>Further_Information_Requested__c</objectType>
     </variables>
     <variables>
+        <name>varApplicantEmail</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>varApplicantEmailCollection</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
         <name>varCaseRecordId</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>true</isInput>
         <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>varContentVersionCollection</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>ContentVersion</objectType>
     </variables>
     <variables>
         <name>varCountFIR</name>
