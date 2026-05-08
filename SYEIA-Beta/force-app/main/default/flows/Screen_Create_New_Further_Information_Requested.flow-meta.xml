@@ -404,7 +404,7 @@
             <label>Email Already Exists</label>
         </rules>
     </decisions>
-    <description>Further Information Requested, applicant</description>
+    <description>Further Information Requested, applicant.</description>
     <environments>Default</environments>
     <formulas>
         <name>form_FIR_Subject</name>
@@ -813,6 +813,7 @@
                     </defaultValue>
                     <fieldText>To Address</fieldText>
                     <fieldType>InputField</fieldType>
+                    <helpText>&lt;p&gt;Emails come from the Company email and the applicant email.&lt;/p&gt;</helpText>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isReadOnly>
                         <booleanValue>true</booleanValue>
@@ -832,6 +833,7 @@
                     <dataType>String</dataType>
                     <fieldText>CC Address</fieldText>
                     <fieldType>InputField</fieldType>
+                    <helpText>&lt;p&gt;You can add additional email addresses by separating them with commas.&lt;/p&gt;</helpText>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
