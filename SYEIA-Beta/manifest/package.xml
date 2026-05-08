@@ -615,32 +615,6 @@
 		<name>PathAssistant</name>
 	</types>
 	<types>
-		<members>PS_AWS_API_Integration</members>
-		<members>PS_Bypass_DocGen_Approval</members>
-		<members>PS_Case_Create_Edit</members>
-		<members>PS_Case_Delete</members>
-		<members>PS_Case_Management_Suite</members>
-		<members>PS_Case_Manual_Share</members>
-		<members>PS_Case_Read</members>
-		<members>PS_Case_Reassign</members>
-		<members>PS_Document_Approve</members>
-		<members>PS_Document_Generation</members>
-		<members>PS_Gov_UK_Notify</members>
-		<members>PS_Read_Write_Locked_Case_Notes</members>
-		<members>PS_Withdraw_Case</members>
-		<name>PermissionSet</name>
-	</types>
-	<types>
-		<members>PSG_Case_Officer_Standard_User</members>
-		<members>PSG_Decision_Manager</members>
-		<members>PSG_Finance</members>
-		<members>PSG_Legal</members>
-		<members>PSG_PEDW</members>
-		<members>PSG_PINS</members>
-		<members>PSG_Super_User</members>
-		<name>PermissionSetGroup</name>
-	</types>
-	<types>
 		<members>Admin</members>
 		<members>Base Employee</members>
 		<members>Decision Manager</members>
