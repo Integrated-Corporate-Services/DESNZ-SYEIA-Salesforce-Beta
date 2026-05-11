@@ -115,9 +115,6 @@
         </inputParameters>
         <inputParameters>
             <name>attachmentId</name>
-            <value>
-                <elementReference>Document_Table.firstSelectedRow.Id</elementReference>
-            </value>
         </inputParameters>
         <inputParameters>
             <name>attachmentIdCollection</name>
@@ -714,7 +711,6 @@
                     <name>InformationRequiredFromApplicant</name>
                     <fieldText>Information Required from Applicant</fieldText>
                     <fieldType>LargeTextArea</fieldType>
-                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -730,7 +726,6 @@
                     <dataType>Date</dataType>
                     <fieldText>Further Information Requested Deadline</fieldText>
                     <fieldType>InputField</fieldType>
-                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -791,7 +786,6 @@
                     </defaultValue>
                     <fieldText>Subject</fieldText>
                     <fieldType>InputField</fieldType>
-                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isReadOnly>
                         <booleanValue>true</booleanValue>
                     </isReadOnly>
@@ -814,10 +808,6 @@
                     <fieldText>To Address</fieldText>
                     <fieldType>InputField</fieldType>
                     <helpText>&lt;p&gt;Emails come from the Company email and the applicant email.&lt;/p&gt;</helpText>
-                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-                    <isReadOnly>
-                        <booleanValue>true</booleanValue>
-                    </isReadOnly>
                     <isRequired>true</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -834,7 +824,6 @@
                     <fieldText>CC Address</fieldText>
                     <fieldType>InputField</fieldType>
                     <helpText>&lt;p&gt;You can add additional email addresses by separating them with commas.&lt;/p&gt;</helpText>
-                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
