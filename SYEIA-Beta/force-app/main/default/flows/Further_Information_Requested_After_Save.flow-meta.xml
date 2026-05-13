@@ -54,24 +54,18 @@
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>recipientAddresses</name>
-            <value>
-                <collectionElements>
-                    <elementReference>Get_Application_Reminder_Custom_Settings.Recipient_Email__c</elementReference>
-                </collectionElements>
-            </value>
+            <value/>
         </inputParameters>
         <inputParameters>
             <name>senderType</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>OrgWideEmailAddress</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>senderAddress</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
-                <stringValue>claire.rannard2@energysecurity.gov.uk</stringValue>
+                <stringValue>s37consents@energysecurity.gov.uk</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -89,8 +83,12 @@
         <inputParameters>
             <name>emailBody</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
-                <stringValue>&lt;p&gt;Dear Section 37 Team, &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;An applicant has uploaded the additional information you requested for {!$Record.Case__r.Name}}. &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;See your case {!form_CaseDetailLink}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Do not reply to this email.&lt;/p&gt;</stringValue>
+                <stringValue>Dear Section 37 Team,
+
+An applicant has uploaded the additional information you requested for {!$Record.Case__r.Name}}.
+
+See your case: {!form_CaseDetailLink}.
+Do not reply to this email.</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -103,14 +101,16 @@
             <name>relatedRecordId</name>
             <value>
                 <elementReference>$Record.Case__r.Id</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
+            <name>logEmailOnSend</name>
+        </inputParameters>
+        <inputParameters>
+            <name>addThreadingTokenToBody</name>
+        </inputParameters>
+        <inputParameters>
             <name>addThreadingTokenToSubject</name>
-            <value>
-                <booleanValue>false</booleanValue>
-            </value>
         </inputParameters>
         <nameSegment>emailSimple</nameSegment>
         <offset>0</offset>
@@ -365,7 +365,7 @@
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <textTemplates>
         <name>CON_FIR_ApplicantRepliedPageReference</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
