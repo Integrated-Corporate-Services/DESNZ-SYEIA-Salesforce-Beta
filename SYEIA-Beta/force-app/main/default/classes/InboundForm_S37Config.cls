@@ -332,6 +332,8 @@ public class InboundForm_S37Config {
             InboundForm_MappingConfig.stringField('organisation_id', 'Application_Party_Id__c'));
         parties.addFieldMapping(
             InboundForm_MappingConfig.stringField('person_id', 'Person_Identification__c'));
+        parties.addFieldMapping(
+            InboundForm_MappingConfig.stringField('additional_contact', 'Additional_Contact_Email_Addresses__c'));
         
         return parties;
     }
