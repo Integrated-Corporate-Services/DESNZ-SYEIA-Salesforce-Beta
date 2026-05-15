@@ -171,7 +171,7 @@
             <assignToReference>varApplicantEmail</assignToReference>
             <operator>Add</operator>
             <value>
-                <stringValue>;</stringValue>
+                <stringValue>,</stringValue>
             </value>
         </assignmentItems>
         <connector>
@@ -248,6 +248,13 @@
             <operator>Add</operator>
             <value>
                 <elementReference>Get_Case_Record.DNO__r.Representative__r.Email__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varAdditionalContactEmailAddress</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Case_Record.DNO__r.Representative__r.Additional_Contact_Email_Addresses__c</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -389,8 +396,8 @@
         </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
-            <name>Email_Already_Exists</name>
-            <conditionLogic>and</conditionLogic>
+            <name>Email_Already_Exists_Or_Blank</name>
+            <conditionLogic>or</conditionLogic>
             <conditions>
                 <leftValueReference>varApplicantEmail</leftValueReference>
                 <operator>Contains</operator>
@@ -398,13 +405,21 @@
                     <elementReference>Loop_Applicant_Emails</elementReference>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>Loop_Applicant_Emails</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue></stringValue>
+                </rightValue>
+            </conditions>
             <connector>
                 <targetReference>Loop_Applicant_Emails</targetReference>
             </connector>
-            <label>Email Already Exists</label>
+            <label>Email Already Exists Or Blank</label>
         </rules>
     </decisions>
-    <description>Further Information Requested, applicant.</description>
+    <description>Further Information Requested, applicant. Email Tracking
+Additional Contact Email Address</description>
     <environments>Default</environments>
     <formulas>
         <name>form_FIR_Subject</name>
@@ -481,9 +496,15 @@
             </value>
         </inputAssignments>
         <inputAssignments>
-            <field>Recipient_Email__c</field>
+            <field>Recipient_Email_Addresses__c</field>
             <value>
                 <elementReference>To_Address_Email</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Recipient_Email__c</field>
+            <value>
+                <elementReference>Get_Case_Record.DNO__r.Email__c</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -605,6 +626,10 @@
         <connector>
             <targetReference>Decision_New_FIR</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Log_Error</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Case__c</field>
@@ -824,6 +849,9 @@
                 <fields>
                     <name>CC_Address_Email</name>
                     <dataType>String</dataType>
+                    <defaultValue>
+                        <elementReference>varAdditionalContactEmailAddress</elementReference>
+                    </defaultValue>
                     <fieldText>CC Address</fieldText>
                     <fieldType>InputField</fieldType>
                     <helpText>&lt;p&gt;You can add additional email addresses by separating them with commas.&lt;/p&gt;</helpText>
@@ -988,7 +1016,7 @@
             <targetReference>Further_Information_Request</targetReference>
         </connector>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <textTemplates>
         <name>tt_FIR_Email_Template</name>
         <isViewedAsPlainText>false</isViewedAsPlainText>
@@ -1013,6 +1041,13 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <objectType>Further_Information_Requested__c</objectType>
+    </variables>
+    <variables>
+        <name>varAdditionalContactEmailAddress</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
     </variables>
     <variables>
         <name>varApplicantEmail</name>

@@ -120,6 +120,7 @@
 		<members>Case__c.Accept_Consultees_Recommendations__c</members>
 		<members>Case__c.Accept_Local_Authority_Conditions__c</members>
 		<members>Case__c.Actual_Completed_Date_Time__c</members>
+		<members>Withdrawal_Request__c.Additional_Contact_Email_Addresses__c</members>
 		<members>Case__c.Adding_or_Replacing_Any_Overhead_Lines__c</members>
 		<members>Case__c.Adding_or_Replacing_Any_Poles__c</members>
 		<members>Case__c.Additional_Info_Requested_From_DNO__c</members>
@@ -275,6 +276,7 @@
 		<members>Email_Tracking__c.Document_Type__c</members>
 		<members>Email_Tracking__c.Email_Unique_Key__c</members>
 		<members>Email_Tracking__c.Recipient_Email__c</members>
+		<members>Email_Tracking__c.Recipient_Email_Addresses__c</members>
 		<members>Email_Tracking__c.Recipient_Type__c</members>
 		<members>Email_Tracking__c.Sent_By__c</members>
 		<members>Email_Tracking__c.Sent_Date_Time__c</members>
