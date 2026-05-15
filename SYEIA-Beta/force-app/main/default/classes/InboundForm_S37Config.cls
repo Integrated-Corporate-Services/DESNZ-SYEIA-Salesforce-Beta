@@ -201,16 +201,6 @@ public class InboundForm_S37Config {
             'sections.supportingInformation.supportingQuestions.esqcr_2002_compliance_confirmed', 
             'Works_Comply_With_ESQCR__c'
         ));
-        
-        config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
-            'sections.supportingInformation.supportingQuestions.esqcr_2002_compliance_confirmed', 
-            'Works_Comply_With_ESQCR__c'
-        ));
-
-        config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
-            'sections.supportingInformation.supportingQuestions.esqcr_2002_compliance_confirmed', 
-            'Works_Comply_With_ESQCR__c'
-        ));
 
         config.addFieldMapping(InboundForm_MappingConfig.IntegerField(
             'sections.sensitiveAreaChecks.tolerance_value', 
@@ -238,7 +228,9 @@ public class InboundForm_S37Config {
         config.addCollection(getParishConfig());
         config.addCollection(getPaymentConfig());
         config.addCollection(getPostConsultationOutcomeConfig());
-        config.addCollection(getSensitiveAreaReviewConfig());
+        config.addCollection(getSensitiveAreaReviewSelectedConfig());
+        config.addCollection(getSensitiveAreaReviewNotSelectedConfig());
+        config.addCollection(getSensitiveAreaReviewCustomAddedConfig());
     }
     
     // ----- Routes Collection -----
@@ -340,8 +332,6 @@ public class InboundForm_S37Config {
             InboundForm_MappingConfig.stringField('organisation_id', 'Application_Party_Id__c'));
         parties.addFieldMapping(
             InboundForm_MappingConfig.stringField('person_id', 'Person_Identification__c'));
-        parties.addFieldMapping(
-            InboundForm_MappingConfig.stringField('additional_contact', 'Additional_Contact_Email_Addresses__c'));
         
         return parties;
     }
@@ -378,7 +368,7 @@ public class InboundForm_S37Config {
         
         return addresses;
     }
-
+    
     // ----- Sensitive Area Checks (Simple Array) -----
     private static InboundForm_MappingConfig.CollectionConfig getSensitiveAreaChecksConfig() {
         return new InboundForm_MappingConfig.CollectionConfig()
@@ -553,28 +543,54 @@ public class InboundForm_S37Config {
         return postConOutcomes;
     }
 
-    // ----- Sensitive Area Review Collection -----
-    private static InboundForm_MappingConfig.CollectionConfig getSensitiveAreaReviewConfig() {
+    // ----- Sensitive Area Review Selected Collection -----
+    private static InboundForm_MappingConfig.CollectionConfig getSensitiveAreaReviewSelectedConfig() {
         InboundForm_MappingConfig.CollectionConfig sars = 
             new InboundForm_MappingConfig.CollectionConfig()
-                .setCollectionName('sensitiveAreaReviews')
-                .setJsonPath('sections.sensitiveAreaReview')
+                .setCollectionName('sensitiveAreaReviewsSelected')
+                .setJsonPath('sections.sensitiveAreaReview.manual.failedSelected')
                 .setTargetObject('Sensitive_Area_Review__c')
                 .setParentLookupField('Case__c')
-                .setParentLinkSfField('Sensitive_Area_Review_Id__c')
-                .setProcessingOrder(120);
+                .setParentLinkSfField('Layer_Id__c')
+                .setProcessingOrder(140);
         
-        sars.addFieldMapping(InboundForm_MappingConfig.stringField('id', 'Sensitive_Area_Review_Id__c'));
-        sars.addFieldMapping(InboundForm_MappingConfig.stringField('route_id','Route_Id__c'));
-        sars.addFieldMapping(InboundForm_MappingConfig.dateTimeField('created_at', 'Created_at__c'));
-        sars.addFieldMapping(InboundForm_MappingConfig.dateTimeField('updated_at', 'Updated_at__c'));
-        sars.addFieldMapping(InboundForm_MappingConfig.stringField( 'reviewed_at', 'Reviewed_at__c'));
-        sars.addFieldMapping(InboundForm_MappingConfig.stringField('reviewed_by', 'Reviewed_by__c'));
-        sars.addFieldMapping(InboundForm_MappingConfig.stringField('settings_id', 'Settings_Id__c'));
-        sars.addFieldMapping(InboundForm_MappingConfig.stringField('application_id', 'Application_Id__c'));
-        sars.addFieldMapping(InboundForm_MappingConfig.stringField('add_other_areas_choice', 'Add_Other_Areas_Choice__c'));
-        sars.addFieldMapping(InboundForm_MappingConfig.integerField('asset_presence_option_id', 'Asset_Presence_Option_Id__c'));
-        sars.addFieldMapping(InboundForm_MappingConfig.stringField('other_sensitive_areas_note', 'Other_Sensitive_Areas_Not__c'));
+        sars.addFieldMapping(InboundForm_MappingConfig.stringField('id', 'Layer_Id__c'));
+        sars.addFieldMapping(InboundForm_MappingConfig.stringField('layerName', 'Name'));
+        sars.addFieldMapping(InboundForm_MappingConfig.defaultValue('Deemed relevant by applicant', 'Type__c'));
         return sars;
+    }
+
+    // ----- Sensitive Area Review Selected Collection -----
+    private static InboundForm_MappingConfig.CollectionConfig getSensitiveAreaReviewNotSelectedConfig() {
+        InboundForm_MappingConfig.CollectionConfig sars = 
+            new InboundForm_MappingConfig.CollectionConfig()
+                .setCollectionName('sensitiveAreaReviewsNotSelected')
+                .setJsonPath('sections.sensitiveAreaReview.manual.failedNotSelected')
+                .setTargetObject('Sensitive_Area_Review__c')
+                .setParentLookupField('Case__c')
+                .setParentLinkSfField('Layer_Id__c')
+                .setProcessingOrder(150);
+        
+        sars.addFieldMapping(InboundForm_MappingConfig.stringField('id', 'Layer_Id__c'));
+        sars.addFieldMapping(InboundForm_MappingConfig.stringField('layerName', 'Name'));
+        sars.addFieldMapping(InboundForm_MappingConfig.defaultValue('Not Deemed relevant by applicant', 'Type__c'));
+        return sars;
+    }
+
+    // ----- Sensitive Area Review Custom Added Collection -----
+    private static InboundForm_MappingConfig.CollectionConfig getSensitiveAreaReviewCustomAddedConfig() {
+        InboundForm_MappingConfig.CollectionConfig sarsms = 
+            new InboundForm_MappingConfig.CollectionConfig()
+                .setCollectionName('sensitiveAreaReviewsMS')
+                .setJsonPath('sections.sensitiveAreaReview.manual.customAdded')
+                .setTargetObject('Sensitive_Area_Review__c')
+                .setParentLookupField('Case__c')
+                .setParentLinkSfField('Layer_Id__c')
+                .setProcessingOrder(160);
+        
+        sarsms.addFieldMapping(InboundForm_MappingConfig.stringField('id', 'Layer_Id__c'));
+        sarsms.addFieldMapping(InboundForm_MappingConfig.stringField('layerName', 'Name'));
+        sarsms.addFieldMapping(InboundForm_MappingConfig.defaultValue('New Area', 'Type__c'));
+       return sarsms;
     }
 }
