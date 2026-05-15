@@ -538,6 +538,7 @@
 		<members>Task_After_Delete</members>
 		<members>Task_After_Save</members>
 		<members>Update_the_application_status_to_Archived</members>
+		<members>Screen_Create_New_Further_Information_Requested</members>
 		<name>Flow</name>
 	</types>
 	<types>
