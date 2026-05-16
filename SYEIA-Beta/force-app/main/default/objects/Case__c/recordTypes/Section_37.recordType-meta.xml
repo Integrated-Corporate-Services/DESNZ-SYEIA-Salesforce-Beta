@@ -731,23 +731,11 @@
     <picklistValues>
         <picklist>Status__c</picklist>
         <values>
-            <fullName>Acknowledged</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Application Received</fullName>
             <default>false</default>
         </values>
         <values>
             <fullName>Archived</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Completed</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Consultation</fullName>
             <default>false</default>
         </values>
         <values>
@@ -759,19 +747,7 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>In Abeyance</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>In Review</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>In-Progress</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Invalid</fullName>
             <default>false</default>
         </values>
         <values>
@@ -783,11 +759,11 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Representation Stage</fullName>
+            <fullName>Submitted for Approval</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Submitted for Approval</fullName>
+            <fullName>Under Review</fullName>
             <default>false</default>
         </values>
         <values>
