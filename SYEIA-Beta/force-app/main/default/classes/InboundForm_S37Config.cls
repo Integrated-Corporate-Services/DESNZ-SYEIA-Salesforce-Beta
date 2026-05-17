@@ -160,7 +160,7 @@ public class InboundForm_S37Config {
             'Plan_Reference__c'
         ));
 
-        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+        config.addFieldMapping(InboundForm_MappingConfig.booleanField(
             'sections.projectDetails.overview.application_project_overview.has_related_applications', 
             'Are_There_Any_Other_Related_Applications__c'
         ));
@@ -168,11 +168,6 @@ public class InboundForm_S37Config {
         config.addFieldMapping(InboundForm_MappingConfig.stringField(
             'sections.projectDetails.overview.application_project_overview.related_applications_details', 
             'Details_of_All_Related_Application__c'
-        ));
-
-        config.addFieldMapping(InboundForm_MappingConfig.stringField(
-            'sections.projectDetails.overview.application_project_overview.max_structure_height_m', 
-            'Tallest_Pole_Height__c'
         ));
 
         config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
