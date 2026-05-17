@@ -130,6 +130,7 @@
 		<members>Case__c.Application_Fee_Paid__c</members>
 		<members>Case__c.Application_Statement__c</members>
 		<members>Case__c.Application_Type__c</members>
+		<members>Case__c.Are_There_Any_Other_Related_Applications__c</members>
 		<members>Case__c.CPO_Attached_To_This_Project__c</members>
 		<members>Case__c.CPO_Submitted__c</members>
 		<members>Case__c.Case_Owner__c</members>
@@ -160,6 +161,7 @@
 		<members>Case__c.Description_Of_Overhead_Lines__c</members>
 		<members>Case__c.Description__c</members>
 		<members>Case__c.Details_Of_Access_Storage_Sites__c</members>
+		<members>Case__c.Details_of_All_Related_Application__c</members>
 		<members>Case__c.Details_Of_Equipment_Removal__c</members>
 		<members>Case__c.Details_Of_Excavation_Works__c</members>
 		<members>Case__c.Details_Of_Vegetation_Clearance__c</members>

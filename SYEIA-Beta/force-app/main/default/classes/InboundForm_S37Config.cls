@@ -159,7 +159,22 @@ public class InboundForm_S37Config {
             'sections.projectDetails.overview.application_project_overview.plan_reference', 
             'Plan_Reference__c'
         ));
-        
+
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'sections.projectDetails.overview.application_project_overview.has_related_applications', 
+            'Are_There_Any_Other_Related_Applications__c'
+        ));
+
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'sections.projectDetails.overview.application_project_overview.related_applications_details', 
+            'Details_of_All_Related_Application__c'
+        ));
+
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'sections.projectDetails.overview.application_project_overview.max_structure_height_m', 
+            'Tallest_Pole_Height__c'
+        ));
+
         config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
             'sections.projectDetails.overview.hasRelatedCpo', 
             'CPO_Submitted__c'
@@ -332,8 +347,6 @@ public class InboundForm_S37Config {
             InboundForm_MappingConfig.stringField('organisation_id', 'Application_Party_Id__c'));
         parties.addFieldMapping(
             InboundForm_MappingConfig.stringField('person_id', 'Person_Identification__c'));
-        parties.addFieldMapping(
-            InboundForm_MappingConfig.stringField('additional_contact', 'Additional_Contact_Email_Addresses__c'));
         
         return parties;
     }
