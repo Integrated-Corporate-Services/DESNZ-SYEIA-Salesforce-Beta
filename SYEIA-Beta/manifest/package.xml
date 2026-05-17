@@ -19,7 +19,13 @@
 		<members>DocGen_DocumentGenerationWrapper</members>
 		<members>DocGen_DocumentGenerationWrapperTest</members>
 		<members>DynamicPathController</members>
-		<members>DynamicPathControllerTest</members> 
+		<members>DynamicPathControllerTest</members>
+		<members>GovUKNotifyInvocable</members>
+		<members>GovUKNotifyInvocableTest</members>
+		<members>GovUKNotifyService</members>
+		<members>GovUKNotifyServiceTest</members>
+		<members>GovUKNotify_JWTGenerator</members>
+		<members>GovUKNotify_JWTGeneratorTest</members>
 		<members>FileController</members>
 		<members>JWTGenerator</members>
 		<members>JWTGeneratorTest</members>
