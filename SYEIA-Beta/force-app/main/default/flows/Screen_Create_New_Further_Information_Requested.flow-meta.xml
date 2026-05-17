@@ -115,9 +115,6 @@
         </inputParameters>
         <inputParameters>
             <name>attachmentId</name>
-            <value>
-                <elementReference>Document_Table.firstSelectedRow.Id</elementReference>
-            </value>
         </inputParameters>
         <inputParameters>
             <name>attachmentIdCollection</name>
