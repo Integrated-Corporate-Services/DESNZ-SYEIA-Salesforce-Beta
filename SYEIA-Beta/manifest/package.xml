@@ -543,6 +543,7 @@
 		<members>Subflow_File_Approval_Process_Next_Steps</members>
 		<members>Subflow_Notify_Approvers_About_New_Request</members>
 		<members>Subflow_Recalculate_Case_Tasks</members>
+		<members>Screen_Create_New_Further_Information_Requested</members>
 		<members>Task_After_Delete</members>
 		<members>Task_After_Save</members>
 		<members>Update_the_application_status_to_Archived</members>
@@ -623,7 +624,6 @@
 	<types>
 		<members>Admin</members>
 		<members>Base Employee</members>
-		<members>Decision Manager</members>
 		<name>Profile</name>
 	</types>
 	<types>
