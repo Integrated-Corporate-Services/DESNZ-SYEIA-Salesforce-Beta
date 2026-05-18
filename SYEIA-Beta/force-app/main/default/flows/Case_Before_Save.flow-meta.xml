@@ -19,6 +19,19 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assign_Date_case_sent_for_approval</name>
+        <label>Assign Date case sent for approval</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Date_case_sent_for_approval__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
         <name>Assign_Decision_Date</name>
         <label>Assign Decision Date</label>
         <locationX>0</locationX>
@@ -64,6 +77,22 @@
         </assignmentItems>
         <connector>
             <targetReference>Is_Case_New_or_Updated</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Mapping_Owner</name>
+        <label>Assign Mapping Owner</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Mapping_Owner__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Owner:User.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Check_Completion_Status</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -144,6 +173,54 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Update_Completion_Status_to_Active</name>
+        <label>Update Completion Status to Active</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Completion_Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Active</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Case_Status_Changed_to_Submit_for_Approval</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Update_Completion_Status_to_Complete</name>
+        <label>Update Completion Status to Complete</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Completion_Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Complete</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Case_Status_Changed_to_Submit_for_Approval</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Update_Completion_Status_to_Withdrawn</name>
+        <label>Update Completion Status to Withdrawn</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Completion_Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Withdrawn</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Case_Status_Changed_to_Submit_for_Approval</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Update_Traget_Completion_Date</name>
         <label>Update Traget Completion Date</label>
         <locationX>0</locationX>
@@ -155,6 +232,9 @@
                 <elementReference>New_Target_Completion_Date</elementReference>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>Is_Mapping_owner_blank</targetReference>
+        </connector>
     </assignments>
     <constants>
         <name>CON_FurtherInformationRequested_Text</name>
@@ -163,6 +243,111 @@
             <stringValue>Further Information Requested</stringValue>
         </value>
     </constants>
+    <decisions>
+        <name>Case_Status_Changed_to_Submit_for_Approval</name>
+        <label>Case Status Changed to Submit for Approval</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Status_Changed_to_Submit_for_Approval</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Date_case_sent_for_approval__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Submitted for Approval</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Date_case_sent_for_approval</targetReference>
+            </connector>
+            <label>Status Changed to Submit for Approval</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Completion_Status</name>
+        <label>Check Completion Status</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Case_Status_Changed_to_Submit_for_Approval</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Is_Active</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Under Review</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>In-Progress</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Submitted for Approval</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Completion_Status_to_Active</targetReference>
+            </connector>
+            <label>Is Active</label>
+        </rules>
+        <rules>
+            <name>Is_Complete</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Decision Issued</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Completion_Status_to_Complete</targetReference>
+            </connector>
+            <label>Is Complete</label>
+        </rules>
+        <rules>
+            <name>Is_Withdrawn</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Withdrawn</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Completion_Status_to_Withdrawn</targetReference>
+            </connector>
+            <label>Is Withdrawn</label>
+        </rules>
+    </decisions>
     <decisions>
         <name>Check_Type_of_Project</name>
         <label>Check Type of Project</label>
@@ -352,6 +537,38 @@
         </rules>
     </decisions>
     <decisions>
+        <name>Is_Mapping_owner_blank</name>
+        <label>Is Mapping owner blank</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Check_Completion_Status</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Mapping_Owner_is_blank</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Owner:User.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Mapping_Owner__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Mapping_Owner</targetReference>
+            </connector>
+            <label>Yes Mapping Owner is blank</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Is_Status_Changed</name>
         <label>Is Status Changed</label>
         <locationX>0</locationX>
@@ -395,6 +612,9 @@
         <label>Is Status Changed from Further Information Requested</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Is_Mapping_owner_blank</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Yes_Status_Changed_from_FIR</name>
