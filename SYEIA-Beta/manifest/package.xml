@@ -156,6 +156,7 @@
 		<members>Case__c.Date_of_Fee_Paid__c</members>
 		<members>Case__c.Date_of_MoD_Response__c</members>
 		<members>Case__c.Date_of_Screening_Fee_Paid__c</members>
+		<members>Case__c.Date_Letter_s_sent_to_Applicant__c</members>
 		<members>Case__c.Days_Ahead_Behind_Target__c</members>
 		<members>Case__c.Decision_Deadline_Display__c</members>
 		<members>Case__c.Decision_Deadline_Formula__c</members>
@@ -532,10 +533,12 @@
 		<members>Payment_After_Save</members>
 		<members>Schedule_Further_Information_Requested_Reminder</members>
 		<members>Screen_DocGen_S37_Consent_Letter</members>
+		<members>Screen_Section_37_Send_Letter</members>
 		<members>Screen_DocGen_S37_Screening_Decision_Letter</members>
 		<members>Screen_Document_Library</members>
 		<members>Screen_Reject_Case_Flow</members>
 		<members>Screen_Withdrawal_Request_Process_Guide</members>
+		<members>Subflow_Add_Log</members>
 		<members>Subflow_Create_Withdrawal_Request</members>
 		<members>Subflow_File_Approval_Process_Next_Steps</members>
 		<members>Subflow_Notify_Approvers_About_New_Request</members>
