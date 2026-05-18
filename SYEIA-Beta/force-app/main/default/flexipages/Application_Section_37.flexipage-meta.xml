@@ -178,6 +178,22 @@
                             </visibilityRule>
                         </valueListItems>
                         <valueListItems>
+                            <value>Case__c.Send_S37_Letter</value>
+                            <visibilityRule>
+                                <booleanFilter>1 OR 2</booleanFilter>
+                                <criteria>
+                                    <leftValue>{!$User.Persona__c}</leftValue>
+                                    <operator>EQUAL</operator>
+                                    <rightValue>Decision Manager</rightValue>
+                                </criteria>
+                                <criteria>
+                                    <leftValue>{!$User.Profile.Name}</leftValue>
+                                    <operator>CONTAINS</operator>
+                                    <rightValue>Admin</rightValue>
+                                </criteria>
+                            </visibilityRule>
+                        </valueListItems>
+                        <valueListItems>
                             <value>Share</value>
                         </valueListItems>
                         <valueListItems>
