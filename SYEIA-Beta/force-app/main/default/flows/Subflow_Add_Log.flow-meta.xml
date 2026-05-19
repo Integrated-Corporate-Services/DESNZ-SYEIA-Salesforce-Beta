@@ -12,20 +12,17 @@
             <name>faultMessage</name>
             <value>
                 <elementReference>varFlowDebugErrorLog</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>flowName</name>
             <value>
                 <elementReference>varAddLogFlowName</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>loggingLevelName</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>ERROR</stringValue>
             </value>
         </inputParameters>
@@ -33,28 +30,25 @@
             <name>message</name>
             <value>
                 <elementReference>varFlowDebugErrorLog</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>recordId</name>
             <value>
                 <elementReference>varRecordId</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>saveLog</name>
             <value>
                 <booleanValue>true</booleanValue>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <nameSegment>FlowLogEntry</nameSegment>
         <offset>0</offset>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
-    <apiVersion>67.0</apiVersion>
+    <apiVersion>65.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <customProperties>
         <name>ScreenProgressIndicator</name>
@@ -62,6 +56,7 @@
             <stringValue>{&quot;location&quot;:&quot;top&quot;,&quot;type&quot;:&quot;simple&quot;}</stringValue>
         </value>
     </customProperties>
+    <description>Version 65</description>
     <environments>Default</environments>
     <interviewLabel>[Subflow] Add Log {!$Flow.CurrentDateTime}</interviewLabel>
     <label>[Subflow] Add Log</label>
