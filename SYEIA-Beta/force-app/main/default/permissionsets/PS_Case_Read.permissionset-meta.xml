@@ -508,6 +508,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Case__c.Tallest_installed_pole_metres__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Case__c.Target_Completion_Date__c</field>
         <readable>true</readable>
     </fieldPermissions>
