@@ -38,6 +38,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Case__c.Additional_fee_Paid_Post_Submission__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Case__c.Additional_Info_Requested_From_DNO__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -134,6 +139,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Case__c.Current_Landowner_Signed_Wayleave__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case__c.Date_case_sent_for_approval__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
