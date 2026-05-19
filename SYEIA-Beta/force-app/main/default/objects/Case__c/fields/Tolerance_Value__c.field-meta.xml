@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Tolerance_Value__c</fullName>
     <externalId>false</externalId>
-    <label>Tolerance Value</label>
+    <label>Tolerance lengh (In metres)</label>
     <precision>18</precision>
     <required>false</required>
     <scale>0</scale>

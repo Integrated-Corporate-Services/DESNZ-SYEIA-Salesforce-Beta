@@ -3,7 +3,7 @@
     <fullName>Applicant_Reference__c</fullName>
     <description>The internal DNO Reference for this particular project</description>
     <externalId>false</externalId>
-    <label>DNO Reference</label>
+    <label>Applicant Reference</label>
     <length>255</length>
     <required>false</required>
     <trackHistory>false</trackHistory>
