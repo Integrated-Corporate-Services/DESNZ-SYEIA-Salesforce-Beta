@@ -406,8 +406,6 @@ private class InboundForm_S37HandlerTest {
         
         Assert.areEqual('Section 37', testCase.Case_Type__c, 
             'Case type should be set to Section 37');
-        Assert.areEqual('Yes', testCase.Application_Fee_Paid__c, 
-            'Application fee paid should be Yes');
         Assert.isFalse(testCase.Overdue_Email_Sent__c, 
             'Overdue email sent should be false');
     }

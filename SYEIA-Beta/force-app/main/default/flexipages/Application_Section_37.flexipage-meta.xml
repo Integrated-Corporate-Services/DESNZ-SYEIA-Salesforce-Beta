@@ -178,6 +178,22 @@
                             </visibilityRule>
                         </valueListItems>
                         <valueListItems>
+                            <value>Case__c.Send_S37_Letter</value>
+                            <visibilityRule>
+                                <booleanFilter>1 OR 2</booleanFilter>
+                                <criteria>
+                                    <leftValue>{!$User.Persona__c}</leftValue>
+                                    <operator>EQUAL</operator>
+                                    <rightValue>Decision Manager</rightValue>
+                                </criteria>
+                                <criteria>
+                                    <leftValue>{!$User.Profile.Name}</leftValue>
+                                    <operator>CONTAINS</operator>
+                                    <rightValue>Admin</rightValue>
+                                </criteria>
+                            </visibilityRule>
+                        </valueListItems>
+                        <valueListItems>
                             <value>Share</value>
                         </valueListItems>
                         <valueListItems>
@@ -1522,17 +1538,7 @@
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Case_Owner__c</fieldItem>
-                <identifier>RecordCase_Owner_cField2</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
+                    <value>required</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Status__c</fieldItem>
                 <identifier>RecordStatus_cField</identifier>
@@ -1552,7 +1558,7 @@
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>none</value>
+                    <value>required</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Application_Fee_Paid__c</fieldItem>
                 <identifier>RecordApp_Fee_Paid_cField2</identifier>
@@ -1565,7 +1571,7 @@
                     <value>none</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Date_Consent_Sent_to_DNO__c</fieldItem>
-                <identifier>RecordDate_Consent_Sent_to_DNO_cField2</identifier>
+                <identifier>RecordDate_Consent_Sent_to_DNO_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -1574,14 +1580,34 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Target_Completion_Date__c</fieldItem>
-                <identifier>RecordTarget_Completion_Date_cField2</identifier>
+                <fieldItem>Record.Date_Case_Sent_For_Approval__c</fieldItem>
+                <identifier>RecordDate_case_sent_for_approval_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Screening_Published_on_GOV_UK__c</fieldItem>
+                <identifier>RecordHas_Screening_Decision_Been_Published_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-b59f71f4-456b-480b-9edf-b81b1e5985c5</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Case_Owner__c</fieldItem>
+                <identifier>RecordCase_Owner_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
         <itemInstances>
             <fieldInstance>
                 <fieldInstanceProperties>
@@ -1598,8 +1624,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Date_Case_Sent_to_Consent_Manager__c</fieldItem>
-                <identifier>RecordDate_Case_Sent_to_Consent_Manager_cField2</identifier>
+                <fieldItem>Record.Payment_Method__c</fieldItem>
+                <identifier>RecordPayment_Method_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -1608,8 +1634,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Screening_Fee_Paid__c</fieldItem>
-                <identifier>RecordScreening_Fee_Paid_cField</identifier>
+                <fieldItem>Record.Target_Completion_Date__c</fieldItem>
+                <identifier>RecordTarget_Completion_Date_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -1618,8 +1644,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Screening_Published_on_GOV_UK__c</fieldItem>
-                <identifier>RecordHas_Screening_Decision_Been_Published_cField2</identifier>
+                <fieldItem>Record.Additional_Fee_Paid_Post_Submission__c</fieldItem>
+                <identifier>RecordAdditional_fee_Paid_Post_Submission_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -1630,16 +1656,6 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Time_to_Decision__c</fieldItem>
                 <identifier>RecordTime_to_Decision_cField2</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Decision_Date__c</fieldItem>
-                <identifier>RecordDecision_Date_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-73374639-1d2c-46a8-a4b8-73cfb21d5f45</name>
