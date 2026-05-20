@@ -1198,7 +1198,7 @@
             <inputParameters>
                 <name>visualPickerSize</name>
                 <value>
-                    <stringValue>medium</stringValue>
+                    <stringValue>small</stringValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
