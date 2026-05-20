@@ -115,9 +115,6 @@
         </inputParameters>
         <inputParameters>
             <name>attachmentId</name>
-            <value>
-                <elementReference>Document_Table.firstSelectedRow.Id</elementReference>
-            </value>
         </inputParameters>
         <inputParameters>
             <name>attachmentIdCollection</name>
@@ -274,7 +271,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Update_FIR_Record</targetReference>
+            <targetReference>Create_FIR</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -297,7 +294,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Create_FIR</targetReference>
+            <targetReference>Get_Content_Document_Link</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -327,7 +324,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Create_FIR</targetReference>
+            <targetReference>Get_Content_Document_Link</targetReference>
         </connector>
     </assignments>
     <customProperties>
@@ -578,6 +575,10 @@ Additional Contact Email Address</description>
         <connector>
             <targetReference>Loop_Content_Document_Link</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Log_Error</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>LinkedEntityId</field>
@@ -643,26 +644,12 @@ Additional Contact Email Address</description>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
-        <name>Update_FIR_Record</name>
-        <label>Update FIR Record</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <connector>
-            <targetReference>Create_Email_Tracking_Record</targetReference>
-        </connector>
-        <faultConnector>
-            <isGoTo>true</isGoTo>
-            <targetReference>Log_Error</targetReference>
-        </faultConnector>
-        <inputReference>varFIR_Record</inputReference>
-    </recordUpdates>
-    <recordUpdates>
         <name>Update_Latest_FIR</name>
         <label>Update Latest FIR</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Get_Content_Document_Link</targetReference>
+            <targetReference>Create_Email_Tracking_Record</targetReference>
         </connector>
         <faultConnector>
             <targetReference>Log_Error</targetReference>
@@ -1027,6 +1014,13 @@ Additional Contact Email Address</description>
         <isViewedAsPlainText>false</isViewedAsPlainText>
         <text>&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;Dear {!Get_Case_Record.Applicant_Name_Formula__c},&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;Thank you for responding to our previous information request for your application &lt;/span&gt;&lt;strong style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;{!Get_Case_Record.Name}&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt; for consent for development of overhead lines (Section 37).&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;Please would you provide the following additional information as soon as possible to help us progress your application:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!InformationRequiredFromApplicant}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;Regards&lt;/span&gt;&lt;/p&gt;&lt;p&gt;{!$User.FirstName} {!$User.LastName}&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;Do not reply to this email. Please send your replies to&lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); font-family: Arial, Helvetica, sans-serif;&quot;&gt; &lt;/span&gt;&lt;a href=&quot;mailto:s37consents@energysecurity.gov.uk&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;color: rgb(1, 118, 211);&quot;&gt;&lt;u&gt;s37consents@energysecurity.gov.uk&lt;/u&gt;&lt;/a&gt;.&lt;/p&gt;</text>
     </textTemplates>
+    <variables>
+        <name>coll_ContentVersionIdsSelected</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
     <variables>
         <name>collection_CDLIds</name>
         <dataType>String</dataType>
