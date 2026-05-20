@@ -271,7 +271,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Update_FIR_Record</targetReference>
+            <targetReference>Create_FIR</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -294,7 +294,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Create_FIR</targetReference>
+            <targetReference>Get_Content_Document_Link</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -324,7 +324,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Create_FIR</targetReference>
+            <targetReference>Get_Content_Document_Link</targetReference>
         </connector>
     </assignments>
     <customProperties>
@@ -575,6 +575,10 @@ Additional Contact Email Address</description>
         <connector>
             <targetReference>Loop_Content_Document_Link</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Log_Error</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>LinkedEntityId</field>
@@ -640,26 +644,12 @@ Additional Contact Email Address</description>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
-        <name>Update_FIR_Record</name>
-        <label>Update FIR Record</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <connector>
-            <targetReference>Create_Email_Tracking_Record</targetReference>
-        </connector>
-        <faultConnector>
-            <isGoTo>true</isGoTo>
-            <targetReference>Log_Error</targetReference>
-        </faultConnector>
-        <inputReference>varFIR_Record</inputReference>
-    </recordUpdates>
-    <recordUpdates>
         <name>Update_Latest_FIR</name>
         <label>Update Latest FIR</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Get_Content_Document_Link</targetReference>
+            <targetReference>Create_Email_Tracking_Record</targetReference>
         </connector>
         <faultConnector>
             <targetReference>Log_Error</targetReference>
