@@ -84,6 +84,13 @@
                     <stringValue>Further Information Requested</stringValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
             <connector>
                 <targetReference>Update_FIR_records_Outstanding</targetReference>
             </connector>
@@ -116,6 +123,7 @@
             <label>Yes</label>
         </rules>
     </decisions>
+    <description>Case Status Change</description>
     <environments>Default</environments>
     <formulas>
         <name>formula_WithdrawalRequestedTaskDescription</name>
@@ -181,7 +189,7 @@
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <variables>
         <description>DNO Has Requested Case Withdrawal</description>
         <name>var_WithdrawalRequestedTaskSubject</name>
