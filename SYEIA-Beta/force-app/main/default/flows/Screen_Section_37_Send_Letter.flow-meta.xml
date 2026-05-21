@@ -184,6 +184,29 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assign_LPA_Consultation_Email</name>
+        <label>Assign LPA Consultation Email</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_defaultToAddressValue</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>,</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_defaultToAddressValue</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_Through_Consultation.Contact_Email_Address__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Through_Consultation</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Set_To_Address_Value</name>
         <label>Set To Address Value</label>
         <locationX>0</locationX>
@@ -363,7 +386,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <targetReference>Email_Builder_Screen</targetReference>
+            <targetReference>Get_LPA_Consultant</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Applicant</defaultConnectorLabel>
         <rules>
@@ -371,7 +394,7 @@
             <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>Recipient_Picker.selectedChoiceValues</leftValueReference>
-                <operator>EqualTo</operator>
+                <operator>Contains</operator>
                 <rightValue>
                     <elementReference>Landowner</elementReference>
                 </rightValue>
@@ -382,12 +405,14 @@
             <label>Landowner</label>
         </rules>
     </decisions>
-    <description>Send Section 37 Letter</description>
+    <description>Send Section 37 Letter
+Email Template
+LPA Email</description>
     <environments>Default</environments>
     <formulas>
         <name>formula_emailSubject_DV</name>
         <dataType>String</dataType>
-        <expression>{!vardocumentEmailTypeLabel} &amp; &quot; for &quot; &amp;  {!Get_Case.Name}</expression>
+        <expression> &quot;Consent issued for application to develop overhead lines: &quot; &amp;  {!Get_Case.Name}</expression>
     </formulas>
     <interviewLabel>Screen - Section 37 - Send Letter {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Screen - Section 37 - Send Letter</label>
@@ -403,6 +428,20 @@
         </nextValueConnector>
         <noMoreValuesConnector>
             <targetReference>Get_Content_Version</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>Loop_Through_Consultation</name>
+        <label>Loop Through Consultation</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>Get_LPA_Consultant</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Assign_LPA_Consultation_Email</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Email_Builder_Screen</targetReference>
         </noMoreValuesConnector>
     </loops>
     <loops>
@@ -670,6 +709,48 @@
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>Email_Tracking__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_LPA_Consultant</name>
+        <label>Get LPA Consultant</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_Through_Consultation</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Add_Error_Log</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Consultation_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>LPA</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Case__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Contact_Email_Address__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Consultation__c</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Contact_Email_Address__c</queriedFields>
+        <queriedFields>Case_Officers_Email_Address__c</queriedFields>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
@@ -1001,7 +1082,7 @@
             <inputParameters>
                 <name>visualPickerSize</name>
                 <value>
-                    <stringValue>medium</stringValue>
+                    <stringValue>large</stringValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -1206,7 +1287,7 @@
     <textTemplates>
         <name>template_emailBody</name>
         <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;This is a placeholder.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</text>
+        <text>&lt;p&gt;&lt;strong&gt;LPA reference: &lt;/strong&gt;&lt;strong style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!Get_Case.Name_of_LPA__c}&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;I enclose a copy of a consent issued by the Secretary of State to install or keep installed electricity lines above ground. The conditions pertaining to this planning permission, as defined under Section 90(2) of the Town and Country Planning Act, are included within the document.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;If you wish to challenge this decision, you can find details of where to get advice in the final paragraph of the consent letter.&lt;/p&gt;&lt;p&gt;Yours sincerely&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!$User.FirstName} {!$User.LastName}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Energy Infrastructure Planning Team&lt;/p&gt;&lt;p&gt;Do not reply to this email. If you have any questions, please contact the Section 37 Team at &lt;a href=&quot;mailto:s37consents@energysecurity.gov.uk&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;&lt;u&gt;s37consents@energysecurity.gov.uk&lt;/u&gt;&lt;/a&gt;.&lt;/p&gt;</text>
     </textTemplates>
     <variables>
         <name>bool_SelectedPDF</name>
