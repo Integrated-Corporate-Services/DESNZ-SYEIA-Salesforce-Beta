@@ -184,6 +184,29 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assign_LPA_Consultation_Email</name>
+        <label>Assign LPA Consultation Email</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_defaultToAddressValue</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>,</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_defaultToAddressValue</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_Through_Consultation.Contact_Email_Address__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Through_Consultation</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Set_To_Address_Value</name>
         <label>Set To Address Value</label>
         <locationX>0</locationX>
@@ -363,7 +386,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <targetReference>Email_Builder_Screen</targetReference>
+            <targetReference>Get_LPA_Consultant</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Applicant</defaultConnectorLabel>
         <rules>
@@ -371,7 +394,7 @@
             <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>Recipient_Picker.selectedChoiceValues</leftValueReference>
-                <operator>EqualTo</operator>
+                <operator>Contains</operator>
                 <rightValue>
                     <elementReference>Landowner</elementReference>
                 </rightValue>
@@ -383,7 +406,8 @@
         </rules>
     </decisions>
     <description>Send Section 37 Letter
-Email Template</description>
+Email Template
+LPA Email</description>
     <environments>Default</environments>
     <formulas>
         <name>formula_emailSubject_DV</name>
@@ -404,6 +428,20 @@ Email Template</description>
         </nextValueConnector>
         <noMoreValuesConnector>
             <targetReference>Get_Content_Version</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>Loop_Through_Consultation</name>
+        <label>Loop Through Consultation</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>Get_LPA_Consultant</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Assign_LPA_Consultation_Email</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Email_Builder_Screen</targetReference>
         </noMoreValuesConnector>
     </loops>
     <loops>
@@ -671,6 +709,48 @@ Email Template</description>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>Email_Tracking__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_LPA_Consultant</name>
+        <label>Get LPA Consultant</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_Through_Consultation</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Add_Error_Log</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Consultation_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>LPA</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Case__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Contact_Email_Address__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Consultation__c</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Contact_Email_Address__c</queriedFields>
+        <queriedFields>Case_Officers_Email_Address__c</queriedFields>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
@@ -1172,7 +1252,7 @@ Email Template</description>
             <targetReference>Get_Case</targetReference>
         </connector>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <subflows>
         <name>Add_Error_Log</name>
         <label>Add Error Log</label>
