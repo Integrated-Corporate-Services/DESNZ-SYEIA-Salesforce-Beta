@@ -71,7 +71,7 @@
                     <name>actionNames</name>
                     <valueList>
                         <valueListItems>
-                            <value>Case__c.Case_Send_Email</value>
+                            <value>Case__c.Send_NWL_Letter</value>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
