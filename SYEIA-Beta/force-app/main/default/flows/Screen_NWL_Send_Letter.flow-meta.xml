@@ -17,32 +17,22 @@
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>recipientAddresses</name>
-            <value>
-                <collectionElements>
-                    <elementReference>collection_ToAddresses</elementReference>
-                </collectionElements>
-            </value>
+            <value/>
         </inputParameters>
         <inputParameters>
             <name>ccAddresses</name>
-            <value>
-                <collectionElements>
-                    <elementReference>collection_CcAddresses</elementReference>
-                </collectionElements>
-            </value>
+            <value/>
         </inputParameters>
         <inputParameters>
             <name>senderType</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>OrgWideEmailAddress</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>senderAddress</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>claire.rannard2@energysecurity.gov.uk</stringValue>
+                <stringValue>s37consents@energysecurity.gov.uk</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -61,7 +51,6 @@
             <name>emailBody</name>
             <value>
                 <elementReference>EmailComposer.value</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -74,7 +63,6 @@
             <name>attachmentId</name>
             <value>
                 <elementReference>Document_Table.firstSelectedRow.Id</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -84,7 +72,6 @@
             <name>relatedRecordId</name>
             <value>
                 <elementReference>recordId</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -575,6 +562,7 @@
             <label>Landowner</label>
         </rules>
     </decisions>
+    <description>PDF Warning message.</description>
     <environments>Default</environments>
     <formulas>
         <name>formula_emailSubject_DV</name>
@@ -938,7 +926,6 @@
                     </defaultValue>
                     <fieldText>Subject</fieldText>
                     <fieldType>InputField</fieldType>
-                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1028,6 +1015,19 @@
             <fields>
                 <name>Email_Builder_Screen_Section1_Column2</name>
                 <fieldType>Region</fieldType>
+                <fields>
+                    <name>PDF_Warning_Message</name>
+                    <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(250, 8, 8);&quot;&gt;The System will only allow PDF attachments to be sent to the recipient.&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(250, 8, 8);&quot;&gt;Please ensure to convert word document you wish to send over to PDF and Upload it to the case. &lt;/strong&gt;&lt;/p&gt;</fieldText>
+                    <fieldType>DisplayText</fieldType>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
+                </fields>
                 <fields>
                     <name>Document_Table</name>
                     <dataTypeMappings>
