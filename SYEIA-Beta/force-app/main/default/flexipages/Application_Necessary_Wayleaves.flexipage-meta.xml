@@ -133,6 +133,22 @@
                             </visibilityRule>
                         </valueListItems>
                         <valueListItems>
+                            <value>Case__c.Send_NWL_Letter</value>
+                            <visibilityRule>
+                                <booleanFilter>1 OR 2</booleanFilter>
+                                <criteria>
+                                    <leftValue>{!$User.Persona__c}</leftValue>
+                                    <operator>EQUAL</operator>
+                                    <rightValue>Case Officer</rightValue>
+                                </criteria>
+                                <criteria>
+                                    <leftValue>{!$User.Persona__c}</leftValue>
+                                    <operator>EQUAL</operator>
+                                    <rightValue>Decision Manager</rightValue>
+                                </criteria>
+                            </visibilityRule>
+                        </valueListItems>
+                        <valueListItems>
                             <value>Case__c.Reject_Case</value>
                             <visibilityRule>
                                 <booleanFilter>1 OR 2</booleanFilter>
@@ -152,7 +168,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>numVisibleActions</name>
-                    <value>3</value>
+                    <value>5</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>primaryField</name>
