@@ -137,6 +137,7 @@
 		<members>Case__c.Application_Fee_Paid__c</members>
 		<members>Case__c.Application_Statement__c</members>
 		<members>Case__c.Application_Type__c</members>
+		<members>Case__c.Are_There_Any_Other_Related_Applications__c</members>
 		<members>Case__c.CPO_Attached_To_This_Project__c</members>
 		<members>Case__c.CPO_Submitted__c</members>
 		<members>Case__c.Case_Owner__c</members>
@@ -169,6 +170,7 @@
 		<members>Case__c.Description_Of_Overhead_Lines__c</members>
 		<members>Case__c.Description__c</members>
 		<members>Case__c.Details_Of_Access_Storage_Sites__c</members>
+		<members>Case__c.Details_of_All_Related_Application__c</members>
 		<members>Case__c.Details_Of_Equipment_Removal__c</members>
 		<members>Case__c.Details_Of_Excavation_Works__c</members>
 		<members>Case__c.Details_Of_Vegetation_Clearance__c</members>
@@ -219,6 +221,7 @@
 		<members>Case__c.Status__c</members>
 		<members>Case__c.Subject_To_An_EIA__c</members>
 		<members>Case__c.Tallest_Pole_Height__c</members>
+		<members>Case__c.Tallest_installed_pole_metres__c</members>
 		<members>Case__c.Target_Completion_Date__c</members>
 		<members>Case__c.Task_Deadline__c</members>
 		<members>Case__c.Tolerance_Required__c</members>

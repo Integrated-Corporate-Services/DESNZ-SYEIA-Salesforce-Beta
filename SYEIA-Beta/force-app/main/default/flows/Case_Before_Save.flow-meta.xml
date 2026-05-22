@@ -30,6 +30,9 @@
                 <elementReference>$Flow.CurrentDate</elementReference>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>Is_Payment_BACS_and_Paid</targetReference>
+        </connector>
     </assignments>
     <assignments>
         <name>Assign_Decision_Date</name>
@@ -221,6 +224,19 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Update_Date_Fee_Paid</name>
+        <label>Update Date Fee Paid</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Date_of_Fee_Paid__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
         <name>Update_Traget_Completion_Date</name>
         <label>Update Traget Completion Date</label>
         <locationX>0</locationX>
@@ -248,6 +264,9 @@
         <label>Case Status Changed to Submit for Approval</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Is_Payment_BACS_and_Paid</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Status_Changed_to_Submit_for_Approval</name>
@@ -566,6 +585,56 @@
                 <targetReference>Assign_Mapping_Owner</targetReference>
             </connector>
             <label>Yes Mapping Owner is blank</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Is_Payment_BACS_and_Paid</name>
+        <label>Is Payment BACS and Paid</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>BACS_and_Paid</name>
+            <conditionLogic>(1 OR 5 ) AND 2 AND 3 AND 4 AND 5</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_IsNew</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Payment_Method__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>BACS</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Date_of_Fee_Paid__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Application_Fee_Paid__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Yes</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Application_Fee_Paid__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Date_Fee_Paid</targetReference>
+            </connector>
+            <label>BACS and Paid</label>
         </rules>
     </decisions>
     <decisions>

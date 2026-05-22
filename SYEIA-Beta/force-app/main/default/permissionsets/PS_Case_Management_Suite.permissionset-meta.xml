@@ -122,6 +122,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Case__c.Asset_Information__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case__c.Are_There_Any_Other_Related_Applications__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Case__c.CPO_Attached_To_This_Project__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -228,6 +238,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Case__c.Details_Of_Access_Storage_Sites__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case__c.Details_of_All_Related_Application__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -483,6 +498,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Case__c.Tallest_Pole_Height__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case__c.Tallest_installed_pole_metres__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
