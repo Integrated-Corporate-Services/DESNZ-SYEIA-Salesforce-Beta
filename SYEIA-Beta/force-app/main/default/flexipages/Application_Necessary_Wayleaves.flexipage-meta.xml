@@ -123,6 +123,16 @@
                             </visibilityRule>
                         </valueListItems>
                         <valueListItems>
+                            <value>Case__c.Generate_Document</value>
+                            <visibilityRule>
+                                <criteria>
+                                    <leftValue>{!Record.Status__c}</leftValue>
+                                    <operator>EQUAL</operator>
+                                    <rightValue>In-Progress</rightValue>
+                                </criteria>
+                            </visibilityRule>
+                        </valueListItems>
+                        <valueListItems>
                             <value>ChangeOwnerOne</value>
                             <visibilityRule>
                                 <criteria>
