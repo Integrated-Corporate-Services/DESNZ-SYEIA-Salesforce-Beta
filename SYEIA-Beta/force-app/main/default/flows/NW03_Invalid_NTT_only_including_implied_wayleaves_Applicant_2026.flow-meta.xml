@@ -463,6 +463,22 @@
     <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
+        <name>Assign_App_Email</name>
+        <label>Assign_App_Email</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_Applicant_Contact_Email</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Applicant_Contact_Email.value</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Generate_Document</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Bypass_Approval</name>
         <label>Bypass Approval?</label>
         <locationX>0</locationX>
@@ -511,6 +527,11 @@
     </decisions>
     <description>Screen - DocGen - NW03. Invalid - NTT only (including implied wayleaves) - Applicant (2026)</description>
     <environments>Default</environments>
+    <formulas>
+        <name>formula_Applicant_Default_Email</name>
+        <dataType>String</dataType>
+        <expression>{!Get_Case_Using_recordId.DNO__r.Representative__r.Email__c}</expression>
+    </formulas>
     <formulas>
         <name>formula_CurrentDate</name>
         <dataType>String</dataType>
@@ -562,7 +583,7 @@ TEXT(YEAR(TODAY()))</expression>
 &apos;&quot;Applicant_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Applicant_Reference__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;DNO_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Name} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;App_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Representative__r.Name} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;App_Email&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Representative__r.Email__c} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;App_Email&quot;: &quot;&apos; &amp; {!var_Applicant_Contact_Email} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;DNO_Address_Line1&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line1__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;DNO_Address_Line2&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line_2__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;DNO_Address_TownCity&quot;: &quot;&apos; &amp; {!Get_Address.Town_City__c} &amp; &apos;&quot;, &apos; &amp;
@@ -763,7 +784,7 @@ TEXT(YEAR(TODAY()))</expression>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Generate_Document</targetReference>
+            <targetReference>Assign_App_Email</targetReference>
         </connector>
         <fields>
             <name>ReasonSectionDisplayText</name>
@@ -786,6 +807,40 @@ TEXT(YEAR(TODAY()))</expression>
                 <name>label</name>
                 <value>
                     <stringValue>Sent by email</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Applicant_Contact_Email</name>
+            <extensionName>flowruntime:email</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Applicant Contact Email</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>value</name>
+                <value>
+                    <elementReference>var_Applicant_Contact_Email</elementReference>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -884,6 +939,16 @@ TEXT(YEAR(TODAY()))</expression>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>var_Applicant_Contact_Email</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <elementReference>formula_Applicant_Default_Email</elementReference>
+        </value>
     </variables>
     <variables>
         <name>var_CanBypassApproval</name>
