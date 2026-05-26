@@ -538,8 +538,10 @@
 		<members>Consultation_Before_Save</members>
 		<members>Document_Approval_Request_After_Save</members>
 		<members>Further_Information_Requested_Before_Save</members>
+		<members>NW03_Invalid_NTT_only_including_implied_wayleaves_Applicant_2026</memebrs>
 		<members>Party_Before_Save</members>
 		<members>Payment_After_Save</members>
+		<members>Screen_DocGen_NW02_Invalid_Unclear_NTR_LO</members>
 		<members>Screen_DocGen_S37_Consent_Letter</members>
 		<members>Screen_DocGen_S37_Screening_Decision_Letter</members>
 		<members>Screen_Document_Library</members>
