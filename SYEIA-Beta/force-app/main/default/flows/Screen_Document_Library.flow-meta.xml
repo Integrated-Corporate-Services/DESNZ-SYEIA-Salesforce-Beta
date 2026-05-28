@@ -72,7 +72,7 @@
     </choices>
     <choices>
         <name>choice_NW03_Invalid_NTT_Only_Applicant</name>
-        <choiceText>&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;NW03. Invalid - NTT only (including implied wayleaves) - Applicant&lt;/span&gt;</choiceText>
+        <choiceText>NW03. Invalid - NTT only (including implied wayleaves) - Applicant</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>NW03. Invalid - NTT only (including implied wayleaves) - Applicant</stringValue>
@@ -82,6 +82,9 @@
         <name>choice_NW03_Invalid_NTT_Only_Land_Owner</name>
         <choiceText>NW03. Invalid - NTT only (including implied wayleaves) - LO</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW03. Invalid - NTT only (including implied wayleaves) - LO</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW04_Invalid_New_Lines_Applicant</name>
@@ -340,6 +343,21 @@
             </connector>
             <label>NW03. Invalid - NTT only (including implied wayleaves) - Applicant</label>
         </rules>
+        <rules>
+            <name>NW03_Invalid_NTT_only_including_implied_wayleaves_LO</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW03. Invalid - NTT only (including implied wayleaves) - LO</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW_Invalid_NTT_only_including_implied_wayleaves_LO</targetReference>
+            </connector>
+            <label>NW03. Invalid - NTT only (including implied wayleaves) - LO</label>
+        </rules>
     </decisions>
     <decisions>
         <name>S37_Document_Choice</name>
@@ -592,6 +610,19 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <flowName>NW03_Invalid_NTT_only_including_implied_wayleaves_Applicant_2026</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW_Invalid_NTT_only_including_implied_wayleaves_LO</name>
+        <label>NW Invalid - NTT only (including implied wayleaves) - LO</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>NW_Invalid_NTT_only_including_implied_wayleaves_LO</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>
