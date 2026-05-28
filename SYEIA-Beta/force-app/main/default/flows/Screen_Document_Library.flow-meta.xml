@@ -58,6 +58,9 @@
         <name>choice_NW02_Invalid_Unclear_NTR_Applicant</name>
         <choiceText>NW02. Invalid - Unclear NTR - Applicant</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW02. Invalid - Unclear NTR - Applicant</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW02_Invalid_Unclear_NTR_Land_Owner</name>
@@ -302,6 +305,9 @@
                     <elementReference>choice_NW02_Invalid_Unclear_NTR_Applicant</elementReference>
                 </rightValue>
             </conditions>
+            <connector>
+                <targetReference>Screen_DocGen_NW02_Invalid_Unclear_NTR_Applicant</targetReference>
+            </connector>
             <label>NW02 Invalid Unclear NTR - Applicant</label>
         </rules>
         <rules>
@@ -586,6 +592,19 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <flowName>NW03_Invalid_NTT_only_including_implied_wayleaves_Applicant_2026</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>Screen_DocGen_NW02_Invalid_Unclear_NTR_Applicant</name>
+        <label>Screen - DocGen - NW02. Invalid - Unclear NTR - Applicant</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW02_Invalid_Unclear_NTR_Applicant</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>
