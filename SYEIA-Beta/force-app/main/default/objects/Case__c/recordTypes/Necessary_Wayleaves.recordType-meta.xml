@@ -618,7 +618,15 @@
     <picklistValues>
         <picklist>Status__c</picklist>
         <values>
-            <fullName>Acknowledged</fullName>
+            <fullName>Application Received</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Archived</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Decision Issued</fullName>
             <default>false</default>
         </values>
         <values>
@@ -626,7 +634,19 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Rejected</fullName>
+            <fullName>Post Decision</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Representation Stage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Submitted for Approval</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Under Review</fullName>
             <default>false</default>
         </values>
         <values>

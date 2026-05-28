@@ -19,7 +19,13 @@
 		<members>DocGen_DocumentGenerationWrapper</members>
 		<members>DocGen_DocumentGenerationWrapperTest</members>
 		<members>DynamicPathController</members>
-		<members>DynamicPathControllerTest</members> 
+		<members>DynamicPathControllerTest</members>
+		<members>GovUKNotifyInvocable</members>
+		<members>GovUKNotifyInvocableTest</members>
+		<members>GovUKNotifyService</members>
+		<members>GovUKNotifyServiceTest</members>
+		<members>GovUKNotify_JWTGenerator</members>
+		<members>GovUKNotify_JWTGeneratorTest</members>
 		<members>FileController</members>
 		<members>JWTGenerator</members>
 		<members>JWTGeneratorTest</members>
@@ -122,6 +128,7 @@
 		<members>Case__c.Actual_Completed_Date_Time__c</members>
 		<members>Case__c.Adding_or_Replacing_Any_Overhead_Lines__c</members>
 		<members>Case__c.Adding_or_Replacing_Any_Poles__c</members>
+		<members>Case__c.Additional_Fee_Paid_Post_Submission__c</members>
 		<members>Case__c.Additional_Info_Requested_From_DNO__c</members>
 		<members>Case__c.Any_Chemical_Treatments_Proposed__c</members>
 		<members>Case__c.Applicant_Name_Formula__c</members>
@@ -130,6 +137,7 @@
 		<members>Case__c.Application_Fee_Paid__c</members>
 		<members>Case__c.Application_Statement__c</members>
 		<members>Case__c.Application_Type__c</members>
+		<members>Case__c.Are_There_Any_Other_Related_Applications__c</members>
 		<members>Case__c.CPO_Attached_To_This_Project__c</members>
 		<members>Case__c.CPO_Submitted__c</members>
 		<members>Case__c.Case_Owner__c</members>
@@ -143,6 +151,7 @@
 		<members>Case__c.Counter_Notice_Issue_Date__c</members>
 		<members>Case__c.County__c</members>
 		<members>Case__c.Current_Landowner_Signed_Wayleave__c</members>
+		<members>Case__c.Date_Case_Sent_For_Approval__c</members>
 		<members>Case__c.Decision_Date__c</members>
 		<members>Case__c.DNO_Name__c</members>
 		<members>Case__c.DNO__c</members>
@@ -154,12 +163,14 @@
 		<members>Case__c.Date_of_Fee_Paid__c</members>
 		<members>Case__c.Date_of_MoD_Response__c</members>
 		<members>Case__c.Date_of_Screening_Fee_Paid__c</members>
+		<members>Case__c.Date_Letter_s_sent_to_Applicant__c</members>
 		<members>Case__c.Days_Ahead_Behind_Target__c</members>
 		<members>Case__c.Decision_Deadline_Display__c</members>
 		<members>Case__c.Decision_Deadline_Formula__c</members>
 		<members>Case__c.Description_Of_Overhead_Lines__c</members>
 		<members>Case__c.Description__c</members>
 		<members>Case__c.Details_Of_Access_Storage_Sites__c</members>
+		<members>Case__c.Details_of_All_Related_Application__c</members>
 		<members>Case__c.Details_Of_Equipment_Removal__c</members>
 		<members>Case__c.Details_Of_Excavation_Works__c</members>
 		<members>Case__c.Details_Of_Vegetation_Clearance__c</members>
@@ -210,6 +221,7 @@
 		<members>Case__c.Status__c</members>
 		<members>Case__c.Subject_To_An_EIA__c</members>
 		<members>Case__c.Tallest_Pole_Height__c</members>
+		<members>Case__c.Tallest_installed_pole_metres__c</members>
 		<members>Case__c.Target_Completion_Date__c</members>
 		<members>Case__c.Task_Deadline__c</members>
 		<members>Case__c.Tolerance_Required__c</members>
@@ -275,6 +287,7 @@
 		<members>Email_Tracking__c.Document_Type__c</members>
 		<members>Email_Tracking__c.Email_Unique_Key__c</members>
 		<members>Email_Tracking__c.Recipient_Email__c</members>
+		<members>Email_Tracking__c.Recipient_Email_Addresses__c</members>
 		<members>Email_Tracking__c.Recipient_Type__c</members>
 		<members>Email_Tracking__c.Sent_By__c</members>
 		<members>Email_Tracking__c.Sent_Date_Time__c</members>
@@ -319,6 +332,7 @@
 		<members>Parish__c.Parish_Code__c</members>
 		<members>Parish__c.Parish_Name__c</members>
 		<members>Party__c.Application_Party_Id__c</members>
+		<members>Party__c.Additional_Contact_Email_Addresses__c</members>
 		<members>Party__c.Case__c</members>
 		<members>Party__c.Email__c</members>
 		<members>Party__c.First_Name__c</members>
@@ -524,13 +538,16 @@
 		<members>Consultation_Before_Save</members>
 		<members>Document_Approval_Request_After_Save</members>
 		<members>Further_Information_Requested_Before_Save</members>
+		<members>NW03_Invalid_NTT_only_including_implied_wayleaves_Applicant_2026</members>
 		<members>Party_Before_Save</members>
-		<members>Schedule_Further_Information_Requested_Reminder</members>
+		<members>Payment_After_Save</members>
+		<members>Screen_DocGen_NW02_Invalid_Unclear_NTR_LO</members>
 		<members>Screen_DocGen_S37_Consent_Letter</members>
 		<members>Screen_DocGen_S37_Screening_Decision_Letter</members>
 		<members>Screen_Document_Library</members>
 		<members>Screen_Reject_Case_Flow</members>
 		<members>Screen_Withdrawal_Request_Process_Guide</members>
+		<members>Subflow_Add_Log</members>
 		<members>Subflow_Create_Withdrawal_Request</members>
 		<members>Subflow_File_Approval_Process_Next_Steps</members>
 		<members>Subflow_Notify_Approvers_About_New_Request</members>
@@ -616,7 +633,6 @@
 	<types>
 		<members>Admin</members>
 		<members>Base Employee</members>
-		<members>Decision Manager</members>
 		<name>Profile</name>
 	</types>
 	<types>
