@@ -111,9 +111,6 @@ public class InboundForm_S37Handler implements InboundForm_Processor.IFormHandle
             // Set Case Type
             caseRecord.Case_Type__c = 'Section 37';
             
-            // Set fee status
-            caseRecord.Application_Fee_Paid__c = 'Yes';
-            
             // Initialize email sent flag
             caseRecord.Overdue_Email_Sent__c = false;
             
