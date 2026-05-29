@@ -562,7 +562,8 @@
             <label>Landowner</label>
         </rules>
     </decisions>
-    <description>PDF Warning message.</description>
+    <description>PDF Warning message.
+Limit Attachements</description>
     <environments>Default</environments>
     <formulas>
         <name>formula_emailSubject_DV</name>
@@ -810,7 +811,12 @@
             </value>
         </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
+        <limit>
+            <numberValue>30.0</numberValue>
+        </limit>
         <object>ContentVersion</object>
+        <sortField>CreatedDate</sortField>
+        <sortOrder>Desc</sortOrder>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
@@ -1318,7 +1324,7 @@
         <allowPause>false</allowPause>
         <fields>
             <name>DisplayText_Non_PDF_File_Selected</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;color: rgb(33, 110, 78); background-color: rgba(5, 21, 36, 0.06); font-size: 14px;&quot;&gt;Only PDF files are permitted as attachments for outgoing emails; any file intended for sending must be uploaded in PDF format&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 14px; background-color: rgba(5, 21, 36, 0.06); color: rgb(247, 6, 2);&quot;&gt;Only PDF files are permitted as attachments for outgoing emails; any file intended for sending must be uploaded in PDF format&lt;/strong&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -1369,7 +1375,7 @@
             <targetReference>Get_Case</targetReference>
         </connector>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <subflows>
         <name>Add_Error_Log</name>
         <label>Add Error Log</label>

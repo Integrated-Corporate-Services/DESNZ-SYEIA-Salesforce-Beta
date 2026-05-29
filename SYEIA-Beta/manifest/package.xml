@@ -302,6 +302,8 @@
 		<members>Further_Information_Requested__c.Type_of_Information_Requested__c</members>
 		<members>Further_Information_Requested__c.Reminder_Sent__c</members>
 		<members>Further_Information_Requested__c.Reminders_Sent_Count__c</members>
+		<members>Further_Information_Requested__c.FIR_to_Applicant_or_Landowner__c</members>
+		<members>Further_Information_Requested__c.Further_Information_Exchange_Letter_Date__c</members>
 		<members>GOV_UK_Notify_Config__mdt.Issuer_UUID__c</members>
 		<members>GOV_UK_Notify_Config__mdt.Secret_Key__c</members>
 		<members>Inbound_Request__c.Error_Log_Text__c</members>

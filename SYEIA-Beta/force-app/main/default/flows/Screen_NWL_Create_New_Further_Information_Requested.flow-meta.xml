@@ -65,21 +65,31 @@
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>recipientAddresses</name>
-            <value/>
+            <value>
+                <collectionElements>
+                    <elementReference>varApplicantEmail</elementReference>
+                </collectionElements>
+            </value>
         </inputParameters>
         <inputParameters>
             <name>ccAddresses</name>
-            <value/>
+            <value>
+                <collectionElements>
+                    <elementReference>varAdditionalContactEmailAddress</elementReference>
+                </collectionElements>
+            </value>
         </inputParameters>
         <inputParameters>
             <name>senderType</name>
             <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>OrgWideEmailAddress</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>senderAddress</name>
             <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>s37consents@energysecurity.gov.uk</stringValue>
             </value>
         </inputParameters>
@@ -98,6 +108,7 @@
         <inputParameters>
             <name>emailBody</name>
             <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>&lt;p&gt;{!Email_Body.value}&lt;/p&gt;</stringValue>
             </value>
         </inputParameters>
@@ -126,6 +137,7 @@
             <name>relatedRecordId</name>
             <value>
                 <elementReference>varCaseRecordId</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -255,10 +267,10 @@
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>varFIR_Record.Type_of_Information_Requested__c</assignToReference>
+            <assignToReference>varFIR_Record.FIR_to_Applicant_or_Landowner__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Type_of_Information_Requested</elementReference>
+                <elementReference>FIR_to_Applicant_or_Landowner</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -422,15 +434,12 @@
             <label>Email Already Exists Or Blank</label>
         </rules>
     </decisions>
-    <description>Further Information Requested, applicant. Email Tracking
-Additional Contact Email Address
-Type Of Information Requested</description>
     <dynamicChoiceSets>
-        <name>varTypeOfPicklist</name>
+        <name>varFIRToApplicantOrLandowner</name>
         <dataType>Picklist</dataType>
         <displayField xsi:nil="true"/>
         <object xsi:nil="true"/>
-        <picklistField>Type_of_Information_Requested__c</picklistField>
+        <picklistField>FIR_to_Applicant_or_Landowner__c</picklistField>
         <picklistObject>Further_Information_Requested__c</picklistObject>
     </dynamicChoiceSets>
     <environments>Default</environments>
@@ -444,8 +453,8 @@ Type Of Information Requested</description>
         <dataType>String</dataType>
         <expression>&quot;Further information request &quot; &amp;TEXT( {!varCountFIR}) &amp; &quot; for application &quot; &amp; {!Get_Case_Record.Name}</expression>
     </formulas>
-    <interviewLabel>Screen - Create New Further Information Requested {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Screen - Create New Further Information Requested</label>
+    <interviewLabel>Screen - NWL - Create New Further Information Requested {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Screen - NWL - Create New Further Information Requested</label>
     <loops>
         <name>Loop_Applicant_Emails</name>
         <label>Loop Applicant Emails</label>
@@ -706,7 +715,7 @@ Type Of Information Requested</description>
                 <fieldType>Region</fieldType>
                 <fields>
                     <name>RequestInformation</name>
-                    <fieldText>&lt;h1 style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(24, 24, 24); font-size: 13px;&quot;&gt;Request Further Information From Applicant&lt;/strong&gt;&lt;/h1&gt;</fieldText>
+                    <fieldText>&lt;h1 style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 13px; color: rgb(24, 24, 24);&quot;&gt;Request Further Information From Applicant or Landowner&lt;/strong&gt;&lt;/h1&gt;</fieldText>
                     <fieldType>DisplayText</fieldType>
                     <styleProperties>
                         <verticalAlignment>
@@ -725,11 +734,12 @@ Type Of Information Requested</description>
                     </visibilityRule>
                 </fields>
                 <fields>
-                    <name>Type_of_Information_Requested</name>
-                    <choiceReferences>varTypeOfPicklist</choiceReferences>
+                    <name>FIR_to_Applicant_or_Landowner</name>
+                    <choiceReferences>varFIRToApplicantOrLandowner</choiceReferences>
                     <dataType>String</dataType>
-                    <fieldText>Type of Information Requested</fieldText>
+                    <fieldText>FIR to Applicant or Landowner</fieldText>
                     <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -744,6 +754,7 @@ Type Of Information Requested</description>
                     <name>InformationRequiredFromApplicant</name>
                     <fieldText>Information Required from Applicant</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -759,6 +770,7 @@ Type Of Information Requested</description>
                     <dataType>Date</dataType>
                     <fieldText>Further Information Requested Deadline</fieldText>
                     <fieldType>InputField</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -788,7 +800,7 @@ Type Of Information Requested</description>
                 </width>
             </styleProperties>
         </fields>
-        <nextOrFinishButtonLabel>Request Information From Applicant</nextOrFinishButtonLabel>
+        <nextOrFinishButtonLabel>Request Information</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
     </screens>
@@ -819,6 +831,7 @@ Type Of Information Requested</description>
                     </defaultValue>
                     <fieldText>Subject</fieldText>
                     <fieldType>InputField</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isReadOnly>
                         <booleanValue>true</booleanValue>
                     </isReadOnly>
@@ -841,6 +854,7 @@ Type Of Information Requested</description>
                     <fieldText>To Address</fieldText>
                     <fieldType>InputField</fieldType>
                     <helpText>&lt;p&gt;Emails come from the Company email and the applicant email.&lt;/p&gt;</helpText>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -860,6 +874,7 @@ Type Of Information Requested</description>
                     <fieldText>CC Address</fieldText>
                     <fieldType>InputField</fieldType>
                     <helpText>&lt;p&gt;You can add additional email addresses by separating them with commas.&lt;/p&gt;</helpText>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -983,13 +998,13 @@ Type Of Information Requested</description>
             <inputParameters>
                 <name>readOnly</name>
                 <value>
-                    <booleanValue>true</booleanValue>
+                    <booleanValue>false</booleanValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>disableAdvancedTools</name>
                 <value>
-                    <booleanValue>true</booleanValue>
+                    <booleanValue>false</booleanValue>
                 </value>
             </inputParameters>
             <inputParameters>
