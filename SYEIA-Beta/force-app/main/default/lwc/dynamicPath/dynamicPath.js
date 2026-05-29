@@ -34,6 +34,7 @@ export default class DynamicPath extends LightningElement {
         getHideStatuses()
             .then(data => {
                 this.hideStatuses = data;
+                this.checkButtonVisibility();
             })
             .catch(error => {
                 console.error(error);

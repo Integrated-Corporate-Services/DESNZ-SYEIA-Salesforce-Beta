@@ -3,5 +3,18 @@
     <description>Allows the user to access Decision Manager actions.</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>PSG - Decision Manager</label>
+    <permissionSets>PS_AWS_API_Integration</permissionSets>
+    <permissionSets>PS_Bypass_DocGen_Approval</permissionSets>
+    <permissionSets>PS_Case_Create_Edit</permissionSets>
+    <permissionSets>PS_Case_Delete</permissionSets>
+    <permissionSets>PS_Case_Management_Suite</permissionSets>
+    <permissionSets>PS_Case_Manual_Share</permissionSets>
+    <permissionSets>PS_Case_Read</permissionSets>
+    <permissionSets>PS_Case_Reassign</permissionSets>
+    <permissionSets>PS_Document_Approve</permissionSets>
+    <permissionSets>PS_Document_Generation</permissionSets>
+    <permissionSets>PS_Gov_UK_Notify</permissionSets>
+    <permissionSets>PS_Read_Write_Locked_Case_Notes</permissionSets>
+    <permissionSets>PS_Withdraw_Case</permissionSets>
     <status>Updated</status>
 </PermissionSetGroup>

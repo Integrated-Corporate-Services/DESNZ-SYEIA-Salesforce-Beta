@@ -48,13 +48,13 @@
     <apiVersion>66.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <decisions>
-        <name>Decision_Date_Plus_90_Days_Check</name>
-        <label>Decision Date Plus 90 Days Check</label>
+        <name>The_91_Days_Check</name>
+        <label>The 91 Days Check</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
-            <name>Yes</name>
+            <name>Decision_Issued</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>$Record.Status__c</leftValueReference>
@@ -67,20 +67,61 @@
                 <leftValueReference>$Flow.CurrentDate</leftValueReference>
                 <operator>GreaterThanOrEqualTo</operator>
                 <rightValue>
-                    <elementReference>DecisionDatePlus90Days</elementReference>
+                    <elementReference>DecisionDatePlus91Days</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Decision Issued</stringValue>
                 </rightValue>
             </conditions>
             <connector>
                 <targetReference>Update_Case_Decision_Date</targetReference>
             </connector>
-            <label>Yes</label>
+            <label>Decision Issued</label>
+        </rules>
+        <rules>
+            <name>Withdrawal_Issued</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Archived</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Withdrawn</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Flow.CurrentDate</leftValueReference>
+                <operator>GreaterThanOrEqualTo</operator>
+                <rightValue>
+                    <elementReference>WithdrawlDatePlus91Days</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Case_Decision_Date</targetReference>
+            </connector>
+            <label>Withdrawal Issued</label>
         </rules>
     </decisions>
     <environments>Default</environments>
     <formulas>
-        <name>DecisionDatePlus90Days</name>
+        <name>DecisionDatePlus91Days</name>
         <dataType>Date</dataType>
-        <expression>{!$Record.Decision_Date__c} + 90</expression>
+        <expression>{!$Record.Decision_Date__c} + 91</expression>
+    </formulas>
+    <formulas>
+        <name>WithdrawlDatePlus91Days</name>
+        <dataType>Date</dataType>
+        <expression>DATEVALUE({!$Record.Withdrawal_Date_Time__c} ) + 91</expression>
     </formulas>
     <interviewLabel>Update the application status to Archived {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Update the application status to Archived</label>
@@ -123,9 +164,30 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Decision_Date_Plus_90_Days_Check</targetReference>
+            <targetReference>The_91_Days_Check</targetReference>
         </connector>
-        <filterLogic>and</filterLogic>
+        <filterLogic>(1 AND 2) OR (3 AND 4)</filterLogic>
+        <filters>
+            <field>Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Withdrawn</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Withdrawal_Date_Time__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Decision Issued</stringValue>
+            </value>
+        </filters>
         <filters>
             <field>Decision_Date__c</field>
             <operator>IsNull</operator>

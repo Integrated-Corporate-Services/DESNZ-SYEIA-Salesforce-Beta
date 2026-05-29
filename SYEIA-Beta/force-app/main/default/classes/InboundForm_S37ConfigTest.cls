@@ -351,4 +351,23 @@ private class InboundForm_S37ConfigTest {
             'parishes target object should be Parish__c');
         Test.stopTest();
     }
+    
+    @IsTest
+    static void testGetConfig_SensitiveAreaLayerCollection() {
+        InboundForm_MappingConfig.FormTypeConfig config = InboundForm_S37Config.getConfig();
+        
+        InboundForm_MappingConfig.CollectionConfig saclConfig = null;
+        for (InboundForm_MappingConfig.CollectionConfig coll : config.collections) {
+            if (coll.collectionName == 'sensitiveAreaReviewsSelected') {
+                saclConfig = coll;
+                break;
+            }
+        }
+        Test.startTest();
+        Assert.isNotNull(saclConfig, 'SensitiveAreaReviewSelected collection should exist');
+        Assert.areEqual('Sensitive_Area_Review__c', saclConfig.targetObject, 
+            'parishes target object should be Sensitive_Area_Review__c');
+        Test.stopTest();
+    }
+    
 }

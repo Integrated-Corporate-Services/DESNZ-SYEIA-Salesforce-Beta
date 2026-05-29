@@ -639,7 +639,7 @@
             <field>Status__c</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Acknowledged</stringValue>
+                <stringValue>Application Received</stringValue>
             </value>
         </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
@@ -657,9 +657,6 @@
             <frequency>Daily</frequency>
             <frequencyNumber>0</frequencyNumber>
             <startDate>2026-02-20</startDate>
-            <!-- NOTE: startTime is intentionally specified in UTC. This flow runs at 08:00 UTC,
-                 which may not correspond to 08:00 in the org/users' local timezone and will
-                 shift relative to local time across DST. -->
             <startTime>08:00:00.000Z</startTime>
         </schedule>
         <triggerType>Scheduled</triggerType>

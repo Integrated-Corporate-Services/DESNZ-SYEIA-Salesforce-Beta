@@ -26,7 +26,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Subflow_File_Approval_Process_Next_Steps</targetReference>
+                <targetReference>Update_Case_Status_to_Decision_Issued</targetReference>
             </connector>
             <label>Changed to Approved</label>
         </rules>
@@ -47,6 +47,9 @@
                     <stringValue>Rejected</stringValue>
                 </rightValue>
             </conditions>
+            <connector>
+                <targetReference>Update_Case_Status_to_Prior_status_to_Submit_Approval</targetReference>
+            </connector>
             <label>Changed to Rejected</label>
         </rules>
         <rules>
@@ -67,7 +70,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Subflow_Notify_Approvers_About_New_Request</targetReference>
+                <targetReference>Update_Case_Status_to_Submit_Approval</targetReference>
             </connector>
             <label>Changed to Pending</label>
         </rules>
@@ -94,6 +97,51 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Update_Case_Status_to_Decision_Issued</name>
+        <label>Update Case Status to Decision Issued</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Subflow_File_Approval_Process_Next_Steps</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>Decision Issued</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.Case__r</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Case_Status_to_Prior_status_to_Submit_Approval</name>
+        <label>Update Case Status to Prior status to Submit Approval</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <elementReference>$Record.Case__r.Prior_Application_Status__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.Case__r</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Case_Status_to_Submit_Approval</name>
+        <label>Update Case Status to Submit Approval</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Subflow_Notify_Approvers_About_New_Request</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>Submitted for Approval</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.Case__r</inputReference>
+    </recordUpdates>
     <start>
         <locationX>0</locationX>
         <locationY>0</locationY>

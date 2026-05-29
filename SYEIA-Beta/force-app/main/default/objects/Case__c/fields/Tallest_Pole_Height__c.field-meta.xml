@@ -4,7 +4,7 @@
     <description>What is the height of the tallest proposed pole?</description>
     <externalId>false</externalId>
     <inlineHelpText>What is the height of the tallest proposed pole?</inlineHelpText>
-    <label>Tallest Pole Height (Metres)</label>
+    <label>Tallest existing pole (metres)</label>
     <precision>18</precision>
     <required>false</required>
     <scale>2</scale>

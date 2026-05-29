@@ -12,8 +12,5 @@
         <value>Necessary Wayleaves</value>
     </filters>
     <label>New Cases</label>
-    <queue>New_Cases_S37</queue>
-    <sharedTo>
-        <allInternalUsers></allInternalUsers>
-    </sharedTo>
+    <queue>New_Cases</queue>
 </ListView>

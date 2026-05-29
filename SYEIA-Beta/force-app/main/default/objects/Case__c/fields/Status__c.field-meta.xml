@@ -2,20 +2,14 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Status__c</fullName>
     <description>Defines the status of Application for the record, this value determines the progress of the path. Values are dependant on record type.</description>
-    <label>Status</label>
+    <label>Case Status</label>
     <required>false</required>
-    <trackHistory>false</trackHistory>
+    <trackHistory>true</trackHistory>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
-        <controllingField>Application_Journey_Status__c</controllingField>
         <valueSetDefinition>
             <sorted>false</sorted>
-            <value>
-                <fullName>Acknowledged</fullName>
-                <default>false</default>
-                <label>Acknowledged</label>
-            </value>
             <value>
                 <fullName>Application Received</fullName>
                 <default>false</default>
@@ -27,29 +21,19 @@
                 <label>Under Review</label>
             </value>
             <value>
-                <fullName>In Review</fullName>
-                <default>false</default>
-                <label>In Review</label>
-            </value>
-            <value>
-                <fullName>Further Information Requested</fullName>
-                <default>false</default>
-                <label>Further Information Requested</label>
-            </value>
-            <value>
                 <fullName>In-Progress</fullName>
                 <default>false</default>
                 <label>In-Progress</label>
             </value>
             <value>
-                <fullName>In Abeyance</fullName>
-                <default>false</default>
-                <label>In Abeyance</label>
-            </value>
-            <value>
                 <fullName>Representation Stage</fullName>
                 <default>false</default>
                 <label>Representation Stage</label>
+            </value>
+            <value>
+                <fullName>Further Information Requested</fullName>
+                <default>false</default>
+                <label>Further Information Requested</label>
             </value>
             <value>
                 <fullName>Submitted for Approval</fullName>
@@ -77,29 +61,9 @@
                 <label>Withdrawn</label>
             </value>
             <value>
-                <fullName>Invalid</fullName>
-                <default>false</default>
-                <label>Invalid</label>
-            </value>
-            <value>
-                <fullName>Consultation</fullName>
-                <default>false</default>
-                <label>Consultation</label>
-            </value>
-            <value>
-                <fullName>Requested More Information</fullName>
-                <default>false</default>
-                <label>Requested More Information</label>
-            </value>
-            <value>
                 <fullName>Rejected</fullName>
                 <default>false</default>
                 <label>Rejected</label>
-            </value>
-            <value>
-                <fullName>Completed</fullName>
-                <default>false</default>
-                <label>Completed</label>
             </value>
             <value>
                 <fullName>Archived</fullName>
@@ -107,45 +71,5 @@
                 <label>Archived</label>
             </value>
         </valueSetDefinition>
-        <valueSettings>
-            <controllingFieldValue>Happy Path</controllingFieldValue>
-            <valueName>In-Progress</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Happy Path</controllingFieldValue>
-            <valueName>Consultation</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Happy Path</controllingFieldValue>
-            <valueName>Completed</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Edge Case Path</controllingFieldValue>
-            <valueName>Further Information Requested</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Edge Case Path</controllingFieldValue>
-            <valueName>Post Decision</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Edge Case Path</controllingFieldValue>
-            <valueName>Withdrawal Requested</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Edge Case Path</controllingFieldValue>
-            <valueName>Withdrawn</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Edge Case Path</controllingFieldValue>
-            <valueName>Requested More Information</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Edge Case Path</controllingFieldValue>
-            <valueName>Rejected</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Edge Case Path</controllingFieldValue>
-            <valueName>Archived</valueName>
-        </valueSettings>
     </valueSet>
 </CustomField>

@@ -328,6 +328,12 @@ Add Nebula Logger</description>
                 <stringValue>Withdrawn</stringValue>
             </value>
         </inputAssignments>
+        <inputAssignments>
+            <field>Withdrawal_Date_Time__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
         <object>Case__c</object>
     </recordUpdates>
     <recordUpdates>

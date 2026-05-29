@@ -330,11 +330,74 @@
             <label>Approval Requested</label>
         </rules>
     </decisions>
+    <description>Sensitive Area Check Point 2 and 3
+Warning Message</description>
     <environments>Default</environments>
     <formulas>
         <name>form_SAR_Names</name>
         <dataType>String</dataType>
         <expression>&quot;( • ) &quot; &amp; {!Transform_SAR_Name} &amp; BR()</expression>
+    </formulas>
+    <formulas>
+        <name>form_Sensitive_Area_Check_Point2</name>
+        <dataType>String</dataType>
+        <expression>IF(
+    AND(
+        NOT(ISBLANK({!varListSAR_Names})),
+        NOT(
+            OR(
+                ISPICKVAL({!Get_Asset_Using_reordId.Line_Voltage__c}, &quot;132kV&quot;),
+                ISPICKVAL({!Get_Asset_Using_reordId.Line_Voltage__c}, &quot;275kV&quot;),
+                ISPICKVAL({!Get_Asset_Using_reordId.Line_Voltage__c}, &quot;400kV&quot;)
+            )
+        )
+    ),
+    &quot;The proposed development falls under Schedule 2 of the 2017 Regulations as the electricity line is to be installed above ground in a sensitive area.&quot;,
+
+    IF(
+        AND(
+            NOT(ISBLANK({!varListSAR_Names})),
+            OR(
+                ISPICKVAL({!Get_Asset_Using_reordId.Line_Voltage__c}, &quot;132kV&quot;),
+                ISPICKVAL({!Get_Asset_Using_reordId.Line_Voltage__c}, &quot;275kV&quot;),
+                ISPICKVAL({!Get_Asset_Using_reordId.Line_Voltage__c}, &quot;400kV&quot;)
+            )
+        ),
+        &quot;The proposed development falls under Schedule 2 of the 2017 Regulations as the electricity line is to be installed above ground in a sensitive area and is 132 kilovolts or more and therefore requires a mandatory screening.&quot;,
+
+        IF(
+            AND(
+                ISBLANK({!varListSAR_Names}),
+                OR(
+                    ISPICKVAL({!Get_Asset_Using_reordId.Line_Voltage__c}, &quot;132kV&quot;),
+                    ISPICKVAL({!Get_Asset_Using_reordId.Line_Voltage__c}, &quot;275kV&quot;),
+                    ISPICKVAL({!Get_Asset_Using_reordId.Line_Voltage__c}, &quot;400kV&quot;)
+                )
+            ),
+            &quot;The proposed development falls under Schedule 2 of the 2017 Regulations as the electricity line is 132 kilovolts or more, and therefore requires a mandatory screening.&quot;,
+            &quot;N/A&quot;
+        )
+    )
+)</expression>
+    </formulas>
+    <formulas>
+        <name>form_Sensitive_Area_Check_Point3</name>
+        <dataType>String</dataType>
+        <expression>IF(
+    NOT(ISBLANK({!varListSAR_Names})),
+    &quot;The proposed development falls within the following designated sensitive area/areas: &quot; &amp;
+    {!varListSAR_Names},
+
+    IF(
+        OR(
+            ISPICKVAL({!Get_Asset_Using_reordId.Line_Voltage__c}, &quot;132kV&quot;),
+            ISPICKVAL({!Get_Asset_Using_reordId.Line_Voltage__c}, &quot;275kV&quot;),
+            ISPICKVAL({!Get_Asset_Using_reordId.Line_Voltage__c}, &quot;400kV&quot;)
+        ),
+        &quot;The proposed development does not fall within any designated sensitive areas.&quot;,
+        &quot;&quot;
+    )
+)</expression>
     </formulas>
     <formulas>
         <name>formula_ApplicationDate</name>
@@ -522,7 +585,7 @@ TEXT(YEAR(TODAY()))</expression>
     <formulas>
         <name>formula_TokenData</name>
         <dataType>String</dataType>
-        <expression>&apos;{&apos; &amp; {!formula_TokenDataUserBlock} &amp; &apos;  &quot;Asset_Line_Voltage&quot;: &quot;&apos; &amp; TEXT({!Get_Asset_Using_reordId.Line_Voltage__c}) &amp; &apos;&quot;,  &quot;Application_Date&quot;: &quot;&apos; &amp; {!formula_ApplicationDate} &amp; &apos;&quot;,  &quot;DESNZ_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Name} &amp; &apos;&quot;,  &quot;Operator_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Applicant_Reference__c} &amp; &apos;&quot;, &quot;DNO_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Name} &amp; &apos;&quot;,  &quot;DNO_Address_Line1&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line1__c} &amp; &apos;&quot;,  &quot;DNO_Address_Line2&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line_2__c} &amp; &apos;&quot;,  &quot;DNO_Address_TownCity&quot;: &quot;&apos; &amp; {!Get_Address.Town_City__c} &amp; &apos;&quot;,  &quot;DNO_Address_Postcode&quot;: &quot;&apos; &amp; {!Get_Address.Postcode__c} &amp; &apos;&quot;,  &quot;Current_Date&quot;: &quot;&apos; &amp; {!formula_CurrentDate} &amp; &apos;&quot;,  &quot;IF_IncludeOutstandingWayleaves&quot;: &apos; &amp; IF({!IncludeLPA_Consultation.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Outstanding_Wayleaves&quot;: &quot;&apos; &amp; {!formula_OutstandingWayleavesNumber} &amp; {!LPA_Consultation_Text} &amp; &apos;&quot;,  &quot;Outstanding_Wayleaves_Reason&quot;: &quot;&apos; &amp; {!Outstanding_Wayleaves_Reason} &amp; &apos;&quot;,  &quot;IF_IncludeNaturalEnglandNRWAssent&quot;: &apos; &amp; IF({!IncludeNaturalEnglandNRWAssent.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Natural_England_NRW_Assent&quot;: &quot;&apos; &amp; {!formula_NaturalEnglandNRWAssentNumber} &amp; {!Natural_England_NRW_Assent_noHRA} &amp; &apos;&quot;,  &quot;Natural_England_NRW_Assent_Reason&quot;: &quot;&apos; &amp; {!Natural_England_NRW_Assent_Reason} &amp; &apos;&quot;,  &quot;IF_IncludeHistoricEnglandCadwConsent&quot;: &apos; &amp; IF({!IncludeHistoricEnglandCadwConsent.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Historic_England_Cadw_Consent&quot;: &quot;&apos; &amp; {!formula_HistoricEnglandCadwConsentNumber} &amp; {!Historic_England_Cadw_Consultation_Consent} &amp; &apos;&quot;,  &quot;Historic_England_Cadw_Consent_Reason&quot;: &quot;&apos; &amp; {!Historic_England_Cadw_Consent_Reason} &amp; &apos;&quot;,  &quot;IF_IncludeEcologySurvey&quot;: &apos; &amp; IF({!IncludeEcologySurvey.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Ecology_Survey&quot;: &quot;&apos; &amp; {!formula_EcologySurveyNumber} &amp; {!Ecology_Survey} &amp; &apos;&quot;,  &quot;Ecology_Survey_Reason&quot;: &quot;&apos; &amp; {!Ecology_Survey_Reason} &amp; &apos;&quot;,  &quot;IF_IncludeAvoidBirdFeeding&quot;: &apos; &amp; IF({!IncludeHRA_Conducted.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Avoiding_Bird_Breeding&quot;: &quot;&apos; &amp; {!formula_AvoidBirdBreedingNumber} &amp; {!HRA_Conducted} &amp; &apos;&quot;,  &quot;Avoiding_Bird_Breeding_Reason&quot;: &quot;&apos; &amp; {!txt_Natural_England_NRW_Consultation_HRA} &amp; &apos;&quot;,  &quot;IF_IncludeTreeProtection&quot;: &apos; &amp; IF({!IncludeHRA_Conclusion_No_Appropriate_Assessment.value}, &quot;true&quot;, &quot;false&quot;) &amp; &apos;,  &quot;Tree_Protection&quot;: &quot;&apos; &amp; {!formula_TreeProtectionNumber} &amp; {!txt_HRA_Conclusion_No_appropriate_assessment} &amp; &apos;&quot;,  &quot;Tree_Protection_Reason&quot;: &quot;&apos; &amp; {!txt_HRA_Conclusion_appropriate_assessment} &amp; &apos;&quot;, &quot;Applicant_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Representative__r.Name} &amp; &apos;&quot;, &quot;Project_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Project_name__c} &amp; &apos;&quot;, &quot;Proposed_Development&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Project_Description__c} &amp; &apos;&quot;, &quot;LPA_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Name_of_LPA__c} &amp; &apos;&quot;, &quot;HRA_Conclusion_With_Assessment&quot;: &quot;&apos; &amp; {!txt_HRA_Conclusion_appropriate_assessment} &amp; &apos;&quot;, &quot;Sensitive_Area_Check_List&quot;: &quot;&apos; &amp; {!varListSAR_Names} &amp; &apos;&quot;  }&apos;</expression>
+        <expression>&apos;{&apos; &amp; {!formula_TokenDataUserBlock} &amp; &apos;&quot;Asset_Line_Voltage&quot;: &quot;&apos; &amp; TEXT({!Get_Asset_Using_reordId.Line_Voltage__c}) &amp; &apos;&quot;, &quot;Application_Date&quot;: &quot;&apos; &amp; {!formula_ApplicationDate} &amp; &apos;&quot;, &quot;DESNZ_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Name} &amp; &apos;&quot;, &quot;Operator_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Applicant_Reference__c} &amp; &apos;&quot;, &quot;DNO_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Name} &amp; &apos;&quot;, &quot;DNO_Address_Line1&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line1__c} &amp; &apos;&quot;, &quot;DNO_Address_Line2&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line_2__c} &amp; &apos;&quot;, &quot;DNO_Address_TownCity&quot;: &quot;&apos; &amp; {!Get_Address.Town_City__c} &amp; &apos;&quot;, &quot;DNO_Address_Postcode&quot;: &quot;&apos; &amp; {!Get_Address.Postcode__c} &amp; &apos;&quot;, &quot;Current_Date&quot;: &quot;&apos; &amp; {!formula_CurrentDate} &amp; &apos;&quot;, &quot;Outstanding_Wayleaves&quot;: &quot;&apos; &amp; {!LPA_Consultation_Text} &amp; &apos;&quot;, &quot;Applicant_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Representative__r.Name} &amp; &apos;&quot;, &quot;Project_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Project_name__c} &amp; &apos;&quot;, &quot;Proposed_Development&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Project_Description__c} &amp; &apos;&quot;, &quot;LPA_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Name_of_LPA__c} &amp; &apos;&quot;, &quot;HRA_Conclusion_With_Assessment&quot;: &quot;&apos; &amp; {!txt_HRA_Conclusion_appropriate_assessment} &amp; &apos;&quot;, &quot;Sensitive_Area_Check_List&quot;: &quot;&apos; &amp; {!varListSAR_Names} &amp; &apos;&quot;, &quot;Sensitive_Area_Check_Point2&quot;: &quot;&apos; &amp; {!form_Sensitive_Area_Check_Point2} &amp; &apos;&quot;, &quot;Sensitive_Area_Check_Point3&quot;: &quot;&apos; &amp; {!form_Sensitive_Area_Check_Point3} &amp; &apos;&quot;, &quot;Natural_England_NRW_Assent_noHRA&quot;: &quot;&apos; &amp; {!Natural_England_NRW_Assent_noHRA} &amp; &apos;&quot;, &quot;Historic_England_Cadw_Consultation_Consent&quot;: &quot;&apos; &amp; {!Historic_England_Cadw_Consultation_Consent} &amp; &apos;&quot;, &quot;Ecology_Survey&quot;: &quot;&apos; &amp; {!Ecology_Survey} &amp; &apos;&quot;, &quot;Ecology_Survey_Reason&quot;: &quot;&apos; &amp; {!Ecology_Survey_Reason} &amp; &apos;&quot;,&quot;HRA_Conducted&quot;: &quot;&apos; &amp; {!HRA_Conducted} &amp; &apos;&quot;, &quot;txt_Natural_England_NRW_Consultation_HRA&quot;: &quot;&apos; &amp; {!txt_Natural_England_NRW_Consultation_HRA} &amp; &apos;&quot;, &quot;txt_HRA_Conclusion_No_appropriate_assessment&quot;: &quot;&apos; &amp; {!txt_HRA_Conclusion_No_appropriate_assessment} &amp; &apos;&quot;, &quot;txt_HRA_Conclusion_appropriate_assessment&quot;: &quot;&apos; &amp; {!txt_HRA_Conclusion_appropriate_assessment} &amp; &apos;&quot;, &quot;txt_Public_Notices_no_responses&quot;: &quot;&apos; &amp; {!txt_Public_Notices_no_responses} &amp; &apos;&quot;, &quot;txt_Public_Notices_responses&quot;: &quot;&apos; &amp; {!txt_Public_Notices_responses} &amp; &apos;&quot;, &quot;txt_Minor_modification_National_Landscapes_National_Parks&quot;: &quot;&apos; &amp; {!txt_Minor_modification_National_Landscapes_National_Parks} &amp; &apos;&quot;, &quot;IF_IncludeLPA_Consultation&quot; : &apos;&amp; IF({!IncludeLPA_Consultation.value}, &quot;true&quot;,&quot;false&quot;) &amp;&apos;, &quot;IF_IncludeNaturalEnglandNRWAssent&quot; : &apos;&amp; IF({!IncludeNaturalEnglandNRWAssent.value}, &quot;true&quot;,&quot;false&quot;) &amp;&apos;,&quot;IF_IncludeHistoricEnglandCadwConsent&quot; : &apos;&amp; IF({!IncludeHistoricEnglandCadwConsent.value}, &quot;true&quot;,&quot;false&quot;) &amp;&apos;, &quot;IF_IncludeEcologySurvey&quot; : &apos;&amp; IF({!IncludeEcologySurvey.value}, &quot;true&quot;,&quot;false&quot;) &amp;&apos;,&quot;IF_IncludeHRA_Conducted&quot; : &apos;&amp; IF({!IncludeHRA_Conducted.value}, &quot;true&quot;,&quot;false&quot;) &amp;&apos;, &quot;IF_tog_Natural_England_NRW_Consultation_HRA&quot; : &apos;&amp; IF({!tog_Natural_England_NRW_Consultation_HRA.value}, &quot;true&quot;,&quot;false&quot;) &amp;&apos;, &quot;IF_IncludeHRA_Conclusion_No_Appropriate_Assessment&quot; : &apos;&amp; IF({!IncludeHRA_Conclusion_No_Appropriate_Assessment.value}, &quot;true&quot;,&quot;false&quot;) &amp;&apos;, &quot;IF_tog_HRA_Conclusion_appropriate_assessment&quot; : &apos;&amp; IF({!tog_HRA_Conclusion_appropriate_assessment.value}, &quot;true&quot;,&quot;false&quot;) &amp;&apos; ,&quot;IF_tog_public_notices_no_response&quot; : &apos;&amp; IF({!tog_public_notices_no_response.value}, &quot;true&quot;,&quot;false&quot;) &amp;&apos;, &quot;IF_tog_public_notices_response&quot; : &apos;&amp; IF({!tog_public_notices_response.value}, &quot;true&quot;,&quot;false&quot;) &amp;&apos;, &quot;IF_tog_Minor_Modification_NL_NP&quot; : &apos;&amp; IF({!tog_Minor_Modification_NL_NP.value}, &quot;true&quot;,&quot;false&quot;) &amp;&apos; }&apos;</expression>
     </formulas>
     <formulas>
         <name>formula_TokenDataUserBlock</name>
@@ -1256,6 +1319,19 @@ TEXT(YEAR(TODAY()))</expression>
             </styleProperties>
         </fields>
         <fields>
+            <name>WarmingMessage</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(255, 5, 5);&quot;&gt;If the selected template contains text in square brackets, replace the bracketed text with the appropriate actual value.&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
             <name>Blank_Spacer</name>
             <fieldText>&lt;p&gt; &lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
@@ -1331,41 +1407,6 @@ TEXT(YEAR(TODAY()))</expression>
             </visibilityRule>
         </fields>
         <fields>
-            <name>Outstanding_Wayleaves_Reason</name>
-            <defaultValue>
-                <stringValue>{!DV_OutstandingWayleaves_Reason}</stringValue>
-            </defaultValue>
-            <fieldText>Outstanding Wayleaves Reason</fieldText>
-            <fieldType>LargeTextArea</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>false</isRequired>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-            <visibilityRule>
-                <conditionLogic>and</conditionLogic>
-                <conditions>
-                    <leftValueReference>IncludeLPA_Consultation.value</leftValueReference>
-                    <operator>EqualTo</operator>
-                    <rightValue>
-                        <booleanValue>true</booleanValue>
-                    </rightValue>
-                </conditions>
-                <conditions>
-                    <leftValueReference>$Flow.CurrentRecord</leftValueReference>
-                    <operator>EqualTo</operator>
-                    <rightValue>
-                        <stringValue>456546546</stringValue>
-                    </rightValue>
-                </conditions>
-            </visibilityRule>
-        </fields>
-        <fields>
             <name>IncludeNaturalEnglandNRWAssent</name>
             <extensionName>flowruntime:toggle</extensionName>
             <fieldType>ComponentInstance</fieldType>
@@ -1423,41 +1464,6 @@ TEXT(YEAR(TODAY()))</expression>
                     <operator>EqualTo</operator>
                     <rightValue>
                         <booleanValue>true</booleanValue>
-                    </rightValue>
-                </conditions>
-            </visibilityRule>
-        </fields>
-        <fields>
-            <name>Natural_England_NRW_Assent_Reason</name>
-            <defaultValue>
-                <stringValue>{!DV_NaturalEnglandNRWAssent_Reason}</stringValue>
-            </defaultValue>
-            <fieldText>Natural England/NRW Assent Reason</fieldText>
-            <fieldType>LargeTextArea</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>false</isRequired>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-            <visibilityRule>
-                <conditionLogic>and</conditionLogic>
-                <conditions>
-                    <leftValueReference>IncludeNaturalEnglandNRWAssent.value</leftValueReference>
-                    <operator>EqualTo</operator>
-                    <rightValue>
-                        <booleanValue>true</booleanValue>
-                    </rightValue>
-                </conditions>
-                <conditions>
-                    <leftValueReference>$Flow.CurrentRecord</leftValueReference>
-                    <operator>EqualTo</operator>
-                    <rightValue>
-                        <stringValue>dfgdfsgfdgdfgdf</stringValue>
                     </rightValue>
                 </conditions>
             </visibilityRule>
@@ -2282,7 +2288,7 @@ TEXT(YEAR(TODAY()))</expression>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <value>
-            <stringValue>A Habitats Regulations Assessment (&quot;the HRA&quot;) was completed in [date] by [company that carried out HRA] (reference: [reference number])</stringValue>
+            <stringValue>A Habitats Regulations Assessment (the HRA) was completed in [date] by [company that carried out HRA] (reference: [reference number])</stringValue>
         </value>
     </variables>
     <variables>
