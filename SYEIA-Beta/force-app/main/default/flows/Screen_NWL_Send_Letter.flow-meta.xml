@@ -570,6 +570,13 @@
                     <stringValue>NW02. Invalid - Unclear NTR</stringValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW03. Invalid NTT only_ (Including Implied Wayleaves)</stringValue>
+                </rightValue>
+            </conditions>
             <connector>
                 <targetReference>Update_NW02_Invalid_Letter_Date</targetReference>
             </connector>
@@ -610,6 +617,7 @@ Limit Attachements</description>
         <expression>CASE(
     {!Email_Type_Selector.selectedChoiceValues},
     &quot;NW02. Invalid - Unclear NTR&quot;, {!temp_InvalidNTR_Email_Template},
+    &quot;NW03. Invalid NTT only_ (Including Implied Wayleaves)&quot;, {!template_NW03_Invalid_NTT_only},
     &quot;&quot;
 )</expression>
     </formulas>
@@ -619,6 +627,7 @@ Limit Attachements</description>
         <expression>CASE(
     {!Email_Type_Selector.selectedChoiceLabels},
     &quot;NW02. Invalid - Unclear NTR&quot;, &quot;Application &quot; &amp; {!Get_Case.Name} &amp; &quot; has been deemed invalid&quot;,
+    &quot;NW03. Invalid NTT only_ (Including Implied Wayleaves)&quot;, &quot;Application &quot; &amp; {!Get_Case.Name} &amp; &quot; has been deemed invalid&quot;,
     &quot;&quot;
 )</expression>
     </formulas>
@@ -864,7 +873,7 @@ Limit Attachements</description>
         </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
         <limit>
-            <numberValue>30.0</numberValue>
+            <numberValue>20.0</numberValue>
         </limit>
         <object>ContentVersion</object>
         <sortField>CreatedDate</sortField>
@@ -1488,6 +1497,11 @@ Limit Attachements</description>
         <name>template_emailBody</name>
         <isViewedAsPlainText>false</isViewedAsPlainText>
         <text>&lt;p&gt;{!formula_decide_email_body}&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>template_NW03_Invalid_NTT_only</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;DESNZ reference: {!Get_Case.Applicant_Reference__c}&lt;/p&gt;&lt;p&gt;The application for {!Get_Case.Application_Type__c} has been deemed invalid by the case officer.&lt;/p&gt;</text>
     </textTemplates>
     <variables>
         <name>bool_SelectedPDF</name>
