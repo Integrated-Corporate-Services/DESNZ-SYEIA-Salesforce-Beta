@@ -108,6 +108,9 @@
         <name>choice_NW05_Request_For_Further_Information_Land_Owner</name>
         <choiceText>NW05. Request for further information - LO</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW05. Request for further information - LO</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW06_Acknowledgement_Letter_Applicant</name>
@@ -376,6 +379,21 @@
             </connector>
             <label>NW05. Request for further information - Applicant</label>
         </rules>
+        <rules>
+            <name>NW05_Request_for_further_information_LO</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW05. Request for further information - LO</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW05_Request_for_further_information_Landowner</targetReference>
+            </connector>
+            <label>NW05. Request for further information - LO</label>
+        </rules>
     </decisions>
     <decisions>
         <name>S37_Document_Choice</name>
@@ -641,6 +659,19 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <flowName>NW05_Request_for_further_information_Applicant</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW05_Request_for_further_information_Landowner</name>
+        <label>NW05. Request for further information - Landowner</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>NW05_Request_for_further_information_Landowner</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>
