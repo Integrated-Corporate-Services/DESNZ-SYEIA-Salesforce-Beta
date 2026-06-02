@@ -1482,7 +1482,7 @@ Limit Attachements</description>
     <textTemplates>
         <name>temp_InvalidNTR_Email_Template</name>
         <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;DESNZ reference: {!Get_Case.Applicant_Reference__c}&lt;/p&gt;&lt;p&gt;The application for [Application type] has been deemed invalid by the case officer.&lt;/p&gt;</text>
+        <text>&lt;p&gt;DESNZ reference: {!Get_Case.Applicant_Reference__c}&lt;/p&gt;&lt;p&gt;The application for {!Get_Case.Application_Type__c} has been deemed invalid by the case officer.&lt;/p&gt;</text>
     </textTemplates>
     <textTemplates>
         <name>template_emailBody</name>
