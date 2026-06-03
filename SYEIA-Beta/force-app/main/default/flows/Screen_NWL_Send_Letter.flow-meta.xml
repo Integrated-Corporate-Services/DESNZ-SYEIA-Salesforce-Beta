@@ -8,7 +8,7 @@
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <connector>
-            <targetReference>Create_Email_Tracking_Record</targetReference>
+            <targetReference>NWL_Letter_Type</targetReference>
         </connector>
         <faultConnector>
             <isGoTo>true</isGoTo>
@@ -17,21 +17,31 @@
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>recipientAddresses</name>
-            <value/>
+            <value>
+                <collectionElements>
+                    <elementReference>collection_ToAddresses</elementReference>
+                </collectionElements>
+            </value>
         </inputParameters>
         <inputParameters>
             <name>ccAddresses</name>
-            <value/>
+            <value>
+                <collectionElements>
+                    <elementReference>collection_CcAddresses</elementReference>
+                </collectionElements>
+            </value>
         </inputParameters>
         <inputParameters>
             <name>senderType</name>
             <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>OrgWideEmailAddress</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>senderAddress</name>
             <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>s37consents@energysecurity.gov.uk</stringValue>
             </value>
         </inputParameters>
@@ -44,13 +54,15 @@
         <inputParameters>
             <name>emailSubject</name>
             <value>
-                <elementReference>Subject</elementReference>
+                <elementReference>formula_emailSubject_DV</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>emailBody</name>
             <value>
                 <elementReference>EmailComposer.value</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -63,6 +75,7 @@
             <name>attachmentId</name>
             <value>
                 <elementReference>Document_Table.firstSelectedRow.Id</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -72,6 +85,7 @@
             <name>relatedRecordId</name>
             <value>
                 <elementReference>recordId</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -130,7 +144,7 @@
             <assignToReference>collection_CcAddresses</assignToReference>
             <operator>Add</operator>
             <value>
-                <elementReference>cc_address.value</elementReference>
+                <elementReference>cc_address</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -538,6 +552,38 @@
         </rules>
     </decisions>
     <decisions>
+        <name>NWL_Letter_Type</name>
+        <label>NWL Letter Type</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Create_Email_Tracking_Record</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>NW02_Invalid_Unclear_NTR</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW02. Invalid - Unclear NTR</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW03. Invalid NTT only_ (Including Implied Wayleaves)</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_NW02_Invalid_Letter_Date</targetReference>
+            </connector>
+            <label>NW02. Invalid - Unclear NTR</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Recipient_Choice</name>
         <label>Recipient Choice</label>
         <locationX>0</locationX>
@@ -566,9 +612,24 @@
 Limit Attachements</description>
     <environments>Default</environments>
     <formulas>
+        <name>formula_decide_email_body</name>
+        <dataType>String</dataType>
+        <expression>CASE(
+    {!Email_Type_Selector.selectedChoiceValues},
+    &quot;NW02. Invalid - Unclear NTR&quot;, {!temp_InvalidNTR_Email_Template},
+    &quot;NW03. Invalid NTT only_ (Including Implied Wayleaves)&quot;, {!template_NW03_Invalid_NTT_only},
+    &quot;&quot;
+)</expression>
+    </formulas>
+    <formulas>
         <name>formula_emailSubject_DV</name>
         <dataType>String</dataType>
-        <expression>{!vardocumentEmailTypeLabel} &amp; &quot; for &quot; &amp;  {!Get_Case.Name}</expression>
+        <expression>CASE(
+    {!Email_Type_Selector.selectedChoiceLabels},
+    &quot;NW02. Invalid - Unclear NTR&quot;, &quot;Application &quot; &amp; {!Get_Case.Name} &amp; &quot; has been deemed invalid&quot;,
+    &quot;NW03. Invalid NTT only_ (Including Implied Wayleaves)&quot;, &quot;Application &quot; &amp; {!Get_Case.Name} &amp; &quot; has been deemed invalid&quot;,
+    &quot;&quot;
+)</expression>
     </formulas>
     <interviewLabel>Screen - NWL - Send Letter {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Screen - NWL - Send Letter</label>
@@ -812,7 +873,7 @@ Limit Attachements</description>
         </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
         <limit>
-            <numberValue>30.0</numberValue>
+            <numberValue>20.0</numberValue>
         </limit>
         <object>ContentVersion</object>
         <sortField>CreatedDate</sortField>
@@ -878,6 +939,30 @@ Limit Attachements</description>
             <field>Status__c</field>
             <value>
                 <stringValue>Decision Issued</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Case__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_NW02_Invalid_Letter_Date</name>
+        <label>Update NW02. Invalid - Letter Date</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Email_Tracking_Record</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Case.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Invalid_Letter_Date__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
             </value>
         </inputAssignments>
         <object>Case__c</object>
@@ -984,23 +1069,19 @@ Limit Attachements</description>
                 </fields>
                 <fields>
                     <name>cc_address</name>
-                    <extensionName>flowruntime:email</extensionName>
-                    <fieldType>ComponentInstance</fieldType>
-                    <inputParameters>
-                        <name>label</name>
-                        <value>
-                            <stringValue>CC Address</stringValue>
-                        </value>
-                    </inputParameters>
-                    <inputParameters>
-                        <name>value</name>
-                        <value>
-                            <elementReference>varAdditionalRecipientEmail</elementReference>
-                        </value>
-                    </inputParameters>
-                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-                    <isRequired>true</isRequired>
-                    <storeOutputAutomatically>true</storeOutputAutomatically>
+                    <dataType>String</dataType>
+                    <defaultValue>
+                        <elementReference>varAdditionalRecipientEmail</elementReference>
+                    </defaultValue>
+                    <fieldText>CC Address</fieldText>
+                    <fieldType>InputField</fieldType>
+                    <isDisabled>
+                        <booleanValue>false</booleanValue>
+                    </isDisabled>
+                    <isReadOnly>
+                        <booleanValue>false</booleanValue>
+                    </isReadOnly>
+                    <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
                             <stringValue>top</stringValue>
@@ -1408,9 +1489,19 @@ Limit Attachements</description>
         </inputAssignments>
     </subflows>
     <textTemplates>
+        <name>temp_InvalidNTR_Email_Template</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;DESNZ reference: {!Get_Case.Applicant_Reference__c}&lt;/p&gt;&lt;p&gt;The application for {!Get_Case.Application_Type__c} has been deemed invalid by the case officer.&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
         <name>template_emailBody</name>
         <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;This is a placeholder.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</text>
+        <text>&lt;p&gt;{!formula_decide_email_body}&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>template_NW03_Invalid_NTT_only</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;DESNZ reference: {!Get_Case.Applicant_Reference__c}&lt;/p&gt;&lt;p&gt;The application for {!Get_Case.Application_Type__c} has been deemed invalid by the case officer.&lt;/p&gt;</text>
     </textTemplates>
     <variables>
         <name>bool_SelectedPDF</name>
