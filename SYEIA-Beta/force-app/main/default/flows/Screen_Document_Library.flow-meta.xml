@@ -201,6 +201,9 @@
         <name>choice_NW_01_General_Letter_Applicant</name>
         <choiceText>NW01. General Letter - Applicant</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW01. General Letter - Applicant</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW_Checklist_Existing_Line_Internal</name>
@@ -287,9 +290,12 @@
                 <leftValueReference>NWL_Document_Library_CS</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <elementReference>choice_NW_01_General_Letter_Applicant</elementReference>
+                    <stringValue>NW01. General Letter - Applicant</stringValue>
                 </rightValue>
             </conditions>
+            <connector>
+                <targetReference>Screen_DocGen_NW01_General_Letter_Applicant_letter</targetReference>
+            </connector>
             <label>NW01 General Letter - Applicant</label>
         </rules>
         <rules>
@@ -685,6 +691,19 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <flowName>NW_Invalid_NTT_only_including_implied_wayleaves_LO</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>Screen_DocGen_NW01_General_Letter_Applicant_letter</name>
+        <label>Screen_DocGen_NW01_General_Letter_Applicant_letter</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW01_General_Letter_Applicant_letter</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>
