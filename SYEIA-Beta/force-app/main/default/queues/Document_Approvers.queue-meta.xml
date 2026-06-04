@@ -6,7 +6,6 @@
     <name>Document Approvers</name>
     <queueMembers>
         <users>
-            <user>testuserdm@ics.gov.uk</user>
             <user>joshua.eze@ics.gov.uk</user>
             <user>narasimha.datla@ics.gov.uk</user>
             <user>uttara.shende-jujp@force.com</user>
