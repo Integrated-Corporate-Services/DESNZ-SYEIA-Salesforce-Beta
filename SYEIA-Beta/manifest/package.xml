@@ -185,6 +185,8 @@
 		<members>Case__c.Has_a_21_Day_Notice_Been_Served__c</members>
 		<members>Case__c.Have_All_Wayleaves_Been_Obtained__c</members>
 		<members>Case__c.Invoice_Date__c</members>
+		<members>Case__c.Landowner__c</members>
+		<members>Case__c.Objector__c</members>
 		<members>Case__c.Invoice_Reference__c</members>
 		<members>Case__c.Is_Any_Existing_Equipment_Being_Removed__c</members>
 		<members>Case__c.Is_The_Mapping_Complete__c</members>

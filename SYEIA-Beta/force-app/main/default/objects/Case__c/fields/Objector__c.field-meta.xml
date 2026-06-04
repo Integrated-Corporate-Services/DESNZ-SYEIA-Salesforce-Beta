@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Objector__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Objector</label>
+    <referenceTo>Party__c</referenceTo>
+    <relationshipLabel>Cases (Objector)</relationshipLabel>
+    <relationshipName>Objector</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>
