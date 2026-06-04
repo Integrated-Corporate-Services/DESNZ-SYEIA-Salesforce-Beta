@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FIR_to_Applicant_or_Landowner__c</fullName>
+    <label>FIR to Applicant or Landowner</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Applicant</fullName>
+                <default>false</default>
+                <label>Applicant</label>
+            </value>
+            <value>
+                <fullName>Landowner</fullName>
+                <default>false</default>
+                <label>Landowner</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

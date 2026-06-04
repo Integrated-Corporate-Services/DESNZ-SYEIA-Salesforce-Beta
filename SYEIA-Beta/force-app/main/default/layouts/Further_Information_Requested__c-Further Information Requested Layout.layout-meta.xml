@@ -4,7 +4,6 @@
     <excludeButtons>Clone</excludeButtons>
     <excludeButtons>Delete</excludeButtons>
     <excludeButtons>OmniChannelRouteWork</excludeButtons>
-    <excludeButtons>OpenSlackRecordChannel</excludeButtons>
     <excludeButtons>RecordShareHierarchy</excludeButtons>
     <excludeButtons>Share</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
@@ -19,7 +18,7 @@
                 <field>Name</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
+                <behavior>Edit</behavior>
                 <field>Type_of_Information_Requested__c</field>
             </layoutItems>
             <layoutItems>
@@ -29,6 +28,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Comment_From_Applicant__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>FIR_to_Applicant_or_Landowner__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -55,6 +58,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Date_Information_was_Received__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Further_Information_Exchange_Letter_Date__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>

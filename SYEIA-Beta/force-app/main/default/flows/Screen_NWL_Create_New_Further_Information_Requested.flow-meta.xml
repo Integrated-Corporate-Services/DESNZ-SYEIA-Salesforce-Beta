@@ -255,10 +255,10 @@
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>varFIR_Record.Type_of_Information_Requested__c</assignToReference>
+            <assignToReference>varFIR_Record.FIR_to_Applicant_or_Landowner__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Type_of_Information_Requested</elementReference>
+                <elementReference>FIR_to_Applicant_or_Landowner</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -297,7 +297,7 @@
             <assignToReference>varFIR_Body</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>tt_FIR_Email_Template</elementReference>
+                <elementReference>tt_FIR_Letter_Email</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -327,7 +327,7 @@
             <assignToReference>varFIR_Body</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>tt_FIR_Email_Template_Not_New</elementReference>
+                <elementReference>tt_FIR_Letter_Email</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -422,15 +422,12 @@
             <label>Email Already Exists Or Blank</label>
         </rules>
     </decisions>
-    <description>Further Information Requested, applicant. Email Tracking
-Additional Contact Email Address
-Type Of Information Requested</description>
     <dynamicChoiceSets>
-        <name>varTypeOfPicklist</name>
+        <name>varFIRToApplicantOrLandowner</name>
         <dataType>Picklist</dataType>
         <displayField xsi:nil="true"/>
         <object xsi:nil="true"/>
-        <picklistField>Type_of_Information_Requested__c</picklistField>
+        <picklistField>FIR_to_Applicant_or_Landowner__c</picklistField>
         <picklistObject>Further_Information_Requested__c</picklistObject>
     </dynamicChoiceSets>
     <environments>Default</environments>
@@ -444,8 +441,8 @@ Type Of Information Requested</description>
         <dataType>String</dataType>
         <expression>&quot;Further information request &quot; &amp;TEXT( {!varCountFIR}) &amp; &quot; for application &quot; &amp; {!Get_Case_Record.Name}</expression>
     </formulas>
-    <interviewLabel>Screen - Create New Further Information Requested {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Screen - Create New Further Information Requested</label>
+    <interviewLabel>Screen - NWL - Create New Further Information Requested {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Screen - NWL - Create New Further Information Requested</label>
     <loops>
         <name>Loop_Applicant_Emails</name>
         <label>Loop Applicant Emails</label>
@@ -706,7 +703,7 @@ Type Of Information Requested</description>
                 <fieldType>Region</fieldType>
                 <fields>
                     <name>RequestInformation</name>
-                    <fieldText>&lt;h1 style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(24, 24, 24); font-size: 13px;&quot;&gt;Request Further Information From Applicant&lt;/strong&gt;&lt;/h1&gt;</fieldText>
+                    <fieldText>&lt;h1 style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 13px; color: rgb(24, 24, 24);&quot;&gt;Request Further Information From Applicant or Landowner&lt;/strong&gt;&lt;/h1&gt;</fieldText>
                     <fieldType>DisplayText</fieldType>
                     <styleProperties>
                         <verticalAlignment>
@@ -725,10 +722,10 @@ Type Of Information Requested</description>
                     </visibilityRule>
                 </fields>
                 <fields>
-                    <name>Type_of_Information_Requested</name>
-                    <choiceReferences>varTypeOfPicklist</choiceReferences>
+                    <name>FIR_to_Applicant_or_Landowner</name>
+                    <choiceReferences>varFIRToApplicantOrLandowner</choiceReferences>
                     <dataType>String</dataType>
-                    <fieldText>Type of Information Requested</fieldText>
+                    <fieldText>FIR to Applicant or Landowner</fieldText>
                     <fieldType>DropdownBox</fieldType>
                     <isRequired>true</isRequired>
                     <styleProperties>
@@ -788,7 +785,7 @@ Type Of Information Requested</description>
                 </width>
             </styleProperties>
         </fields>
-        <nextOrFinishButtonLabel>Request Information From Applicant</nextOrFinishButtonLabel>
+        <nextOrFinishButtonLabel>Request Information</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
     </screens>
@@ -971,7 +968,7 @@ Type Of Information Requested</description>
             <inputParameters>
                 <name>value</name>
                 <value>
-                    <elementReference>varFIR_Body</elementReference>
+                    <elementReference>tt_FIR_Letter_Email</elementReference>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -983,13 +980,13 @@ Type Of Information Requested</description>
             <inputParameters>
                 <name>readOnly</name>
                 <value>
-                    <booleanValue>true</booleanValue>
+                    <booleanValue>false</booleanValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>disableAdvancedTools</name>
                 <value>
-                    <booleanValue>true</booleanValue>
+                    <booleanValue>false</booleanValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -1031,6 +1028,11 @@ Type Of Information Requested</description>
         <name>tt_FIR_Email_Template_Not_New</name>
         <isViewedAsPlainText>false</isViewedAsPlainText>
         <text>&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;Dear {!Get_Case_Record.Applicant_Name_Formula__c},&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;Thank you for responding to our previous information request for your application &lt;/span&gt;&lt;strong style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;{!Get_Case_Record.Name}&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt; for consent for development of overhead lines (Section 37).&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;Please would you provide the following additional information as soon as possible to help us progress your application:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!InformationRequiredFromApplicant}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;Regards&lt;/span&gt;&lt;/p&gt;&lt;p&gt;{!$User.FirstName} {!$User.LastName}&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;Do not reply to this email. Please send your replies to&lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); font-family: Arial, Helvetica, sans-serif;&quot;&gt; &lt;/span&gt;&lt;a href=&quot;mailto:s37consents@energysecurity.gov.uk&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;color: rgb(1, 118, 211);&quot;&gt;&lt;u&gt;s37consents@energysecurity.gov.uk&lt;/u&gt;&lt;/a&gt;.&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>tt_FIR_Letter_Email</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p style=&quot;text-align: right;&quot;&gt;Department for Energy Security &amp;amp; Net Zero&lt;/p&gt;&lt;p style=&quot;text-align: right;&quot;&gt;3-8 Whitehall Place,&lt;/p&gt;&lt;p style=&quot;text-align: right;&quot;&gt;London, SW1A 2JP&lt;/p&gt;&lt;p style=&quot;text-align: right;&quot;&gt;E: necessarywayleaves@energysecurity.gov.uk&lt;/p&gt;&lt;p style=&quot;text-align: right;&quot;&gt;Website: &lt;a href=&quot;www.gov.uk/desnz&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;www.gov.uk/desnz&lt;/a&gt;&lt;/p&gt;&lt;p style=&quot;text-align: right;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Name of Owner or Occupier Contact: &lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt; {!Get_Case_Record.Applicant_Name_Formula__c}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Applicant Organisation name: {!Get_Case_Record.DNO__r.Name}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Address&lt;/p&gt;&lt;p&gt;Postcode&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Sent by Email:&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Owner or Occupier contact email address: {!Get_Case_Record.DNO__r.Email__c}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Dear &lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!Get_Case_Record.Applicant_Name_Formula__c}&lt;/span&gt;,&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Your ref. {!Get_Case_Record.Applicant_Reference__c}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Our ref. &lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!Get_Case_Record.Name}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Date: {!$Flow.CurrentDate}&lt;/p&gt;&lt;p&gt;Owner or Occupier contact name: &lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!Get_Case_Record.Applicant_Name_Formula__c}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Site Address&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Owner or Occupier Name: {!Get_Case_Record.Applicant_Name_Formula__c}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Application Submission Date: {!Get_Case_Record.Date_of_Application__c}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!InformationRequiredFromApplicant}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;4 week deadline: &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Necessary Wayleaves Team&amp;nbsp;&lt;/p&gt;&lt;p&gt;Necessary Wayleaves&amp;nbsp;&lt;/p&gt;&lt;p&gt;Electricity Network Planning Team&amp;nbsp;&lt;/p&gt;&lt;p&gt;Energy Infrastructure Planning&amp;nbsp;&lt;/p&gt;</text>
     </textTemplates>
     <variables>
         <name>coll_ContentVersionIdsSelected</name>

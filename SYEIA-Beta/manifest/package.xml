@@ -185,6 +185,8 @@
 		<members>Case__c.Has_a_21_Day_Notice_Been_Served__c</members>
 		<members>Case__c.Have_All_Wayleaves_Been_Obtained__c</members>
 		<members>Case__c.Invoice_Date__c</members>
+		<members>Case__c.Landowner__c</members>
+		<members>Case__c.Objector__c</members>
 		<members>Case__c.Invoice_Reference__c</members>
 		<members>Case__c.Is_Any_Existing_Equipment_Being_Removed__c</members>
 		<members>Case__c.Is_The_Mapping_Complete__c</members>
@@ -302,6 +304,8 @@
 		<members>Further_Information_Requested__c.Type_of_Information_Requested__c</members>
 		<members>Further_Information_Requested__c.Reminder_Sent__c</members>
 		<members>Further_Information_Requested__c.Reminders_Sent_Count__c</members>
+		<members>Further_Information_Requested__c.FIR_to_Applicant_or_Landowner__c</members>
+		<members>Further_Information_Requested__c.Further_Information_Exchange_Letter_Date__c</members>
 		<members>GOV_UK_Notify_Config__mdt.Issuer_UUID__c</members>
 		<members>GOV_UK_Notify_Config__mdt.Secret_Key__c</members>
 		<members>Inbound_Request__c.Error_Log_Text__c</members>
