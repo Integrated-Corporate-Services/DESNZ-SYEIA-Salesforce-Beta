@@ -188,7 +188,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Send_FIR_Email_Screen</targetReference>
+            <targetReference>Decision_Send_Physical_Letter</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -346,7 +346,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <targetReference>Send_FIR_Email_Screen</targetReference>
+            <targetReference>Decision_Send_Physical_Letter</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -420,6 +420,38 @@
                 <targetReference>Loop_Applicant_Emails</targetReference>
             </connector>
             <label>Email Already Exists Or Blank</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Decision_Send_Physical_Letter</name>
+        <label>Decision Send Physical Letter</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Send_FIR_Email_Screen</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Landowner_Letter</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Case_Record.Landowner__r.Email__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Case_Record.Objector__r.Email__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Physical_Letter</targetReference>
+            </connector>
+            <label>Landowner Letter</label>
         </rules>
     </decisions>
     <dynamicChoiceSets>
@@ -626,6 +658,9 @@
             </value>
         </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
+        <limit>
+            <numberValue>15.0</numberValue>
+        </limit>
         <object>ContentVersion</object>
         <sortField>CreatedDate</sortField>
         <sortOrder>Desc</sortOrder>
@@ -1008,6 +1043,46 @@
             </styleProperties>
         </fields>
         <nextOrFinishButtonLabel>Send Email</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>Send_Physical_Letter</name>
+        <label>Send Physical Letter</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Display_Text_Send_Physical_Letter</name>
+            <fieldText>&lt;p&gt;You need to send physical copies of this letter and any supporting information to the landowner, occupier or landowner&apos;s representative, because they did not provide an email address.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>I_confirm_I_will_send_physical_copies_of_these_documents_to_the_relevant_recipie</name>
+            <dataType>Boolean</dataType>
+            <fieldText>I confirm I will send physical copies of these documents to the relevant recipients.</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <nextOrFinishButtonLabel>Confirm</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
     </screens>
