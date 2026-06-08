@@ -178,7 +178,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Recipient_Selector_Screen</targetReference>
+            <targetReference>LandOwner_OR_Applicant_OR_Internal</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -198,8 +198,79 @@
         </connector>
     </assignments>
     <assignments>
-        <name>Set_To_Address_Value</name>
-        <label>Set To Address Value</label>
+        <name>Set_Applicant_Email_to_CC_Address</name>
+        <label>Set Applicant Email to CC Address</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_defaultCCAddress</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Find_Landowner_Party.Representative__r.Email__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Email_Builder_Screen</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Applicant_Email_to_To_Address_Value</name>
+        <label>Set Applicant Email to To Address Value</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_defaultToAddressValue</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Find_Landowner_Party.Representative__r.Email__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Email_Builder_Screen</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Applicant_Email_to_To_Address_Value_App</name>
+        <label>Set Applicant Email to To Address Value</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_defaultToAddressValue</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Case.DNO__r.Representative__r.Email__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_defaultCCAddress</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Case.DNO__r.Additional_Contact_Email_Addresses__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Email_Builder_Screen</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Landlord_Email_To_Address_Value</name>
+        <label>Set Landlord Email To Address Value</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_defaultToAddressValue</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Find_Landowner_Party.Email__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Set_Applicant_Email_to_CC_Address</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Landlord_Email_to_To_Address_Value</name>
+        <label>Set Landlord Email to To Address Value</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
@@ -247,51 +318,304 @@
         </value>
     </choices>
     <choices>
-        <name>NW11_Further_representations_exchange</name>
+        <name>NW01_GeneralLetter_LO</name>
         <choiceIcon>
-            <iconName>standard:drafts</iconName>
+            <iconName>standard:all</iconName>
         </choiceIcon>
-        <choiceText>NW11. Further representations exchange</choiceText>
+        <choiceText>NW01. General Letter - LO</choiceText>
         <dataType>String</dataType>
         <value>
-            <stringValue>NW11. Further representations exchange</stringValue>
+            <stringValue>NW01. General Letter - LO</stringValue>
         </value>
     </choices>
     <choices>
-        <name>NWL_Abeyance_Letter</name>
+        <name>NW02_Invalid_UnclearNTR_Applicant</name>
         <choiceIcon>
-            <iconName>standard:lead_list</iconName>
+            <iconName>utility:error</iconName>
         </choiceIcon>
-        <choiceText>NW07. Abeyance letter</choiceText>
+        <choiceText>NW02. Invalid - Unclear NTR - Applicant</choiceText>
         <dataType>String</dataType>
         <value>
-            <stringValue>NW07. Abeyance letter</stringValue>
+            <stringValue>NW02. Invalid - Unclear NTR - Applicant</stringValue>
         </value>
     </choices>
     <choices>
-        <name>NWL_Acknowledgement_Letter</name>
+        <name>NW02_Invalid_UnclearNTR_LO</name>
+        <choiceIcon>
+            <iconName>utility:error</iconName>
+        </choiceIcon>
+        <choiceText>NW02. Invalid - Unclear NTR - LO</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW02. Invalid - Unclear NTR - LO</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NW03_Invalid_NTTonly_includingimpliedwayleaves_Applicant</name>
+        <choiceIcon>
+            <iconName>utility:error</iconName>
+        </choiceIcon>
+        <choiceText>NW03. Invalid - NTT only (including implied wayleaves) - Applicant</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW03. Invalid - NTT only (including implied wayleaves) - Applicant</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NW03_Invalid_NTTonly_includingimpliedwayleaves_LO</name>
+        <choiceIcon>
+            <iconName>utility:error</iconName>
+        </choiceIcon>
+        <choiceText>NW03. Invalid - NTT only (including implied wayleaves) - LO</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW03. Invalid - NTT only (including implied wayleaves) - LO</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NW04_Invalid_NewLines_Applicant</name>
+        <choiceIcon>
+            <iconName>utility:error</iconName>
+        </choiceIcon>
+        <choiceText>NW04. Invalid (New Lines) - Applicant</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW04. Invalid (New Lines) - Applicant</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NW04_Invalid_NewLines_LO</name>
+        <choiceIcon>
+            <iconName>utility:error</iconName>
+        </choiceIcon>
+        <choiceText>NW04. Invalid (New Lines) - LO</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW04. Invalid (New Lines) - LO</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NW05_Requestforfurtherinformation_Applicant</name>
+        <choiceIcon>
+            <iconName>utility:info</iconName>
+        </choiceIcon>
+        <choiceText>NW05. Request for further information - Applicant</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW05. Request for further information - Applicant</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NW05_Requestforfurtherinformation_LO</name>
+        <choiceIcon>
+            <iconName>utility:info</iconName>
+        </choiceIcon>
+        <choiceText>NW05. Request for further information - LO</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW05. Request for further information - LO</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NW06_Acknowledgementletter_Applicant</name>
         <choiceIcon>
             <iconName>standard:letterhead</iconName>
         </choiceIcon>
-        <choiceText>NW06. Acknowledgement letter</choiceText>
+        <choiceText>NW06. Acknowledgement letter - Applicant</choiceText>
         <dataType>String</dataType>
         <value>
-            <stringValue>NW06. Acknowledgement letter</stringValue>
+            <stringValue>NW06. Acknowledgement letter - Applicant</stringValue>
         </value>
     </choices>
     <choices>
-        <name>NWL_Checklist_Existing_Lines</name>
+        <name>NW06_Acknowledgementletter_LO</name>
+        <choiceIcon>
+            <iconName>standard:letterhead</iconName>
+        </choiceIcon>
+        <choiceText>NW06. Acknowledgement letter - LO&lt;p&gt;&lt;br&gt;&lt;/p&gt;</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW06. Acknowledgement letter - LO</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NW07_Abeyanceletter_Applicant</name>
+        <choiceIcon>
+            <iconName>standard:lead_list</iconName>
+        </choiceIcon>
+        <choiceText>NW07. Abeyance letter - Applicant</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW07. Abeyance letter - Applicant</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NW07_Abeyanceletter_LO</name>
+        <choiceIcon>
+            <iconName>standard:lead_list</iconName>
+        </choiceIcon>
+        <choiceText>NW07. Abeyance letter - LO</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW07. Abeyance letter - LO</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NW08_CTWR_letter_Applicant</name>
+        <choiceIcon>
+            <iconName>standard:letterhead</iconName>
+        </choiceIcon>
+        <choiceText>NW08. CTWR letter - Applicant</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW08. CTWR letter - Applicant</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NW08_CTWRlette_LO</name>
+        <choiceIcon>
+            <iconName>standard:letterhead</iconName>
+        </choiceIcon>
+        <choiceText>NW08.CTWRletter-LO</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW08.CTWRletter-LO</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NW09_Proceduralnotice_WR_Applicant</name>
+        <choiceIcon>
+            <iconName>utility:copy</iconName>
+        </choiceIcon>
+        <choiceText>NW09. Procedural notice (WR) - Applicant</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW09. Procedural notice (WR) - Applicant</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NW09_Proceduralnotice_WR_LO</name>
+        <choiceIcon>
+            <iconName>utility:copy</iconName>
+        </choiceIcon>
+        <choiceText>NW09. Procedural notice (WR) - LO</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW09. Procedural notice (WR) - LO</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NW10_Statementofevidenceexchange_Applicant</name>
+        <choiceIcon>
+            <iconName>standard:drafts</iconName>
+        </choiceIcon>
+        <choiceText>NW10. Statement of evidence exchange - Applicant</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW10. Statement of evidence exchange - Applicant</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NW10_Statementofevidenceexchange_LO</name>
+        <choiceIcon>
+            <iconName>standard:drafts</iconName>
+        </choiceIcon>
+        <choiceText>NW10. Statement of evidence exchange - LO</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW10. Statement of evidence exchange - LO</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NW11_Furtherrepresentationsexchange_Applicant</name>
+        <choiceIcon>
+            <iconName>standard:drafts</iconName>
+        </choiceIcon>
+        <choiceText>NW11. Further representations exchange - Applicant</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW11. Further representations exchange - Applicant</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NW11_Furtherrepresentationsexchange_Lo</name>
+        <choiceIcon>
+            <iconName>standard:drafts</iconName>
+        </choiceIcon>
+        <choiceText>NW11. Further representations exchange - Lo</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW11. Further representations exchange - Lo</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NW12_Proceduralnotice_OH_Applicant</name>
+        <choiceIcon>
+            <iconName>standard:drafts</iconName>
+        </choiceIcon>
+        <choiceText>NW12. Procedural notice (OH) - Applicant</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW12. Procedural notice (OH) - Applicant</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NW12_Proceduralnotice_OH_LO</name>
+        <choiceIcon>
+            <iconName>utility:process</iconName>
+        </choiceIcon>
+        <choiceText>NW12. Procedural notice (OH) - LO</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW12. Procedural notice (OH) - LO</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NW13_Decisionletter_Applicant</name>
+        <choiceIcon>
+            <iconName>standard:decision</iconName>
+        </choiceIcon>
+        <choiceText>NW13. Decision letter - Applicant</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW13. Decision letter - Applicant</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NW14_Withdrawalletter_Applicant</name>
+        <choiceIcon>
+            <iconName>standard:drafts</iconName>
+        </choiceIcon>
+        <choiceText>NW14. Withdrawal letter - Applicant</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW14. Withdrawal letter - Applicant</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NW14_Withdrawalletter_LO</name>
+        <choiceIcon>
+            <iconName>standard:drafts</iconName>
+        </choiceIcon>
+        <choiceText>NW14. Withdrawal letter - LO</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NW14. Withdrawal letter - LO</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NWL_Checklist_Existing_Lines_Internal</name>
         <choiceIcon>
             <iconName>utility:check</iconName>
         </choiceIcon>
-        <choiceText>NW Checklist (Existing Lines) (Internal)</choiceText>
+        <choiceText>NW Checklist (Existing Lines) (internal)</choiceText>
         <dataType>String</dataType>
         <value>
-            <stringValue>NW Checklist (Existing Lines) (Internal)</stringValue>
+            <stringValue>NW Checklist (Existing Lines) (internal)</stringValue>
         </value>
     </choices>
     <choices>
-        <name>NWL_Checklist_New_Lines</name>
+        <name>NWL_Checklist_New_Lines_Internal</name>
         <choiceIcon>
             <iconName>utility:check</iconName>
         </choiceIcon>
@@ -299,17 +623,6 @@
         <dataType>String</dataType>
         <value>
             <stringValue>NW Checklist (New Lines) (Internal)</stringValue>
-        </value>
-    </choices>
-    <choices>
-        <name>NWL_CTWR_letter</name>
-        <choiceIcon>
-            <iconName>standard:letterhead</iconName>
-        </choiceIcon>
-        <choiceText>NW08. CTWR letter</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <stringValue>NW08. CTWR letter</stringValue>
         </value>
     </choices>
     <choices>
@@ -324,124 +637,14 @@
         </value>
     </choices>
     <choices>
-        <name>NWL_Decision_Letter</name>
-        <choiceIcon>
-            <iconName>standard:decision</iconName>
-        </choiceIcon>
-        <choiceText>NW13. Decision Letter</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <stringValue>NW13. Decision Letter</stringValue>
-        </value>
-    </choices>
-    <choices>
-        <name>NWL_General_Letter</name>
+        <name>NWL_General_Letter_Applicant</name>
         <choiceIcon>
             <iconName>standard:all</iconName>
         </choiceIcon>
-        <choiceText>NW01. General Letter</choiceText>
+        <choiceText>NW01. General Letter - Applicant</choiceText>
         <dataType>String</dataType>
         <value>
-            <stringValue>NW01. General Letter</stringValue>
-        </value>
-    </choices>
-    <choices>
-        <name>NWL_Invalid_New_Lines</name>
-        <choiceIcon>
-            <iconName>utility:error</iconName>
-        </choiceIcon>
-        <choiceText>NW04. Invalid (New Lines)</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <stringValue>NW04. Invalid (New Lines)</stringValue>
-        </value>
-    </choices>
-    <choices>
-        <name>NWL_Invalid_NTT_Only_Including_Implied_Wayleaves</name>
-        <choiceIcon>
-            <iconName>utility:error</iconName>
-        </choiceIcon>
-        <choiceText>NW03. Invalid NTT only_ (Including Implied Wayleaves)</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <stringValue>NW03. Invalid NTT only_ (Including Implied Wayleaves)</stringValue>
-        </value>
-    </choices>
-    <choices>
-        <name>NWL_Invalid_Unclear_NTR</name>
-        <choiceIcon>
-            <iconName>utility:error</iconName>
-        </choiceIcon>
-        <choiceText>NW02. Invalid - Unclear NTR</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <stringValue>NW02. Invalid - Unclear NTR</stringValue>
-        </value>
-    </choices>
-    <choices>
-        <name>NWL_Procedural_Notice</name>
-        <choiceIcon>
-            <iconName>utility:process</iconName>
-        </choiceIcon>
-        <choiceText>NW12. Procedural Notice</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <stringValue>NW12. Procedural Notice</stringValue>
-        </value>
-    </choices>
-    <choices>
-        <name>NWL_Procedural_notice_OH</name>
-        <choiceIcon>
-            <iconName>standard:drafts</iconName>
-        </choiceIcon>
-        <choiceText>&lt;strong&gt;NW12. Procedural notice (OH)&lt;/strong&gt;</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <stringValue>NW12. Procedural notice (OH)</stringValue>
-        </value>
-    </choices>
-    <choices>
-        <name>NWL_Procedural_notice_WR</name>
-        <choiceIcon>
-            <iconName>utility:copy</iconName>
-        </choiceIcon>
-        <choiceText>&lt;strong&gt;NW09. Procedural notice (WR)&lt;/strong&gt;</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <stringValue>NW09. Procedural notice (WR)</stringValue>
-        </value>
-    </choices>
-    <choices>
-        <name>NWL_Request_for_further_information</name>
-        <choiceIcon>
-            <iconName>utility:info_alt</iconName>
-        </choiceIcon>
-        <choiceText>NW05. Request for further information</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <stringValue>NW05. Request for further information</stringValue>
-        </value>
-    </choices>
-    <choices>
-        <name>NWL_Statement_of_evidence_exchange</name>
-        <choiceIcon>
-            <iconName>standard:drafts</iconName>
-        </choiceIcon>
-        <choiceText>&lt;strong&gt;NW10. Statement of evidence exchange&lt;/strong&gt;</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <stringValue>NW10. Statement of evidence exchange</stringValue>
-        </value>
-    </choices>
-    <choices>
-        <name>NWL_Withdrawal_Letter</name>
-        <choiceIcon>
-            <iconName>standard:drafts</iconName>
-        </choiceIcon>
-        <choiceText>NW14. Withdrawal Letter</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <stringValue>NW14. Withdrawal Letter</stringValue>
+            <stringValue>NW01. General Letter - Applicant</stringValue>
         </value>
     </choices>
     <constants>
@@ -552,6 +755,61 @@
         </rules>
     </decisions>
     <decisions>
+        <name>LandOwner_OR_Applicant_OR_Internal</name>
+        <label>LandOwner OR Applicant Or Internal</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Email_Builder_Screen</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Outcome_1_of_LandOwner_OR_Applicant</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_emailToType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>LO</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Find_Landowner_Party</targetReference>
+            </connector>
+            <label>Outcome 1 of LandOwner OR Applicant</label>
+        </rules>
+        <rules>
+            <name>Applicant_Email_Choice</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_emailToType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Applicant</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Applicant_Email_to_To_Address_Value_App</targetReference>
+            </connector>
+            <label>Applicant</label>
+        </rules>
+        <rules>
+            <name>Internal</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_emailToType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Internal</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Email_Builder_Screen</targetReference>
+            </connector>
+            <label>Internal</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>NWL_Letter_Type</name>
         <label>NWL Letter Type</label>
         <locationX>0</locationX>
@@ -584,28 +842,107 @@
         </rules>
     </decisions>
     <decisions>
-        <name>Recipient_Choice</name>
-        <label>Recipient Choice</label>
+        <name>SetToAndCCAddress</name>
+        <label>SetToAndCCAddress</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Email_Builder_Screen</targetReference>
         </defaultConnector>
-        <defaultConnectorLabel>Applicant</defaultConnectorLabel>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
-            <name>Landowner_path</name>
+            <name>Londowner_and_Applicant_Email_exist</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Recipient_Picker.selectedChoiceValues</leftValueReference>
-                <operator>EqualTo</operator>
+                <leftValueReference>Find_Landowner_Party.Email__c</leftValueReference>
+                <operator>IsNull</operator>
                 <rightValue>
-                    <elementReference>Landowner</elementReference>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Find_Landowner_Party.Representative__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Find_Landowner_Party.Representative__r.Email__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Find_Landowner_Party</targetReference>
+                <targetReference>Set_Landlord_Email_To_Address_Value</targetReference>
             </connector>
-            <label>Landowner</label>
+            <label>Londowner and Applicant(Rep) Email exist</label>
+        </rules>
+        <rules>
+            <name>Landowner_Email_only_exist</name>
+            <conditionLogic>1 AND (2 AND 3) OR 4</conditionLogic>
+            <conditions>
+                <leftValueReference>Find_Landowner_Party.Email__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Find_Landowner_Party.Representative__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Find_Landowner_Party.Representative__r.Email__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Find_Landowner_Party.Representative__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Landlord_Email_to_To_Address_Value</targetReference>
+            </connector>
+            <label>Landowner Email only exist</label>
+        </rules>
+        <rules>
+            <name>Applicant_Rep_Email_only_Exist</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Find_Landowner_Party.Email__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Find_Landowner_Party.Representative__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Find_Landowner_Party.Representative__r.Representative__r.Email__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Applicant_Email_to_To_Address_Value</targetReference>
+            </connector>
+            <label>Applicant(Rep) Email only Exist</label>
         </rules>
     </decisions>
     <description>PDF Warning message.
@@ -616,18 +953,111 @@ Limit Attachements</description>
         <dataType>String</dataType>
         <expression>CASE(
     {!Email_Type_Selector.selectedChoiceValues},
-    &quot;NW02. Invalid - Unclear NTR&quot;, {!temp_InvalidNTR_Email_Template},
-    &quot;NW03. Invalid NTT only_ (Including Implied Wayleaves)&quot;, {!template_NW03_Invalid_NTT_only},
-    &quot;&quot;
+
+    &quot;Decision Assessment Form (Internal)&quot;, &quot;&quot;,
+    &quot;NW Checklist (Existing Lines) (internal)&quot;, &quot;&quot;,
+    &quot;NW Checklist (New Lines) (Internal)&quot;, &quot;&quot;,
+
+    &quot;NW01. General Letter - Applicant&quot;, {!template_NTR_Email_Template},
+    &quot;NW01. General Letter - LO&quot;, {!template_NTR_Email_Template},
+
+    &quot;NW02. Invalid - Unclear NTR - Applicant&quot;, {!template_NTR_Email_Template},
+    &quot;NW02. Invalid - Unclear NTR - LO&quot;, {!template_NTR_Email_Template},
+
+    &quot;NW03. Invalid - NTT only (including implied wayleaves) - Applicant&quot;, {!template_NTR_Email_Template},
+    &quot;NW03. Invalid - NTT only (including implied wayleaves) - LO&quot;, {!template_NTR_Email_Template},
+
+    &quot;NW04. Invalid (New Lines) - Applicant&quot;, {!template_NTR_Email_Template},
+    &quot;NW04. Invalid (New Lines) - LO&quot;, {!template_NTR_Email_Template},
+
+    &quot;NW05. Request for further information - Applicant&quot;, {!template_NTR_Email_Template},
+    &quot;NW05. Request for further information - LO&quot;, {!template_NTR_Email_Template},
+
+    &quot;NW06. Acknowledgement letter - Applicant&quot;, {!template_NTR_Email_Template},
+    &quot;NW06. Acknowledgement letter - LO&quot;, {!template_NTR_Email_Template},
+
+    &quot;NW07. Abeyance letter - Applicant&quot;, {!template_NTR_Email_Template},
+    &quot;NW07. Abeyance letter - LO&quot;, {!template_NTR_Email_Template},
+
+    &quot;NW08. CTWR letter - Applicant&quot;, {!template_NTR_Email_Template},
+    &quot;NW08. CTWR letter - LO&quot;, {!template_NTR_Email_Template},
+
+    &quot;NW09. Procedural notice (WR) - Applicant&quot;, {!template_NTR_Email_Template},
+    &quot;NW09. Procedural notice (WR) - LO&quot;, {!template_NTR_Email_Template},
+
+    &quot;NW10. Statement of evidence exchange - Applicant&quot;, {!template_NTR_Email_Template},
+    &quot;NW10. Statement of evidence exchange - LO&quot;, {!template_NTR_Email_Template},
+
+    &quot;NW11. Further representations exchange - Applicant&quot;, {!template_NTR_Email_Template},
+    &quot;NW11. Further representations exchange - LO&quot;, {!template_NTR_Email_Template},
+
+    &quot;NW12. Procedural notice (OH) - Applicant&quot;, {!template_NTR_Email_Template},
+    &quot;NW12. Procedural notice (OH) - LO&quot;, {!template_NTR_Email_Template},
+
+    &quot;NW13. Decision letter - Applicant&quot;, {!template_NTR_Email_Template},
+
+    &quot;NW14. Withdrawal letter - Applicant&quot;, {!template_NTR_Email_Template},
+    &quot;NW14. Withdrawal letter - LO&quot;, {!template_NTR_Email_Template},
+
+    {!template_NTR_Email_Template}
 )</expression>
     </formulas>
     <formulas>
         <name>formula_emailSubject_DV</name>
         <dataType>String</dataType>
+        <expression>&quot;Important information for application: &quot; &amp; {!Get_Case.Name}</expression>
+    </formulas>
+    <formulas>
+        <name>formula_emailToType</name>
+        <dataType>String</dataType>
         <expression>CASE(
-    {!Email_Type_Selector.selectedChoiceLabels},
-    &quot;NW02. Invalid - Unclear NTR&quot;, &quot;Application &quot; &amp; {!Get_Case.Name} &amp; &quot; has been deemed invalid&quot;,
-    &quot;NW03. Invalid NTT only_ (Including Implied Wayleaves)&quot;, &quot;Application &quot; &amp; {!Get_Case.Name} &amp; &quot; has been deemed invalid&quot;,
+    {!Email_Type_Selector.selectedChoiceValues},
+
+    &quot;Decision Assessment Form (Internal)&quot;, &quot;Internal&quot;,
+    &quot;NW Checklist (Existing Lines) (internal)&quot;, &quot;Internal&quot;,
+    &quot;NW Checklist (New Lines) (Internal)&quot;, &quot;Internal&quot;,
+
+    &quot;NW01. General Letter - Applicant&quot;, &quot;Applicant&quot;,
+    &quot;NW01. General Letter - LO&quot;, &quot;LO&quot;,
+
+    &quot;NW02. Invalid - Unclear NTR - Applicant&quot;, &quot;Applicant&quot;,
+    &quot;NW02. Invalid - Unclear NTR - LO&quot;, &quot;LO&quot;,
+
+    &quot;NW03. Invalid - NTT only (including implied wayleaves) - Applicant&quot;, &quot;Applicant&quot;,
+    &quot;NW03. Invalid - NTT only (including implied wayleaves) - LO&quot;, &quot;LO&quot;,
+
+    &quot;NW04. Invalid (New Lines) - Applicant&quot;, &quot;Applicant&quot;,
+    &quot;NW04. Invalid (New Lines) - LO&quot;, &quot;LO&quot;,
+
+    &quot;NW05. Request for further information - Applicant&quot;, &quot;Applicant&quot;,
+    &quot;NW05. Request for further information - LO&quot;, &quot;LO&quot;,
+
+    &quot;NW06. Acknowledgement letter - Applicant&quot;, &quot;Applicant&quot;,
+    &quot;NW06. Acknowledgement letter - LO&quot;, &quot;LO&quot;,
+
+    &quot;NW07. Abeyance letter - Applicant&quot;, &quot;Applicant&quot;,
+    &quot;NW07. Abeyance letter - LO&quot;, &quot;LO&quot;,
+
+    &quot;NW08. CTWR letter - Applicant&quot;, &quot;Applicant&quot;,
+    &quot;NW08. CTWR letter - LO&quot;, &quot;LO&quot;,
+
+    &quot;NW09. Procedural notice (WR) - Applicant&quot;, &quot;Applicant&quot;,
+    &quot;NW09. Procedural notice (WR) - LO&quot;, &quot;LO&quot;,
+
+    &quot;NW10. Statement of evidence exchange - Applicant&quot;, &quot;Applicant&quot;,
+    &quot;NW10. Statement of evidence exchange - LO&quot;, &quot;LO&quot;,
+
+    &quot;NW11. Further representations exchange - Applicant&quot;, &quot;Applicant&quot;,
+    &quot;NW11. Further representations exchange - LO&quot;, &quot;LO&quot;,
+
+    &quot;NW12. Procedural notice (OH) - Applicant&quot;, &quot;Applicant&quot;,
+    &quot;NW12. Procedural notice (OH) - LO&quot;, &quot;LO&quot;,
+
+    &quot;NW13. Decision letter - Applicant&quot;, &quot;Applicant&quot;,
+
+    &quot;NW14. Withdrawal letter - Applicant&quot;, &quot;Applicant&quot;,
+    &quot;NW14. Withdrawal letter - LO&quot;, &quot;LO&quot;,
+
     &quot;&quot;
 )</expression>
     </formulas>
@@ -707,7 +1137,7 @@ Limit Attachements</description>
         <inputAssignments>
             <field>Recipient_Type__c</field>
             <value>
-                <elementReference>Recipient_Picker.selectedChoiceLabels</elementReference>
+                <elementReference>formula_emailToType</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -738,12 +1168,8 @@ Limit Attachements</description>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Set_To_Address_Value</targetReference>
+            <targetReference>SetToAndCCAddress</targetReference>
         </connector>
-        <faultConnector>
-            <isGoTo>true</isGoTo>
-            <targetReference>Add_Error_Log</targetReference>
-        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Case__c</field>
@@ -1071,7 +1497,7 @@ Limit Attachements</description>
                     <name>cc_address</name>
                     <dataType>String</dataType>
                     <defaultValue>
-                        <elementReference>varAdditionalRecipientEmail</elementReference>
+                        <elementReference>var_defaultCCAddress</elementReference>
                     </defaultValue>
                     <fieldText>CC Address</fieldText>
                     <fieldType>InputField</fieldType>
@@ -1262,23 +1688,35 @@ Limit Attachements</description>
         <fields>
             <name>Email_Type_Selector</name>
             <choiceReferences>NWL_Decision_Assessment_Form</choiceReferences>
-            <choiceReferences>NWL_Checklist_Existing_Lines</choiceReferences>
-            <choiceReferences>NWL_Checklist_New_Lines</choiceReferences>
-            <choiceReferences>NWL_General_Letter</choiceReferences>
-            <choiceReferences>NWL_Invalid_Unclear_NTR</choiceReferences>
-            <choiceReferences>NWL_Invalid_NTT_Only_Including_Implied_Wayleaves</choiceReferences>
-            <choiceReferences>NWL_Invalid_New_Lines</choiceReferences>
-            <choiceReferences>NWL_Request_for_further_information</choiceReferences>
-            <choiceReferences>NWL_Acknowledgement_Letter</choiceReferences>
-            <choiceReferences>NWL_Abeyance_Letter</choiceReferences>
-            <choiceReferences>NWL_CTWR_letter</choiceReferences>
-            <choiceReferences>NWL_Procedural_notice_WR</choiceReferences>
-            <choiceReferences>NWL_Statement_of_evidence_exchange</choiceReferences>
-            <choiceReferences>NW11_Further_representations_exchange</choiceReferences>
-            <choiceReferences>NWL_Procedural_notice_OH</choiceReferences>
-            <choiceReferences>NWL_Procedural_Notice</choiceReferences>
-            <choiceReferences>NWL_Decision_Letter</choiceReferences>
-            <choiceReferences>NWL_Withdrawal_Letter</choiceReferences>
+            <choiceReferences>NWL_Checklist_Existing_Lines_Internal</choiceReferences>
+            <choiceReferences>NWL_Checklist_New_Lines_Internal</choiceReferences>
+            <choiceReferences>NWL_General_Letter_Applicant</choiceReferences>
+            <choiceReferences>NW01_GeneralLetter_LO</choiceReferences>
+            <choiceReferences>NW02_Invalid_UnclearNTR_Applicant</choiceReferences>
+            <choiceReferences>NW02_Invalid_UnclearNTR_LO</choiceReferences>
+            <choiceReferences>NW03_Invalid_NTTonly_includingimpliedwayleaves_Applicant</choiceReferences>
+            <choiceReferences>NW03_Invalid_NTTonly_includingimpliedwayleaves_LO</choiceReferences>
+            <choiceReferences>NW04_Invalid_NewLines_Applicant</choiceReferences>
+            <choiceReferences>NW04_Invalid_NewLines_LO</choiceReferences>
+            <choiceReferences>NW05_Requestforfurtherinformation_Applicant</choiceReferences>
+            <choiceReferences>NW05_Requestforfurtherinformation_LO</choiceReferences>
+            <choiceReferences>NW06_Acknowledgementletter_Applicant</choiceReferences>
+            <choiceReferences>NW06_Acknowledgementletter_LO</choiceReferences>
+            <choiceReferences>NW07_Abeyanceletter_Applicant</choiceReferences>
+            <choiceReferences>NW07_Abeyanceletter_LO</choiceReferences>
+            <choiceReferences>NW08_CTWR_letter_Applicant</choiceReferences>
+            <choiceReferences>NW08_CTWRlette_LO</choiceReferences>
+            <choiceReferences>NW09_Proceduralnotice_WR_Applicant</choiceReferences>
+            <choiceReferences>NW09_Proceduralnotice_WR_LO</choiceReferences>
+            <choiceReferences>NW10_Statementofevidenceexchange_Applicant</choiceReferences>
+            <choiceReferences>NW10_Statementofevidenceexchange_LO</choiceReferences>
+            <choiceReferences>NW11_Furtherrepresentationsexchange_Applicant</choiceReferences>
+            <choiceReferences>NW11_Furtherrepresentationsexchange_Lo</choiceReferences>
+            <choiceReferences>NW12_Proceduralnotice_OH_Applicant</choiceReferences>
+            <choiceReferences>NW12_Proceduralnotice_OH_LO</choiceReferences>
+            <choiceReferences>NW13_Decisionletter_Applicant</choiceReferences>
+            <choiceReferences>NW14_Withdrawalletter_Applicant</choiceReferences>
+            <choiceReferences>NW14_Withdrawalletter_LO</choiceReferences>
             <extensionName>flowruntime:visualPicker</extensionName>
             <fieldText>Email Type Selector</fieldText>
             <fieldType>ComponentChoice</fieldType>
@@ -1326,72 +1764,6 @@ Limit Attachements</description>
             </styleProperties>
         </fields>
         <nextOrFinishButtonLabel>Close</nextOrFinishButtonLabel>
-        <showFooter>true</showFooter>
-        <showHeader>false</showHeader>
-    </screens>
-    <screens>
-        <name>Recipient_Selector_Screen</name>
-        <label>Recipient Selector Screen</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <connector>
-            <targetReference>Recipient_Choice</targetReference>
-        </connector>
-        <fields>
-            <name>Header</name>
-            <fieldText>&lt;h1&gt;Who are you wishing to issue a {!vardocumentEmailTypeLabel} to?&lt;/h1&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>Subheader</name>
-            <fieldText>&lt;p&gt;Please select an option from the items below.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>Recipient_Picker</name>
-            <choiceReferences>Landowner</choiceReferences>
-            <choiceReferences>Applicant</choiceReferences>
-            <choiceReferences>Internal_recipient</choiceReferences>
-            <extensionName>flowruntime:visualPicker</extensionName>
-            <fieldType>ComponentChoice</fieldType>
-            <inputParameters>
-                <name>visualPickerSize</name>
-                <value>
-                    <stringValue>large</stringValue>
-                </value>
-            </inputParameters>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>true</isRequired>
-            <storeOutputAutomatically>true</storeOutputAutomatically>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>middle</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <nextOrFinishButtonLabel>Next</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
     </screens>
@@ -1489,14 +1861,14 @@ Limit Attachements</description>
         </inputAssignments>
     </subflows>
     <textTemplates>
-        <name>temp_InvalidNTR_Email_Template</name>
-        <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;DESNZ reference: {!Get_Case.Applicant_Reference__c}&lt;/p&gt;&lt;p&gt;The application for {!Get_Case.Application_Type__c} has been deemed invalid by the case officer.&lt;/p&gt;</text>
-    </textTemplates>
-    <textTemplates>
         <name>template_emailBody</name>
         <isViewedAsPlainText>false</isViewedAsPlainText>
         <text>&lt;p&gt;{!formula_decide_email_body}&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>template_NTR_Email_Template</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;Dear {!Get_Case.Applicant_Name_Formula__c}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Please find the attached letter and any attachments (if included) for your attention.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Please read the letter and if applicable, complete any actions requested as soon as possible.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Regards&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;The Necessary Wayleaves Team&lt;/p&gt;</text>
     </textTemplates>
     <textTemplates>
         <name>template_NW03_Invalid_NTT_only</name>
@@ -1536,6 +1908,13 @@ Limit Attachements</description>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>var_defaultCCAddress</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
         <isOutput>false</isOutput>
     </variables>
     <variables>
