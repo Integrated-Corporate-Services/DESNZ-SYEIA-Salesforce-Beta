@@ -4,6 +4,10 @@
         <application>Case_Management_Suite</application>
         <visible>true</visible>
     </applicationVisibilities>
+    <classAccesses>
+        <apexClass>DynamicPathController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
     <description>Grants read/write access to all default objects related to the Case__c object as well as access to the EIP App.</description>
     <fieldPermissions>
         <editable>true</editable>
