@@ -214,6 +214,9 @@
         <name>choice_NW_Checklist_New_Lines_Internal</name>
         <choiceText>NW Checklist (New Lines) (Internal)</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW Checklist (New Lines) (Internal)</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_S37_Consent_Letter</name>
@@ -632,7 +635,7 @@
             <targetReference>Get_Case</targetReference>
         </connector>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <subflows>
         <name>NW02_Invalid_Unclear_NTR_LO_1</name>
         <label>NW02 Invalid - Unclear NTR - LO</label>
