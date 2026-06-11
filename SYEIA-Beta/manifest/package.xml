@@ -548,6 +548,7 @@
 		<members>NW05_Request_for_further_information_Landowner</members>
 		<members>Party_Before_Save</members>
 		<members>Payment_After_Save</members>
+		<memebers>Screen_DocGen_NW_Checklist_New_Lines_Internal</members>
 		<members>Screen_DocGen_NW01_General_Letter_Applicant_letter</members>
 		<members>Screen_DocGen_NW02_Invalid_Unclear_NTR_Applicant</members>
 		<members>Screen_DocGen_NW02_Invalid_Unclear_NTR_LO</members>
