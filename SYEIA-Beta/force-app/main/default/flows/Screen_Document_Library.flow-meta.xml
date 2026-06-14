@@ -212,6 +212,9 @@
         <name>choice_NW_Checklist_Existing_Line_Internal</name>
         <choiceText>NW Checklist (Existing Lines) (internal)</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW Checklist (Existing Lines) (internal)</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW_Checklist_New_Lines_Internal</name>
@@ -272,9 +275,12 @@
                 <leftValueReference>NWL_Document_Library_CS</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <elementReference>choice_NW_Checklist_Existing_Line_Internal</elementReference>
+                    <stringValue>NW Checklist (Existing Lines) (internal)</stringValue>
                 </rightValue>
             </conditions>
+            <connector>
+                <targetReference>Screen_DocGen_NW_Checklist_Existing_Lines_internal</targetReference>
+            </connector>
             <label>NW Checklist Existing Lines Internal</label>
         </rules>
         <rules>
@@ -603,6 +609,7 @@
             <dataType>String</dataType>
             <fieldText>NWL Document Library</fieldText>
             <fieldType>RadioButtons</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
             <styleProperties>
                 <verticalAlignment>
@@ -635,6 +642,7 @@
             <dataType>Boolean</dataType>
             <fieldText>S37 Document Library</fieldText>
             <fieldType>RadioButtons</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
             <styleProperties>
                 <verticalAlignment>
@@ -754,6 +762,19 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <flowName>Screen_DocGen_NW02_Invalid_Unclear_NTR_Applicant</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>Screen_DocGen_NW_Checklist_Existing_Lines_internal</name>
+        <label>Screen - DocGen - NW Checklist (Existing Lines) (internal)</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW_Checklist_Existing_Lines_internal</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>
