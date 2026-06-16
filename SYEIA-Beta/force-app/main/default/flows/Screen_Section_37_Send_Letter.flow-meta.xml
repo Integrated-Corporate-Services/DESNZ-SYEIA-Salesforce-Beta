@@ -99,6 +99,38 @@
     <apiVersion>65.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
+        <name>Assign_Applicant_Email</name>
+        <label>Assign Applicant Email</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_defaultToAddressValue</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Case.DNO__r.Representative__r.Email__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Email_Builder_Screen</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Applicant_Email_And_LPA</name>
+        <label>Assign Applicant Email And LPA</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_defaultToAddressValue</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Case.DNO__r.Representative__r.Email__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Get_LPA_Consultant_And_Applicant_Path</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Assign_ContentDocId</name>
         <label>Assign ContentDocId</label>
         <locationX>0</locationX>
@@ -123,14 +155,14 @@
             <assignToReference>collection_ToAddresses</assignToReference>
             <operator>Add</operator>
             <value>
-                <elementReference>to_address.value</elementReference>
+                <elementReference>To_Address_Text</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
             <assignToReference>collection_CcAddresses</assignToReference>
             <operator>Add</operator>
             <value>
-                <elementReference>cc_address.value</elementReference>
+                <elementReference>CC_Address_Text</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -147,13 +179,6 @@
             <operator>Assign</operator>
             <value>
                 <elementReference>Email_Type_Selector.selectedChoiceLabels</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>var_defaultToAddressValue</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>Get_Case.DNO__r.Email__c</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -207,19 +232,26 @@
         </connector>
     </assignments>
     <assignments>
-        <name>Set_To_Address_Value</name>
-        <label>Set To Address Value</label>
+        <name>Assign_LPA_Consultation_Email_and_Applicant</name>
+        <label>Assign LPA Consultation Email and Applicant</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>var_defaultToAddressValue</assignToReference>
-            <operator>Assign</operator>
+            <operator>Add</operator>
             <value>
-                <elementReference>Find_Landowner_Party.Email__c</elementReference>
+                <stringValue>,</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_defaultToAddressValue</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_Through_Consultation.Contact_Email_Address__c</elementReference>
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Email_Builder_Screen</targetReference>
+            <targetReference>Loop_Through_Consultation_and_Applicant</targetReference>
         </connector>
     </assignments>
     <choices>
@@ -245,14 +277,14 @@
         </value>
     </choices>
     <choices>
-        <name>Landowner</name>
+        <name>LPA</name>
         <choiceIcon>
             <iconName>utility:people</iconName>
         </choiceIcon>
-        <choiceText>Landowner</choiceText>
+        <choiceText>LPA</choiceText>
         <dataType>String</dataType>
         <value>
-            <stringValue>Landowner</stringValue>
+            <stringValue>LPA</stringValue>
         </value>
     </choices>
     <choices>
@@ -386,23 +418,52 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <targetReference>Get_LPA_Consultant</targetReference>
+            <targetReference>Assign_Applicant_Email_And_LPA</targetReference>
         </defaultConnector>
-        <defaultConnectorLabel>Applicant</defaultConnectorLabel>
+        <defaultConnectorLabel>Applicant and LPA</defaultConnectorLabel>
         <rules>
-            <name>Landowner_path</name>
+            <name>LPA_Only_path</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>Recipient_Picker.selectedChoiceValues</leftValueReference>
-                <operator>Contains</operator>
+                <operator>EqualTo</operator>
                 <rightValue>
-                    <elementReference>Landowner</elementReference>
+                    <elementReference>LPA</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Recipient_Picker.selectedChoiceValues</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>Applicant</elementReference>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Find_Landowner_Party</targetReference>
+                <targetReference>Get_LPA_Consultant</targetReference>
             </connector>
-            <label>Landowner</label>
+            <label>Is LPA Only</label>
+        </rules>
+        <rules>
+            <name>Applicant_Only_Path</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Recipient_Picker.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>Applicant</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Recipient_Picker.selectedChoiceValues</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>LPA</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Applicant_Email</targetReference>
+            </connector>
+            <label>Applicant Only</label>
         </rules>
     </decisions>
     <description>Send Section 37 Letter
@@ -439,6 +500,20 @@ LPA Email</description>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
             <targetReference>Assign_LPA_Consultation_Email</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Email_Builder_Screen</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>Loop_Through_Consultation_and_Applicant</name>
+        <label>Loop Through Consultation and Applicant</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>Get_LPA_Consultant_And_Applicant_Path</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Assign_LPA_Consultation_Email_and_Applicant</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
             <targetReference>Email_Builder_Screen</targetReference>
@@ -498,7 +573,7 @@ LPA Email</description>
         <inputAssignments>
             <field>Recipient_Email__c</field>
             <value>
-                <elementReference>to_address.value</elementReference>
+                <elementReference>To_Address_Text</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -528,38 +603,6 @@ LPA Email</description>
         <object>Email_Tracking__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
-    <recordLookups>
-        <name>Find_Landowner_Party</name>
-        <label>Find Landowner Party</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Set_To_Address_Value</targetReference>
-        </connector>
-        <faultConnector>
-            <isGoTo>true</isGoTo>
-            <targetReference>Add_Error_Log</targetReference>
-        </faultConnector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>Case__c</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>recordId</elementReference>
-            </value>
-        </filters>
-        <filters>
-            <field>Party_Type__c</field>
-            <operator>EqualTo</operator>
-            <value>
-                <stringValue>Landowner</stringValue>
-            </value>
-        </filters>
-        <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>Party__c</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
     <recordLookups>
         <name>Get_Applicant_Tracking_Record</name>
         <label>Get Applicant Tracking Record</label>
@@ -697,7 +740,7 @@ LPA Email</description>
             <field>Recipient_Type__c</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Landowner</stringValue>
+                <stringValue>LPA</stringValue>
             </value>
         </filters>
         <filters>
@@ -720,10 +763,44 @@ LPA Email</description>
         <connector>
             <targetReference>Loop_Through_Consultation</targetReference>
         </connector>
-        <faultConnector>
-            <isGoTo>true</isGoTo>
-            <targetReference>Add_Error_Log</targetReference>
-        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Consultation_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>LPA</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Case__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Contact_Email_Address__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Consultation__c</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Contact_Email_Address__c</queriedFields>
+        <queriedFields>Case_Officers_Email_Address__c</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_LPA_Consultant_And_Applicant_Path</name>
+        <label>Get LPA Consultant and Applicant Path</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_Through_Consultation_and_Applicant</targetReference>
+        </connector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Consultation_Type__c</field>
@@ -839,6 +916,7 @@ LPA Email</description>
                     </defaultValue>
                     <fieldText>Subject</fieldText>
                     <fieldType>InputField</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -850,36 +928,21 @@ LPA Email</description>
                     </styleProperties>
                 </fields>
                 <fields>
-                    <name>to_address</name>
-                    <extensionName>flowruntime:email</extensionName>
-                    <fieldType>ComponentInstance</fieldType>
-                    <inputParameters>
-                        <name>label</name>
-                        <value>
-                            <stringValue>To Address</stringValue>
-                        </value>
-                    </inputParameters>
-                    <inputParameters>
-                        <name>required</name>
-                        <value>
-                            <booleanValue>true</booleanValue>
-                        </value>
-                    </inputParameters>
-                    <inputParameters>
-                        <name>value</name>
-                        <value>
-                            <elementReference>var_defaultToAddressValue</elementReference>
-                        </value>
-                    </inputParameters>
-                    <inputParameters>
-                        <name>placeholder</name>
-                        <value>
-                            <stringValue>you@example.com</stringValue>
-                        </value>
-                    </inputParameters>
+                    <name>To_Address_Text</name>
+                    <dataType>String</dataType>
+                    <defaultValue>
+                        <elementReference>var_defaultToAddressValue</elementReference>
+                    </defaultValue>
+                    <fieldText>To Address</fieldText>
+                    <fieldType>InputField</fieldType>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isDisabled>
+                        <booleanValue>false</booleanValue>
+                    </isDisabled>
+                    <isReadOnly>
+                        <booleanValue>false</booleanValue>
+                    </isReadOnly>
                     <isRequired>true</isRequired>
-                    <storeOutputAutomatically>true</storeOutputAutomatically>
                     <styleProperties>
                         <verticalAlignment>
                             <stringValue>top</stringValue>
@@ -890,24 +953,21 @@ LPA Email</description>
                     </styleProperties>
                 </fields>
                 <fields>
-                    <name>cc_address</name>
-                    <extensionName>flowruntime:email</extensionName>
-                    <fieldType>ComponentInstance</fieldType>
-                    <inputParameters>
-                        <name>label</name>
-                        <value>
-                            <stringValue>CC Address</stringValue>
-                        </value>
-                    </inputParameters>
-                    <inputParameters>
-                        <name>value</name>
-                        <value>
-                            <elementReference>varAdditionalRecipientEmail</elementReference>
-                        </value>
-                    </inputParameters>
+                    <name>CC_Address_Text</name>
+                    <dataType>String</dataType>
+                    <defaultValue>
+                        <elementReference>varAdditionalRecipientEmail</elementReference>
+                    </defaultValue>
+                    <fieldText>CC Address</fieldText>
+                    <fieldType>InputField</fieldType>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-                    <isRequired>true</isRequired>
-                    <storeOutputAutomatically>true</storeOutputAutomatically>
+                    <isDisabled>
+                        <booleanValue>false</booleanValue>
+                    </isDisabled>
+                    <isReadOnly>
+                        <booleanValue>false</booleanValue>
+                    </isReadOnly>
+                    <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
                             <stringValue>top</stringValue>
@@ -1111,7 +1171,7 @@ LPA Email</description>
         <allowPause>false</allowPause>
         <fields>
             <name>No_Attachment_Display_Text</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(253, 7, 7);&quot;&gt;There are no attachments related to the Application. Please attach the letter you intend to send.&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;There are no attachments related to the Application. Please attach the letter you intend to send.&lt;/strong&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -1165,7 +1225,7 @@ LPA Email</description>
         </fields>
         <fields>
             <name>Recipient_Picker</name>
-            <choiceReferences>Landowner</choiceReferences>
+            <choiceReferences>LPA</choiceReferences>
             <choiceReferences>Applicant</choiceReferences>
             <extensionName>flowruntime:visualPicker</extensionName>
             <fieldType>ComponentMultiChoice</fieldType>
@@ -1201,7 +1261,7 @@ LPA Email</description>
         <allowPause>false</allowPause>
         <fields>
             <name>DisplayText_Non_PDF_File_Selected</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;color: rgb(33, 110, 78); background-color: rgba(5, 21, 36, 0.06); font-size: 14px;&quot;&gt;Only PDF files are permitted as attachments for outgoing emails; any file intended for sending must be uploaded in PDF format&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;Only PDF files are permitted as attachments for outgoing emails; any file intended for sending must be uploaded in PDF format.&lt;/strong&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -1230,7 +1290,7 @@ LPA Email</description>
         </connector>
         <fields>
             <name>WarningMessageDisplay</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(21, 1, 1);&quot;&gt;Please ensure you have manually converted the Letter you wish to send as PDF and uploaded to the Case.&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(250, 5, 5);&quot;&gt;Have you converted the files needed as PDF and attached to the case?&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(21, 1, 1);&quot;&gt;Please ensure you have manually converted the Letter you wish to send as PDF and uploaded to the Case.&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;Have you converted the files needed as PDF and attached to the case?&lt;/strong&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -1293,6 +1353,14 @@ LPA Email</description>
         <name>bool_SelectedPDF</name>
         <dataType>Boolean</dataType>
         <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>list of to email addresses</description>
+        <name>col_to_email</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
     </variables>
