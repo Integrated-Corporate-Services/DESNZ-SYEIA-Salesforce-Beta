@@ -3,6 +3,9 @@
  * creates Salesforce records based on JSON payloads.
  */
 public with sharing class InboundForm_Processor {
+    private static final String WITHDRAWAL_EVENT_TYPE = 'WITHDRAWL_REQUESTED';
+    private static final String S37_FORM_TYPE = 'S37';
+    private static final String S37_WITHDRAWAL_FORM_TYPE = 'S37_WITHDRAWAL_REQUEST';
     
     
     // Schema cache to avoid repeated getGlobalDescribe calls
@@ -125,12 +128,14 @@ public with sharing class InboundForm_Processor {
             // Store parser in result for use in afterPrimaryInsert hook
             result.parser = parser;
             
-            // Get form type
-            String formType = parser.getString('formType');
-            if (String.isBlank(formType)) {
+            // Get configured form type (may be derived from event type)
+            String payloadFormType = parser.getString('formType');
+            if (String.isBlank(payloadFormType)) {
                 result.addError('formType not found in payload');
                 return result;
             }
+
+            String formType = resolveConfiguredFormType(parser, payloadFormType);
             
             // Get configuration
             InboundForm_MappingConfig.FormTypeConfig formConfig = 
@@ -197,6 +202,18 @@ public with sharing class InboundForm_Processor {
         }
         
         return result;
+    }
+
+    /**
+     * Resolve inbound payload into a configured form type key.
+     * S37 withdrawal events are processed by a dedicated withdrawal config.
+     */
+    private static String resolveConfiguredFormType(InboundForm_JSONParser parser, String payloadFormType) {
+        String eventType = parser.getString('eventType');
+        if (payloadFormType == S37_FORM_TYPE && eventType == WITHDRAWAL_EVENT_TYPE) {
+            return S37_WITHDRAWAL_FORM_TYPE;
+        }
+        return payloadFormType;
     }
     
     /**

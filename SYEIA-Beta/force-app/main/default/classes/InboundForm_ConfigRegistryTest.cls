@@ -91,6 +91,8 @@ private class InboundForm_ConfigRegistryTest {
         
         Assert.isNotNull(formTypes, 'Form types set should not be null');
         Assert.isTrue(formTypes.contains('S37'), 'S37 should be registered');
+        Assert.isTrue(formTypes.contains('S37_WITHDRAWAL_REQUEST'),
+            'S37 withdrawal form type should be registered');
     }
     
     // ========================================================================
@@ -106,6 +108,10 @@ private class InboundForm_ConfigRegistryTest {
         Test.stopTest();
         
         Assert.isTrue(isSupported, 'S37 should be supported');
+        Assert.isTrue(
+            InboundForm_ConfigRegistry.isFormTypeSupported('S37_WITHDRAWAL_REQUEST'),
+            'S37 withdrawal form type should be supported'
+        );
     }
     
     @IsTest
@@ -168,6 +174,8 @@ private class InboundForm_ConfigRegistryTest {
         Assert.isTrue(summary.contains('Form Type Registry Summary'), 
             'Summary should contain header');
         Assert.isTrue(summary.contains('S37'), 'Summary should contain S37');
+        Assert.isTrue(summary.contains('S37_WITHDRAWAL_REQUEST'),
+            'Summary should contain S37 withdrawal form type');
     }
     
     // ========================================================================
