@@ -63,6 +63,7 @@ public class InboundForm_ConfigRegistry {
         // ═══════════════════════════════════════════════════════════
         
         registerConfig(InboundForm_S37Config.getConfig());
+        registerConfig(InboundForm_S37WithdrawalConfig.getConfig());
         
         // ═══════════════════════════════════════════════════════════
     }

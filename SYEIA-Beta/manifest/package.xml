@@ -54,6 +54,8 @@
 		<members>InboundRequestTriggerHandlerTest</members>
 		<members>InboundRequestTriggerHelper</members>
 		<members>InboundRequestTriggerHelperTest</members>
+		<members>InboundForm_S37WithdrawalConfig</members>
+		<members>InboundForm_S37WithdrawalHandler</members>
 		<members>JitHandler</members>
 		<members>JitHandlerTest</members>
 		<members>OAuthTokenService</members>
