@@ -820,7 +820,7 @@
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>NW02_Invalid_Unclear_NTR</name>
-            <conditionLogic>and</conditionLogic>
+            <conditionLogic>or</conditionLogic>
             <conditions>
                 <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
                 <operator>EqualTo</operator>
@@ -839,6 +839,28 @@
                 <targetReference>Update_NW02_Invalid_Letter_Date</targetReference>
             </connector>
             <label>NW02. Invalid - Unclear NTR</label>
+        </rules>
+        <rules>
+            <name>NW05_Request_for_further_information</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW05. Request for further information - Applicant</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW05. Request for further information - LO</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_NW05_Request_for_further_information</targetReference>
+            </connector>
+            <label>NW05. Request for further information</label>
         </rules>
     </decisions>
     <decisions>
@@ -1394,6 +1416,30 @@ Limit Attachements</description>
         <object>Case__c</object>
     </recordUpdates>
     <recordUpdates>
+        <name>Update_NW05_Request_for_further_information</name>
+        <label>Update NW05. Request for further information</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Email_Tracking_Record</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Case.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Date_Information_Was_Requested__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Case__c</object>
+    </recordUpdates>
+    <recordUpdates>
         <name>Update_NWL_Letter_Date</name>
         <label>Update NWL Letter Date</label>
         <locationX>0</locationX>
@@ -1443,6 +1489,7 @@ Limit Attachements</description>
                     </defaultValue>
                     <fieldText>Subject</fieldText>
                     <fieldType>InputField</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1501,6 +1548,7 @@ Limit Attachements</description>
                     </defaultValue>
                     <fieldText>CC Address</fieldText>
                     <fieldType>InputField</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isDisabled>
                         <booleanValue>false</booleanValue>
                     </isDisabled>
@@ -1828,7 +1876,7 @@ Limit Attachements</description>
             <targetReference>Get_Case</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <subflows>
         <name>Add_Error_Log</name>
         <label>Add Error Log</label>

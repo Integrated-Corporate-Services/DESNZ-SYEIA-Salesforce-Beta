@@ -173,6 +173,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Case__c.Date_Information_Was_Requested__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Case__c.DNO_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
