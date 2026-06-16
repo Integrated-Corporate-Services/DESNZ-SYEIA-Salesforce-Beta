@@ -154,7 +154,7 @@
 		<members>Case__c.County__c</members>
 		<members>Case__c.Current_Landowner_Signed_Wayleave__c</members>
 		<members>Case__c.Date_Case_Sent_For_Approval__c</members>
-		<members>Date_Information_Was_Requested__c</members>
+		<members>Case__c.Date_Information_Was_Requested__c</members>
 		<members>Case__c.Decision_Date__c</members>
 		<members>Case__c.DNO_Name__c</members>
 		<members>Case__c.DNO__c</members>
