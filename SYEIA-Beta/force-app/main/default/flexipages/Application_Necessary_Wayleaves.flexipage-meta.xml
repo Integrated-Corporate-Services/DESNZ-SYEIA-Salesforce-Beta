@@ -231,6 +231,12 @@
                 <identifier>RecordRejected_On_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Date_Information_Was_Requested__c</fieldItem>
+                <identifier>RecordDate_Information_Was_Requested__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-6bea69ba-47ee-4dfa-98d4-ab4c9aef52af</name>
         <type>Facet</type>
     </flexiPageRegions>
