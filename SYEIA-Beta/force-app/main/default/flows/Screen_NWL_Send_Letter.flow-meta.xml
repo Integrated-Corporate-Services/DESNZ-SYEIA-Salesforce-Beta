@@ -203,7 +203,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
-            <assignToReference>var_defaultCCAddress</assignToReference>
+            <assignToReference>var_defaultToAddressValue</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>Find_Landowner_Party.Representative__r.Email__c</elementReference>
@@ -258,7 +258,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
-            <assignToReference>var_defaultToAddressValue</assignToReference>
+            <assignToReference>var_defaultCCAddress</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>Find_Landowner_Party.Email__c</elementReference>
@@ -903,7 +903,7 @@
         </rules>
         <rules>
             <name>Landowner_Email_only_exist</name>
-            <conditionLogic>1 AND (2 AND 3) OR 4</conditionLogic>
+            <conditionLogic>1 AND 2 AND 3</conditionLogic>
             <conditions>
                 <leftValueReference>Find_Landowner_Party.Email__c</leftValueReference>
                 <operator>IsNull</operator>
@@ -920,13 +920,6 @@
             </conditions>
             <conditions>
                 <leftValueReference>Find_Landowner_Party.Representative__r.Email__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Find_Landowner_Party.Representative__c</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
@@ -955,7 +948,7 @@
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>Find_Landowner_Party.Representative__r.Representative__r.Email__c</leftValueReference>
+                <leftValueReference>Find_Landowner_Party.Representative__r.Email__c</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
