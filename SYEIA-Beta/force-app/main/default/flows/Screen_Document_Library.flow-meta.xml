@@ -48,6 +48,9 @@
         <name>choice_Decision_Assessment_Form_Internal</name>
         <choiceText>Decision Assessment Form (Internal)</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>Decision Assessment Form (Internal)</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW01_General_Letter_Land_Owner</name>
@@ -263,9 +266,12 @@
                 <leftValueReference>NWL_Document_Library_CS</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <elementReference>choice_Decision_Assessment_Form_Internal</elementReference>
+                    <stringValue>Decision Assessment Form (Internal)</stringValue>
                 </rightValue>
             </conditions>
+            <connector>
+                <targetReference>Screen_DocGen_Decision_Assessment_Form_Internal</targetReference>
+            </connector>
             <label>Decision Assessment Form Internal</label>
         </rules>
         <rules>
@@ -736,6 +742,19 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <flowName>NW_Invalid_NTT_only_including_implied_wayleaves_LO</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>Screen_DocGen_Decision_Assessment_Form_Internal</name>
+        <label>Screen - DocGen - Decision Assessment Form (Internal)</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_Decision_Assessment_Form_Internal</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>

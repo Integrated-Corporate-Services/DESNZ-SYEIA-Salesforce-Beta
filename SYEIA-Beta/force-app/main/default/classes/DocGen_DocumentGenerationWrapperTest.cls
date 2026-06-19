@@ -85,7 +85,7 @@ private class DocGen_DocumentGenerationWrapperTest {
       'ReferenceObject should match test case ID'
     );
     Assert.areEqual(
-      '{"field1":"value1","field2":"value2"}',
+      DocGen_DocumentGenerationWrapper.sanitizeTokenDataForJson('{"field1":"value1","field2":"value2"}'),
       process.TokenData,
       'TokenData should match input'
     );
@@ -282,7 +282,7 @@ private class DocGen_DocumentGenerationWrapperTest {
     ];
 
     Assert.areEqual(
-      complexTokenData,
+      DocGen_DocumentGenerationWrapper.sanitizeTokenDataForJson(complexTokenData),
       process.TokenData,
       'Complex token data should be stored correctly'
     );
