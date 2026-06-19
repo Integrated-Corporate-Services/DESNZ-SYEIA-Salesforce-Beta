@@ -239,7 +239,7 @@ private class InboundForm_ProcessorTest {
                 '"voluntaryAgreement":null' +
             '},' +
             '"desnzRef":"' + desnzRef + '",' +
-            '"eventType":"WITHDRAWL_REQUESTED"' +
+            '"eventType":"WITHDRAWAL_REQUESTED"' +
         '}';
     }
     
@@ -895,8 +895,8 @@ private class InboundForm_ProcessorTest {
             WHERE Id = :existingCase.Id
             LIMIT 1
         ];
-        // Assert.areEqual('Withdrawal Requested', updatedCase.Status__c,
-            // 'Case status should be updated to Withdrawal Requested');
+        Assert.areEqual('Withdrawal Requested', updatedCase.Status__c,
+            'Case status should be updated to Withdrawal Requested');
     }
     
     // ========================================================================

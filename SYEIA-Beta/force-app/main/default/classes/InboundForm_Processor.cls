@@ -3,7 +3,7 @@
  * creates Salesforce records based on JSON payloads.
  */
 public with sharing class InboundForm_Processor {
-    private static final String WITHDRAWAL_EVENT_TYPE = 'WITHDRAWL_REQUESTED';
+    private static final String WITHDRAWAL_EVENT_TYPE = 'WITHDRAWAL_REQUESTED';
     private static final String S37_FORM_TYPE = 'S37';
     private static final String S37_WITHDRAWAL_FORM_TYPE = 'S37_WITHDRAWAL_REQUEST';
     
@@ -210,10 +210,18 @@ public with sharing class InboundForm_Processor {
      */
     private static String resolveConfiguredFormType(InboundForm_JSONParser parser, String payloadFormType) {
         String eventType = parser.getString('eventType');
-        if (payloadFormType == S37_FORM_TYPE && eventType == WITHDRAWAL_EVENT_TYPE) {
+        if (payloadFormType == S37_FORM_TYPE && isWithdrawalRequestedEvent(eventType)) {
             return S37_WITHDRAWAL_FORM_TYPE;
         }
         return payloadFormType;
+    }
+
+    private static Boolean isWithdrawalRequestedEvent(String eventType) {
+        if (String.isBlank(eventType)) {
+            return false;
+        }
+
+        return eventType.equalsIgnoreCase(WITHDRAWAL_EVENT_TYPE);
     }
     
     /**
@@ -801,6 +809,11 @@ public with sharing class InboundForm_Processor {
                 if (!result.success) continue;
                 
                 Id primaryId = inboundToPrimaryMap.get(result.inboundRequestId);
+                if (primaryId == null
+                        && result.createdRecords.containsKey(config.primaryObject)
+                        && !result.createdRecords.get(config.primaryObject).isEmpty()) {
+                    primaryId = result.createdRecords.get(config.primaryObject)[0].Id;
+                }
                 if (primaryId != null && result.parser != null) {
                     try {
                         handler.afterPrimaryInsert(result.parser, primaryId, result);
