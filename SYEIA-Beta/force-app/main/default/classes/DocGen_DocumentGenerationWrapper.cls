@@ -2,6 +2,7 @@ public class DocGen_DocumentGenerationWrapper {
     
     @InvocableMethod(label='Generate Document' description='Creates a DocumentGenerationProcess record and returns its ID')
     public static List<String> generateDocument(List<DocumentGenerationRequest> requests) {
+        
         List<String> documentGenerationProcessIds = new List<String>();
         
         if (requests == null || requests.isEmpty()) {
@@ -10,36 +11,68 @@ public class DocGen_DocumentGenerationWrapper {
         
         DocumentGenerationRequest request = requests[0];
         
-        String documentType = 'Generate';//'GenerateAndConvert' - For both generation and conversion (PDF), 'Generate' - For generation only, 'Convert' - For conversion only
+        String documentType = 'Generate';
         String documentStatus = 'InProgress';
         String documentDocGenApiVersionType = 'Advanced';
         
-        String requestText = '{"keepIntermediate":false,"title":"' + request.documentTitle + '","templateContentVersionId":"' + request.templateContentVersionId + '"}';
+        String requestText =
+            '{"keepIntermediate":false,"title":"' +
+            request.documentTitle +
+            '","templateContentVersionId":"' +
+            request.templateContentVersionId +
+            '"}';
+        
+        String safeTokenData = request.tokenData;
+        
+        if (safeTokenData != null) {
+            
+            safeTokenData = safeTokenData
+                .replace('\r\n', '\\n')
+                .replace('\n', '\\n')
+                .replace('\r', '\\n');
+            
+            Map<String, Object> tokenMap =
+                (Map<String, Object>) JSON.deserializeUntyped(safeTokenData);
+            
+            for (String k : tokenMap.keySet()) {
+                
+                Object val = tokenMap.get(k);
+                
+                if (val instanceof String) {
+                    String s = (String) val;                    
+                    s = s.replace('\\n', '\r\n');
+                    tokenMap.put(k, s);
+                }
+            }            
+            safeTokenData = JSON.serialize(tokenMap);
+        }
         
         DocumentGenerationProcess documentGenerationProcessToInsert = new DocumentGenerationProcess(
             Type = documentType,
             Status = documentStatus,
             RequestText = requestText,
             ReferenceObject = request.referenceObject,
-            TokenData = request.tokenData,
+            TokenData = safeTokenData,
             DocGenApiVersionType = documentDocGenApiVersionType
         );
-        try{
+        
+        try {
             insert documentGenerationProcessToInsert;
             Logger.warn('Inserted DocumentGenerationProcess with Id: ' + documentGenerationProcessToInsert.Id);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             Logger.error('Error inserting DocumentGenerationProcess: ' + e.getMessage());
             Logger.setScenario('DocGen_DocumentGenerationWrapper.generateDocument');
             Logger.saveLog();
-            throw e; // Re-throw the exception after logging
+            throw e;
         }
         
         documentGenerationProcessIds.add(documentGenerationProcessToInsert.Id);
-        
         return documentGenerationProcessIds;
     }
     
     public class DocumentGenerationRequest {
+        
         @InvocableVariable(label='Template Content Version ID' required=true)
         public String templateContentVersionId;
         

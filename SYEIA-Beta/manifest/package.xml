@@ -551,6 +551,7 @@
 		<members>NW05_Request_for_further_information_Landowner</members>
 		<members>Party_Before_Save</members>
 		<members>Payment_After_Save</members>
+		<members>Screen_DocGen_Decision_Assessment_Form_Internal</members>
 		<members>Screen_DocGen_NW_Checklist_Existing_Lines_internal</members>
 		<members>Screen_DocGen_NW_Checklist_New_Lines_Internal</members>
 		<members>Screen_DocGen_NW01_General_Letter_Applicant_letter</members>
