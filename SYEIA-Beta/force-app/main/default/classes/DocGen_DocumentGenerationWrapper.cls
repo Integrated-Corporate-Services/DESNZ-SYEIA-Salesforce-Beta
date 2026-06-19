@@ -21,32 +21,9 @@ public class DocGen_DocumentGenerationWrapper {
             '","templateContentVersionId":"' +
             request.templateContentVersionId +
             '"}';
-        
-        String safeTokenData = request.tokenData;
-        
-        if (safeTokenData != null) {
-            
-            safeTokenData = safeTokenData
-                .replace('\r\n', '\\n')
-                .replace('\n', '\\n')
-                .replace('\r', '\\n');
-            
-            Map<String, Object> tokenMap =
-                (Map<String, Object>) JSON.deserializeUntyped(safeTokenData);
-            
-            for (String k : tokenMap.keySet()) {
-                
-                Object val = tokenMap.get(k);
-                
-                if (val instanceof String) {
-                    String s = (String) val;                    
-                    s = s.replace('\\n', '\r\n');
-                    tokenMap.put(k, s);
-                }
-            }            
-            safeTokenData = JSON.serialize(tokenMap);
-        }
-        
+
+        String safeTokenData = sanitizeTokenDataForJson(request.tokenData);
+
         DocumentGenerationProcess documentGenerationProcessToInsert = new DocumentGenerationProcess(
             Type = documentType,
             Status = documentStatus,
@@ -69,6 +46,36 @@ public class DocGen_DocumentGenerationWrapper {
         
         documentGenerationProcessIds.add(documentGenerationProcessToInsert.Id);
         return documentGenerationProcessIds;
+    }
+
+    @TestVisible
+    private static String sanitizeTokenDataForJson(String tokenData){
+
+        String safeTokenData = tokenData;
+        
+        if (safeTokenData != null) {
+
+            safeTokenData = safeTokenData
+                .replace('\r\n', '\\n')
+                .replace('\n', '\\n')
+                .replace('\r', '\\n');
+            
+            Map<String, Object> tokenMap =
+                (Map<String, Object>) JSON.deserializeUntyped(safeTokenData);
+            
+            for (String k : tokenMap.keySet()) {
+                
+                Object val = tokenMap.get(k);
+                
+                if (val instanceof String) {
+                    String s = (String) val;                    
+                    s = s.replace('\\n', '\r\n');
+                    tokenMap.put(k, s);
+                }
+            }            
+            safeTokenData = JSON.serialize(tokenMap);
+        }
+        return safeTokenData;
     }
     
     public class DocumentGenerationRequest {
