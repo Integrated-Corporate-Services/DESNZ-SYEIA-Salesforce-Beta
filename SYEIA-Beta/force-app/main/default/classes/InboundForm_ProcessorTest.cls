@@ -846,57 +846,62 @@ private class InboundForm_ProcessorTest {
     static void testProcessRequests_S37WithdrawalRequestPayload() {
         InboundForm_Processor.clearAllCaches();
         InboundForm_ConfigRegistry.clearCache();
+        CaseTriggerHelper.disableProcessing();
+        try {
 
-        String appId = 'a4120bcf-c2c4-4d42-a1bd-254ac543c251';
-        String desnzRef = 'S3701492';
-        Case__c existingCase = new Case__c(
-            Name = desnzRef,
-            Status__c = 'New',
-            AWS_Application_Id__c = appId
-        );
-        insert existingCase;
+            String appId = 'a4120bcf-c2c4-4d42-a1bd-254ac543c251';
+            String desnzRef = 'S3701492';
+            Case__c existingCase = new Case__c(
+                Name = desnzRef,
+                Status__c = 'New',
+                AWS_Application_Id__c = appId
+            );
+            insert existingCase;
 
-        Inbound_Request__c request = new Inbound_Request__c(
-            Payload__c = getS37WithdrawalJson(appId, desnzRef),
-            Status__c = 'Received'
-        );
-        insert request;
+            Inbound_Request__c request = new Inbound_Request__c(
+                Payload__c = getS37WithdrawalJson(appId, desnzRef),
+                Status__c = 'Received'
+            );
+            insert request;
 
-        List<Inbound_Request__c> requests = new List<Inbound_Request__c>{
-            [SELECT Id, Payload__c FROM Inbound_Request__c WHERE Id = :request.Id]
-        };
+            List<Inbound_Request__c> requests = new List<Inbound_Request__c>{
+                [SELECT Id, Payload__c FROM Inbound_Request__c WHERE Id = :request.Id]
+            };
 
-        Test.startTest();
-        Map<Id, InboundForm_Processor.ProcessingResult> results =
-            InboundForm_Processor.processRequests(requests);
-        Test.stopTest();
+            Test.startTest();
+            Map<Id, InboundForm_Processor.ProcessingResult> results =
+                InboundForm_Processor.processRequests(requests);
+            Test.stopTest();
 
-        InboundForm_Processor.ProcessingResult result = results.get(request.Id);
-        Assert.isTrue(result.success, 'S37 withdrawal payload should process successfully');
-        Assert.areEqual('S37_WITHDRAWAL_REQUEST', result.formType,
-            'Withdrawal payload should be routed to withdrawal form type');
+            InboundForm_Processor.ProcessingResult result = results.get(request.Id);
+            Assert.isTrue(result.success, 'S37 withdrawal payload should process successfully');
+            Assert.areEqual('S37_WITHDRAWAL_REQUEST', result.formType,
+                'Withdrawal payload should be routed to withdrawal form type');
 
-        List<Withdrawal_Request__c> inserted = [
-            SELECT Id, Case__c, Status__c, Withdrawal_Request_Reason__c
-            FROM Withdrawal_Request__c
-            WHERE Case__c = :existingCase.Id
-        ];
+            List<Withdrawal_Request__c> inserted = [
+                SELECT Id, Case__c, Status__c, Withdrawal_Request_Reason__c
+                FROM Withdrawal_Request__c
+                WHERE Case__c = :existingCase.Id
+            ];
 
-        Assert.areEqual(2, inserted.size(), 'Should create two withdrawal requests');
-        Assert.areEqual('Pending', inserted[0].Status__c,
-            'Withdrawal request status should be normalized to Pending');
-        Assert.areEqual('testing reason for withdrawal',
-            inserted[0].Withdrawal_Request_Reason__c,
-            'Withdrawal reason should be mapped from payload');
+            Assert.areEqual(2, inserted.size(), 'Should create two withdrawal requests');
+            Assert.areEqual('Pending', inserted[0].Status__c,
+                'Withdrawal request status should be normalized to Pending');
+            Assert.areEqual('testing reason for withdrawal',
+                inserted[0].Withdrawal_Request_Reason__c,
+                'Withdrawal reason should be mapped from payload');
 
-        Case__c updatedCase = [
-            SELECT Id, Status__c
-            FROM Case__c
-            WHERE Id = :existingCase.Id
-            LIMIT 1
-        ];
-        Assert.areEqual('Withdrawal Requested', updatedCase.Status__c,
-            'Case status should be updated to Withdrawal Requested');
+            Case__c updatedCase = [
+                SELECT Id, Status__c
+                FROM Case__c
+                WHERE Id = :existingCase.Id
+                LIMIT 1
+            ];
+            Assert.areEqual('Withdrawal Requested', updatedCase.Status__c,
+                'Case status should be updated to Withdrawal Requested');
+        } finally {
+            CaseTriggerHelper.enableProcessing();
+        }
     }
     
     // ========================================================================
