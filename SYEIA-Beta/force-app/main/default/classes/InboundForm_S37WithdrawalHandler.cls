@@ -1,5 +1,5 @@
 public class InboundForm_S37WithdrawalHandler implements InboundForm_Processor.IFormHandler {
-    private static final String WITHDRAWAL_EVENT_TYPE = 'WITHDRAWL_REQUESTED';
+    private static final String WITHDRAWAL_EVENT_TYPE = 'WITHDRAWAL_REQUESTED';
     private static final String WITHDRAWAL_REQUESTED_STATUS = 'Withdrawal Requested';
 
     public List<String> validate(InboundForm_JSONParser parser) {
@@ -13,7 +13,7 @@ public class InboundForm_S37WithdrawalHandler implements InboundForm_Processor.I
             return errors;
         }
 
-        if (eventType != WITHDRAWAL_EVENT_TYPE) {
+        if (!isWithdrawalRequestedEvent(eventType)) {
             errors.add('Unsupported eventType for S37 withdrawal handler: ' + eventType);
             return errors;
         }
@@ -90,5 +90,13 @@ public class InboundForm_S37WithdrawalHandler implements InboundForm_Processor.I
 
     public void afterAllInserts(Id primaryRecordId, Map<String, List<SObject>> insertedRecords) {
         // No-op for this event type.
+    }
+
+    private static Boolean isWithdrawalRequestedEvent(String eventType) {
+        if (String.isBlank(eventType)) {
+            return false;
+        }
+
+        return eventType.equalsIgnoreCase(WITHDRAWAL_EVENT_TYPE);
     }
 }
