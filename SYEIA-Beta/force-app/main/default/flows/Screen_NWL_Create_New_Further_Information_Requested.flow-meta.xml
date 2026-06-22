@@ -65,21 +65,31 @@
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>recipientAddresses</name>
-            <value/>
+            <value>
+                <collectionElements>
+                    <elementReference>varApplicantEmail</elementReference>
+                </collectionElements>
+            </value>
         </inputParameters>
         <inputParameters>
             <name>ccAddresses</name>
-            <value/>
+            <value>
+                <collectionElements>
+                    <elementReference>varAdditionalContactEmailAddress</elementReference>
+                </collectionElements>
+            </value>
         </inputParameters>
         <inputParameters>
             <name>senderType</name>
             <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>OrgWideEmailAddress</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>senderAddress</name>
             <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>s37consents@energysecurity.gov.uk</stringValue>
             </value>
         </inputParameters>
@@ -98,6 +108,7 @@
         <inputParameters>
             <name>emailBody</name>
             <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>&lt;p&gt;{!Email_Body.value}&lt;/p&gt;</stringValue>
             </value>
         </inputParameters>
@@ -126,6 +137,7 @@
             <name>relatedRecordId</name>
             <value>
                 <elementReference>varCaseRecordId</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -341,6 +353,28 @@
         </value>
     </customProperties>
     <decisions>
+        <name>Decision_Create_Email_Tracker</name>
+        <label>Decision Create Email Tracker</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Create_Email_Tracking_Record</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>If_Physical_Letter</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Landowner_Letter</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>If Physical Letter</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Decision_Get_Content_Record</name>
         <label>Decision Get Content Record</label>
         <locationX>0</locationX>
@@ -454,6 +488,7 @@
             <label>Landowner Letter</label>
         </rules>
     </decisions>
+    <description>FIR Feedback Policy</description>
     <dynamicChoiceSets>
         <name>varFIRToApplicantOrLandowner</name>
         <dataType>Picklist</dataType>
@@ -697,7 +732,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Create_Email_Tracking_Record</targetReference>
+            <targetReference>Decision_Create_Email_Tracker</targetReference>
         </connector>
         <faultConnector>
             <targetReference>Log_Error</targetReference>
@@ -762,6 +797,7 @@
                     <dataType>String</dataType>
                     <fieldText>FIR to Applicant or Landowner</fieldText>
                     <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -774,8 +810,9 @@
                 </fields>
                 <fields>
                     <name>InformationRequiredFromApplicant</name>
-                    <fieldText>Information Required from Applicant</fieldText>
+                    <fieldText>Additional Information Required</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -791,6 +828,7 @@
                     <dataType>Date</dataType>
                     <fieldText>Further Information Requested Deadline</fieldText>
                     <fieldType>InputField</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -851,6 +889,7 @@
                     </defaultValue>
                     <fieldText>Subject</fieldText>
                     <fieldType>InputField</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isReadOnly>
                         <booleanValue>true</booleanValue>
                     </isReadOnly>
@@ -873,6 +912,7 @@
                     <fieldText>To Address</fieldText>
                     <fieldType>InputField</fieldType>
                     <helpText>&lt;p&gt;Emails come from the Company email and the applicant email.&lt;/p&gt;</helpText>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -892,6 +932,7 @@
                     <fieldText>CC Address</fieldText>
                     <fieldType>InputField</fieldType>
                     <helpText>&lt;p&gt;You can add additional email addresses by separating them with commas.&lt;/p&gt;</helpText>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -930,7 +971,7 @@
                     <inputParameters>
                         <name>selectionMode</name>
                         <value>
-                            <stringValue>MULTI_SELECT</stringValue>
+                            <stringValue>SINGLE_SELECT</stringValue>
                         </value>
                     </inputParameters>
                     <inputParameters>
@@ -963,6 +1004,12 @@
                         <value>
                             <complexValue>{&quot;dataType&quot;:&quot;SObject&quot;,&quot;objectType&quot;:&quot;ContentVersion&quot;,&quot;fieldReferences&quot;:[&quot;Title&quot;,&quot;FileType&quot;,&quot;CreatedDate&quot;,&quot;ContentSize&quot;],&quot;elementReference&quot;:&quot;varContentVersionCollection&quot;}</complexValue>
                             <complexValueType>ComplexObjectFieldDetails</complexValueType>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>maxRowSelection</name>
+                        <value>
+                            <numberValue>1.0</numberValue>
                         </value>
                     </inputParameters>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -1054,6 +1101,9 @@
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Create_FIR</targetReference>
+        </connector>
         <fields>
             <name>Display_Text_Send_Physical_Letter</name>
             <fieldText>&lt;p&gt;You need to send physical copies of this letter and any supporting information to the landowner, occupier or landowner&apos;s representative, because they did not provide an email address.&lt;/p&gt;</fieldText>
@@ -1072,6 +1122,7 @@
             <dataType>Boolean</dataType>
             <fieldText>I confirm I will send physical copies of these documents to the relevant recipients.</fieldText>
             <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <styleProperties>
                 <verticalAlignment>
