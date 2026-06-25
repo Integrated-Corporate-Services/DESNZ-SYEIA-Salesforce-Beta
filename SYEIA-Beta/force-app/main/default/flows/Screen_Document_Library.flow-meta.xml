@@ -184,6 +184,9 @@
         <name>choice_NW12_Procedural_Notice_OH_Land_Owner</name>
         <choiceText>NW12. Procedural notice (OH) - LO</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW12. Procedural notice (OH) - LO</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW13_Decision_Letter_Applicant</name>
@@ -423,6 +426,21 @@
                 <targetReference>NW05_Request_for_further_information_Landowner</targetReference>
             </connector>
             <label>NW05. Request for further information - LO</label>
+        </rules>
+        <rules>
+            <name>NW12_Procedural_notice_OH_LO</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW12. Procedural notice (OH) - LO</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW12_Procedural_notice_OH_LO_SubFlow</targetReference>
+            </connector>
+            <label>NW12. Procedural notice (OH) - LO</label>
         </rules>
         <rules>
             <name>NW14_Withdrawal_letter_Applicant</name>
@@ -734,6 +752,19 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <flowName>NW05_Request_for_further_information_Landowner</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW12_Procedural_notice_OH_LO_SubFlow</name>
+        <label>NW12. Procedural notice (OH) - LO</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW12_Procedural_notice_OH_LO</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>
