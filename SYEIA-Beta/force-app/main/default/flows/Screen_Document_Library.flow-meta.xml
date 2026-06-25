@@ -172,8 +172,11 @@
     </choices>
     <choices>
         <name>choice_NW11_Further_Representations_Exchange_Land_Owner</name>
-        <choiceText>NW11. Further representations exchange - Lo</choiceText>
+        <choiceText>NW11. Further representations exchange - LO</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW11. Further representations exchange - LO</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW12_Procedural_Notice_OH_Applicant</name>
@@ -426,6 +429,21 @@
                 <targetReference>NW05_Request_for_further_information_Landowner</targetReference>
             </connector>
             <label>NW05. Request for further information - LO</label>
+        </rules>
+        <rules>
+            <name>NW11_Further_representations_exchange_LO</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW11. Further representations exchange - LO</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW11_Further_representations_exchange_LO_SubFlow</targetReference>
+            </connector>
+            <label>NW11. Further representations exchange - LO</label>
         </rules>
         <rules>
             <name>NW12_Procedural_notice_OH_LO</name>
@@ -752,6 +770,19 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <flowName>NW05_Request_for_further_information_Landowner</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW11_Further_representations_exchange_LO_SubFlow</name>
+        <label>NW11. Further representations exchange - LO</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW11_Further_representations_exchange_LO</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>
