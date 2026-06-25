@@ -526,7 +526,7 @@ TEXT(YEAR(TODAY()))</expression>
     <formulas>
         <name>formula_DocumentTitle</name>
         <dataType>String</dataType>
-        <expression>&apos;NW Invalid - NTT only (including implied wayleaves) - LO -&apos; &amp; {!Get_Case_Using_recordId.Name} &amp; &apos;-&apos; &amp; TEXT(TODAY())</expression>
+        <expression>&apos;NW03. Invalid - NTT only (including implied wayleaves) - LO -&apos; &amp; {!Get_Case_Using_recordId.Name} &amp; &apos;-&apos; &amp; TEXT(TODAY())</expression>
     </formulas>
     <formulas>
         <name>formula_OwnerorOccupiercontactemailaddress</name>
@@ -571,7 +571,7 @@ TEXT(YEAR(TODAY()))</expression>
 &apos;}&apos;</expression>
     </formulas>
     <interviewLabel>NW Invalid - NTT only (including implied wayleaves) - LO {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Screen - DocGen - NW Invalid - NTT only (including implied wayleaves) - LO</label>
+    <label>Screen - DocGen - NW03 Invalid - NTT only (including implied wayleaves) - LO</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -762,7 +762,7 @@ TEXT(YEAR(TODAY()))</expression>
         </connector>
         <fields>
             <name>ReasonSectionDisplayText</name>
-            <fieldText>&lt;h1&gt;&lt;strong&gt;The  NW02 Invalid - Unclear NTR - Applicant (2026)&lt;/strong&gt;&lt;/h1&gt;</fieldText>
+            <fieldText>&lt;h1&gt;&lt;strong&gt;NW03. Invalid - NTT only (including implied wayleaves) - LO&lt;/strong&gt;&lt;/h1&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -777,6 +777,7 @@ TEXT(YEAR(TODAY()))</expression>
             <name>Insert_Reasons</name>
             <fieldText>Reasons</fieldText>
             <fieldType>LargeTextArea</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <styleProperties>
                 <verticalAlignment>
@@ -864,6 +865,7 @@ TEXT(YEAR(TODAY()))</expression>
             <dataType>Date</dataType>
             <fieldText>Date of Letter</fieldText>
             <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <styleProperties>
                 <verticalAlignment>
@@ -887,7 +889,7 @@ TEXT(YEAR(TODAY()))</expression>
         <allowPause>false</allowPause>
         <fields>
             <name>H_Final_Record_Creation_Screen_Approval_Titl</name>
-            <fieldText>&lt;h1&gt;&lt;strong&gt;The  NW02 Invalid - Unclear NTR - Applicant (2026) has been successfully created.&lt;/strong&gt;&lt;/h1&gt;</fieldText>
+            <fieldText>&lt;h1&gt;&lt;strong&gt;The  NW03. Invalid - NTT only (including implied wayleaves) - LO has been successfully created.&lt;/strong&gt;&lt;/h1&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>

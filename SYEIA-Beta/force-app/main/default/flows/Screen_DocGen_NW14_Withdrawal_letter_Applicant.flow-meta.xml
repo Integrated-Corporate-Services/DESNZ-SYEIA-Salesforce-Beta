@@ -19,7 +19,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
+                <stringValue>Screen_DocGen_NW14_Withdrawal_letter_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -49,21 +49,6 @@
                 <booleanValue>true</booleanValue>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
-        </inputParameters>
-        <inputParameters>
-            <name>saveMethodName</name>
-        </inputParameters>
-        <inputParameters>
-            <name>scenario</name>
-        </inputParameters>
-        <inputParameters>
-            <name>shouldThrowFaultMessageException</name>
-        </inputParameters>
-        <inputParameters>
-            <name>tagsString</name>
-        </inputParameters>
-        <inputParameters>
-            <name>topics</name>
         </inputParameters>
         <nameSegment>FlowLogEntry</nameSegment>
         <offset>0</offset>
@@ -88,7 +73,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
+                <stringValue>Screen_DocGen_NW14_Withdrawal_letter_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -118,21 +103,6 @@
                 <booleanValue>true</booleanValue>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
-        </inputParameters>
-        <inputParameters>
-            <name>saveMethodName</name>
-        </inputParameters>
-        <inputParameters>
-            <name>scenario</name>
-        </inputParameters>
-        <inputParameters>
-            <name>shouldThrowFaultMessageException</name>
-        </inputParameters>
-        <inputParameters>
-            <name>tagsString</name>
-        </inputParameters>
-        <inputParameters>
-            <name>topics</name>
         </inputParameters>
         <nameSegment>FlowLogEntry</nameSegment>
         <offset>0</offset>
@@ -157,7 +127,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
+                <stringValue>Screen_DocGen_NW14_Withdrawal_letter_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -187,21 +157,6 @@
                 <booleanValue>true</booleanValue>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
-        </inputParameters>
-        <inputParameters>
-            <name>saveMethodName</name>
-        </inputParameters>
-        <inputParameters>
-            <name>scenario</name>
-        </inputParameters>
-        <inputParameters>
-            <name>shouldThrowFaultMessageException</name>
-        </inputParameters>
-        <inputParameters>
-            <name>tagsString</name>
-        </inputParameters>
-        <inputParameters>
-            <name>topics</name>
         </inputParameters>
         <nameSegment>FlowLogEntry</nameSegment>
         <offset>0</offset>
@@ -209,7 +164,7 @@
     </actionCalls>
     <actionCalls>
         <name>Copy_4_of_Generate_Document_Nebula_Logger</name>
-        <label>Copy 4 of Generate Document Nebula Logger</label>
+        <label>Generate Document Nebula Logger</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <actionName>FlowLogEntry</actionName>
@@ -226,7 +181,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
+                <stringValue>Screen_DocGen_NW14_Withdrawal_letter_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -256,21 +211,6 @@
                 <booleanValue>true</booleanValue>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
-        </inputParameters>
-        <inputParameters>
-            <name>saveMethodName</name>
-        </inputParameters>
-        <inputParameters>
-            <name>scenario</name>
-        </inputParameters>
-        <inputParameters>
-            <name>shouldThrowFaultMessageException</name>
-        </inputParameters>
-        <inputParameters>
-            <name>tagsString</name>
-        </inputParameters>
-        <inputParameters>
-            <name>topics</name>
         </inputParameters>
         <nameSegment>FlowLogEntry</nameSegment>
         <offset>0</offset>
@@ -278,7 +218,7 @@
     </actionCalls>
     <actionCalls>
         <name>Copy_5_of_Generate_Document_Nebula_Logger</name>
-        <label>Copy 5 of Generate Document Nebula Logger</label>
+        <label>Generate Document Nebula Logger</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <actionName>FlowLogEntry</actionName>
@@ -295,7 +235,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
+                <stringValue>Screen_DocGen_NW14_Withdrawal_letter_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -325,21 +265,6 @@
                 <booleanValue>true</booleanValue>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
-        </inputParameters>
-        <inputParameters>
-            <name>saveMethodName</name>
-        </inputParameters>
-        <inputParameters>
-            <name>scenario</name>
-        </inputParameters>
-        <inputParameters>
-            <name>shouldThrowFaultMessageException</name>
-        </inputParameters>
-        <inputParameters>
-            <name>tagsString</name>
-        </inputParameters>
-        <inputParameters>
-            <name>topics</name>
         </inputParameters>
         <nameSegment>FlowLogEntry</nameSegment>
         <offset>0</offset>
@@ -356,7 +281,7 @@
             <targetReference>Final_Record_Creation_Screen_Approval_Titl</targetReference>
         </connector>
         <faultConnector>
-            <targetReference>Copy_3_of_Generate_Document_Nebula_Logger</targetReference>
+            <targetReference>Copy_5_of_Generate_Document_Nebula_Logger</targetReference>
         </faultConnector>
         <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
@@ -376,7 +301,7 @@
         <inputParameters>
             <name>templateContentVersionId</name>
             <value>
-                <elementReference>Get_NW03_Invalid_NTT_IWL_only_including_DTContentDoc.LatestContentVersionId</elementReference>
+                <elementReference>Get_NW14_Withdrawal_letter_Applicant_DocumentTemplateContentDoc.LatestContentVersionId</elementReference>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
@@ -410,7 +335,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
+                <stringValue>Screen_DocGen_NW14_Withdrawal_letter_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -441,26 +366,65 @@
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
+        <nameSegment>FlowLogEntry</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Generate_Document_Nebula_Logger_1</name>
+        <label>Generate Document Nebula Logger</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>FlowLogEntry</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
-            <name>saveMethodName</name>
+            <name>faultMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+            </value>
         </inputParameters>
         <inputParameters>
-            <name>scenario</name>
+            <name>flowName</name>
+            <value>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+                <stringValue>Screen_DocGen_NW14_Withdrawal_letter_Applicant</stringValue>
+            </value>
         </inputParameters>
         <inputParameters>
-            <name>shouldThrowFaultMessageException</name>
+            <name>loggingLevelName</name>
+            <value>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+                <stringValue>ERROR</stringValue>
+            </value>
         </inputParameters>
         <inputParameters>
-            <name>tagsString</name>
+            <name>message</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+            </value>
         </inputParameters>
         <inputParameters>
-            <name>topics</name>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveLog</name>
+            <value>
+                <booleanValue>true</booleanValue>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+            </value>
         </inputParameters>
         <nameSegment>FlowLogEntry</nameSegment>
         <offset>0</offset>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
-    <apiVersion>66.0</apiVersion>
+    <apiVersion>65.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
         <name>Assign_App_Email</name>
@@ -491,7 +455,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Get_NW05_Request_for_further_information_Applicant</targetReference>
+            <targetReference>Get_NW14_Withdrawal_letter_Applicant</targetReference>
         </connector>
     </assignments>
     <customProperties>
@@ -501,37 +465,12 @@
         </value>
     </customProperties>
     <decisions>
-        <name>Decision_Further_Information_Request</name>
-        <label>Decision Further Information Request</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <defaultConnector>
-            <targetReference>Condition_Library</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
-        <rules>
-            <name>Is_Further_Information_Null</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Get_Further_Information_Requested</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Display_Create_FIR_On_Assessment_Tab</targetReference>
-            </connector>
-            <label>Is Further Information Null</label>
-        </rules>
-    </decisions>
-    <decisions>
         <name>Does_User_Have_Bypass_Approval_CP</name>
         <label>Does User Have Bypass Approval CP?</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <targetReference>Get_NW05_Request_for_further_information_Applicant</targetReference>
+            <targetReference>Get_NW14_Withdrawal_letter_Applicant</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -550,28 +489,16 @@
             <label>Yes</label>
         </rules>
     </decisions>
-    <description>Deadline 
-FIR Review</description>
     <environments>Default</environments>
-    <formulas>
-        <name>formula_1_Free_Text</name>
-        <dataType>String</dataType>
-        <expression>{!X1_Free_Text}</expression>
-    </formulas>
-    <formulas>
-        <name>formula_2_Free_Text</name>
-        <dataType>String</dataType>
-        <expression>{!X2_Free_Text}</expression>
-    </formulas>
-    <formulas>
-        <name>formula_4WeekDeadLine</name>
-        <dataType>String</dataType>
-        <expression>TEXT({!DeadLineX4})</expression>
-    </formulas>
     <formulas>
         <name>formula_Applicant_Default_Email</name>
         <dataType>String</dataType>
         <expression>{!Get_Case_Using_recordId.DNO__r.Representative__r.Email__c}</expression>
+    </formulas>
+    <formulas>
+        <name>formula_CorrespondenceDate</name>
+        <dataType>Date</dataType>
+        <expression>{!Correspondence_Date}</expression>
     </formulas>
     <formulas>
         <name>formula_CurrentDate</name>
@@ -609,7 +536,7 @@ TEXT(YEAR(TODAY()))</expression>
     <formulas>
         <name>formula_DocumentTitle</name>
         <dataType>String</dataType>
-        <expression>&apos;NW05. Request for further information - Applicant -&apos; &amp; {!Get_Case_Using_recordId.Name} &amp; &apos;-&apos; &amp; TEXT(TODAY())</expression>
+        <expression>&apos;NW14. Withdrawal letter - Applicant (2026) -&apos; &amp; {!Get_Case_Using_recordId.Name} &amp; &apos;-&apos; &amp; TEXT(TODAY())</expression>
     </formulas>
     <formulas>
         <name>formula_SentByEmail</name>
@@ -624,7 +551,7 @@ TEXT(YEAR(TODAY()))</expression>
 &apos;&quot;Applicant_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Applicant_Reference__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;DNO_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Name} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;App_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Representative__r.Name} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;App_Email&quot;: &quot;&apos; &amp; {!var_Applicant_Contact_Email} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;VAR_App_Email&quot;: &quot;&apos; &amp; {!var_Applicant_Contact_Email} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;DNO_Address_Line1&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line1__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;DNO_Address_Line2&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line_2__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;DNO_Address_TownCity&quot;: &quot;&apos; &amp; {!Get_Address.Town_City__c} &amp; &apos;&quot;, &apos; &amp;
@@ -634,17 +561,13 @@ TEXT(YEAR(TODAY()))</expression>
 &apos;&quot;Site_Address_TownCity&quot;: &quot;&apos; &amp; {!Get_Site_Address.Town_City__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;Site_Address_Postcode&quot;: &quot;&apos; &amp; {!Get_Site_Address.Postcode__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;NameofOwner_or_occupier_contact&quot;: &quot;&apos; &amp; {!Get_Owner_Rep.Name} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;Date_of_Application__c&quot;: &quot;&apos; &amp; TEXT({!Get_Case_Using_recordId.Date_of_Application__c}) &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;Written_Removal_Notice_Issue_Date__c&quot;: &quot;&apos; &amp; TEXT({!Get_Case_Using_recordId.Written_Removal_Notice_Issue_Date__c}) &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;1_Free_Text&quot;: &quot;&apos; &amp; {!formula_1_Free_Text} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;2_Free_Text&quot;: &quot;&apos; &amp; {!formula_2_Free_Text} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;4_WeekDeadLine&quot;: &quot;&apos; &amp; {!formula_4WeekDeadLine} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;SENT_BY_EMAIL&quot;: &quot;&apos; &amp; {!formula_SentByEmail} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;Correspondence_Date&quot;: &quot;&apos; &amp; TEXT({!formula_CorrespondenceDate}) &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;Date_of_Letter&quot;: &quot;&apos; &amp; TEXT({!Selected_Date_of_Letter}) &amp; &apos;&quot;&apos; &amp;
 &apos;}&apos;</expression>
     </formulas>
-    <interviewLabel>NW05. Request for further information - Applicant {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Screen - DocGen - NW05. Request for further information - Applicant</label>
+    <interviewLabel>Screen - DocGen - {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Screen - DocGen -NW14. Withdrawal letter - Applicant</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -673,6 +596,9 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Get_Site_Address</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Copy_2_of_Generate_Document_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Party__c</field>
@@ -695,7 +621,7 @@ TEXT(YEAR(TODAY()))</expression>
             <targetReference>Get_Address</targetReference>
         </connector>
         <faultConnector>
-            <targetReference>Copy_2_of_Generate_Document_Nebula_Logger</targetReference>
+            <targetReference>Copy_1_of_Generate_Document_Nebula_Logger</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -710,62 +636,13 @@ TEXT(YEAR(TODAY()))</expression>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <name>Get_Further_Information_Requested</name>
-        <label>Get Further Information Requested</label>
+        <name>Get_NW14_Withdrawal_letter_Applicant</name>
+        <label>Get NW14. Withdrawal letter - Applicant</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Decision_Further_Information_Request</targetReference>
-        </connector>
-        <faultConnector>
-            <isGoTo>true</isGoTo>
-            <targetReference>Copy_3_of_Generate_Document_Nebula_Logger</targetReference>
-        </faultConnector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>Case__c</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>recordId</elementReference>
-            </value>
-        </filters>
-        <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>Further_Information_Requested__c</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
-    <recordLookups>
-        <name>Get_NW03_Invalid_NTT_IWL_only_including_DTContentDoc</name>
-        <label>Get NW05_Request_for_further_information_Applicant</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Get_Case_Using_recordId</targetReference>
-        </connector>
-        <faultConnector>
-            <targetReference>Copy_1_of_Generate_Document_Nebula_Logger</targetReference>
-        </faultConnector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>DocumentTemplateId</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>Get_NW05_Request_for_further_information_Applicant.Id</elementReference>
-            </value>
-        </filters>
-        <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>DocumentTemplateContentDoc</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
-    <recordLookups>
-        <name>Get_NW05_Request_for_further_information_Applicant</name>
-        <label>Get NW05_Request_for_further_information_Applicant</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Get_NW03_Invalid_NTT_IWL_only_including_DTContentDoc</targetReference>
+            <targetReference>Get_NW14_Withdrawal_letter_Applicant_DocumentTemplateContentDoc</targetReference>
         </connector>
         <faultConnector>
             <targetReference>Generate_Document_Nebula_Logger</targetReference>
@@ -775,11 +652,35 @@ TEXT(YEAR(TODAY()))</expression>
             <field>Name</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>NW05_Request_for_further_information_Applicant_2026</stringValue>
+                <stringValue>NW14_Withdrawal_letter_Applicant_2026</stringValue>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>DocumentTemplate</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_NW14_Withdrawal_letter_Applicant_DocumentTemplateContentDoc</name>
+        <label>Get NW14. Withdrawal letter - Applicant DocumentTemplateContentDoc</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Case_Using_recordId</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Generate_Document_Nebula_Logger_1</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DocumentTemplateId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_NW14_Withdrawal_letter_Applicant.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>DocumentTemplateContentDoc</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
@@ -789,10 +690,10 @@ TEXT(YEAR(TODAY()))</expression>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Get_Further_Information_Requested</targetReference>
+            <targetReference>Condition_Library</targetReference>
         </connector>
         <faultConnector>
-            <targetReference>Copy_5_of_Generate_Document_Nebula_Logger</targetReference>
+            <targetReference>Copy_4_of_Generate_Document_Nebula_Logger</targetReference>
         </faultConnector>
         <filterLogic>1 AND ( 2 OR 3 )</filterLogic>
         <filters>
@@ -830,7 +731,7 @@ TEXT(YEAR(TODAY()))</expression>
             <targetReference>Get_Owner_Rep</targetReference>
         </connector>
         <faultConnector>
-            <targetReference>Copy_4_of_Generate_Document_Nebula_Logger</targetReference>
+            <targetReference>Copy_3_of_Generate_Document_Nebula_Logger</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -849,75 +750,16 @@ TEXT(YEAR(TODAY()))</expression>
         <label>Condition Library</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <allowBack>false</allowBack>
+        <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
+        <allowPause>true</allowPause>
         <connector>
             <targetReference>Assign_App_Email</targetReference>
         </connector>
         <fields>
             <name>ReasonSectionDisplayText</name>
-            <fieldText>&lt;h1&gt;NW05. Request for further information - Applicant&lt;/h1&gt;</fieldText>
+            <fieldText>&lt;h1&gt;&lt;strong&gt;NW14. Withdrawal letter - Applicant (2026)&lt;/strong&gt;&lt;/h1&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>FIR_Notification_Request</name>
-            <fieldText>&lt;p&gt;If this is an extended &lt;strong&gt;Further Information Requested&lt;/strong&gt; document For this Case.&lt;/p&gt;&lt;p&gt;Please navigate to the &lt;strong&gt;Assessment&lt;/strong&gt; tab and raise a &lt;strong&gt;Further Information Request&lt;/strong&gt; before generating the document.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>X1_Free_Text</name>
-            <fieldText>1. Free Text</fieldText>
-            <fieldType>LargeTextArea</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>false</isRequired>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>X2_Free_Text</name>
-            <fieldText>2. Free Text</fieldText>
-            <fieldType>LargeTextArea</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>false</isRequired>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>DeadLineX4</name>
-            <dataType>Date</dataType>
-            <fieldText>Deadline</fieldText>
-            <fieldType>InputField</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>true</isRequired>
             <styleProperties>
                 <verticalAlignment>
                     <stringValue>top</stringValue>
@@ -966,15 +808,15 @@ TEXT(YEAR(TODAY()))</expression>
                 </value>
             </inputParameters>
             <inputParameters>
-                <name>value</name>
-                <value>
-                    <elementReference>var_Applicant_Contact_Email</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
                 <name>required</name>
                 <value>
                     <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>value</name>
+                <value>
+                    <elementReference>var_Applicant_Contact_Email</elementReference>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -992,7 +834,7 @@ TEXT(YEAR(TODAY()))</expression>
         <fields>
             <name>Selected_Date_of_Letter</name>
             <dataType>Date</dataType>
-            <fieldText>Date</fieldText>
+            <fieldText>Date of Letter</fieldText>
             <fieldType>InputField</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
@@ -1005,22 +847,13 @@ TEXT(YEAR(TODAY()))</expression>
                 </width>
             </styleProperties>
         </fields>
-        <nextOrFinishButtonLabel>Complete</nextOrFinishButtonLabel>
-        <showFooter>true</showFooter>
-        <showHeader>false</showHeader>
-    </screens>
-    <screens>
-        <name>Display_Create_FIR_On_Assessment_Tab</name>
-        <label>Display Create FIR On Assessment Tab</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <allowBack>false</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
         <fields>
-            <name>DisplayText_NO_FIR</name>
-            <fieldText>&lt;p&gt;No &lt;strong&gt;Further Information Requested&lt;/strong&gt; records have been found for this case.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Please navigate to the &lt;strong&gt;Assessment&lt;/strong&gt; tab and raise a &lt;strong&gt;Further Information Request&lt;/strong&gt; before generating the document.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
+            <name>Correspondence_Date</name>
+            <dataType>Date</dataType>
+            <fieldText>Correspondence Date</fieldText>
+            <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
             <styleProperties>
                 <verticalAlignment>
                     <stringValue>top</stringValue>
@@ -1030,7 +863,6 @@ TEXT(YEAR(TODAY()))</expression>
                 </width>
             </styleProperties>
         </fields>
-        <nextOrFinishButtonLabel>Close</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
     </screens>
@@ -1044,7 +876,7 @@ TEXT(YEAR(TODAY()))</expression>
         <allowPause>false</allowPause>
         <fields>
             <name>H_Final_Record_Creation_Screen_Approval_Titl</name>
-            <fieldText>&lt;h1&gt;&lt;strong&gt;NW05. Request for further information - Applicant&lt;/strong&gt;&lt;/h1&gt;</fieldText>
+            <fieldText>&lt;h1&gt;&lt;strong&gt;The  NW14. Withdrawal letter - Applicant (2026)&lt;/strong&gt;&lt;/h1&gt;&lt;h1&gt;&lt;strong&gt; has been successfully created.&lt;/strong&gt;&lt;/h1&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -1079,7 +911,7 @@ TEXT(YEAR(TODAY()))</expression>
             <targetReference>Does_User_Have_Bypass_Approval_CP</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <name>recordId</name>
         <dataType>String</dataType>
