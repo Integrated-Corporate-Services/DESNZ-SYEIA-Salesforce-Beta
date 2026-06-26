@@ -205,7 +205,7 @@ public class InboundForm_NWLConfig {
                 .setParentLookupField('Party__c')
                 .setParentCollection('Landowners')
                 .setParentLinkJsonField('application_party_id')
-                .setParentLinkSfField('Application_Party_Id__c')
+                .setParentLinkSfField('Application_Party_Identification__c')
                 .setChildLinkSfField('Application_Party_Identification__c')
                 .setProcessingOrder(31);
 
@@ -238,7 +238,7 @@ public class InboundForm_NWLConfig {
                 .setParentLookupField('Party__c')
                 .setParentCollection('LandownerRepresentatives')
                 .setParentLinkJsonField('application_party_id')
-                .setParentLinkSfField('Application_Party_Id__c')
+                .setParentLinkSfField('Application_Party_Identification__c')
                 .setChildLinkSfField('Application_Party_Identification__c')
                 .setProcessingOrder(32);
 
