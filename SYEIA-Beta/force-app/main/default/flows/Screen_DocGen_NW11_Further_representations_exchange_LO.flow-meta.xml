@@ -654,7 +654,7 @@
     &quot;Received (On Time)&quot;, {!App_ReceivedOnTimeNote},
     &quot;Not Received&quot;,  {!App_NotReceivedNote},
     &quot;Received Late – Accepted&quot;, {!App_ReceivedLateAccepted_Note},
-    &quot;Received Late – Rejected&quot;, {!App_ReceivedLateRejected},
+    &quot;Received Late – Rejected&quot;, {!App_Received_Late_Rejected_Note},
     &quot;&quot;
 )</expression>
     </formulas>
@@ -1211,7 +1211,7 @@ TEXT(YEAR(TODAY()))</expression>
             <targetReference>Does_User_Have_Bypass_Approval_CP</targetReference>
         </connector>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <variables>
         <name>recordId</name>
         <dataType>String</dataType>
