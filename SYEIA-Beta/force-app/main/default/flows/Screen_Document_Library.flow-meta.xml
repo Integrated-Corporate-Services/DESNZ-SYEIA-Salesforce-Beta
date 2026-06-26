@@ -182,6 +182,9 @@
         <name>choice_NW12_Procedural_Notice_OH_Applicant</name>
         <choiceText>NW12. Procedural notice (OH) - Applicant</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW12. Procedural notice (OH) - Applicant</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW12_Procedural_Notice_OH_Land_Owner</name>
@@ -444,6 +447,21 @@
                 <targetReference>NW11_Further_representations_exchange_LO_SubFlow</targetReference>
             </connector>
             <label>NW11. Further representations exchange - LO</label>
+        </rules>
+        <rules>
+            <name>NW12_Procedural_notice_OH_Applicant</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW12. Procedural notice (OH) - Applicant</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW12_Procedural_notice_OH_Applicant_SubFlow</targetReference>
+            </connector>
+            <label>NW12. Procedural notice (OH) - Applicant</label>
         </rules>
         <rules>
             <name>NW12_Procedural_notice_OH_LO</name>
@@ -783,6 +801,19 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <flowName>Screen_DocGen_NW11_Further_representations_exchange_LO</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW12_Procedural_notice_OH_Applicant_SubFlow</name>
+        <label>NW12. Procedural notice (OH) - Applicant</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW12_Procedural_notice_OH_Applicant</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>
