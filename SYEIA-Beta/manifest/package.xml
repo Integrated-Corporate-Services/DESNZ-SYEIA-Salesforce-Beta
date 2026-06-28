@@ -557,6 +557,7 @@
 		<members>Screen_DocGen_NW01_General_Letter_Applicant_letter</members>
 		<members>Screen_DocGen_NW02_Invalid_Unclear_NTR_Applicant</members>
 		<members>Screen_DocGen_NW02_Invalid_Unclear_NTR_LO</members>
+		<members>Screen_DocGen_NW10_Statement_of_evidence_exchange_LO</members>
 		<members>Screen_DocGen_NW11_Further_representations_exchange_LO</members>
 		<members>Screen_DocGen_NW12_Procedural_notice_OH_LO</members>
 		<members>Screen_DocGen_NW14_Withdrawal_letter_Applicant</members>
