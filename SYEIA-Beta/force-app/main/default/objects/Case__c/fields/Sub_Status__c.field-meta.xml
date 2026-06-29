@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sub_Status__c</fullName>
+    <description>Sub Status for NWL case type.</description>
+    <label>Sub Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Awaiting Validation</fullName>
+                <default>false</default>
+                <label>Awaiting Validation</label>
+            </value>
+            <value>
+                <fullName>Further Information Requested From Applicant</fullName>
+                <default>false</default>
+                <label>Further Information Requested From Applicant</label>
+            </value>
+            <value>
+                <fullName>Further Information Requested From Landowner</fullName>
+                <default>false</default>
+                <label>Further Information Requested From Landowner</label>
+            </value>
+            <value>
+                <fullName>Further Information Requested From Both Parties</fullName>
+                <default>false</default>
+                <label>Further Information Requested From Both Parties</label>
+            </value>
+            <value>
+                <fullName>Seeking Legal Advice</fullName>
+                <default>false</default>
+                <label>Seeking Legal Advice</label>
+            </value>
+            <value>
+                <fullName>Acknowledgement Letter Issued</fullName>
+                <default>false</default>
+                <label>Acknowledgement Letter Issued</label>
+            </value>
+            <value>
+                <fullName>Abeyance Letter Issued</fullName>
+                <default>false</default>
+                <label>Abeyance Letter Issued</label>
+            </value>
+            <value>
+                <fullName>Ongoing Negotiations</fullName>
+                <default>false</default>
+                <label>Ongoing Negotiations</label>
+            </value>
+            <value>
+                <fullName>Awaiting Update From The Parties</fullName>
+                <default>false</default>
+                <label>Awaiting Update From The Parties</label>
+            </value>
+            <value>
+                <fullName>CTWR Letter Issued</fullName>
+                <default>false</default>
+                <label>CTWR Letter Issued</label>
+            </value>
+            <value>
+                <fullName>Procedural Notice Issued</fullName>
+                <default>false</default>
+                <label>Procedural Notice Issued</label>
+            </value>
+            <value>
+                <fullName>Statement Of Evidence Exchanged</fullName>
+                <default>false</default>
+                <label>Statement Of Evidence Exchanged</label>
+            </value>
+            <value>
+                <fullName>Further Statement Of Evidence Exchanged</fullName>
+                <default>false</default>
+                <label>Further Statement Of Evidence Exchanged</label>
+            </value>
+            <value>
+                <fullName>Referred To PINS/PEDW</fullName>
+                <default>false</default>
+                <label>Referred To PINS/PEDW</label>
+            </value>
+            <value>
+                <fullName>Inspector Appointed</fullName>
+                <default>false</default>
+                <label>Inspector Appointed</label>
+            </value>
+            <value>
+                <fullName>Decision In Progress</fullName>
+                <default>false</default>
+                <label>Decision In Progress</label>
+            </value>
+            <value>
+                <fullName>Seeking Further Information From Inspector</fullName>
+                <default>false</default>
+                <label>Seeking Further Information From Inspector</label>
+            </value>
+            <value>
+                <fullName>Seeking Further Information From The Parties</fullName>
+                <default>false</default>
+                <label>Seeking Further Information From The Parties</label>
+            </value>
+            <value>
+                <fullName>NW Granted</fullName>
+                <default>false</default>
+                <label>NW Granted</label>
+            </value>
+            <value>
+                <fullName>NW Granted Against Inspector Recommendation</fullName>
+                <default>false</default>
+                <label>NW Granted Against Inspector Recommendation</label>
+            </value>
+            <value>
+                <fullName>NW Refused</fullName>
+                <default>false</default>
+                <label>NW Refused</label>
+            </value>
+            <value>
+                <fullName>NW Refused Against Inspector Recommendation</fullName>
+                <default>false</default>
+                <label>NW Refused Against Inspector Recommendation</label>
+            </value>
+            <value>
+                <fullName>TL Order Granted</fullName>
+                <default>false</default>
+                <label>TL Order Granted</label>
+            </value>
+            <value>
+                <fullName>TL Order Granted Against Inspector Recommendation</fullName>
+                <default>false</default>
+                <label>TL Order Granted Against Inspector Recommendation</label>
+            </value>
+            <value>
+                <fullName>TL Order Refused</fullName>
+                <default>false</default>
+                <label>TL Order Refused</label>
+            </value>
+            <value>
+                <fullName>TL Order Refused Against Inspector Recommendation</fullName>
+                <default>false</default>
+                <label>TL Order Refused Against Inspector Recommendation</label>
+            </value>
+            <value>
+                <fullName>Pre-Action Protocol Letter Received</fullName>
+                <default>false</default>
+                <label>Pre-Action Protocol Letter Received</label>
+            </value>
+            <value>
+                <fullName>Judicial Review In Progress</fullName>
+                <default>false</default>
+                <label>Judicial Review In Progress</label>
+            </value>
+            <value>
+                <fullName>Post Decision Correspondence</fullName>
+                <default>false</default>
+                <label>Post Decision Correspondence</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

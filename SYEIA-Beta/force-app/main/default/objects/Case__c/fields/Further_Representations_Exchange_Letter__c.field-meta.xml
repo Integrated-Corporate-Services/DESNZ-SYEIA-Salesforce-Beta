@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Further_Representations_Exchange_Letter__c</fullName>
+    <description>Further Representations Exchange Letter Date</description>
+    <inlineHelpText>Further Representations Exchange Letter Date</inlineHelpText>
+    <label>Further Representations Exchange Letter</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>
