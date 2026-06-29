@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X2nd_Abeyance_Duration_In_Days__c</fullName>
+    <description>2nd Abeyance Duration (in days)
+The system to calculate 2nd Start Date and 2nd End Date = duration in days</description>
+    <externalId>false</externalId>
+    <inlineHelpText>2nd Abeyance Duration (in days)
+The system to calculate 2nd Start Date and 2nd End Date = duration in days</inlineHelpText>
+    <label>2nd Abeyance Duration (In Days)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>
