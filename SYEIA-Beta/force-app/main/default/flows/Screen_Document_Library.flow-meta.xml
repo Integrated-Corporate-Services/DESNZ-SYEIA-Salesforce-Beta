@@ -164,6 +164,9 @@
         <name>choice_NW10_Statement_Of_Evidence_Exchange_Land_Owner</name>
         <choiceText>NW10. Statement of evidence exchange - LO</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW10. Statement of evidence exchange - LO</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW11_Further_Representations_Exchange_Applicant</name>
@@ -432,6 +435,21 @@
                 <targetReference>NW05_Request_for_further_information_Landowner</targetReference>
             </connector>
             <label>NW05. Request for further information - LO</label>
+        </rules>
+        <rules>
+            <name>NW10_Statement_of_evidence_exchange_LO</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW10. Statement of evidence exchange - LO</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW10_Statement_of_evidence_exchange_LO_SubFLow</targetReference>
+            </connector>
+            <label>NW10. Statement of evidence exchange - LO</label>
         </rules>
         <rules>
             <name>NW11_Further_representations_exchange_LO</name>
@@ -788,6 +806,19 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <flowName>NW05_Request_for_further_information_Landowner</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW10_Statement_of_evidence_exchange_LO_SubFLow</name>
+        <label>NW10. Statement of evidence exchange - LO</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW10_Statement_of_evidence_exchange_LO</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>
