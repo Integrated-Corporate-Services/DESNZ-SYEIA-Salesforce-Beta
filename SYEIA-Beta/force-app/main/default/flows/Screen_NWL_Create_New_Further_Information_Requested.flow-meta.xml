@@ -65,31 +65,21 @@
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>recipientAddresses</name>
-            <value>
-                <collectionElements>
-                    <elementReference>varApplicantEmail</elementReference>
-                </collectionElements>
-            </value>
+            <value/>
         </inputParameters>
         <inputParameters>
             <name>ccAddresses</name>
-            <value>
-                <collectionElements>
-                    <elementReference>varAdditionalContactEmailAddress</elementReference>
-                </collectionElements>
-            </value>
+            <value/>
         </inputParameters>
         <inputParameters>
             <name>senderType</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>OrgWideEmailAddress</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>senderAddress</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>s37consents@energysecurity.gov.uk</stringValue>
             </value>
         </inputParameters>
@@ -108,7 +98,6 @@
         <inputParameters>
             <name>emailBody</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>&lt;p&gt;{!Email_Body.value}&lt;/p&gt;</stringValue>
             </value>
         </inputParameters>
@@ -137,7 +126,6 @@
             <name>relatedRecordId</name>
             <value>
                 <elementReference>varCaseRecordId</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -271,6 +259,20 @@
             <operator>Assign</operator>
             <value>
                 <elementReference>FIR_to_Applicant_or_Landowner</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varApplicantEmailCollection</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Get_Landowner_Record.Email__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varApplicantEmailCollection</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Get_Objector_Record.Email__c</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -469,18 +471,26 @@
             <name>Landowner_Letter</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Get_Case_Record.Landowner__r.Email__c</leftValueReference>
+                <leftValueReference>Get_Objector_Record</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>Get_Case_Record.Objector__r.Email__c</leftValueReference>
+                <leftValueReference>Get_Objector_Record.Email__c</leftValueReference>
+                <operator>EqualTo</operator>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Landowner_Record</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
                 </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Landowner_Record.Email__c</leftValueReference>
+                <operator>EqualTo</operator>
             </conditions>
             <connector>
                 <targetReference>Send_Physical_Letter</targetReference>
@@ -488,7 +498,8 @@
             <label>Landowner Letter</label>
         </rules>
     </decisions>
-    <description>FIR Feedback Policy</description>
+    <description>FIR Feedback Policy
+- Is Blank</description>
     <dynamicChoiceSets>
         <name>varFIRToApplicantOrLandowner</name>
         <dataType>Picklist</dataType>
@@ -632,7 +643,7 @@
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Assign_FIR_Record</targetReference>
+            <targetReference>Get_Landowner_Record</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -699,6 +710,48 @@
         <object>ContentVersion</object>
         <sortField>CreatedDate</sortField>
         <sortOrder>Desc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Landowner_Record</name>
+        <label>Get Landowner Record</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Objector_Record</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Case_Record.Landowner__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Party__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Objector_Record</name>
+        <label>Get Objector Record</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_FIR_Record</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Case_Record.Objector__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Party__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
@@ -1102,7 +1155,7 @@
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Create_FIR</targetReference>
+            <targetReference>Assign_FIR_Update</targetReference>
         </connector>
         <fields>
             <name>Display_Text_Send_Physical_Letter</name>

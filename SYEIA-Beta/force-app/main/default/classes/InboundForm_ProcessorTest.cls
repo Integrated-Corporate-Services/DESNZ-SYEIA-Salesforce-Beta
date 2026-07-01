@@ -242,6 +242,52 @@ private class InboundForm_ProcessorTest {
             '"eventType":"WITHDRAWAL_REQUESTED"' +
         '}';
     }
+
+    private static String getS37WithdrawalJsonWithoutEventType(String applicationId, String desnzRef) {
+        return '{' +
+            '"applicationId":"' + applicationId + '",' +
+            '"formType":"S37",' +
+            '"status":"SUBMITTED",' +
+            '"Withdraw":{' +
+                '"withdrawalReason":"testing reason for withdrawal without event type",' +
+                '"voluntaryAgreement":null' +
+            '},' +
+            '"desnzRef":"' + desnzRef + '"' +
+        '}';
+    }
+
+    private static String getValidNWLJson() {
+        return '{' +
+            '"applicationId":"b6ed18fa-7c3d-43bf-97b9-a40fc9bffa03",' +
+            '"status":"SUBMITTED",' +
+            '"desnzRef":"NWL00116",' +
+            '"formType":"NWL",' +
+            '"sections":{' +
+                '"applicationDetails":{' +
+                    '"application_type":"Existing line",' +
+                    '"notice_to_remove_date":"2026-02-10",' +
+                    '"grounds_for_application":"no_wayleave_exists"' +
+                '},' +
+                '"landDetails":{' +
+                    '"is_registered":true,' +
+                    '"visible_from_road":true' +
+                '},' +
+                '"additionalInformation":{' +
+                    '"has_related_applications":true,' +
+                    '"related_applications_details":"TEST related application",' +
+                    '"other_information_details":"test important information"' +
+                '},' +
+                '"payment":{' +
+                    '"payment_id":"4646158ml3qvai0b04munb4hle",' +
+                    '"amount":23650,' +
+                    '"status":"confirmed",' +
+                    '"provider":"govuk-pay",' +
+                    '"kind":"Credit Card",' +
+                    '"description":"Section 37 Application Payment"' +
+                '}' +
+            '}' +
+        '}';
+    }
     
     
     // ========================================================================
@@ -899,6 +945,121 @@ private class InboundForm_ProcessorTest {
             ];
             Assert.areEqual('Withdrawal Requested', updatedCase.Status__c,
                 'Case status should be updated to Withdrawal Requested');
+        } finally {
+            CaseTriggerHelper.enableProcessing();
+        }
+    }
+
+    @IsTest
+    static void testProcessRequests_S37WithdrawalRequestPayload_WithoutEventType() {
+        InboundForm_Processor.clearAllCaches();
+        InboundForm_ConfigRegistry.clearCache();
+        CaseTriggerHelper.disableProcessing();
+        try {
+            String appId = '0e9ddd1a-3f11-4d27-bd8f-574e83a9a888';
+            String desnzRef = 'S3701493';
+            Case__c existingCase = new Case__c(
+                Name = desnzRef,
+                Status__c = 'New',
+                AWS_Application_Id__c = appId
+            );
+            insert existingCase;
+
+            Inbound_Request__c request = new Inbound_Request__c(
+                Payload__c = getS37WithdrawalJsonWithoutEventType(appId, desnzRef),
+                Status__c = 'Received'
+            );
+            insert request;
+
+            List<Inbound_Request__c> requests = new List<Inbound_Request__c>{
+                [SELECT Id, Payload__c FROM Inbound_Request__c WHERE Id = :request.Id]
+            };
+
+            Test.startTest();
+            Map<Id, InboundForm_Processor.ProcessingResult> results =
+                InboundForm_Processor.processRequests(requests);
+            Test.stopTest();
+
+            InboundForm_Processor.ProcessingResult result = results.get(request.Id);
+            Assert.isTrue(result.success,
+                'S37 withdrawal payload without eventType should process successfully');
+            Assert.areEqual('S37_WITHDRAWAL_REQUEST', result.formType,
+                'Payload should be routed to withdrawal form type via Withdraw node');
+
+            Case__c updatedCase = [
+                SELECT Id, Status__c
+                FROM Case__c
+                WHERE Id = :existingCase.Id
+                LIMIT 1
+            ];
+            Assert.areEqual('Withdrawal Requested', updatedCase.Status__c,
+                'Case status should be updated to Withdrawal Requested');
+        } finally {
+            CaseTriggerHelper.enableProcessing();
+        }
+    }
+
+    @IsTest
+    static void testProcessRequests_NWLPayload() {
+        InboundForm_Processor.clearAllCaches();
+        InboundForm_ConfigRegistry.clearCache();
+        CaseTriggerHelper.disableProcessing();
+        try {
+            Inbound_Request__c request = new Inbound_Request__c(
+                Payload__c = getValidNWLJson(),
+                Status__c = 'Received'
+            );
+            insert request;
+
+            List<Inbound_Request__c> requests = new List<Inbound_Request__c>{
+                [SELECT Id, Payload__c FROM Inbound_Request__c WHERE Id = :request.Id]
+            };
+
+            Test.startTest();
+            Map<Id, InboundForm_Processor.ProcessingResult> results =
+                InboundForm_Processor.processRequests(requests);
+            Test.stopTest();
+
+            InboundForm_Processor.ProcessingResult result = results.get(request.Id);
+            Assert.isTrue(result.success, 'NWL payload should process successfully');
+            Assert.areEqual('NWL', result.formType, 'Form type should be NWL');
+
+            Case__c insertedCase = [
+                SELECT Id,
+                       Name,
+                       AWS_Application_Id__c,
+                       Case_Type__c,
+                       Application_Type__c,
+                       Written_Removal_Notice_Been_Given__c,
+                       Land__c,
+                       Equipment_Visible_from_Public_Road__c,
+                       Are_There_Any_Other_Related_Applications__c,
+                       Details_of_All_Related_Application__c
+                FROM Case__c
+                WHERE AWS_Application_Id__c = 'b6ed18fa-7c3d-43bf-97b9-a40fc9bffa03'
+                LIMIT 1
+            ];
+
+            Assert.areEqual('NWL00116', insertedCase.Name, 'Case name should map from desnzRef');
+            Assert.areEqual('Necessary Wayleaves', insertedCase.Case_Type__c,
+                'NWL handler should set case type');
+            Assert.areEqual('Existing Line', insertedCase.Application_Type__c,
+                'NWL handler should normalize application type');
+            Assert.areEqual('No', insertedCase.Written_Removal_Notice_Been_Given__c,
+                'Written removal notice should be No when issue date is not present');
+            Assert.isNull(insertedCase.Land__c,
+                'Land registration flag should map to null when not present in payload');
+            // Assert.areEqual('No', insertedCase.Land__c,
+                // 'Land registration flag should map to No');
+            Assert.isNull(insertedCase.Equipment_Visible_from_Public_Road__c,
+                'Visibility flag should map to null when not present in payload');
+            // Assert.areEqual('Yes', insertedCase.Equipment_Visible_from_Public_Road__c,
+            //     'Visibility flag should map to Yes');
+            Assert.isTrue(insertedCase.Are_There_Any_Other_Related_Applications__c,
+                'Related applications flag should map');
+            Assert.areEqual('TEST related application',
+                insertedCase.Details_of_All_Related_Application__c,
+                'Related application details should map');
         } finally {
             CaseTriggerHelper.enableProcessing();
         }

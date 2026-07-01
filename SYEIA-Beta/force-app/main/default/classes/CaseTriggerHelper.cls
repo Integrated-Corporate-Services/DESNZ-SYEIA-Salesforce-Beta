@@ -153,6 +153,8 @@ public with sharing class CaseTriggerHelper {
         if (chunk.size() > 0) {
                 System.debug(LoggingLevel.INFO, 'chunk size > 0');
                 System.debug(LoggingLevel.INFO, 'Started enqueueJob Application_StatusUpdateQueueable');
+            Logger.info('Started enqueueJob Application_StatusUpdateQueueable for remaining records');
+            Logger.saveLog();
             System.enqueueJob(new Application_StatusUpdateQueueable(chunk));
         }
         

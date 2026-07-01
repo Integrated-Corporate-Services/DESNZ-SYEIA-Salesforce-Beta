@@ -19,7 +19,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW_Invalid_NTT_only_including_implied_wayleaves_LO</stringValue>
+                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -49,6 +49,21 @@
                 <booleanValue>true</booleanValue>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveMethodName</name>
+        </inputParameters>
+        <inputParameters>
+            <name>scenario</name>
+        </inputParameters>
+        <inputParameters>
+            <name>shouldThrowFaultMessageException</name>
+        </inputParameters>
+        <inputParameters>
+            <name>tagsString</name>
+        </inputParameters>
+        <inputParameters>
+            <name>topics</name>
         </inputParameters>
         <nameSegment>FlowLogEntry</nameSegment>
         <offset>0</offset>
@@ -73,7 +88,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW_Invalid_NTT_only_including_implied_wayleaves_LO</stringValue>
+                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -103,6 +118,21 @@
                 <booleanValue>true</booleanValue>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveMethodName</name>
+        </inputParameters>
+        <inputParameters>
+            <name>scenario</name>
+        </inputParameters>
+        <inputParameters>
+            <name>shouldThrowFaultMessageException</name>
+        </inputParameters>
+        <inputParameters>
+            <name>tagsString</name>
+        </inputParameters>
+        <inputParameters>
+            <name>topics</name>
         </inputParameters>
         <nameSegment>FlowLogEntry</nameSegment>
         <offset>0</offset>
@@ -127,7 +157,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW_Invalid_NTT_only_including_implied_wayleaves_LO</stringValue>
+                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -157,6 +187,21 @@
                 <booleanValue>true</booleanValue>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveMethodName</name>
+        </inputParameters>
+        <inputParameters>
+            <name>scenario</name>
+        </inputParameters>
+        <inputParameters>
+            <name>shouldThrowFaultMessageException</name>
+        </inputParameters>
+        <inputParameters>
+            <name>tagsString</name>
+        </inputParameters>
+        <inputParameters>
+            <name>topics</name>
         </inputParameters>
         <nameSegment>FlowLogEntry</nameSegment>
         <offset>0</offset>
@@ -164,7 +209,7 @@
     </actionCalls>
     <actionCalls>
         <name>Copy_4_of_Generate_Document_Nebula_Logger</name>
-        <label>Generate Document Nebula Logger</label>
+        <label>Copy 4 of Generate Document Nebula Logger</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <actionName>FlowLogEntry</actionName>
@@ -181,7 +226,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW_Invalid_NTT_only_including_implied_wayleaves_LO</stringValue>
+                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -211,6 +256,21 @@
                 <booleanValue>true</booleanValue>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveMethodName</name>
+        </inputParameters>
+        <inputParameters>
+            <name>scenario</name>
+        </inputParameters>
+        <inputParameters>
+            <name>shouldThrowFaultMessageException</name>
+        </inputParameters>
+        <inputParameters>
+            <name>tagsString</name>
+        </inputParameters>
+        <inputParameters>
+            <name>topics</name>
         </inputParameters>
         <nameSegment>FlowLogEntry</nameSegment>
         <offset>0</offset>
@@ -218,7 +278,7 @@
     </actionCalls>
     <actionCalls>
         <name>Copy_5_of_Generate_Document_Nebula_Logger</name>
-        <label>Generate Document Nebula Logger</label>
+        <label>Copy 5 of Generate Document Nebula Logger</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <actionName>FlowLogEntry</actionName>
@@ -235,7 +295,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW_Invalid_NTT_only_including_implied_wayleaves_LO</stringValue>
+                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -265,6 +325,21 @@
                 <booleanValue>true</booleanValue>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
+        </inputParameters>
+        <inputParameters>
+            <name>saveMethodName</name>
+        </inputParameters>
+        <inputParameters>
+            <name>scenario</name>
+        </inputParameters>
+        <inputParameters>
+            <name>shouldThrowFaultMessageException</name>
+        </inputParameters>
+        <inputParameters>
+            <name>tagsString</name>
+        </inputParameters>
+        <inputParameters>
+            <name>topics</name>
         </inputParameters>
         <nameSegment>FlowLogEntry</nameSegment>
         <offset>0</offset>
@@ -281,7 +356,7 @@
             <targetReference>Final_Record_Creation_Screen_Approval_Titl</targetReference>
         </connector>
         <faultConnector>
-            <targetReference>Copy_5_of_Generate_Document_Nebula_Logger</targetReference>
+            <targetReference>Copy_3_of_Generate_Document_Nebula_Logger</targetReference>
         </faultConnector>
         <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
@@ -301,7 +376,7 @@
         <inputParameters>
             <name>templateContentVersionId</name>
             <value>
-                <elementReference>Get_NW_Invalid_NTT_only_including_implied_wayleaves_LO_DocumentTemplateContentDo.LatestContentVersionId</elementReference>
+                <elementReference>Get_Screen_DocGen_NW12_Procedural_notice_OH_LO_DTCD.LatestContentVersionId</elementReference>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
@@ -335,7 +410,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW_Invalid_NTT_only_including_implied_wayleaves_LO</stringValue>
+                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -366,65 +441,26 @@
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
-        <nameSegment>FlowLogEntry</nameSegment>
-        <offset>0</offset>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </actionCalls>
-    <actionCalls>
-        <name>Generate_Document_Nebula_Logger_1</name>
-        <label>Generate Document Nebula Logger</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <actionName>FlowLogEntry</actionName>
-        <actionType>apex</actionType>
-        <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
-            <name>faultMessage</name>
-            <value>
-                <elementReference>$Flow.FaultMessage</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
-            </value>
+            <name>saveMethodName</name>
         </inputParameters>
         <inputParameters>
-            <name>flowName</name>
-            <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW_Invalid_NTT_only_including_implied_wayleaves_LO</stringValue>
-            </value>
+            <name>scenario</name>
         </inputParameters>
         <inputParameters>
-            <name>loggingLevelName</name>
-            <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>ERROR</stringValue>
-            </value>
+            <name>shouldThrowFaultMessageException</name>
         </inputParameters>
         <inputParameters>
-            <name>message</name>
-            <value>
-                <elementReference>$Flow.FaultMessage</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
-            </value>
+            <name>tagsString</name>
         </inputParameters>
         <inputParameters>
-            <name>recordId</name>
-            <value>
-                <elementReference>recordId</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>saveLog</name>
-            <value>
-                <booleanValue>true</booleanValue>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
-            </value>
+            <name>topics</name>
         </inputParameters>
         <nameSegment>FlowLogEntry</nameSegment>
         <offset>0</offset>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
-    <apiVersion>66.0</apiVersion>
+    <apiVersion>65.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
         <name>Assign_App_Email</name>
@@ -432,10 +468,10 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
-            <assignToReference>var_OwnerorOccupiercontactemailaddress</assignToReference>
+            <assignToReference>var_Owner_Or_Rep_Email</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Applicant_Contact_Email.value</elementReference>
+                <elementReference>Owner_Or_Rep_Contact_Email.value</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -455,7 +491,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Get_NW_Invalid_NTT_only_including_implied_wayleaves_LO</targetReference>
+            <targetReference>Get_NW12_Procedural_notice_OH_LO</targetReference>
         </connector>
     </assignments>
     <customProperties>
@@ -470,7 +506,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <targetReference>Get_NW_Invalid_NTT_only_including_implied_wayleaves_LO</targetReference>
+            <targetReference>Get_NW12_Procedural_notice_OH_LO</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -490,6 +526,26 @@
         </rules>
     </decisions>
     <environments>Default</environments>
+    <formulas>
+        <name>Applicant_Consents_to_Written_Representations_TA_DefaultText</name>
+        <dataType>String</dataType>
+        <expression>&apos;[[Thank you for your correspondence dated [[insert date]], in which you requested the application be considered by way of the oral hearing procedure. Please note that we received a response from the applicant who gave their consent to the written representation procedure.]]&apos;</expression>
+    </formulas>
+    <formulas>
+        <name>Applicant_Requests_Oral_Hearing_TA_DefaultText</name>
+        <dataType>String</dataType>
+        <expression>&apos;[[Thank you for your correspondence dated [[insert date]], in which you gave your consent to the application being considered by way of the written representation procedure. Please note that we received a response from the applicant who did not give their consent and requested an oral hearing.]]&apos;</expression>
+    </formulas>
+    <formulas>
+        <name>formula_Applicant_Consents_to_Written_Representations</name>
+        <dataType>String</dataType>
+        <expression>IF({!Applicant_Consents_to_Written_Representations.value}, {!Applicant_Consents_to_Written_Representations_TA}, &apos;&apos;)</expression>
+    </formulas>
+    <formulas>
+        <name>formula_Applicant_Requests_Oral_Hearing</name>
+        <dataType>String</dataType>
+        <expression>IF({!Applicant_Requests_Oral_Hearing.value}, {!Applicant_Requests_Oral_Hearing_TA}, &apos;&apos;)</expression>
+    </formulas>
     <formulas>
         <name>formula_CurrentDate</name>
         <dataType>String</dataType>
@@ -526,17 +582,27 @@ TEXT(YEAR(TODAY()))</expression>
     <formulas>
         <name>formula_DocumentTitle</name>
         <dataType>String</dataType>
-        <expression>&apos;NW03. Invalid - NTT only (including implied wayleaves) - LO -&apos; &amp; {!Get_Case_Using_recordId.Name} &amp; &apos;-&apos; &amp; TEXT(TODAY())</expression>
+        <expression>&apos;NW12. Procedural notice (OH) - LO -&apos; &amp; {!Get_Case.Name} &amp; &apos;-&apos; &amp; TEXT(TODAY())</expression>
     </formulas>
     <formulas>
-        <name>formula_OwnerorOccupiercontactemailaddress</name>
+        <name>formula_Mutual_Request_for_Oral_Hearing</name>
+        <dataType>String</dataType>
+        <expression>IF({!Mutual_Request_for_Oral_Hearing.value}, {!Mutual_Request_for_Oral_Hearing_TA}, &apos;&apos;)</expression>
+    </formulas>
+    <formulas>
+        <name>formula_No_Response_Received_Applicant_Requests_Oral_Hearing</name>
+        <dataType>String</dataType>
+        <expression>IF({!No_Response_Received_Applicant_Requests_Oral_Hearing.value}, {!No_Response_Received_Applicant_Requests_Oral_Hearing_TA}, &apos;&apos;)</expression>
+    </formulas>
+    <formulas>
+        <name>formula_owner_or_rep_Email</name>
         <dataType>String</dataType>
         <expression>{!Get_Owner_Rep.Email__c}</expression>
     </formulas>
     <formulas>
-        <name>formula_Reasons</name>
+        <name>formula_Planning_Inspectorate_PEDW</name>
         <dataType>String</dataType>
-        <expression>{!Insert_Reasons}</expression>
+        <expression>{!Planning_Inspectorate_PEDW}</expression>
     </formulas>
     <formulas>
         <name>formula_SentByEmail</name>
@@ -547,13 +613,11 @@ TEXT(YEAR(TODAY()))</expression>
         <name>formula_TokenData</name>
         <dataType>String</dataType>
         <expression>&apos;{&apos; &amp;
-&apos;&quot;DESNZ_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Name} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;Applicant_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Applicant_Reference__c} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;OwnerOrOccuppier_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Applicant_Reference__c} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;Owner_or_occupier_contact_Email&quot;: &quot;&apos; &amp; {!Get_Owner_Rep.Email__c} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;NetworkOperator&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Name} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;App_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Representative__r.Name} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;VAR_App_Email&quot;: &quot;&apos; &amp; {!var_OwnerorOccupiercontactemailaddress} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;DESNZ_Reference&quot;: &quot;&apos; &amp; {!Get_Case.Name} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;OwnerOrOccuppier_Reference&quot;: &quot;&apos; &amp; {!Get_Case.Applicant_Reference__c} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;DNO_Name&quot;: &quot;&apos; &amp; {!Get_Case.DNO__r.Name} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;App_Name&quot;: &quot;&apos; &amp; {!Get_Case.DNO__r.Representative__r.Name} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;App_Email&quot;: &quot;&apos; &amp; {!var_Owner_Or_Rep_Email} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;DNO_Address_Line1&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line1__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;DNO_Address_Line2&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line_2__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;DNO_Address_TownCity&quot;: &quot;&apos; &amp; {!Get_Address.Town_City__c} &amp; &apos;&quot;, &apos; &amp;
@@ -563,15 +627,25 @@ TEXT(YEAR(TODAY()))</expression>
 &apos;&quot;Site_Address_TownCity&quot;: &quot;&apos; &amp; {!Get_Site_Address.Town_City__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;Site_Address_Postcode&quot;: &quot;&apos; &amp; {!Get_Site_Address.Postcode__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;NameofOwner_or_occupier_contact&quot;: &quot;&apos; &amp; {!Get_Owner_Rep.Name} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;Date_of_Application__c&quot;: &quot;&apos; &amp; TEXT({!Get_Case_Using_recordId.Date_of_Application__c}) &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;Written_Removal_Notice_Issue_Date__c&quot;: &quot;&apos; &amp; TEXT({!Get_Case_Using_recordId.Written_Removal_Notice_Issue_Date__c}) &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;Reasons&quot;: &quot;&apos; &amp; {!formula_Reasons} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;Owner_or_occupier_contact_Email&quot;: &quot;&apos; &amp; {!var_Owner_Or_Rep_Email} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;Date_of_Application__c&quot;: &quot;&apos; &amp; TEXT({!Get_Case.Date_of_Application__c}) &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;formula_Mutual_Request_for_Oral_Hearing&quot;: &quot;&apos; &amp; {!formula_Mutual_Request_for_Oral_Hearing} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;formula_Applicant_Consents_to_Written_Representations&quot;: &quot;&apos; &amp; {!formula_Applicant_Consents_to_Written_Representations} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;formula_Applicant_Requests_Oral_Hearing&quot;: &quot;&apos; &amp; {!formula_Applicant_Requests_Oral_Hearing} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;formula_No_Response_Received_Applicant_Requests_Oral_Hearing&quot;: &quot;&apos; &amp; {!formula_No_Response_Received_Applicant_Requests_Oral_Hearing} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;formula_Planning_Inspectorate_PEDW&quot;: &quot;&apos; &amp; {!formula_Planning_Inspectorate_PEDW} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;Appeals_Authority_Contact_Details&quot;: &quot;&apos; &amp; {!Appeals_Authority_Contact_Details} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;SENT_BY_EMAIL&quot;: &quot;&apos; &amp; {!formula_SentByEmail} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;Date_of_Letter&quot;: &quot;&apos; &amp; TEXT({!Selected_Date_of_Letter}) &amp; &apos;&quot;&apos; &amp;
 &apos;}&apos;</expression>
     </formulas>
-    <interviewLabel>NW Invalid - NTT only (including implied wayleaves) - LO {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Screen - DocGen - NW03 Invalid - NTT only (including implied wayleaves) - LO</label>
+    <formulas>
+        <name>No_Response_Received_Applicant_Requests_Oral_Hearing_TA_DefaultText</name>
+        <dataType>String</dataType>
+        <expression>&apos;[[We refer to our previous letter dated [[CTWR letter date]], in which we sought your consent for the application to be considered by way of the written representation procedure. It is noted that we did not receive a response from you by the deadline.  Please note that we received a response from the applicant who did not give their consent and requested an oral hearing.]]&apos;</expression>
+    </formulas>
+    <interviewLabel>Screen DocGen NW12. Procedural notice (OH) - LO {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Screen DocGen NW12. Procedural notice (OH) - LO</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -600,15 +674,12 @@ TEXT(YEAR(TODAY()))</expression>
         <connector>
             <targetReference>Get_Site_Address</targetReference>
         </connector>
-        <faultConnector>
-            <targetReference>Copy_2_of_Generate_Document_Nebula_Logger</targetReference>
-        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Party__c</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>Get_Case_Using_recordId.DNO__c</elementReference>
+                <elementReference>Get_Case.DNO__c</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -616,8 +687,8 @@ TEXT(YEAR(TODAY()))</expression>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <name>Get_Case_Using_recordId</name>
-        <label>Get Case Using recordId</label>
+        <name>Get_Case</name>
+        <label>Get Case</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
@@ -625,7 +696,7 @@ TEXT(YEAR(TODAY()))</expression>
             <targetReference>Get_Address</targetReference>
         </connector>
         <faultConnector>
-            <targetReference>Copy_1_of_Generate_Document_Nebula_Logger</targetReference>
+            <targetReference>Copy_2_of_Generate_Document_Nebula_Logger</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -640,13 +711,13 @@ TEXT(YEAR(TODAY()))</expression>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <name>Get_NW_Invalid_NTT_only_including_implied_wayleaves_LO</name>
-        <label>Get NW_Invalid_NTT_only_including_implied wayleaves_LO</label>
+        <name>Get_NW12_Procedural_notice_OH_LO</name>
+        <label>Get NW12. Procedural notice (OH) - LO</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Get_NW_Invalid_NTT_only_including_implied_wayleaves_LO_DocumentTemplateContentDo</targetReference>
+            <targetReference>Get_Screen_DocGen_NW12_Procedural_notice_OH_LO_DTCD</targetReference>
         </connector>
         <faultConnector>
             <targetReference>Generate_Document_Nebula_Logger</targetReference>
@@ -656,35 +727,11 @@ TEXT(YEAR(TODAY()))</expression>
             <field>Name</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>NW03_Invalid_NTT_only_including_implied_wayleaves_LO_2022</stringValue>
+                <stringValue>NW12_Procedural_notice_OH_LO</stringValue>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>DocumentTemplate</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
-    <recordLookups>
-        <name>Get_NW_Invalid_NTT_only_including_implied_wayleaves_LO_DocumentTemplateContentDo</name>
-        <label>Get NW_Invalid_NTT_only_including_implied wayleaves_LO DocumentTemplateContentDoc</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Get_Case_Using_recordId</targetReference>
-        </connector>
-        <faultConnector>
-            <targetReference>Generate_Document_Nebula_Logger_1</targetReference>
-        </faultConnector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>DocumentTemplateId</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>Get_NW_Invalid_NTT_only_including_implied_wayleaves_LO.Id</elementReference>
-            </value>
-        </filters>
-        <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>DocumentTemplateContentDoc</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
@@ -697,14 +744,14 @@ TEXT(YEAR(TODAY()))</expression>
             <targetReference>Condition_Library</targetReference>
         </connector>
         <faultConnector>
-            <targetReference>Copy_4_of_Generate_Document_Nebula_Logger</targetReference>
+            <targetReference>Copy_5_of_Generate_Document_Nebula_Logger</targetReference>
         </faultConnector>
         <filterLogic>1 AND ( 2 OR 3 )</filterLogic>
         <filters>
             <field>Case__c</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>Get_Case_Using_recordId.Id</elementReference>
+                <elementReference>Get_Case.Id</elementReference>
             </value>
         </filters>
         <filters>
@@ -726,6 +773,30 @@ TEXT(YEAR(TODAY()))</expression>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
+        <name>Get_Screen_DocGen_NW12_Procedural_notice_OH_LO_DTCD</name>
+        <label>Get Screen DocGen NW12. Procedural notice (OH) - LO</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Case</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Copy_1_of_Generate_Document_Nebula_Logger</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DocumentTemplateId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_NW12_Procedural_notice_OH_LO.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>DocumentTemplateContentDoc</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
         <name>Get_Site_Address</name>
         <label>Get Site Address</label>
         <locationX>0</locationX>
@@ -735,14 +806,14 @@ TEXT(YEAR(TODAY()))</expression>
             <targetReference>Get_Owner_Rep</targetReference>
         </connector>
         <faultConnector>
-            <targetReference>Copy_3_of_Generate_Document_Nebula_Logger</targetReference>
+            <targetReference>Copy_4_of_Generate_Document_Nebula_Logger</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Case__c</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>Get_Case_Using_recordId.Id</elementReference>
+                <elementReference>Get_Case.Id</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -754,15 +825,15 @@ TEXT(YEAR(TODAY()))</expression>
         <label>Condition Library</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <allowBack>true</allowBack>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
+        <allowPause>false</allowPause>
         <connector>
             <targetReference>Assign_App_Email</targetReference>
         </connector>
         <fields>
             <name>ReasonSectionDisplayText</name>
-            <fieldText>&lt;h1&gt;&lt;strong&gt;NW03. Invalid - NTT only (including implied wayleaves) - LO&lt;/strong&gt;&lt;/h1&gt;</fieldText>
+            <fieldText>&lt;h1&gt;&lt;strong&gt;NW12. Procedural notice (OH) - LO&lt;/strong&gt;&lt;/h1&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -774,11 +845,229 @@ TEXT(YEAR(TODAY()))</expression>
             </styleProperties>
         </fields>
         <fields>
-            <name>Insert_Reasons</name>
-            <fieldText>Reasons</fieldText>
-            <fieldType>LargeTextArea</fieldType>
+            <name>Mutual_Request_for_Oral_Hearing</name>
+            <extensionName>flowruntime:toggle</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Mutual Request for Oral Hearing</stringValue>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Mutual_Request_for_Oral_Hearing_TA</name>
+            <defaultValue>
+                <stringValue>[[Thank you for your correspondence dated [[insert date]], in which you requested the application be considered by way of the oral hearing procedure. Please note that we received a response from the applicant who also requested an oral hearing.]]</stringValue>
+            </defaultValue>
+            <fieldType>LargeTextArea</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Mutual_Request_for_Oral_Hearing.value</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Applicant_Consents_to_Written_Representations</name>
+            <extensionName>flowruntime:toggle</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Applicant Consents to Written Representations</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Applicant_Consents_to_Written_Representations_TA</name>
+            <defaultValue>
+                <stringValue>{!Applicant_Consents_to_Written_Representations_TA_DefaultText}</stringValue>
+            </defaultValue>
+            <fieldType>LargeTextArea</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Applicant_Consents_to_Written_Representations.value</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Applicant_Requests_Oral_Hearing</name>
+            <extensionName>flowruntime:toggle</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Applicant Requests Oral Hearing</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Applicant_Requests_Oral_Hearing_TA</name>
+            <defaultValue>
+                <stringValue>{!Applicant_Requests_Oral_Hearing_TA_DefaultText}</stringValue>
+            </defaultValue>
+            <fieldType>LargeTextArea</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Applicant_Requests_Oral_Hearing.value</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>No_Response_Received_Applicant_Requests_Oral_Hearing</name>
+            <extensionName>flowruntime:toggle</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>No Response Received – Applicant Requests Oral Hearing</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>No_Response_Received_Applicant_Requests_Oral_Hearing_TA</name>
+            <defaultValue>
+                <stringValue>{!No_Response_Received_Applicant_Requests_Oral_Hearing_TA_DefaultText}</stringValue>
+            </defaultValue>
+            <fieldType>LargeTextArea</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>No_Response_Received_Applicant_Requests_Oral_Hearing.value</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Planning_Inspectorate_PEDW</name>
+            <defaultValue>
+                <stringValue>[[The Planning Inspectorate / Planning &amp; Environment Decisions Wales]] </stringValue>
+            </defaultValue>
+            <fieldText>Planning Inspectorate / PEDW</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Appeals_Authority_Contact_Details</name>
+            <defaultValue>
+                <stringValue>[[The Planning Inspectorate can be contacted at: ETC@planninginspectorate.gov.uk]]  or
+[[Planning &amp; Environment Decisions Wales can be contacted at: PEDW.casework@gov.wales]]</stringValue>
+            </defaultValue>
+            <fieldText>Appeals Authority Contact Details</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>false</isRequired>
             <styleProperties>
                 <verticalAlignment>
                     <stringValue>top</stringValue>
@@ -817,25 +1106,25 @@ TEXT(YEAR(TODAY()))</expression>
             </styleProperties>
         </fields>
         <fields>
-            <name>Applicant_Contact_Email</name>
+            <name>Owner_Or_Rep_Contact_Email</name>
             <extensionName>flowruntime:email</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
                 <name>label</name>
                 <value>
-                    <stringValue>Owner or Occupier contact email address</stringValue>
+                    <stringValue>Owner or Representative Contact Email</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>value</name>
+                <value>
+                    <elementReference>var_Owner_Or_Rep_Email</elementReference>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>required</name>
                 <value>
                     <booleanValue>true</booleanValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>value</name>
-                <value>
-                    <elementReference>var_OwnerorOccupiercontactemailaddress</elementReference>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -849,21 +1138,11 @@ TEXT(YEAR(TODAY()))</expression>
                     <stringValue>12</stringValue>
                 </width>
             </styleProperties>
-            <visibilityRule>
-                <conditionLogic>and</conditionLogic>
-                <conditions>
-                    <leftValueReference>formula_OwnerorOccupiercontactemailaddress</leftValueReference>
-                    <operator>IsNull</operator>
-                    <rightValue>
-                        <booleanValue>false</booleanValue>
-                    </rightValue>
-                </conditions>
-            </visibilityRule>
         </fields>
         <fields>
             <name>Selected_Date_of_Letter</name>
             <dataType>Date</dataType>
-            <fieldText>Date of Letter</fieldText>
+            <fieldText>Date</fieldText>
             <fieldType>InputField</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
@@ -876,6 +1155,7 @@ TEXT(YEAR(TODAY()))</expression>
                 </width>
             </styleProperties>
         </fields>
+        <nextOrFinishButtonLabel>Complete</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
     </screens>
@@ -889,7 +1169,7 @@ TEXT(YEAR(TODAY()))</expression>
         <allowPause>false</allowPause>
         <fields>
             <name>H_Final_Record_Creation_Screen_Approval_Titl</name>
-            <fieldText>&lt;h1&gt;&lt;strong&gt;The  NW03. Invalid - NTT only (including implied wayleaves) - LO has been successfully created.&lt;/strong&gt;&lt;/h1&gt;</fieldText>
+            <fieldText>&lt;h1&gt;&lt;strong&gt;NW12. Procedural notice (OH) - LO&lt;/strong&gt;&lt;/h1&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -950,13 +1230,13 @@ TEXT(YEAR(TODAY()))</expression>
         </value>
     </variables>
     <variables>
-        <name>var_OwnerorOccupiercontactemailaddress</name>
+        <name>var_Owner_Or_Rep_Email</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <value>
-            <elementReference>formula_OwnerorOccupiercontactemailaddress</elementReference>
+            <elementReference>formula_owner_or_rep_Email</elementReference>
         </value>
     </variables>
 </Flow>
