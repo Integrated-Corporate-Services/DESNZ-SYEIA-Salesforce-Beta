@@ -149,6 +149,9 @@
         <name>choice_NW09_Procedural_Notice_WR_Applicant</name>
         <choiceText>NW09. Procedural notice (WR) - Applicant</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW09. Procedural notice (WR) - Applicant</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW09_Procedural_Notice_WR_Land_Owner</name>
@@ -441,6 +444,21 @@
                 <targetReference>NW05_Request_for_further_information_Landowner</targetReference>
             </connector>
             <label>NW05. Request for further information - LO</label>
+        </rules>
+        <rules>
+            <name>NW09_Procedural_notice_WR_Applicant</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW09. Procedural notice (WR) - Applicant</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW09_Procedural_notice_WR_Applicant_SubFlow</targetReference>
+            </connector>
+            <label>NW09. Procedural notice (WR) - Applicant</label>
         </rules>
         <rules>
             <name>NW09_Procedural_notice_WR_LO</name>
@@ -842,6 +860,19 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <flowName>NW05_Request_for_further_information_Landowner</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW09_Procedural_notice_WR_Applicant_SubFlow</name>
+        <label>NW09. Procedural notice (WR) - Applicant</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW09_Procedural_notice_WR_Applicant</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>
