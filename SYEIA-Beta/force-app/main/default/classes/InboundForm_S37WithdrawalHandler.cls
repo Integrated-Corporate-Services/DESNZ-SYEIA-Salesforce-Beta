@@ -13,7 +13,10 @@ public class InboundForm_S37WithdrawalHandler implements InboundForm_Processor.I
             return errors;
         }
 
-        if (!isWithdrawalRequestedEvent(eventType)) {
+        Boolean hasWithdrawalPayload =
+            parser.hasValue('Withdraw') || parser.hasValue('Withdraw.withdrawalReason');
+
+        if (!isWithdrawalRequestedEvent(eventType) && !hasWithdrawalPayload) {
             errors.add('Unsupported eventType for S37 withdrawal handler: ' + eventType);
             return errors;
         }
@@ -97,6 +100,14 @@ public class InboundForm_S37WithdrawalHandler implements InboundForm_Processor.I
             return false;
         }
 
-        return eventType.equalsIgnoreCase(WITHDRAWAL_EVENT_TYPE);
+        String normalizedEventType = eventType
+            .toUpperCase()
+            .replace('_', '')
+            .replace('-', '')
+            .replace(' ', '');
+
+        return normalizedEventType == 'WITHDRAWALREQUESTED' ||
+            normalizedEventType == 'WITHDRAWALREQUEST' ||
+            normalizedEventType == WITHDRAWAL_EVENT_TYPE.replace('_', '');
     }
 }

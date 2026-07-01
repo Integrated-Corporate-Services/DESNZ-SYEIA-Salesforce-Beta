@@ -243,6 +243,19 @@ private class InboundForm_ProcessorTest {
         '}';
     }
 
+    private static String getS37WithdrawalJsonWithoutEventType(String applicationId, String desnzRef) {
+        return '{' +
+            '"applicationId":"' + applicationId + '",' +
+            '"formType":"S37",' +
+            '"status":"SUBMITTED",' +
+            '"Withdraw":{' +
+                '"withdrawalReason":"testing reason for withdrawal without event type",' +
+                '"voluntaryAgreement":null' +
+            '},' +
+            '"desnzRef":"' + desnzRef + '"' +
+        '}';
+    }
+
     private static String getValidNWLJson() {
         return '{' +
             '"applicationId":"b6ed18fa-7c3d-43bf-97b9-a40fc9bffa03",' +
@@ -923,6 +936,55 @@ private class InboundForm_ProcessorTest {
             Assert.areEqual('testing reason for withdrawal',
                 inserted[0].Withdrawal_Request_Reason__c,
                 'Withdrawal reason should be mapped from payload');
+
+            Case__c updatedCase = [
+                SELECT Id, Status__c
+                FROM Case__c
+                WHERE Id = :existingCase.Id
+                LIMIT 1
+            ];
+            Assert.areEqual('Withdrawal Requested', updatedCase.Status__c,
+                'Case status should be updated to Withdrawal Requested');
+        } finally {
+            CaseTriggerHelper.enableProcessing();
+        }
+    }
+
+    @IsTest
+    static void testProcessRequests_S37WithdrawalRequestPayload_WithoutEventType() {
+        InboundForm_Processor.clearAllCaches();
+        InboundForm_ConfigRegistry.clearCache();
+        CaseTriggerHelper.disableProcessing();
+        try {
+            String appId = '0e9ddd1a-3f11-4d27-bd8f-574e83a9a888';
+            String desnzRef = 'S3701493';
+            Case__c existingCase = new Case__c(
+                Name = desnzRef,
+                Status__c = 'New',
+                AWS_Application_Id__c = appId
+            );
+            insert existingCase;
+
+            Inbound_Request__c request = new Inbound_Request__c(
+                Payload__c = getS37WithdrawalJsonWithoutEventType(appId, desnzRef),
+                Status__c = 'Received'
+            );
+            insert request;
+
+            List<Inbound_Request__c> requests = new List<Inbound_Request__c>{
+                [SELECT Id, Payload__c FROM Inbound_Request__c WHERE Id = :request.Id]
+            };
+
+            Test.startTest();
+            Map<Id, InboundForm_Processor.ProcessingResult> results =
+                InboundForm_Processor.processRequests(requests);
+            Test.stopTest();
+
+            InboundForm_Processor.ProcessingResult result = results.get(request.Id);
+            Assert.isTrue(result.success,
+                'S37 withdrawal payload without eventType should process successfully');
+            Assert.areEqual('S37_WITHDRAWAL_REQUEST', result.formType,
+                'Payload should be routed to withdrawal form type via Withdraw node');
 
             Case__c updatedCase = [
                 SELECT Id, Status__c

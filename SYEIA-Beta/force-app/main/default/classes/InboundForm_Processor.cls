@@ -208,11 +208,27 @@ public with sharing class InboundForm_Processor {
      * S37 withdrawal events are processed by a dedicated withdrawal config.
      */
     private static String resolveConfiguredFormType(InboundForm_JSONParser parser, String payloadFormType) {
-        String eventType = parser.getString('eventType');
-        if (payloadFormType == S37_FORM_TYPE && isWithdrawalRequestedEvent(eventType)) {
+        if (isS37WithdrawalPayload(parser, payloadFormType)) {
             return S37_WITHDRAWAL_FORM_TYPE;
         }
         return payloadFormType;
+    }
+
+    private static Boolean isS37WithdrawalPayload(InboundForm_JSONParser parser, String payloadFormType) {
+        if (payloadFormType == S37_WITHDRAWAL_FORM_TYPE) {
+            return true;
+        }
+
+        if (payloadFormType != S37_FORM_TYPE) {
+            return false;
+        }
+
+        String eventType = parser.getString('eventType');
+        if (isWithdrawalRequestedEvent(eventType)) {
+            return true;
+        }
+
+        return parser.hasValue('Withdraw') || parser.hasValue('Withdraw.withdrawalReason');
     }
 
     private static Boolean isWithdrawalRequestedEvent(String eventType) {
@@ -220,7 +236,15 @@ public with sharing class InboundForm_Processor {
             return false;
         }
 
-        return eventType.equalsIgnoreCase(WITHDRAWAL_EVENT_TYPE);
+        String normalizedEventType = eventType
+            .toUpperCase()
+            .replace('_', '')
+            .replace('-', '')
+            .replace(' ', '');
+
+        return normalizedEventType == 'WITHDRAWALREQUESTED' ||
+            normalizedEventType == 'WITHDRAWALREQUEST' ||
+            normalizedEventType == WITHDRAWAL_EVENT_TYPE.replace('_', '');
     }
     
     /**
