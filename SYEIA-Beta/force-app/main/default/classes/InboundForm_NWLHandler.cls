@@ -71,15 +71,33 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
     }
 
     private static void normalizeApplicationType(Case__c caseRecord) {
-        if (String.isBlank(caseRecord.Application_Type__c)) {
-            return;
+        if (!String.isBlank(caseRecord.Application_Type__c)) {
+            if (caseRecord.Application_Type__c.equalsIgnoreCase('Existing line')) {
+                caseRecord.Application_Type__c = 'Existing Line';
+            } else if (caseRecord.Application_Type__c.equalsIgnoreCase('New line')) {
+                caseRecord.Application_Type__c = 'New Line';
+            }
         }
 
-        if (caseRecord.Application_Type__c.equalsIgnoreCase('Existing line')) {
-            caseRecord.Application_Type__c = 'Existing Line';
-        } else if (caseRecord.Application_Type__c.equalsIgnoreCase('New line')) {
-            caseRecord.Application_Type__c = 'New Line';
+        caseRecord.Legislation_Applicable__c =
+            mapNwlGroundsForApplication(caseRecord.Legislation_Applicable__c);
+    }
+
+    @TestVisible
+    private static String mapNwlGroundsForApplication(String value) {
+        if (String.isBlank(value)) {
+            return value;
         }
+
+        if (value.equalsIgnoreCase('no_wayleave_exists')) {
+            return Label.NWL_no_wayleave_exists;
+        } else if (value.equalsIgnoreCase('wayleave_has_been_terminated')) {
+            return Label.NWL_Wayleave_has_been_terminated;
+        } else if (value.equalsIgnoreCase('wayleave_has_expired')) {
+            return Label.NWL_Wayleave_has_Expired;
+        }
+
+        return value;
     }
 
     private static void normalizeLandLocation(Map<String, List<SObject>> records) {

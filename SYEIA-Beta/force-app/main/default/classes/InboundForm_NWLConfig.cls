@@ -39,10 +39,10 @@ public class InboundForm_NWLConfig {
             'Application_Type__c'
         ));
         
-        // config.addFieldMapping(InboundForm_MappingConfig.stringField(
-        //     'sections.applicationDetails.grounds_for_application',
-        //     'Legislation_Applicable__c'
-        // ));
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'sections.applicationDetails.grounds_for_application',
+            'Legislation_Applicable__c'
+        ));
 
         config.addFieldMapping(InboundForm_MappingConfig.stringField(
             'sections.applicationDetails.wayleave_type',
