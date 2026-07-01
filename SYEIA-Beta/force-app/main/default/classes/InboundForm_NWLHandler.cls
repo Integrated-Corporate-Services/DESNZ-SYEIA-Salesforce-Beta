@@ -24,6 +24,8 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
             caseRecord.Written_Termination_Notice_Been_Given__c =
                 caseRecord.Written_Termination_Notice_Issue_Date__c != null ? 'Yes' : 'No';
         }
+
+        normalizeLandLocation(records);
     }
 
     public void afterPrimaryInsert(InboundForm_JSONParser parser, Id primaryCaseId,
@@ -53,6 +55,8 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
             shouldUpdate = true;
         }
 
+        linkLandToSiteAddress(insertedRecords);
+
         if (!shouldUpdate) {
             return;
         }
@@ -75,6 +79,69 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
             caseRecord.Application_Type__c = 'Existing Line';
         } else if (caseRecord.Application_Type__c.equalsIgnoreCase('New line')) {
             caseRecord.Application_Type__c = 'New Line';
+        }
+    }
+
+    private static void normalizeLandLocation(Map<String, List<SObject>> records) {
+        if (!records.containsKey('Land__c')) {
+            return;
+        }
+
+        for (SObject record : records.get('Land__c')) {
+            Land__c landRecord = (Land__c) record;
+            if (String.isBlank(landRecord.Land_Location__c)) {
+                continue;
+            }
+
+            if (landRecord.Land_Location__c.equalsIgnoreCase('england')) {
+                landRecord.Land_Location__c = 'England';
+            } else if (landRecord.Land_Location__c.equalsIgnoreCase('wales')) {
+                landRecord.Land_Location__c = 'Wales';
+            }
+        }
+    }
+
+    private static Boolean linkLandToSiteAddress(Map<String, List<SObject>> insertedRecords) {
+        if (!insertedRecords.containsKey('Land__c') || !insertedRecords.containsKey('Address__c')) {
+            return false;
+        }
+
+        Id landId;
+        for (SObject record : insertedRecords.get('Land__c')) {
+            if (record.Id != null) {
+                landId = record.Id;
+                break;
+            }
+        }
+
+        if (landId == null) {
+            return false;
+        }
+
+        Id siteAddressId;
+        for (SObject record : insertedRecords.get('Address__c')) {
+            Address__c addr = (Address__c) record;
+            if (addr.Id != null && addr.Application_Party_Identification__c == 'NWL_SITE_ADDRESS') {
+                siteAddressId = addr.Id;
+                break;
+            }
+        }
+
+        if (siteAddressId == null) {
+            return false;
+        }
+
+        try {
+            update new Land__c(
+                Id = landId,
+                Site_Address__c = siteAddressId
+            );
+            return true;
+        } catch (Exception e) {
+            Logger.error('Error linking NWL land to site address: ' + e.getMessage());
+            Logger.setScenario('InboundForm_NWLHandler.linkLandToSiteAddress');
+            Logger.saveLog();
+            return false;
         }
     }
 

@@ -17,7 +17,7 @@ public class InboundForm_NWLConfig {
                 .setApplicationIdJsonPath('applicationId')
                 .setNameJsonPath('desnzRef')
                 .setStatusField('Status__c')
-                .setDefaultStatus('New')
+                .setDefaultStatus('Application Received')
                 .setHandlerClass(InboundForm_NWLHandler.class);
 
         addCaseFieldMappings(config);
@@ -32,14 +32,31 @@ public class InboundForm_NWLConfig {
             'Name'
         ));
 
+        // Sections
+        // Application Details
         config.addFieldMapping(InboundForm_MappingConfig.stringField(
             'sections.applicationDetails.application_type',
             'Application_Type__c'
         ));
+        
+        // config.addFieldMapping(InboundForm_MappingConfig.stringField(
+        //     'sections.applicationDetails.grounds_for_application',
+        //     'Legislation_Applicable__c'
+        // ));
+
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'sections.applicationDetails.wayleave_type',
+            'Type_Of_NWL_That_Existed__c'
+        ));
+
+        config.addFieldMapping(InboundForm_MappingConfig.dateField(
+            'sections.applicationDetails.wayleave_expiry_date',
+            'Wayleave_Expiry_Date__c'
+        ));
 
         config.addFieldMapping(InboundForm_MappingConfig.dateField(
             'sections.applicationDetails.notice_to_remove_date',
-            'Written_Removal_Notice_Issue_Date__c'
+            'Notice_to_Remove_Date__c'
         ));
 
         config.addFieldMapping(InboundForm_MappingConfig.dateField(
@@ -47,14 +64,79 @@ public class InboundForm_NWLConfig {
             'Written_Termination_Notice_Issue_Date__c'
         ));
 
+        // Notice Compliance
         config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
-            'sections.landDetails.is_registered',
-            'Land__c'
+            'sections.noticeCompliance.notice_clearly_refers_to_removal',
+            'Notice_Clearly_Refers_to_Line_Removal__c'
+        ));
+
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'sections.noticeCompliance.notice_unclear_explanation',
+            'Explanation_Notice_Omits_Line_Removal__c'
         ));
 
         config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
-            'sections.landDetails.visible_from_road',
-            'Equipment_Visible_from_Public_Road__c'
+            'sections.noticeCompliance.submitted_within_three_months',
+            'Submitted_Within_3_Months_Of_Notice__c'
+        ));
+
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'sections.noticeCompliance.late_submission_reason',
+            'Explanation_Submitted_Beyond_3_Months__c'
+        ));
+
+        config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
+            'sections.noticeCompliance.different_term_requested',
+            'Standard_15_Year_Term__c'
+        ).setBooleanTrueValue('No').setBooleanFalseValue('Yes'));
+
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'sections.noticeCompliance.different_term_length_and_explanation',
+            'Term_Length_Requested_with_Explanation__c'
+        ));
+
+        // Objector / Landowner / Representative Details
+        config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
+            'sections.landownerDetails.is_objector_also_landowner',
+            'Is_Objector_also_Landowner__c'
+        ));
+
+        config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
+            'sections.representativeDetails.objector_has_representative',
+            'Does_Objector_Have_Representative__c'
+        ));
+
+        // Land Details
+        config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
+            'sections.landDetails.site_address_same_as_objector',
+            'Site_Address_Same_as_Objector_Address__c'
+        ));
+
+        // Assets
+        config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
+            'sections.assets.assets_match_application_plan',
+            'Assets_Match_Application_Plan__c'
+        ));
+
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'sections.assets.assets_match_plan_explanation',
+            'Explanation_Assets_Do_Not_Match_Plan__c'
+        ));
+
+        // Negotiations
+        config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
+            'sections.negotiations.has_negotiations',
+            'Negotiations_in_Progress__c'
+        ));
+
+        config.addFieldMapping(InboundForm_MappingConfig.dateField(
+            'sections.negotiations.negotiations_start_date',
+            'Start_Date_of_Negotiations__c'
+        ));
+
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'sections.negotiations.negotiations_comments',
+            'Evidence_of_Negotiations__c'
         ));
 
         config.addFieldMapping(InboundForm_MappingConfig.booleanField(
@@ -67,15 +149,16 @@ public class InboundForm_NWLConfig {
             'Details_of_All_Related_Application__c'
         ));
 
-        config.addFieldMapping(InboundForm_MappingConfig.stringField(
-            'sections.additionalInformation.other_information_details',
-            'Application_Statement__c'
+        config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
+            'sections.additionalInformation.has_other_information',
+            'Any_Other_Important_Information__c'
         ));
 
         config.addFieldMapping(InboundForm_MappingConfig.stringField(
-            'sections.applicationDetails.grounds_for_application',
-            'Description__c'
+            'sections.additionalInformation.other_information_details',
+            'Description_of_Important_Information__c'
         ));
+
     }
 
     private static void addCollectionConfigs(InboundForm_MappingConfig.FormTypeConfig config) {
@@ -85,6 +168,8 @@ public class InboundForm_NWLConfig {
         config.addCollection(getObjectorAddressConfig());
         config.addCollection(getLandownerAddressConfig());
         config.addCollection(getRepresentativeAddressConfig());
+        config.addCollection(getLandDetailsConfig());
+        config.addCollection(getSiteAddressConfig());
         config.addCollection(getPaymentConfig());
     }
 
@@ -280,5 +365,67 @@ public class InboundForm_NWLConfig {
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('description', 'Description__c'));
 
         return payments;
+    }
+
+    private static InboundForm_MappingConfig.CollectionConfig getLandDetailsConfig() {
+        InboundForm_MappingConfig.CollectionConfig landDetails =
+            new InboundForm_MappingConfig.CollectionConfig()
+                .setCollectionName('LandDetails')
+                .setJsonPath('sections.landDetails')
+                .setTargetObject('Land__c')
+                .setParentLookupField('Case__c')
+                .setProcessingOrder(40);
+
+        landDetails.addFieldMapping(InboundForm_MappingConfig.yesNoField(
+            'is_registered',
+            'Land_Registered_with_Land_Registry__c'
+        ));
+        landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'land_registry_ref',
+            'Land_Registry_Reference_Number__c'
+        ));
+        landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'os_grid_ref',
+            'Land_Reference__c'
+        ));
+        landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'land_identification',
+            'Other_Info_To_Identify_Land__c'
+        ));
+        landDetails.addFieldMapping(InboundForm_MappingConfig.yesNoField(
+            'visible_from_road',
+            'Equipment_Visible_from_Public_Road__c'
+        ));
+        landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'country',
+            'Land_Location__c'
+        ));
+
+        return landDetails;
+    }
+
+    private static InboundForm_MappingConfig.CollectionConfig getSiteAddressConfig() {
+        InboundForm_MappingConfig.CollectionConfig siteAddress =
+            new InboundForm_MappingConfig.CollectionConfig()
+                .setCollectionName('SiteAddresses')
+                .setJsonPath('sections.landDetails')
+                .setTargetObject('Address__c')
+                .setParentLinkSfField('Application_Party_Identification__c')
+                .setProcessingOrder(41);
+
+        // siteAddress.addFieldMapping(InboundForm_MappingConfig.stringField(
+        //     'site_address',
+        //     'Full_Address__c'
+        // ));
+        siteAddress.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'country',
+            'Country__c'
+        ));
+        siteAddress.addFieldMapping(InboundForm_MappingConfig.defaultValue(
+            'NWL_SITE_ADDRESS',
+            'Application_Party_Identification__c'
+        ));
+
+        return siteAddress;
     }
 }
