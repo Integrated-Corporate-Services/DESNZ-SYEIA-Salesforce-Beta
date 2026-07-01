@@ -7,7 +7,6 @@ public with sharing class InboundForm_Processor {
     private static final String S37_FORM_TYPE = 'S37';
     private static final String S37_WITHDRAWAL_FORM_TYPE = 'S37_WITHDRAWAL_REQUEST';
     
-    
     // Schema cache to avoid repeated getGlobalDescribe calls
     private static Map<String, Schema.SObjectType> sObjectTypeCache = 
         new Map<String, Schema.SObjectType>();
@@ -915,6 +914,8 @@ public with sharing class InboundForm_Processor {
                         handler.afterAllInserts(primaryId, resultInsertedRecords);
                     } catch (Exception e) {
                         System.debug(LoggingLevel.WARN, 'After-all-inserts handler error: ' + e.getMessage());
+                        Logger.error('After-all-inserts handler error: ' + e.getMessage());
+                        Logger.saveLog();
                     }
                 }
             }
@@ -1126,6 +1127,9 @@ public with sharing class InboundForm_Processor {
                     System.debug(LoggingLevel.ERROR, 
                         'DML Error on ' + objectName + ': ' + err.getMessage() + 
                         ' [Fields: ' + err.getFields() + ']');
+                    Logger.error('DML Error on ' + objectName + ': ' + err.getMessage() + 
+                        ' [Fields: ' + err.getFields() + ']');
+                    Logger.saveLog();
                 }
             }
         }

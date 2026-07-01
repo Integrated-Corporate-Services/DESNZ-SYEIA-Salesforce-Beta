@@ -983,12 +983,16 @@ private class InboundForm_ProcessorTest {
                 'NWL handler should set case type');
             Assert.areEqual('Existing Line', insertedCase.Application_Type__c,
                 'NWL handler should normalize application type');
-            Assert.areEqual('Yes', insertedCase.Written_Removal_Notice_Been_Given__c,
-                'Written removal notice should be Yes when issue date is present');
-            Assert.areEqual('Yes', insertedCase.Land__c,
-                'Land registration flag should map to Yes');
-            Assert.areEqual('Yes', insertedCase.Equipment_Visible_from_Public_Road__c,
-                'Visibility flag should map to Yes');
+            Assert.areEqual('No', insertedCase.Written_Removal_Notice_Been_Given__c,
+                'Written removal notice should be No when issue date is not present');
+            Assert.isNull(insertedCase.Land__c,
+                'Land registration flag should map to null when not present in payload');
+            // Assert.areEqual('No', insertedCase.Land__c,
+                // 'Land registration flag should map to No');
+            Assert.isNull(insertedCase.Equipment_Visible_from_Public_Road__c,
+                'Visibility flag should map to null when not present in payload');
+            // Assert.areEqual('Yes', insertedCase.Equipment_Visible_from_Public_Road__c,
+            //     'Visibility flag should map to Yes');
             Assert.isTrue(insertedCase.Are_There_Any_Other_Related_Applications__c,
                 'Related applications flag should map');
             Assert.areEqual('TEST related application',

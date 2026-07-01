@@ -85,6 +85,10 @@
 		<name>CustomApplication</name>
 	</types>
 	<types>
+		<members>*</members>
+		<name>CustomLabel</name>
+	</types>
+	<types>
 		<members>Address__c.Address_Line1__c</members>
 		<members>Address__c.Address_Line_2__c</members>
 		<members>Address__c.Application_Party_Identification__c</members>
