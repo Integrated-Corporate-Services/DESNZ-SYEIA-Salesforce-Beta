@@ -144,6 +144,9 @@
         <name>choice_NW08_CTWR_Letter_Land_Owner</name>
         <choiceText>NW08. CTWR letter - LO</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW08. CTWR letter - LO</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW09_Procedural_Notice_WR_Applicant</name>
@@ -444,6 +447,21 @@
                 <targetReference>NW05_Request_for_further_information_Landowner</targetReference>
             </connector>
             <label>NW05. Request for further information - LO</label>
+        </rules>
+        <rules>
+            <name>NW08_CTWR_letter_LO</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW08. CTWR letter - LO</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW08_CTWR_letter_LO_Sub_Flow</targetReference>
+            </connector>
+            <label>NW08. CTWR letter - LO</label>
         </rules>
         <rules>
             <name>NW09_Procedural_notice_WR_Applicant</name>
@@ -860,6 +878,19 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <flowName>NW05_Request_for_further_information_Landowner</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW08_CTWR_letter_LO_Sub_Flow</name>
+        <label>NW08. CTWR letter - LO</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW08_CTWR_letter_LO_2026</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>
