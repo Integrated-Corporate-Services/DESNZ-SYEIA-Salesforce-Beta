@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Explanation_Notice_Omits_Line_Removal__c</fullName>
+    <description>Explanation Notice Does Not Clearly Refer to Line Removal</description>
+    <inlineHelpText>Explanation Notice Does Not Clearly Refer to Line Removal</inlineHelpText>
+    <label>Explanation - Notice Omits Line Removal</label>
+    <length>32768</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

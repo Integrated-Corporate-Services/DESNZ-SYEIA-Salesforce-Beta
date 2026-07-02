@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X1st_Abeyance_Start_Date__c</fullName>
+    <description>1st Abeyance Start Date
+The date the CO changes the main status to In abeyance manually - should be based on the date the letter was sent to both parties.</description>
+    <inlineHelpText>1st Abeyance Start Date 
+The date the CO changes the main status to In abeyance manually - should be based on the date the letter was sent to both parties.</inlineHelpText>
+    <label>1st Abeyance Start Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

@@ -3,7 +3,9 @@
  * creates Salesforce records based on JSON payloads.
  */
 public with sharing class InboundForm_Processor {
-    
+    private static final String WITHDRAWAL_EVENT_TYPE = 'WITHDRAWAL_REQUESTED';
+    private static final String S37_FORM_TYPE = 'S37';
+    private static final String S37_WITHDRAWAL_FORM_TYPE = 'S37_WITHDRAWAL_REQUEST';
     
     // Schema cache to avoid repeated getGlobalDescribe calls
     private static Map<String, Schema.SObjectType> sObjectTypeCache = 
@@ -125,12 +127,14 @@ public with sharing class InboundForm_Processor {
             // Store parser in result for use in afterPrimaryInsert hook
             result.parser = parser;
             
-            // Get form type
-            String formType = parser.getString('formType');
-            if (String.isBlank(formType)) {
+            // Get configured form type (may be derived from event type)
+            String payloadFormType = parser.getString('formType');
+            if (String.isBlank(payloadFormType)) {
                 result.addError('formType not found in payload');
                 return result;
             }
+
+            String formType = resolveConfiguredFormType(parser, payloadFormType);
             
             // Get configuration
             InboundForm_MappingConfig.FormTypeConfig formConfig = 
@@ -197,6 +201,50 @@ public with sharing class InboundForm_Processor {
         }
         
         return result;
+    }
+
+    /**
+     * Resolve inbound payload into a configured form type key.
+     * S37 withdrawal events are processed by a dedicated withdrawal config.
+     */
+    private static String resolveConfiguredFormType(InboundForm_JSONParser parser, String payloadFormType) {
+        if (isS37WithdrawalPayload(parser, payloadFormType)) {
+            return S37_WITHDRAWAL_FORM_TYPE;
+        }
+        return payloadFormType;
+    }
+
+    private static Boolean isS37WithdrawalPayload(InboundForm_JSONParser parser, String payloadFormType) {
+        if (payloadFormType == S37_WITHDRAWAL_FORM_TYPE) {
+            return true;
+        }
+
+        if (payloadFormType != S37_FORM_TYPE) {
+            return false;
+        }
+
+        String eventType = parser.getString('eventType');
+        if (isWithdrawalRequestedEvent(eventType)) {
+            return true;
+        }
+
+        return parser.hasValue('Withdraw') || parser.hasValue('Withdraw.withdrawalReason');
+    }
+
+    private static Boolean isWithdrawalRequestedEvent(String eventType) {
+        if (String.isBlank(eventType)) {
+            return false;
+        }
+
+        String normalizedEventType = eventType
+            .toUpperCase()
+            .replace('_', '')
+            .replace('-', '')
+            .replace(' ', '');
+
+        return normalizedEventType == 'WITHDRAWALREQUESTED' ||
+            normalizedEventType == 'WITHDRAWALREQUEST' ||
+            normalizedEventType == WITHDRAWAL_EVENT_TYPE.replace('_', '');
     }
     
     /**
@@ -784,6 +832,11 @@ public with sharing class InboundForm_Processor {
                 if (!result.success) continue;
                 
                 Id primaryId = inboundToPrimaryMap.get(result.inboundRequestId);
+                if (primaryId == null
+                        && result.createdRecords.containsKey(config.primaryObject)
+                        && !result.createdRecords.get(config.primaryObject).isEmpty()) {
+                    primaryId = result.createdRecords.get(config.primaryObject)[0].Id;
+                }
                 if (primaryId != null && result.parser != null) {
                     try {
                         handler.afterPrimaryInsert(result.parser, primaryId, result);
@@ -885,6 +938,8 @@ public with sharing class InboundForm_Processor {
                         handler.afterAllInserts(primaryId, resultInsertedRecords);
                     } catch (Exception e) {
                         System.debug(LoggingLevel.WARN, 'After-all-inserts handler error: ' + e.getMessage());
+                        Logger.error('After-all-inserts handler error: ' + e.getMessage());
+                        Logger.saveLog();
                     }
                 }
             }
@@ -1096,6 +1151,9 @@ public with sharing class InboundForm_Processor {
                     System.debug(LoggingLevel.ERROR, 
                         'DML Error on ' + objectName + ': ' + err.getMessage() + 
                         ' [Fields: ' + err.getFields() + ']');
+                    Logger.error('DML Error on ' + objectName + ': ' + err.getMessage() + 
+                        ' [Fields: ' + err.getFields() + ']');
+                    Logger.saveLog();
                 }
             }
         }

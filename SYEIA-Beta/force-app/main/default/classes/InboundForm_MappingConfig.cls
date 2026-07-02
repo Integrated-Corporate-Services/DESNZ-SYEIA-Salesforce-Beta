@@ -53,6 +53,10 @@ public class InboundForm_MappingConfig {
             this.primaryRecordType = value; 
             return this; 
         }
+        public FormTypeConfig setInboundRequestLookupField(String value) {
+            this.inboundRequestLookupField = value;
+            return this;
+        }
         public FormTypeConfig setApplicationIdField(String value) { 
             this.applicationIdField = value; 
             return this; 
@@ -64,6 +68,10 @@ public class InboundForm_MappingConfig {
         public FormTypeConfig setNameJsonPath(String value) { 
             this.nameJsonPath = value; 
             return this; 
+        }
+        public FormTypeConfig setNameField(String value) {
+            this.nameField = value;
+            return this;
         }
         public FormTypeConfig setStatusField(String value) { 
             this.statusField = value; 

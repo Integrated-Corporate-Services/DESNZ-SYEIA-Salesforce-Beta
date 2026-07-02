@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>NWL_Wayleave_has_Expired</fullName>
+        <categories>NWL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NWL Wayleave has Expired</shortDescription>
+        <value>The wayleave has expired para 8(1)(a) and 8(2)(a)</value>
+    </labels>
+    <labels>
+        <fullName>NWL_Wayleave_has_been_terminated</fullName>
+        <categories>NWL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NWL Wayleave has been terminated</shortDescription>
+        <value>The wayleave has been terminated 8(1)(b) and 8(2)(b)</value>
+    </labels>
+    <labels>
+        <fullName>NWL_no_wayleave_exists</fullName>
+        <categories>NWL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NWL no_wayleave_exists</shortDescription>
+        <value>The wayleave has expired para 8(1)(a) and 8(2)(a)</value>
+    </labels>
+</CustomLabels>
