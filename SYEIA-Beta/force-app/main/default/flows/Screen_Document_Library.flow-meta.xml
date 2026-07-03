@@ -134,6 +134,9 @@
         <name>choice_NW07_Abeyance_Letter_Land_Owner</name>
         <choiceText>NW07. Abeyance letter - LO</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW07. Abeyance letter - LO</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW08_CTWR_Letter_Applicant</name>
@@ -450,6 +453,21 @@
                 <targetReference>NW05_Request_for_further_information_Landowner</targetReference>
             </connector>
             <label>NW05. Request for further information - LO</label>
+        </rules>
+        <rules>
+            <name>NW07_Abeyance_letter_LO</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW07. Abeyance letter - LO</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW07_Abeyance_letter_LO_SubFlow</targetReference>
+            </connector>
+            <label>NW07. Abeyance letter - LO</label>
         </rules>
         <rules>
             <name>NW08_CTWR_letter_Applicant</name>
@@ -896,6 +914,19 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <flowName>NW05_Request_for_further_information_Landowner</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW07_Abeyance_letter_LO_SubFlow</name>
+        <label>NW07. Abeyance letter - LO</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW07_Abeyance_letter_LO_2026</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>
