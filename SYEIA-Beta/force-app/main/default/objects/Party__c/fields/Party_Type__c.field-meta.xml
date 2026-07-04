@@ -36,9 +36,14 @@
                 <label>Lawyer</label>
             </value>
             <value>
-                <fullName>Landowner Representative</fullName>
+                <fullName>Representative</fullName>
                 <default>false</default>
-                <label>Landowner Representative</label>
+                <label>Representative</label>
+            </value>
+            <value>
+                <fullName>Objector</fullName>
+                <default>false</default>
+                <label>Objector</label>
             </value>
             <value>
                 <fullName>Grantor</fullName>
