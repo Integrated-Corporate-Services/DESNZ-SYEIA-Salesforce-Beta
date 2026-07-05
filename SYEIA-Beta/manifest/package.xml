@@ -135,7 +135,6 @@
 		<members>Case__c.AWS_Application_Id__c</members>
 		<members>Case__c.Representative__c</members>
 		<members>Case__c.Termination_Period_Expired__c</members>
-		<members>Case__c.Wayleaves_Notice_Date__c</members>
 		<members>Case__c.Accept_Consultees_Recommendations__c</members>
 		<members>Case__c.Accept_Local_Authority_Conditions__c</members>
 		<members>Case__c.Actual_Completed_Date_Time__c</members>
