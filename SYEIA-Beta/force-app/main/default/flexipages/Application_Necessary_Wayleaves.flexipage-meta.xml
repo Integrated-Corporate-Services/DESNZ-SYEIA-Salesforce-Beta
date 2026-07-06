@@ -2570,6 +2570,12 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>applicationDocumentManager</componentName>
+                <identifier>c_applicationDocumentManager</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>parentFieldApiName</name>
                     <value>Case__c.Id</value>

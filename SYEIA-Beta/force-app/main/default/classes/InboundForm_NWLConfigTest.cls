@@ -46,6 +46,14 @@ private class InboundForm_NWLConfigTest {
             'Notice to remove date should be DATE_TYPE'
         );
 
+        Assert.isTrue(mappingsByTarget.containsKey('Written_Removal_Notice_Issue_Date__c'),
+            'Should map legacy written removal notice issue date for downstream automation');
+        Assert.areEqual(
+            'sections.applicationDetails.notice_to_remove_date',
+            mappingsByTarget.get('Written_Removal_Notice_Issue_Date__c').jsonPath,
+            'Written removal notice issue date should come from notice_to_remove_date'
+        );
+
         Assert.isTrue(mappingsByTarget.containsKey('Notice_Clearly_Refers_to_Line_Removal__c'),
             'Should map notice clarity answer');
         Assert.areEqual(
@@ -94,5 +102,30 @@ private class InboundForm_NWLConfigTest {
         Assert.isTrue(collectionNames.contains('SiteAddresses'),
             'SiteAddresses collection should exist');
         Assert.isTrue(collectionNames.contains('payments'), 'payments collection should exist');
+
+        InboundForm_MappingConfig.CollectionConfig siteAddressConfig;
+        for (InboundForm_MappingConfig.CollectionConfig coll : config.collections) {
+            if (coll.collectionName == 'SiteAddresses') {
+                siteAddressConfig = coll;
+                break;
+            }
+        }
+
+        Assert.isNotNull(siteAddressConfig, 'SiteAddresses config should be present');
+
+        Map<String, InboundForm_MappingConfig.FieldMapping> siteAddressMappingsByTarget =
+            new Map<String, InboundForm_MappingConfig.FieldMapping>();
+
+        for (InboundForm_MappingConfig.FieldMapping mapping : siteAddressConfig.fieldMappings) {
+            siteAddressMappingsByTarget.put(mapping.targetField, mapping);
+        }
+
+        Assert.isTrue(siteAddressMappingsByTarget.containsKey('Address_Line1__c'),
+            'Site address line should be mapped for NWL payload site_address');
+        Assert.areEqual(
+            'site_address',
+            siteAddressMappingsByTarget.get('Address_Line1__c').jsonPath,
+            'Site address line mapping should come from site_address'
+        );
     }
 }
