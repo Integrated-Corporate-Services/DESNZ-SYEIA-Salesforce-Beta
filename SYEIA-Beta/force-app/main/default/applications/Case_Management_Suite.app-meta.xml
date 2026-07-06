@@ -14,6 +14,114 @@
     <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
     <label>Case Management Suite</label>
     <navType>Console</navType>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Application_Tree_Lopping</content>
+        <formFactor>Small</formFactor>
+        <pageOrSobjectType>Case__c</pageOrSobjectType>
+        <recordType>Case__c.Tree_Lopping</recordType>
+        <type>Flexipage</type>
+        <profile>Base Employee</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Application_Tree_Lopping</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Case__c</pageOrSobjectType>
+        <recordType>Case__c.Tree_Lopping</recordType>
+        <type>Flexipage</type>
+        <profile>Base Employee</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Application_Tree_Lopping</content>
+        <formFactor>Small</formFactor>
+        <pageOrSobjectType>Case__c</pageOrSobjectType>
+        <recordType>Case__c.Tree_Lopping</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Application_Tree_Lopping</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Case__c</pageOrSobjectType>
+        <recordType>Case__c.Tree_Lopping</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Application_Section_37</content>
+        <formFactor>Small</formFactor>
+        <pageOrSobjectType>Case__c</pageOrSobjectType>
+        <recordType>Case__c.Section_37</recordType>
+        <type>Flexipage</type>
+        <profile>Base Employee</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Application_Section_37</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Case__c</pageOrSobjectType>
+        <recordType>Case__c.Section_37</recordType>
+        <type>Flexipage</type>
+        <profile>Base Employee</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Application_Section_37</content>
+        <formFactor>Small</formFactor>
+        <pageOrSobjectType>Case__c</pageOrSobjectType>
+        <recordType>Case__c.Section_37</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Application_Section_37</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Case__c</pageOrSobjectType>
+        <recordType>Case__c.Section_37</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Application_Necessary_Wayleaves</content>
+        <formFactor>Small</formFactor>
+        <pageOrSobjectType>Case__c</pageOrSobjectType>
+        <recordType>Case__c.Necessary_Wayleaves</recordType>
+        <type>Flexipage</type>
+        <profile>Base Employee</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Application_Necessary_Wayleaves</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Case__c</pageOrSobjectType>
+        <recordType>Case__c.Necessary_Wayleaves</recordType>
+        <type>Flexipage</type>
+        <profile>Base Employee</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Application_Necessary_Wayleaves</content>
+        <formFactor>Small</formFactor>
+        <pageOrSobjectType>Case__c</pageOrSobjectType>
+        <recordType>Case__c.Necessary_Wayleaves</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Application_Necessary_Wayleaves</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Case__c</pageOrSobjectType>
+        <recordType>Case__c.Necessary_Wayleaves</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
     <tabs>Case_Management_Dashboard</tabs>
     <tabs>Case_Management_Dashboard_TL</tabs>
     <tabs>Case_Management_Dashboard_NWL</tabs>

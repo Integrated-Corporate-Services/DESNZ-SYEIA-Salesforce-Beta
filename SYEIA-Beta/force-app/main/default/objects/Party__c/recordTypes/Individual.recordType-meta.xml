@@ -29,11 +29,15 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Landowner Representative</fullName>
+            <fullName>Lawyer</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Lawyer</fullName>
+            <fullName>Objector</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Representative</fullName>
             <default>false</default>
         </values>
     </picklistValues>
