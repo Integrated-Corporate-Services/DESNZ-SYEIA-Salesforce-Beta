@@ -219,6 +219,9 @@
         <name>choice_NW13_Decision_Letter_Applicant</name>
         <choiceText>NW13. Decision letter - Applicant</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW13. Decision letter - Applicant</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW14_Withdrawal_Letter_Applicant</name>
@@ -603,6 +606,21 @@
                 <targetReference>NW12_Procedural_notice_OH_LO_SubFlow</targetReference>
             </connector>
             <label>NW12. Procedural notice (OH) - LO</label>
+        </rules>
+        <rules>
+            <name>NW13_Decision_letter_Applicant</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW13. Decision letter - Applicant</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW13_Decision_letter_Applicant_SubFlow</targetReference>
+            </connector>
+            <label>NW13. Decision letter - Applicant</label>
         </rules>
         <rules>
             <name>NW14_Withdrawal_letter_Applicant</name>
@@ -1044,6 +1062,19 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <flowName>Screen_DocGen_NW12_Procedural_notice_OH_LO</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW13_Decision_letter_Applicant_SubFlow</name>
+        <label>NW13. Decision letter - Applicant</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW13_Decision_letter_Applicant_2026</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>
