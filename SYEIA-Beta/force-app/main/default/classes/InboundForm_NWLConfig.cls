@@ -59,6 +59,12 @@ public class InboundForm_NWLConfig {
             'Notice_to_Remove_Date__c'
         ));
 
+        // Keep legacy NWL automation populated until all downstream flows use Notice_to_Remove_Date__c.
+        config.addFieldMapping(InboundForm_MappingConfig.dateField(
+            'sections.applicationDetails.notice_to_remove_date',
+            'Written_Removal_Notice_Issue_Date__c'
+        ));
+
         config.addFieldMapping(InboundForm_MappingConfig.dateField(
             'sections.applicationDetails.notice_to_terminate_date',
             'Written_Termination_Notice_Issue_Date__c'
@@ -392,6 +398,10 @@ public class InboundForm_NWLConfig {
             'land_identification',
             'Other_Info_To_Identify_Land__c'
         ));
+        landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'land_identification',
+            'Land_Identification__c'
+        ));
         landDetails.addFieldMapping(InboundForm_MappingConfig.yesNoField(
             'visible_from_road',
             'Equipment_Visible_from_Public_Road__c'
@@ -413,10 +423,10 @@ public class InboundForm_NWLConfig {
                 .setParentLinkSfField('Application_Party_Identification__c')
                 .setProcessingOrder(41);
 
-        // siteAddress.addFieldMapping(InboundForm_MappingConfig.stringField(
-        //     'site_address',
-        //     'Full_Address__c'
-        // ));
+        siteAddress.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'site_address',
+            'Address_Line1__c'
+        ));
         siteAddress.addFieldMapping(InboundForm_MappingConfig.stringField(
             'country',
             'Country__c'
