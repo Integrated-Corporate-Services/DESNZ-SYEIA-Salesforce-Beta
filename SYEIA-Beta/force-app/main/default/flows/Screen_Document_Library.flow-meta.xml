@@ -190,6 +190,9 @@
         <name>choice_NW11_Further_Representations_Exchange_Applicant</name>
         <choiceText>NW11. Further representations exchange - Applicant</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW11. Further representations exchange - Applicant</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW11_Further_Representations_Exchange_Land_Owner</name>
@@ -563,6 +566,21 @@
             <label>NW10. Statement of evidence exchange - LO</label>
         </rules>
         <rules>
+            <name>NW11_Further_representations_exchange_Applicant</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW11. Further representations exchange - Applicant</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW11_Further_representations_exchange_Applicant_SubFlow</targetReference>
+            </connector>
+            <label>NW11. Further representations exchange - Applicant</label>
+        </rules>
+        <rules>
             <name>NW11_Further_representations_exchange_LO</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
@@ -886,7 +904,7 @@
             <targetReference>Get_Case</targetReference>
         </connector>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <subflows>
         <name>NW02_Invalid_Unclear_NTR_LO_1</name>
         <label>NW02 Invalid - Unclear NTR - LO</label>
@@ -1023,6 +1041,19 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <flowName>Screen_DocGen_NW10_Statement_of_evidence_exchange_LO</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW11_Further_representations_exchange_Applicant_SubFlow</name>
+        <label>NW11. Further representations exchange - Applicant</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW11_Further_representations_exchange_Applicant</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>

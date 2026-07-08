@@ -19,7 +19,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW11_Further_representations_exchange_LO</stringValue>
+                <stringValue>Screen_DocGen_NW11_Further_representations_exchange_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -88,7 +88,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW11_Further_representations_exchange_LO</stringValue>
+                <stringValue>Screen_DocGen_NW11_Further_representations_exchange_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -157,7 +157,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW11_Further_representations_exchange_LO</stringValue>
+                <stringValue>Screen_DocGen_NW11_Further_representations_exchange_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -226,7 +226,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW11_Further_representations_exchange_LO</stringValue>
+                <stringValue>Screen_DocGen_NW11_Further_representations_exchange_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -295,7 +295,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW11_Further_representations_exchange_LO</stringValue>
+                <stringValue>Screen_DocGen_NW11_Further_representations_exchange_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -376,7 +376,7 @@
         <inputParameters>
             <name>templateContentVersionId</name>
             <value>
-                <elementReference>Get_Screen_DocGen_NW11_Further_representations_exchange_LO_DTO.LatestContentVersionId</elementReference>
+                <elementReference>Get_Screen_DocGen_NW11_Further_representations_exchange_Applicant.LatestContentVersionId</elementReference>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
@@ -410,7 +410,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW11_Further_representations_exchange_LO</stringValue>
+                <stringValue>Screen_DocGen_NW11_Further_representations_exchange_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -468,10 +468,10 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
-            <assignToReference>var_Owner_Or_Rep_Email</assignToReference>
+            <assignToReference>var_Applicant_Contact_Email</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Owner_Or_Rep_Contact_Email.value</elementReference>
+                <elementReference>Applicant_Contact_Email.value</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -491,7 +491,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Get_NW11_Furtherrepresentationsexchange_LO</targetReference>
+            <targetReference>Get_NW11_Further_representations_exchange_Applicant</targetReference>
         </connector>
     </assignments>
     <choices>
@@ -586,7 +586,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <targetReference>Get_NW11_Furtherrepresentationsexchange_LO</targetReference>
+            <targetReference>Get_NW11_Further_representations_exchange_Applicant</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -609,32 +609,32 @@
     <formulas>
         <name>AA_PEDW_Note</name>
         <dataType>String</dataType>
-        <expression>&apos;[[No further evidence will be accepted by either party as the written exchange has concluded. The application will be referred to Planning &amp; Environment Decisions Wales who will appoint an Inspector to consider all the evidence and visit the site. Planning &amp; Environment Decisions Wales will contact you in due course with the site visit arrangements. Planning &amp; Environment Decisions Wales can be contacted at: PEDW.casework@gov.wales]]&apos;</expression>
+        <expression>&apos;[[No further evidence will be accepted by either party as the written exchange has concluded. Your application will be referred to Planning &amp; Environment Decisions Wales who will appoint an Inspector to consider all the evidence and visit the site. Planning &amp; Environment Decisions Wales will contact you in due course with the site visit arrangements. Planning &amp; Environment Decisions Wales can be contacted at: PEDW.casework@gov.wales]]&apos;</expression>
     </formulas>
     <formulas>
         <name>AA_PINS_Note</name>
         <dataType>String</dataType>
-        <expression>&apos;[[No further evidence will be accepted by either party as the written exchange has concluded. The application will be referred to the Planning Inspectorate who will appoint an Inspector to consider all the evidence and visit the site. The Planning Inspectorate will contact you in due course with the site visit arrangements. The Planning Inspectorate can be contacted at: ETC@planninginspectorate.gov.uk]]&apos;</expression>
+        <expression>&apos;[[No further evidence will be accepted by either party as the written exchange has concluded. Your application will be referred to the Planning Inspectorate who will appoint an Inspector to consider all the evidence and visit the site. The Planning Inspectorate will contact you in due course with the site visit arrangements. The Planning Inspectorate can be contacted at: ETC@planninginspectorate.gov.uk]]&apos;</expression>
     </formulas>
     <formulas>
         <name>App_NotReceivedNote</name>
         <dataType>String</dataType>
-        <expression>&apos;[[We are writing to inform you that the applicant did not submit any further representations.]]&apos;</expression>
+        <expression>&apos;[[We are writing to inform you that the objector did not submit any further representations.]]&apos;</expression>
     </formulas>
     <formulas>
         <name>App_Received_Late_Rejected_Note</name>
         <dataType>String</dataType>
-        <expression>&apos;[[We are writing to inform you that the applicant submitted further representations after the deadline, and we have decided to disregard them. We have therefore returned the representations to the applicant, and they will not be considered by the appointed Inspector and the Secretary of State.]]&apos;</expression>
+        <expression>&apos;[[We are writing to inform you that the objector submitted further representations after the deadline, and we have decided to disregard them. We have therefore returned the representation to the objector, and they will not be considered by the appointed Inspector and the Secretary of State.]]&apos;</expression>
     </formulas>
     <formulas>
         <name>App_ReceivedLateAccepted_Note</name>
         <dataType>String</dataType>
-        <expression>&apos;[[Please find enclosed the applicant’s further representations, which were submitted after the deadline, but we have decided to accept them.]]&apos;</expression>
+        <expression>&apos;[[Please find enclosed the objector’s further representations, which were submitted after the deadline, but we have decided to accept them.]]&apos;</expression>
     </formulas>
     <formulas>
         <name>App_ReceivedOnTimeNote</name>
         <dataType>String</dataType>
-        <expression>&apos;[[Please find enclosed the applicant’s further representations, which were received by the deadline.]]&apos;</expression>
+        <expression>&apos;[[Please find enclosed the objector’s further representations, which were received by the deadline.]]&apos;</expression>
     </formulas>
     <formulas>
         <name>formula_AA_Default_Note</name>
@@ -645,6 +645,11 @@
     &quot;PEDW&quot;, {!AA_PEDW_Note},
     &quot;&quot;
 )</expression>
+    </formulas>
+    <formulas>
+        <name>formula_Applicant_Default_Email</name>
+        <dataType>String</dataType>
+        <expression>{!Get_Case.DNO__r.Representative__r.Email__c}</expression>
     </formulas>
     <formulas>
         <name>formula_Application_Further_Representations_Status_Default_Note</name>
@@ -694,7 +699,7 @@ TEXT(YEAR(TODAY()))</expression>
     <formulas>
         <name>formula_DocumentTitle</name>
         <dataType>String</dataType>
-        <expression>&apos; NW11. Further representations exchange - LO -&apos; &amp; {!Get_Case.Name} &amp; &apos;-&apos; &amp; TEXT(TODAY())</expression>
+        <expression>&apos;NW11. Further representations exchange - Applicant -&apos; &amp; {!Get_Case.Name} &amp; &apos;-&apos; &amp; TEXT(TODAY())</expression>
     </formulas>
     <formulas>
         <name>formula_Further_Representations_Status_Default_Note</name>
@@ -709,11 +714,6 @@ TEXT(YEAR(TODAY()))</expression>
 )</expression>
     </formulas>
     <formulas>
-        <name>formula_owner_or_rep_Email</name>
-        <dataType>String</dataType>
-        <expression>{!Get_Owner_Rep.Email__c}</expression>
-    </formulas>
-    <formulas>
         <name>formula_SentByEmail</name>
         <dataType>String</dataType>
         <expression>{!Sent_by_email.value}</expression>
@@ -723,10 +723,10 @@ TEXT(YEAR(TODAY()))</expression>
         <dataType>String</dataType>
         <expression>&apos;{&apos; &amp;
 &apos;&quot;DESNZ_Reference&quot;: &quot;&apos; &amp; {!Get_Case.Name} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;OwnerOrOccuppier_Reference&quot;: &quot;&apos; &amp; {!Get_Case.Applicant_Reference__c} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;Applicant_Reference&quot;: &quot;&apos; &amp; {!Get_Case.Applicant_Reference__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;DNO_Name&quot;: &quot;&apos; &amp; {!Get_Case.DNO__r.Name} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;App_Name&quot;: &quot;&apos; &amp; {!Get_Case.DNO__r.Representative__r.Name} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;App_Email&quot;: &quot;&apos; &amp; {!var_Owner_Or_Rep_Email} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;App_Email&quot;: &quot;&apos; &amp; {!var_Applicant_Contact_Email} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;DNO_Address_Line1&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line1__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;DNO_Address_Line2&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line_2__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;DNO_Address_TownCity&quot;: &quot;&apos; &amp; {!Get_Address.Town_City__c} &amp; &apos;&quot;, &apos; &amp;
@@ -736,7 +736,7 @@ TEXT(YEAR(TODAY()))</expression>
 &apos;&quot;Site_Address_TownCity&quot;: &quot;&apos; &amp; {!Get_Site_Address.Town_City__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;Site_Address_Postcode&quot;: &quot;&apos; &amp; {!Get_Site_Address.Postcode__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;NameofOwner_or_occupier_contact&quot;: &quot;&apos; &amp; {!Get_Owner_Rep.Name} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;Owner_or_occupier_contact_Email&quot;: &quot;&apos; &amp; {!var_Owner_Or_Rep_Email} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;Owner_or_occupier_contact_Email&quot;: &quot;&apos; &amp; {!var_Applicant_Contact_Email} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;Date_of_Application__c&quot;: &quot;&apos; &amp; TEXT({!Get_Case.Date_of_Application__c}) &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;Further_Representations_Note&quot;: &quot;&apos; &amp; {!FRS_Selected_Note} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;Note_Further_Representations_Note&quot;: &quot;&apos; &amp; {!App_FRS_Selected_Note} &amp; &apos;&quot;, &apos; &amp;
@@ -753,20 +753,20 @@ TEXT(YEAR(TODAY()))</expression>
     <formulas>
         <name>Received_Late_Rejected_Note</name>
         <dataType>String</dataType>
-        <expression>&apos;[[Further to our previous letter dated [[statement of evidence exchange letter date]], your further representations were received after the deadline, and we have decided to disregard them. We are therefore returning your further representations to you. A copy will not be sent to the applicant, and it will not be considered by the appointed Inspector and the Secretary of State.]] &apos;</expression>
+        <expression>&apos;[[Further to our previous letter dated [[statement of evidence exchange letter date]], your further representations were received after the deadline, and we have decided to disregard them. We are therefore returning your further representations to you. A copy will not be sent to the objector, and it will not be considered by the appointed Inspector and the Secretary of State.]]&apos;</expression>
     </formulas>
     <formulas>
         <name>ReceivedLateAccepted_Note</name>
         <dataType>String</dataType>
-        <expression>&apos;[[Further to our previous letter dated [[statement of evidence exchange letter date]], your further representations were received after the deadline, but we have decided to accept them. We can confirm that your further representations have been sent to the applicant.]]&apos;</expression>
+        <expression>&apos;[[Further to our previous letter dated [[statement of evidence exchange letter date]], your further representations were received after the deadline, but we have decided to accept them. We can confirm that your further representations have been sent to the objector.]]&apos;</expression>
     </formulas>
     <formulas>
         <name>ReceivedOnTimeNote</name>
         <dataType>String</dataType>
-        <expression>&apos;[[Thank you for submitting your further representations, which were received on [[insert date]]. We can confirm that your further representations have been sent to the applicant.]]&apos;</expression>
+        <expression>&apos;[[Thank you for submitting your further representations, which were received on [[insert date]]. We can confirm that your further representations have been sent to the objector.]]&apos;</expression>
     </formulas>
     <interviewLabel>Screen DocGen NW11. Further representations exchange - LO {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Screen DocGen NW11. Further representations exchange - LO</label>
+    <label>Screen DocGen NW11. Further representations exchange - Applicant</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -832,13 +832,13 @@ TEXT(YEAR(TODAY()))</expression>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <name>Get_NW11_Furtherrepresentationsexchange_LO</name>
-        <label>Get NW11. Further representations exchange - LO</label>
+        <name>Get_NW11_Further_representations_exchange_Applicant</name>
+        <label>Get NW11. Further representations exchange - Applicant</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Get_Screen_DocGen_NW11_Further_representations_exchange_LO_DTO</targetReference>
+            <targetReference>Get_Screen_DocGen_NW11_Further_representations_exchange_Applicant</targetReference>
         </connector>
         <faultConnector>
             <targetReference>Generate_Document_Nebula_Logger</targetReference>
@@ -848,7 +848,7 @@ TEXT(YEAR(TODAY()))</expression>
             <field>Name</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>NW11_Further_Representations_Exchange_LO_2026</stringValue>
+                <stringValue>NW11_Further_representations_exchange_Applicant_2026</stringValue>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -894,8 +894,8 @@ TEXT(YEAR(TODAY()))</expression>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <name>Get_Screen_DocGen_NW11_Further_representations_exchange_LO_DTO</name>
-        <label>Get Screen DocGen NW11. Further representations exchange - LO</label>
+        <name>Get_Screen_DocGen_NW11_Further_representations_exchange_Applicant</name>
+        <label>Get Screen DocGen NW11. Further representations exchange - Applicant</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
@@ -910,7 +910,7 @@ TEXT(YEAR(TODAY()))</expression>
             <field>DocumentTemplateId</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>Get_NW11_Furtherrepresentationsexchange_LO.Id</elementReference>
+                <elementReference>Get_NW11_Further_representations_exchange_Applicant.Id</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -954,7 +954,7 @@ TEXT(YEAR(TODAY()))</expression>
         </connector>
         <fields>
             <name>ReasonSectionDisplayText</name>
-            <fieldText>&lt;h1&gt;&lt;strong&gt;&amp;nbsp;NW11. Further representations exchange - LO&lt;/strong&gt;&lt;/h1&gt;</fieldText>
+            <fieldText>&lt;h1&gt;&lt;strong&gt;NW11. Further representations exchange - Applicant&lt;/strong&gt;&lt;/h1&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -1113,19 +1113,19 @@ TEXT(YEAR(TODAY()))</expression>
             </styleProperties>
         </fields>
         <fields>
-            <name>Owner_Or_Rep_Contact_Email</name>
+            <name>Applicant_Contact_Email</name>
             <extensionName>flowruntime:email</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
                 <name>label</name>
                 <value>
-                    <stringValue>Owner or Representative Contact Email</stringValue>
+                    <stringValue>Applicant Contact Email</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>value</name>
                 <value>
-                    <elementReference>var_Owner_Or_Rep_Email</elementReference>
+                    <elementReference>var_Applicant_Contact_Email</elementReference>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -1176,7 +1176,7 @@ TEXT(YEAR(TODAY()))</expression>
         <allowPause>false</allowPause>
         <fields>
             <name>H_Final_Record_Creation_Screen_Approval_Titl</name>
-            <fieldText>&lt;h1&gt;&lt;strong&gt;&amp;nbsp;NW11. Further representations exchange - LO&lt;/strong&gt;&lt;/h1&gt;</fieldText>
+            <fieldText>&lt;h1&gt;&lt;strong&gt;The DocGen - NW11. Further representations exchange - Applicant has been successfully created.&lt;/strong&gt;&lt;/h1&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -1227,6 +1227,16 @@ TEXT(YEAR(TODAY()))</expression>
         <isOutput>false</isOutput>
     </variables>
     <variables>
+        <name>var_Applicant_Contact_Email</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <elementReference>formula_Applicant_Default_Email</elementReference>
+        </value>
+    </variables>
+    <variables>
         <name>var_CanBypassApproval</name>
         <dataType>Boolean</dataType>
         <isCollection>false</isCollection>
@@ -1234,16 +1244,6 @@ TEXT(YEAR(TODAY()))</expression>
         <isOutput>false</isOutput>
         <value>
             <booleanValue>false</booleanValue>
-        </value>
-    </variables>
-    <variables>
-        <name>var_Owner_Or_Rep_Email</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <value>
-            <elementReference>formula_owner_or_rep_Email</elementReference>
         </value>
     </variables>
 </Flow>
