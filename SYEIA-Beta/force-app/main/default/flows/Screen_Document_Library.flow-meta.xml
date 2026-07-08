@@ -904,7 +904,7 @@
             <targetReference>Get_Case</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <subflows>
         <name>NW02_Invalid_Unclear_NTR_LO_1</name>
         <label>NW02 Invalid - Unclear NTR - LO</label>
