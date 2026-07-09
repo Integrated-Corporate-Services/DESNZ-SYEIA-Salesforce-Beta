@@ -30,6 +30,12 @@ jobs:
           node-version: '20.18.1'
           check-latest: false
 
+      - name: Check versions
+        run: |
+          which node
+          node --version
+          npm --version
+
       - name: Setup Java (for PMD)
         uses: actions/setup-java@v4
         with:
