@@ -3436,6 +3436,16 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
+                <fieldItem>Record.Inspector_s_Report_Received_Date__c</fieldItem>
+                <identifier>RecordInspector_s_Report_Received_Date_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.PINS_PEDW_Comments__c</fieldItem>
                 <identifier>RecordPINS_PEDW_Comments_cField</identifier>
             </fieldInstance>
