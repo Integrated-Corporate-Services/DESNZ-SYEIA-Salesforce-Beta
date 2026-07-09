@@ -97,21 +97,25 @@ private class InboundForm_NWLConfigTest {
         Assert.isTrue(collectionNames.contains('Landowners'), 'Landowners collection should exist');
         Assert.isTrue(collectionNames.contains('LandownerRepresentatives'),
             'LandownerRepresentatives collection should exist');
+        Assert.isTrue(collectionNames.contains('Applicants'),
+            'Applicants collection should exist');
+        Assert.isTrue(collectionNames.contains('ApplicantAddresses'),
+            'ApplicantAddresses collection should exist');
         Assert.isTrue(collectionNames.contains('LandDetails'),
             'LandDetails collection should exist');
-        Assert.isTrue(collectionNames.contains('SiteAddresses'),
-            'SiteAddresses collection should exist');
+        Assert.isTrue(collectionNames.contains('SiteAddress'),
+            'SiteAddress collection should exist');
         Assert.isTrue(collectionNames.contains('payments'), 'payments collection should exist');
 
         InboundForm_MappingConfig.CollectionConfig siteAddressConfig;
         for (InboundForm_MappingConfig.CollectionConfig coll : config.collections) {
-            if (coll.collectionName == 'SiteAddresses') {
+            if (coll.collectionName == 'SiteAddress') {
                 siteAddressConfig = coll;
                 break;
             }
         }
 
-        Assert.isNotNull(siteAddressConfig, 'SiteAddresses config should be present');
+        Assert.isNotNull(siteAddressConfig, 'SiteAddress config should be present');
 
         Map<String, InboundForm_MappingConfig.FieldMapping> siteAddressMappingsByTarget =
             new Map<String, InboundForm_MappingConfig.FieldMapping>();
@@ -123,9 +127,105 @@ private class InboundForm_NWLConfigTest {
         Assert.isTrue(siteAddressMappingsByTarget.containsKey('Address_Line1__c'),
             'Site address line should be mapped for NWL payload site_address');
         Assert.areEqual(
-            'site_address',
+            'site_address.line1',
             siteAddressMappingsByTarget.get('Address_Line1__c').jsonPath,
             'Site address line mapping should come from site_address'
+        );
+
+        Assert.isTrue(siteAddressMappingsByTarget.containsKey('Address_Line_2__c'),
+            'Site address line 2 should be mapped for NWL payload site_address');
+        Assert.areEqual(
+            'site_address.line2',
+            siteAddressMappingsByTarget.get('Address_Line_2__c').jsonPath,
+            'Site address line 2 mapping should come from site_address.line2'
+        );
+
+        Assert.isTrue(siteAddressMappingsByTarget.containsKey('County__c'),
+            'Site address county should be mapped for NWL payload site_address');
+        Assert.areEqual(
+            'site_address.county',
+            siteAddressMappingsByTarget.get('County__c').jsonPath,
+            'Site address county mapping should come from site_address.county'
+        );
+
+        Assert.isTrue(siteAddressMappingsByTarget.containsKey('Postcode__c'),
+            'Site address postcode should be mapped for NWL payload site_address');
+        Assert.areEqual(
+            'site_address.postcode',
+            siteAddressMappingsByTarget.get('Postcode__c').jsonPath,
+            'Site address postcode mapping should come from site_address.postcode'
+        );
+
+        Assert.isTrue(siteAddressMappingsByTarget.containsKey('Town_City__c'),
+            'Site address town city should be mapped for NWL payload site_address');
+        Assert.areEqual(
+            'site_address.town_city',
+            siteAddressMappingsByTarget.get('Town_City__c').jsonPath,
+            'Site address town city mapping should come from site_address.town_city'
+        );
+
+        Assert.isTrue(siteAddressMappingsByTarget.containsKey('Country__c'),
+            'Site address country should be mapped from landDetails.country');
+        Assert.areEqual(
+            'country',
+            siteAddressMappingsByTarget.get('Country__c').jsonPath,
+            'Site address country mapping should come from country'
+        );
+
+        InboundForm_MappingConfig.CollectionConfig applicantConfig;
+        for (InboundForm_MappingConfig.CollectionConfig coll : config.collections) {
+            if (coll.collectionName == 'Applicants') {
+                applicantConfig = coll;
+                break;
+            }
+        }
+
+        Assert.isNotNull(applicantConfig, 'Applicants config should be present');
+
+        Map<String, InboundForm_MappingConfig.FieldMapping> applicantMappingsByTarget =
+            new Map<String, InboundForm_MappingConfig.FieldMapping>();
+        for (InboundForm_MappingConfig.FieldMapping mapping : applicantConfig.fieldMappings) {
+            applicantMappingsByTarget.put(mapping.targetField, mapping);
+        }
+
+        Assert.areEqual(
+            'sections.applicantDetails',
+            applicantConfig.jsonPath,
+            'Applicants should map from sections.applicantDetails'
+        );
+        Assert.areEqual(
+            'Organisation',
+            applicantConfig.targetRecordType,
+            'Applicants should use Organisation record type'
+        );
+        Assert.isTrue(applicantMappingsByTarget.containsKey('Name'),
+            'Applicant name should be mapped');
+        Assert.areEqual(
+            'applicant_name',
+            applicantMappingsByTarget.get('Name').jsonPath,
+            'Applicant name should map from applicant_name'
+        );
+        Assert.isTrue(applicantMappingsByTarget.containsKey('Email__c'),
+            'Applicant email should be mapped');
+        Assert.areEqual(
+            'email',
+            applicantMappingsByTarget.get('Email__c').jsonPath,
+            'Applicant email should map from email'
+        );
+
+        InboundForm_MappingConfig.CollectionConfig applicantAddressConfig;
+        for (InboundForm_MappingConfig.CollectionConfig coll : config.collections) {
+            if (coll.collectionName == 'ApplicantAddresses') {
+                applicantAddressConfig = coll;
+                break;
+            }
+        }
+
+        Assert.isNotNull(applicantAddressConfig, 'ApplicantAddresses config should be present');
+        Assert.areEqual(
+            'sections.applicantDetails',
+            applicantAddressConfig.jsonPath,
+            'ApplicantAddresses should map from sections.applicantDetails'
         );
     }
 }
