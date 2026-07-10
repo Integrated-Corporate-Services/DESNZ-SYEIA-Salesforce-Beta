@@ -119,11 +119,17 @@
         <name>choice_NW06_Acknowledgement_Letter_Applicant</name>
         <choiceText>NW06. Acknowledgement letter - Applicant</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW06. Acknowledgement letter - Applicant</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW06_Ackowledgement_Letter_Land_Owner</name>
         <choiceText>NW06. Acknowledgement letter - LO</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW06. Acknowledgement letter - LO</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW07_Abeyance_Letter_Applicant</name>
@@ -462,6 +468,33 @@
                 <targetReference>NW05_Request_for_further_information_Landowner</targetReference>
             </connector>
             <label>NW05. Request for further information - LO</label>
+        </rules>
+        <rules>
+            <name>NW06_Acknowledgement_letter_Applicant</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW06. Acknowledgement letter - Applicant</stringValue>
+                </rightValue>
+            </conditions>
+            <label>NW06. Acknowledgement letter - Applicant</label>
+        </rules>
+        <rules>
+            <name>NW06_Acknowledgement_letter_LO</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW06. Acknowledgement letter - LO</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW06_Acknowledgement_letter_Applicant_Subflow</targetReference>
+            </connector>
+            <label>NW06. Acknowledgement letter - LO</label>
         </rules>
         <rules>
             <name>NW07_Abeyance_letter_Applicant</name>
@@ -968,6 +1001,19 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <flowName>NW05_Request_for_further_information_Landowner</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW06_Acknowledgement_letter_Applicant_Subflow</name>
+        <label>NW06. Acknowledgement letter - Applicant</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW06_Acknowledgement_letter_LO</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>
