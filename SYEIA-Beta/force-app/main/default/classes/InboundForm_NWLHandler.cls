@@ -93,13 +93,13 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
         }
 
         if (value.equalsIgnoreCase('inherited_necessary_wayleave')) {
-            return 'Inherited Necessary Wayleave';
+            return Label.NWL_Inherited_Necessary_Wayleave;
         }
         if (value.equalsIgnoreCase('implied_wayleave')) {
-            return 'Implied Wayleave';
+            return Label.NWL_Implied_Wayleave;
         }
         if (value.equalsIgnoreCase('wayleave')) {
-            return 'Wayleave';
+            return Label.NWL_Wayleave;
         }
 
         return value;
@@ -115,7 +115,7 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
             return Label.NWL_no_wayleave_exists;
         } else if (value.equalsIgnoreCase('wayleave_has_been_terminated')) {
             return Label.NWL_Wayleave_has_been_terminated;
-        } else if (value.equalsIgnoreCase('wayleave_has_expired')) {
+        } else if (value.equalsIgnoreCase('wayleave_expired')) {
             return Label.NWL_Wayleave_has_Expired;
         }
 

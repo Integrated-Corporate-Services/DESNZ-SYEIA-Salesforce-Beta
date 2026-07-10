@@ -24,4 +24,28 @@
         <shortDescription>NWL no_wayleave_exists</shortDescription>
         <value>The wayleave has expired para 8(1)(a) and 8(2)(a)</value>
     </labels>
+    <labels>
+        <fullName>NWL_implied_wayleave</fullName>
+        <categories>NWL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NWL implied_wayleave</shortDescription>
+        <value>Implied Wayleave</value>
+    </labels>
+    <labels>
+        <fullName>NWL_inherited_necessary_wayleave</fullName>
+        <categories>NWL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NWL inherited_necessary_wayleave</shortDescription>
+        <value>Inherited Necessary Wayleave</value>
+    </labels>
+    <labels>
+        <fullName>NWL_wayleave</fullName>
+        <categories>NWL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NWL wayleave</shortDescription>
+        <value>Wayleave</value>
+    </labels>
 </CustomLabels>

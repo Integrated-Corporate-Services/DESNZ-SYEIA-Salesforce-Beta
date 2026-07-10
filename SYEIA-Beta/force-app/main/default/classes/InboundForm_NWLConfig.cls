@@ -438,7 +438,7 @@ public class InboundForm_NWLConfig {
                 .setJsonPath('sections.landDetails')
                 .setTargetObject('Land__c')
                 .setParentLookupField('Case__c')
-                .setParentLinkSfField('Land_Registry_Reference_Number__c')
+                .setParentLinkSfField('Land_Identification__c')
                 .setProcessingOrder(40);
 
         landDetails.addFieldMapping(InboundForm_MappingConfig.yesNoField(
