@@ -79,8 +79,30 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
             }
         }
 
+        caseRecord.Type_Of_NWL_That_Existed__c =
+            mapNwlWayleaveType(caseRecord.Type_Of_NWL_That_Existed__c);
+
         caseRecord.Legislation_Applicable__c =
             mapNwlGroundsForApplication(caseRecord.Legislation_Applicable__c);
+    }
+
+    @TestVisible
+    private static String mapNwlWayleaveType(String value) {
+        if (String.isBlank(value)) {
+            return value;
+        }
+
+        if (value.equalsIgnoreCase('inherited_necessary_wayleave')) {
+            return Label.NWL_Inherited_Necessary_Wayleave;
+        }
+        if (value.equalsIgnoreCase('implied_wayleave')) {
+            return Label.NWL_Implied_Wayleave;
+        }
+        if (value.equalsIgnoreCase('wayleave')) {
+            return Label.NWL_Wayleave;
+        }
+
+        return value;
     }
 
     @TestVisible
@@ -93,7 +115,7 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
             return Label.NWL_no_wayleave_exists;
         } else if (value.equalsIgnoreCase('wayleave_has_been_terminated')) {
             return Label.NWL_Wayleave_has_been_terminated;
-        } else if (value.equalsIgnoreCase('wayleave_has_expired')) {
+        } else if (value.equalsIgnoreCase('wayleave_expired')) {
             return Label.NWL_Wayleave_has_Expired;
         }
 

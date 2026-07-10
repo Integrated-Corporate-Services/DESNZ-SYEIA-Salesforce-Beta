@@ -279,7 +279,7 @@ private class InboundForm_ProcessorTest {
                     '"paragraph":null,' +
                     '"notice_to_remove_date":"2026-02-10",' +
                     '"grounds_for_application":"no_wayleave_exists",' +
-                    '"wayleave_type":null,' +
+                    '"wayleave_type":"inherited_necessary_wayleave",' +
                     '"wayleave_expiry_date":null,' +
                     '"wayleave_expiry_documents":[],' +
                     '"implied_wayleave_documents":[],' +
@@ -332,7 +332,13 @@ private class InboundForm_ProcessorTest {
                 '"landDetails":{' +
                     '"is_registered":true,' +
                     '"site_address_same_as_objector":false,' +
-                    '"site_address":"test\\ntest\\ntest\\ntest\\nSA14RF",' +
+                    '"site_address":{' +
+                        '"line1":"test",' +
+                        '"line2":"test",' +
+                        '"county":"test",' +
+                        '"postcode":"SA14RF",' +
+                        '"town_city":"test"' +
+                    '},' +
                     '"country":"england",' +
                     '"land_registry_ref":"1234567",' +
                     '"land_registry_reference_document":{"document_id":"d3adb166-5942-4fae-aeb1-0a40315df684","file_id":"4a470cd4-acb6-4d5c-8640-a31379e5b34e","filename":"evidence-request.pdf","fileUrl":"b6ed18fa-7c3d-43bf-97b9-a40fc9bffa03/LAND_REGISTRY/evidence-request.pdf"},'+
@@ -1119,6 +1125,7 @@ private class InboundForm_ProcessorTest {
                        AWS_Application_Id__c,
                        Case_Type__c,
                        Application_Type__c,
+                      Type_Of_NWL_That_Existed__c,
                        Written_Removal_Notice_Issue_Date__c,
                        Written_Removal_Notice_Been_Given__c,
                        Land__c,
@@ -1135,6 +1142,9 @@ private class InboundForm_ProcessorTest {
                 'NWL handler should set case type');
             Assert.areEqual('Existing Line', insertedCase.Application_Type__c,
                 'NWL handler should normalize application type');
+            Assert.areEqual('Inherited Necessary Wayleave',
+                insertedCase.Type_Of_NWL_That_Existed__c,
+                'NWL handler should map inherited_necessary_wayleave to picklist value');
             Assert.areEqual(Date.newInstance(2026, 2, 10),
                 insertedCase.Written_Removal_Notice_Issue_Date__c,
                 'Written removal notice issue date should map from notice_to_remove_date');
@@ -1153,6 +1163,32 @@ private class InboundForm_ProcessorTest {
             Assert.areEqual('TEST related application',
                 insertedCase.Details_of_All_Related_Application__c,
                 'Related application details should map');
+
+            Assert.isTrue(result.collectionRecords.containsKey('Applicants'),
+                'Applicants collection should be processed from applicantDetails');
+            List<SObject> applicantRecords = result.collectionRecords.get('Applicants');
+            Assert.areEqual(1, applicantRecords.size(),
+                'Applicants should produce one party record');
+
+            SObject applicantParty = applicantRecords[0];
+            Assert.areEqual('DESNZ', (String) applicantParty.get('Name'),
+                'Applicant party should map applicant_name');
+            Assert.areEqual('ics.tester10@ics-testing.com', (String) applicantParty.get('Email__c'),
+                'Applicant party should map email');
+            Assert.areEqual('Organisation', (String) applicantParty.get('Party_Type__c'),
+                'Applicant party type should be Organisation');
+            Assert.areEqual('NWL_APPLICANT', (String) applicantParty.get('Application_Party_Id__c'),
+                'Applicant party should carry NWL_APPLICANT identifier');
+
+            Assert.isTrue(result.collectionRecords.containsKey('ApplicantAddresses'),
+                'ApplicantAddresses collection should be processed from applicantDetails');
+            List<SObject> applicantAddressRecords = result.collectionRecords.get('ApplicantAddresses');
+            Assert.areEqual(1, applicantAddressRecords.size(),
+                'ApplicantAddresses should produce one address record');
+
+            SObject applicantAddress = applicantAddressRecords[0];
+            Assert.areEqual('NWL_APPLICANT', (String) applicantAddress.get('Application_Party_Identification__c'),
+                'Applicant address should carry NWL_APPLICANT identifier');
         } finally {
             CaseTriggerHelper.enableProcessing();
         }
