@@ -279,7 +279,7 @@ private class InboundForm_ProcessorTest {
                     '"paragraph":null,' +
                     '"notice_to_remove_date":"2026-02-10",' +
                     '"grounds_for_application":"no_wayleave_exists",' +
-                    '"wayleave_type":null,' +
+                    '"wayleave_type":"inherited_necessary_wayleave",' +
                     '"wayleave_expiry_date":null,' +
                     '"wayleave_expiry_documents":[],' +
                     '"implied_wayleave_documents":[],' +
@@ -1125,6 +1125,7 @@ private class InboundForm_ProcessorTest {
                        AWS_Application_Id__c,
                        Case_Type__c,
                        Application_Type__c,
+                      Type_Of_NWL_That_Existed__c,
                        Written_Removal_Notice_Issue_Date__c,
                        Written_Removal_Notice_Been_Given__c,
                        Land__c,
@@ -1141,6 +1142,9 @@ private class InboundForm_ProcessorTest {
                 'NWL handler should set case type');
             Assert.areEqual('Existing Line', insertedCase.Application_Type__c,
                 'NWL handler should normalize application type');
+            Assert.areEqual('Inherited Necessary Wayleave',
+                insertedCase.Type_Of_NWL_That_Existed__c,
+                'NWL handler should map inherited_necessary_wayleave to picklist value');
             Assert.areEqual(Date.newInstance(2026, 2, 10),
                 insertedCase.Written_Removal_Notice_Issue_Date__c,
                 'Written removal notice issue date should map from notice_to_remove_date');

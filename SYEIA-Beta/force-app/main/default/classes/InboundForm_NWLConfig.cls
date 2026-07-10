@@ -438,6 +438,7 @@ public class InboundForm_NWLConfig {
                 .setJsonPath('sections.landDetails')
                 .setTargetObject('Land__c')
                 .setParentLookupField('Case__c')
+                .setParentLinkSfField('Land_Registry_Reference_Number__c')
                 .setProcessingOrder(40);
 
         landDetails.addFieldMapping(InboundForm_MappingConfig.yesNoField(
@@ -450,7 +451,7 @@ public class InboundForm_NWLConfig {
         ));
         landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
             'os_grid_ref',
-            'Land_Reference__c'
+            'Grid_Letter__c'
         ));
         landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
             'land_identification',

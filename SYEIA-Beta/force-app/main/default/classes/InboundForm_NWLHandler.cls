@@ -79,8 +79,30 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
             }
         }
 
+        caseRecord.Type_Of_NWL_That_Existed__c =
+            mapNwlWayleaveType(caseRecord.Type_Of_NWL_That_Existed__c);
+
         caseRecord.Legislation_Applicable__c =
             mapNwlGroundsForApplication(caseRecord.Legislation_Applicable__c);
+    }
+
+    @TestVisible
+    private static String mapNwlWayleaveType(String value) {
+        if (String.isBlank(value)) {
+            return value;
+        }
+
+        if (value.equalsIgnoreCase('inherited_necessary_wayleave')) {
+            return 'Inherited Necessary Wayleave';
+        }
+        if (value.equalsIgnoreCase('implied_wayleave')) {
+            return 'Implied Wayleave';
+        }
+        if (value.equalsIgnoreCase('wayleave')) {
+            return 'Wayleave';
+        }
+
+        return value;
     }
 
     @TestVisible
