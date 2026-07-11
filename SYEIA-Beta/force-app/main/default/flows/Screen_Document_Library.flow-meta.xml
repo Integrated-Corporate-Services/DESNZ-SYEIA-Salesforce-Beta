@@ -98,6 +98,9 @@
         <name>choice_NW04_Invalid_New_Lines_Land_Owner</name>
         <choiceText>NW04. Invalid (New Lines) - LO</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW04. Invalid (New Lines) - LO</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW05_Request_For_Further_Information_Applicant</name>
@@ -438,6 +441,21 @@
                 <targetReference>NW_Invalid_NTT_only_including_implied_wayleaves_LO</targetReference>
             </connector>
             <label>NW03. Invalid - NTT only (including implied wayleaves) - LO</label>
+        </rules>
+        <rules>
+            <name>NW04_Invalid_New_Lines_LO</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW04. Invalid (New Lines) - LO</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW04_Invalid_New_Lines_Landowner_SubFlow</targetReference>
+            </connector>
+            <label>NW04. Invalid (New Lines) - LO</label>
         </rules>
         <rules>
             <name>NW05_Request_for_further_information_Applicant</name>
@@ -978,6 +996,19 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <flowName>NW03_Invalid_NTT_only_including_implied_wayleaves_Applicant_2026</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW04_Invalid_New_Lines_Landowner_SubFlow</name>
+        <label>NW04_Invalid_New_Lines_Landowner</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW04_Invalid_New_Lines_Landowner</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>
