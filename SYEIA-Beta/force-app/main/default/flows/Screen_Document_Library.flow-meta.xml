@@ -479,6 +479,9 @@
                     <stringValue>NW06. Acknowledgement letter - Applicant</stringValue>
                 </rightValue>
             </conditions>
+            <connector>
+                <targetReference>NW06_Acknowledgement_letter_Applicant_SubFlow</targetReference>
+            </connector>
             <label>NW06. Acknowledgement letter - Applicant</label>
         </rules>
         <rules>
@@ -492,7 +495,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>NW06_Acknowledgement_letter_Applicant_Subflow</targetReference>
+                <targetReference>NW06_Acknowledgement_letter_LO_Subflow</targetReference>
             </connector>
             <label>NW06. Acknowledgement letter - LO</label>
         </rules>
@@ -1009,8 +1012,21 @@
         </inputAssignments>
     </subflows>
     <subflows>
-        <name>NW06_Acknowledgement_letter_Applicant_Subflow</name>
+        <name>NW06_Acknowledgement_letter_Applicant_SubFlow</name>
         <label>NW06. Acknowledgement letter - Applicant</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW06_Acknowledgement_letter_Applicant</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW06_Acknowledgement_letter_LO_Subflow</name>
+        <label>NW06. Acknowledgement letter - LO</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <flowName>Screen_DocGen_NW06_Acknowledgement_letter_LO</flowName>
