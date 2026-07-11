@@ -93,6 +93,9 @@
         <name>choice_NW04_Invalid_New_Lines_Applicant</name>
         <choiceText>NW04. Invalid (New Lines) - Applicant</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW04. Invalid (New Lines) - Applicant</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW04_Invalid_New_Lines_Land_Owner</name>
@@ -441,6 +444,21 @@
                 <targetReference>NW_Invalid_NTT_only_including_implied_wayleaves_LO</targetReference>
             </connector>
             <label>NW03. Invalid - NTT only (including implied wayleaves) - LO</label>
+        </rules>
+        <rules>
+            <name>NW04_Invalid_New_Lines_Applicant</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW04. Invalid (New Lines) - Applicant</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW04_Invalid_New_Lines_Applicant_SubFlow</targetReference>
+            </connector>
+            <label>NW04. Invalid (New Lines) - Applicant</label>
         </rules>
         <rules>
             <name>NW04_Invalid_New_Lines_LO</name>
@@ -976,7 +994,7 @@
             <targetReference>Get_Case</targetReference>
         </connector>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <subflows>
         <name>NW02_Invalid_Unclear_NTR_LO_1</name>
         <label>NW02 Invalid - Unclear NTR - LO</label>
@@ -996,6 +1014,19 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <flowName>NW03_Invalid_NTT_only_including_implied_wayleaves_Applicant_2026</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW04_Invalid_New_Lines_Applicant_SubFlow</name>
+        <label>NW04. Invalid (New Lines) - Applicant</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW04_Invalid_New_Lines_Applicant</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>

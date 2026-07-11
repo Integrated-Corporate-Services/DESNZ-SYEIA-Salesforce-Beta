@@ -628,6 +628,7 @@
 		<members>Screen_DocGen_NW02_Invalid_Unclear_NTR_Applicant</members>
 		<members>Screen_DocGen_NW12_Procedural_notice_OH_Applicant</members>
 		<members>Screen_DocGen_NW02_Invalid_Unclear_NTR_LO</members>
+		<members>Screen_DocGen_NW04_Invalid_New_Lines_Applicant</members>
 		<members>Screen_DocGen_NW04_Invalid_New_Lines_Landowner</members>
 		<members>Screen_DocGen_NW06_Acknowledgement_letter_Applicant</members>
 		<members>Screen_DocGen_NW06_Acknowledgement_letter_LO</members>
