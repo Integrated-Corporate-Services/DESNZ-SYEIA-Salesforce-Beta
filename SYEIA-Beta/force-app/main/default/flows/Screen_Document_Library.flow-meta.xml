@@ -56,6 +56,9 @@
         <name>choice_NW01_General_Letter_Land_Owner</name>
         <choiceText>NW01. General Letter - LO</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW01. General Letter - LO</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW02_Invalid_Unclear_NTR_Applicant</name>
@@ -380,9 +383,12 @@
                 <leftValueReference>NWL_Document_Library_CS</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <elementReference>choice_NW01_General_Letter_Land_Owner</elementReference>
+                    <stringValue>NW01. General Letter - LO</stringValue>
                 </rightValue>
             </conditions>
+            <connector>
+                <targetReference>NW01_General_Letter_LO_SubFlow</targetReference>
+            </connector>
             <label>NW01 General Letter - LO</label>
         </rules>
         <rules>
@@ -994,7 +1000,20 @@
             <targetReference>Get_Case</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
+    <subflows>
+        <name>NW01_General_Letter_LO_SubFlow</name>
+        <label>NW01_General_Letter_LO</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW01_General_Letter_LO</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
     <subflows>
         <name>NW02_Invalid_Unclear_NTR_LO_1</name>
         <label>NW02 Invalid - Unclear NTR - LO</label>
