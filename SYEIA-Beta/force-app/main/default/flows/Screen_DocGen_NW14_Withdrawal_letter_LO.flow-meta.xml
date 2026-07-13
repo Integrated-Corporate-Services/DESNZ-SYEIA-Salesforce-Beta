@@ -19,7 +19,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
+                <stringValue>Screen_DocGen_NW14_Withdrawal_letter_LO</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -88,7 +88,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
+                <stringValue>Screen_DocGen_NW14_Withdrawal_letter_LO</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -157,7 +157,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
+                <stringValue>Screen_DocGen_NW14_Withdrawal_letter_LO</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -226,7 +226,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
+                <stringValue>Screen_DocGen_NW14_Withdrawal_letter_LO</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -295,7 +295,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
+                <stringValue>Screen_DocGen_NW14_Withdrawal_letter_LO</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -410,7 +410,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
+                <stringValue>Screen_DocGen_NW14_Withdrawal_letter_LO</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -734,17 +734,17 @@ TEXT(YEAR(TODAY()))</expression>
             </value>
         </filters>
         <filters>
-            <field>Party_Type__c</field>
+            <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Landowner</stringValue>
+                <elementReference>Get_Case.Landowner__c</elementReference>
             </value>
         </filters>
         <filters>
-            <field>Party_Type__c</field>
+            <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Landowner Representative</stringValue>
+                <elementReference>Get_Case.Representative__c</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -866,6 +866,7 @@ TEXT(YEAR(TODAY()))</expression>
             <dataType>Date</dataType>
             <fieldText>Date</fieldText>
             <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <styleProperties>
                 <verticalAlignment>
