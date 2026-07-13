@@ -900,7 +900,15 @@
             <default>false</default>
         </values>
         <values>
+            <fullName>In Abeyance</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>In-Progress</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Invalid</fullName>
             <default>false</default>
         </values>
         <values>
