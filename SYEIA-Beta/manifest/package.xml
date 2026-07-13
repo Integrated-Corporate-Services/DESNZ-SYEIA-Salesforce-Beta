@@ -625,9 +625,15 @@
 		<members>Screen_DocGen_NW_Checklist_Existing_Lines_internal</members>
 		<members>Screen_DocGen_NW_Checklist_New_Lines_Internal</members>
 		<members>Screen_DocGen_NW01_General_Letter_Applicant_letter</members>
+		<members>Screen_DocGen_NW01_General_Letter_LO</members>
 		<members>Screen_DocGen_NW02_Invalid_Unclear_NTR_Applicant</members>
 		<members>Screen_DocGen_NW12_Procedural_notice_OH_Applicant</members>
 		<members>Screen_DocGen_NW02_Invalid_Unclear_NTR_LO</members>
+		<members>Screen_DocGen_NW04_Invalid_New_Lines_Applicant</members>
+		<members>Screen_DocGen_NW04_Invalid_New_Lines_Landowner</members>
+		<members>Screen_DocGen_NW06_Acknowledgement_letter_Applicant</members>
+		<members>Screen_DocGen_NW06_Acknowledgement_letter_LO</members>
+		<members>Screen_DocGen_NW07_Abeyance_letter_Applicant_2026</members>
 		<members>Screen_DocGen_NW07_Abeyance_letter_LO_2026</members>
 		<members>Screen_DocGen_NW08_CTWR_letter_Applicant_2026</members>
 		<members>Screen_DocGen_NW08_CTWR_letter_LO_2026</members>

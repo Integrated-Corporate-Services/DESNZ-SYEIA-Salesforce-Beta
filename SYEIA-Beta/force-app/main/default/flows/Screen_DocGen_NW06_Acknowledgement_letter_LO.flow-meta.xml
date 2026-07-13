@@ -19,7 +19,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW01_General_Letter_Applicant_letter</stringValue>
+                <stringValue>Screen_DocGen_NW06_Acknowledgement_letter_LO</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -73,7 +73,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW01_General_Letter_Applicant_letter</stringValue>
+                <stringValue>Screen_DocGen_NW06_Acknowledgement_letter_LO</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -127,7 +127,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW01_General_Letter_Applicant_letter</stringValue>
+                <stringValue>Screen_DocGen_NW06_Acknowledgement_letter_LO</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -181,7 +181,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW01_General_Letter_Applicant_letter</stringValue>
+                <stringValue>Screen_DocGen_NW06_Acknowledgement_letter_LO</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -235,7 +235,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW01_General_Letter_Applicant_letter</stringValue>
+                <stringValue>Screen_DocGen_NW06_Acknowledgement_letter_LO</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -301,7 +301,7 @@
         <inputParameters>
             <name>templateContentVersionId</name>
             <value>
-                <elementReference>Get_NW01_General_Letter_Applicant_letter_DocumentTemplateContentDoc.LatestContentVersionId</elementReference>
+                <elementReference>Get_NW06_Acknowledgement_letter_LO_DocumentTemplateContentDoc.LatestContentVersionId</elementReference>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
@@ -335,7 +335,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW01_General_Letter_Applicant_letter</stringValue>
+                <stringValue>Screen_DocGen_NW06_Acknowledgement_letter_LO</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -389,7 +389,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW01_General_Letter_Applicant_letter</stringValue>
+                <stringValue>Screen_DocGen_NW06_Acknowledgement_letter_LO</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -432,7 +432,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
-            <assignToReference>var_Applicant_Contact_Email</assignToReference>
+            <assignToReference>var_OwnerorOccupiercontactemailaddress</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>Applicant_Contact_Email.value</elementReference>
@@ -455,7 +455,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Get_NW01_General_Letter_Applicant_letter</targetReference>
+            <targetReference>Get_NW06_Acknowledgement_letter_LO</targetReference>
         </connector>
     </assignments>
     <customProperties>
@@ -470,7 +470,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <targetReference>Get_NW01_General_Letter_Applicant_letter</targetReference>
+            <targetReference>Get_NW06_Acknowledgement_letter_LO</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -490,11 +490,6 @@
         </rules>
     </decisions>
     <environments>Default</environments>
-    <formulas>
-        <name>formula_Applicant_Default_Email</name>
-        <dataType>String</dataType>
-        <expression>{!Get_Case_Using_recordId.DNO__r.Representative__r.Email__c}</expression>
-    </formulas>
     <formulas>
         <name>formula_CurrentDate</name>
         <dataType>String</dataType>
@@ -531,12 +526,17 @@ TEXT(YEAR(TODAY()))</expression>
     <formulas>
         <name>formula_DocumentTitle</name>
         <dataType>String</dataType>
-        <expression>&apos;NW01. General letter - Applicant (2026) -&apos; &amp; {!Get_Case_Using_recordId.Name} &amp; &apos;-&apos; &amp; TEXT(TODAY())</expression>
+        <expression>&apos;NW06. Acknowledgement letter - LO  -&apos; &amp; {!Get_Case_Using_recordId.Name} &amp; &apos;-&apos; &amp; TEXT(TODAY())</expression>
     </formulas>
     <formulas>
-        <name>formula_Free_Text</name>
+        <name>formula_OwnerorOccupiercontactemailaddress</name>
         <dataType>String</dataType>
-        <expression>{!Free_Text}</expression>
+        <expression>{!Get_Owner_Rep.Email__c}</expression>
+    </formulas>
+    <formulas>
+        <name>formula_Response_Deadline</name>
+        <dataType>String</dataType>
+        <expression>{!Response_Deadline}</expression>
     </formulas>
     <formulas>
         <name>formula_SentByEmail</name>
@@ -549,9 +549,11 @@ TEXT(YEAR(TODAY()))</expression>
         <expression>&apos;{&apos; &amp;
 &apos;&quot;DESNZ_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Name} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;Applicant_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Applicant_Reference__c} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;DNO_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Name} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;OwnerOrOccuppier_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Applicant_Reference__c} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;Owner_or_occupier_contact_Email&quot;: &quot;&apos; &amp; {!var_OwnerorOccupiercontactemailaddress} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;NetworkOperator&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Name} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;App_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Representative__r.Name} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;App_Email&quot;: &quot;&apos; &amp; {!var_Applicant_Contact_Email} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;DNO_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Name} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;DNO_Address_Line1&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line1__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;DNO_Address_Line2&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line_2__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;DNO_Address_TownCity&quot;: &quot;&apos; &amp; {!Get_Address.Town_City__c} &amp; &apos;&quot;, &apos; &amp;
@@ -562,13 +564,14 @@ TEXT(YEAR(TODAY()))</expression>
 &apos;&quot;Site_Address_Postcode&quot;: &quot;&apos; &amp; {!Get_Site_Address.Postcode__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;NameofOwner_or_occupier_contact&quot;: &quot;&apos; &amp; {!Get_Owner_Rep.Name} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;Date_of_Application__c&quot;: &quot;&apos; &amp; TEXT({!Get_Case_Using_recordId.Date_of_Application__c}) &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;Free_Text&quot;: &quot;&apos; &amp; {!formula_Free_Text} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;Application_submission_date&quot;: &quot;&apos; &amp; TEXT({!Get_Case_Using_recordId.Date_of_Application__c}) &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;Response_Deadline&quot;: &quot;&apos; &amp; {!formula_Response_Deadline} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;SENT_BY_EMAIL&quot;: &quot;&apos; &amp; {!formula_SentByEmail} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;Date_of_Letter&quot;: &quot;&apos; &amp; TEXT({!Selected_Date_of_Letter}) &amp; &apos;&quot;&apos; &amp;
 &apos;}&apos;</expression>
     </formulas>
-    <interviewLabel>Screen - DocGen - NW01 General Letter - Applicant letter {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Screen - DocGen - NW01 General Letter - Applicant letter</label>
+    <interviewLabel>Screen - DocGen - {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Screen - DocGen - NW06. Acknowledgement letter - LO</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -637,14 +640,13 @@ TEXT(YEAR(TODAY()))</expression>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <description>NW01 General Letter - Applicant letter</description>
-        <name>Get_NW01_General_Letter_Applicant_letter</name>
-        <label>Get NW01 General Letter - Applicant letter</label>
+        <name>Get_NW06_Acknowledgement_letter_LO</name>
+        <label>Get NW06. Acknowledgement letter - LO</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Get_NW01_General_Letter_Applicant_letter_DocumentTemplateContentDoc</targetReference>
+            <targetReference>Get_NW06_Acknowledgement_letter_LO_DocumentTemplateContentDoc</targetReference>
         </connector>
         <faultConnector>
             <targetReference>Generate_Document_Nebula_Logger</targetReference>
@@ -654,7 +656,7 @@ TEXT(YEAR(TODAY()))</expression>
             <field>Name</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>NW01_General_Letter_Applicant</stringValue>
+                <stringValue>NW06_Acknowledgement_letter_LO</stringValue>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -662,8 +664,8 @@ TEXT(YEAR(TODAY()))</expression>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <name>Get_NW01_General_Letter_Applicant_letter_DocumentTemplateContentDoc</name>
-        <label>Get NW01_General_Letter_Applicant_letter DocumentTemplateContentDoc</label>
+        <name>Get_NW06_Acknowledgement_letter_LO_DocumentTemplateContentDoc</name>
+        <label>Get NW06. Acknowledgement letter - LO DocumentTemplateContentDoc</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
@@ -678,7 +680,7 @@ TEXT(YEAR(TODAY()))</expression>
             <field>DocumentTemplateId</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>Get_NW01_General_Letter_Applicant_letter.Id</elementReference>
+                <elementReference>Get_NW06_Acknowledgement_letter_LO.Id</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -760,7 +762,7 @@ TEXT(YEAR(TODAY()))</expression>
         </connector>
         <fields>
             <name>ReasonSectionDisplayText</name>
-            <fieldText>&lt;h1&gt;&lt;strong&gt;The  NW01 General Letter - Applicant&lt;/strong&gt;&lt;/h1&gt;</fieldText>
+            <fieldText>&lt;h1&gt;&lt;strong&gt;NW06. Acknowledgement letter - LO (2026)&lt;/strong&gt;&lt;/h1&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -772,11 +774,14 @@ TEXT(YEAR(TODAY()))</expression>
             </styleProperties>
         </fields>
         <fields>
-            <name>Free_Text</name>
-            <fieldText>Free Text</fieldText>
+            <name>Response_Deadline</name>
+            <defaultValue>
+                <stringValue>[[2-week deadline]]. </stringValue>
+            </defaultValue>
+            <fieldText>Response Deadline</fieldText>
             <fieldType>LargeTextArea</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>true</isRequired>
+            <isRequired>false</isRequired>
             <styleProperties>
                 <verticalAlignment>
                     <stringValue>top</stringValue>
@@ -821,7 +826,7 @@ TEXT(YEAR(TODAY()))</expression>
             <inputParameters>
                 <name>label</name>
                 <value>
-                    <stringValue>Applicant Contact Email</stringValue>
+                    <stringValue>Owner or Occupier contact email address</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -833,7 +838,7 @@ TEXT(YEAR(TODAY()))</expression>
             <inputParameters>
                 <name>value</name>
                 <value>
-                    <elementReference>var_Applicant_Contact_Email</elementReference>
+                    <elementReference>var_OwnerorOccupiercontactemailaddress</elementReference>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -847,6 +852,16 @@ TEXT(YEAR(TODAY()))</expression>
                     <stringValue>12</stringValue>
                 </width>
             </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>formula_OwnerorOccupiercontactemailaddress</leftValueReference>
+                    <operator>IsNull</operator>
+                    <rightValue>
+                        <booleanValue>false</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
         </fields>
         <fields>
             <name>Selected_Date_of_Letter</name>
@@ -877,7 +892,7 @@ TEXT(YEAR(TODAY()))</expression>
         <allowPause>false</allowPause>
         <fields>
             <name>H_Final_Record_Creation_Screen_Approval_Titl</name>
-            <fieldText>&lt;h1&gt;&lt;strong&gt;The  NW01 General Letter - Applicant has been successfully created.&lt;/strong&gt;&lt;/h1&gt;</fieldText>
+            <fieldText>&lt;h1&gt;&lt;strong&gt;The  NW06. Acknowledgement letter - LO (2026) has been successfully created.&lt;/strong&gt;&lt;/h1&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -928,16 +943,6 @@ TEXT(YEAR(TODAY()))</expression>
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <name>var_Applicant_Contact_Email</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <value>
-            <elementReference>formula_Applicant_Default_Email</elementReference>
-        </value>
-    </variables>
-    <variables>
         <name>var_CanBypassApproval</name>
         <dataType>Boolean</dataType>
         <isCollection>false</isCollection>
@@ -945,6 +950,16 @@ TEXT(YEAR(TODAY()))</expression>
         <isOutput>false</isOutput>
         <value>
             <booleanValue>false</booleanValue>
+        </value>
+    </variables>
+    <variables>
+        <name>var_OwnerorOccupiercontactemailaddress</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <elementReference>formula_OwnerorOccupiercontactemailaddress</elementReference>
         </value>
     </variables>
 </Flow>
