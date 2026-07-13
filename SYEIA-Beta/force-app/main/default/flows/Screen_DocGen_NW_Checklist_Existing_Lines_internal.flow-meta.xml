@@ -19,7 +19,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW02_Invalid_Unclear_NTR_App</stringValue>
+                <stringValue>Screen_DocGen_NW_Checklist_Existing_Lines_internal</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -73,7 +73,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW02_Invalid_Unclear_NTR_App</stringValue>
+                <stringValue>Screen_DocGen_NW_Checklist_Existing_Lines_internal</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -127,7 +127,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW02_Invalid_Unclear_NTR_App</stringValue>
+                <stringValue>Screen_DocGen_NW_Checklist_Existing_Lines_internal</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -181,7 +181,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW02_Invalid_Unclear_NTR_App</stringValue>
+                <stringValue>Screen_DocGen_NW_Checklist_Existing_Lines_internal</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -235,7 +235,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW02_Invalid_Unclear_NTR_App</stringValue>
+                <stringValue>Screen_DocGen_NW_Checklist_Existing_Lines_internal</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -334,7 +334,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW02_Invalid_Unclear_NTR_App</stringValue>
+                <stringValue>Screen_DocGen_NW_Checklist_Existing_Lines_internal</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -388,7 +388,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW02_Invalid_Unclear_NTR_App</stringValue>
+                <stringValue>Screen_DocGen_NW_Checklist_Existing_Lines_internal</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -423,7 +423,7 @@
         <offset>0</offset>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
-    <apiVersion>65.0</apiVersion>
+    <apiVersion>66.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
         <name>Bypass_Approval</name>
@@ -800,7 +800,7 @@
             <assignToReference>v_Q25</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>com_Is_the_written_notice_to_terminate_enclosedm</elementReference>
+                <elementReference>Is_the_written_notice_to_terminate_enclosed</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -1452,17 +1452,17 @@ TEXT(YEAR(TODAY()))</expression>
             </value>
         </filters>
         <filters>
-            <field>Party_Type__c</field>
+            <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Landowner</stringValue>
+                <elementReference>Get_Case.Landowner__c</elementReference>
             </value>
         </filters>
         <filters>
-            <field>Party_Type__c</field>
+            <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Landowner Representative</stringValue>
+                <elementReference>Get_Case.Representative__c</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -3163,7 +3163,7 @@ TEXT(YEAR(TODAY()))</expression>
                     </styleProperties>
                 </fields>
                 <fields>
-                    <name>com_Is_the_written_notice_to_terminate_enclosedm</name>
+                    <name>coIs_the_written_notice_to_terminate_enclosedm</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -4441,7 +4441,7 @@ TEXT(YEAR(TODAY()))</expression>
             <targetReference>Does_User_Have_Bypass_Approval_CP</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <name>recordId</name>
         <dataType>String</dataType>

@@ -19,7 +19,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW02_Invalid_Unclear_NTR_App</stringValue>
+                <stringValue>Screen_DocGen_NW_Checklist_New_Lines_Internal</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -73,7 +73,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW02_Invalid_Unclear_NTR_App</stringValue>
+                <stringValue>Screen_DocGen_NW_Checklist_New_Lines_Internal</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -127,7 +127,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW02_Invalid_Unclear_NTR_App</stringValue>
+                <stringValue>Screen_DocGen_NW_Checklist_New_Lines_Internal</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -181,7 +181,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW02_Invalid_Unclear_NTR_App</stringValue>
+                <stringValue>Screen_DocGen_NW_Checklist_New_Lines_Internal</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -235,7 +235,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW02_Invalid_Unclear_NTR_App</stringValue>
+                <stringValue>Screen_DocGen_NW_Checklist_New_Lines_Internal</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -334,7 +334,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW02_Invalid_Unclear_NTR_App</stringValue>
+                <stringValue>Screen_DocGen_NW_Checklist_New_Lines_Internal</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -388,7 +388,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>Screen_DocGen_NW02_Invalid_Unclear_NTR_App</stringValue>
+                <stringValue>Screen_DocGen_NW_Checklist_New_Lines_Internal</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -423,7 +423,7 @@
         <offset>0</offset>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
-    <apiVersion>65.0</apiVersion>
+    <apiVersion>66.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
         <name>Bypass_Approval</name>
@@ -441,327 +441,472 @@
             <targetReference>Get_NW_Checklist_New_Lines_Internal</targetReference>
         </connector>
     </assignments>
-<assignments>
-<name>CL_Values_To_Variables</name>
-<label>CL_Values To Variables</label>
-<locationX>0</locationX>
-<locationY>0</locationY>
-
-<assignmentItems>
-<assignToReference>paymentMade</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>paymentMade</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>paymentMadeCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>paymentMadeCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>afterNoticeExpiry</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>afterNoticeExpiry</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>afterNoticeExpiryCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>afterNoticeExpiryCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>notice21Days</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>notice21Days</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>notice21DaysCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>notice21DaysCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>landAddr</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>landAddr</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>landAddrCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>landAddrCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>boundaries</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>boundaries</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>boundariesCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>boundariesCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>lineListed</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>lineListed</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>lineListedCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>lineListedCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>lineLoc</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>lineLoc</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>lineLocCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>lineLocCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>landBounds</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>landBounds</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>landBoundsCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>landBoundsCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>otherLines</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>otherLines</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>otherLinesCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>otherLinesCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>lineType</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>lineType</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>lineTypeCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>lineTypeCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>voltage</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>voltage</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>voltageCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>voltageCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>ownerMatch</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>ownerMatch</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>ownerMatchCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>ownerMatchCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>landRef</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>landRef</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>landRefCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>landRefCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>negotiations</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>negotiations</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>negotiationsCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>negotiationsCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>abeyance</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>abeyance</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>abeyanceCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>abeyanceCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>notes</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>notes</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>notesCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>notesCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>dnoIssues</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>dnoIssues</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>dnoIssuesCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>dnoIssuesCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>singleParcel</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>singleParcel</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>singleParcelCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>singleParcelCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>linkedApps</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>linkedApps</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>linkedAppsCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>linkedAppsCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>highPriority</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>highPriority</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>highPriorityCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>highPriorityCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>appPlan</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>appPlan</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>appPlanCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>appPlanCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>landReg</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>landReg</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>landRegCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>landRegCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>titlePlan</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>titlePlan</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>titlePlanCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>titlePlanCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>wayleave</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>wayleave</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>wayleaveCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>wayleaveCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>correspondence</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>correspondence</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>correspondenceCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>correspondenceCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>valid</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>valid</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>validCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>validCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>moreInfo</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>moreInfo</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>moreInfoCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>moreInfoCom</elementReference></value>
-</assignmentItems>
-
-<assignmentItems>
-<assignToReference>infoReceived</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>infoReceived</elementReference></value>
-</assignmentItems>
-<assignmentItems>
-<assignToReference>infoReceivedCom</assignToReference>
-<operator>Assign</operator>
-<value><elementReference>infoReceivedCom</elementReference></value>
-</assignmentItems>
-
-<connector>
-<targetReference>Generate_Document</targetReference>
-</connector>
-</assignments>
+    <assignments>
+        <name>CL_Values_To_Variables</name>
+        <label>CL_Values To Variables</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>v_hasDnoPaid</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Has_payment_been_made_by_the_DNO</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_hasDnoPaid</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Has_payment_been_made_by_the_DNO</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_isAppDateAfterNoticeExpiry</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Is_the_application_date_after_the_expiry_of_the_notice_period</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_isAppDateAfterNoticeExpiry</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Is_the_application_date_after_the_expiry_of_the_notice_period</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_dnoWayleaveMin21Days</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Does_the_DNO_s_voluntary_wayleave_offer_letter_give_at_least_21_days</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_dnoWayleaveMin21Days</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Does_the_DNO_s_voluntary_wayleave_offer_letter_give_at_least_21_days</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_isLandAddressConfirmedInApp</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Does_the_application_confirm_the_location_of_the_land_full_address_with_postcode</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_isLandFullAddressConfirmed</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Does_the_application_confirm_the_location_of_the_land_full_address</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_landMatchRegistry</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Do_the_land_boundaries_match_the_land_registry_documents</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_landMatchRegistry</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Do_the_land_boundaries_match_the_land_registry_documents</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_elecLineInSchedule</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Is_the_Electric_line_correctly_listed_under_the_asset_schedule</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_elecLineInSchedule</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Is_the_Electric_line_correctly_listed_under_the_asset_schedule</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_showLineLoc</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Show_the_location_of_the_proposed_line</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_showLineLoc</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Show_the_location_of_the_proposed_line</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_showLandBoundaries</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Show_the_land_boundaries</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_showLandBoundaries</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_ShowTheLandBoundaries</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_showCrossingLines</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Show_any_other_lines_crossing_the_land</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_showCrossingLines</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_ShowAnyOtherLinesCrossingTheLand</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_distinguishLineType</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Distinguish_between_proposed_lines_placed_overhead_and_underground</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_distinguishLineType</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Distinguish_between_proposed_lines</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_distinguishVoltageLevel</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Distinguish_between_high_and_low_voltage_lines</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_distinguishVoltageLevel</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Distinguish_between_high_and_low_voltage_lines</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_landownerMatchRegistry</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Do_the_landowner_s_details_name_and_address_match_the_land_registry_documents</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_landownerMatchRegistry</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Do_the_landowner_s_details_name_and_address_match_the_land_registry</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_landRegTitleRefMatch</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Do_the_Land_Register_and_Title_Plan_have_the_same_reference_number</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_landRegTitleRefMatch</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Do_the_Land_Register_and_Title_Plan_have_the_same_reference</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_dnoNegStatus</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Has_the_DNO_confirmed_whether_negotiations_are_in_progress</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_dnoNegStatus</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Has_the_DNO_confirmed_whether_negotiations_are_in_progress</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_dnoHoldAbeyance</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Has_the_DNO_requested_the_application_to_be_held_in_abeyance</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_dnoHoldAbeyance</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Has_the_DNO_requested_the_application_to_be_held_in_abeyance</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_anyComments</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Any_comments_to_note</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_anyComments</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Any_comments_to_note</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_dnoComments</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Are_there_any_comments_from_the_DNO_that_need_to_be_raised_with_the_consent_mana</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_dnoComments</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Are_there_any_comments_from_the_DNO_that_need_to_be_raised_with_the</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_oneParcel</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Does_the_application_relate_to_one_parcel_of_land</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_oneParcel</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Does_the_application_relate_to_one_parcel_of_land</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_linkedApps</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Are_there_any_linked_applications_If_yes_please_list_reference_number_s</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_linkedApps</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Are_there_any_linked_applications_If_yes_please_list_reference_number_s</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_highPriority</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Should_this_application_be_treated_as_a_high_priority</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_highPriority</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Should_this_application_be_treated_as_a_high_priority</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_appPlans</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Application_plan_s</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_appPlans</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Application_plan</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_landReg</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Land_Registry_Register</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_landReg</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Land_Registry_Register</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_landRegTitlePlan</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Land_Registry_Title_Plan</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_landRegTitlePlan</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Land_Registry_Title_Plan</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_dnoWayleaveNotice</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>DNO_voluntary_wayleave_offer_letter_Notice</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_dnoWayleaveNotice</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_DNO_voluntary_wayleave_offer_letter_Notice</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_addlCorr</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Additional_correspondence</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_addlCorr</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Additional_correspondence</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_appValid</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Is_the_application_valid</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_appValid</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Is_the_application_valid</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_needsInfo</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Is_further_information_required</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_needsInfo</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_Is_further_information_required</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_infoReceived</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>If_further_information_requested_has_it_been_received</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>v_c_infoReceived</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>com_If_further_information_requested_has_it_been_received</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>SignedBy</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Signed</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Signed_Date</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>SignedDate</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Generate_Document</targetReference>
+        </connector>
+    </assignments>
+    <choices>
+        <name>ChristineMower</name>
+        <choiceText>Christine Mower</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Christine Mower</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>DianaArdley</name>
+        <choiceText>Diana Ardley</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Diana Ardley</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>GarethHarvey</name>
+        <choiceText>Gareth Harvey</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Gareth Harvey</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>LawrenceCritchlow</name>
+        <choiceText>Lawrence Critchlow</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Lawrence Critchlow</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>LeonDaniels</name>
+        <choiceText>LeonDaniels</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Leon Daniels</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NigelTurner</name>
+        <choiceText>Nigel Turner</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Nigel Turner</stringValue>
+        </value>
+    </choices>
     <choices>
         <name>OptionNo</name>
-        <choiceText>No</choiceText>
+        <choiceText>&lt;p _msttexthash=&quot;18642&quot; _msthash=&quot;6654&quot;&gt;NO&lt;/p&gt;</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>No</stringValue>
@@ -769,7 +914,7 @@
     </choices>
     <choices>
         <name>OptionYes</name>
-        <choiceText>Yes</choiceText>
+        <choiceText>&lt;p _msttexthash=&quot;32058&quot; _msthash=&quot;6577&quot;&gt;YES&lt;/p&gt;</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>Yes</stringValue>
@@ -810,7 +955,7 @@
     <formulas>
         <name>formula_Applicant_Default_Email</name>
         <dataType>String</dataType>
-        <expression>{!Get_Case_Using_recordId.DNO__r.Representative__r.Email__c}</expression>
+        <expression>{!Get_Case.DNO__r.Representative__r.Email__c}</expression>
     </formulas>
     <formulas>
         <name>formula_CurrentDate</name>
@@ -848,33 +993,110 @@ TEXT(YEAR(TODAY()))</expression>
     <formulas>
         <name>formula_DocumentTitle</name>
         <dataType>String</dataType>
-        <expression>&apos;NW02 Invalid - Unclear NTR - Applicant (2026) -&apos; &amp; {!Get_Case_Using_recordId.Name} &amp; &apos;-&apos; &amp; TEXT(TODAY())</expression>
+        <expression>&apos; NW Checklist (New Lines) (Internal) -&apos; &amp; {!Get_Case.Name} &amp; &apos;-&apos; &amp; TEXT(TODAY())</expression>
     </formulas>
     <formulas>
         <name>formula_IsPaymentDone</name>
         <dataType>String</dataType>
-        <expression>IF(ISBLANK({!Get_Case_Using_recordId.Payment_Date__c}), &quot;NO&quot;,&quot;YES&quot;)</expression>
+        <expression>IF(ISBLANK({!Get_Case.Payment_Date__c}), &quot;NO&quot;,&quot;YES&quot;)</expression>
     </formulas>
     <formulas>
         <name>formula_TokenData</name>
         <dataType>String</dataType>
-        <expression>&apos;{&apos; &amp;
-&apos;&quot;DESNZ_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Name} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;Applicant_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Applicant_Reference__c} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;DNO_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Name} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;App_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Representative__r.Name} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;VAR_App_Email&quot;: &quot;&apos; &amp; {!var_Applicant_Contact_Email} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;DNO_Address_Line1&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line1__c} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;DNO_Address_Line2&quot;: &quot;&apos; &amp; {!Get_Address.Address_Line_2__c} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;DNO_Address_TownCity&quot;: &quot;&apos; &amp; {!Get_Address.Town_City__c} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;DNO_Address_Postcode&quot;: &quot;&apos; &amp; {!Get_Address.Postcode__c} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;Site_Address_Line1&quot;: &quot;&apos; &amp; {!Get_Site_Address.Address_Line1__c} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;Site_Address_Line2&quot;: &quot;&apos; &amp; {!Get_Site_Address.Address_Line_2__c} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;Site_Address_TownCity&quot;: &quot;&apos; &amp; {!Get_Site_Address.Town_City__c} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;Site_Address_Postcode&quot;: &quot;&apos; &amp; {!Get_Site_Address.Postcode__c} &amp; &apos;&quot;, &apos; &amp;
+        <expression>&apos;{&apos; &amp; 
+&apos;&quot;desnzRef&quot;: &quot;&apos; &amp; {!Get_Case.Name} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;dnoName&quot;: &quot;&apos; &amp; {!Get_Case.DNO__r.Name} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;Date_of_Application__c&quot;: &quot;&apos; &amp; TEXT({!Get_Case.Date_of_Application__c}) &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;NameofOwner_or_occupier_contact&quot;: &quot;&apos; &amp; {!Get_Owner_Rep.Name} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;Date_of_Application__c&quot;: &quot;&apos; &amp; TEXT({!Get_Case_Using_recordId.Date_of_Application__c}) &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;Written_Removal_Notice_Issue_Date__c&quot;: &quot;&apos; &amp; TEXT({!Get_Case_Using_recordId.Written_Removal_Notice_Issue_Date__c}) &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;siteAddr1&quot;: &quot;&apos; &amp; {!Get_Site_Address.Address_Line1__c} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;siteAddr2&quot;: &quot;&apos; &amp; {!Get_Site_Address.Address_Line_2__c} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;siteTown&quot;: &quot;&apos; &amp; {!Get_Site_Address.Town_City__c} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;sitePostcode&quot;: &quot;&apos; &amp; {!Get_Site_Address.Postcode__c} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;hasDnoPaid&quot;: &quot;&apos; &amp; {!v_hasDnoPaid} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_hasDnoPaid&quot;: &quot;&apos; &amp; {!v_c_hasDnoPaid} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;isAppDateAfterNoticeExpiry&quot;: &quot;&apos; &amp; {!v_isAppDateAfterNoticeExpiry} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_isAppDateAfterNoticeExpiry&quot;: &quot;&apos; &amp; {!v_c_isAppDateAfterNoticeExpiry} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;dnoWayleaveMin21Days&quot;: &quot;&apos; &amp; {!v_dnoWayleaveMin21Days} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_dnoWayleaveMin21Days&quot;: &quot;&apos; &amp; {!v_c_dnoWayleaveMin21Days} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;isLandAddressConfirmedInApp&quot;: &quot;&apos; &amp; {!v_isLandAddressConfirmedInApp} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_isLandFullAddressConfirmed&quot;: &quot;&apos; &amp; {!v_c_isLandFullAddressConfirmed} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;landMatchRegistry&quot;: &quot;&apos; &amp; {!v_landMatchRegistry} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_landMatchRegistry&quot;: &quot;&apos; &amp; {!v_c_landMatchRegistry} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;elecLineInSchedule&quot;: &quot;&apos; &amp; {!v_elecLineInSchedule} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_elecLineInSchedule&quot;: &quot;&apos; &amp; {!v_c_elecLineInSchedule} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;showLineLoc&quot;: &quot;&apos; &amp; {!v_showLineLoc} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_showLineLoc&quot;: &quot;&apos; &amp; {!v_c_showLineLoc} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;showLandBoundaries&quot;: &quot;&apos; &amp; {!v_showLandBoundaries} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_showLandBoundaries&quot;: &quot;&apos; &amp; {!v_c_showLandBoundaries} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;showCrossingLines&quot;: &quot;&apos; &amp; {!v_showCrossingLines} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_showCrossingLines&quot;: &quot;&apos; &amp; {!v_c_showCrossingLines} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;distinguishLineType&quot;: &quot;&apos; &amp; {!v_distinguishLineType} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_distinguishLineType&quot;: &quot;&apos; &amp; {!v_c_distinguishLineType} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;distinguishVoltageLevel&quot;: &quot;&apos; &amp; {!v_distinguishVoltageLevel} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_distinguishVoltageLevel&quot;: &quot;&apos; &amp; {!v_c_distinguishVoltageLevel} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;landownerMatchRegistry&quot;: &quot;&apos; &amp; {!v_landownerMatchRegistry} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_landownerMatchRegistry&quot;: &quot;&apos; &amp; {!v_c_landownerMatchRegistry} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;landRegTitleRefMatch&quot;: &quot;&apos; &amp; {!v_landRegTitleRefMatch} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_landRegTitleRefMatch&quot;: &quot;&apos; &amp; {!v_c_landRegTitleRefMatch} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;dnoNegStatus&quot;: &quot;&apos; &amp; {!v_dnoNegStatus} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_dnoNegStatus&quot;: &quot;&apos; &amp; {!v_c_dnoNegStatus} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;dnoHoldAbeyance&quot;: &quot;&apos; &amp; {!v_dnoHoldAbeyance} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_dnoHoldAbeyance&quot;: &quot;&apos; &amp; {!v_c_dnoHoldAbeyance} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;anyComments&quot;: &quot;&apos; &amp; {!v_anyComments} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_anyComments&quot;: &quot;&apos; &amp; {!v_c_anyComments} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;dnoComments&quot;: &quot;&apos; &amp; {!v_dnoComments} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_dnoComments&quot;: &quot;&apos; &amp; {!v_c_dnoComments} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;oneParcel&quot;: &quot;&apos; &amp; {!v_oneParcel} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_oneParcel&quot;: &quot;&apos; &amp; {!v_c_oneParcel} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;linkedApps&quot;: &quot;&apos; &amp; {!v_linkedApps} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_linkedApps&quot;: &quot;&apos; &amp; {!v_c_linkedApps} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;highPriority&quot;: &quot;&apos; &amp; {!v_highPriority} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_highPriority&quot;: &quot;&apos; &amp; {!v_c_highPriority} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;appPlans&quot;: &quot;&apos; &amp; {!v_appPlans} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_appPlans&quot;: &quot;&apos; &amp; {!v_c_appPlans} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;landReg&quot;: &quot;&apos; &amp; {!v_landReg} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_landReg&quot;: &quot;&apos; &amp; {!v_c_landReg} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;landRegTitlePlan&quot;: &quot;&apos; &amp; {!v_landRegTitlePlan} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_landRegTitlePlan&quot;: &quot;&apos; &amp; {!v_c_landRegTitlePlan} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;dnoWayleaveNotice&quot;: &quot;&apos; &amp; {!v_dnoWayleaveNotice} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_dnoWayleaveNotice&quot;: &quot;&apos; &amp; {!v_c_dnoWayleaveNotice} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;addlCorr&quot;: &quot;&apos; &amp; {!v_addlCorr} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_addlCorr&quot;: &quot;&apos; &amp; {!v_c_addlCorr} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;appValid&quot;: &quot;&apos; &amp; {!v_appValid} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_appValid&quot;: &quot;&apos; &amp; {!v_c_appValid} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;needsInfo&quot;: &quot;&apos; &amp; {!v_needsInfo} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_needsInfo&quot;: &quot;&apos; &amp; {!v_c_needsInfo} &amp; &apos;&quot;, &apos; &amp;
+
+&apos;&quot;infoReceived&quot;: &quot;&apos; &amp; {!v_infoReceived} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;c_infoReceived&quot;: &quot;&apos; &amp; {!v_c_infoReceived} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;SignedBy&quot;: &quot;&apos; &amp; {!SignedBy} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;Signed_Date&quot;: &quot;&apos; &amp; TEXT({!Signed_Date}) &amp; &apos;&quot;&apos; &amp;
 &apos;}&apos;</expression>
     </formulas>
     <interviewLabel>Screen - DocGen - NW Checklist (New Lines) (Internal) {!$Flow.CurrentDateTime}</interviewLabel>
@@ -915,7 +1137,7 @@ TEXT(YEAR(TODAY()))</expression>
             <field>Party__c</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>Get_Case_Using_recordId.DNO__c</elementReference>
+                <elementReference>Get_Case.DNO__c</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -923,7 +1145,7 @@ TEXT(YEAR(TODAY()))</expression>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <name>Get_Case_Using_recordId</name>
+        <name>Get_Case</name>
         <label>Get Case Using recordId</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
@@ -977,7 +1199,7 @@ TEXT(YEAR(TODAY()))</expression>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Get_Case_Using_recordId</targetReference>
+            <targetReference>Get_Case</targetReference>
         </connector>
         <faultConnector>
             <targetReference>Generate_Document_Nebula_Logger_1</targetReference>
@@ -1011,21 +1233,21 @@ TEXT(YEAR(TODAY()))</expression>
             <field>Case__c</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>Get_Case_Using_recordId.Id</elementReference>
+                <elementReference>Get_Case.Id</elementReference>
             </value>
         </filters>
         <filters>
-            <field>Party_Type__c</field>
+            <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Landowner</stringValue>
+                <elementReference>Get_Case.Landowner__c</elementReference>
             </value>
         </filters>
         <filters>
-            <field>Party_Type__c</field>
+            <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Landowner Representative</stringValue>
+                <elementReference>Get_Case.Representative__c</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -1049,7 +1271,7 @@ TEXT(YEAR(TODAY()))</expression>
             <field>Case__c</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>Get_Case_Using_recordId.Id</elementReference>
+                <elementReference>Get_Case.Id</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -1113,6 +1335,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <fieldText>Has payment been made by the DNO?</fieldText>
                     <fieldType>DropdownBox</fieldType>
                     <helpText>&lt;p&gt;&lt;em style=&quot;font-size: 8pt;&quot;&gt;Payment is only made once the system shows it as complete. Pending should be treated as no payment made.&lt;/em&gt;&lt;/p&gt;</helpText>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1138,6 +1361,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Has_payment_been_made_by_the_DNO</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1200,6 +1424,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <fieldText>Is the application date after the expiry of the notice period?</fieldText>
                     <fieldType>DropdownBox</fieldType>
                     <helpText>&lt;p&gt;&lt;em style=&quot;font-family: Arial, sans-serif; font-size: 8pt;&quot;&gt;This detail is important to note, if an application is submitted before the deadline, it is considered invalid.&lt;/em&gt;&lt;/p&gt;</helpText>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1225,6 +1450,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Is_the_application_date_after_the_expiry_of_the_notice_period</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1268,6 +1494,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <fieldText>Does the DNO’s voluntary wayleave offer/letter give at least 21 days?</fieldText>
                     <fieldType>DropdownBox</fieldType>
                     <helpText>&lt;p&gt;&lt;em style=&quot;font-family: Arial, sans-serif; font-size: 8pt;&quot;&gt;If not, application invalid.&lt;/em&gt;&lt;/p&gt;</helpText>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1293,6 +1520,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Does_the_DNO_s_voluntary_wayleave_offer_letter_give_at_least_21_days</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1367,6 +1595,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <fieldText>Does the application confirm the location of the land, full address with postcode?</fieldText>
                     <fieldType>DropdownBox</fieldType>
                     <helpText>&lt;p&gt;&lt;em style=&quot;font-family: Arial, sans-serif; font-size: 8pt;&quot;&gt;Note: Refer to the Application description - Full address.&lt;/em&gt;&lt;/p&gt;</helpText>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1400,6 +1629,7 @@ TEXT(YEAR(TODAY()))</expression>
             <name>com_Does_the_application_confirm_the_location_of_the_land_full_address</name>
             <fieldText>Comments</fieldText>
             <fieldType>LargeTextArea</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
             <styleProperties>
                 <verticalAlignment>
@@ -1424,6 +1654,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <fieldText>Do the land boundaries match the land registry documents?</fieldText>
                     <fieldType>DropdownBox</fieldType>
                     <helpText>&lt;p&gt;&lt;em style=&quot;font-family: Arial, sans-serif; font-size: 8pt;&quot;&gt;Note: Compare the application plan and the Official Copy (Title Plan)&lt;/em&gt;&lt;/p&gt;</helpText>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1438,6 +1669,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Do_the_land_boundaries_match_the_land_registry_documents</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1481,6 +1713,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <fieldText>Is the Electric line correctly listed under the asset schedule?</fieldText>
                     <fieldType>DropdownBox</fieldType>
                     <helpText>&lt;p&gt;&lt;em style=&quot;font-size: 8pt;&quot;&gt;Note: Compare asset schedule to application plan. If &quot;No&quot;, explain in the comments.&lt;/em&gt;&lt;/p&gt;</helpText>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1495,6 +1728,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Is_the_Electric_line_correctly_listed_under_the_asset_schedule</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1550,6 +1784,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <dataType>String</dataType>
                     <fieldText>Show the location of the proposed line?</fieldText>
                     <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1564,6 +1799,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Show_the_location_of_the_proposed_line</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1606,6 +1842,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <dataType>String</dataType>
                     <fieldText>Show the land boundaries?</fieldText>
                     <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1620,6 +1857,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_ShowTheLandBoundaries</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1662,6 +1900,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <dataType>String</dataType>
                     <fieldText>Show any other lines crossing the land?</fieldText>
                     <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1676,6 +1915,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_ShowAnyOtherLinesCrossingTheLand</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1718,6 +1958,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <dataType>String</dataType>
                     <fieldText>Distinguish between proposed lines placed overhead and underground?</fieldText>
                     <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1732,6 +1973,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Distinguish_between_proposed_lines</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1774,6 +2016,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <dataType>String</dataType>
                     <fieldText>Distinguish between high and low voltage lines?</fieldText>
                     <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1788,6 +2031,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Distinguish_between_high_and_low_voltage_lines</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1862,6 +2106,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <fieldText>Do the landowner’s details (name and address) match the land registry documents?</fieldText>
                     <fieldType>DropdownBox</fieldType>
                     <helpText>&lt;p&gt;&lt;em style=&quot;font-size: 8pt;&quot;&gt;Note: Compare the Grantor Information and the Official Copy (Register).&lt;/em&gt;&lt;/p&gt;</helpText>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1876,6 +2121,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Do_the_landowner_s_details_name_and_address_match_the_land_registry</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1919,6 +2165,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <fieldText>Do the Land Register and Title Plan have the same reference number?</fieldText>
                     <fieldType>DropdownBox</fieldType>
                     <helpText>&lt;p&gt;&lt;em style=&quot;font-size: 8pt;&quot;&gt;Note: Compare the Land Registry documents. If the reference don’t match query with DNO.&lt;/em&gt;&lt;/p&gt;</helpText>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1933,6 +2180,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Do_the_Land_Register_and_Title_Plan_have_the_same_reference</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2006,6 +2254,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <dataType>String</dataType>
                     <fieldText>Has the DNO confirmed whether negotiations are in progress?</fieldText>
                     <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2020,6 +2269,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Has_the_DNO_confirmed_whether_negotiations_are_in_progress</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2062,6 +2312,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <dataType>String</dataType>
                     <fieldText>Has the DNO requested the application to be held in abeyance?</fieldText>
                     <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2076,6 +2327,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Has_the_DNO_requested_the_application_to_be_held_in_abeyance</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2118,6 +2370,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <dataType>String</dataType>
                     <fieldText>Any comments to note?</fieldText>
                     <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2132,6 +2385,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Any_comments_to_note</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2205,6 +2459,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <dataType>String</dataType>
                     <fieldText>Are there any comments from the DNO that need to be raised with the consent manager?</fieldText>
                     <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2219,6 +2474,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Are_there_any_comments_from_the_DNO_that_need_to_be_raised_with_the</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2261,6 +2517,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <dataType>String</dataType>
                     <fieldText>Does the application relate to one parcel of land?</fieldText>
                     <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2275,6 +2532,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Does_the_application_relate_to_one_parcel_of_land</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2318,6 +2576,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <fieldText>Are there any linked applications?  If, yes, please list reference number(s).</fieldText>
                     <fieldType>DropdownBox</fieldType>
                     <helpText>&lt;p&gt;&lt;em style=&quot;font-family: Arial, sans-serif; font-size: 8pt;&quot;&gt;Note: Search the portal on both “Stakeholder (Landowner) Name and Case (Development) Name?&lt;/em&gt;&lt;/p&gt;</helpText>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2332,6 +2591,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Are_there_any_linked_applications_If_yes_please_list_reference_number_s</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2375,6 +2635,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <fieldText>Should this application be treated as a high priority?</fieldText>
                     <fieldType>DropdownBox</fieldType>
                     <helpText>&lt;p&gt;&lt;em style=&quot;font-family: Arial, sans-serif; font-size: 8pt;&quot;&gt;Note: All applications involving new lines should be treated as a high priority. Please inform the consent manager immediately.&lt;/em&gt;&lt;/p&gt;</helpText>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2389,6 +2650,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Should_this_application_be_treated_as_a_high_priority</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2450,6 +2712,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <dataType>String</dataType>
                     <fieldText>Application plan(s)</fieldText>
                     <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2464,6 +2727,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Application_plan</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2506,6 +2770,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <dataType>String</dataType>
                     <fieldText>Land Registry (Register)</fieldText>
                     <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2520,6 +2785,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Land_Registry_Register</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2562,6 +2828,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <dataType>String</dataType>
                     <fieldText>Land Registry (Title Plan)</fieldText>
                     <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2576,6 +2843,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Land_Registry_Title_Plan</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2618,6 +2886,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <dataType>String</dataType>
                     <fieldText>DNO voluntary wayleave offer letter/Notice</fieldText>
                     <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2632,6 +2901,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_DNO_voluntary_wayleave_offer_letter_Notice</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2675,6 +2945,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <fieldText>Additional correspondence</fieldText>
                     <fieldType>DropdownBox</fieldType>
                     <helpText>&lt;p&gt;&lt;em style=&quot;font-family: Arial, sans-serif; font-size: 8pt;&quot;&gt;Note: Correspondence between the parties, TP1/TR1 forms etc.&lt;/em&gt;&lt;/p&gt;</helpText>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2689,6 +2960,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Additional_correspondence</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2751,6 +3023,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <fieldText>Is the application valid?</fieldText>
                     <fieldType>DropdownBox</fieldType>
                     <helpText>&lt;p&gt;&lt;em style=&quot;color: black; font-family: Arial, sans-serif; font-size: 8pt;&quot;&gt;Note: If No, please briefly explain why the application is invalid in the comments box.&lt;/em&gt;&lt;/p&gt;</helpText>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2765,6 +3038,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Is_the_application_valid</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2807,6 +3081,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <dataType>String</dataType>
                     <fieldText>Is further information required?</fieldText>
                     <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2821,6 +3096,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_Is_further_information_required</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2864,6 +3140,7 @@ TEXT(YEAR(TODAY()))</expression>
                     <fieldText>If further information requested, has it been received?</fieldText>
                     <fieldType>DropdownBox</fieldType>
                     <helpText>&lt;p&gt;&lt;em style=&quot;color: black; font-size: 8pt;&quot;&gt;Note: Please add the date the information was received in the comments box.&lt;/em&gt;&lt;/p&gt;</helpText>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2878,6 +3155,70 @@ TEXT(YEAR(TODAY()))</expression>
                     <name>com_If_further_information_requested_has_it_been_received</name>
                     <fieldText>Comments</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>false</isRequired>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>6</stringValue>
+                        </width>
+                    </styleProperties>
+                </fields>
+                <inputParameters>
+                    <name>width</name>
+                    <value>
+                        <stringValue>12</stringValue>
+                    </value>
+                </inputParameters>
+                <isRequired>false</isRequired>
+            </fields>
+            <isRequired>false</isRequired>
+            <regionContainerType>SectionWithoutHeader</regionContainerType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Condition_Library_Section29</name>
+            <fieldType>RegionContainer</fieldType>
+            <fields>
+                <name>Condition_Library_Section29_Column1</name>
+                <fieldType>Region</fieldType>
+                <fields>
+                    <name>Signed</name>
+                    <choiceReferences>DianaArdley</choiceReferences>
+                    <choiceReferences>ChristineMower</choiceReferences>
+                    <choiceReferences>NigelTurner</choiceReferences>
+                    <choiceReferences>LawrenceCritchlow</choiceReferences>
+                    <choiceReferences>GarethHarvey</choiceReferences>
+                    <choiceReferences>LeonDaniels</choiceReferences>
+                    <dataType>String</dataType>
+                    <fieldText>SIGNED</fieldText>
+                    <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>false</isRequired>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>6</stringValue>
+                        </width>
+                    </styleProperties>
+                </fields>
+                <fields>
+                    <name>SignedDate</name>
+                    <dataType>Date</dataType>
+                    <fieldText>DATE</fieldText>
+                    <fieldType>InputField</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -2955,7 +3296,7 @@ TEXT(YEAR(TODAY()))</expression>
             <targetReference>Does_User_Have_Bypass_Approval_CP</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <name>recordId</name>
         <dataType>String</dataType>
@@ -2971,14 +3312,406 @@ TEXT(YEAR(TODAY()))</expression>
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <name>var_Additional_correspondence</name>
+        <name>Signed_Date</name>
+        <dataType>Date</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>SignedBy</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <name>var_Any_comments_to_note</name>
+        <name>v_addlCorr</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_anyComments</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_appPlans</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_appValid</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_addlCorr</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_anyComments</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_appPlans</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_appValid</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_distinguishLineType</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_distinguishVoltageLevel</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_dnoComments</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_dnoHoldAbeyance</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_dnoNegStatus</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_dnoWayleaveMin21Days</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_dnoWayleaveNotice</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_elecLineInSchedule</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_hasDnoPaid</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_highPriority</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_infoReceived</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_isAppDateAfterNoticeExpiry</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_isLandFullAddressConfirmed</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_landMatchRegistry</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_landownerMatchRegistry</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_landReg</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_landRegTitlePlan</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_landRegTitleRefMatch</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_linkedApps</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_needsInfo</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_oneParcel</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_showCrossingLines</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_showLandBoundaries</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_c_showLineLoc</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_distinguishLineType</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_distinguishVoltageLevel</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_dnoComments</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_dnoHoldAbeyance</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_dnoNegStatus</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_dnoWayleaveMin21Days</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_dnoWayleaveNotice</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_elecLineInSchedule</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_hasDnoPaid</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_highPriority</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_infoReceived</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_isAppDateAfterNoticeExpiry</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_isLandAddressConfirmedInApp</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_landMatchRegistry</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_landownerMatchRegistry</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_landReg</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_landRegTitlePlan</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_landRegTitleRefMatch</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_linkedApps</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_needsInfo</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_oneParcel</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_showCrossingLines</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_showLandBoundaries</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>v_showLineLoc</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
@@ -2995,27 +3728,6 @@ TEXT(YEAR(TODAY()))</expression>
         </value>
     </variables>
     <variables>
-        <name>var_Application_plan_s</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Are_there_any_comments_from_the_DNO_that_need_to_be_raised_with_the</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Are_there_any_linked_applications_If_yes_please_list_reference_number_s</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
         <name>var_CanBypassApproval</name>
         <dataType>Boolean</dataType>
         <isCollection>false</isCollection>
@@ -3026,364 +3738,7 @@ TEXT(YEAR(TODAY()))</expression>
         </value>
     </variables>
     <variables>
-        <name>var_com_Additional_correspondence</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Any_comments_to_note</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Application_plan</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Are_there_any_comments_from_the_DNO_that_need_to_be_raised</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Are_there_any_linked_applications_If_yes_please_list_reference_number_s</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Distinguish_between_high_and_low_voltage_lines</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Distinguish_between_proposed_lines</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
         <name>var_com_Distinguish_between_proposed_lines_placed_overhead_and_underground</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_DNO_voluntary_wayleave_offer_letter_Notice</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Do_the_land_boundaries_match_the_land_registry_documents</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Do_the_Land_Register_and_Title_Plan_have_the_same_reference</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Do_the_landowner_s_details_name_and_address_match_the_land_registry</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Does_the_application_confirm_the_location_of_the_land_full_address</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Does_the_application_relate_to_one_parcel_of_land</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Does_the_DNO_s_voluntary_wayleave_offer_letter_give_at_least_21_days</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Has_payment_been_made_by_the_DNO</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Has_the_DNO_confirmed_whether_negotiations_are_in_progress</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Has_the_DNO_requested_the_application_to_be_held_in_abeyance</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_If_further_information_requested_has_it_been_received</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Is_further_information_required</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Is_the_application_date_after_the_expiry_of_the_notice_period</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Is_the_application_valid</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Is_the_Electric_line_correctly_listed_under_the_asset_schedule</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Land_Registry_Register</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Land_Registry_Title_Plan</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Should_this_application_be_treated_as_a_high_priority</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_Show_the_location_of_the_proposed_line</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_ShowAnyOtherLinesCrossingTheLand</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_com_ShowTheLandBoundaries</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Distinguish_between_high_and_low_voltage_lines</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Distinguish_between_proposed_lines_placed_overhead_and_underground</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_DNO_voluntary_wayleave_offer_letter_Notice</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Do_the_land_boundaries_match_the_land_registry_documents</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Do_the_Land_Register_and_Title_Plan_have_the_same_reference_number</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Do_the_landowner_s_details_name_and_address_match_the_land_registry</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Does_the_application_confirm_the_location_of_the_land_full_address</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Does_the_application_relate_to_one_parcel_of_land</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Does_the_DNO_s_voluntary_wayleave_offer_letter_give_at_least_21_days</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Has_payment_been_made_by_the_DNO</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Has_the_DNO_confirmed_whether_negotiations_are_in_progress</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Has_the_DNO_requested_the_application_to_be_held_in_abeyance</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_If_further_information_requested_has_it_been_received</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Is_further_information_required</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Is_the_application_date_after_the_expiry_of_the_notice_period</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Is_the_application_valid</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Is_the_Electric_line_correctly_listed_under_the_asset_schedule</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Land_Registry_Register</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Land_Registry_Title_Plan</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Should_this_application_be_treated_as_a_high_priority</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Show_any_other_lines_crossing_the_land</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Show_the_land_boundaries</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>var_Show_the_location_of_the_proposed_line</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>

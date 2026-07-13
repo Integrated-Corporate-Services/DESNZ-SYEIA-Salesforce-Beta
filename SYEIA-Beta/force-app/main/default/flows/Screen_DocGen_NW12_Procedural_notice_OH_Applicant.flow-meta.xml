@@ -801,17 +801,17 @@ TEXT(YEAR(TODAY()))</expression>
             </value>
         </filters>
         <filters>
-            <field>Party_Type__c</field>
+            <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Landowner</stringValue>
+                <elementReference>Get_Case_Using_recordId.Landowner__c</elementReference>
             </value>
         </filters>
         <filters>
-            <field>Party_Type__c</field>
+            <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Landowner Representative</stringValue>
+                <elementReference>Get_Case_Using_recordId.Representative__c</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>

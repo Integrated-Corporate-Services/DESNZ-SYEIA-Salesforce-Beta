@@ -706,17 +706,17 @@ TEXT(YEAR(TODAY()))</expression>
             </value>
         </filters>
         <filters>
-            <field>Party_Type__c</field>
+            <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Landowner</stringValue>
+                <elementReference>Get_Case_Using_recordId.Landowner__c</elementReference>
             </value>
         </filters>
         <filters>
-            <field>Party_Type__c</field>
+            <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Landowner Representative</stringValue>
+                <elementReference>Get_Case_Using_recordId.Representative__c</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -775,6 +775,7 @@ TEXT(YEAR(TODAY()))</expression>
             <name>Insert_Reasons</name>
             <fieldText>Reasons</fieldText>
             <fieldType>LargeTextArea</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <styleProperties>
                 <verticalAlignment>
@@ -852,6 +853,7 @@ TEXT(YEAR(TODAY()))</expression>
             <dataType>Date</dataType>
             <fieldText>Date of Letter</fieldText>
             <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <styleProperties>
                 <verticalAlignment>
