@@ -188,6 +188,7 @@
 		<members>Case__c.Details_Of_Equipment_Removal__c</members>
 		<members>Case__c.Details_Of_Excavation_Works__c</members>
 		<members>Case__c.Details_Of_Vegetation_Clearance__c</members>
+		<members>Case__c.Decision_Letter_Issued_in_Time_Formula__c</members>
 		<members>Case__c.Does_Application_Include_a_Title_Plan__c</members>
 		<members>Case__c.Earliest_Expected_Start_Date_Display__c</members>
 		<members>Case__c.Earliest_Expected_Start_Date__c</members>

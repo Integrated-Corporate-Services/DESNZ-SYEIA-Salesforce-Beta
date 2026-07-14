@@ -3058,7 +3058,7 @@
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>none</value>
+                    <value>required</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Procedure__c</fieldItem>
                 <identifier>RecordProcedure_cField</identifier>
@@ -3192,8 +3192,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Decision_Deadline_Display__c</fieldItem>
-                <identifier>RecordDecision_Deadline_Display_cField</identifier>
+                <fieldItem>Record.Decision_Deadline_Formula__c</fieldItem>
+                <identifier>RecordDecision_Deadline_Formula_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -3212,8 +3212,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Time_to_Decision__c</fieldItem>
-                <identifier>RecordTime_to_Decision_cField</identifier>
+                <fieldItem>Record.Decision_Letter_Issued_in_Time_Formula__c</fieldItem>
+                <identifier>RecordDecision_Letter_Issued_in_Time_Formula_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
