@@ -3,6 +3,7 @@
     <fullName>Lock_Decision_Issued_CaseOfficer</fullName>
     <active>true</active>
     <errorConditionFormula>AND(
+    NOT($Permission.Bypass_Validation_Rule),
     NOT(ISNEW()),
     ISPICKVAL(PRIORVALUE(Status__c), &quot;Decision Issued&quot;),
     NOT(ISPICKVAL($User.Persona__c, &quot;Decision Manager&quot;))
