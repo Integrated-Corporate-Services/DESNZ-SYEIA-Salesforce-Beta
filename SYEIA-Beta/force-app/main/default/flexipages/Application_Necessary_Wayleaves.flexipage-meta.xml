@@ -3325,7 +3325,48 @@
                     <value>none</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.X1st_Abeyance_Start_Date__c</fieldItem>
+                <identifier>RecordX1st_Abeyance_Start_Date_cField2</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Status__c}</leftValue>
+                        <operator>NE</operator>
+                        <rightValue>In Abeyance</rightValue>
+                    </criteria>
+                </visibilityRule>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>required</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.X1st_Abeyance_Start_Date__c</fieldItem>
                 <identifier>RecordX1st_Abeyance_Start_Date_cField</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Status__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>In Abeyance</rightValue>
+                    </criteria>
+                </visibilityRule>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>required</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.X1st_Abeyance_End_Date__c</fieldItem>
+                <identifier>RecordX1st_Abeyance_End_Date_cField</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Status__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>In Abeyance</rightValue>
+                    </criteria>
+                </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -3335,7 +3376,31 @@
                     <value>none</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.X1st_Abeyance_End_Date__c</fieldItem>
-                <identifier>RecordX1st_Abeyance_End_Date_cField</identifier>
+                <identifier>RecordX1st_Abeyance_End_Date_cField2</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Status__c}</leftValue>
+                        <operator>NE</operator>
+                        <rightValue>In Abeyance</rightValue>
+                    </criteria>
+                </visibilityRule>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>required</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.X1st_Abeyance_Duration_In_Days__c</fieldItem>
+                <identifier>RecordX1st_Abeyance_Duration_In_Days_cField</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Status__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>In Abeyance</rightValue>
+                    </criteria>
+                </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -3345,7 +3410,14 @@
                     <value>none</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.X1st_Abeyance_Duration_In_Days__c</fieldItem>
-                <identifier>RecordX1st_Abeyance_Duration_In_Days_cField</identifier>
+                <identifier>RecordX1st_Abeyance_Duration_In_Days_cField2</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Status__c}</leftValue>
+                        <operator>NE</operator>
+                        <rightValue>In Abeyance</rightValue>
+                    </criteria>
+                </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <name>Facet-91311018-9425-4ff1-8bec-c2c924f88dfd</name>

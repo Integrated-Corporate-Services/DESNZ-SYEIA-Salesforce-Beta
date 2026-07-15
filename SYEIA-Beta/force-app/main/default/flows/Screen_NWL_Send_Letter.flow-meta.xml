@@ -862,6 +862,86 @@
             </connector>
             <label>NW05. Request for further information</label>
         </rules>
+        <rules>
+            <name>NW09_NW12_Procedural_Letter</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>NW09_Proceduralnotice_WR_LO</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>NW09_Proceduralnotice_WR_LO</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>NW12_Proceduralnotice_OH_Applicant</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>NW12_Proceduralnotice_OH_LO</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_NW09_Procedural_Letters</targetReference>
+            </connector>
+            <label>NW09 &amp; NW12 Procedural Letter</label>
+        </rules>
+        <rules>
+            <name>NW10_Statement_Of_Evidence_Exchange</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>NW10_Statementofevidenceexchange_Applicant</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>NW10_Statementofevidenceexchange_LO</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_NW10_Statement_Of_Evidence_Letter</targetReference>
+            </connector>
+            <label>NW10 Statement Of Evidence Exchange</label>
+        </rules>
+        <rules>
+            <name>NW11_Further_Representation_Exchange_Letter</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>NW11_Furtherrepresentationsexchange_Applicant</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>NW11_Furtherrepresentationsexchange_Lo</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_NW11_Further_Representation_Exchange_Letter</targetReference>
+            </connector>
+            <label>NW11 Further Representation Exchange Letter</label>
+        </rules>
     </decisions>
     <decisions>
         <name>SetToAndCCAddress</name>
@@ -961,7 +1041,7 @@
         </rules>
     </decisions>
     <description>PDF Warning message.
-Limit Attachements</description>
+Limit Attachments</description>
     <environments>Default</environments>
     <formulas>
         <name>formula_decide_email_body</name>
@@ -1428,6 +1508,78 @@ Limit Attachements</description>
             <field>Date_Information_Was_Requested__c</field>
             <value>
                 <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Case__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_NW09_Procedural_Letters</name>
+        <label>Update NW09. Procedural Letters</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Email_Tracking_Record</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Procedural_Notice_Letter_Date__c</field>
+            <value>
+                <elementReference>$System.OriginDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Case__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_NW10_Statement_Of_Evidence_Letter</name>
+        <label>Update NW10 Statement Of Evidence Letter</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Email_Tracking_Record</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Statement_Of_Evidence_Exchange_Date__c</field>
+            <value>
+                <elementReference>$System.OriginDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Case__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_NW11_Further_Representation_Exchange_Letter</name>
+        <label>Update NW11 Further Representation Exchange Letter</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Email_Tracking_Record</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Applicant_Further_Representations_Date__c</field>
+            <value>
+                <elementReference>$System.OriginDateTime</elementReference>
             </value>
         </inputAssignments>
         <object>Case__c</object>
