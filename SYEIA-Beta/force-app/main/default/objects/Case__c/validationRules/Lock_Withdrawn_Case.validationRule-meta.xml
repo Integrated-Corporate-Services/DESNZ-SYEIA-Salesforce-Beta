@@ -4,6 +4,7 @@
     <active>true</active>
     <description>Prevent users from editing the case when the status is &apos;Completed,&apos; excluding DM and TL roles.</description>
     <errorConditionFormula>AND(
+NOT($Permission.Bypass_Validation_Rule),
 ISPICKVAL(PRIORVALUE(Status__c), &quot;Withdrawn&quot;),
 NOT($UserRole.DeveloperName = &quot;Decision_Managers_Team_Leaders&quot;),
 NOT(ISPICKVAL($User.Persona__c, &apos;Decision Manager&apos;))
