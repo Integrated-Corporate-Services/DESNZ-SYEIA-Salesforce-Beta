@@ -19,6 +19,19 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assign_CTWR_Deadline_Date</name>
+        <label>Assign CTWR Deadline Date</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.CTWR_Deadline__c</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>30.0</numberValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
         <name>Assign_Date_case_sent_for_approval</name>
         <label>Assign Date case sent for approval</label>
         <locationX>0</locationX>
@@ -35,6 +48,29 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assign_Date_Of_Fee_Paid</name>
+        <label>Assign Date Of Fee Paid</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Date_of_Fee_Paid__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Date_of_Application__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Application_Fee_Paid__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Yes</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Decision_NWL_Status_Changes</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Assign_Deadline_Further_Representation</name>
         <label>Assign Deadline Further Representation</label>
         <locationX>0</locationX>
@@ -46,6 +82,9 @@
                 <numberValue>10.0</numberValue>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>Decision_CTWR_Letter_Changes</targetReference>
+        </connector>
     </assignments>
     <assignments>
         <name>Assign_Decision_Date</name>
@@ -105,6 +144,9 @@
                 <elementReference>form_2nd_Abeyance_Duration</elementReference>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>Decision_On_Procedural_Letter_Changes</targetReference>
+        </connector>
     </assignments>
     <assignments>
         <name>Assign_In_Abeyance_Defaults_Not_changed</name>
@@ -125,6 +167,9 @@
                 <elementReference>form_2nd_Abeyance_Duration</elementReference>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>Decision_On_Procedural_Letter_Changes</targetReference>
+        </connector>
     </assignments>
     <assignments>
         <name>Assign_Low_Full_EIA_Target_Completion_Date</name>
@@ -186,6 +231,9 @@
                 <numberValue>30.0</numberValue>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>Decision_Deadline_Further_Representation_Changes</targetReference>
+        </connector>
     </assignments>
     <assignments>
         <name>Assign_Screening_needed_NL_Target_Completion_Date</name>
@@ -249,6 +297,16 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Clear_CTWR_Deadline_Date</name>
+        <label>Clear CTWR Deadline Date</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.CTWR_Deadline__c</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+    </assignments>
+    <assignments>
         <name>Clear_Deadline_for_Further_Representation</name>
         <label>Clear Deadline for Further Representation</label>
         <locationX>0</locationX>
@@ -257,6 +315,9 @@
             <assignToReference>$Record.Deadline_For_Further_Representations__c</assignToReference>
             <operator>Assign</operator>
         </assignmentItems>
+        <connector>
+            <targetReference>Decision_CTWR_Letter_Changes</targetReference>
+        </connector>
     </assignments>
     <assignments>
         <name>Clear_Deadline_For_Statement_of_Evidence</name>
@@ -267,6 +328,9 @@
             <assignToReference>$Record.Deadline_For_Statement_Of_Evidence__c</assignToReference>
             <operator>Assign</operator>
         </assignmentItems>
+        <connector>
+            <targetReference>Decision_Deadline_Further_Representation_Changes</targetReference>
+        </connector>
     </assignments>
     <assignments>
         <name>Update_Completion_Status_to_Active</name>
@@ -595,10 +659,132 @@
         </rules>
     </decisions>
     <decisions>
+        <name>Decision_CTWR_Letter_Changes</name>
+        <label>Decision  CTWR Letter Changes</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>On_CTWR_Letter_Date_Change</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.CTWR_Letter_Date__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.CTWR_Letter_Date__c</leftValueReference>
+                <operator>HasValue</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_CTWR_Deadline_Date</targetReference>
+            </connector>
+            <label>On CTWR Letter Date Change</label>
+        </rules>
+        <rules>
+            <name>On_CTWR_Letter_Date_Empty</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.CTWR_Letter_Date__c</leftValueReference>
+                <operator>HasNoValue</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Clear_CTWR_Deadline_Date</targetReference>
+            </connector>
+            <label>On CTWR Letter Date Empty</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Decision_Deadline_Further_Representation_Changes</name>
+        <label>Decision Deadline Further Representation Changes</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Decision_CTWR_Letter_Changes</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>On_Statement_Of_Evidence_Exchange_Date</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Statement_Of_Evidence_Exchange_Date__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Statement_Of_Evidence_Exchange_Date__c</leftValueReference>
+                <operator>HasValue</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Deadline_Further_Representation</targetReference>
+            </connector>
+            <label>On Statement Of Evidence Exchange Date</label>
+        </rules>
+        <rules>
+            <name>On_Statement_Of_Evidence_Empty</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Statement_Of_Evidence_Exchange_Date__c</leftValueReference>
+                <operator>HasNoValue</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Clear_Deadline_for_Further_Representation</targetReference>
+            </connector>
+            <label>On Statement Of Evidence Empty</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Decision_NWL_Status_Changes</name>
         <label>Decision NWL Status Changes</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Decision_On_Procedural_Letter_Changes</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>In_Abeyance_Changed</name>
@@ -651,8 +837,18 @@
             </connector>
             <label>In Abeyance</label>
         </rules>
+    </decisions>
+    <decisions>
+        <name>Decision_On_Procedural_Letter_Changes</name>
+        <label>Decision On Procedural Letter Changes</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Decision_Deadline_Further_Representation_Changes</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
-            <name>On_Procedural_Notice_Letter</name>
+            <name>On_Procedural_Notice_Letter_Change</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>$Record.Procedural_Notice_Letter_Date__c</leftValueReference>
@@ -666,6 +862,13 @@
                 <operator>HasValue</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary Wayleaves</stringValue>
                 </rightValue>
             </conditions>
             <connector>
@@ -674,7 +877,7 @@
             <label>On Procedural Notice Letter</label>
         </rules>
         <rules>
-            <name>On_Procedural_Notice_Letter_Empty</name>
+            <name>On_Procedural_Notice_Letter_Empty1</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>$Record.Procedural_Notice_Letter_Date__c</leftValueReference>
@@ -683,47 +886,17 @@
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
             <connector>
                 <targetReference>Clear_Deadline_For_Statement_of_Evidence</targetReference>
             </connector>
             <label>On Procedural Notice Letter Empty</label>
-        </rules>
-        <rules>
-            <name>On_Statement_Of_Evidence_Exchange_Date</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>$Record.Statement_Of_Evidence_Exchange_Date__c</leftValueReference>
-                <operator>IsChanged</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>$Record.Statement_Of_Evidence_Exchange_Date__c</leftValueReference>
-                <operator>HasValue</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Assign_Deadline_Further_Representation</targetReference>
-            </connector>
-            <label>On Statement Of Evidence Exchange Date</label>
-        </rules>
-        <rules>
-            <name>On_Statement_Of_Evidence_Empty</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>$Record.Statement_Of_Evidence_Exchange_Date__c</leftValueReference>
-                <operator>HasNoValue</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Clear_Deadline_for_Further_Representation</targetReference>
-            </connector>
-            <label>On Statement Of Evidence Empty</label>
         </rules>
     </decisions>
     <decisions>
@@ -866,6 +1039,49 @@
                 <targetReference>Update_Date_Fee_Paid</targetReference>
             </connector>
             <label>BACS and Paid</label>
+        </rules>
+        <rules>
+            <name>Credit_Card_and_Paid</name>
+            <conditionLogic>((1 OR 2) AND 3 AND 4) OR (1 AND 5)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Payment__r.Payment_Method__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Credit Card</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Payment__r.Payment_Method__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Debit Card</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Date_of_Application__c</leftValueReference>
+                <operator>HasValue</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Date_of_Fee_Paid__c</leftValueReference>
+                <operator>HasNoValue</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Application_Fee_Paid__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Yes</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Date_Of_Fee_Paid</targetReference>
+            </connector>
+            <label>Credit Card and Paid</label>
         </rules>
     </decisions>
     <decisions>
