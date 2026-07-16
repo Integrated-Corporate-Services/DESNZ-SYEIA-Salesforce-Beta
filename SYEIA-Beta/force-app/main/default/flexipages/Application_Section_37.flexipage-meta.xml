@@ -1368,12 +1368,6 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Payment__r.Name</fieldItem>
-                <identifier>RecordPayment_rNameField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
                 <fieldItem>Record.Payment__r.Invoice_Reference__c</fieldItem>
                 <identifier>RecordPayment_rInvoice_Reference_cField</identifier>
             </fieldInstance>
@@ -1384,6 +1378,10 @@
                 <identifier>RecordPayment_rItem_Reference_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <name>Facet-u8aw0tgjfd9</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
                 <fieldItem>Record.Payment__r.Quantity__c</fieldItem>
@@ -1392,48 +1390,8 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Payment__r.Payment_Id__c</fieldItem>
-                <identifier>RecordPayment_rPayment_Id_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Payment__r.Provider__c</fieldItem>
-                <identifier>RecordPayment_rProvider_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <name>Facet-u8aw0tgjfd9</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Payment__r.Invoice_Date__c</fieldItem>
-                <identifier>RecordPayment_rInvoice_Date_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Payment__r.Payment_Date__c</fieldItem>
-                <identifier>RecordPayment_rPayment_Date_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Payment__r.Payment_Method__c</fieldItem>
-                <identifier>RecordPayment_rPayment_Method_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
                 <fieldItem>Record.Payment__r.Subtotal__c</fieldItem>
                 <identifier>RecordPayment_rSubtotal_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Payment__r.Status__c</fieldItem>
-                <identifier>RecordPayment_rStatus_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>

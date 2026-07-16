@@ -669,6 +669,13 @@
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>Get_Case.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Section 37</stringValue>
+                </rightValue>
+            </conditions>
             <connector>
                 <targetReference>Update_Date</targetReference>
             </connector>
@@ -684,8 +691,15 @@
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>Get_Case.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Section 37</stringValue>
+                </rightValue>
+            </conditions>
             <connector>
-                <targetReference>Update_NWL_Letter_Date</targetReference>
+                <targetReference>Update_Applicant_Only_Letter_Date</targetReference>
             </connector>
             <label>Yes Applicant Only</label>
         </rules>
@@ -1472,6 +1486,31 @@ Letter Dates</description>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
+        <name>Update_Applicant_Only_Letter_Date</name>
+        <label>Update Applicant Only Letter Date</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Add_Error_Log</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>Decision Issued</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Case__c</object>
+    </recordUpdates>
+    <recordUpdates>
         <name>Update_Date</name>
         <label>Update Date</label>
         <locationX>0</locationX>
@@ -1503,6 +1542,9 @@ Letter Dates</description>
         <connector>
             <targetReference>Create_Email_Tracking_Record</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Add_Error_LogNWLLetterDate</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -1527,6 +1569,10 @@ Letter Dates</description>
         <connector>
             <targetReference>Create_Email_Tracking_Record</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Add_Error_LogNWLLetterDate</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -1551,6 +1597,10 @@ Letter Dates</description>
         <connector>
             <targetReference>Create_Email_Tracking_Record</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Add_Error_LogNWLLetterDate</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -1575,6 +1625,10 @@ Letter Dates</description>
         <connector>
             <targetReference>Create_Email_Tracking_Record</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Add_Error_LogNWLLetterDate</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -1599,6 +1653,10 @@ Letter Dates</description>
         <connector>
             <targetReference>Create_Email_Tracking_Record</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Add_Error_LogNWLLetterDate</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -1623,6 +1681,10 @@ Letter Dates</description>
         <connector>
             <targetReference>Create_Email_Tracking_Record</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Add_Error_LogNWLLetterDate</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -1647,6 +1709,10 @@ Letter Dates</description>
         <connector>
             <targetReference>Create_Email_Tracking_Record</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Add_Error_LogNWLLetterDate</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -1659,31 +1725,6 @@ Letter Dates</description>
             <field>Applicant_Further_Representations_Date__c</field>
             <value>
                 <elementReference>$Flow.CurrentDate</elementReference>
-            </value>
-        </inputAssignments>
-        <object>Case__c</object>
-    </recordUpdates>
-    <recordUpdates>
-        <name>Update_NWL_Letter_Date</name>
-        <label>Update NWL Letter Date</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <faultConnector>
-            <isGoTo>true</isGoTo>
-            <targetReference>Add_Error_Log</targetReference>
-        </faultConnector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>Id</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>recordId</elementReference>
-            </value>
-        </filters>
-        <inputAssignments>
-            <field>Status__c</field>
-            <value>
-                <stringValue>Decision Issued</stringValue>
             </value>
         </inputAssignments>
         <object>Case__c</object>
@@ -2125,7 +2166,7 @@ Letter Dates</description>
             <targetReference>Get_Case</targetReference>
         </connector>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <subflows>
         <name>Add_Error_Log</name>
         <label>Add Error Log</label>
@@ -2154,6 +2195,41 @@ Letter Dates</description>
             <name>varRecordId</name>
             <value>
                 <elementReference>$Flow.CurrentRecord</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>Add_Error_LogNWLLetterDate</name>
+        <label>Add Error Log</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Create_Email_Tracking_Record</targetReference>
+        </connector>
+        <flowName>Subflow_Add_Log</flowName>
+        <inputAssignments>
+            <name>varAddLogFlowName</name>
+            <value>
+                <stringValue>Screen_NWL_Send_Letter</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>varErrorMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>varFlowDebugErrorLog</name>
+            <value>
+                <stringValue>ERROR</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>varRecordId</name>
+            <value>
+                <elementReference>Get_Case.Id</elementReference>
             </value>
         </inputAssignments>
     </subflows>
