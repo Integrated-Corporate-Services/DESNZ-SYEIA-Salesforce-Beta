@@ -2728,12 +2728,6 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Payment__r.Name</fieldItem>
-                <identifier>RecordPayment_rNameField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
                 <fieldItem>Record.Payment__r.Invoice_Reference__c</fieldItem>
                 <identifier>RecordPayment_rInvoice_Reference_cField</identifier>
             </fieldInstance>
@@ -2744,32 +2738,14 @@
                 <identifier>RecordPayment_rItem_Reference_cField</identifier>
             </fieldInstance>
         </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Payment__r.Quantity__c</fieldItem>
-                <identifier>RecordPayment_rQuantity_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
         <name>Facet-3537dc02-bd42-4735-beca-9892190faf70</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Payment__r.Invoice_Date__c</fieldItem>
-                <identifier>RecordPayment_rInvoice_Date_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Payment__r.Payment_Date__c</fieldItem>
-                <identifier>RecordPayment_rPayment_Date_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Payment__r.Payment_Method__c</fieldItem>
-                <identifier>RecordPayment_rPayment_Method_cField</identifier>
+                <fieldItem>Record.Payment__r.Quantity__c</fieldItem>
+                <identifier>RecordPayment_rQuantity_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>

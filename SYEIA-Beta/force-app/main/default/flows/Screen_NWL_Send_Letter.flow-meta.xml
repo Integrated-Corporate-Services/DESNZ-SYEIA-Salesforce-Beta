@@ -17,31 +17,21 @@
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>recipientAddresses</name>
-            <value>
-                <collectionElements>
-                    <elementReference>collection_ToAddresses</elementReference>
-                </collectionElements>
-            </value>
+            <value/>
         </inputParameters>
         <inputParameters>
             <name>ccAddresses</name>
-            <value>
-                <collectionElements>
-                    <elementReference>collection_CcAddresses</elementReference>
-                </collectionElements>
-            </value>
+            <value/>
         </inputParameters>
         <inputParameters>
             <name>senderType</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>OrgWideEmailAddress</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>senderAddress</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>s37consents@energysecurity.gov.uk</stringValue>
             </value>
         </inputParameters>
@@ -55,14 +45,12 @@
             <name>emailSubject</name>
             <value>
                 <elementReference>formula_emailSubject_DV</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>emailBody</name>
             <value>
                 <elementReference>EmailComposer.value</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -75,7 +63,6 @@
             <name>attachmentId</name>
             <value>
                 <elementReference>Document_Table.firstSelectedRow.Id</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -85,7 +72,6 @@
             <name>relatedRecordId</name>
             <value>
                 <elementReference>recordId</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -683,6 +669,13 @@
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>Get_Case.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Section 37</stringValue>
+                </rightValue>
+            </conditions>
             <connector>
                 <targetReference>Update_Date</targetReference>
             </connector>
@@ -698,8 +691,15 @@
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>Get_Case.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Section 37</stringValue>
+                </rightValue>
+            </conditions>
             <connector>
-                <targetReference>Update_NWL_Letter_Date</targetReference>
+                <targetReference>Update_Applicant_Only_Letter_Date</targetReference>
             </connector>
             <label>Yes Applicant Only</label>
         </rules>
@@ -861,6 +861,50 @@
                 <targetReference>Update_NW05_Request_for_further_information</targetReference>
             </connector>
             <label>NW05. Request for further information</label>
+        </rules>
+        <rules>
+            <name>NW06_Acknowledgement_letter_Applicant</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>NW06_Acknowledgementletter_Applicant</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>NW06_Acknowledgementletter_LO</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_NW06_Acknowledgement_letter_Applicant_Letter</targetReference>
+            </connector>
+            <label>NW06. Acknowledgement letter - Applicant</label>
+        </rules>
+        <rules>
+            <name>NW08_CTWR_letter_Applicant_Selected</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>NW08_CTWR_letter_Applicant</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>NW08_CTWRlette_LO</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_NW08_CTWR_Letter_Date</targetReference>
+            </connector>
+            <label>NW08. CTWR letter - Applicant Selected</label>
         </rules>
         <rules>
             <name>NW09_NW12_Procedural_Letter</name>
@@ -1041,7 +1085,8 @@
         </rules>
     </decisions>
     <description>PDF Warning message.
-Limit Attachments</description>
+Limit Attachments
+Letter Dates</description>
     <environments>Default</environments>
     <formulas>
         <name>formula_decide_email_body</name>
@@ -1441,6 +1486,31 @@ Limit Attachments</description>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
+        <name>Update_Applicant_Only_Letter_Date</name>
+        <label>Update Applicant Only Letter Date</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Add_Error_Log</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>Decision Issued</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Case__c</object>
+    </recordUpdates>
+    <recordUpdates>
         <name>Update_Date</name>
         <label>Update Date</label>
         <locationX>0</locationX>
@@ -1472,6 +1542,9 @@ Limit Attachments</description>
         <connector>
             <targetReference>Create_Email_Tracking_Record</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Add_Error_LogNWLLetterDate</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -1496,6 +1569,10 @@ Limit Attachments</description>
         <connector>
             <targetReference>Create_Email_Tracking_Record</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Add_Error_LogNWLLetterDate</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -1513,6 +1590,62 @@ Limit Attachments</description>
         <object>Case__c</object>
     </recordUpdates>
     <recordUpdates>
+        <name>Update_NW06_Acknowledgement_letter_Applicant_Letter</name>
+        <label>Update NW06. Acknowledgement letter - Applicant Letter</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Email_Tracking_Record</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Add_Error_LogNWLLetterDate</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Acknowledgement_Letter_Date__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Case__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_NW08_CTWR_Letter_Date</name>
+        <label>Update NW08 CTWR Letter Date</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Email_Tracking_Record</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Add_Error_LogNWLLetterDate</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>CTWR_Letter_Date__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Case__c</object>
+    </recordUpdates>
+    <recordUpdates>
         <name>Update_NW09_Procedural_Letters</name>
         <label>Update NW09. Procedural Letters</label>
         <locationX>0</locationX>
@@ -1520,6 +1653,10 @@ Limit Attachments</description>
         <connector>
             <targetReference>Create_Email_Tracking_Record</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Add_Error_LogNWLLetterDate</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -1531,7 +1668,7 @@ Limit Attachments</description>
         <inputAssignments>
             <field>Procedural_Notice_Letter_Date__c</field>
             <value>
-                <elementReference>$System.OriginDateTime</elementReference>
+                <elementReference>$Flow.CurrentDate</elementReference>
             </value>
         </inputAssignments>
         <object>Case__c</object>
@@ -1544,6 +1681,10 @@ Limit Attachments</description>
         <connector>
             <targetReference>Create_Email_Tracking_Record</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Add_Error_LogNWLLetterDate</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -1555,7 +1696,7 @@ Limit Attachments</description>
         <inputAssignments>
             <field>Statement_Of_Evidence_Exchange_Date__c</field>
             <value>
-                <elementReference>$System.OriginDateTime</elementReference>
+                <elementReference>$Flow.CurrentDate</elementReference>
             </value>
         </inputAssignments>
         <object>Case__c</object>
@@ -1568,6 +1709,10 @@ Limit Attachments</description>
         <connector>
             <targetReference>Create_Email_Tracking_Record</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Add_Error_LogNWLLetterDate</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -1579,32 +1724,7 @@ Limit Attachments</description>
         <inputAssignments>
             <field>Applicant_Further_Representations_Date__c</field>
             <value>
-                <elementReference>$System.OriginDateTime</elementReference>
-            </value>
-        </inputAssignments>
-        <object>Case__c</object>
-    </recordUpdates>
-    <recordUpdates>
-        <name>Update_NWL_Letter_Date</name>
-        <label>Update NWL Letter Date</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <faultConnector>
-            <isGoTo>true</isGoTo>
-            <targetReference>Add_Error_Log</targetReference>
-        </faultConnector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>Id</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>recordId</elementReference>
-            </value>
-        </filters>
-        <inputAssignments>
-            <field>Status__c</field>
-            <value>
-                <stringValue>Decision Issued</stringValue>
+                <elementReference>$Flow.CurrentDate</elementReference>
             </value>
         </inputAssignments>
         <object>Case__c</object>
@@ -2046,7 +2166,7 @@ Limit Attachments</description>
             <targetReference>Get_Case</targetReference>
         </connector>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <subflows>
         <name>Add_Error_Log</name>
         <label>Add Error Log</label>
@@ -2075,6 +2195,41 @@ Limit Attachments</description>
             <name>varRecordId</name>
             <value>
                 <elementReference>$Flow.CurrentRecord</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>Add_Error_LogNWLLetterDate</name>
+        <label>Add Error Log</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Create_Email_Tracking_Record</targetReference>
+        </connector>
+        <flowName>Subflow_Add_Log</flowName>
+        <inputAssignments>
+            <name>varAddLogFlowName</name>
+            <value>
+                <stringValue>Screen_NWL_Send_Letter</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>varErrorMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>varFlowDebugErrorLog</name>
+            <value>
+                <stringValue>ERROR</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>varRecordId</name>
+            <value>
+                <elementReference>Get_Case.Id</elementReference>
             </value>
         </inputAssignments>
     </subflows>
