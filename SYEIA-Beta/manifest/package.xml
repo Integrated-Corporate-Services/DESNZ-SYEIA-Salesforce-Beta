@@ -516,6 +516,11 @@
 		<members>Application_Deadline_Reminder_Config.FIR_Applicant_Response_Notification</members>
 		<members>Application_Deadline_Reminder_Config.FIR_Deadline_Notification</members>
 		<members>Application_Deadline_Reminder_Config.FIR_Extended_Deadline_Notification</members>
+		<members>Application_Deadline_Reminder_Config.NWL_Deadline_Reminder</members>
+		<members>Application_Deadline_Reminder_Config.S37_Deadline_Reminder</members>
+		<members>Application_Deadline_Reminder_Config.S37_Withdrawal_Accepted</members>
+		<members>Case_Email_Config.Overdue_Cases</members>
+		<members>Case_Email_Config.Section_37_Team_Email</members>
 		<members>Dynamic_Application_Status_Routing.Post_Decision</members>
 		<members>Mark_Status_as_Complete_Setting.Statuses</members>
 		<members>Prior_Application_Status_Setting.Applicable_Statuses</members>
@@ -526,6 +531,7 @@
 		<members>FIR_Response_Notification</members>
 		<members>Notify_File_Approvers</members>
 		<members>Unassigned_Case_Notifications</members>
+		<members>Section_37_Withdrawal_Request_Notification</members>
 		<name>CustomNotificationType</name>
 	</types>
 	<types>
@@ -662,6 +668,7 @@
 		<members>Task_After_Delete</members>
 		<members>Task_After_Save</members>
 		<members>Update_the_application_status_to_Archived</members>
+		<members>Withdrawal_Request_After_Save</members>
 		<name>Flow</name>
 	</types>
 	<types>
