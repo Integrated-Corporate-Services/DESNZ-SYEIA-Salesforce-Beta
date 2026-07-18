@@ -30,6 +30,9 @@
                 <numberValue>30.0</numberValue>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>Assign_NWL_Default_Calculated_Dates</targetReference>
+        </connector>
     </assignments>
     <assignments>
         <name>Assign_Date_case_sent_for_approval</name>
@@ -204,6 +207,33 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assign_NWL_Default_Calculated_Dates</name>
+        <label>Assign NWL Default Calculated Dates</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Total_Time_Excluding_Abeyance_In_Days__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>form_TotalTimeExAbeyanceInDays</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Total_Time_Including_Abeyance_In_Days__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>form_TotalTimeIncAbeyanceInDays</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Time_To_Decision_After_Inspector_Report__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>form_TimeToDecisionInspectorReport</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
         <name>Assign_Previous_Status</name>
         <label>Assign Previous Status</label>
         <locationX>0</locationX>
@@ -305,6 +335,9 @@
             <assignToReference>$Record.CTWR_Deadline__c</assignToReference>
             <operator>Assign</operator>
         </assignmentItems>
+        <connector>
+            <targetReference>Assign_NWL_Default_Calculated_Dates</targetReference>
+        </connector>
     </assignments>
     <assignments>
         <name>Clear_Deadline_for_Further_Representation</name>
@@ -663,6 +696,9 @@
         <label>Decision  CTWR Letter Changes</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Assign_NWL_Default_Calculated_Dates</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>On_CTWR_Letter_Date_Change</name>
@@ -1339,6 +1375,29 @@ NOT(OR(
         <expression>{!$Record.Procedural_Notice_Letter_Date__c} + 30</expression>
     </formulas>
     <formulas>
+        <name>form_TimeToDecisionInspectorReport</name>
+        <dataType>Number</dataType>
+        <expression>{!$Record.Decision_Date__c} - {!$Record.Inspector_s_Report_Received_Date__c}</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <description>Date the procedural letter was issued and Decision Letter date, excluding abeyance time</description>
+        <name>form_TotalTimeExAbeyanceInDays</name>
+        <dataType>Number</dataType>
+        <expression>IF(NOT(OR(
+ISBLANK({!$Record.Procedural_Notice_Letter_Date__c}), ISBLANK({!$Record.Decision_Date__c}))),
+({!$Record.Decision_Date__c} - {!$Record.Procedural_Notice_Letter_Date__c}) - ({!form_1st_Abeyance_Duration} +{!form_2nd_Abeyance_Duration}), 0)</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>form_TotalTimeIncAbeyanceInDays</name>
+        <dataType>Number</dataType>
+        <expression>IF(NOT(OR(
+ISBLANK({!$Record.Procedural_Notice_Letter_Date__c}), ISBLANK({!$Record.Decision_Date__c}))),
+({!$Record.Procedural_Notice_Letter_Date__c} - {!$Record.Decision_Date__c}), 0)</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
         <name>formula_IsNew</name>
         <dataType>Boolean</dataType>
         <expression>ISNEW()</expression>
@@ -1573,7 +1632,7 @@ NOT(OR(
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordBeforeSave</triggerType>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <variables>
         <name>FurtherInformationStatusUpdatedDateTime</name>
         <dataType>DateTime</dataType>
