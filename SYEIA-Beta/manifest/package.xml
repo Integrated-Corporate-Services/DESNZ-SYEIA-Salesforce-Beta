@@ -576,6 +576,10 @@
 		<name>CustomPermission</name>
 	</types>
 	<types>
+		<members>PS_RequireMFA</members>
+		<name>PermissionSet</name>
+	</types>
+	<types>
 		<members>Address__c</members>
 		<members>Asset_Information__c</members>
 		<members>Case_Management_Dashboard</members>
