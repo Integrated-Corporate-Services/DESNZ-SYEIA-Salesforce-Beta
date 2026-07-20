@@ -3894,6 +3894,9 @@
                         <valueListItems>
                             <value>New</value>
                         </valueListItems>
+                        <valueListItems>
+                            <value>Case_Note__c.Lock</value>
+                        </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
