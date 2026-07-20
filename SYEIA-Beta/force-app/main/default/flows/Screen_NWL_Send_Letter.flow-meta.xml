@@ -825,14 +825,42 @@
                 <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <stringValue>NW02. Invalid - Unclear NTR</stringValue>
+                    <elementReference>NW02_Invalid_UnclearNTR_Applicant</elementReference>
                 </rightValue>
             </conditions>
             <conditions>
                 <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <stringValue>NW03. Invalid NTT only_ (Including Implied Wayleaves)</stringValue>
+                    <elementReference>NW02_Invalid_UnclearNTR_LO</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>NW03_Invalid_NTTonly_includingimpliedwayleaves_Applicant</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>NW03_Invalid_NTTonly_includingimpliedwayleaves_LO</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>NW04_Invalid_NewLines_Applicant</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>NW04_Invalid_NewLines_LO</elementReference>
                 </rightValue>
             </conditions>
             <connector>
@@ -847,14 +875,14 @@
                 <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <stringValue>NW05. Request for further information - Applicant</stringValue>
+                    <elementReference>NW05_Requestforfurtherinformation_Applicant</elementReference>
                 </rightValue>
             </conditions>
             <conditions>
                 <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <stringValue>NW05. Request for further information - LO</stringValue>
+                    <elementReference>NW05_Requestforfurtherinformation_LO</elementReference>
                 </rightValue>
             </conditions>
             <connector>
@@ -2166,7 +2194,7 @@ Letter Dates</description>
             <targetReference>Get_Case</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <subflows>
         <name>Add_Error_Log</name>
         <label>Add Error Log</label>
