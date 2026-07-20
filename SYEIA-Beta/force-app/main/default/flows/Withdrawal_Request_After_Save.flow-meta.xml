@@ -339,7 +339,7 @@
         <text>{
  &quot;type&quot;: &quot;standard__recordPage&quot;,
  &quot;attributes&quot;: {
-   &quot;recordId&quot;: {!$Record.Case__c},
+   &quot;recordId&quot;: {!$Record.Case__r.Id},
    &quot;objectApiName&quot;: &quot;Case__c&quot;,
    &quot;actionName&quot;: &quot;view&quot;
  }

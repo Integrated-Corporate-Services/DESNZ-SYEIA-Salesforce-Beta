@@ -11,14 +11,12 @@
         <inputParameters>
             <name>flowName</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>Schedule_Case_Overdue_Reminder_Notification</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>loggingLevelName</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>ERROR</stringValue>
             </value>
         </inputParameters>
@@ -26,21 +24,18 @@
             <name>message</name>
             <value>
                 <elementReference>$Flow.FaultMessage</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>recordId</name>
             <value>
                 <elementReference>$Record.Id</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>saveLog</name>
             <value>
                 <booleanValue>true</booleanValue>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <nameSegment>FlowLogEntry</nameSegment>
@@ -65,7 +60,6 @@
             <name>customNotifTypeId</name>
             <value>
                 <elementReference>Get_Custom_Notifications_Settings.Id</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -77,7 +71,6 @@
         <inputParameters>
             <name>title</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>Deadline reminder</stringValue>
             </value>
         </inputParameters>
@@ -85,21 +78,18 @@
             <name>body</name>
             <value>
                 <elementReference>var_Reminder_Subject</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>targetId</name>
             <value>
                 <elementReference>$Record.Id</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>targetPageRef</name>
             <value>
                 <elementReference>tt_ReminderSection37CaseSystemNotification</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <nameSegment>customNotificationAction</nameSegment>
@@ -122,21 +112,23 @@
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>recipientAddresses</name>
-            <value>
-                <collectionElements>
-                    <elementReference>$Record.Owner:User.Email</elementReference>
-                </collectionElements>
-            </value>
+            <value/>
+        </inputParameters>
+        <inputParameters>
+            <name>ccAddresses</name>
+            <value/>
         </inputParameters>
         <inputParameters>
             <name>senderType</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>OrgWideEmailAddress</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>senderAddress</name>
+            <value>
+                <stringValue>s37consents@energysecurity.gov.uk</stringValue>
+            </value>
         </inputParameters>
         <inputParameters>
             <name>composeEmailContent</name>
@@ -148,13 +140,11 @@
             <name>emailSubject</name>
             <value>
                 <elementReference>var_Reminder_Subject</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>emailBody</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>&lt;p&gt;{!var_EmailBody}&lt;/p&gt;</stringValue>
             </value>
         </inputParameters>
@@ -165,14 +155,12 @@
             <name>relatedRecordId</name>
             <value>
                 <elementReference>$Record.Id</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>logEmailOnSend</name>
             <value>
                 <booleanValue>true</booleanValue>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
             </value>
         </inputParameters>
         <nameSegment>emailSimple</nameSegment>
@@ -200,6 +188,13 @@
                 <elementReference>tt_Section37_14DaysReminderSubject</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_Section37NotificationIdCollection</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>$Record.OwnerId</elementReference>
+            </value>
+        </assignmentItems>
         <connector>
             <targetReference>Send_S37_Reminder_Email</targetReference>
         </connector>
@@ -221,6 +216,27 @@
             <operator>Assign</operator>
             <value>
                 <elementReference>tt_Section37_7DaysReminderEmailBody</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_Section37NotificationIdCollection</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>$Record.OwnerId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_Section37NotificationIdCollection</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Transform_Get_User_Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_Section37_ccEmailAddress</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Label.S37_Email</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -291,7 +307,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Assign_7_Days_Reminder_Detaults</targetReference>
+                <targetReference>Get_Decision_Managers</targetReference>
             </connector>
             <label>7 Days</label>
         </rules>
@@ -371,6 +387,10 @@
         <connector>
             <targetReference>Send_Custom_Notification</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Add_Error_Log</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>DeveloperName</field>
@@ -381,6 +401,31 @@
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>CustomNotificationType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Decision_Managers</name>
+        <label>Get Decision Managers</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Transform_Get_User_Id</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Add_Error_Log</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Persona__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Decision Manager</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>User</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
@@ -487,6 +532,27 @@
         <isViewedAsPlainText>false</isViewedAsPlainText>
         <text>&lt;p&gt;Dear {!$Record.Case_Owner__c}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Your case {!$Record.Name} must be completed by {!$Record.Target_Completion_Date__c}.&lt;/p&gt;&lt;p&gt;See your case {!form_CaseDetailLink} &lt;/p&gt;&lt;p&gt;Do not reply to this email.&lt;/p&gt;</text>
     </textTemplates>
+    <transforms>
+        <name>Transform_Get_User_Id</name>
+        <label>Transform Get User Id</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Assign_7_Days_Reminder_Detaults</targetReference>
+        </connector>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <scale>0</scale>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+        <transformValues>
+            <transformValueActions>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>Get_Decision_Managers[$EachItem].Id</elementReference>
+                </value>
+            </transformValueActions>
+        </transformValues>
+    </transforms>
     <variables>
         <name>var_EmailBody</name>
         <dataType>String</dataType>
@@ -496,6 +562,13 @@
     </variables>
     <variables>
         <name>var_Reminder_Subject</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>var_Section37_ccEmailAddress</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>

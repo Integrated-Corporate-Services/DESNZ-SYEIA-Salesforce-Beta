@@ -48,4 +48,12 @@
         <shortDescription>NWL wayleave</shortDescription>
         <value>Wayleave</value>
     </labels>
+    <labels>
+        <fullName>S37_Email</fullName>
+        <categories>S37</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>S37 Email</shortDescription>
+        <value>s37Contents@energysecurity.gov,uk</value>
+    </labels>
 </CustomLabels>
