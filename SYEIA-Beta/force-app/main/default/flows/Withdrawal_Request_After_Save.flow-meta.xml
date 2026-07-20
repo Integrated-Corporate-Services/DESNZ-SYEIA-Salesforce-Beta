@@ -339,8 +339,8 @@
         <text>{
  &quot;type&quot;: &quot;standard__recordPage&quot;,
  &quot;attributes&quot;: {
-   &quot;recordId&quot;: {!$Record.Id},
-   &quot;objectApiName&quot;: &quot;Withdrawal_Request__c&quot;,
+   &quot;recordId&quot;: {!$Record.Case__c},
+   &quot;objectApiName&quot;: &quot;Case__c&quot;,
    &quot;actionName&quot;: &quot;view&quot;
  }
 }</text>
