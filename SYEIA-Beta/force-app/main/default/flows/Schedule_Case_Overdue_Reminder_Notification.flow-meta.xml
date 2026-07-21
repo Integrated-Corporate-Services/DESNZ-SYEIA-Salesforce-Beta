@@ -86,12 +86,6 @@
                 <elementReference>$Record.Id</elementReference>
             </value>
         </inputParameters>
-        <inputParameters>
-            <name>targetPageRef</name>
-            <value>
-                <elementReference>tt_ReminderSection37CaseSystemNotification</elementReference>
-            </value>
-        </inputParameters>
         <nameSegment>customNotificationAction</nameSegment>
         <offset>0</offset>
     </actionCalls>
@@ -334,6 +328,7 @@
             <label>14 Days</label>
         </rules>
     </decisions>
+    <description>Remove Target Page</description>
     <environments>Default</environments>
     <formulas>
         <name>form_CaseDetailLink</name>
