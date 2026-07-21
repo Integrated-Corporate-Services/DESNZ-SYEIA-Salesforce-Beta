@@ -144,6 +144,15 @@
         </inputParameters>
         <inputParameters>
             <name>sendRichBody</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientId</name>
+            <value>
+                <elementReference>$Record.Owner:User.Id</elementReference>
+            </value>
         </inputParameters>
         <inputParameters>
             <name>relatedRecordId</name>
