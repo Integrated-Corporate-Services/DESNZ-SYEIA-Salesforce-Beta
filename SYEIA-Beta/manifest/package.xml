@@ -669,8 +669,6 @@
 		<members>Task_After_Delete</members>
 		<members>Task_After_Save</members>
 		<members>Update_the_application_status_to_Archived</members>
-		<members>Withdrawal_Request_After_Save</members>
-		<members>Schedule_Case_Overdue_Reminder_Notification</members>
 		<name>Flow</name>
 	</types>
 	<types>
