@@ -17,22 +17,32 @@
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>recipientAddresses</name>
-            <value/>
+            <value>
+                <collectionElements>
+                    <elementReference>collection_ToAddresses</elementReference>
+                </collectionElements>
+            </value>
         </inputParameters>
         <inputParameters>
             <name>ccAddresses</name>
-            <value/>
+            <value>
+                <collectionElements>
+                    <elementReference>collection_CcAddresses</elementReference>
+                </collectionElements>
+            </value>
         </inputParameters>
         <inputParameters>
             <name>senderType</name>
             <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>OrgWideEmailAddress</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>senderAddress</name>
             <value>
-                <stringValue>s37consents@energysecurity.gov.uk</stringValue>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>necessarywayleaves@energysecurity.gov.uk</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -45,12 +55,14 @@
             <name>emailSubject</name>
             <value>
                 <elementReference>formula_emailSubject_DV</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>emailBody</name>
             <value>
                 <elementReference>EmailComposer.value</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -63,6 +75,7 @@
             <name>attachmentId</name>
             <value>
                 <elementReference>Document_Table.firstSelectedRow.Id</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -72,6 +85,7 @@
             <name>relatedRecordId</name>
             <value>
                 <elementReference>recordId</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -208,7 +222,7 @@
             <assignToReference>var_defaultToAddressValue</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Find_Landowner_Party.Representative__r.Email__c</elementReference>
+                <elementReference>Get_Case.DNO__r.Representative__r.Email__c</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -264,6 +278,22 @@
             <operator>Assign</operator>
             <value>
                 <elementReference>Find_Landowner_Party.Email__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Email_Builder_Screen</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Organisation_Email_to_To_Address_Value</name>
+        <label>Set Organisation Email to To Address Value</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_defaultToAddressValue</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Case.DNO__r.Email__c</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -1016,6 +1046,46 @@
         </rules>
     </decisions>
     <decisions>
+        <name>Organisation_Email_Or_Applicant_Email</name>
+        <label>Organisation Email Or Applicant Email</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Email_Builder_Screen</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Organisation_Email</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Case.DNO__r.Email__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Organisation_Email_to_To_Address_Value</targetReference>
+            </connector>
+            <label>Organisation Email</label>
+        </rules>
+        <rules>
+            <name>Organisation_Applicant_email</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Case.DNO__r.Representative__r.Email__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Applicant_Email_to_To_Address_Value</targetReference>
+            </connector>
+            <label>Organisation Applicant email</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>SetToAndCCAddress</name>
         <label>SetToAndCCAddress</label>
         <locationX>0</locationX>
@@ -1083,33 +1153,26 @@
             <label>Landowner Email only exist</label>
         </rules>
         <rules>
-            <name>Applicant_Rep_Email_only_Exist</name>
-            <conditionLogic>and</conditionLogic>
+            <name>Organisation_or_Applicant_Email_Exist</name>
+            <conditionLogic>or</conditionLogic>
             <conditions>
-                <leftValueReference>Find_Landowner_Party.Email__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Find_Landowner_Party.Representative__c</leftValueReference>
+                <leftValueReference>Get_Case.DNO__r.Email__c</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>Find_Landowner_Party.Representative__r.Email__c</leftValueReference>
+                <leftValueReference>Get_Case.DNO__r.Representative__r.Email__c</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Set_Applicant_Email_to_To_Address_Value</targetReference>
+                <targetReference>Organisation_Email_Or_Applicant_Email</targetReference>
             </connector>
-            <label>Applicant(Rep) Email only Exist</label>
+            <label>Organisation or Applicant Email Exist</label>
         </rules>
     </decisions>
     <description>PDF Warning message.
