@@ -569,6 +569,11 @@ FIR Review</description>
         <expression>{!Get_Case_Using_recordId.DNO__r.Representative__r.Email__c}</expression>
     </formulas>
     <formulas>
+        <name>formula_Applicant_Reference</name>
+        <dataType>String</dataType>
+        <expression>IF(NOT(ISBLANK({!Get_Case_Using_recordId.Applicant_Reference__c})), {!Get_Case_Using_recordId.Applicant_Reference__c}, &quot;-&quot;)</expression>
+    </formulas>
+    <formulas>
         <name>formula_CurrentDate</name>
         <dataType>String</dataType>
         <expression>TEXT(
@@ -616,7 +621,7 @@ TEXT(YEAR(TODAY()))</expression>
         <dataType>String</dataType>
         <expression>&apos;{&apos; &amp;
 &apos;&quot;DESNZ_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Name} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;Applicant_Reference&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.Applicant_Reference__c} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;Applicant_Reference&quot;: &quot;&apos; &amp; {!formula_Applicant_Reference} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;DNO_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Name} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;App_Name&quot;: &quot;&apos; &amp; {!Get_Case_Using_recordId.DNO__r.Representative__r.Name} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;App_Email&quot;: &quot;&apos; &amp; {!var_Applicant_Contact_Email} &amp; &apos;&quot;, &apos; &amp;

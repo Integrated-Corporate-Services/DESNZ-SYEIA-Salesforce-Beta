@@ -554,6 +554,11 @@
         <expression>&apos;[[Thank you for your correspondence dated [[insert date]], in which you gave your consent to the application being considered by way of the written representation procedure. We can confirm that the applicant also gave their consent.]]&apos;</expression>
     </formulas>
     <formulas>
+        <name>formula_Applicant_Reference</name>
+        <dataType>String</dataType>
+        <expression>IF(NOT(ISBLANK({!Get_Case.Applicant_Reference__c})), {!Get_Case.Applicant_Reference__c}, &quot;-&quot;)</expression>
+    </formulas>
+    <formulas>
         <name>formula_CurrentDate</name>
         <dataType>String</dataType>
         <expression>TEXT(
@@ -606,7 +611,7 @@ TEXT(YEAR(TODAY()))</expression>
         <dataType>String</dataType>
         <expression>&apos;{&apos; &amp;
 &apos;&quot;DESNZ_Reference&quot;: &quot;&apos; &amp; {!Get_Case.Name} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;OwnerOrOccuppier_Reference&quot;: &quot;&apos; &amp; {!Get_Case.Applicant_Reference__c} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;OwnerOrOccuppier_Reference&quot;: &quot;&apos; &amp; {!formula_Applicant_Reference} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;DNO_Name&quot;: &quot;&apos; &amp; {!Get_Case.DNO__r.Name} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;App_Name&quot;: &quot;&apos; &amp; {!Get_Case.DNO__r.Representative__r.Name} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;App_Email&quot;: &quot;&apos; &amp; {!var_Owner_Or_Rep_Email} &amp; &apos;&quot;, &apos; &amp;
