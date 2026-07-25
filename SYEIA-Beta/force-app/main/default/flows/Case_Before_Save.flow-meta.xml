@@ -403,6 +403,32 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Update_Status_to_Post_Decision</name>
+        <label>Update Status to Post Decision</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Post Decision</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Update_Status_to_Representation_Stage</name>
+        <label>Update Status to Representation Stage</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Representation Stage</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
         <name>Update_Status_to_Under_Review</name>
         <label>Update Status to Under Review</label>
         <locationX>0</locationX>
@@ -414,6 +440,9 @@
                 <stringValue>Under Review</stringValue>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>NWL_Sub_Status_Changed</targetReference>
+        </connector>
     </assignments>
     <assignments>
         <name>Update_Traget_Completion_Date</name>
@@ -1015,6 +1044,9 @@
         <label>Is NWL Owner Changed and Status is Application Received</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>NWL_Sub_Status_Changed</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Yes_NWL_and_Owner_Changed</name>
@@ -1335,6 +1367,57 @@
                 <targetReference>Get_Project_Target_Duration_Dates</targetReference>
             </connector>
             <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>NWL_Sub_Status_Changed</name>
+        <label>NWL Sub Status Changed</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Changed_to_Seeking_further_information_from_inspector</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Seeking Further Information From The Parties</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Status_to_Representation_Stage</targetReference>
+            </connector>
+            <label>Changed to Seeking further information from inspector</label>
+        </rules>
+        <rules>
+            <name>Changed_to_Pre_Action_Protocol_Letter_received_Or</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Pre-Action Protocol Letter Received</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Judicial Review In Progress</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Post Decision Correspondence</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Status_to_Post_Decision</targetReference>
+            </connector>
+            <label>Changed to Pre-Action Protocol Letter received Or</label>
         </rules>
     </decisions>
     <decisions>
