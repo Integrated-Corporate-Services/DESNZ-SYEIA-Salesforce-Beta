@@ -440,6 +440,29 @@
                 <stringValue>Under Review</stringValue>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Sub_Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Awaiting Validation</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>NWL_Status_Check</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Update_Sub_Status_to_Awaiting_validation</name>
+        <label>Update Sub Status to Awaiting validation</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Sub_Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Awaiting Validation</stringValue>
+            </value>
+        </assignmentItems>
         <connector>
             <targetReference>NWL_Sub_Status_Changed</targetReference>
         </connector>
@@ -1045,7 +1068,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <targetReference>NWL_Sub_Status_Changed</targetReference>
+            <targetReference>NWL_Status_Check</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -1370,6 +1393,38 @@
         </rules>
     </decisions>
     <decisions>
+        <name>NWL_Status_Check</name>
+        <label>NWL Status Check</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>NWL_Sub_Status_Changed</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Is_Application_Received</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Application Received</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary_Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Sub_Status_to_Awaiting_validation</targetReference>
+            </connector>
+            <label>Is Application Received</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>NWL_Sub_Status_Changed</name>
         <label>NWL Sub Status Changed</label>
         <locationX>0</locationX>
@@ -1385,6 +1440,13 @@
                     <stringValue>Seeking Further Information From The Parties</stringValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary_Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
             <connector>
                 <targetReference>Update_Status_to_Representation_Stage</targetReference>
             </connector>
@@ -1392,7 +1454,7 @@
         </rules>
         <rules>
             <name>Changed_to_Pre_Action_Protocol_Letter_received_Or</name>
-            <conditionLogic>or</conditionLogic>
+            <conditionLogic>(1 OR 2 OR 3) AND 4</conditionLogic>
             <conditions>
                 <leftValueReference>$Record.Sub_Status__c</leftValueReference>
                 <operator>EqualTo</operator>
@@ -1412,6 +1474,13 @@
                 <operator>EqualTo</operator>
                 <rightValue>
                     <stringValue>Post Decision Correspondence</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary_Wayleaves</stringValue>
                 </rightValue>
             </conditions>
             <connector>

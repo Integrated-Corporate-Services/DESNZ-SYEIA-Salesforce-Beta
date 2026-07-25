@@ -1740,6 +1740,12 @@ Letter Dates</description>
                 <stringValue>In-Progress</stringValue>
             </value>
         </inputAssignments>
+        <inputAssignments>
+            <field>Sub_Status__c</field>
+            <value>
+                <stringValue>Acknowledgement Letter Issued</stringValue>
+            </value>
+        </inputAssignments>
         <object>Case__c</object>
     </recordUpdates>
     <recordUpdates>
@@ -1766,6 +1772,12 @@ Letter Dates</description>
             <field>Status__c</field>
             <value>
                 <stringValue>In Abeyance</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Sub_Status__c</field>
+            <value>
+                <stringValue>Abeyance Letter Issued</stringValue>
             </value>
         </inputAssignments>
         <object>Case__c</object>
@@ -1802,6 +1814,12 @@ Letter Dates</description>
                 <stringValue>In-Progress</stringValue>
             </value>
         </inputAssignments>
+        <inputAssignments>
+            <field>Sub_Status__c</field>
+            <value>
+                <stringValue>CTWR Letter Issued</stringValue>
+            </value>
+        </inputAssignments>
         <object>Case__c</object>
     </recordUpdates>
     <recordUpdates>
@@ -1834,6 +1852,12 @@ Letter Dates</description>
             <field>Status__c</field>
             <value>
                 <stringValue>Representation Stage</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Sub_Status__c</field>
+            <value>
+                <stringValue>Procedural Notice Issued</stringValue>
             </value>
         </inputAssignments>
         <object>Case__c</object>
