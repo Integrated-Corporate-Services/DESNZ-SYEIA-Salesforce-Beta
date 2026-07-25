@@ -17,17 +17,21 @@ export default class DynamicPath extends LightningElement {
 
     currentValue = '';
     selectedValue = null;
-    ready = false;
+    recordTypeDevName;
 
+    ready = false;
     hideButton = true;
     hideStatuses = [];
 
-    progressKey = 0;
     isSaving = false;
     showSuccess = false;
 
-    get computedField() {
-        return [`${this.objectApiName}.${this.fieldApiName}`];
+    // Fields for wire
+    get computedFields() {
+        return [
+            `${this.objectApiName}.${this.fieldApiName}`,
+            `${this.objectApiName}.RecordType.DeveloperName`
+        ];
     }
 
     connectedCallback() {
@@ -36,24 +40,24 @@ export default class DynamicPath extends LightningElement {
                 this.hideStatuses = data;
                 this.checkButtonVisibility();
             })
-            .catch(error => {
-                console.error(error);
-            });
+            .catch(console.error);
     }
 
     @wire(getRecord, {
         recordId: '$recordId',
-        fields: '$computedField'
+        fields: '$computedFields'
     })
     wiredRecord({ data, error }) {
         if (data) {
             const newValue = data.fields[this.fieldApiName]?.value;
 
+            this.recordTypeDevName =
+                data.fields.RecordType?.value?.fields?.DeveloperName?.value;
+
             if (newValue && newValue !== this.currentValue) {
                 this.currentValue = newValue;
 
                 this.ready = false;
-                this.progressKey++;
 
                 this.loadStages();
                 this.checkButtonVisibility();
@@ -66,27 +70,32 @@ export default class DynamicPath extends LightningElement {
     }
 
     loadStages() {
-        if (!this.currentValue) return;
+        if (!this.currentValue || !this.recordTypeDevName) return;
 
-        getStatusByCurrentStatus({ status: this.currentValue })
-            .then(data => {
-                this.stages = data.map(val => ({
-                    label: val,
-                    value: val
-                }));
+        getStatusByCurrentStatus({
+            status: this.currentValue,
+            recordTypeDevName: this.recordTypeDevName
+        })
+        .then(data => {
+            this.stages = data.map(val => ({
+                label: val,
+                value: val.trim()
+            }));
 
-                this.initIfReady();
-            })
-            .catch(error => {
-                console.error(error);
-                this.showToast('Error', 'Error loading path configuration', 'error');
-            });
-    }
+            // Ensure current value exists in stages
+            if (!this.stages.some(s => s.value === this.currentValue)) {
+                this.stages = [
+                    ...this.stages,
+                    { label: this.currentValue, value: this.currentValue }
+                ];
+            }
 
-    initIfReady() {
-        if (this.stages.length && this.currentValue) {
             this.ready = true;
-        }
+        })
+        .catch(error => {
+            console.error(error);
+            this.showToast('Error', 'Error loading path', 'error');
+        });
     }
 
     checkButtonVisibility() {
@@ -100,32 +109,20 @@ export default class DynamicPath extends LightningElement {
         );
     }
 
-    get displayValue() {
-        return this.selectedValue || this.currentValue;
-    }
-
     handleStageSelect(event) {
         this.selectedValue = event.currentTarget.dataset.value;
     }
 
     handleUpdateStatus() {
-
         let newValue;
 
-        // Use selected value if user clicked
         if (this.selectedValue && this.selectedValue !== this.currentValue) {
             newValue = this.selectedValue;
-        } 
-        else {
-            const currentIndex = this.stages.findIndex(
-                s => s.value === this.currentValue
-            );
-
-            if (currentIndex < this.stages.length - 1) {
-                newValue = this.stages[currentIndex + 1].value;
-            } else {
-                newValue = this.currentValue;
-            }
+        } else {
+            const index = this.stages.findIndex(s => s.value === this.currentValue);
+            newValue = index < this.stages.length - 1
+                ? this.stages[index + 1].value
+                : this.currentValue;
         }
 
         this.isSaving = true;
@@ -133,22 +130,17 @@ export default class DynamicPath extends LightningElement {
         updateRecordStatus({
             recordId: this.recordId,
             fieldApiName: this.fieldApiName,
-            currentStatus: newValue // Apex will handle prior status override
+            currentStatus: newValue
         })
         .then(() => {
-
             this.selectedValue = null;
             this.currentValue = newValue;
 
             this.showSuccess = true;
-            setTimeout(() => {
-                this.showSuccess = false;
-            }, 1200);
-
-            this.ready = false;
-            this.progressKey++;
+            setTimeout(() => this.showSuccess = false, 1200);
 
             getRecordNotifyChange([{ recordId: this.recordId }]);
+
             this.loadStages();
             this.checkButtonVisibility();
 
@@ -166,14 +158,9 @@ export default class DynamicPath extends LightningElement {
         });
     }
 
-    showToast(title, message, variant) {
-        this.dispatchEvent(
-            new ShowToastEvent({
-                title,
-                message,
-                variant
-            })
-        );
+    // 🔥 KEY FIX: always return correct step
+    get displayValue() {
+        return this.selectedValue || this.currentValue;
     }
 
     get buttonIcon() {
@@ -182,5 +169,11 @@ export default class DynamicPath extends LightningElement {
 
     get isButtonDisabled() {
         return this.isSaving;
+    }
+
+    showToast(title, message, variant) {
+        this.dispatchEvent(
+            new ShowToastEvent({ title, message, variant })
+        );
     }
 }

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>Under Review</label>
+    <label>In Progress NWL</label>
     <protected>false</protected>
     <values>
         <field>Case_RecordType__c</field>
-        <value xsi:type="xsd:string">Section_37</value>
+        <value xsi:type="xsd:string">Necessary_Wayleaves</value>
     </values>
     <values>
         <field>Controlling_Status__c</field>
-        <value xsi:type="xsd:string">Under Review</value>
+        <value xsi:type="xsd:string">In-Progress</value>
     </values>
     <values>
         <field>Path_Statuses__c</field>
-        <value xsi:type="xsd:string">Application Received,Under Review,In-Progress,Submitted for Approval,Decision Issued</value>
+        <value xsi:type="xsd:string">Application Received,Under Review,In-Progress,Representation Stage,Submitted for Approval,Decision Issued</value>
     </values>
 </CustomMetadata>

@@ -1706,6 +1706,12 @@ Letter Dates</description>
                 <elementReference>$Flow.CurrentDate</elementReference>
             </value>
         </inputAssignments>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>In-Progress</stringValue>
+            </value>
+        </inputAssignments>
         <object>Case__c</object>
     </recordUpdates>
     <recordUpdates>
@@ -1732,6 +1738,12 @@ Letter Dates</description>
             <field>CTWR_Letter_Date__c</field>
             <value>
                 <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>In-Progress</stringValue>
             </value>
         </inputAssignments>
         <object>Case__c</object>
@@ -1762,6 +1774,12 @@ Letter Dates</description>
                 <elementReference>$Flow.CurrentDate</elementReference>
             </value>
         </inputAssignments>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>Representation Stage</stringValue>
+            </value>
+        </inputAssignments>
         <object>Case__c</object>
     </recordUpdates>
     <recordUpdates>
@@ -1790,6 +1808,12 @@ Letter Dates</description>
                 <elementReference>$Flow.CurrentDate</elementReference>
             </value>
         </inputAssignments>
+        <inputAssignments>
+            <field>Sub_Status__c</field>
+            <value>
+                <stringValue>Statement Of Evidence Exchanged</stringValue>
+            </value>
+        </inputAssignments>
         <object>Case__c</object>
     </recordUpdates>
     <recordUpdates>
@@ -1816,6 +1840,12 @@ Letter Dates</description>
             <field>Applicant_Further_Representations_Date__c</field>
             <value>
                 <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Sub_Status__c</field>
+            <value>
+                <stringValue>Further Statement Of Evidence Exchanged</stringValue>
             </value>
         </inputAssignments>
         <object>Case__c</object>
