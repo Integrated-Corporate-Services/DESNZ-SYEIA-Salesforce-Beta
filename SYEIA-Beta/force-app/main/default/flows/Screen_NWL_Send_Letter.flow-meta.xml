@@ -943,6 +943,28 @@
             <label>NW06. Acknowledgement letter - Applicant</label>
         </rules>
         <rules>
+            <name>W07_Abeyance_letter</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW07. Abeyance letter - Applicant</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW07. Abeyance letter - LO</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_NW07_In_Abeyance_Status</targetReference>
+            </connector>
+            <label>W07. Abeyance letter</label>
+        </rules>
+        <rules>
             <name>NW08_CTWR_letter_Applicant_Selected</name>
             <conditionLogic>or</conditionLogic>
             <conditions>
@@ -1650,6 +1672,12 @@ Letter Dates</description>
                 <elementReference>$Flow.CurrentDate</elementReference>
             </value>
         </inputAssignments>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>Invalid</stringValue>
+            </value>
+        </inputAssignments>
         <object>Case__c</object>
     </recordUpdates>
     <recordUpdates>
@@ -1710,6 +1738,34 @@ Letter Dates</description>
             <field>Status__c</field>
             <value>
                 <stringValue>In-Progress</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Case__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_NW07_In_Abeyance_Status</name>
+        <label>Update NW07 In Abeyance Status</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Email_Tracking_Record</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Add_Error_LogNWLLetterDate</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>In Abeyance</stringValue>
             </value>
         </inputAssignments>
         <object>Case__c</object>
