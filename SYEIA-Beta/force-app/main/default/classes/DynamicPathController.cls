@@ -6,7 +6,6 @@ public with sharing class DynamicPathController {
             throw new AuraHandledException('Record Id is required');
         }
 
-        // Get object API name dynamically
         String objectApiName = recordId.getSObjectType().getDescribe().getName();
 
         Schema.SObjectType sObjType = Schema.getGlobalDescribe().get(objectApiName);
@@ -30,24 +29,16 @@ public with sharing class DynamicPathController {
     @AuraEnabled
     public static void updateRecordStatus(Id recordId, String fieldApiName, String currentStatus) {
         if (recordId == null) {
-            Logger.error('Error updateRecordStatus: ' + 'Record Id is required');
-            Logger.setScenario('DynamicPathController.updateRecordStatus');
-            Logger.saveLog();
             throw new AuraHandledException('Record Id is required');
         }
+
         if (String.isBlank(fieldApiName)) {
-            Logger.error('Error updateRecordStatus: ' + 'Field API Name is required');
-            Logger.setScenario('DynamicPathController.updateRecordStatus');
-            Logger.saveLog();
             throw new AuraHandledException('Field API Name is required');
         }
+
         if (String.isBlank(currentStatus)) {
-            // fallback to first picklist value if LWC passes empty
             List<String> picklist = getPicklistValuesByRecord(recordId, fieldApiName);
             if (picklist.isEmpty()) {
-                Logger.error('Error updateRecordStatus: ' + 'No picklist values found for field ' + fieldApiName);
-                Logger.setScenario('DynamicPathController.updateRecordStatus');
-                Logger.saveLog();
                 throw new AuraHandledException('No picklist values found for field ' + fieldApiName);
             }
             currentStatus = picklist[0];
@@ -55,7 +46,7 @@ public with sharing class DynamicPathController {
 
         String finalValue;
 
-        // Check Dynamic Routing metadata first
+        // Routing metadata
         List<Dynamic_Application_Status_Routing__mdt> routing = [
             SELECT Current_Status__c, Next_Status__c
             FROM Dynamic_Application_Status_Routing__mdt
@@ -67,7 +58,7 @@ public with sharing class DynamicPathController {
             finalValue = routing[0].Next_Status__c;
         }
 
-        // Check Prior Application Status if no routing
+        // Prior status fallback
         if (String.isBlank(finalValue)) {
             List<Prior_Application_Status_Setting__mdt> priorSettings = [
                 SELECT Applicable_Statuses__c
@@ -76,15 +67,15 @@ public with sharing class DynamicPathController {
             ];
 
             if (!priorSettings.isEmpty() && !String.isBlank(priorSettings[0].Applicable_Statuses__c)) {
-                String applicableStatuses = priorSettings[0].Applicable_Statuses__c;
-                for (String s : applicableStatuses.split(',')) {
-                    if (currentStatus.equalsIgnoreCase(s)) {
-                        // Dynamically query Prior_Application_Status__c
+                for (String s : priorSettings[0].Applicable_Statuses__c.split(',')) {
+                    if (currentStatus.equalsIgnoreCase(s.trim())) {
+
                         SObject rec = Database.query(
-                            'SELECT Prior_Application_Status__c FROM ' 
-                            + recordId.getSObjectType() 
-                            + ' WHERE Id = :recordId LIMIT 1'
+                            'SELECT Prior_Application_Status__c FROM ' +
+                            recordId.getSObjectType() +
+                            ' WHERE Id = :recordId LIMIT 1'
                         );
+
                         String priorStatus = (String)rec.get('Prior_Application_Status__c');
                         if (!String.isBlank(priorStatus)) {
                             finalValue = priorStatus;
@@ -95,72 +86,78 @@ public with sharing class DynamicPathController {
             }
         }
 
-        // Fallback to LWC-provided status
         if (String.isBlank(finalValue)) {
             finalValue = currentStatus;
         }
 
-        // Validate against picklist
+        // Validate picklist
         Schema.DescribeFieldResult fieldResult = recordId.getSObjectType().getDescribe()
             .fields.getMap().get(fieldApiName).getDescribe();
 
         Boolean isValid = false;
         for (Schema.PicklistEntry pe : fieldResult.getPicklistValues()) {
             if (pe.getValue().equalsIgnoreCase(finalValue)) {
-                finalValue = pe.getValue(); // ensure proper casing
+                finalValue = pe.getValue();
                 isValid = true;
                 break;
             }
         }
 
         if (!isValid) {
-            Logger.error('Error updateRecordStatus: ' + 'Status "' + finalValue + '" is not a valid picklist value.');
-            Logger.setScenario('DynamicPathController.updateRecordStatus');
-            Logger.saveLog();
-            throw new AuraHandledException('Status "' + finalValue + '" is not a valid picklist value.');
+            throw new AuraHandledException('Invalid status: ' + finalValue);
         }
 
-        // Update record dynamically
         try {
             SObject record = recordId.getSObjectType().newSObject(recordId);
             record.put(fieldApiName, finalValue);
             update record;
-            Logger.warn('Updated Application with Id: ' + record.Id);
         } catch (DmlException e) {
-            String errorMessage = e.getNumDml() > 0 ? e.getDmlMessage(0) : e.getMessage();
-            Logger.error('Error updateRecordStatus: ' + e.getMessage());
-            Logger.setScenario('DynamicPathController.updateRecordStatus');
-            Logger.saveLog();
-            throw new AuraHandledException(errorMessage);
+            throw new AuraHandledException(e.getMessage());
         }
     }
 
+    //UPDATED METHOD (RecordType-aware)
     @AuraEnabled(cacheable=true)
-    public static List<String> getStatusByCurrentStatus(String status) {
+    public static List<String> getStatusByCurrentStatus(String status, String recordTypeDevName) {
         if (String.isBlank(status)) {
-            Logger.info('getStatusByCurrentStatus' + 'Status is required');
-            Logger.saveLog();
             throw new AuraHandledException('Status is required');
         }
 
+        if (String.isBlank(recordTypeDevName)) {
+            throw new AuraHandledException('Record Type is required');
+        }
+
         List<Application_Status_Path_Setting__mdt> settings = [
-            SELECT Controlling_Status__c, Path_Statuses__c
+            SELECT Controlling_Status__c, Path_Statuses__c, Case_RecordType__c
             FROM Application_Status_Path_Setting__mdt
             WHERE Controlling_Status__c = :status
+            AND Case_RecordType__c = :recordTypeDevName
             LIMIT 1
         ];
+
+        // Fallback to DEFAULT
+        if (settings.isEmpty()) {
+            settings = [
+                SELECT Controlling_Status__c, Path_Statuses__c
+                FROM Application_Status_Path_Setting__mdt
+                WHERE Controlling_Status__c = :status
+                AND Case_RecordType__c = 'DEFAULT'
+                LIMIT 1
+            ];
+        }
 
         if (settings.isEmpty() || String.isBlank(settings[0].Path_Statuses__c)) {
             return new List<String>();
         }
 
-        List<String> pathStatuses = new List<String>();
+        List<String> result = new List<String>();
         for (String s : settings[0].Path_Statuses__c.split(',')) {
-            String trimmed = s.trim();
-            if (!String.isBlank(trimmed)) pathStatuses.add(trimmed);
+            if (!String.isBlank(s)) {
+                result.add(s.trim());
+            }
         }
 
-        return pathStatuses;
+        return result;
     }
 
     @AuraEnabled(cacheable=true)
@@ -177,7 +174,9 @@ public with sharing class DynamicPathController {
 
         List<String> result = new List<String>();
         for (String s : setting.Button_Hide_Statuses__c.split(',')) {
-            if (!String.isBlank(s)) result.add(s.trim().toLowerCase());
+            if (!String.isBlank(s)) {
+                result.add(s.trim().toLowerCase());
+            }
         }
 
         return result;

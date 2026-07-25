@@ -31,7 +31,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Assign_NWL_Default_Calculated_Dates</targetReference>
+            <targetReference>Is_NWL_Owner_Changed_and_Status_is_Application_Received</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -207,33 +207,6 @@
         </connector>
     </assignments>
     <assignments>
-        <name>Assign_NWL_Default_Calculated_Dates</name>
-        <label>Assign NWL Default Calculated Dates</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <assignmentItems>
-            <assignToReference>$Record.Total_Time_Excluding_Abeyance_In_Days__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>form_TotalTimeExAbeyanceInDays</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>$Record.Total_Time_Including_Abeyance_In_Days__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>form_TotalTimeIncAbeyanceInDays</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>$Record.Time_To_Decision_After_Inspector_Report__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>form_TimeToDecisionInspectorReport</elementReference>
-            </value>
-        </assignmentItems>
-    </assignments>
-    <assignments>
         <name>Assign_Previous_Status</name>
         <label>Assign Previous Status</label>
         <locationX>0</locationX>
@@ -336,7 +309,7 @@
             <operator>Assign</operator>
         </assignmentItems>
         <connector>
-            <targetReference>Assign_NWL_Default_Calculated_Dates</targetReference>
+            <targetReference>Is_NWL_Owner_Changed_and_Status_is_Application_Received</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -428,6 +401,19 @@
         <connector>
             <targetReference>Decision_NWL_Status_Changes</targetReference>
         </connector>
+    </assignments>
+    <assignments>
+        <name>Update_Status_to_Under_Review</name>
+        <label>Update Status to Under Review</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Under Review</stringValue>
+            </value>
+        </assignmentItems>
     </assignments>
     <assignments>
         <name>Update_Traget_Completion_Date</name>
@@ -697,7 +683,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <targetReference>Assign_NWL_Default_Calculated_Dates</targetReference>
+            <targetReference>Is_NWL_Owner_Changed_and_Status_is_Application_Received</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -1022,6 +1008,49 @@
                 <targetReference>Assign_Mapping_Owner</targetReference>
             </connector>
             <label>Yes Mapping Owner is blank</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Is_NWL_Owner_Changed_and_Status_is_Application_Received</name>
+        <label>Is NWL Owner Changed and Status is Application Received</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes_NWL_and_Owner_Changed</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Application Received</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.OwnerId</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.OwnerId</leftValueReference>
+                <operator>StartsWith</operator>
+                <rightValue>
+                    <stringValue>005</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary_Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Status_to_Under_Review</targetReference>
+            </connector>
+            <label>Yes NWL and Owner Changed</label>
         </rules>
     </decisions>
     <decisions>
@@ -1375,29 +1404,6 @@ NOT(OR(
         <expression>{!$Record.Procedural_Notice_Letter_Date__c} + 30</expression>
     </formulas>
     <formulas>
-        <name>form_TimeToDecisionInspectorReport</name>
-        <dataType>Number</dataType>
-        <expression>{!$Record.Decision_Date__c} - {!$Record.Inspector_s_Report_Received_Date__c}</expression>
-        <scale>0</scale>
-    </formulas>
-    <formulas>
-        <description>Date the procedural letter was issued and Decision Letter date, excluding abeyance time</description>
-        <name>form_TotalTimeExAbeyanceInDays</name>
-        <dataType>Number</dataType>
-        <expression>IF(NOT(OR(
-ISBLANK({!$Record.Procedural_Notice_Letter_Date__c}), ISBLANK({!$Record.Decision_Date__c}))),
-({!$Record.Decision_Date__c} - {!$Record.Procedural_Notice_Letter_Date__c}) - ({!form_1st_Abeyance_Duration} +{!form_2nd_Abeyance_Duration}), 0)</expression>
-        <scale>0</scale>
-    </formulas>
-    <formulas>
-        <name>form_TotalTimeIncAbeyanceInDays</name>
-        <dataType>Number</dataType>
-        <expression>IF(NOT(OR(
-ISBLANK({!$Record.Procedural_Notice_Letter_Date__c}), ISBLANK({!$Record.Decision_Date__c}))),
-({!$Record.Procedural_Notice_Letter_Date__c} - {!$Record.Decision_Date__c}), 0)</expression>
-        <scale>0</scale>
-    </formulas>
-    <formulas>
         <name>formula_IsNew</name>
         <dataType>Boolean</dataType>
         <expression>ISNEW()</expression>
@@ -1632,7 +1638,7 @@ ISBLANK({!$Record.Procedural_Notice_Letter_Date__c}), ISBLANK({!$Record.Decision
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordBeforeSave</triggerType>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <name>FurtherInformationStatusUpdatedDateTime</name>
         <dataType>DateTime</dataType>
