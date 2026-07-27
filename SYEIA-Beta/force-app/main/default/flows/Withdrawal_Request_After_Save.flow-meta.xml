@@ -49,6 +49,59 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
     <actionCalls>
+        <name>Send_Notification_Email_To_NWL_Team</name>
+        <label>Send Notification Email To NWL Team</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>Get_NWL_Custom_Notifications</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Error_Log</targetReference>
+        </faultConnector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>recipientAddresses</name>
+            <value/>
+        </inputParameters>
+        <inputParameters>
+            <name>senderType</name>
+            <value>
+                <stringValue>OrgWideEmailAddress</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderAddress</name>
+            <value>
+                <stringValue>necessarywayleaves@energysecurity.gov.uk</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>composeEmailContent</name>
+            <value>
+                <stringValue>True</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>Request to withdraw an application</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <stringValue>&lt;p&gt;Dear {!$Record.Case__r.Case_Owner__c},&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;{!$Record.Case__r.Applicant_Name_Formula__c} has sent a request to withdraw their application: {!$Record.Case__r.Name}.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;See this request: {!form_CaseDetailLink}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Do not reply to this email.&lt;/p&gt;</stringValue>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+        <offset>0</offset>
+        <versionString>3.0.1</versionString>
+    </actionCalls>
+    <actionCalls>
         <name>Send_Notification_Email_To_S37_Team</name>
         <label>Send Notification Email To S37 Team</label>
         <locationX>0</locationX>
@@ -56,7 +109,7 @@
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <connector>
-            <targetReference>Get_Custom_Notifications</targetReference>
+            <targetReference>Get_S37_Custom_Notifications</targetReference>
         </connector>
         <faultConnector>
             <isGoTo>true</isGoTo>
@@ -102,8 +155,59 @@
         <versionString>3.0.1</versionString>
     </actionCalls>
     <actionCalls>
-        <name>Send_Withdrawal_Request_Notification</name>
-        <label>Send Withdrawal Request Notification</label>
+        <name>Send_NWL_Withdrawal_Request_Notification</name>
+        <label>Send NWL Withdrawal Request Notification</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>customNotificationAction</actionName>
+        <actionType>customNotificationAction</actionType>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Error_Log</targetReference>
+        </faultConnector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>customNotifTypeId</name>
+            <value>
+                <elementReference>Get_NWL_Custom_Notifications.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientIds</name>
+            <value>
+                <elementReference>varCaseNWL_QueueIdList</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>title</name>
+            <value>
+                <elementReference>TEMP_WithdrawalRequestNotificationSubject</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>body</name>
+            <value>
+                <elementReference>TEMP_WithdrawalRequestNotificationBody</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>targetId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>targetPageRef</name>
+            <value>
+                <elementReference>TEMP_WithdrawalRequestTarget</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>customNotificationAction</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_S37_Withdrawal_Request_Notification</name>
+        <label>Send S37 Withdrawal Request Notification</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <actionName>customNotificationAction</actionName>
@@ -115,7 +219,7 @@
         <inputParameters>
             <name>customNotifTypeId</name>
             <value>
-                <elementReference>Get_Custom_Notifications.Id</elementReference>
+                <elementReference>Get_S37_Custom_Notifications.Id</elementReference>
             </value>
         </inputParameters>
         <inputParameters>
@@ -162,11 +266,27 @@
             <assignToReference>var_Case_37_Ids</assignToReference>
             <operator>Add</operator>
             <value>
-                <elementReference>Get_Notification_Queue.Id</elementReference>
+                <elementReference>Get_S37_Notification_Queue.Id</elementReference>
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Send_Withdrawal_Request_Notification</targetReference>
+            <targetReference>Send_S37_Withdrawal_Request_Notification</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Case_NWL_Queue_Id</name>
+        <label>Assign Case NWL Queue Id</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>varCaseNWL_QueueIdList</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Get_NWL_Notification_Queue.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Send_NWL_Withdrawal_Request_Notification</targetReference>
         </connector>
     </assignments>
     <decisions>
@@ -189,6 +309,21 @@
                 <targetReference>Get_Recipient_Email</targetReference>
             </connector>
             <label>Section 37</label>
+        </rules>
+        <rules>
+            <name>NWL_Case</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case__r.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Notification_Email_To_NWL_Team</targetReference>
+            </connector>
+            <label>NWL Case</label>
         </rules>
     </decisions>
     <decisions>
@@ -213,7 +348,8 @@
             <label>Is Update</label>
         </rules>
     </decisions>
-    <description>This Trigger runs after a Withdrawal request has been saved.</description>
+    <description>This Trigger runs after a Withdrawal request has been saved.
+NWL and Section 37.</description>
     <environments>Default</environments>
     <formulas>
         <name>form_CaseDetailLink</name>
@@ -242,20 +378,24 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordLookups>
-        <name>Get_Custom_Notifications</name>
-        <label>Get Custom Notifications</label>
+        <name>Get_NWL_Custom_Notifications</name>
+        <label>Get NWL Custom Notifications</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Get_Notification_Queue</targetReference>
+            <targetReference>Get_NWL_Notification_Queue</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Error_Log</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>DeveloperName</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Section_37_Withdrawal_Request_Notification</stringValue>
+                <stringValue>Section_NWL_Withdrawal_Request_Notification</stringValue>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -263,14 +403,18 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <name>Get_Notification_Queue</name>
-        <label>Get Notification Queue</label>
+        <name>Get_NWL_Notification_Queue</name>
+        <label>Get NWL Notification Queue</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Assign_Case_37_Queue_Id</targetReference>
+            <targetReference>Assign_Case_NWL_Queue_Id</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Error_Log</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Type</field>
@@ -283,7 +427,7 @@
             <field>DeveloperName</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Queue_S37_Cases</stringValue>
+                <stringValue>Queue_NWL_Cases</stringValue>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -311,6 +455,63 @@
         <object>Case_Email_Config__mdt</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <recordLookups>
+        <name>Get_S37_Custom_Notifications</name>
+        <label>Get S37 Custom Notifications</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_S37_Notification_Queue</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Error_Log</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Section_37_Withdrawal_Request_Notification</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>CustomNotificationType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_S37_Notification_Queue</name>
+        <label>Get S37 Notification Queue</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_Case_37_Queue_Id</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Error_Log</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Type</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Queue</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Queue_S37_Cases</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Group</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <start>
         <locationX>0</locationX>
         <locationY>0</locationY>
@@ -322,7 +523,7 @@
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <textTemplates>
         <name>TEMP_WithdrawalRequestNotificationBody</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
@@ -347,6 +548,13 @@
     </textTemplates>
     <variables>
         <name>var_Case_37_Ids</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>varCaseNWL_QueueIdList</name>
         <dataType>String</dataType>
         <isCollection>true</isCollection>
         <isInput>false</isInput>
