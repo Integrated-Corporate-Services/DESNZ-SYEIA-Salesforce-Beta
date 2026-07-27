@@ -557,6 +557,8 @@
 		<members>Unassigned_Case_Notifications</members>
 		<members>Section_37_Withdrawal_Request_Notification</members>
 		<members>Section_37_Deadline_Reminder</members>
+		<members>New_NWL_Case_Notification</members>
+		<members>New_S37_Case_Notification</members>
 		<name>CustomNotificationType</name>
 	</types>
 	<types>
@@ -693,7 +695,7 @@
 		<members>Task_After_Save</members>
 		<members>Update_the_application_status_to_Archived</members>
 		<members>SubFlow_NWL_Decision_Issued_Letter</members>
-		<members>Subflow_Notify_Team_On_New_NWL_Case</members>
+		<members>Subflow_Notify_Team_On_New_Case</members>
 		<name>Flow</name>
 	</types>
 	<types>

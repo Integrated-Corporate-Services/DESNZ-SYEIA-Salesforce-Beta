@@ -85,7 +85,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Notify_NWL_Team_On_New_NWL_Case</targetReference>
+                <targetReference>Notify_NWL_Team_On_New_Case</targetReference>
             </connector>
             <label>Is New</label>
         </rules>
@@ -178,7 +178,7 @@
         </rules>
     </decisions>
     <description>Case Status Change
-New NWL Case</description>
+New Case</description>
     <environments>Default</environments>
     <formulas>
         <name>formula_WithdrawalRequestedTaskDescription</name>
@@ -246,11 +246,12 @@ New NWL Case</description>
     </start>
     <status>Active</status>
     <subflows>
-        <name>Notify_NWL_Team_On_New_NWL_Case</name>
-        <label>Notify NWL Team On New NWL Case</label>
+        <description>Notify S37 or NWL team members when a new case is created.</description>
+        <name>Notify_NWL_Team_On_New_Case</name>
+        <label>Notify NWL Team On New Case</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <flowName>Subflow_Notify_Team_On_New_NWL_Case</flowName>
+        <flowName>Subflow_Notify_Team_On_New_Case</flowName>
         <inputAssignments>
             <name>varTriggeringCase</name>
             <value>
