@@ -96,6 +96,35 @@
             </connector>
             <label>Changed From FIR</label>
         </rules>
+        <rules>
+            <name>NWL_Changed_To_Decision_Issued</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Decision Issued</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NWL_Send_Decision_Letter</targetReference>
+            </connector>
+            <label>NWL - Changed To Decision Issued</label>
+        </rules>
     </decisions>
     <decisions>
         <name>Status_Changed_to_Withdrawal_Requested</name>
@@ -189,7 +218,24 @@
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
+    <subflows>
+        <name>NWL_Send_Decision_Letter</name>
+        <label>NWL Send Decision Letter</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Status_Changed_to_Withdrawal_Requested</targetReference>
+        </connector>
+        <flowName>SubFlow_NWL_Decision_Issued_Letter</flowName>
+        <inputAssignments>
+            <name>varTriggeringCase</name>
+            <value>
+                <elementReference>$Record</elementReference>
+            </value>
+        </inputAssignments>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </subflows>
     <variables>
         <description>DNO Has Requested Case Withdrawal</description>
         <name>var_WithdrawalRequestedTaskSubject</name>
