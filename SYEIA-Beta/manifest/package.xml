@@ -695,7 +695,6 @@
 		<members>Task_After_Save</members>
 		<members>Update_the_application_status_to_Archived</members>
 		<members>SubFlow_NWL_Decision_Issued_Letter</members>
-		<members>Subflow_Notify_Team_On_New_Case</members>
 		<name>Flow</name>
 	</types>
 	<types>
