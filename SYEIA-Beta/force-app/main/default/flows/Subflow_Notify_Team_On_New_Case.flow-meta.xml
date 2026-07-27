@@ -12,20 +12,17 @@
             <name>faultMessage</name>
             <value>
                 <elementReference>$Flow.FaultMessage</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>flowName</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>Subflow_Notify_Team_On_New_NWL_Case</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>loggingLevelName</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>ERROR</stringValue>
             </value>
         </inputParameters>
@@ -33,21 +30,18 @@
             <name>message</name>
             <value>
                 <elementReference>$Flow.FaultMessage</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>recordId</name>
             <value>
                 <elementReference>varTriggeringCase.Id</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>saveLog</name>
             <value>
                 <booleanValue>true</booleanValue>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <nameSegment>FlowLogEntry</nameSegment>
@@ -62,7 +56,7 @@
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <connector>
-            <targetReference>Get_Custom_Notification</targetReference>
+            <targetReference>Get_NWL_Custom_Notification</targetReference>
         </connector>
         <faultConnector>
             <isGoTo>true</isGoTo>
@@ -71,23 +65,17 @@
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>recipientAddresses</name>
-            <value>
-                <collectionElements>
-                    <stringValue>NWL_Team_Email</stringValue>
-                </collectionElements>
-            </value>
+            <value/>
         </inputParameters>
         <inputParameters>
             <name>senderType</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>OrgWideEmailAddress</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>senderAddress</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>necessarywayleaves@energysecurity.gov.uk</stringValue>
             </value>
         </inputParameters>
@@ -100,30 +88,29 @@
         <inputParameters>
             <name>emailSubject</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>A new SYEIA application has been submitted</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>emailBody</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>&lt;p&gt;Dear Necessary Wayleaves Team,&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;A new application {!varTriggeringCase.Name} for {!varTriggeringCase.Case_Type__c} has been submitted must be assigned to a case officer {!form_CaseDetailLink} within 2 working days.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Do not reply to this email.&lt;/p&gt;</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <booleanValue>true</booleanValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>relatedRecordId</name>
             <value>
                 <elementReference>varTriggeringCase.Id</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>logEmailOnSend</name>
-            <value>
-                <booleanValue>true</booleanValue>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
-            </value>
         </inputParameters>
         <nameSegment>emailSimple</nameSegment>
         <offset>0</offset>
@@ -143,8 +130,7 @@
         <inputParameters>
             <name>customNotifTypeId</name>
             <value>
-                <elementReference>Get_Custom_Notification.Id</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+                <elementReference>Get_NWL_Custom_Notification.Id</elementReference>
             </value>
         </inputParameters>
         <inputParameters>
@@ -156,7 +142,6 @@
         <inputParameters>
             <name>title</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>New Application</stringValue>
             </value>
         </inputParameters>
@@ -164,14 +149,125 @@
             <name>body</name>
             <value>
                 <elementReference>TEMP_NewNWL_CaseNotification_Body</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>targetId</name>
             <value>
                 <elementReference>varTriggeringCase.Id</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+            </value>
+        </inputParameters>
+        <nameSegment>customNotificationAction</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_New_S37_Case_Alert</name>
+        <label>Send New S37 Case Alert</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>Get_S37_Custom_Notification</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Error_Log</targetReference>
+        </faultConnector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>recipientAddresses</name>
+            <value/>
+        </inputParameters>
+        <inputParameters>
+            <name>senderType</name>
+            <value>
+                <stringValue>OrgWideEmailAddress</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderAddress</name>
+            <value>
+                <stringValue>s37consents@energysecurity.gov.uk</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>composeEmailContent</name>
+            <value>
+                <stringValue>True</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>A new SYEIA application has been submitted</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <stringValue>&lt;p&gt;Dear Necessary Wayleaves Team,&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;A new application {!varTriggeringCase.Name} for {!varTriggeringCase.Case_Type__c} has been submitted must be assigned to a case officer {!form_CaseDetailLink} within 2 working days.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Do not reply to this email.&lt;/p&gt;</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>relatedRecordId</name>
+            <value>
+                <elementReference>varTriggeringCase.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>logEmailOnSend</name>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+        <offset>0</offset>
+        <versionString>3.0.1</versionString>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_New_S37_Case_Notification</name>
+        <label>Send New S37 Case Notification</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>customNotificationAction</actionName>
+        <actionType>customNotificationAction</actionType>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Error_Log</targetReference>
+        </faultConnector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>customNotifTypeId</name>
+            <value>
+                <elementReference>Get_S37_Custom_Notification.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientIds</name>
+            <value>
+                <elementReference>varCaseS37QueueIdList</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>title</name>
+            <value>
+                <stringValue>New Application</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>body</name>
+            <value>
+                <elementReference>TEMP_NewNWL_CaseNotification_Body</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>targetId</name>
+            <value>
+                <elementReference>varTriggeringCase.Id</elementReference>
             </value>
         </inputParameters>
         <nameSegment>customNotificationAction</nameSegment>
@@ -188,11 +284,27 @@
             <assignToReference>varCaseNWL_QueueIdList</assignToReference>
             <operator>Add</operator>
             <value>
-                <elementReference>Get_Notification_Queue.Id</elementReference>
+                <elementReference>Get_NWL_Notification_Queue.Id</elementReference>
             </value>
         </assignmentItems>
         <connector>
             <targetReference>Send_New_NWL_Case_Notification</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Case_S37_Queue_Id</name>
+        <label>Assign Case S37 Queue Id</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>varCaseS37QueueIdList</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Get_S37_Notification_Queue.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Send_New_S37_Case_Notification</targetReference>
         </connector>
     </assignments>
     <decisions>
@@ -217,16 +329,31 @@
             </connector>
             <label>Is NWL Case</label>
         </rules>
+        <rules>
+            <name>Is_S37_Case</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>varTriggeringCase.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Section 37</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_New_S37_Case_Alert</targetReference>
+            </connector>
+            <label>Is S37 Case</label>
+        </rules>
     </decisions>
-    <description>Notify NWL team when a new case arrives.</description>
+    <description>Notify Team members when a new case is submitted.</description>
     <environments>Default</environments>
     <formulas>
         <name>form_CaseDetailLink</name>
         <dataType>String</dataType>
         <expression>LEFT({!$Api.Partner_Server_URL_370} , FIND(&apos;/services&apos;,{!$Api.Partner_Server_URL_370}))&amp; &apos;/lightning/r/Case__c/&apos; &amp;{!varTriggeringCase.Id}&amp; &apos;/view&apos;</expression>
     </formulas>
-    <interviewLabel>[Subflow] - Notify Team On New NWL Case {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>[Subflow] - Notify Team On New NWL Case</label>
+    <interviewLabel>[Subflow] - Notify Team On New Case {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>[Subflow] - Notify Team On New Case</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -247,13 +374,13 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordLookups>
-        <name>Get_Custom_Notification</name>
-        <label>Get Custom Notification</label>
+        <name>Get_NWL_Custom_Notification</name>
+        <label>Get NWL Custom Notification</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Get_Notification_Queue</targetReference>
+            <targetReference>Get_NWL_Notification_Queue</targetReference>
         </connector>
         <faultConnector>
             <isGoTo>true</isGoTo>
@@ -272,8 +399,8 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <name>Get_Notification_Queue</name>
-        <label>Get Notification Queue</label>
+        <name>Get_NWL_Notification_Queue</name>
+        <label>Get NWL Notification Queue</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
@@ -303,6 +430,63 @@
         <object>Group</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <recordLookups>
+        <name>Get_S37_Custom_Notification</name>
+        <label>Get S37 Custom Notification</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_S37_Notification_Queue</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Error_Log</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>New_S37_Case_Notification</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>CustomNotificationType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_S37_Notification_Queue</name>
+        <label>Get S37 Notification Queue</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_Case_S37_Queue_Id</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Error_Log</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Type</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Queue</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Queue_S37_Cases</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Group</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <start>
         <locationX>0</locationX>
         <locationY>0</locationY>
@@ -313,11 +497,18 @@
     <status>Active</status>
     <textTemplates>
         <name>TEMP_NewNWL_CaseNotification_Body</name>
-        <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;A new application has been submitted and must be assigned to a case officer.&lt;/p&gt;</text>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>A new application has been submitted and must be assigned to a case officer.</text>
     </textTemplates>
     <variables>
         <name>varCaseNWL_QueueIdList</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>varCaseS37QueueIdList</name>
         <dataType>String</dataType>
         <isCollection>true</isCollection>
         <isInput>false</isInput>

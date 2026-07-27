@@ -325,13 +325,13 @@
     <status>Active</status>
     <textTemplates>
         <name>TEMP_WithdrawalRequestNotificationBody</name>
-        <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;You&apos;ve received a request to withdraw an application.&lt;/span&gt;&lt;/p&gt;</text>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>You&apos;ve received a request to withdraw an application.</text>
     </textTemplates>
     <textTemplates>
         <name>TEMP_WithdrawalRequestNotificationSubject</name>
-        <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Withdrawal request&lt;/span&gt;&lt;/p&gt;</text>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Withdrawal request</text>
     </textTemplates>
     <textTemplates>
         <name>TEMP_WithdrawalRequestTarget</name>
