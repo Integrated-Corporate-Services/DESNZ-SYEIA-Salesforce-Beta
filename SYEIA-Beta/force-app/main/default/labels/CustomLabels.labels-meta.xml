@@ -56,4 +56,12 @@
         <shortDescription>S37 Email</shortDescription>
         <value>s37Contents@energysecurity.gov,uk</value>
     </labels>
+    <labels>
+        <fullName>NWL_Team_Email</fullName>
+        <categories>NWL</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NWL Team Email</shortDescription>
+        <value>necessarywayleaves@energysecurity.gov.uk</value>
+    </labels>
 </CustomLabels>
