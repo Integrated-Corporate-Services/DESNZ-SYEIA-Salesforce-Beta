@@ -12,20 +12,17 @@
             <name>faultMessage</name>
             <value>
                 <elementReference>$Flow.FaultMessage</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>flowName</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>Subflow_Notify_Team_On_New_NWL_Case</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>loggingLevelName</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>ERROR</stringValue>
             </value>
         </inputParameters>
@@ -33,21 +30,18 @@
             <name>message</name>
             <value>
                 <elementReference>$Flow.FaultMessage</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>recordId</name>
             <value>
                 <elementReference>varTriggeringCase.Id</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>saveLog</name>
             <value>
                 <booleanValue>true</booleanValue>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <nameSegment>FlowLogEntry</nameSegment>
@@ -71,23 +65,17 @@
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>recipientAddresses</name>
-            <value>
-                <collectionElements>
-                    <stringValue>NWL_Team_Email</stringValue>
-                </collectionElements>
-            </value>
+            <value/>
         </inputParameters>
         <inputParameters>
             <name>senderType</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>OrgWideEmailAddress</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>senderAddress</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>necessarywayleaves@energysecurity.gov.uk</stringValue>
             </value>
         </inputParameters>
@@ -100,14 +88,12 @@
         <inputParameters>
             <name>emailSubject</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>A new SYEIA application has been submitted</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>emailBody</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>&lt;p&gt;Dear Necessary Wayleaves Team,&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;A new application {!varTriggeringCase.Name} for {!varTriggeringCase.Case_Type__c} has been submitted must be assigned to a case officer {!form_CaseDetailLink} within 2 working days.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Do not reply to this email.&lt;/p&gt;</stringValue>
             </value>
         </inputParameters>
@@ -115,14 +101,12 @@
             <name>relatedRecordId</name>
             <value>
                 <elementReference>varTriggeringCase.Id</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>logEmailOnSend</name>
             <value>
                 <booleanValue>true</booleanValue>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <nameSegment>emailSimple</nameSegment>
@@ -144,7 +128,6 @@
             <name>customNotifTypeId</name>
             <value>
                 <elementReference>Get_NWL_Custom_Notification.Id</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -156,7 +139,6 @@
         <inputParameters>
             <name>title</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>New Application</stringValue>
             </value>
         </inputParameters>
@@ -164,14 +146,12 @@
             <name>body</name>
             <value>
                 <elementReference>TEMP_NewNWL_CaseNotification_Body</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>targetId</name>
             <value>
                 <elementReference>varTriggeringCase.Id</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <nameSegment>customNotificationAction</nameSegment>
@@ -194,23 +174,17 @@
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>recipientAddresses</name>
-            <value>
-                <collectionElements>
-                    <elementReference>$Label.S37_Email</elementReference>
-                </collectionElements>
-            </value>
+            <value/>
         </inputParameters>
         <inputParameters>
             <name>senderType</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>OrgWideEmailAddress</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>senderAddress</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>s37consents@energysecurity.gov.uk</stringValue>
             </value>
         </inputParameters>
@@ -223,14 +197,12 @@
         <inputParameters>
             <name>emailSubject</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>A new SYEIA application has been submitted</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>emailBody</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>&lt;p&gt;Dear Necessary Wayleaves Team,&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;A new application {!varTriggeringCase.Name} for {!varTriggeringCase.Case_Type__c} has been submitted must be assigned to a case officer {!form_CaseDetailLink} within 2 working days.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Do not reply to this email.&lt;/p&gt;</stringValue>
             </value>
         </inputParameters>
@@ -238,21 +210,18 @@
             <name>sendRichBody</name>
             <value>
                 <booleanValue>true</booleanValue>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>relatedRecordId</name>
             <value>
                 <elementReference>varTriggeringCase.Id</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>logEmailOnSend</name>
             <value>
                 <booleanValue>true</booleanValue>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <nameSegment>emailSimple</nameSegment>
@@ -275,7 +244,6 @@
             <name>customNotifTypeId</name>
             <value>
                 <elementReference>Get_S37_Custom_Notification.Id</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -287,7 +255,6 @@
         <inputParameters>
             <name>title</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>New Application</stringValue>
             </value>
         </inputParameters>
@@ -295,14 +262,12 @@
             <name>body</name>
             <value>
                 <elementReference>TEMP_NewNWL_CaseNotification_Body</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>targetId</name>
             <value>
                 <elementReference>varTriggeringCase.Id</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <nameSegment>customNotificationAction</nameSegment>
@@ -532,8 +497,8 @@
     <status>Active</status>
     <textTemplates>
         <name>TEMP_NewNWL_CaseNotification_Body</name>
-        <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;A new application has been submitted and must be assigned to a case officer.&lt;/p&gt;</text>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>A new application has been submitted and must be assigned to a case officer.</text>
     </textTemplates>
     <variables>
         <name>varCaseNWL_QueueIdList</name>
