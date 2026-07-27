@@ -66,6 +66,31 @@
     <apiVersion>65.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <decisions>
+        <name>Decision_Is_New</name>
+        <label>Decision Is New</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Decision_Status_Changed</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Is Update</defaultConnectorLabel>
+        <rules>
+            <name>Is_New</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Notify_NWL_Team_On_New_NWL_Case</targetReference>
+            </connector>
+            <label>Is New</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Decision_Status_Changed</name>
         <label>Decision Status Changed</label>
         <locationX>0</locationX>
@@ -152,7 +177,8 @@
             <label>Yes</label>
         </rules>
     </decisions>
-    <description>Case Status Change</description>
+    <description>Case Status Change
+New NWL Case</description>
     <environments>Default</environments>
     <formulas>
         <name>formula_WithdrawalRequestedTaskDescription</name>
@@ -211,7 +237,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Decision_Status_Changed</targetReference>
+            <targetReference>Decision_Is_New</targetReference>
         </connector>
         <filterFormula>{!$Permission.Bypass_Flow} == false</filterFormula>
         <object>Case__c</object>
@@ -219,6 +245,20 @@
         <triggerType>RecordAfterSave</triggerType>
     </start>
     <status>Active</status>
+    <subflows>
+        <name>Notify_NWL_Team_On_New_NWL_Case</name>
+        <label>Notify NWL Team On New NWL Case</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Subflow_Notify_Team_On_New_NWL_Case</flowName>
+        <inputAssignments>
+            <name>varTriggeringCase</name>
+            <value>
+                <elementReference>$Record</elementReference>
+            </value>
+        </inputAssignments>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </subflows>
     <subflows>
         <name>NWL_Send_Decision_Letter</name>
         <label>NWL Send Decision Letter</label>
