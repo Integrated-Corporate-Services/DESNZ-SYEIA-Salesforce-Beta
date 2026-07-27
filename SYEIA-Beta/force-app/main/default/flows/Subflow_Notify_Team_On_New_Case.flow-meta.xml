@@ -98,6 +98,12 @@
             </value>
         </inputParameters>
         <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
             <name>relatedRecordId</name>
             <value>
                 <elementReference>varTriggeringCase.Id</elementReference>
