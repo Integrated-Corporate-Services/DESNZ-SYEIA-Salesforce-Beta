@@ -993,7 +993,7 @@
                 <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <elementReference>NW09_Proceduralnotice_WR_LO</elementReference>
+                    <elementReference>NW09_Proceduralnotice_WR_Applicant</elementReference>
                 </rightValue>
             </conditions>
             <conditions>
