@@ -1418,6 +1418,13 @@
                     <stringValue>Necessary_Wayleaves</stringValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
             <connector>
                 <targetReference>Update_Sub_Status_to_Awaiting_validation</targetReference>
             </connector>
@@ -1432,7 +1439,7 @@
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Changed_to_Seeking_further_information_from_inspector</name>
-            <conditionLogic>and</conditionLogic>
+            <conditionLogic>(1 OR 4 ) AND 2 AND 3</conditionLogic>
             <conditions>
                 <leftValueReference>$Record.Sub_Status__c</leftValueReference>
                 <operator>EqualTo</operator>
@@ -1447,6 +1454,20 @@
                     <stringValue>Necessary_Wayleaves</stringValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>$Record.Sub_Status__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Seeking Further Information From Inspector</stringValue>
+                </rightValue>
+            </conditions>
             <connector>
                 <targetReference>Update_Status_to_Representation_Stage</targetReference>
             </connector>
@@ -1454,7 +1475,7 @@
         </rules>
         <rules>
             <name>Changed_to_Pre_Action_Protocol_Letter_received_Or</name>
-            <conditionLogic>(1 OR 2 OR 3) AND 4</conditionLogic>
+            <conditionLogic>(1 OR 2 OR 3) AND 4 AND 5</conditionLogic>
             <conditions>
                 <leftValueReference>$Record.Sub_Status__c</leftValueReference>
                 <operator>EqualTo</operator>
@@ -1481,6 +1502,13 @@
                 <operator>EqualTo</operator>
                 <rightValue>
                     <stringValue>Necessary_Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Sub_Status__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
             <connector>

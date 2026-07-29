@@ -944,19 +944,19 @@
         </rules>
         <rules>
             <name>W07_Abeyance_letter</name>
-            <conditionLogic>and</conditionLogic>
+            <conditionLogic>or</conditionLogic>
             <conditions>
                 <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <stringValue>NW07. Abeyance letter - Applicant</stringValue>
+                    <elementReference>NW07_Abeyanceletter_Applicant</elementReference>
                 </rightValue>
             </conditions>
             <conditions>
                 <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <stringValue>NW07. Abeyance letter - LO</stringValue>
+                    <elementReference>NW07_Abeyanceletter_LO</elementReference>
                 </rightValue>
             </conditions>
             <connector>
