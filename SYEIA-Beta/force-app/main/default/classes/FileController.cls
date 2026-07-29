@@ -7,7 +7,7 @@ public with sharing class FileController {
         HttpRequest req = new HttpRequest();
         String bearerToken = OAuthTokenService.getBearerToken();
 
-        req.setEndpoint('callout:Applicant_File_Download/backend/api/v1/internal/applications/' + applicationId + '/documents/download'); 
+        req.setEndpoint('callout:Applicant_File_Download/' + applicationId + '/documents/download'); 
         req.setMethod('POST');
         req.setHeader('Content-Type', 'application/json');
         req.setHeader('Accept', 'application/zip');
