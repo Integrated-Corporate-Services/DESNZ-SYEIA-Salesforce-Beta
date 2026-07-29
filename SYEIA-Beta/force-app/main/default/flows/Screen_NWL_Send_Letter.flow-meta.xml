@@ -1077,7 +1077,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Create_Email_Tracking_Record</targetReference>
+                <targetReference>NW13_Decision_letter_Applicant_App</targetReference>
             </connector>
             <label>NW13. Decision letter - Applicant</label>
         </rules>
@@ -1613,6 +1613,36 @@ Letter Dates</description>
         <object>Email_Tracking__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <recordUpdates>
+        <name>NW13_Decision_letter_Applicant_App</name>
+        <label>NW13. Decision letter - Applicant</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Email_Tracking_Record</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Decision_Date__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>Decision Issued</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Case__c</object>
+    </recordUpdates>
     <recordUpdates>
         <name>Update_Applicant_Only_Letter_Date</name>
         <label>Update Applicant Only Letter Date</label>
