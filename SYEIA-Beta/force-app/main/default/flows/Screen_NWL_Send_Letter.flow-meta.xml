@@ -1962,7 +1962,7 @@ Letter Dates</description>
             </value>
         </filters>
         <inputAssignments>
-            <field>Applicant_Further_Representations_Date__c</field>
+            <field>Further_Representations_Exchange_Letter__c</field>
             <value>
                 <elementReference>$Flow.CurrentDate</elementReference>
             </value>
