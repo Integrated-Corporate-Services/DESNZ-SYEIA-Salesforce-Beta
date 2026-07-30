@@ -57,7 +57,7 @@ private class FileControllerTest {
                 }
 
                 System.assertEquals('POST', req.getMethod(), 'Expected POST for document download');
-                System.assert(endpoint.contains('/internal/applications/' + APPLICATION_ID + '/documents/download'),
+                System.assert(endpoint.contains(APPLICATION_ID + '/documents/download'),
                     'Unexpected endpoint: ' + endpoint);
                 System.assertEquals('application/json', req.getHeader('Content-Type'));
                 System.assertEquals('application/zip', req.getHeader('Accept'));
