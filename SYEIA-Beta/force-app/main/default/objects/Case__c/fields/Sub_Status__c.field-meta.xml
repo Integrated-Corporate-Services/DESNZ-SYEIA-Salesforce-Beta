@@ -156,6 +156,16 @@
                 <default>false</default>
                 <label>Post Decision Correspondence</label>
             </value>
+            <value>
+                <fullName>Withdrawal Requested</fullName>
+                <default>false</default>
+                <label>Withdrawal Requested</label>
+            </value>
+            <value>
+                <fullName>Withdrawn</fullName>
+                <default>false</default>
+                <label>Withdrawn</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>
