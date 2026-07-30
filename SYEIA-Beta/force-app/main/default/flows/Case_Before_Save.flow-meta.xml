@@ -468,6 +468,38 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Update_SubStatus_to_Withdrawal_Requested</name>
+        <label>Update SubStatus to Withdrawal Requested</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Sub_Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Withdrawal Requested</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>NWL_Sub_Status_Changed</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Update_SubStatus_to_Withdrawn</name>
+        <label>Update SubStatus to Withdrawn</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Sub_Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Withdrawn</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>NWL_Sub_Status_Changed</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Update_Traget_Completion_Date</name>
         <label>Update Traget Completion Date</label>
         <locationX>0</locationX>
@@ -1429,6 +1461,78 @@
                 <targetReference>Update_Sub_Status_to_Awaiting_validation</targetReference>
             </connector>
             <label>Is Application Received</label>
+        </rules>
+        <rules>
+            <name>Withdrawal_Requested</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Withdrawal Requested</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Sub_Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Withdrawal Requested</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary_Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_SubStatus_to_Withdrawal_Requested</targetReference>
+            </connector>
+            <label>Withdrawal Requested</label>
+        </rules>
+        <rules>
+            <name>Withdrawn</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Withdrawn</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Sub_Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Withdrawn</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary_Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_SubStatus_to_Withdrawn</targetReference>
+            </connector>
+            <label>Withdrawn</label>
         </rules>
     </decisions>
     <decisions>

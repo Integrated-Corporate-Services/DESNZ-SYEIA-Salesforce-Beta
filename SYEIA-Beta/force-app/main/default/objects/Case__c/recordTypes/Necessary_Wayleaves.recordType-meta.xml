@@ -1054,6 +1054,14 @@
             <fullName>TL Order Refused Against Inspector Recommendation</fullName>
             <default>false</default>
         </values>
+        <values>
+            <fullName>Withdrawal Requested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Withdrawn</fullName>
+            <default>false</default>
+        </values>
     </picklistValues>
     <picklistValues>
         <picklist>Subject_To_An_EIA__c</picklist>
