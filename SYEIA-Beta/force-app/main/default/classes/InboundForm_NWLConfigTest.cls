@@ -99,6 +99,8 @@ private class InboundForm_NWLConfigTest {
             'LandownerRepresentatives collection should exist');
         Assert.isTrue(collectionNames.contains('Applicants'),
             'Applicants collection should exist');
+        Assert.isTrue(collectionNames.contains('ApplicantContacts'),
+            'ApplicantContacts collection should exist');
         Assert.isTrue(collectionNames.contains('ApplicantAddresses'),
             'ApplicantAddresses collection should exist');
         Assert.isTrue(collectionNames.contains('LandDetails'),
@@ -212,6 +214,22 @@ private class InboundForm_NWLConfigTest {
             applicantMappingsByTarget.get('Email__c').jsonPath,
             'Applicant email should map from email'
         );
+
+        InboundForm_MappingConfig.CollectionConfig applicantContactConfig;
+        for (InboundForm_MappingConfig.CollectionConfig coll : config.collections) {
+            if (coll.collectionName == 'ApplicantContacts') {
+                applicantContactConfig = coll;
+                break;
+            }
+        }
+
+        Assert.isNotNull(applicantContactConfig, 'ApplicantContacts config should be present');
+        Assert.areEqual('sections.applicantDetails', applicantContactConfig.jsonPath,
+            'Applicant contacts should map from sections.applicantDetails');
+        Assert.areEqual('Representative__c', applicantContactConfig.parentLookupField,
+            'Applicant contact should link to applicant via Representative__c');
+        Assert.areEqual('Applicants', applicantContactConfig.parentCollection,
+            'Applicant contact should use Applicants as parent collection');
 
         InboundForm_MappingConfig.CollectionConfig applicantAddressConfig;
         for (InboundForm_MappingConfig.CollectionConfig coll : config.collections) {
