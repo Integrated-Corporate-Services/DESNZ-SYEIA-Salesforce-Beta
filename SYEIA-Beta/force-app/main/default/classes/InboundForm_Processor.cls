@@ -920,6 +920,12 @@ public with sharing class InboundForm_Processor {
         // Each level contains collections that can be inserted together
         // (collections in the same level don't depend on each other)
         Map<String, Map<String, Id>> allLinkMaps = new Map<String, Map<String, Id>>();
+        Set<String> collectionsUsedAsParents = new Set<String>();
+        for (InboundForm_MappingConfig.CollectionConfig coll : config.collections) {
+            if (String.isNotBlank(coll.parentCollection)) {
+                collectionsUsedAsParents.add(coll.parentCollection);
+            }
+        }
         
         // Track all inserted records by object type for afterAllInserts hook
         Map<String, List<SObject>> allInsertedByObject = new Map<String, List<SObject>>();
@@ -929,7 +935,8 @@ public with sharing class InboundForm_Processor {
             Map<String, List<SObject>> recordsByObject = new Map<String, List<SObject>>();
             Map<String, List<ProcessingResult>> ownersByObject =
                 new Map<String, List<ProcessingResult>>();
-            Map<String, InboundForm_MappingConfig.CollectionConfig> configByObject = 
+            Map<String, List<SObject>> recordsByCollection = new Map<String, List<SObject>>();
+            Map<String, InboundForm_MappingConfig.CollectionConfig> configByCollection =
                 new Map<String, InboundForm_MappingConfig.CollectionConfig>();
             
             for (InboundForm_MappingConfig.CollectionConfig collConfig : level) {
@@ -944,7 +951,9 @@ public with sharing class InboundForm_Processor {
                     }
                     recordsByObject.get(targetObj).addAll(gathered.records);
                     ownersByObject.get(targetObj).addAll(gathered.owners);
-                    configByObject.put(targetObj, collConfig);
+
+                    recordsByCollection.put(collConfig.collectionName, gathered.records);
+                    configByCollection.put(collConfig.collectionName, collConfig);
                 }
             }
             
@@ -972,13 +981,21 @@ public with sharing class InboundForm_Processor {
                         allInsertedByObject.put(objectType, new List<SObject>());
                     }
                     allInsertedByObject.get(objectType).addAll(recordsToInsert);
-                    
-                    // Update link maps for next level's parent-child linking
-                    InboundForm_MappingConfig.CollectionConfig collConfig = configByObject.get(objectType);
-                    if (collConfig != null && String.isNotBlank(collConfig.parentLinkSfField)) {
-                        Map<String, Id> linkMap = buildLinkMapFromRecords(recordsToInsert, collConfig.parentLinkSfField);
-                        allLinkMaps.put(collConfig.collectionName, linkMap);
-                    }
+                }
+            }
+
+            // Update link maps for next level's parent-child linking per collection.
+            for (String collectionName : recordsByCollection.keySet()) {
+                InboundForm_MappingConfig.CollectionConfig collConfig =
+                    configByCollection.get(collectionName);
+                if (collConfig != null
+                        && collectionsUsedAsParents.contains(collectionName)
+                        && String.isNotBlank(collConfig.parentLinkSfField)) {
+                    Map<String, Id> linkMap = buildLinkMapFromRecords(
+                        recordsByCollection.get(collectionName),
+                        collConfig.parentLinkSfField
+                    );
+                    allLinkMaps.put(collectionName, linkMap);
                 }
             }
         }
@@ -989,6 +1006,11 @@ public with sharing class InboundForm_Processor {
                 if (!result.success) continue;
                 
                 Id primaryId = inboundToPrimaryMap.get(result.inboundRequestId);
+                if (primaryId == null
+                        && result.createdRecords.containsKey(config.primaryObject)
+                        && !result.createdRecords.get(config.primaryObject).isEmpty()) {
+                    primaryId = result.createdRecords.get(config.primaryObject)[0].Id;
+                }
 
                 if (primaryId != null) {
                     try {

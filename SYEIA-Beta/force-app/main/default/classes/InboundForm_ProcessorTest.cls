@@ -1176,17 +1176,17 @@ private class InboundForm_ProcessorTest {
                 'Applicant party should map applicant_name');
             Assert.areEqual('ics.tester10@ics-testing.com', (String) applicantParty.get('Email__c'),
                 'Applicant party should map email');
-            Assert.areEqual('Organisation', (String) applicantParty.get('Party_Type__c'),
-                'Applicant party type should be Organisation');
-            Assert.areEqual('NWL_APPLICANT', (String) applicantParty.get('Application_Party_Id__c'),
-                'Applicant party should carry NWL_APPLICANT identifier');
+            Assert.areEqual('DNO', (String) applicantParty.get('Party_Type__c'),
+                'Applicant party type should be DNO');
+            Assert.areEqual('NWL_ORGANISATION', (String) applicantParty.get('Application_Party_Id__c'),
+                'Applicant party should carry NWL_ORGANISATION identifier');
 
             Party__c applicantOrganisationParty = [
                 SELECT Id
                 FROM Party__c
                 WHERE Case__c = :insertedCase.Id
                 AND Name = 'DESNZ'
-                AND Party_Type__c = 'Organisation'
+                AND Party_Type__c = 'DNO'
                 LIMIT 1
             ];
             Assert.areEqual(applicantOrganisationParty.Id, insertedCase.DNO__c,
@@ -1203,13 +1203,14 @@ private class InboundForm_ProcessorTest {
                 'Applicant contact party should map applicant_contact_name');
             Assert.areEqual('ics.tester10@ics-testing.com', (String) applicantContactParty.get('Email__c'),
                 'Applicant contact party should map email');
-            Assert.areEqual('NWL_APPLICANT', (String) applicantContactParty.get('Application_Party_Id__c'),
-                'Applicant contact party should use NWL_APPLICANT link key');
+            Assert.areEqual('NWL_ORGANISATION', (String) applicantContactParty.get('Application_Party_Id__c'),
+                'Applicant contact party should use NWL_ORGANISATION link key');
 
             List<Party__c> linkedApplicantParties = [
                 SELECT Id, Name, Representative__c
                 FROM Party__c
-                WHERE Name IN ('DESNZ', 'ICS Test Coordinator 10')
+                WHERE Case__c = :insertedCase.Id
+                AND Name IN ('DESNZ', 'ICS Test Coordinator 10')
             ];
             Map<String, Party__c> partiesByName = new Map<String, Party__c>();
             for (Party__c partyRec : linkedApplicantParties) {
@@ -1231,8 +1232,8 @@ private class InboundForm_ProcessorTest {
                 'ApplicantAddresses should produce one address record');
 
             SObject applicantAddress = applicantAddressRecords[0];
-            Assert.areEqual('NWL_APPLICANT', (String) applicantAddress.get('Application_Party_Identification__c'),
-                'Applicant address should carry NWL_APPLICANT identifier');
+            Assert.areEqual('NWL_ORGANISATION', (String) applicantAddress.get('Application_Party_Identification__c'),
+                'Applicant address should carry NWL_ORGANISATION identifier');
         } finally {
             CaseTriggerHelper.enableProcessing();
         }

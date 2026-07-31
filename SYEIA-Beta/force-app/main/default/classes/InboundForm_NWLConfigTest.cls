@@ -226,10 +226,8 @@ private class InboundForm_NWLConfigTest {
         Assert.isNotNull(applicantContactConfig, 'ApplicantContacts config should be present');
         Assert.areEqual('sections.applicantDetails', applicantContactConfig.jsonPath,
             'Applicant contacts should map from sections.applicantDetails');
-        Assert.areEqual('Representative__c', applicantContactConfig.parentLookupField,
-            'Applicant contact should link to applicant via Representative__c');
-        Assert.areEqual('Applicants', applicantContactConfig.parentCollection,
-            'Applicant contact should use Applicants as parent collection');
+        Assert.areEqual('Case__c', applicantContactConfig.parentLookupField,
+            'Applicant contacts should be direct Case children before representative linking');
 
         InboundForm_MappingConfig.CollectionConfig applicantAddressConfig;
         for (InboundForm_MappingConfig.CollectionConfig coll : config.collections) {

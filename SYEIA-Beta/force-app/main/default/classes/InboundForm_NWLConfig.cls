@@ -77,6 +77,11 @@ public class InboundForm_NWLConfig {
             'Written_Termination_Notice_Issue_Date__c'
         ));
 
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'sections.applicantDetails.applicant_name',
+            'DNO_Name__c'
+        ));
+
         // Notice Compliance
         config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
             'sections.noticeCompliance.notice_clearly_refers_to_removal',
@@ -203,9 +208,9 @@ public class InboundForm_NWLConfig {
         applicants.addFieldMapping(InboundForm_MappingConfig.stringField('applicant_name', 'Name'));
         applicants.addFieldMapping(InboundForm_MappingConfig.stringField('email', 'Email__c'));
         applicants.addFieldMapping(InboundForm_MappingConfig.stringField('phone', 'Phone__c'));
-        applicants.addFieldMapping(InboundForm_MappingConfig.defaultValue('Organisation', 'Party_Type__c'));
+        applicants.addFieldMapping(InboundForm_MappingConfig.defaultValue('DNO', 'Party_Type__c'));
         applicants.addFieldMapping(InboundForm_MappingConfig.defaultValue(
-            'NWL_APPLICANT',
+            'NWL_ORGANISATION',
             'Application_Party_Id__c'
         ));
 
@@ -219,10 +224,7 @@ public class InboundForm_NWLConfig {
                 .setJsonPath('sections.applicantDetails')
                 .setTargetObject('Party__c')
                 .setTargetRecordType('Individual')
-                .setParentLookupField('Representative__c')
-                .setParentCollection('Applicants')
-                .setParentLinkSfField('Application_Party_Id__c')
-                .setChildLinkSfField('Application_Party_Id__c')
+                .setParentLookupField('Case__c')
                 .setProcessingOrder(23);
 
         applicantContacts.addFieldMapping(InboundForm_MappingConfig.stringField(
@@ -236,7 +238,7 @@ public class InboundForm_NWLConfig {
             'Party_Type__c'
         ));
         applicantContacts.addFieldMapping(InboundForm_MappingConfig.defaultValue(
-            'NWL_APPLICANT',
+            'NWL_ORGANISATION',
             'Application_Party_Id__c'
         ));
 
@@ -377,7 +379,7 @@ public class InboundForm_NWLConfig {
             'Postcode__c'
         ));
         addresses.addFieldMapping(InboundForm_MappingConfig.defaultValue(
-            'NWL_APPLICANT',
+            'NWL_ORGANISATION',
             'Application_Party_Identification__c'
         ));
 
