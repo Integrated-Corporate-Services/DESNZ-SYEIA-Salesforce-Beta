@@ -99,8 +99,12 @@ private class InboundForm_NWLConfigTest {
             'LandownerRepresentatives collection should exist');
         Assert.isTrue(collectionNames.contains('Applicants'),
             'Applicants collection should exist');
+        Assert.isTrue(collectionNames.contains('ApplicantContacts'),
+            'ApplicantContacts collection should exist');
         Assert.isTrue(collectionNames.contains('ApplicantAddresses'),
             'ApplicantAddresses collection should exist');
+        Assert.isTrue(collectionNames.contains('InstalledAssets'),
+            'InstalledAssets collection should exist');
         Assert.isTrue(collectionNames.contains('LandDetails'),
             'LandDetails collection should exist');
         Assert.isTrue(collectionNames.contains('SiteAddress'),
@@ -213,6 +217,20 @@ private class InboundForm_NWLConfigTest {
             'Applicant email should map from email'
         );
 
+        InboundForm_MappingConfig.CollectionConfig applicantContactConfig;
+        for (InboundForm_MappingConfig.CollectionConfig coll : config.collections) {
+            if (coll.collectionName == 'ApplicantContacts') {
+                applicantContactConfig = coll;
+                break;
+            }
+        }
+
+        Assert.isNotNull(applicantContactConfig, 'ApplicantContacts config should be present');
+        Assert.areEqual('sections.applicantDetails', applicantContactConfig.jsonPath,
+            'Applicant contacts should map from sections.applicantDetails');
+        Assert.areEqual('Case__c', applicantContactConfig.parentLookupField,
+            'Applicant contacts should be direct Case children before representative linking');
+
         InboundForm_MappingConfig.CollectionConfig applicantAddressConfig;
         for (InboundForm_MappingConfig.CollectionConfig coll : config.collections) {
             if (coll.collectionName == 'ApplicantAddresses') {
@@ -227,5 +245,18 @@ private class InboundForm_NWLConfigTest {
             applicantAddressConfig.jsonPath,
             'ApplicantAddresses should map from sections.applicantDetails'
         );
+
+        InboundForm_MappingConfig.CollectionConfig installedAssetsConfig;
+        for (InboundForm_MappingConfig.CollectionConfig coll : config.collections) {
+            if (coll.collectionName == 'InstalledAssets') {
+                installedAssetsConfig = coll;
+            }
+        }
+
+        Assert.isNotNull(installedAssetsConfig, 'InstalledAssets config should be present');
+        Assert.areEqual('sections.assets.installed_assets', installedAssetsConfig.jsonPath,
+            'Installed assets should map from sections.assets.installed_assets');
+        Assert.areEqual('Asset_Information__c', installedAssetsConfig.targetObject,
+            'Installed assets should create Asset_Information__c records');
     }
 }

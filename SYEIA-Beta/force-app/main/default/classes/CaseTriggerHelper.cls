@@ -24,43 +24,43 @@ public with sharing class CaseTriggerHelper {
     
     
     /**
-* Disable all processing (useful for data migrations)
-*/
+    * Disable all processing (useful for data migrations)
+    */
     public static void disableProcessing() {
         processingDisabled = true;
     }
     
     /**
-* Enable processing
-*/
+    * Enable processing
+    */
     public static void enableProcessing() {
         processingDisabled = false;
     }
     
     /**
-* Check if a specific record has been processed
-*/
+    * Check if a specific record has been processed
+    */
     public static Boolean isRecordProcessed(Id recordId) {
         return processedApplicatonIds.contains(recordId);
     }
     
     /**
-* Manually mark a record as processed (useful for external integrations)
-*/
+    * Manually mark a record as processed (useful for external integrations)
+    */
     public static void markAsProcessed(Id recordId) {
         processedApplicatonIds.add(recordId);
     }
     
     /**
-* Manually mark multiple records as processed
-*/
+    * Manually mark multiple records as processed
+    */
     public static void markAsProcessed(Set<Id> recordIds) {
         processedApplicatonIds.addAll(recordIds);
     }
     
     /**
-* Get count of processed records in this transaction
-*/
+    * Get count of processed records in this transaction
+    */
     public static Integer getProcessedCount() {
         return processedApplicatonIds.size();
     }
@@ -94,8 +94,8 @@ public with sharing class CaseTriggerHelper {
     }
     
     /**
-* Main entry point for processing Inbound Requests (after insert)
-*/
+    * Main entry point for processing Inbound Requests (after insert)
+    */
     public void processAfterUpdate(List<Case__c> applications,  Map<Id, SObject> applicationsMap) {
         Utilities.logMethodEntry('CaseTriggerHelper.processAfterUpdate');
         

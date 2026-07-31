@@ -184,6 +184,10 @@ public with sharing class InboundRequestTriggerHelper {
             System.debug(LoggingLevel.ERROR, 
                 'Exception in processAfterInsert: ' + e.getMessage() + 
                 '\nStack Trace: ' + e.getStackTraceString());
+            Logger.error('Exception in processAfterInsert: ' + e.getMessage());
+            Logger.error('Stack Trace: ' + e.getStackTraceString());
+            Logger.setScenario('InboundRequestTriggerHelper.processAfterInsert');
+            Logger.saveLog();
             
             // Re-throw to ensure transaction awareness
             throw e;
@@ -203,35 +207,44 @@ public with sharing class InboundRequestTriggerHelper {
         if (requestIds == null || requestIds.isEmpty()) {
             return;
         }
-        
-        Logger.info('Reprocessing ' + requestIds.size() + ' inbound requests');
-        System.debug(LoggingLevel.INFO, 
-            'Reprocessing ' + requestIds.size() + ' inbound requests');
-        
-        // Remove from processed set to allow reprocessing
-        processedRequestIds.removeAll(requestIds);
-        
-        // Query fresh records
-        List<Inbound_Request__c> requests = [
-            SELECT Id, Payload__c, Status__c, Error_Log_Text__c
-            FROM Inbound_Request__c
-            WHERE Id IN :requestIds
-        ];
-        
-        if (requests.isEmpty()) {
-            Logger.warn('No Inbound Requests found for reprocessing');
-            System.debug(LoggingLevel.WARN, 'No records found for reprocessing');
-            return;
+
+        try {
+            Logger.info('Reprocessing ' + requestIds.size() + ' inbound requests');
+            System.debug(LoggingLevel.INFO,
+                'Reprocessing ' + requestIds.size() + ' inbound requests');
+
+            // Remove from processed set to allow reprocessing
+            processedRequestIds.removeAll(requestIds);
+
+            // Query fresh records
+            List<Inbound_Request__c> requests = [
+                SELECT Id, Payload__c, Status__c, Error_Log_Text__c
+                FROM Inbound_Request__c
+                WHERE Id IN :requestIds
+            ];
+
+            if (requests.isEmpty()) {
+                Logger.warn('No Inbound Requests found for reprocessing');
+                Logger.setScenario('InboundRequestTriggerHelper.reprocessRequests');
+                Logger.saveLog();
+                System.debug(LoggingLevel.WARN, 'No records found for reprocessing');
+                return;
+            }
+
+            // Build map for processing
+            Map<Id, SObject> requestMap = new Map<Id, SObject>();
+            for (Inbound_Request__c req : requests) {
+                requestMap.put(req.Id, req);
+            }
+
+            // Process
+            processAfterInsert(requests, requestMap);
+        } catch (Exception e) {
+            Logger.error('Error during inbound request reprocessing: ' + e.getMessage());
+            Logger.setScenario('InboundRequestTriggerHelper.reprocessRequests');
+            Logger.saveLog();
+            throw e;
         }
-        
-        // Build map for processing
-        Map<Id, SObject> requestMap = new Map<Id, SObject>();
-        for (Inbound_Request__c req : requests) {
-            requestMap.put(req.Id, req);
-        }
-        
-        // Process
-        processAfterInsert(requests, requestMap);
     }
     
     /**
@@ -281,6 +294,8 @@ public with sharing class InboundRequestTriggerHelper {
             Logger.error('=== Failure Details ===' +
                 '\n' + String.join(failureDetails, '\n') +
                 '\n=======================');
+            Logger.setScenario('InboundRequestTriggerHelper.logResults');
+            Logger.saveLog();
         }
     }
 }

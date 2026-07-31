@@ -1123,6 +1123,7 @@ private class InboundForm_ProcessorTest {
                 SELECT Id,
                        Name,
                        AWS_Application_Id__c,
+                      DNO__c,
                        Case_Type__c,
                        Application_Type__c,
                       Type_Of_NWL_That_Existed__c,
@@ -1175,10 +1176,54 @@ private class InboundForm_ProcessorTest {
                 'Applicant party should map applicant_name');
             Assert.areEqual('ics.tester10@ics-testing.com', (String) applicantParty.get('Email__c'),
                 'Applicant party should map email');
-            Assert.areEqual('Organisation', (String) applicantParty.get('Party_Type__c'),
-                'Applicant party type should be Organisation');
-            Assert.areEqual('NWL_APPLICANT', (String) applicantParty.get('Application_Party_Id__c'),
-                'Applicant party should carry NWL_APPLICANT identifier');
+            Assert.areEqual('DNO', (String) applicantParty.get('Party_Type__c'),
+                'Applicant party type should be DNO');
+            Assert.areEqual('NWL_ORGANISATION', (String) applicantParty.get('Application_Party_Id__c'),
+                'Applicant party should carry NWL_ORGANISATION identifier');
+
+            Party__c applicantOrganisationParty = [
+                SELECT Id
+                FROM Party__c
+                WHERE Case__c = :insertedCase.Id
+                AND Name = 'DESNZ'
+                AND Party_Type__c = 'DNO'
+                LIMIT 1
+            ];
+            Assert.areEqual(applicantOrganisationParty.Id, insertedCase.DNO__c,
+                'Case should link applicant organisation party through DNO__c');
+
+            Assert.isTrue(result.collectionRecords.containsKey('ApplicantContacts'),
+                'ApplicantContacts collection should be processed from applicantDetails');
+            List<SObject> applicantContactRecords = result.collectionRecords.get('ApplicantContacts');
+            Assert.areEqual(1, applicantContactRecords.size(),
+                'ApplicantContacts should produce one party record');
+
+            SObject applicantContactParty = applicantContactRecords[0];
+            Assert.areEqual('ICS Test Coordinator 10', (String) applicantContactParty.get('Name'),
+                'Applicant contact party should map applicant_contact_name');
+            Assert.areEqual('ics.tester10@ics-testing.com', (String) applicantContactParty.get('Email__c'),
+                'Applicant contact party should map email');
+            Assert.areEqual('NWL_ORGANISATION', (String) applicantContactParty.get('Application_Party_Id__c'),
+                'Applicant contact party should use NWL_ORGANISATION link key');
+
+            List<Party__c> linkedApplicantParties = [
+                SELECT Id, Name, Representative__c
+                FROM Party__c
+                WHERE Case__c = :insertedCase.Id
+                AND Name IN ('DESNZ', 'ICS Test Coordinator 10')
+            ];
+            Map<String, Party__c> partiesByName = new Map<String, Party__c>();
+            for (Party__c partyRec : linkedApplicantParties) {
+                partiesByName.put(partyRec.Name, partyRec);
+            }
+
+            Assert.isTrue(partiesByName.containsKey('DESNZ'),
+                'Applicant organisation party should be inserted');
+            Assert.isTrue(partiesByName.containsKey('ICS Test Coordinator 10'),
+                'Applicant contact party should be inserted');
+            Assert.areEqual(partiesByName.get('ICS Test Coordinator 10').Id,
+                partiesByName.get('DESNZ').Representative__c,
+                'Applicant party should link to applicant contact party via Representative__c');
 
             Assert.isTrue(result.collectionRecords.containsKey('ApplicantAddresses'),
                 'ApplicantAddresses collection should be processed from applicantDetails');
@@ -1187,8 +1232,27 @@ private class InboundForm_ProcessorTest {
                 'ApplicantAddresses should produce one address record');
 
             SObject applicantAddress = applicantAddressRecords[0];
-            Assert.areEqual('NWL_APPLICANT', (String) applicantAddress.get('Application_Party_Identification__c'),
-                'Applicant address should carry NWL_APPLICANT identifier');
+            Assert.areEqual('NWL_ORGANISATION', (String) applicantAddress.get('Application_Party_Identification__c'),
+                'Applicant address should carry NWL_ORGANISATION identifier');
+
+            Assert.isTrue(result.collectionRecords.containsKey('InstalledAssets'),
+                'InstalledAssets collection should be processed from assets.installed_assets');
+            List<SObject> installedAssetRecords = result.collectionRecords.get('InstalledAssets');
+            Assert.areEqual(2, installedAssetRecords.size(),
+                'InstalledAssets should produce one record per installed asset');
+
+            Map<String, SObject> installedAssetsByCode = new Map<String, SObject>();
+            for (SObject installedAsset : installedAssetRecords) {
+                installedAssetsByCode.put((String) installedAsset.get('TORI_NOI_Code__c'), installedAsset);
+            }
+
+            Assert.isTrue(installedAssetsByCode.containsKey('966c15b0-89cf-40e2-8a73-fb8a099be0e7'),
+                'First installed asset should be mapped using asset_id');
+            Assert.isTrue(installedAssetsByCode.containsKey('3abe7869-41f5-47c1-b5c5-70048e9af76a'),
+                'Second installed asset should be mapped using asset_id');
+            Assert.areEqual('240/415v',
+                (String) installedAssetsByCode.get('966c15b0-89cf-40e2-8a73-fb8a099be0e7').get('Line_Voltage__c'),
+                'Installed asset line voltage should map and normalize from line_voltage');
         } finally {
             CaseTriggerHelper.enableProcessing();
         }

@@ -22,7 +22,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>NWL no_wayleave_exists</shortDescription>
-        <value>The wayleave has expired para 8(1)(a) and 8(2)(a)</value>
+        <value>No wayleave exists 8(1)(c) and 8(2)(c)</value>
     </labels>
     <labels>
         <fullName>NWL_implied_wayleave</fullName>
