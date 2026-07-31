@@ -26,6 +26,7 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
                     caseRecord.Written_Termination_Notice_Issue_Date__c != null ? 'Yes' : 'No';
             }
 
+            normalizeInstalledAssets(records);
             normalizeLandLocation(records);
         } catch (Exception e) {
             Logger.error('Error in NWL afterBuild: ' + e.getMessage());
@@ -173,6 +174,41 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
                 landRecord.Land_Location__c = 'England';
             } else if (landRecord.Land_Location__c.equalsIgnoreCase('wales')) {
                 landRecord.Land_Location__c = 'Wales';
+            }
+        }
+    }
+
+    private static void normalizeInstalledAssets(Map<String, List<SObject>> records) {
+        if (!records.containsKey('Asset_Information__c')) {
+            return;
+        }
+
+        for (SObject record : records.get('Asset_Information__c')) {
+            Asset_Information__c assetRecord = (Asset_Information__c) record;
+            if (String.isBlank(assetRecord.Line_Voltage__c)) {
+                continue;
+            }
+
+            if (assetRecord.Line_Voltage__c.equalsIgnoreCase('240/415V')) {
+                assetRecord.Line_Voltage__c = '240/415v';
+            } else if (assetRecord.Line_Voltage__c.equalsIgnoreCase('6.6KV')) {
+                assetRecord.Line_Voltage__c = '6.6kV';
+            } else if (assetRecord.Line_Voltage__c.equalsIgnoreCase('11KV')) {
+                assetRecord.Line_Voltage__c = '11kV';
+            } else if (assetRecord.Line_Voltage__c.equalsIgnoreCase('20KV')) {
+                assetRecord.Line_Voltage__c = '20kV';
+            } else if (assetRecord.Line_Voltage__c.equalsIgnoreCase('25KV')) {
+                assetRecord.Line_Voltage__c = '25kV';
+            } else if (assetRecord.Line_Voltage__c.equalsIgnoreCase('33KV')) {
+                assetRecord.Line_Voltage__c = '33kV';
+            } else if (assetRecord.Line_Voltage__c.equalsIgnoreCase('66KV')) {
+                assetRecord.Line_Voltage__c = '66kV';
+            } else if (assetRecord.Line_Voltage__c.equalsIgnoreCase('132KV')) {
+                assetRecord.Line_Voltage__c = '132kV';
+            } else if (assetRecord.Line_Voltage__c.equalsIgnoreCase('275KV')) {
+                assetRecord.Line_Voltage__c = '275kV';
+            } else if (assetRecord.Line_Voltage__c.equalsIgnoreCase('400KV')) {
+                assetRecord.Line_Voltage__c = '400kV';
             }
         }
     }

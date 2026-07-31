@@ -189,6 +189,7 @@ public class InboundForm_NWLConfig {
         config.addCollection(getObjectorAddressConfig());
         config.addCollection(getLandownerAddressConfig());
         config.addCollection(getRepresentativeAddressConfig());
+        config.addCollection(getInstalledAssetsConfig());
         config.addCollection(getLandDetailsConfig());
         config.addCollection(getSiteAddressConfig());
         config.addCollection(getPaymentConfig());
@@ -470,6 +471,27 @@ public class InboundForm_NWLConfig {
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('description', 'Description__c'));
 
         return payments;
+    }
+
+    private static InboundForm_MappingConfig.CollectionConfig getInstalledAssetsConfig() {
+        InboundForm_MappingConfig.CollectionConfig installedAssets =
+            new InboundForm_MappingConfig.CollectionConfig()
+                .setCollectionName('InstalledAssets')
+                .setJsonPath('sections.assets.installed_assets')
+                .setTargetObject('Asset_Information__c')
+                .setParentLookupField('Case__c')
+                .setProcessingOrder(42);
+
+        installedAssets.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'line_voltage',
+            'Line_Voltage__c'
+        ));
+        installedAssets.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'asset_id',
+            'TORI_NOI_Code__c'
+        ));
+
+        return installedAssets;
     }
 
     private static InboundForm_MappingConfig.CollectionConfig getLandDetailsConfig() {

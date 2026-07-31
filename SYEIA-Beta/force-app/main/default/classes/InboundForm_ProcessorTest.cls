@@ -1234,6 +1234,25 @@ private class InboundForm_ProcessorTest {
             SObject applicantAddress = applicantAddressRecords[0];
             Assert.areEqual('NWL_ORGANISATION', (String) applicantAddress.get('Application_Party_Identification__c'),
                 'Applicant address should carry NWL_ORGANISATION identifier');
+
+            Assert.isTrue(result.collectionRecords.containsKey('InstalledAssets'),
+                'InstalledAssets collection should be processed from assets.installed_assets');
+            List<SObject> installedAssetRecords = result.collectionRecords.get('InstalledAssets');
+            Assert.areEqual(2, installedAssetRecords.size(),
+                'InstalledAssets should produce one record per installed asset');
+
+            Map<String, SObject> installedAssetsByCode = new Map<String, SObject>();
+            for (SObject installedAsset : installedAssetRecords) {
+                installedAssetsByCode.put((String) installedAsset.get('TORI_NOI_Code__c'), installedAsset);
+            }
+
+            Assert.isTrue(installedAssetsByCode.containsKey('966c15b0-89cf-40e2-8a73-fb8a099be0e7'),
+                'First installed asset should be mapped using asset_id');
+            Assert.isTrue(installedAssetsByCode.containsKey('3abe7869-41f5-47c1-b5c5-70048e9af76a'),
+                'Second installed asset should be mapped using asset_id');
+            Assert.areEqual('240/415v',
+                (String) installedAssetsByCode.get('966c15b0-89cf-40e2-8a73-fb8a099be0e7').get('Line_Voltage__c'),
+                'Installed asset line voltage should map and normalize from line_voltage');
         } finally {
             CaseTriggerHelper.enableProcessing();
         }

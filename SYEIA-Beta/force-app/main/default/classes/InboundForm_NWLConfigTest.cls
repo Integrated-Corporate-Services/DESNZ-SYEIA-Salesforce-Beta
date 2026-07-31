@@ -103,6 +103,8 @@ private class InboundForm_NWLConfigTest {
             'ApplicantContacts collection should exist');
         Assert.isTrue(collectionNames.contains('ApplicantAddresses'),
             'ApplicantAddresses collection should exist');
+        Assert.isTrue(collectionNames.contains('InstalledAssets'),
+            'InstalledAssets collection should exist');
         Assert.isTrue(collectionNames.contains('LandDetails'),
             'LandDetails collection should exist');
         Assert.isTrue(collectionNames.contains('SiteAddress'),
@@ -243,5 +245,18 @@ private class InboundForm_NWLConfigTest {
             applicantAddressConfig.jsonPath,
             'ApplicantAddresses should map from sections.applicantDetails'
         );
+
+        InboundForm_MappingConfig.CollectionConfig installedAssetsConfig;
+        for (InboundForm_MappingConfig.CollectionConfig coll : config.collections) {
+            if (coll.collectionName == 'InstalledAssets') {
+                installedAssetsConfig = coll;
+            }
+        }
+
+        Assert.isNotNull(installedAssetsConfig, 'InstalledAssets config should be present');
+        Assert.areEqual('sections.assets.installed_assets', installedAssetsConfig.jsonPath,
+            'Installed assets should map from sections.assets.installed_assets');
+        Assert.areEqual('Asset_Information__c', installedAssetsConfig.targetObject,
+            'Installed assets should create Asset_Information__c records');
     }
 }
