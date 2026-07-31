@@ -176,6 +176,7 @@ public class InboundForm_NWLConfig {
 
     private static void addCollectionConfigs(InboundForm_MappingConfig.FormTypeConfig config) {
         config.addCollection(getApplicantConfig());
+        config.addCollection(getApplicantContactConfig());
         config.addCollection(getObjectorConfig());
         config.addCollection(getLandownerConfig());
         config.addCollection(getRepresentativeConfig());
@@ -209,6 +210,37 @@ public class InboundForm_NWLConfig {
         ));
 
         return applicants;
+    }
+
+    private static InboundForm_MappingConfig.CollectionConfig getApplicantContactConfig() {
+        InboundForm_MappingConfig.CollectionConfig applicantContacts =
+            new InboundForm_MappingConfig.CollectionConfig()
+                .setCollectionName('ApplicantContacts')
+                .setJsonPath('sections.applicantDetails')
+                .setTargetObject('Party__c')
+                .setTargetRecordType('Individual')
+                .setParentLookupField('Representative__c')
+                .setParentCollection('Applicants')
+                .setParentLinkSfField('Application_Party_Id__c')
+                .setChildLinkSfField('Application_Party_Id__c')
+                .setProcessingOrder(23);
+
+        applicantContacts.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'applicant_contact_name',
+            'Name'
+        ));
+        applicantContacts.addFieldMapping(InboundForm_MappingConfig.stringField('email', 'Email__c'));
+        applicantContacts.addFieldMapping(InboundForm_MappingConfig.stringField('phone', 'Phone__c'));
+        applicantContacts.addFieldMapping(InboundForm_MappingConfig.defaultValue(
+            'Representative',
+            'Party_Type__c'
+        ));
+        applicantContacts.addFieldMapping(InboundForm_MappingConfig.defaultValue(
+            'NWL_APPLICANT',
+            'Application_Party_Id__c'
+        ));
+
+        return applicantContacts;
     }
 
     private static InboundForm_MappingConfig.CollectionConfig getObjectorConfig() {

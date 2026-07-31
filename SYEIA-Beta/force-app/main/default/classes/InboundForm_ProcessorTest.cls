@@ -1123,6 +1123,7 @@ private class InboundForm_ProcessorTest {
                 SELECT Id,
                        Name,
                        AWS_Application_Id__c,
+                      DNO__c,
                        Case_Type__c,
                        Application_Type__c,
                       Type_Of_NWL_That_Existed__c,
@@ -1179,6 +1180,49 @@ private class InboundForm_ProcessorTest {
                 'Applicant party type should be Organisation');
             Assert.areEqual('NWL_APPLICANT', (String) applicantParty.get('Application_Party_Id__c'),
                 'Applicant party should carry NWL_APPLICANT identifier');
+
+            Party__c applicantOrganisationParty = [
+                SELECT Id
+                FROM Party__c
+                WHERE Case__c = :insertedCase.Id
+                AND Name = 'DESNZ'
+                AND Party_Type__c = 'Organisation'
+                LIMIT 1
+            ];
+            Assert.areEqual(applicantOrganisationParty.Id, insertedCase.DNO__c,
+                'Case should link applicant organisation party through DNO__c');
+
+            Assert.isTrue(result.collectionRecords.containsKey('ApplicantContacts'),
+                'ApplicantContacts collection should be processed from applicantDetails');
+            List<SObject> applicantContactRecords = result.collectionRecords.get('ApplicantContacts');
+            Assert.areEqual(1, applicantContactRecords.size(),
+                'ApplicantContacts should produce one party record');
+
+            SObject applicantContactParty = applicantContactRecords[0];
+            Assert.areEqual('ICS Test Coordinator 10', (String) applicantContactParty.get('Name'),
+                'Applicant contact party should map applicant_contact_name');
+            Assert.areEqual('ics.tester10@ics-testing.com', (String) applicantContactParty.get('Email__c'),
+                'Applicant contact party should map email');
+            Assert.areEqual('NWL_APPLICANT', (String) applicantContactParty.get('Application_Party_Id__c'),
+                'Applicant contact party should use NWL_APPLICANT link key');
+
+            List<Party__c> linkedApplicantParties = [
+                SELECT Id, Name, Representative__c
+                FROM Party__c
+                WHERE Name IN ('DESNZ', 'ICS Test Coordinator 10')
+            ];
+            Map<String, Party__c> partiesByName = new Map<String, Party__c>();
+            for (Party__c partyRec : linkedApplicantParties) {
+                partiesByName.put(partyRec.Name, partyRec);
+            }
+
+            Assert.isTrue(partiesByName.containsKey('DESNZ'),
+                'Applicant organisation party should be inserted');
+            Assert.isTrue(partiesByName.containsKey('ICS Test Coordinator 10'),
+                'Applicant contact party should be inserted');
+            Assert.areEqual(partiesByName.get('DESNZ').Id,
+                partiesByName.get('ICS Test Coordinator 10').Representative__c,
+                'Applicant contact party should link to applicant party via Representative__c');
 
             Assert.isTrue(result.collectionRecords.containsKey('ApplicantAddresses'),
                 'ApplicantAddresses collection should be processed from applicantDetails');

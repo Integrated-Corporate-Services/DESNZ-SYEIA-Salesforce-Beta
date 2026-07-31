@@ -50,6 +50,16 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
                 shouldUpdate = true;
             }
 
+            Id applicantOrgId = getPartyIdByTypeAndApplicationPartyId(
+                insertedRecords,
+                'Organisation',
+                'NWL_APPLICANT'
+            );
+            if (applicantOrgId != null) {
+                caseToUpdate.DNO__c = applicantOrgId;
+                shouldUpdate = true;
+            }
+
             Id objectorId = getPartyIdByType(insertedRecords, 'Individual');
             if (objectorId != null) {
                 caseToUpdate.Objector__c = objectorId;
@@ -218,6 +228,25 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
         for (SObject record : insertedRecords.get('Party__c')) {
             Party__c party = (Party__c) record;
             if (party.Id != null && party.Party_Type__c == partyType) {
+                return party.Id;
+            }
+        }
+        return null;
+    }
+
+    private static Id getPartyIdByTypeAndApplicationPartyId(
+            Map<String, List<SObject>> insertedRecords,
+            String partyType,
+            String applicationPartyId) {
+        if (!insertedRecords.containsKey('Party__c')) {
+            return null;
+        }
+
+        for (SObject record : insertedRecords.get('Party__c')) {
+            Party__c party = (Party__c) record;
+            if (party.Id != null
+                    && party.Party_Type__c == partyType
+                    && party.Application_Party_Id__c == applicationPartyId) {
                 return party.Id;
             }
         }
