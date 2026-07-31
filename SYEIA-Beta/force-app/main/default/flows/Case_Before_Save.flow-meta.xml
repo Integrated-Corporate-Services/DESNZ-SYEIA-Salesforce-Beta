@@ -207,6 +207,33 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assign_NWL_Default_Calculated_Dates_based_on_abeyance</name>
+        <label>Assign NWL Default Calculated Dates based on abeyance</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Total_Time_Excluding_Abeyance_In_Days__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>form_TotalTimeExAbeyanceInDays</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Total_Time_Including_Abeyance_In_Days__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>form_TotalTimeIncAbeyanceInDays</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Time_To_Decision_After_Inspector_Report__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>form_TimeToDecisionInspectorReport</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
         <name>Assign_Previous_Status</name>
         <label>Assign Previous Status</label>
         <locationX>0</locationX>
@@ -414,6 +441,9 @@
                 <stringValue>Post Decision</stringValue>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>Check_Calculated_Dates</targetReference>
+        </connector>
     </assignments>
     <assignments>
         <name>Update_Status_to_Representation_Stage</name>
@@ -427,6 +457,9 @@
                 <stringValue>Representation Stage</stringValue>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>Check_Calculated_Dates</targetReference>
+        </connector>
     </assignments>
     <assignments>
         <name>Update_Status_to_Under_Review</name>
@@ -559,6 +592,42 @@
                 <targetReference>Assign_Date_case_sent_for_approval</targetReference>
             </connector>
             <label>Status Changed to Submit for Approval</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Calculated_Dates</name>
+        <label>Check Calculated Dates</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Check_NWL_Default_Calculated_Dates</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Total_Time_Excluding_Abeyance_In_Days__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>form_TotalTimeExAbeyanceInDays</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Total_Time_Including_Abeyance_In_Days__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>form_TotalTimeIncAbeyanceInDays</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Time_To_Decision_After_Inspector_Report__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>form_TimeToDecisionInspectorReport</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_NWL_Default_Calculated_Dates_based_on_abeyance</targetReference>
+            </connector>
+            <label>Check NWL Default Calculated Dates</label>
         </rules>
     </decisions>
     <decisions>
@@ -1540,6 +1609,9 @@
         <label>NWL Sub Status Changed</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Check_Calculated_Dates</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Changed_to_Seeking_further_information_from_inspector</name>
@@ -1686,6 +1758,36 @@ NOT(OR(
         <name>form_DeadlineForStatementOfEvidence</name>
         <dataType>Date</dataType>
         <expression>{!$Record.Procedural_Notice_Letter_Date__c} + 30</expression>
+    </formulas>
+    <formulas>
+        <name>form_TimeToDecisionInspectorReport</name>
+        <dataType>Number</dataType>
+        <expression>{!$Record.Decision_Date__c} - {!$Record.Inspector_s_Report_Received_Date__c}</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <description>Date the procedural letter was issued and Decision Letter date, excluding abeyance time</description>
+        <name>form_TotalTimeExAbeyanceInDays</name>
+        <dataType>Number</dataType>
+        <expression>IF(NOT(OR(
+ISBLANK({!$Record.Procedural_Notice_Letter_Date__c}), ISBLANK({!$Record.Decision_Date__c}))),
+({!$Record.Decision_Date__c} - {!$Record.Procedural_Notice_Letter_Date__c}) - ({!form_1st_Abeyance_Duration} +{!form_2nd_Abeyance_Duration}), 0)</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>form_TotalTimeIncAbeyanceInDays</name>
+        <dataType>Number</dataType>
+        <expression>IF(
+    NOT(
+        OR(
+            ISBLANK({!$Record.Procedural_Notice_Letter_Date__c}),
+            ISBLANK({!$Record.Decision_Date__c})
+        )
+    ),
+    ({!$Record.Decision_Date__c} - {!$Record.Procedural_Notice_Letter_Date__c}),
+    0
+)</expression>
+        <scale>0</scale>
     </formulas>
     <formulas>
         <name>formula_IsNew</name>
