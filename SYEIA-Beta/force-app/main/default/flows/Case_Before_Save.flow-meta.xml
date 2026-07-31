@@ -619,7 +619,7 @@
             </conditions>
             <conditions>
                 <leftValueReference>$Record.Time_To_Decision_After_Inspector_Report__c</leftValueReference>
-                <operator>EqualTo</operator>
+                <operator>NotEqualTo</operator>
                 <rightValue>
                     <elementReference>form_TimeToDecisionInspectorReport</elementReference>
                 </rightValue>
@@ -1777,9 +1777,16 @@ ISBLANK({!$Record.Procedural_Notice_Letter_Date__c}), ISBLANK({!$Record.Decision
     <formulas>
         <name>form_TotalTimeIncAbeyanceInDays</name>
         <dataType>Number</dataType>
-        <expression>IF(NOT(OR(
-ISBLANK({!$Record.Procedural_Notice_Letter_Date__c}), ISBLANK({!$Record.Decision_Date__c}))),
-({!$Record.Procedural_Notice_Letter_Date__c} - {!$Record.Decision_Date__c}), 0)</expression>
+        <expression>IF(
+    NOT(
+        OR(
+            ISBLANK({!$Record.Procedural_Notice_Letter_Date__c}),
+            ISBLANK({!$Record.Decision_Date__c})
+        )
+    ),
+    ({!$Record.Decision_Date__c} - {!$Record.Procedural_Notice_Letter_Date__c}),
+    0
+)</expression>
         <scale>0</scale>
     </formulas>
     <formulas>
