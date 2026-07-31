@@ -301,8 +301,8 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.DNO__r.Representative__r.Representative__c</fieldItem>
-                <identifier>RecordDNO_rRepresentative_rRepresentative_cField</identifier>
+                <fieldItem>Record.DNO__r.Representative__c</fieldItem>
+                <identifier>RecordDNO_rRepresentative_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
