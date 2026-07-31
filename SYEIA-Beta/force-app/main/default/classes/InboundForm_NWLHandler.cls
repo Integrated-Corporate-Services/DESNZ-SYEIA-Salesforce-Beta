@@ -8,24 +8,30 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
     }
 
     public void afterBuild(InboundForm_JSONParser parser, Map<String, List<SObject>> records) {
-        if (!records.containsKey('Case__c')) {
-            return;
+        try {
+            if (!records.containsKey('Case__c')) {
+                return;
+            }
+
+            for (SObject record : records.get('Case__c')) {
+                Case__c caseRecord = (Case__c) record;
+                caseRecord.Case_Type__c = 'Necessary Wayleaves';
+                caseRecord.Overdue_Email_Sent__c = false;
+
+                normalizeApplicationType(caseRecord);
+
+                caseRecord.Written_Removal_Notice_Been_Given__c =
+                    caseRecord.Written_Removal_Notice_Issue_Date__c != null ? 'Yes' : 'No';
+                caseRecord.Written_Termination_Notice_Been_Given__c =
+                    caseRecord.Written_Termination_Notice_Issue_Date__c != null ? 'Yes' : 'No';
+            }
+
+            normalizeLandLocation(records);
+        } catch (Exception e) {
+            Logger.error('Error in NWL afterBuild: ' + e.getMessage());
+            Logger.setScenario('InboundForm_NWLHandler.afterBuild');
+            Logger.saveLog();
         }
-
-        for (SObject record : records.get('Case__c')) {
-            Case__c caseRecord = (Case__c) record;
-            caseRecord.Case_Type__c = 'Necessary Wayleaves';
-            caseRecord.Overdue_Email_Sent__c = false;
-
-            normalizeApplicationType(caseRecord);
-
-            caseRecord.Written_Removal_Notice_Been_Given__c =
-                caseRecord.Written_Removal_Notice_Issue_Date__c != null ? 'Yes' : 'No';
-            caseRecord.Written_Termination_Notice_Been_Given__c =
-                caseRecord.Written_Termination_Notice_Issue_Date__c != null ? 'Yes' : 'No';
-        }
-
-        normalizeLandLocation(records);
     }
 
     public void afterPrimaryInsert(InboundForm_JSONParser parser, Id primaryCaseId,
@@ -34,37 +40,43 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
     }
 
     public void afterAllInserts(Id primaryCaseId, Map<String, List<SObject>> insertedRecords) {
-        Case__c caseToUpdate = new Case__c(Id = primaryCaseId);
-        Boolean shouldUpdate = false;
-
-        Id paymentId = getFirstRecordId(insertedRecords, 'Payment__c');
-        if (paymentId != null) {
-            caseToUpdate.Payment__c = paymentId;
-            shouldUpdate = true;
-        }
-
-        Id objectorId = getPartyIdByType(insertedRecords, 'Individual');
-        if (objectorId != null) {
-            caseToUpdate.Objector__c = objectorId;
-            shouldUpdate = true;
-        }
-
-        Id landownerId = getPartyIdByType(insertedRecords, 'Landowner');
-        if (landownerId != null) {
-            caseToUpdate.Landowner__c = landownerId;
-            shouldUpdate = true;
-        }
-
-        linkLandToSiteAddress(insertedRecords);
-
-        if (!shouldUpdate) {
-            return;
-        }
-
         try {
-            update caseToUpdate;
+            Case__c caseToUpdate = new Case__c(Id = primaryCaseId);
+            Boolean shouldUpdate = false;
+
+            Id paymentId = getFirstRecordId(insertedRecords, 'Payment__c');
+            if (paymentId != null) {
+                caseToUpdate.Payment__c = paymentId;
+                shouldUpdate = true;
+            }
+
+            Id objectorId = getPartyIdByType(insertedRecords, 'Individual');
+            if (objectorId != null) {
+                caseToUpdate.Objector__c = objectorId;
+                shouldUpdate = true;
+            }
+
+            Id landownerId = getPartyIdByType(insertedRecords, 'Landowner');
+            if (landownerId != null) {
+                caseToUpdate.Landowner__c = landownerId;
+                shouldUpdate = true;
+            }
+
+            linkLandToSiteAddress(insertedRecords);
+
+            if (!shouldUpdate) {
+                return;
+            }
+
+            try {
+                update caseToUpdate;
+            } catch (Exception e) {
+                Logger.error('Error updating NWL case lookups: ' + e.getMessage());
+                Logger.setScenario('InboundForm_NWLHandler.afterAllInserts');
+                Logger.saveLog();
+            }
         } catch (Exception e) {
-            Logger.error('Error updating NWL case lookups: ' + e.getMessage());
+            Logger.error('Unexpected error in NWL afterAllInserts: ' + e.getMessage());
             Logger.setScenario('InboundForm_NWLHandler.afterAllInserts');
             Logger.saveLog();
         }
@@ -111,11 +123,11 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
             return value;
         }
 
-        if (value.equalsIgnoreCase('no_wayleave_exists')) {
+        if (value.equalsIgnoreCase('no_wayleave_exists') || value.containsIgnoreCase('exist')) {
             return Label.NWL_no_wayleave_exists;
-        } else if (value.equalsIgnoreCase('wayleave_has_been_terminated')) {
+        } else if (value.equalsIgnoreCase('wayleave_has_been_terminated') || value.equalsIgnoreCase('wayleave_termination') || value.equalsIgnoreCase('wayleave_terminated') || value.containsIgnoreCase('terminated')) {
             return Label.NWL_Wayleave_has_been_terminated;
-        } else if (value.equalsIgnoreCase('wayleave_expired')) {
+        } else if (value.equalsIgnoreCase('wayleave_expired') || value.containsIgnoreCase('expir')) {
             return Label.NWL_Wayleave_has_Expired;
         }
 

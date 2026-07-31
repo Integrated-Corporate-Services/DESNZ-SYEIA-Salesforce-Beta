@@ -7,23 +7,30 @@ public class InboundForm_NWLConfig {
      * Get the complete NWL configuration.
      */
     public static InboundForm_MappingConfig.FormTypeConfig getConfig() {
-        InboundForm_MappingConfig.FormTypeConfig config =
-            new InboundForm_MappingConfig.FormTypeConfig()
-                .setFormType('NWL')
-                .setDescription('Necessary Wayleaves')
-                .setPrimaryObject('Case__c')
-                .setPrimaryRecordType('Necessary_Wayleaves')
-                .setApplicationIdField('AWS_Application_Id__c')
-                .setApplicationIdJsonPath('applicationId')
-                .setNameJsonPath('desnzRef')
-                .setStatusField('Status__c')
-                .setDefaultStatus('Application Received')
-                .setHandlerClass(InboundForm_NWLHandler.class);
+        try {
+            InboundForm_MappingConfig.FormTypeConfig config =
+                new InboundForm_MappingConfig.FormTypeConfig()
+                    .setFormType('NWL')
+                    .setDescription('Necessary Wayleaves')
+                    .setPrimaryObject('Case__c')
+                    .setPrimaryRecordType('Necessary_Wayleaves')
+                    .setApplicationIdField('AWS_Application_Id__c')
+                    .setApplicationIdJsonPath('applicationId')
+                    .setNameJsonPath('desnzRef')
+                    .setStatusField('Status__c')
+                    .setDefaultStatus('Application Received')
+                    .setHandlerClass(InboundForm_NWLHandler.class);
 
-        addCaseFieldMappings(config);
-        addCollectionConfigs(config);
+            addCaseFieldMappings(config);
+            addCollectionConfigs(config);
 
-        return config;
+            return config;
+        } catch (Exception e) {
+            Logger.error('Error building NWL form configuration: ' + e.getMessage());
+            Logger.setScenario('InboundForm_NWLConfig.getConfig');
+            Logger.saveLog();
+            throw e;
+        }
     }
 
     private static void addCaseFieldMappings(InboundForm_MappingConfig.FormTypeConfig config) {
