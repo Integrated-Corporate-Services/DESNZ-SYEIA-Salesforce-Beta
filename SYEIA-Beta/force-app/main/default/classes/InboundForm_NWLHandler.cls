@@ -295,7 +295,7 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
 
         Id applicantPartyId;
         String applicantLinkKey;
-        List<Party__c> contactsToUpdate = new List<Party__c>();
+        Id applicantContactPartyId;
 
         for (Party__c party : parties) {
             if (party.Party_Type__c == 'DNO') {
@@ -311,21 +311,21 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
 
         for (Party__c party : parties) {
             if (party.Id != applicantPartyId
-                    && party.Representative__c == null
                     && party.Application_Party_Id__c == applicantLinkKey) {
-                contactsToUpdate.add(new Party__c(
-                    Id = party.Id,
-                    Representative__c = applicantPartyId
-                ));
+                applicantContactPartyId = party.Id;
+                break;
             }
         }
 
-        if (contactsToUpdate.isEmpty()) {
+        if (applicantContactPartyId == null) {
             return;
         }
 
         try {
-            update contactsToUpdate;
+            update new Party__c(
+                Id = applicantPartyId,
+                Representative__c = applicantContactPartyId
+            );
         } catch (Exception e) {
             Logger.error('Error linking NWL applicant contact to applicant: ' + e.getMessage());
             Logger.setScenario('InboundForm_NWLHandler.linkApplicantContactToApplicant');

@@ -1221,9 +1221,9 @@ private class InboundForm_ProcessorTest {
                 'Applicant organisation party should be inserted');
             Assert.isTrue(partiesByName.containsKey('ICS Test Coordinator 10'),
                 'Applicant contact party should be inserted');
-            Assert.areEqual(partiesByName.get('DESNZ').Id,
-                partiesByName.get('ICS Test Coordinator 10').Representative__c,
-                'Applicant contact party should link to applicant party via Representative__c');
+            Assert.areEqual(partiesByName.get('ICS Test Coordinator 10').Id,
+                partiesByName.get('DESNZ').Representative__c,
+                'Applicant party should link to applicant contact party via Representative__c');
 
             Assert.isTrue(result.collectionRecords.containsKey('ApplicantAddresses'),
                 'ApplicantAddresses collection should be processed from applicantDetails');
