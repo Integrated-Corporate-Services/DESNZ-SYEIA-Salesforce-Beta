@@ -755,6 +755,8 @@
 		<members>Case__c.Your_Cases_NWL</members>
 		<members>Case__c.Your_Cases_TL</members>
 		<members>Inbound_Request__c.All</members>
+		<members>Inbound_Request__c.Today_Inbound_Requests</members>
+		<members>Inbound_Request__c.This_Week_Inbound_Requests</members>
 		<name>ListView</name>
 	</types>
 	<types>
