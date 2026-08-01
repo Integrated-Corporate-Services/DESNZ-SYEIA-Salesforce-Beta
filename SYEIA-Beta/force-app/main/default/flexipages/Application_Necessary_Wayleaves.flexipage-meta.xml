@@ -2489,9 +2489,9 @@
                 <identifier>flexipage_fieldSection20</identifier>
                 <visibilityRule>
                     <criteria>
-                        <leftValue>{!Record.CPO_Submitted__c}</leftValue>
+                        <leftValue>{!Record.Are_There_Any_Other_Related_Applications__c}</leftValue>
                         <operator>EQUAL</operator>
-                        <rightValue>Yes</rightValue>
+                        <rightValue>true</rightValue>
                     </criteria>
                 </visibilityRule>
             </componentInstance>
@@ -2514,9 +2514,9 @@
                 <identifier>flexipage_fieldSection25</identifier>
                 <visibilityRule>
                     <criteria>
-                        <leftValue>{!Record.CPO_Submitted__c}</leftValue>
+                        <leftValue>{!Record.Are_There_Any_Other_Related_Applications__c}</leftValue>
                         <operator>EQUAL</operator>
-                        <rightValue>No</rightValue>
+                        <rightValue>false</rightValue>
                     </criteria>
                 </visibilityRule>
             </componentInstance>
