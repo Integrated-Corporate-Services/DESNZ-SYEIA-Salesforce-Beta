@@ -5,7 +5,9 @@
 public with sharing class InboundForm_Processor {
     private static final String WITHDRAWAL_EVENT_TYPE = 'WITHDRAWAL_REQUESTED';
     private static final String S37_FORM_TYPE = 'S37';
+    private static final String NWL_FORM_TYPE = 'NWL';
     private static final String S37_WITHDRAWAL_FORM_TYPE = 'S37_WITHDRAWAL_REQUEST';
+    private static final String NWL_WITHDRAWAL_FORM_TYPE = 'NWL_WITHDRAWAL_REQUEST';
     
     // Schema cache to avoid repeated getGlobalDescribe calls
     private static Map<String, Schema.SObjectType> sObjectTypeCache = 
@@ -210,21 +212,30 @@ public with sharing class InboundForm_Processor {
 
     /**
      * Resolve inbound payload into a configured form type key.
-     * S37 withdrawal events are processed by a dedicated withdrawal config.
+     * S37 and NWL withdrawal events are processed by a dedicated withdrawal config.
      */
     private static String resolveConfiguredFormType(InboundForm_JSONParser parser, String payloadFormType) {
-        if (isS37WithdrawalPayload(parser, payloadFormType)) {
-            return S37_WITHDRAWAL_FORM_TYPE;
+        if (isWithdrawalPayload(parser, payloadFormType)) {
+            return getWithdrawalConfiguredFormType(payloadFormType);
         }
         return payloadFormType;
     }
 
-    private static Boolean isS37WithdrawalPayload(InboundForm_JSONParser parser, String payloadFormType) {
-        if (payloadFormType == S37_WITHDRAWAL_FORM_TYPE) {
+    private static String getWithdrawalConfiguredFormType(String payloadFormType) {
+        if (payloadFormType == NWL_WITHDRAWAL_FORM_TYPE || payloadFormType == NWL_FORM_TYPE) {
+            return NWL_WITHDRAWAL_FORM_TYPE;
+        }
+
+        return S37_WITHDRAWAL_FORM_TYPE;
+    }
+
+    private static Boolean isWithdrawalPayload(InboundForm_JSONParser parser, String payloadFormType) {
+        if (payloadFormType == S37_WITHDRAWAL_FORM_TYPE ||
+            payloadFormType == NWL_WITHDRAWAL_FORM_TYPE) {
             return true;
         }
 
-        if (payloadFormType != S37_FORM_TYPE) {
+        if (!supportsWithdrawalRouting(payloadFormType)) {
             return false;
         }
 
@@ -234,6 +245,10 @@ public with sharing class InboundForm_Processor {
         }
 
         return parser.hasValue('Withdraw') || parser.hasValue('Withdraw.withdrawalReason');
+    }
+
+    private static Boolean supportsWithdrawalRouting(String payloadFormType) {
+        return payloadFormType == S37_FORM_TYPE || payloadFormType == NWL_FORM_TYPE;
     }
 
     private static Boolean isWithdrawalRequestedEvent(String eventType) {

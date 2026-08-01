@@ -94,6 +94,8 @@ private class InboundForm_ConfigRegistryTest {
         Assert.isTrue(formTypes.contains('NWL'), 'NWL should be registered');
         Assert.isTrue(formTypes.contains('S37_WITHDRAWAL_REQUEST'),
             'S37 withdrawal form type should be registered');
+        Assert.isTrue(formTypes.contains('NWL_WITHDRAWAL_REQUEST'),
+            'NWL withdrawal form type should be registered');
     }
     
     // ========================================================================
@@ -116,6 +118,10 @@ private class InboundForm_ConfigRegistryTest {
         Assert.isTrue(
             InboundForm_ConfigRegistry.isFormTypeSupported('S37_WITHDRAWAL_REQUEST'),
             'S37 withdrawal form type should be supported'
+        );
+        Assert.isTrue(
+            InboundForm_ConfigRegistry.isFormTypeSupported('NWL_WITHDRAWAL_REQUEST'),
+            'NWL withdrawal form type should be supported'
         );
     }
     
@@ -182,6 +188,8 @@ private class InboundForm_ConfigRegistryTest {
         Assert.isTrue(summary.contains('NWL'), 'Summary should contain NWL');
         Assert.isTrue(summary.contains('S37_WITHDRAWAL_REQUEST'),
             'Summary should contain S37 withdrawal form type');
+        Assert.isTrue(summary.contains('NWL_WITHDRAWAL_REQUEST'),
+            'Summary should contain NWL withdrawal form type');
     }
     
     // ========================================================================
