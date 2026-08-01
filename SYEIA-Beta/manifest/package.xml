@@ -250,6 +250,7 @@
 		<members>Case__c.Rejected_On__c</members>
 		<members>Case__c.Rejection_Reason__c</members>
 		<members>Case__c.Related_CPO_Details__c</members>
+		<members>Case__c.Related_Applications__c</members>
 		<members>Case__c.Related_Land__c</members>
 		<members>Case__c.Representative__c</members>
 		<members>Case__c.Road_Closures_Or_Traffic_Calming__c</members>

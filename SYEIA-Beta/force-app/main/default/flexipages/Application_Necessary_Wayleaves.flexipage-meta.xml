@@ -1768,8 +1768,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.CPO_Submitted__c</fieldItem>
-                <identifier>RecordCPO_Submitted_cField</identifier>
+                <fieldItem>Record.Related_Applications__c</fieldItem>
+                <identifier>RecordRelated_Applications_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -1847,8 +1847,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.CPO_Submitted__c</fieldItem>
-                <identifier>RecordCPO_Submitted_cField2</identifier>
+                <fieldItem>Record.Related_Applications__c</fieldItem>
+                <identifier>RecordRelated_Applications_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -2489,9 +2489,9 @@
                 <identifier>flexipage_fieldSection20</identifier>
                 <visibilityRule>
                     <criteria>
-                        <leftValue>{!Record.Are_There_Any_Other_Related_Applications__c}</leftValue>
+                        <leftValue>{!Record.Related_Applications__c}</leftValue>
                         <operator>EQUAL</operator>
-                        <rightValue>true</rightValue>
+                        <rightValue>Yes</rightValue>
                     </criteria>
                 </visibilityRule>
             </componentInstance>
@@ -2514,9 +2514,9 @@
                 <identifier>flexipage_fieldSection25</identifier>
                 <visibilityRule>
                     <criteria>
-                        <leftValue>{!Record.Are_There_Any_Other_Related_Applications__c}</leftValue>
+                        <leftValue>{!Record.Related_Applications__c}</leftValue>
                         <operator>EQUAL</operator>
-                        <rightValue>false</rightValue>
+                        <rightValue>No</rightValue>
                     </criteria>
                 </visibilityRule>
             </componentInstance>
