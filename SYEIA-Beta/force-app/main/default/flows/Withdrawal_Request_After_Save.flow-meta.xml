@@ -395,7 +395,7 @@ NWL and Section 37.</description>
             <field>DeveloperName</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Section_NWL_Withdrawal_Request_Notification</stringValue>
+                <stringValue>NWL_Withdrawal_Request_Notification</stringValue>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -523,7 +523,7 @@ NWL and Section 37.</description>
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <textTemplates>
         <name>TEMP_WithdrawalRequestNotificationBody</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>

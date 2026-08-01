@@ -560,6 +560,7 @@
 		<members>Notify_File_Approvers</members>
 		<members>Section_37_Deadline_Reminder</members>
 		<members>Section_37_Withdrawal_Request_Notification</members>
+		<members>NWL_Withdrawal_Request_Notification</members>
 		<members>Unassigned_Case_Notifications</members>
 		<name>CustomNotificationType</name>
 	</types>
@@ -693,11 +694,13 @@
 		<members>Subflow_Create_Withdrawal_Request</members>
 		<members>Subflow_File_Approval_Process_Next_Steps</members>
 		<members>Subflow_Notify_Approvers_About_New_Request</members>
+		<members>Subflow_Notify_Team_On_New_NWL_Case</members>
 		<members>SubFlow_NWL_Decision_Issued_Letter</members>
 		<members>Subflow_Recalculate_Case_Tasks</members>
 		<members>Task_After_Delete</members>
 		<members>Task_After_Save</members>
 		<members>Update_the_application_status_to_Archived</members>
+		<members>Withdrawal_Request_After_Save</members>
 		<name>Flow</name>
 	</types>
 <types>
