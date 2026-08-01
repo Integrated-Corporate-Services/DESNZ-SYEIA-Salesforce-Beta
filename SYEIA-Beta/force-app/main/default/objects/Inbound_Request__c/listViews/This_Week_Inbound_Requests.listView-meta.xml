@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>All</fullName>
+    <fullName>This_Week_Inbound_Requests</fullName>
     <columns>NAME</columns>
     <columns>External_System__c</columns>
     <columns>Status__c</columns>
     <columns>CREATED_DATE</columns>
     <filterScope>Everything</filterScope>
-    <label>All</label>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>equals</operation>
+        <value>THIS_WEEK</value>
+    </filters>
+    <label>This Week - Inbound Requests</label>
 </ListView>

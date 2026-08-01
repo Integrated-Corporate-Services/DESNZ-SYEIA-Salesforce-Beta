@@ -256,6 +256,20 @@ private class InboundForm_ProcessorTest {
         '}';
     }
 
+    private static String getNWLWithdrawalJson(String applicationId, String desnzRef) {
+        return '{' +
+            '"applicationId":"' + applicationId + '",' +
+            '"formType":"NWL",' +
+            '"status":"UNDER_REVIEW",' +
+            '"Withdraw":{' +
+                '"withdrawalReason":"test",' +
+                '"voluntaryAgreement":false' +
+            '},' +
+            '"desnzRef":"' + desnzRef + '",' +
+            '"eventType":"WITHDRAWL_REQUESTED"' +
+        '}';
+    }
+
     private static String getValidNWLJson() {
         return '{' +
             '"applicationId":"b6ed18fa-7c3d-43bf-97b9-a40fc9bffa03",' +
@@ -1080,6 +1094,66 @@ private class InboundForm_ProcessorTest {
                 'S37 withdrawal payload without eventType should process successfully');
             Assert.areEqual('S37_WITHDRAWAL_REQUEST', result.formType,
                 'Payload should be routed to withdrawal form type via Withdraw node');
+
+            Case__c updatedCase = [
+                SELECT Id, Status__c
+                FROM Case__c
+                WHERE Id = :existingCase.Id
+                LIMIT 1
+            ];
+            Assert.areEqual('Withdrawal Requested', updatedCase.Status__c,
+                'Case status should be updated to Withdrawal Requested');
+        } finally {
+            CaseTriggerHelper.enableProcessing();
+        }
+    }
+
+    @IsTest
+    static void testProcessRequests_NWLWithdrawalRequestPayload() {
+        InboundForm_Processor.clearAllCaches();
+        InboundForm_ConfigRegistry.clearCache();
+        CaseTriggerHelper.disableProcessing();
+        try {
+            String appId = 'a3d42bff-058d-4e82-9e87-dda5867da7ef';
+            String desnzRef = 'NWL07089';
+            Case__c existingCase = new Case__c(
+                Name = desnzRef,
+                Status__c = 'New',
+                AWS_Application_Id__c = appId
+            );
+            insert existingCase;
+
+            Inbound_Request__c request = new Inbound_Request__c(
+                Payload__c = getNWLWithdrawalJson(appId, desnzRef),
+                Status__c = 'Received'
+            );
+            insert request;
+
+            List<Inbound_Request__c> requests = new List<Inbound_Request__c>{
+                [SELECT Id, Payload__c FROM Inbound_Request__c WHERE Id = :request.Id]
+            };
+
+            Test.startTest();
+            Map<Id, InboundForm_Processor.ProcessingResult> results =
+                InboundForm_Processor.processRequests(requests);
+            Test.stopTest();
+
+            InboundForm_Processor.ProcessingResult result = results.get(request.Id);
+            Assert.isTrue(result.success, 'NWL withdrawal payload should process successfully');
+            Assert.areEqual('NWL_WITHDRAWAL_REQUEST', result.formType,
+                'NWL withdrawal payload should be routed to withdrawal form type');
+
+            List<Withdrawal_Request__c> inserted = [
+                SELECT Id, Case__c, Status__c, Withdrawal_Request_Reason__c
+                FROM Withdrawal_Request__c
+                WHERE Case__c = :existingCase.Id
+            ];
+
+            Assert.areEqual(2, inserted.size(), 'Should create two withdrawal requests');
+            Assert.areEqual('Pending', inserted[0].Status__c,
+                'Withdrawal request status should be normalized to Pending');
+            Assert.areEqual('test', inserted[0].Withdrawal_Request_Reason__c,
+                'Withdrawal reason should be mapped from payload');
 
             Case__c updatedCase = [
                 SELECT Id, Status__c

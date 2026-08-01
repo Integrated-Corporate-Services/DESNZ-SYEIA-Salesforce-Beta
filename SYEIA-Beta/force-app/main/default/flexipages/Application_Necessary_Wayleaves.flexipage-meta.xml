@@ -1768,8 +1768,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.CPO_Submitted__c</fieldItem>
-                <identifier>RecordCPO_Submitted_cField</identifier>
+                <fieldItem>Record.Related_Applications__c</fieldItem>
+                <identifier>RecordRelated_Applications_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -1847,8 +1847,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.CPO_Submitted__c</fieldItem>
-                <identifier>RecordCPO_Submitted_cField2</identifier>
+                <fieldItem>Record.Related_Applications__c</fieldItem>
+                <identifier>RecordRelated_Applications_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -2489,7 +2489,7 @@
                 <identifier>flexipage_fieldSection20</identifier>
                 <visibilityRule>
                     <criteria>
-                        <leftValue>{!Record.CPO_Submitted__c}</leftValue>
+                        <leftValue>{!Record.Related_Applications__c}</leftValue>
                         <operator>EQUAL</operator>
                         <rightValue>Yes</rightValue>
                     </criteria>
@@ -2514,7 +2514,7 @@
                 <identifier>flexipage_fieldSection25</identifier>
                 <visibilityRule>
                     <criteria>
-                        <leftValue>{!Record.CPO_Submitted__c}</leftValue>
+                        <leftValue>{!Record.Related_Applications__c}</leftValue>
                         <operator>EQUAL</operator>
                         <rightValue>No</rightValue>
                     </criteria>
@@ -3907,6 +3907,79 @@
                         <leftValue>{!Record.Status__c}</leftValue>
                         <operator>EQUAL</operator>
                         <rightValue>Withdrawal Requested</rightValue>
+                    </criteria>
+                </visibilityRule>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>actionNames</name>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>maxRecordsToDisplay</name>
+                    <value>5</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>parentFieldApiName</name>
+                    <value>Case__c.Id</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListApiName</name>
+                    <value>Withdrawal_Requests__r</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListDisplayType</name>
+                    <value>ADVGRID</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListFieldAliases</name>
+                    <valueList>
+                        <valueListItems>
+                            <value>NAME</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Withdrawal_Request_Reason__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Status__c</value>
+                        </valueListItems>
+                    </valueList>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListLabel</name>
+                    <value>Withdrawal Requests</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showActionBar</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>sortFieldAlias</name>
+                    <value>__DEFAULT__</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>sortFieldOrder</name>
+                    <value>Default</value>
+                </componentInstanceProperties>
+                <componentName>lst:dynamicRelatedList</componentName>
+                <identifier>lst_dynamicRelatedList4</identifier>
+                <visibilityRule>
+                    <booleanFilter>1 OR 2 OR 3</booleanFilter>
+                    <criteria>
+                        <leftValue>{!Record.Withdrawal_Request_Count__c}</leftValue>
+                        <operator>GT</operator>
+                        <rightValue>0</rightValue>
+                    </criteria>
+                    <criteria>
+                        <leftValue>{!Record.Status__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Withdrawal Requested</rightValue>
+                    </criteria>
+                    <criteria>
+                        <leftValue>{!Record.Status__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Withdrawn</rightValue>
                     </criteria>
                 </visibilityRule>
             </componentInstance>

@@ -159,7 +159,7 @@ public class InboundForm_NWLConfig {
 
         config.addFieldMapping(InboundForm_MappingConfig.booleanField(
             'sections.additionalInformation.has_related_applications',
-            'Are_There_Any_Other_Related_Applications__c'
+            'Related_Applications__c'
         ));
 
         config.addFieldMapping(InboundForm_MappingConfig.stringField(
