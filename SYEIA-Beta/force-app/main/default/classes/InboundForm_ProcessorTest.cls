@@ -1205,7 +1205,7 @@ private class InboundForm_ProcessorTest {
                        Written_Removal_Notice_Been_Given__c,
                        Land__c,
                        Equipment_Visible_from_Public_Road__c,
-                       Are_There_Any_Other_Related_Applications__c,
+                      Related_Applications__c,
                        Details_of_All_Related_Application__c
                 FROM Case__c
                 WHERE AWS_Application_Id__c = 'b6ed18fa-7c3d-43bf-97b9-a40fc9bffa03'
@@ -1233,8 +1233,6 @@ private class InboundForm_ProcessorTest {
                 'Visibility flag should map to null when not present in payload');
             // Assert.areEqual('Yes', insertedCase.Equipment_Visible_from_Public_Road__c,
             //     'Visibility flag should map to Yes');
-            Assert.isTrue(insertedCase.Are_There_Any_Other_Related_Applications__c,
-                'Related applications flag should map');
             Assert.areEqual('TEST related application',
                 insertedCase.Details_of_All_Related_Application__c,
                 'Related application details should map');

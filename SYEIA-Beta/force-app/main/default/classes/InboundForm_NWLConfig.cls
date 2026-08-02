@@ -157,7 +157,7 @@ public class InboundForm_NWLConfig {
             'Evidence_of_Negotiations__c'
         ));
 
-        config.addFieldMapping(InboundForm_MappingConfig.booleanField(
+        config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
             'sections.additionalInformation.has_related_applications',
             'Related_Applications__c'
         ));
