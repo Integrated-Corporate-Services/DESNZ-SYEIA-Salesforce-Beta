@@ -838,6 +838,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Case__c.Related_Applications__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Case__c.Related_CPO_Details__c</field>
         <readable>true</readable>
     </fieldPermissions>
