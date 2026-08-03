@@ -75,6 +75,16 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
                 shouldUpdate = true;
             }
 
+            Id representativeId = getPartyIdByTypeAndApplicationPartyId(
+                insertedRecords,
+                'Representative',
+                'NWL_REPRESENTATIVE'
+            );
+            if (representativeId != null) {
+                caseToUpdate.Representative__c = representativeId;
+                shouldUpdate = true;
+            }
+
             Id landownerId = getPartyIdByTypeAndApplicationPartyId(
                 insertedRecords,
                 'Landowner',

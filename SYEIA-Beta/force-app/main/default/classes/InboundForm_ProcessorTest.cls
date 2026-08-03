@@ -1198,6 +1198,9 @@ private class InboundForm_ProcessorTest {
                        Name,
                        AWS_Application_Id__c,
                       DNO__c,
+                      Objector__c,
+                      Landowner__c,
+                      Representative__c,
                        Case_Type__c,
                        Application_Type__c,
                       Type_Of_NWL_That_Existed__c,
@@ -1236,6 +1239,36 @@ private class InboundForm_ProcessorTest {
             Assert.areEqual('TEST related application',
                 insertedCase.Details_of_All_Related_Application__c,
                 'Related application details should map');
+
+            Party__c objectorParty = [
+                SELECT Id
+                FROM Party__c
+                WHERE Case__c = :insertedCase.Id
+                AND Application_Party_Id__c = 'NWL_OBJECTOR'
+                LIMIT 1
+            ];
+            Assert.areEqual(objectorParty.Id, insertedCase.Objector__c,
+                'Case should link objector party through Objector__c');
+
+            Party__c representativeParty = [
+                SELECT Id, Name, Email__c, Phone__c, Party_Type__c, Application_Party_Id__c
+                FROM Party__c
+                WHERE Case__c = :insertedCase.Id
+                AND Application_Party_Id__c = 'NWL_REPRESENTATIVE'
+                LIMIT 1
+            ];
+            Assert.areEqual('test rep name', representativeParty.Name,
+                'Representative party should map representative_name');
+            Assert.areEqual('testrepresentative@test.com', representativeParty.Email__c,
+                'Representative party should map representative_email');
+            Assert.areEqual('077777777777', representativeParty.Phone__c,
+                'Representative party should map representative_phone');
+            Assert.areEqual('Representative', representativeParty.Party_Type__c,
+                'Representative party should have Representative type');
+            Assert.areEqual('NWL_REPRESENTATIVE', representativeParty.Application_Party_Id__c,
+                'Representative party should carry NWL_REPRESENTATIVE identifier');
+            Assert.areEqual(representativeParty.Id, insertedCase.Representative__c,
+                'Case should link representative party through Representative__c');
 
             Assert.isTrue(result.collectionRecords.containsKey('Applicants'),
                 'Applicants collection should be processed from applicantDetails');
