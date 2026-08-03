@@ -65,6 +65,12 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
                 shouldUpdate = true;
             }
 
+            Id relatedLandId = getFirstRecordId(insertedRecords, 'Land__c');
+            if (relatedLandId != null) {
+                caseToUpdate.Related_Land__c = relatedLandId;
+                shouldUpdate = true;
+            }
+
             Id objectorId = getPartyIdByTypeAndApplicationPartyId(
                 insertedRecords,
                 'Individual',

@@ -133,6 +133,8 @@ private class InboundForm_NWLConfigTest {
         }
 
         Assert.isNotNull(siteAddressConfig, 'SiteAddress config should be present');
+        Assert.areEqual('Case__c', siteAddressConfig.parentLookupField,
+            'SiteAddress should be attached directly to Case');
 
         Map<String, InboundForm_MappingConfig.FieldMapping> siteAddressMappingsByTarget =
             new Map<String, InboundForm_MappingConfig.FieldMapping>();

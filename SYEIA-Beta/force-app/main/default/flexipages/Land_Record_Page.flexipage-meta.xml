@@ -20,6 +20,10 @@
                     <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
+                    <name>hideSlackAction</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
                     <name>numVisibleActions</name>
                     <value>3</value>
                 </componentInstanceProperties>
@@ -75,6 +79,16 @@
                 <identifier>RecordLand_Registered_with_Land_Registry_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Explanation_Land_not_Registered__c</fieldItem>
+                <identifier>RecordExplanation_Land_not_Registered__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-da479ed1-0720-4f06-b254-a858ecde380e</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -85,7 +99,7 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Land_Reference__c</fieldItem>
+                <fieldItem>Record.Land_Identification__c</fieldItem>
                 <identifier>RecordLand_Reference_cField</identifier>
             </fieldInstance>
         </itemInstances>
@@ -258,6 +272,30 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Site_Address__r.Full_Address__c</fieldItem>
+                <identifier>RecordSite_Address_rFull_Address_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-65d527dc-82c7-47ff-97bd-dc32d635a734</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-65d527dc-82c7-47ff-97bd-dc32d635a734</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column3</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-5437a3ef-cabd-47db-8cda-616527b87d9f</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
                     <name>columns</name>
@@ -309,6 +347,24 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
                 <identifier>flexipage_fieldSection4</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>columns</name>
+                    <value>Facet-5437a3ef-cabd-47db-8cda-616527b87d9f</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>Site Address</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:fieldSection</componentName>
+                <identifier>flexipage_fieldSection2</identifier>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>

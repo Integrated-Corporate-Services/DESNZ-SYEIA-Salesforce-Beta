@@ -1198,6 +1198,7 @@ private class InboundForm_ProcessorTest {
                        Name,
                        AWS_Application_Id__c,
                       DNO__c,
+                      Related_Land__c,
                       Objector__c,
                       Landowner__c,
                       Representative__c,
@@ -1239,6 +1240,47 @@ private class InboundForm_ProcessorTest {
             Assert.areEqual('TEST related application',
                 insertedCase.Details_of_All_Related_Application__c,
                 'Related application details should map');
+
+            Land__c relatedLand = [
+                SELECT Id,
+                       Case__c,
+                      Site_Address__c,
+                       Land_Registry_Reference_Number__c,
+                       Grid_Letter__c,
+                       Land_Location__c
+                FROM Land__c
+                WHERE Case__c = :insertedCase.Id
+                LIMIT 1
+            ];
+            Assert.areEqual(relatedLand.Id, insertedCase.Related_Land__c,
+                'Case should link land details record through Related_Land__c');
+            Assert.areEqual('1234567', relatedLand.Land_Registry_Reference_Number__c,
+                'Land record should map land_registry_ref from landDetails');
+            Assert.areEqual('TE 123456 654321', relatedLand.Grid_Letter__c,
+                'Land record should map os_grid_ref from landDetails');
+            Assert.areEqual('England', relatedLand.Land_Location__c,
+                'Land location should normalize and map from landDetails.country');
+
+            Assert.isNotNull(relatedLand.Site_Address__c,
+                'Land record should have Site_Address__c populated');
+
+            Address__c siteAddress = [
+                SELECT Id,
+                       Application_Party_Identification__c,
+                       Address_Line1__c,
+                       Postcode__c
+                FROM Address__c
+                WHERE Id = :relatedLand.Site_Address__c
+                LIMIT 1
+            ];
+            Assert.areEqual(siteAddress.Id, relatedLand.Site_Address__c,
+                'Land record should link created site address through Site_Address__c');
+            Assert.areEqual('NWL_SITE_ADDRESS', siteAddress.Application_Party_Identification__c,
+                'Linked site address should be tagged as NWL site address');
+            Assert.areEqual('test', siteAddress.Address_Line1__c,
+                'Site address line 1 should map from landDetails.site_address.line1');
+            Assert.areEqual('SA14RF', siteAddress.Postcode__c,
+                'Site address postcode should map from landDetails.site_address.postcode');
 
             Party__c objectorParty = [
                 SELECT Id

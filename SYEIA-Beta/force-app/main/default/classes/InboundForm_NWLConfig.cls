@@ -551,6 +551,7 @@ public class InboundForm_NWLConfig {
                 .setCollectionName('SiteAddress')
                 .setJsonPath('sections.landDetails')
                 .setTargetObject('Address__c')
+                .setParentLookupField('Case__c')
                 .setParentLinkSfField('Application_Party_Identification__c')
                 .setProcessingOrder(41);
 
