@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Decision_Letter_Sent_Date_is_Mandatory</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT(ISBLANK(PRIORVALUE(Decision_Date__c))),
+    ISBLANK(Decision_Date__c)
+)</errorConditionFormula>
+    <errorDisplayField>Decision_Date__c</errorDisplayField>
+    <errorMessage>Decision Letter Date cannot be empty after the letter has been sent.</errorMessage>
+</ValidationRule>

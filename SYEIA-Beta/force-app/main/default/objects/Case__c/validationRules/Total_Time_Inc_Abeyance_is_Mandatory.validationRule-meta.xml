@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Time_Inc_Abeyance_is_Mandatory</fullName>
+    <active>true</active>
+    <description>Total Time Including Abeyance (In Days) is required when Abeyance Dates are populated.</description>
+    <errorConditionFormula>AND(
+ OR (NOT(ISBLANK(X1st_Abeyance_Start_Date__c)),
+     NOT(ISBLANK( X2nd_Abeyance_Start_Date__c ))),
+     Total_Time_Including_Abeyance_In_Days__c &lt;= 0
+)</errorConditionFormula>
+    <errorDisplayField>Total_Time_Including_Abeyance_In_Days__c</errorDisplayField>
+    <errorMessage>Total Time Including Abeyance (In Days) is required when an Abeyance Date is provided.</errorMessage>
+</ValidationRule>

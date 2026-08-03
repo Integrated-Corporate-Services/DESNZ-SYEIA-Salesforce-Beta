@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Time_To_Decision_After_Inspect_Mandatory</fullName>
+    <active>true</active>
+    <description>Time To Decision After Inspector Report is Mandatory</description>
+    <errorConditionFormula>AND(
+    NOT(ISBLANK(Inspector_s_Report_Received_Date__c)),
+    Time_To_Decision_After_Inspector_Report__c &lt;= 0
+)</errorConditionFormula>
+    <errorDisplayField>Time_To_Decision_After_Inspector_Report__c</errorDisplayField>
+    <errorMessage>Time To Decision After Inspector Report is required when Inspector&apos;s Report Received Date is populated.</errorMessage>
+</ValidationRule>
