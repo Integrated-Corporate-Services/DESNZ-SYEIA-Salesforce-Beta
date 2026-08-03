@@ -847,6 +847,13 @@
 		<members>Case__c.Restrict_Admin_Edit_On_Status</members>
 		<members>Case__c.Validate_DNO_Party_Type</members>
 		<members>Case__c.CWTR_Letter_Sent_Date_Mandatory</members>
+		<members>Case__c.Decision_Letter_Sent_Date_is_Mandatory</members>
+		<members>Case__c.DESNZ_Decision_is_Mandatory</members>
+		<members>Case__c.Agreed_With_Inspector_Recom_is_Mandatory</members>
+		<members>Case__c.Time_To_Decision_After_Inspect_Mandatory</members>
+		<members>Case__c.Total_Time_Exc_Abeyance_is_Mandatory</members>
+		<members>Case__c.Withdrawal_Date_Time_Is_Required</members>
+		<members>Case__c.Invalid_Letter_Date_Is_Required</members>
 		<name>ValidationRule</name>
 	</types>
 	<version>65.0</version>

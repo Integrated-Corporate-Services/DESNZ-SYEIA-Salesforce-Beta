@@ -207,33 +207,6 @@
         </connector>
     </assignments>
     <assignments>
-        <name>Assign_NWL_Default_Calculated_Dates_based_on_abeyance</name>
-        <label>Assign NWL Default Calculated Dates based on abeyance</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <assignmentItems>
-            <assignToReference>$Record.Total_Time_Excluding_Abeyance_In_Days__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>form_TotalTimeExAbeyanceInDays</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>$Record.Total_Time_Including_Abeyance_In_Days__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>form_TotalTimeIncAbeyanceInDays</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>$Record.Time_To_Decision_After_Inspector_Report__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>form_TimeToDecisionInspectorReport</elementReference>
-            </value>
-        </assignmentItems>
-    </assignments>
-    <assignments>
         <name>Assign_Previous_Status</name>
         <label>Assign Previous Status</label>
         <locationX>0</locationX>
@@ -308,6 +281,51 @@
         </assignmentItems>
         <connector>
             <targetReference>Is_Case_New_or_Updated</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Time_to_Decision_after_Inspector_report</name>
+        <label>Assign Time to Decision after Inspector report</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Time_To_Decision_After_Inspector_Report__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>form_TimeToDecisionInspectorReport</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Assign_Total_Time_Excluding_Abeyance</name>
+        <label>Assign Total Time Excluding Abeyance</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Total_Time_Excluding_Abeyance_In_Days__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>form_TotalTimeExAbeyanceInDays</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Check_Total_Time_including_Abeyance_In_Days</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Total_time_Including_Abeyance</name>
+        <label>Assign Total time Including Abeyance</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Total_Time_Including_Abeyance_In_Days__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>form_TotalTimeIncAbeyanceInDays</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>check_Time_to_Decision_after_Inspector_report</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -442,7 +460,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Check_Calculated_Dates</targetReference>
+            <targetReference>Check_Total_Time_Excluding_Abeyance_In_Days</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -458,7 +476,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Check_Calculated_Dates</targetReference>
+            <targetReference>Check_Total_Time_Excluding_Abeyance_In_Days</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -595,42 +613,6 @@
         </rules>
     </decisions>
     <decisions>
-        <name>Check_Calculated_Dates</name>
-        <label>Check Calculated Dates</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
-        <rules>
-            <name>Check_NWL_Default_Calculated_Dates</name>
-            <conditionLogic>or</conditionLogic>
-            <conditions>
-                <leftValueReference>$Record.Total_Time_Excluding_Abeyance_In_Days__c</leftValueReference>
-                <operator>NotEqualTo</operator>
-                <rightValue>
-                    <elementReference>form_TotalTimeExAbeyanceInDays</elementReference>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>$Record.Total_Time_Including_Abeyance_In_Days__c</leftValueReference>
-                <operator>NotEqualTo</operator>
-                <rightValue>
-                    <elementReference>form_TotalTimeIncAbeyanceInDays</elementReference>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>$Record.Time_To_Decision_After_Inspector_Report__c</leftValueReference>
-                <operator>NotEqualTo</operator>
-                <rightValue>
-                    <elementReference>form_TimeToDecisionInspectorReport</elementReference>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Assign_NWL_Default_Calculated_Dates_based_on_abeyance</targetReference>
-            </connector>
-            <label>Check NWL Default Calculated Dates</label>
-        </rules>
-    </decisions>
-    <decisions>
         <name>Check_Completion_Status</name>
         <label>Check Completion Status</label>
         <locationX>0</locationX>
@@ -697,6 +679,99 @@
                 <targetReference>Update_Completion_Status_to_Withdrawn</targetReference>
             </connector>
             <label>Is Withdrawn</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>check_Time_to_Decision_after_Inspector_report</name>
+        <label>check Time to Decision after Inspector report</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Time_to_Decision_after_Inspector_report</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Time_To_Decision_After_Inspector_Report__c</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Time_To_Decision_After_Inspector_Report__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Time_to_Decision_after_Inspector_report</targetReference>
+            </connector>
+            <label>Time to Decision after Inspector report</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Total_Time_Excluding_Abeyance_In_Days</name>
+        <label>Check Total Time Excluding Abeyance In Days</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Check_Total_Time_including_Abeyance_In_Days</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Total_Time_Excluding_Abeyance_In_Days</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Total_Time_Excluding_Abeyance_In_Days__c</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Total_Time_Excluding_Abeyance_In_Days__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Total_Time_Excluding_Abeyance</targetReference>
+            </connector>
+            <label>Total Time Excluding Abeyance In Days</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Total_Time_including_Abeyance_In_Days</name>
+        <label>Check Total Time including Abeyance In Days</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>check_Time_to_Decision_after_Inspector_report</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Total_Time_including_Abeyance_In_Days</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Total_Time_Including_Abeyance_In_Days__c</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Total_Time_Including_Abeyance_In_Days__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Total_time_Including_Abeyance</targetReference>
+            </connector>
+            <label>Total Time including Abeyance In Days</label>
         </rules>
     </decisions>
     <decisions>
@@ -1610,7 +1685,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <targetReference>Check_Calculated_Dates</targetReference>
+            <targetReference>Check_Total_Time_Excluding_Abeyance_In_Days</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
