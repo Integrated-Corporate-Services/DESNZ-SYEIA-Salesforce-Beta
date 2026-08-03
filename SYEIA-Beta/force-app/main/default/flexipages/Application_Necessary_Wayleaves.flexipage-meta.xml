@@ -1730,8 +1730,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Evidence_of_Negotiations__c</fieldItem>
-                <identifier>RecordEvidence_of_Negotiations_cField2</identifier>
+                <fieldItem>Record.Explanation_No_Negotiations__c</fieldItem>
+                <identifier>RecordExplanation_No_Negotiations_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-40e10606-3172-4202-b927-b50dd57ed4ce</name>
