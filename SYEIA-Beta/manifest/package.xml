@@ -197,6 +197,7 @@
 		<members>Case__c.Explanation_Assets_Do_Not_Match_Plan__c</members>
 		<members>Case__c.Explanation_Notice_Omits_Line_Removal__c</members>
 		<members>Case__c.Explanation_Submitted_Beyond_3_Months__c</members>
+		<members>Case__c.Explanation_No_Negotiations__c</members>
 		<members>Case__c.Full_EIA_Process_or_Screening_Opinion__c</members>
 		<members>Case__c.Further_Representations_Exchange_Letter__c</members>
 		<members>Case__c.General_Comments__c</members>
