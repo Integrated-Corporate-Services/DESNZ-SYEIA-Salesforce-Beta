@@ -59,5 +59,21 @@
             <fullName>Mrs</fullName>
             <default>false</default>
         </values>
+        <values>
+            <fullName>Ms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prof</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rev</fullName>
+            <default>false</default>
+        </values>
     </picklistValues>
 </RecordType>
