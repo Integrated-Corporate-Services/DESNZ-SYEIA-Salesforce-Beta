@@ -2331,8 +2331,14 @@
                 <componentName>flexipage:accordion</componentName>
                 <identifier>flexipage_accordion</identifier>
                 <visibilityRule>
+                    <booleanFilter>1 AND 2</booleanFilter>
                     <criteria>
                         <leftValue>{!Record.Is_Objector_also_Landowner__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>No</rightValue>
+                    </criteria>
+                    <criteria>
+                        <leftValue>{!Record.Does_Objector_Have_Representative__c}</leftValue>
                         <operator>EQUAL</operator>
                         <rightValue>No</rightValue>
                     </criteria>
