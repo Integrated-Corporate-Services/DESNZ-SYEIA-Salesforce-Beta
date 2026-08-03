@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CWTR_Letter_Sent_Date_Mandatory</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(CTWR_Letter_Sent__c==TRUE,  ISBLANK(CTWR_Letter_Date__c ))</errorConditionFormula>
+    <errorDisplayField>CTWR_Letter_Date__c</errorDisplayField>
+    <errorMessage>CTWR Letter Date cannot be empty after the letter has been sent.</errorMessage>
+</ValidationRule>

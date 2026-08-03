@@ -155,6 +155,7 @@
 		<members>Case__c.CPO_Submitted__c</members>
 		<members>Case__c.CTWR_Deadline__c</members>
 		<members>Case__c.CTWR_Letter_Date__c</members>
+		<members>Case__c.CTWR_Letter_Sent__c</members>
 		<members>Case__c.CTWR_Response_From_Applicant_Date__c</members>
 		<members>Case__c.CTWR_Response_From_Landowner_Date__c</members>
 		<members>Case__c.Current_Landowner_Signed_Wayleave__c</members>
@@ -845,6 +846,7 @@
 		<members>Case__c.Lock_Withdrawn_Case</members>
 		<members>Case__c.Restrict_Admin_Edit_On_Status</members>
 		<members>Case__c.Validate_DNO_Party_Type</members>
+		<members>Case__c.CWTR_Letter_Sent_Date_Mandatory</members>
 		<name>ValidationRule</name>
 	</types>
 	<version>65.0</version>

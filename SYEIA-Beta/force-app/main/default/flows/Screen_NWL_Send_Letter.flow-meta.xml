@@ -1249,7 +1249,8 @@
     </decisions>
     <description>PDF Warning message.
 Limit Attachments
-Letter Dates</description>
+Letter Dates
+CTWR Letter Sent</description>
     <environments>Default</environments>
     <formulas>
         <name>formula_decide_email_body</name>
@@ -1893,6 +1894,12 @@ Letter Dates</description>
             <field>CTWR_Letter_Date__c</field>
             <value>
                 <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>CTWR_Letter_Sent__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
             </value>
         </inputAssignments>
         <inputAssignments>
