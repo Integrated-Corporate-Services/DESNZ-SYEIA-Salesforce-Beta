@@ -39,6 +39,11 @@ public class InboundForm_NWLConfig {
             'Name'
         ));
 
+        config.addFieldMapping(InboundForm_MappingConfig.dateField(
+            'submittedAt', 
+            'Date_of_Application__c'
+        ));
+
         // Sections
         // Application Details
         config.addFieldMapping(InboundForm_MappingConfig.stringField(
