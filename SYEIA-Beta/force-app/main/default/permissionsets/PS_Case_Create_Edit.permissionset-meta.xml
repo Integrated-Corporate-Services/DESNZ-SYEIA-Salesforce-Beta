@@ -273,6 +273,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Case__c.CTWR_Letter_Sent__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Case__c.CTWR_Response_From_Applicant_Date__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -519,6 +524,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Case__c.Explanation_Assets_Do_Not_Match_Plan__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case__c.Explanation_No_Negotiations__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
