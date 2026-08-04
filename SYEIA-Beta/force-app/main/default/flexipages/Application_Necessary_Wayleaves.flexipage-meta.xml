@@ -4157,7 +4157,7 @@
                             <value>Line_Voltage__c</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>Line_Type__c</value>
+                            <value>Line_Type_Multi__c</value>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
