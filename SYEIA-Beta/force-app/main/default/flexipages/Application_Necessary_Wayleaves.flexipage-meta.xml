@@ -1766,7 +1766,7 @@
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>none</value>
+                    <value>required</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Related_Applications__c</fieldItem>
                 <identifier>RecordRelated_Applications_cField</identifier>
@@ -1790,7 +1790,7 @@
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>none</value>
+                    <value>required</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Details_of_All_Related_Application__c</fieldItem>
                 <identifier>RecordDetails_of_All_Related_Application_cField</identifier>
