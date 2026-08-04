@@ -1845,7 +1845,7 @@
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>none</value>
+                    <value>required</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Related_Applications__c</fieldItem>
                 <identifier>RecordRelated_Applications_cField2</identifier>
