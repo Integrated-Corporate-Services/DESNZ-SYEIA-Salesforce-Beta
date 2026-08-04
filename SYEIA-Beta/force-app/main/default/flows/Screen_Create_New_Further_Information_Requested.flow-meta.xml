@@ -730,6 +730,7 @@ Type Of Information Requested</description>
                     <dataType>String</dataType>
                     <fieldText>Type of Information Requested</fieldText>
                     <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -744,6 +745,7 @@ Type Of Information Requested</description>
                     <name>InformationRequiredFromApplicant</name>
                     <fieldText>Information Required from Applicant</fieldText>
                     <fieldType>LargeTextArea</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -759,6 +761,7 @@ Type Of Information Requested</description>
                     <dataType>Date</dataType>
                     <fieldText>Further Information Requested Deadline</fieldText>
                     <fieldType>InputField</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -819,6 +822,7 @@ Type Of Information Requested</description>
                     </defaultValue>
                     <fieldText>Subject</fieldText>
                     <fieldType>InputField</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isReadOnly>
                         <booleanValue>true</booleanValue>
                     </isReadOnly>
@@ -841,6 +845,7 @@ Type Of Information Requested</description>
                     <fieldText>To Address</fieldText>
                     <fieldType>InputField</fieldType>
                     <helpText>&lt;p&gt;Emails come from the Company email and the applicant email.&lt;/p&gt;</helpText>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -860,6 +865,7 @@ Type Of Information Requested</description>
                     <fieldText>CC Address</fieldText>
                     <fieldType>InputField</fieldType>
                     <helpText>&lt;p&gt;You can add additional email addresses by separating them with commas.&lt;/p&gt;</helpText>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>false</isRequired>
                     <styleProperties>
                         <verticalAlignment>
