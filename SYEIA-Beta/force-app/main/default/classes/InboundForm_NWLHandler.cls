@@ -27,6 +27,7 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
             }
 
             normalizeInstalledAssets(records);
+            enrichInstalledAssets(parser, records);
             normalizeLandLocation(records);
         } catch (Exception e) {
             Logger.error('Error in NWL afterBuild: ' + e.getMessage());
@@ -65,6 +66,12 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
                 shouldUpdate = true;
             }
 
+            Id relatedLandId = getFirstRecordId(insertedRecords, 'Land__c');
+            if (relatedLandId != null) {
+                caseToUpdate.Related_Land__c = relatedLandId;
+                shouldUpdate = true;
+            }
+
             Id objectorId = getPartyIdByTypeAndApplicationPartyId(
                 insertedRecords,
                 'Individual',
@@ -72,6 +79,16 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
             );
             if (objectorId != null) {
                 caseToUpdate.Objector__c = objectorId;
+                shouldUpdate = true;
+            }
+
+            Id representativeId = getPartyIdByTypeAndApplicationPartyId(
+                insertedRecords,
+                'Representative',
+                'NWL_REPRESENTATIVE'
+            );
+            if (representativeId != null) {
+                caseToUpdate.Representative__c = representativeId;
                 shouldUpdate = true;
             }
 
@@ -211,6 +228,202 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
                 assetRecord.Line_Voltage__c = '400kV';
             }
         }
+    }
+
+    private static void enrichInstalledAssets(
+            InboundForm_JSONParser parser,
+            Map<String, List<SObject>> records) {
+        if (parser == null || !records.containsKey('Asset_Information__c')) {
+            return;
+        }
+
+        List<Map<String, Object>> rawInstalledAssets =
+            parser.getObjectList('sections.assets.installed_assets');
+        if (rawInstalledAssets.isEmpty()) {
+            return;
+        }
+
+        Map<String, Map<String, Object>> installedAssetsById = new Map<String, Map<String, Object>>();
+        for (Map<String, Object> rawAsset : rawInstalledAssets) {
+            Object assetIdObj = rawAsset.get('asset_id');
+            if (assetIdObj == null) {
+                continue;
+            }
+
+            String assetId = String.valueOf(assetIdObj);
+            if (!String.isBlank(assetId)) {
+                installedAssetsById.put(assetId, rawAsset);
+            }
+        }
+
+        for (SObject record : records.get('Asset_Information__c')) {
+            Asset_Information__c assetRecord = (Asset_Information__c) record;
+            if (String.isBlank(assetRecord.TORI_NOI_Code__c)) {
+                continue;
+            }
+
+            Map<String, Object> rawAsset = installedAssetsById.get(assetRecord.TORI_NOI_Code__c);
+            if (rawAsset == null) {
+                continue;
+            }
+
+            List<String> lineTypes = extractStringList(rawAsset.get('line_types'));
+            String mappedLineTypes = mapLineTypes(lineTypes, assetRecord.Line_Voltage__c);
+            if (!String.isBlank(mappedLineTypes)) {
+                assetRecord.Line_Type_Multi__c = mappedLineTypes;
+            }
+
+            String description = buildAssetDescription(rawAsset.get('component_descriptions'), lineTypes);
+            if (!String.isBlank(description)) {
+                assetRecord.Description__c = description;
+            }
+        }
+    }
+
+    private static List<String> extractStringList(Object rawListObj) {
+        List<String> values = new List<String>();
+        if (!(rawListObj instanceof List<Object>)) {
+            return values;
+        }
+
+        for (Object item : (List<Object>) rawListObj) {
+            if (item != null) {
+                String strValue = String.valueOf(item);
+                if (!String.isBlank(strValue)) {
+                    values.add(strValue);
+                }
+            }
+        }
+
+        return values;
+    }
+
+    private static String buildAssetDescription(Object rawDescriptionsObj, List<String> lineTypes) {
+        if (!(rawDescriptionsObj instanceof Map<String, Object>)) {
+            return null;
+        }
+
+        Map<String, Object> descriptionMap = (Map<String, Object>) rawDescriptionsObj;
+        List<String> orderedDescriptions = new List<String>();
+        Set<String> seen = new Set<String>();
+
+        for (String lineType : lineTypes) {
+            if (!descriptionMap.containsKey(lineType)) {
+                continue;
+            }
+            String descriptionText = String.valueOf(descriptionMap.get(lineType));
+            if (!String.isBlank(descriptionText) && !seen.contains(descriptionText)) {
+                orderedDescriptions.add(descriptionText);
+                seen.add(descriptionText);
+            }
+        }
+
+        if (orderedDescriptions.isEmpty()) {
+            for (Object valueObj : descriptionMap.values()) {
+                String descriptionText = String.valueOf(valueObj);
+                if (!String.isBlank(descriptionText) && !seen.contains(descriptionText)) {
+                    orderedDescriptions.add(descriptionText);
+                    seen.add(descriptionText);
+                }
+            }
+        }
+
+        if (orderedDescriptions.isEmpty()) {
+            return null;
+        }
+
+        String combined = String.join(orderedDescriptions, ' | ');
+        return combined.length() > 255 ? combined.substring(0, 255) : combined;
+    }
+
+    private static String mapLineTypes(List<String> lineTypes, String lineVoltage) {
+        if (lineTypes.isEmpty()) {
+            return null;
+        }
+
+        List<String> mappedValues = new List<String>();
+        Set<String> seen = new Set<String>();
+        Boolean highVoltage = isHighVoltage(lineVoltage);
+
+        for (String lineType : lineTypes) {
+            String mappedValue = mapSingleLineType(lineType, highVoltage);
+            if (!String.isBlank(mappedValue) && !seen.contains(mappedValue)) {
+                mappedValues.add(mappedValue);
+                seen.add(mappedValue);
+            }
+        }
+
+        return mappedValues.isEmpty() ? null : String.join(mappedValues, ';');
+    }
+
+    private static String mapSingleLineType(String lineType, Boolean highVoltage) {
+        if (String.isBlank(lineType)) {
+            return null;
+        }
+
+        if (lineType == 'Distribution') {
+            return 'Distribution';
+        }
+        if (lineType == 'Transmission') {
+            return 'Transmission';
+        }
+
+        if (lineType == 'overhead_line_wooden_pole_stay') {
+            return highVoltage
+                ? 'HV overhead + poles + stays'
+                : 'LV overhead + poles + stays';
+        }
+        if (lineType == 'overhead_line_wooden_pole') {
+            return highVoltage
+                ? 'HV overhead + wooden poles'
+                : 'LV overhead + wooden poles';
+        }
+        if (lineType == 'overhead_line_steel_tower') {
+            return highVoltage
+                ? 'HV overhead + steel towers'
+                : 'LV overhead + steel towers';
+        }
+        if (lineType == 'underground_cable') {
+            return highVoltage
+                ? 'HV underground cable'
+                : 'LV underground cable';
+        }
+        if (lineType == 'overhead_line') {
+            return highVoltage
+                ? 'HV overhead line'
+                : 'LV overhead line';
+        }
+        if (lineType == 'underground_cable_wooden_pole_stay') {
+            return highVoltage
+                ? 'HV underground + poles + stays'
+                : 'LV underground + poles + stays';
+        }
+        if (lineType == 'underground_cable_wooden_pole') {
+            return highVoltage
+                ? 'HV underground + wooden poles'
+                : 'LV underground + wooden poles';
+        }
+        if (lineType == 'wooden_pole') {
+            return 'Wooden poles';
+        }
+        if (lineType == 'steel_tower') {
+            return 'Steel towers';
+        }
+        if (lineType == 'stay') {
+            return 'Stays';
+        }
+
+        return null;
+    }
+
+    private static Boolean isHighVoltage(String lineVoltage) {
+        if (String.isBlank(lineVoltage)) {
+            return true;
+        }
+
+        String normalized = lineVoltage.toLowerCase().replace(' ', '');
+        // NWL payloads use 240/415V for low-voltage assets.
+        return !normalized.contains('240/415');
     }
 
     private static Boolean linkLandToSiteAddress(Map<String, List<SObject>> insertedRecords) {

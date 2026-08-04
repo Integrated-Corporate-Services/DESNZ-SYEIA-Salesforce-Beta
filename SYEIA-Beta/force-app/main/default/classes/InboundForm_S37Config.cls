@@ -406,7 +406,7 @@ public class InboundForm_S37Config {
         assets.addFieldMapping(
             InboundForm_MappingConfig.stringField('line_voltage', 'Line_Voltage__c'));
         assets.addFieldMapping(
-            InboundForm_MappingConfig.stringField('type_of_line', 'Line_Type__c'));
+            InboundForm_MappingConfig.stringField('type_of_line', 'Line_Type_Multi__c'));
         assets.addFieldMapping(
             InboundForm_MappingConfig.stringField('tori_noi_code', 'TORI_NOI_Code__c'));
         assets.addFieldMapping(

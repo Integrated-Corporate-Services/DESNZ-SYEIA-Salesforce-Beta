@@ -39,6 +39,11 @@ public class InboundForm_NWLConfig {
             'Name'
         ));
 
+        config.addFieldMapping(InboundForm_MappingConfig.dateField(
+            'submittedAt', 
+            'Date_of_Application__c'
+        ));
+
         // Sections
         // Application Details
         config.addFieldMapping(InboundForm_MappingConfig.stringField(
@@ -464,8 +469,12 @@ public class InboundForm_NWLConfig {
                 .setProcessingOrder(60);
 
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('payment_id', 'Payment_Id__c'));
+        payments.addFieldMapping(InboundForm_MappingConfig.stringField('payment_id', 'Item_Reference__c'));
+        payments.addFieldMapping(InboundForm_MappingConfig.stringField('payment_id', 'Invoice_Reference__c'));
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('kind', 'Payment_Method__c'));
+        payments.addFieldMapping(InboundForm_MappingConfig.integerField('1', 'Quantity__c'));
         payments.addFieldMapping(InboundForm_MappingConfig.currencyField('total_amount', 'Total_Amount__c'));
+        payments.addFieldMapping(InboundForm_MappingConfig.currencyField('subtotal', 'Subtotal__c'));
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('status', 'Status__c'));
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('provider', 'Provider__c'));
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('description', 'Description__c'));
@@ -542,6 +551,7 @@ public class InboundForm_NWLConfig {
                 .setCollectionName('SiteAddress')
                 .setJsonPath('sections.landDetails')
                 .setTargetObject('Address__c')
+                .setParentLookupField('Case__c')
                 .setParentLinkSfField('Application_Party_Identification__c')
                 .setProcessingOrder(41);
 

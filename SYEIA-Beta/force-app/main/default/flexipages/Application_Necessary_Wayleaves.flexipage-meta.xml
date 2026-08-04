@@ -1790,10 +1790,10 @@
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>required</value>
+                    <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Related_CPO_Details__c</fieldItem>
-                <identifier>RecordRelated_CPO_Details_cField</identifier>
+                <fieldItem>Record.Details_of_All_Related_Application__c</fieldItem>
+                <identifier>RecordDetails_of_All_Related_Application_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -4157,7 +4157,7 @@
                             <value>Line_Voltage__c</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>Line_Type__c</value>
+                            <value>Line_Type_Multi__c</value>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>

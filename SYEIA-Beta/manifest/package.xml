@@ -111,7 +111,7 @@
 		<members>Asset_Information__c.Case__c</members>
 		<members>Asset_Information__c.Description__c</members>
 		<members>Asset_Information__c.Line_Length__c</members>
-		<members>Asset_Information__c.Line_Type__c</members>
+		<members>Asset_Information__c.Line_Type_Multi__c</members>
 		<members>Asset_Information__c.Line_Voltage__c</members>
 		<members>Asset_Information__c.Poles_Being_Added__c</members>
 		<members>Asset_Information__c.Poles_Being_Removed__c</members>

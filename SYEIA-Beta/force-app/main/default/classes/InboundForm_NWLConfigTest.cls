@@ -38,6 +38,19 @@ private class InboundForm_NWLConfigTest {
             'Application type path should match'
         );
 
+        Assert.isTrue(mappingsByTarget.containsKey('Date_of_Application__c'),
+            'Should map submitted at date');
+        Assert.areEqual(
+            'submittedAt',
+            mappingsByTarget.get('Date_of_Application__c').jsonPath,
+            'Date of application path should match'
+        );
+        Assert.areEqual(
+            InboundForm_MappingConfig.DataType.DATE_TYPE,
+            mappingsByTarget.get('Date_of_Application__c').dataType,
+            'Date of application should be DATE_TYPE'
+        );
+
         Assert.isTrue(mappingsByTarget.containsKey('Notice_to_Remove_Date__c'),
             'Should map notice to remove date');
         Assert.areEqual(
@@ -120,6 +133,8 @@ private class InboundForm_NWLConfigTest {
         }
 
         Assert.isNotNull(siteAddressConfig, 'SiteAddress config should be present');
+        Assert.areEqual('Case__c', siteAddressConfig.parentLookupField,
+            'SiteAddress should be attached directly to Case');
 
         Map<String, InboundForm_MappingConfig.FieldMapping> siteAddressMappingsByTarget =
             new Map<String, InboundForm_MappingConfig.FieldMapping>();

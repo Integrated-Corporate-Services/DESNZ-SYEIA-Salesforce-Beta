@@ -1198,6 +1198,10 @@ private class InboundForm_ProcessorTest {
                        Name,
                        AWS_Application_Id__c,
                       DNO__c,
+                      Related_Land__c,
+                      Objector__c,
+                      Landowner__c,
+                      Representative__c,
                        Case_Type__c,
                        Application_Type__c,
                       Type_Of_NWL_That_Existed__c,
@@ -1236,6 +1240,77 @@ private class InboundForm_ProcessorTest {
             Assert.areEqual('TEST related application',
                 insertedCase.Details_of_All_Related_Application__c,
                 'Related application details should map');
+
+            Land__c relatedLand = [
+                SELECT Id,
+                       Case__c,
+                      Site_Address__c,
+                       Land_Registry_Reference_Number__c,
+                       Grid_Letter__c,
+                       Land_Location__c
+                FROM Land__c
+                WHERE Case__c = :insertedCase.Id
+                LIMIT 1
+            ];
+            Assert.areEqual(relatedLand.Id, insertedCase.Related_Land__c,
+                'Case should link land details record through Related_Land__c');
+            Assert.areEqual('1234567', relatedLand.Land_Registry_Reference_Number__c,
+                'Land record should map land_registry_ref from landDetails');
+            Assert.areEqual('TE 123456 654321', relatedLand.Grid_Letter__c,
+                'Land record should map os_grid_ref from landDetails');
+            Assert.areEqual('England', relatedLand.Land_Location__c,
+                'Land location should normalize and map from landDetails.country');
+
+            Assert.isNotNull(relatedLand.Site_Address__c,
+                'Land record should have Site_Address__c populated');
+
+            Address__c siteAddress = [
+                SELECT Id,
+                       Application_Party_Identification__c,
+                       Address_Line1__c,
+                       Postcode__c
+                FROM Address__c
+                WHERE Id = :relatedLand.Site_Address__c
+                LIMIT 1
+            ];
+            Assert.areEqual(siteAddress.Id, relatedLand.Site_Address__c,
+                'Land record should link created site address through Site_Address__c');
+            Assert.areEqual('NWL_SITE_ADDRESS', siteAddress.Application_Party_Identification__c,
+                'Linked site address should be tagged as NWL site address');
+            Assert.areEqual('test', siteAddress.Address_Line1__c,
+                'Site address line 1 should map from landDetails.site_address.line1');
+            Assert.areEqual('SA14RF', siteAddress.Postcode__c,
+                'Site address postcode should map from landDetails.site_address.postcode');
+
+            Party__c objectorParty = [
+                SELECT Id
+                FROM Party__c
+                WHERE Case__c = :insertedCase.Id
+                AND Application_Party_Id__c = 'NWL_OBJECTOR'
+                LIMIT 1
+            ];
+            Assert.areEqual(objectorParty.Id, insertedCase.Objector__c,
+                'Case should link objector party through Objector__c');
+
+            Party__c representativeParty = [
+                SELECT Id, Name, Email__c, Phone__c, Party_Type__c, Application_Party_Id__c
+                FROM Party__c
+                WHERE Case__c = :insertedCase.Id
+                AND Application_Party_Id__c = 'NWL_REPRESENTATIVE'
+                LIMIT 1
+            ];
+            Assert.areEqual('test rep name', representativeParty.Name,
+                'Representative party should map representative_name');
+            Assert.areEqual('testrepresentative@test.com', representativeParty.Email__c,
+                'Representative party should map representative_email');
+            Assert.areEqual('077777777777', representativeParty.Phone__c,
+                'Representative party should map representative_phone');
+            Assert.areEqual('Representative', representativeParty.Party_Type__c,
+                'Representative party should have Representative type');
+            Assert.areEqual('NWL_REPRESENTATIVE', representativeParty.Application_Party_Id__c,
+                'Representative party should carry NWL_REPRESENTATIVE identifier');
+            Assert.areEqual(representativeParty.Id, insertedCase.Representative__c,
+                'Case should link representative party through Representative__c');
 
             Assert.isTrue(result.collectionRecords.containsKey('Applicants'),
                 'Applicants collection should be processed from applicantDetails');
@@ -1325,6 +1400,20 @@ private class InboundForm_ProcessorTest {
             Assert.areEqual('240/415v',
                 (String) installedAssetsByCode.get('966c15b0-89cf-40e2-8a73-fb8a099be0e7').get('Line_Voltage__c'),
                 'Installed asset line voltage should map and normalize from line_voltage');
+            Assert.areEqual(
+                'LV overhead line;LV overhead + wooden poles;LV overhead + poles + stays;' +
+                'LV overhead + steel towers;Wooden poles;Stays;Steel towers;LV underground cable',
+                (String) installedAssetsByCode.get('966c15b0-89cf-40e2-8a73-fb8a099be0e7').get('Line_Type_Multi__c'),
+                'Installed asset line_types should map to multiple line type picklist values');
+            Assert.areEqual('TEST',
+                (String) installedAssetsByCode.get('966c15b0-89cf-40e2-8a73-fb8a099be0e7').get('Description__c'),
+                'Installed asset component_descriptions should map to Description__c');
+            Assert.areEqual('Stays;Steel towers',
+                (String) installedAssetsByCode.get('3abe7869-41f5-47c1-b5c5-70048e9af76a').get('Line_Type_Multi__c'),
+                'Installed asset line_types should map multiple selected keys to multi-select values');
+            Assert.areEqual('TEST',
+                (String) installedAssetsByCode.get('3abe7869-41f5-47c1-b5c5-70048e9af76a').get('Description__c'),
+                'Installed asset description should use component_descriptions values');
         } finally {
             CaseTriggerHelper.enableProcessing();
         }
