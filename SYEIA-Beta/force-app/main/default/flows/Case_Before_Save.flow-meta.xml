@@ -3,6 +3,29 @@
     <apiVersion>65.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
+        <name>Assign_Application_Fee_and_Date</name>
+        <label>Assign Application Fee and Date</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Application_Fee_Paid__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Yes</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Date_of_Fee_Paid__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Date_of_Application__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Decision_NWL_Status_Changes</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Assign_Case_Actual_Completed_Date_Time</name>
         <label>Assign Case Actual Completed Date/Time</label>
         <locationX>0</locationX>
@@ -1379,6 +1402,28 @@
             </connector>
             <label>Credit Card and Paid</label>
         </rules>
+        <rules>
+            <name>Credit_Card_and_Debit_Card</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Payment__r.Payment_Method__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Credit Card</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Payment__r.Payment_Method__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Debit Card</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Application_Fee_and_Date</targetReference>
+            </connector>
+            <label>Credit Card and Debit Card</label>
+        </rules>
     </decisions>
     <decisions>
         <name>Is_Status_Changed</name>
@@ -1801,7 +1846,8 @@
         </rules>
     </decisions>
     <description>SYEIA-77
-SYEIA-1962</description>
+SYEIA-1962
+SYEIA-1953</description>
     <environments>Default</environments>
     <formulas>
         <name>FIR_DateDiffrence_Today</name>
