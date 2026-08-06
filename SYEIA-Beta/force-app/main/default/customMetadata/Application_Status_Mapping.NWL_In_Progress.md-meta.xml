@@ -4,7 +4,7 @@
     <protected>false</protected>
     <values>
         <field>AWS_Status__c</field>
-        <value xsi:type="xsd:string">Under review</value>
+        <value xsi:type="xsd:string">In Progress</value>
     </values>
     <values>
         <field>RecordType_Dev_Name__c</field>
