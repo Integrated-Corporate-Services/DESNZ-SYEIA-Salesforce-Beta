@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
+        <name>BusinessDaysCalculator</name>
+        <label>BusinessDaysCalculator</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>BusinessDaysCalculator</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Get_Unassigned_Cases</targetReference>
+        </connector>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>businessDays</name>
+            <value>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+                <numberValue>2.0</numberValue>
+            </value>
+        </inputParameters>
+        <nameSegment>BusinessDaysCalculator</nameSegment>
+        <offset>0</offset>
+        <outputParameters>
+            <assignToReference>varTwoBusinessDaysAgo</assignToReference>
+            <name>businessDaysAgo</name>
+        </outputParameters>
+    </actionCalls>
+    <actionCalls>
         <name>Necessary_Wayleaves_Send_Custom_Notification</name>
         <label>Necessary_Wayleaves_Send_Custom_Notification</label>
         <locationX>0</locationX>
@@ -8,7 +33,7 @@
         <actionName>customNotificationAction</actionName>
         <actionType>customNotificationAction</actionType>
         <connector>
-            <targetReference>Record_exist_in_Section_37_Collection</targetReference>
+            <targetReference>Assign_New_Cases_Necessary_Wayleaves_Collection_Count</targetReference>
         </connector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
@@ -52,7 +77,7 @@
         <actionName>customNotificationAction</actionName>
         <actionType>customNotificationAction</actionType>
         <connector>
-            <targetReference>Record_exist_in_Tree_Lopping_collection</targetReference>
+            <targetReference>Assign_New_S37_Collection_Count</targetReference>
         </connector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
@@ -87,6 +112,302 @@
         </inputParameters>
         <nameSegment>customNotificationAction</nameSegment>
         <offset>0</offset>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Multiple_Cases_Info_Email</name>
+        <label>Send Multiple Cases Info Email</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>Record_exist_in_Section_37_Collection</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>recipientAddresses</name>
+            <value>
+                <collectionElements>
+                    <stringValue>necessarywayleaves@energysecurity.gov.uk</stringValue>
+                </collectionElements>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderType</name>
+            <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>OrgWideEmailAddress</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderAddress</name>
+            <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>necessarywayleaves@energysecurity.gov.uk</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>composeEmailContent</name>
+            <value>
+                <stringValue>True</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+                <stringValue>A new application must be assigned to a case officer</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>&lt;p&gt;&lt;span style=&quot;color: rgb(18, 18, 18);&quot;&gt;Dear &lt;/span&gt;Necessary Wayleaves Team&lt;/p&gt;&lt;p&gt;These new applications were submitted more than 2 days ago and have not been assigned to a case officer yet:&lt;/p&gt;&lt;p&gt;{!var_NWL_MultipleCaseInfoForEmail}&lt;/p&gt;&lt;p&gt;These cases must be assigned to a case officer link to SF &lt;a href=&quot;{!formula_salesforceNewCaseListView}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;New Cases&lt;/a&gt; section as soon as possible.&lt;/p&gt;&lt;p&gt;Do not reply to this email.&lt;/p&gt;</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <elementReference>Yes</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>useLineBreaks</name>
+            <value>
+                <elementReference>Yes</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientId</name>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+        <offset>0</offset>
+        <versionString>3.0.1</versionString>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Multiple_Cases_Info_Email_S37</name>
+        <label>Send Multiple Cases Info Email S37</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>Record_exist_in_Tree_Lopping_collection</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>recipientAddresses</name>
+            <value>
+                <collectionElements>
+                    <stringValue>s37consents@energysecurity.gov.uk</stringValue>
+                </collectionElements>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderType</name>
+            <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>OrgWideEmailAddress</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderAddress</name>
+            <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>s37consents@energysecurity.gov.uk</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>composeEmailContent</name>
+            <value>
+                <stringValue>True</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+                <stringValue>A new application must be assigned to a case officer</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>&lt;p&gt;&lt;span style=&quot;color: rgb(18, 18, 18);&quot;&gt;Dear &lt;/span&gt;Section 37 Team&lt;/p&gt;&lt;p&gt;These new applications were submitted more than 2 days ago and have not been assigned to a case officer yet:&lt;/p&gt;&lt;p&gt;{!var_S37_MultipleCaseInfoForEmail}&lt;/p&gt;&lt;p&gt;These cases must be assigned to a case officer link to SF &lt;a href=&quot;formula_salesforceNewCaseListView_S37&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;New Cases&lt;/a&gt; section as soon as possible.&lt;/p&gt;&lt;p&gt;Do not reply to this email.&lt;/p&gt;</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <elementReference>Yes_Section_37</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>useLineBreaks</name>
+            <value>
+                <elementReference>Yes_Section_37</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientId</name>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+        <offset>0</offset>
+        <versionString>3.0.1</versionString>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Single_Case_Email</name>
+        <label>Send Single Case Email</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>Record_exist_in_Section_37_Collection</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>recipientAddresses</name>
+            <value>
+                <collectionElements>
+                    <stringValue>necessarywayleaves@energysecurity.gov.uk</stringValue>
+                </collectionElements>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderType</name>
+            <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>OrgWideEmailAddress</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderAddress</name>
+            <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>necessarywayleaves@energysecurity.gov.uk</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>composeEmailContent</name>
+            <value>
+                <stringValue>True</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+                <stringValue>A new application must be assigned to a case officer</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>&lt;p&gt;&lt;span style=&quot;color: rgb(18, 18, 18);&quot;&gt;Dear &lt;/span&gt;Necessary Wayleaves Team&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(18, 18, 18);&quot;&gt;A new application {!var_NWLCaserecord.Name} for &lt;/span&gt;Necessary Wayleaves&lt;span style=&quot;color: rgb(18, 18, 18);&quot;&gt; was submitted more than 2 days ago and has not been assigned to a case officer yet.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(18, 18, 18);&quot;&gt;The case must be assigned to a case officer &lt;/span&gt;&lt;a href=&quot;{!formula_salesforceNewCaseListView}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;color: rgb(18, 18, 18);&quot;&gt;New Cases&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(18, 18, 18);&quot;&gt;Do not reply to this email.&lt;/span&gt;&lt;/p&gt;</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <elementReference>Yes</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>useLineBreaks</name>
+            <value>
+                <elementReference>Yes</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientId</name>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+        <offset>0</offset>
+        <versionString>3.0.1</versionString>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Single_Case_Email_S37</name>
+        <label>Send Single Case Email S37</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>Record_exist_in_Tree_Lopping_collection</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>recipientAddresses</name>
+            <value>
+                <collectionElements>
+                    <stringValue>s37consents@energysecurity.gov.uk</stringValue>
+                </collectionElements>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderType</name>
+            <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>OrgWideEmailAddress</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderAddress</name>
+            <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>s37consents@energysecurity.gov.uk</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>composeEmailContent</name>
+            <value>
+                <stringValue>True</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+                <stringValue>A new application must be assigned to a case officer</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>&lt;p&gt;&lt;span style=&quot;color: rgb(18, 18, 18);&quot;&gt;Dear &lt;/span&gt;Section 37 Team&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(18, 18, 18);&quot;&gt;A new application {!var_S37Caserecord.Name} for &lt;/span&gt;consent for development of overhead lines (Section 37)&lt;span style=&quot;color: rgb(18, 18, 18);&quot;&gt; was submitted more than 2 days ago and has not been assigned to a case officer yet.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(18, 18, 18);&quot;&gt;The case must be assigned to a case officer &lt;/span&gt;&lt;a href=&quot;{!formula_salesforceNewCaseListView_S37}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;color: rgb(18, 18, 18);&quot;&gt;New Cases&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(18, 18, 18);&quot;&gt;Do not reply to this email.&lt;/span&gt;&lt;/p&gt;</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <elementReference>Yes_Section_37</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>useLineBreaks</name>
+            <value>
+                <elementReference>Yes_Section_37</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientId</name>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+        <offset>0</offset>
+        <versionString>3.0.1</versionString>
     </actionCalls>
     <actionCalls>
         <name>Tree_Looping_Send_Custom_Notification</name>
@@ -132,6 +453,40 @@
     <apiVersion>66.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
+        <description>This will be used when only one record has been delayed for more than two days.</description>
+        <name>Assign_Case_to_NWLCaseRecord</name>
+        <label>Assign Case to NWLCaseRecord</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_NWLCaserecord</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Loop_Unassigned_Cases</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Assign_Necessary_Wayleaves_To_Collection</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>This will be used when only one record has been delayed for more than two days.</description>
+        <name>Assign_Case_to_S37CaseRecord</name>
+        <label>Assign Case to S37CaseRecord</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_S37Caserecord</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Loop_Unassigned_Cases</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Assign_Section_37_To_Collection</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Assign_Necessary_Wayleaves_Names</name>
         <label>Assign Necessary_Wayleaves Names</label>
         <locationX>0</locationX>
@@ -151,7 +506,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Loop_Unassigned_Cases</targetReference>
+            <targetReference>Assign_to_var_NWL_MultipleCaseInfoForEmail</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -171,6 +526,38 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assign_New_Cases_Necessary_Wayleaves_Collection_Count</name>
+        <label>Assign New_Cases_Necessary_Wayleaves_Collection Count</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>Var_New_Cases_Necessary_Wayleaves_Collection_Count</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference>New_Cases_Necessary_Wayleaves_Collection</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Does_the_collection_contain_a_single_item_or_multiple_items</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_New_S37_Collection_Count</name>
+        <label>Assign New_S37_Collection Count</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>Var_New_Cases_S37_Collection_Count</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference>New_Cases_S37_Collection</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Does_the_collection_contain_a_single_item_or_multiple_items_S37</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Assign_Section_37_To_Collection</name>
         <label>Assign Section 37 To Collection</label>
         <locationX>0</locationX>
@@ -184,6 +571,38 @@
         </assignmentItems>
         <connector>
             <targetReference>S37_Case_Names</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_to_var_NWL_MultipleCaseInfoForEmail</name>
+        <label>Assign to var_NWL_MultipleCaseInfoForEmail</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_NWL_MultipleCaseInfoForEmail</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>TT_NWL_MultipleCaseInfoForEmail</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Unassigned_Cases</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_to_var_S37_MultipleCaseInfoForEmail</name>
+        <label>Assign to var_S37_MultipleCaseInfoForEmail</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_S37_MultipleCaseInfoForEmail</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>TT_S37_MultipleCaseInfoForEmail</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Unassigned_Cases</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -270,7 +689,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Loop_Unassigned_Cases</targetReference>
+            <targetReference>Assign_to_var_S37_MultipleCaseInfoForEmail</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -365,9 +784,24 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Assign_Section_37_To_Collection</targetReference>
+                <targetReference>Assign_Case_to_S37CaseRecord</targetReference>
             </connector>
             <label>Is Section_37</label>
+        </rules>
+        <rules>
+            <name>Necessary_Wayleaves</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Loop_Unassigned_Cases.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary_Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Case_to_NWLCaseRecord</targetReference>
+            </connector>
+            <label>Necessary_Wayleaves</label>
         </rules>
         <rules>
             <name>Is_Tree_Lopping</name>
@@ -384,20 +818,107 @@
             </connector>
             <label>Is_Tree_Lopping</label>
         </rules>
+    </decisions>
+    <decisions>
+        <name>Does_the_collection_contain_a_single_item_or_multiple_items</name>
+        <label>Does the collection contain a single item or multiple items</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Record_exist_in_Section_37_Collection</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
-            <name>Necessary_Wayleaves</name>
+            <name>Single</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Loop_Unassigned_Cases.RecordType.DeveloperName</leftValueReference>
+                <leftValueReference>Var_New_Cases_Necessary_Wayleaves_Collection_Count</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <stringValue>Necessary_Wayleaves</stringValue>
+                    <numberValue>1.0</numberValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Assign_Necessary_Wayleaves_To_Collection</targetReference>
+                <targetReference>Send_Single_Case_Email</targetReference>
             </connector>
-            <label>Necessary_Wayleaves</label>
+            <label>Single</label>
+        </rules>
+        <rules>
+            <name>Multiple</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Var_New_Cases_Necessary_Wayleaves_Collection_Count</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>1.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Multiple_Cases_Info_Email</targetReference>
+            </connector>
+            <label>Multiple</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Does_the_collection_contain_a_single_item_or_multiple_items_S37</name>
+        <label>Does the collection contain a single item or multiple items</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Record_exist_in_Tree_Lopping_collection</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Single_S37</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Var_New_Cases_S37_Collection_Count</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <numberValue>1.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Single_Case_Email_S37</targetReference>
+            </connector>
+            <label>Single</label>
+        </rules>
+        <rules>
+            <name>Multiple_S37</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Var_New_Cases_Necessary_Wayleaves_Collection_Count</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>1.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Multiple_Cases_Info_Email_S37</targetReference>
+            </connector>
+            <label>Multiple</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Is_WeekDay</name>
+        <label>Is WeekDay</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes_WeekDay</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_IsWeekDay</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>BusinessDaysCalculator</targetReference>
+            </connector>
+            <label>Yes WeekDay</label>
         </rules>
     </decisions>
     <decisions>
@@ -473,6 +994,30 @@
         </rules>
     </decisions>
     <environments>Default</environments>
+    <formulas>
+        <name>formula_IsWeekDay</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(
+    WEEKDAY(TODAY()) &lt;&gt; 1,
+    WEEKDAY(TODAY()) &lt;&gt; 7
+)</expression>
+    </formulas>
+    <formulas>
+        <name>formula_salesforceNewCaseListView</name>
+        <dataType>String</dataType>
+        <expression>LEFT(
+    {!$Api.Partner_Server_URL_610},
+    FIND(&quot;/services&quot;, {!$Api.Partner_Server_URL_610})
+)+&apos;lightning/n/Case_Management_Dashboard_NWL&apos;</expression>
+    </formulas>
+    <formulas>
+        <name>formula_salesforceNewCaseListView_S37</name>
+        <dataType>String</dataType>
+        <expression>LEFT(
+    {!$Api.Partner_Server_URL_610},
+    FIND(&quot;/services&quot;, {!$Api.Partner_Server_URL_610})
+)+&apos;lightning/n/Case_Management_Dashboard&apos;</expression>
+    </formulas>
     <formulas>
         <name>TwoDaysAfterDateOfApplication</name>
         <dataType>Date</dataType>
@@ -630,9 +1175,9 @@
         <filterLogic>1 AND 2</filterLogic>
         <filters>
             <field>Date_of_Application__c</field>
-            <operator>LessThanOrEqualTo</operator>
+            <operator>EqualTo</operator>
             <value>
-                <elementReference>TwoDaysAfterDateOfApplication</elementReference>
+                <elementReference>varTwoBusinessDaysAgo</elementReference>
             </value>
         </filters>
         <filters>
@@ -650,7 +1195,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Get_Unassigned_Cases</targetReference>
+            <targetReference>Is_WeekDay</targetReference>
         </connector>
         <schedule>
             <dayOfMonthToRun>0</dayOfMonthToRun>
@@ -694,6 +1239,16 @@
         <name>CON_Tree_Lopping_Notification_Title</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
         <text>Tree Lopping - Case Assignment Pending</text>
+    </textTemplates>
+    <textTemplates>
+        <name>TT_NWL_MultipleCaseInfoForEmail</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;{!var_NWLCaserecord.Name}: a necessary wayleave&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>TT_S37_MultipleCaseInfoForEmail</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!var_S37Caserecord.Name}: a &lt;/span&gt;consent for development of overhead lines (Section 37)&lt;/p&gt;</text>
     </textTemplates>
     <variables>
         <name>Id_of_New_Cases_Necessary_Wayleaves_Queue</name>
@@ -790,8 +1345,61 @@
         <isOutput>false</isOutput>
     </variables>
     <variables>
+        <name>Var_New_Cases_Necessary_Wayleaves_Collection_Count</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+    </variables>
+    <variables>
         <name>Var_New_Cases_Necessary_Wayleaves_Group_Id</name>
         <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>Var_New_Cases_S37_Collection_Count</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+    </variables>
+    <variables>
+        <name>var_NWL_MultipleCaseInfoForEmail</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>var_NWLCaserecord</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Case__c</objectType>
+    </variables>
+    <variables>
+        <name>var_S37_MultipleCaseInfoForEmail</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>var_S37Caserecord</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Case__c</objectType>
+    </variables>
+    <variables>
+        <name>varTwoBusinessDaysAgo</name>
+        <dataType>Date</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>

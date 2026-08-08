@@ -5,6 +5,8 @@
 		<members>Application_StatusUpdateQueueableTest</members>
 		<members>ApplicationStatusService</members>
 		<members>ApplicationStatusServiceTest</members>
+		<members>BusinessDaysCalculator</members>
+		<members>BusinessDaysCalculatorTest</members>
 		<members>CaseTriggerHandler</members>
 		<members>CaseTriggerHandlerTest</members>
 		<members>CaseTriggerHelper</members>
