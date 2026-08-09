@@ -71,7 +71,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <targetReference>Decision_Status_Changed</targetReference>
+            <targetReference>Is_OwnerChanged</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Is Update</defaultConnectorLabel>
         <rules>
@@ -95,9 +95,6 @@
         <label>Decision Status Changed</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <defaultConnector>
-            <targetReference>Status_Changed_to_Withdrawal_Requested</targetReference>
-        </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Changed_From_FIR</name>
@@ -152,29 +149,85 @@
         </rules>
     </decisions>
     <decisions>
-        <name>Status_Changed_to_Withdrawal_Requested</name>
-        <label>Status Changed to Withdrawal Requested</label>
+        <name>Is_OwnerChanged</name>
+        <label>Is OwnerChanged</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <defaultConnector>
+            <targetReference>Decision_Status_Changed</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
-            <name>Yes</name>
+            <name>Owner_Changed_From_Queue_to_Case_Officer</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>$Record.Status__c</leftValueReference>
+                <leftValueReference>$Record.OwnerId</leftValueReference>
                 <operator>IsChanged</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>$Record.Status__c</leftValueReference>
-                <operator>EqualTo</operator>
+                <leftValueReference>$Record.Owner:Group.Id</leftValueReference>
+                <operator>IsNull</operator>
                 <rightValue>
-                    <stringValue>Withdrawal Requested</stringValue>
+                    <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
-            <label>Yes</label>
+            <conditions>
+                <leftValueReference>$Record__Prior.Owner:Group.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Owner:User.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Notify_When_a_Case_is_Assigned_to_a_Case_Officer</targetReference>
+            </connector>
+            <label>Owner Changed From Queue to Case Officer</label>
+        </rules>
+        <rules>
+            <name>Owner_Changed_From_CO_to_CO</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.OwnerId</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Owner:Group.OwnerId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Owner:User.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record__Prior.Owner:User.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Notify_When_a_Case_is_Reassigned_to_a_Case_Officer</targetReference>
+            </connector>
+            <label>Owner Changed From CO to CO</label>
         </rules>
     </decisions>
     <description>Case Status Change
@@ -211,9 +264,6 @@ New Case</description>
         <label>Update FIR records Outstanding</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <connector>
-            <targetReference>Status_Changed_to_Withdrawal_Requested</targetReference>
-        </connector>
         <faultConnector>
             <targetReference>Error_Log</targetReference>
         </faultConnector>
@@ -261,13 +311,44 @@ New Case</description>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </subflows>
     <subflows>
+        <name>Notify_When_a_Case_is_Assigned_to_a_Case_Officer</name>
+        <label>Notify When a Case is Assigned to a Case Officer</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Decision_Status_Changed</targetReference>
+        </connector>
+        <flowName>Subflow_Notify_When_a_Case_is_Assigned_to_a_Case_Officer</flowName>
+        <inputAssignments>
+            <name>varTriggeringCase</name>
+            <value>
+                <elementReference>$Record</elementReference>
+            </value>
+        </inputAssignments>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </subflows>
+    <subflows>
+        <name>Notify_When_a_Case_is_Reassigned_to_a_Case_Officer</name>
+        <label>Notify When a Case is Reassigned to a Case Officer</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Decision_Status_Changed</targetReference>
+        </connector>
+        <flowName>Subflow_Notify_When_a_Case_is_Reassigned_to_a_Case_Officer</flowName>
+        <inputAssignments>
+            <name>varTriggeringCase</name>
+            <value>
+                <elementReference>$Record</elementReference>
+            </value>
+        </inputAssignments>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </subflows>
+    <subflows>
         <name>NWL_Send_Decision_Letter</name>
         <label>NWL Send Decision Letter</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <connector>
-            <targetReference>Status_Changed_to_Withdrawal_Requested</targetReference>
-        </connector>
         <flowName>SubFlow_NWL_Decision_Issued_Letter</flowName>
         <inputAssignments>
             <name>varTriggeringCase</name>
