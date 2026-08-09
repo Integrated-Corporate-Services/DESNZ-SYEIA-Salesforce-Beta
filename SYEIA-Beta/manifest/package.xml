@@ -558,6 +558,7 @@
 		<name>CustomMetadata</name>
 	</types>
 <types>
+		<members>Case_Assigned_to_Case_Officer_Notification</members>
 		<members>Consent_Letter_Approved</members>
 		<members>FIR_Response_Notification</members>
 		<members>New_NWL_Case_Notification</members>
@@ -698,6 +699,8 @@
 		<members>Subflow_Create_Withdrawal_Request</members>
 		<members>Subflow_File_Approval_Process_Next_Steps</members>
 		<members>Subflow_Notify_Approvers_About_New_Request</members>
+		<members>Subflow_Notify_When_a_Case_is_Assigned_to_a_Case_Officer</members>
+		<members>Subflow_Notify_When_a_Case_is_Reassigned_to_a_Case_Officer</members>
 		<members>SubFlow_NWL_Decision_Issued_Letter</members>
 		<members>Subflow_Recalculate_Case_Tasks</members>
 		<members>Task_After_Delete</members>
