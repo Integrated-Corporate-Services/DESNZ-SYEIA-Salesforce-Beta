@@ -213,6 +213,7 @@ public class InboundForm_NWLConfig {
 
         applicants.addFieldMapping(InboundForm_MappingConfig.stringField('applicant_name', 'Name'));
         applicants.addFieldMapping(InboundForm_MappingConfig.stringField('email', 'Email__c'));
+        applicants.addFieldMapping(InboundForm_MappingConfig.stringField('applicant_name', 'Organisation__c'));
         applicants.addFieldMapping(InboundForm_MappingConfig.stringField('phone', 'Phone__c'));
         applicants.addFieldMapping(InboundForm_MappingConfig.defaultValue('DNO', 'Party_Type__c'));
         applicants.addFieldMapping(InboundForm_MappingConfig.defaultValue(
@@ -247,6 +248,8 @@ public class InboundForm_NWLConfig {
             'NWL_ORGANISATION',
             'Application_Party_Id__c'
         ));
+        
+        applicantContacts.addFieldMapping(InboundForm_MappingConfig.stringField('phone', 'Phone__c'));
 
         return applicantContacts;
     }
@@ -266,6 +269,7 @@ public class InboundForm_NWLConfig {
         objectors.addFieldMapping(InboundForm_MappingConfig.stringField('objector_title', 'Salutation__c'));
         objectors.addFieldMapping(InboundForm_MappingConfig.stringField('objector_email', 'Email__c'));
         objectors.addFieldMapping(InboundForm_MappingConfig.stringField('objector_phone', 'Phone__c'));
+        objectors.addFieldMapping(InboundForm_MappingConfig.stringField('objector_organisation', 'Organisation__c'));
         objectors.addFieldMapping(InboundForm_MappingConfig.defaultValue('Individual', 'Party_Type__c'));
         objectors.addFieldMapping(InboundForm_MappingConfig.defaultValue(
             'NWL_OBJECTOR',
@@ -290,6 +294,7 @@ public class InboundForm_NWLConfig {
         landowners.addFieldMapping(InboundForm_MappingConfig.stringField('landowner_title', 'Salutation__c'));
         landowners.addFieldMapping(InboundForm_MappingConfig.stringField('landowner_email', 'Email__c'));
         landowners.addFieldMapping(InboundForm_MappingConfig.stringField('landowner_phone', 'Phone__c'));
+        landowners.addFieldMapping(InboundForm_MappingConfig.stringField('landowner_organisation', 'Organisation__c'));
         landowners.addFieldMapping(InboundForm_MappingConfig.defaultValue('Landowner', 'Party_Type__c'));
         landowners.addFieldMapping(InboundForm_MappingConfig.defaultValue(
             'NWL_LANDOWNER',
@@ -313,6 +318,7 @@ public class InboundForm_NWLConfig {
         reps.addFieldMapping(InboundForm_MappingConfig.stringField('representative_name', 'Name'));
         reps.addFieldMapping(InboundForm_MappingConfig.stringField('representative_title', 'Salutation__c'));
         reps.addFieldMapping(InboundForm_MappingConfig.stringField('representative_email', 'Email__c'));
+        reps.addFieldMapping(InboundForm_MappingConfig.stringField('representative_organisation', 'Organisation__c'));
         reps.addFieldMapping(InboundForm_MappingConfig.stringField('representative_phone', 'Phone__c'));
         reps.addFieldMapping(InboundForm_MappingConfig.defaultValue(
             'Representative',
