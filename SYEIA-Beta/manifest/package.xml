@@ -706,6 +706,7 @@
 		<members>Task_After_Delete</members>
 		<members>Task_After_Save</members>
 		<members>Update_the_application_status_to_Archived</members>
+		<members>Screen_NWL_Create_New_Further_Information_Requested</members>
 		<name>Flow</name>
 	</types>
 <types>
@@ -801,6 +802,7 @@
 		<name>QuickAction</name>
 	</types>
 <types>
+	<types>
 		<members>Case__c.Necessary_Wayleaves</members>
 		<members>Case__c.Section_37</members>
 		<members>Case__c.Tree_Lopping</members>
@@ -809,6 +811,10 @@
 		<name>RecordType</name>
 	</types>
 <types>
+		<members>*</members>
+		<name>QuickAction</name>
+	</types>
+	<types>
 		<members>*</members>
 		<name>Role</name>
 	</types>
