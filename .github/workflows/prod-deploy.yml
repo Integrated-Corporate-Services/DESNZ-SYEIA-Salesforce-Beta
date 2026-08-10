@@ -1,0 +1,99 @@
+name: Deploy to Salesforce Production
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  validate-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run ESLint
+        run: npm run lint
+        continue-on-error: false
+
+      - name: Run Jest Tests
+        run: npm run test -- --coverage
+        continue-on-error: false
+
+      - name: Install Salesforce CLI
+        run: npm install --global @salesforce/cli
+
+      - name: Display Salesforce CLI version
+        run: sf --version
+
+      - name: Authenticate to Salesforce Production
+        env:
+          SFDX_AUTH_URL: ${{ secrets.SFDX_AUTH_URL }}
+        run: |
+          echo "$SFDX_AUTH_URL" > sfdx_auth_url.txt
+          sf org login sfdx-url \
+            --sfdx-url-file sfdx_auth_url.txt \
+            --alias production \
+            --set-default
+          rm -f sfdx_auth_url.txt
+
+      - name: Validate deployment
+        run: |
+          sf project deploy validate \
+            --target-org production \
+            --source-dir force-app \
+            --test-level RunLocalTests \
+            --wait 60
+
+      - name: Validate destructive changes
+        run: |
+          sf project deploy validate \
+            --target-org production \
+            --manifest manifest/destructiveChangesPost.xml \
+            --test-level RunLocalTests \
+            --wait 30
+
+      - name: Manual Production Approval
+        uses: trstringer/manual-approval@v1
+        with:
+          secret: ${{ github.TOKEN }}
+          approvers: ${{ secrets.PRODUCTION_APPROVERS }}
+          minimum-approvals: 1
+
+      - name: Deploy to Production
+        run: |
+          sf project deploy start \
+            --target-org production \
+            --source-dir force-app \
+            --test-level RunLocalTests \
+            --wait 60
+
+      - name: Deploy destructive changes
+        if: success()
+        run: |
+          sf project deploy start \
+            --target-org production \
+            --manifest manifest/destructiveChangesPost.xml \
+            --test-level RunLocalTests \
+            --wait 30
+
+      - name: Notify Deployment Status
+        if: always()
+        run: |
+          if [ "${{ job.status }}" = "success" ]; then
+            echo "✅ Deployment to production completed successfully"
+          else
+            echo "❌ Deployment to production failed"
+            exit 1
+          fi
