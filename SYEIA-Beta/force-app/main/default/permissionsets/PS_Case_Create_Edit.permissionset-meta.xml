@@ -447,6 +447,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Case__c.Decision_Letter_Issued_in_Time_Formula__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Case__c.Description_Of_Overhead_Lines__c</field>
         <readable>true</readable>
@@ -1539,6 +1544,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Party__c.Last_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Party__c.Organisation__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

@@ -1393,6 +1393,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Party__c.Organisation__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Party__c.Party_Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
