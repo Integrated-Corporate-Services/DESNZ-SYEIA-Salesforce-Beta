@@ -1108,7 +1108,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
-                    <value>Objector / Landowner Details</value>
+                    <value>Objector and Landowner Details</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>name</name>
@@ -1310,7 +1310,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
-                    <value>Objector / Representative Details</value>
+                    <value>Objector and Representative Details</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>name</name>
@@ -1590,7 +1590,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
-                    <value>Objector / Landowner / Representative Details</value>
+                    <value>Objector, Landowner and Representative Details</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>name</name>
