@@ -321,6 +321,7 @@
 		<members>Case_Party__c.Case__c</members>
 		<members>Case_Party__c.Party__c</members>
 		<members>Case_Party__c.Type__c</members>
+		<members>Case_Party__c.Organisation__c</members>
 		<members>Consultation__c.Case__c</members>
 		<members>Consultation__c.Case_Officers_Email_Address__c</members>
 		<members>Consultation__c.Completed_On__c</members>
