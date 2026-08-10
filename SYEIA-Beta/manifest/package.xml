@@ -427,6 +427,7 @@
 		<members>Party__c.Phone__c</members>
 		<members>Party__c.Representative__c</members>
 		<members>Party__c.Salutation__c</members>
+		<members>Party__c.Organisation__c</members>
 		<members>Payment__c.Case__c</members>
 		<members>Payment__c.Created_at__c</members>
 		<members>Payment__c.Description__c</members>

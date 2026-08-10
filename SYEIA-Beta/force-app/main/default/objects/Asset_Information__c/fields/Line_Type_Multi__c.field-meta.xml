@@ -32,34 +32,34 @@
                 <label>LV overhead line</label>
             </value>
             <value>
-                <fullName>HV overhead + wooden poles</fullName>
+                <fullName>HV overhead line + wooden poles</fullName>
                 <default>false</default>
-                <label>HV overhead + wooden poles</label>
+                <label>HV overhead line + wooden poles</label>
             </value>
             <value>
-                <fullName>LV overhead + wooden poles</fullName>
+                <fullName>LV overhead line + wooden poles</fullName>
                 <default>false</default>
-                <label>LV overhead + wooden poles</label>
+                <label>LV overhead line + wooden poles</label>
             </value>
             <value>
-                <fullName>HV overhead + poles + stays</fullName>
+                <fullName>HV overhead line + poles + stays</fullName>
                 <default>false</default>
-                <label>HV overhead + poles + stays</label>
+                <label>HV overhead line + poles + stays</label>
             </value>
             <value>
-                <fullName>LV overhead + poles + stays</fullName>
+                <fullName>LV overhead line + poles + stays</fullName>
                 <default>false</default>
-                <label>LV overhead + poles + stays</label>
+                <label>LV overhead line + poles + stays</label>
             </value>
             <value>
-                <fullName>HV overhead + steel towers</fullName>
+                <fullName>HV overhead line + steel towers</fullName>
                 <default>false</default>
-                <label>HV overhead + steel towers</label>
+                <label>HV overhead line + steel towers</label>
             </value>
             <value>
-                <fullName>LV overhead + steel towers</fullName>
+                <fullName>LV overhead line + steel towers</fullName>
                 <default>false</default>
-                <label>LV overhead + steel towers</label>
+                <label>LV overhead line + steel towers</label>
             </value>
             <value>
                 <fullName>HV underground cable</fullName>
@@ -72,24 +72,24 @@
                 <label>LV underground cable</label>
             </value>
             <value>
-                <fullName>HV underground + wooden poles</fullName>
+                <fullName>HV underground cable + wooden poles</fullName>
                 <default>false</default>
-                <label>HV underground + wooden poles</label>
+                <label>HV underground cable + wooden poles</label>
             </value>
             <value>
-                <fullName>LV underground + wooden poles</fullName>
+                <fullName>LV underground cable + wooden poles</fullName>
                 <default>false</default>
-                <label>LV underground + wooden poles</label>
+                <label>LV underground cable + wooden poles</label>
             </value>
             <value>
-                <fullName>HV underground + poles + stays</fullName>
+                <fullName>HV underground cable+ poles + stays</fullName>
                 <default>false</default>
-                <label>HV underground + poles + stays</label>
+                <label>HV underground cable + poles + stays</label>
             </value>
             <value>
-                <fullName>LV underground + poles + stays</fullName>
+                <fullName>LV underground cable + poles + stays</fullName>
                 <default>false</default>
-                <label>LV underground + poles + stays</label>
+                <label>LV underground cable + poles + stays</label>
             </value>
             <value>
                 <fullName>Wooden poles</fullName>

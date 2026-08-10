@@ -370,18 +370,18 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
 
         if (lineType == 'overhead_line_wooden_pole_stay') {
             return highVoltage
-                ? 'HV overhead + poles + stays'
-                : 'LV overhead + poles + stays';
+                ? 'HV overhead line + poles + stays'
+                : 'LV overhead line + poles + stays';
         }
         if (lineType == 'overhead_line_wooden_pole') {
             return highVoltage
-                ? 'HV overhead + wooden poles'
-                : 'LV overhead + wooden poles';
+                ? 'HV overhead line + wooden poles'
+                : 'LV overhead line + wooden poles';
         }
         if (lineType == 'overhead_line_steel_tower') {
             return highVoltage
-                ? 'HV overhead + steel towers'
-                : 'LV overhead + steel towers';
+                ? 'HV overhead line + steel towers'
+                : 'LV overhead line + steel towers';
         }
         if (lineType == 'underground_cable') {
             return highVoltage
@@ -395,13 +395,13 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
         }
         if (lineType == 'underground_cable_wooden_pole_stay') {
             return highVoltage
-                ? 'HV underground + poles + stays'
-                : 'LV underground + poles + stays';
+                ? 'HV underground cable + poles + stays'
+                : 'LV underground cable + poles + stays';
         }
         if (lineType == 'underground_cable_wooden_pole') {
             return highVoltage
-                ? 'HV underground + wooden poles'
-                : 'LV underground + wooden poles';
+                ? 'HV underground cable + wooden poles'
+                : 'LV underground cable + wooden poles';
         }
         if (lineType == 'wooden_pole') {
             return 'Wooden poles';
