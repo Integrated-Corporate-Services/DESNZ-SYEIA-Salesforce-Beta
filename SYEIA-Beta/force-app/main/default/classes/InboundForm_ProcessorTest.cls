@@ -1401,8 +1401,8 @@ private class InboundForm_ProcessorTest {
                 (String) installedAssetsByCode.get('966c15b0-89cf-40e2-8a73-fb8a099be0e7').get('Line_Voltage__c'),
                 'Installed asset line voltage should map and normalize from line_voltage');
             Assert.areEqual(
-                'LV overhead line;LV overhead + wooden poles;LV overhead + poles + stays;' +
-                'LV overhead + steel towers;Wooden poles;Stays;Steel towers;LV underground cable',
+                'LV overhead line;LV overhead line + wooden poles;LV overhead line + poles + stays;' +
+                'LV overhead line + steel towers;Wooden poles;Stays;Steel towers;LV underground cable',
                 (String) installedAssetsByCode.get('966c15b0-89cf-40e2-8a73-fb8a099be0e7').get('Line_Type_Multi__c'),
                 'Installed asset line_types should map to multiple line type picklist values');
             Assert.areEqual('TEST',
