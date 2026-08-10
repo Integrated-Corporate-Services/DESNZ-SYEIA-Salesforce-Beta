@@ -26,6 +26,11 @@
                 <label>In-Progress</label>
             </value>
             <value>
+                <fullName>In Abeyance</fullName>
+                <default>false</default>
+                <label>In Abeyance</label>
+            </value>
+            <value>
                 <fullName>Representation Stage</fullName>
                 <default>false</default>
                 <label>Representation Stage</label>
@@ -64,6 +69,11 @@
                 <fullName>Rejected</fullName>
                 <default>false</default>
                 <label>Rejected</label>
+            </value>
+            <value>
+                <fullName>Invalid</fullName>
+                <default>false</default>
+                <label>Invalid</label>
             </value>
             <value>
                 <fullName>Archived</fullName>

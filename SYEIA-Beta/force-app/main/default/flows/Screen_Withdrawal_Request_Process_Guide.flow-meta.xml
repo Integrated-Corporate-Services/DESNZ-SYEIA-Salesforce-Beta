@@ -1,12 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
+        <name>Send_Extended_GOV_UK_Notify_Notification_Action_Withdrawal</name>
+        <label>Send Extended GOV.UK Notify Notification Action Withdrawal</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>GovUKNotifyInvocable</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>caseId</name>
+            <value>
+                <elementReference>Get_Case_Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>personalisationJson</name>
+            <value>
+                <elementReference>temp_WithdrawalTemplateJSON</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientEmail</name>
+            <value>
+                <elementReference>Get_Case_Record.DNO__r.Representative__r.Email__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>templateId</name>
+            <value>
+                <elementReference>Get_Metadata_Settings_For_Withdrawal_Notification.Gov_Notify_Template_Id__c</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>GovUKNotifyInvocable</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
         <name>Send_Request_Approved_to_Applicant</name>
         <label>Send Request Approved to Applicant</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <actionName>GovUKNotify_Invocable</actionName>
         <actionType>apex</actionType>
+        <connector>
+            <targetReference>Decision_Case_Type</targetReference>
+        </connector>
         <faultConnector>
             <targetReference>Send_Request_To_Applicant_Nebula_Logger</targetReference>
         </faultConnector>
@@ -155,6 +194,28 @@
         </value>
     </customProperties>
     <decisions>
+        <name>Decision_Case_Type</name>
+        <label>Decision Case Type</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Section_37</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Case_Record.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Section 37</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Metadata_Settings_For_Withdrawal_Notification</targetReference>
+            </connector>
+            <label>Section 37</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Rejected_or_Approved</name>
         <label>Rejected or Approved?</label>
         <locationX>0</locationX>
@@ -234,13 +295,41 @@ Add Nebula Logger</description>
     </processMetadataValues>
     <processType>Flow</processType>
     <recordLookups>
+        <name>Get_Applicant</name>
+        <label>Get Applicant</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Latest_Withdrawal_Request_Record</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Case__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Case_Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Representative__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Party__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
         <name>Get_Case_Record</name>
         <label>Get Case Record</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Get_Latest_Withdrawal_Request_Record</targetReference>
+            <targetReference>Get_Applicant</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -282,6 +371,27 @@ Add Nebula Logger</description>
         <object>Withdrawal_Request__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <recordLookups>
+        <name>Get_Metadata_Settings_For_Withdrawal_Notification</name>
+        <label>Get Metadata Settings For Withdrawal Notification</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Send_Extended_GOV_UK_Notify_Notification_Action_Withdrawal</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>S37_Withdrawal_Accepted</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Application_Deadline_Reminder_Config__mdt</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <recordUpdates>
         <name>Update_Case_To_Prior_Application_Status</name>
         <label>Update Case To Prior Application Status</label>
@@ -290,6 +400,10 @@ Add Nebula Logger</description>
         <connector>
             <targetReference>Send_Request_Rejected_to_Applicant</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Send_Request_To_Applicant_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -314,6 +428,10 @@ Add Nebula Logger</description>
         <connector>
             <targetReference>Send_Request_Approved_to_Applicant</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Send_Request_To_Applicant_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -344,6 +462,10 @@ Add Nebula Logger</description>
         <connector>
             <targetReference>Update_Case_To_Withdrawn</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Send_Request_To_Applicant_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Case__c</field>
@@ -387,6 +509,10 @@ Add Nebula Logger</description>
         <connector>
             <targetReference>Update_Case_To_Prior_Application_Status</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Send_Request_To_Applicant_Nebula_Logger</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Case__c</field>
@@ -671,11 +797,25 @@ Add Nebula Logger</description>
         </connector>
     </start>
     <status>Active</status>
+    <textTemplates>
+        <description>The JSON payload containing the Gov Notify merge fields.</description>
+        <name>temp_WithdrawalTemplateJSON</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>{&quot;desnz_ref&quot;:{!Get_Case_Record.Name}, &quot;dno_name&quot;:{!Get_Case_Record.DNO__r.Name}}</text>
+    </textTemplates>
     <variables>
         <name>recordId</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Get all additional emails.</description>
+        <name>var_collection_email</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
         <isOutput>false</isOutput>
     </variables>
 </Flow>

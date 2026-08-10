@@ -1,6 +1,6 @@
 @IsTest
 global class DynamicPathControllerTest {
-    
+   
     @TestSetup
     static void setupTestData() {
         // Get a valid picklist value dynamically
@@ -112,7 +112,10 @@ global class DynamicPathControllerTest {
     static void testGetStatusByCurrentStatus() {
         Test.startTest();
         List<String> statuses =
-            DynamicPathController.getStatusByCurrentStatus('Anything');
+        DynamicPathController.getStatusByCurrentStatus(
+            'Anything',
+            'Section_37'
+        );
         Test.stopTest();
         
         System.assertNotEquals(null, statuses);
@@ -123,7 +126,10 @@ global class DynamicPathControllerTest {
         Boolean exceptionThrown = false;
         
         try {
-            DynamicPathController.getStatusByCurrentStatus('');
+            DynamicPathController.getStatusByCurrentStatus(
+                '',
+                'Section_37'
+            );
             System.assert(false);
         } catch (AuraHandledException e) {
             exceptionThrown = true;

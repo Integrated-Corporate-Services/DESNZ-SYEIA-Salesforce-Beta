@@ -3,7 +3,7 @@
     <fullName>Oral_Hearing_Requested_By_Either_Party__c</fullName>
     <description>Has either party requested an Oral Hearing?</description>
     <inlineHelpText>Has either party requested an Oral Hearing?</inlineHelpText>
-    <label>Oral Hearing Requested By Either Party</label>
+    <label>Has any party requested an oral hearing?</label>
     <required>false</required>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Invalid_Letter_Date_Is_Required</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT(ISBLANK(PRIORVALUE(Invalid_Letter_Date__c))),
+    ISBLANK(Invalid_Letter_Date__c)
+)</errorConditionFormula>
+    <errorDisplayField>Invalid_Letter_Date__c</errorDisplayField>
+    <errorMessage>Invalid Letter Date cannot be blank once the Invalid  letter has been sent.</errorMessage>
+</ValidationRule>

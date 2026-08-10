@@ -17,7 +17,7 @@ public class InboundForm_S37WithdrawalHandler implements InboundForm_Processor.I
             parser.hasValue('Withdraw') || parser.hasValue('Withdraw.withdrawalReason');
 
         if (!isWithdrawalRequestedEvent(eventType) && !hasWithdrawalPayload) {
-            errors.add('Unsupported eventType for S37 withdrawal handler: ' + eventType);
+            errors.add('Unsupported eventType for withdrawal handler: ' + eventType);
             return errors;
         }
 

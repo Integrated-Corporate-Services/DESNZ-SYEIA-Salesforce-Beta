@@ -256,34 +256,143 @@ private class InboundForm_ProcessorTest {
         '}';
     }
 
+    private static String getNWLWithdrawalJson(String applicationId, String desnzRef) {
+        return '{' +
+            '"applicationId":"' + applicationId + '",' +
+            '"formType":"NWL",' +
+            '"status":"UNDER_REVIEW",' +
+            '"Withdraw":{' +
+                '"withdrawalReason":"test",' +
+                '"voluntaryAgreement":false' +
+            '},' +
+            '"desnzRef":"' + desnzRef + '",' +
+            '"eventType":"WITHDRAWL_REQUESTED"' +
+        '}';
+    }
+
     private static String getValidNWLJson() {
         return '{' +
             '"applicationId":"b6ed18fa-7c3d-43bf-97b9-a40fc9bffa03",' +
             '"status":"SUBMITTED",' +
             '"desnzRef":"NWL00116",' +
             '"formType":"NWL",' +
+            '"metadata":{"schemaVersion":2,"source":"SYEIA"},' +
             '"sections":{' +
+                '"applicantDetails":{' +
+                    '"applicant_name":"DESNZ",' +
+                    '"applicant_contact_name":"ICS Test Coordinator 10",' +
+                    '"address_line1":null,' +
+                    '"address_line2":null,' +
+                    '"postcode":null,' +
+                    '"email":"ics.tester10@ics-testing.com",' +
+                    '"phone":null,' +
+                    '"additional_contacts":[]' +
+                '},' +
                 '"applicationDetails":{' +
                     '"application_type":"Existing line",' +
+                    '"paragraph":null,' +
                     '"notice_to_remove_date":"2026-02-10",' +
-                    '"grounds_for_application":"no_wayleave_exists"' +
+                    '"grounds_for_application":"no_wayleave_exists",' +
+                    '"wayleave_type":"inherited_necessary_wayleave",' +
+                    '"wayleave_expiry_date":null,' +
+                    '"wayleave_expiry_documents":[],' +
+                    '"implied_wayleave_documents":[],' +
+                    '"wayleave_offer_date":null,' +
+                    '"wayleave_offer_documents":[],' +
+                    '"notice_to_remove_documents":[{"document_id":"a43064a2-bfdb-4c6f-87d5-5edf95c26f24","file_id":"98be2654-96e4-4dab-a19f-6945bfdd078b","filename":"NWL-noticetoremove.pdf","fileUrl":"b6ed18fa-7c3d-43bf-97b9-a40fc9bffa03/NOTICE_TO_REMOVE/NWL-noticetoremove.pdf"}],'+
+                    '"notice_to_terminate_date":null,' +
+                    '"notice_to_terminate_documents":[]' +
+                '},' +
+                '"noticeCompliance":{' +
+                    '"notice_clearly_refers_to_removal":true,' +
+                    '"notice_unclear_explanation":null,' +
+                    '"submitted_within_three_months":true,' +
+                    '"late_submission_reason":null,' +
+                    '"different_term_requested":false,' +
+                    '"different_term_length_and_explanation":null' +
+                '},' +
+                '"objectorDetails":{' +
+                    '"objector_title":"Mr",' +
+                    '"objector_name":"test",' +
+                    '"objector_organisation":null,' +
+                    '"objector_address_line1":"test",' +
+                    '"objector_address_line2":"test",' +
+                    '"objector_postcode":"ls84rf",' +
+                    '"objector_email":null,' +
+                    '"objector_phone":null' +
+                '},' +
+                '"landownerDetails":{' +
+                    '"is_objector_also_landowner":false,' +
+                    '"landowner_title":"Mr",' +
+                    '"landowner_name":"test full name",' +
+                    '"landowner_organisation":"test organisation",' +
+                    '"landowner_address_line1":"test",' +
+                    '"landowner_address_line2":"test",' +
+                    '"landowner_postcode":"ls84rf",' +
+                    '"landowner_email":"testlandowner@email.com",' +
+                    '"landowner_phone":"07777777777"' +
+                '},' +
+                '"representativeDetails":{' +
+                    '"objector_has_representative":true,' +
+                    '"representative_title":"Mr",' +
+                    '"representative_name":"test rep name",' +
+                    '"representative_organisation":"test organisation",' +
+                    '"representative_address_line1":"test",' +
+                    '"representative_address_line2":"test",' +
+                    '"representative_postcode":"ts14rf",' +
+                    '"representative_email":"testrepresentative@test.com",' +
+                    '"representative_phone":"077777777777"' +
                 '},' +
                 '"landDetails":{' +
                     '"is_registered":true,' +
-                    '"visible_from_road":true' +
+                    '"site_address_same_as_objector":false,' +
+                    '"site_address":{' +
+                        '"line1":"test",' +
+                        '"line2":"test",' +
+                        '"county":"test",' +
+                        '"postcode":"SA14RF",' +
+                        '"town_city":"test"' +
+                    '},' +
+                    '"country":"england",' +
+                    '"land_registry_ref":"1234567",' +
+                    '"land_registry_reference_document":{"document_id":"d3adb166-5942-4fae-aeb1-0a40315df684","file_id":"4a470cd4-acb6-4d5c-8640-a31379e5b34e","filename":"evidence-request.pdf","fileUrl":"b6ed18fa-7c3d-43bf-97b9-a40fc9bffa03/LAND_REGISTRY/evidence-request.pdf"},'+
+                    '"os_grid_ref":"TE 123456 654321",' +
+                    '"land_identification":"TEST IDENTIFY LAND",' +
+                    '"visible_from_road":true,' +
+                    '"site_identification_photographs":[{"document_id":"fb4ebcbe-bc1c-4278-b963-2bccc9b3ea4b","file_id":"ce94dbfb-0197-4e79-8a95-47895a19839d","filename":"SITEINFORMATIONDOC.pdf","fileUrl":"b6ed18fa-7c3d-43bf-97b9-a40fc9bffa03/SITE_INFORMATION/SITEINFORMATIONDOC.pdf"}]' +
+                '},' +
+                '"assets":{' +
+                    '"installed_assets":[{"asset_id":"966c15b0-89cf-40e2-8a73-fb8a099be0e7","line_voltage":"240/415V","line_types":["overhead_line","overhead_line_wooden_pole","overhead_line_wooden_pole_stay","overhead_line_steel_tower","wooden_pole","stay","steel_tower","underground_cable","earth_wire_apparatus","other"],"component_descriptions":{"overhead_line":"TEST","overhead_line_wooden_pole":"TEST","overhead_line_wooden_pole_stay":"TEST","overhead_line_steel_tower":"TEST","wooden_pole":"TEST","stay":"TEST","steel_tower":"TEST","underground_cable":"TEST","earth_wire_apparatus":"TEST","other":"TEST"},"created_at":"2026-06-22T12:47:16.357Z"},{"asset_id":"3abe7869-41f5-47c1-b5c5-70048e9af76a","line_voltage":"400kV","line_types":["stay","steel_tower"],"component_descriptions":{"stay":"TEST","steel_tower":"TEST"},"created_at":"2026-06-22T12:47:32.350Z"}],'+
+                    '"assets_match_application_plan":true,' +
+                    '"assets_match_plan_explanation":null,' +
+                    '"application_plan":{"plan_documents":[{"document_id":"fb791cd8-8ee6-4e1e-bca7-b4279218eaac","file_id":"a8a970d4-23d0-4b30-9df8-6b1e2e63a4e8","filename":"ASSET_APPLCIATION_PLAN.pdf","fileUrl":"b6ed18fa-7c3d-43bf-97b9-a40fc9bffa03/application-plan/ASSET_APPLCIATION_PLAN.pdf"}],"verification_documents":[]}' +
+                '},' +
+                '"negotiations":{' +
+                    '"has_negotiations":true,' +
+                    '"negotiations_start_date":"2025-12-10",' +
+                    '"negotiations_comments":"TEST",' +
+                    '"no_negotiations_reason":null,' +
+                    '"evidence_documents":[{"document_id":"02a6dd97-f466-40f7-909b-1164d7a2b7c0","file_id":"a6483b5f-26f5-4647-96e8-795471c2b0c3","filename":"evidence-request.pdf","fileUrl":"b6ed18fa-7c3d-43bf-97b9-a40fc9bffa03/NEGOTIATIONS/evidence-request.pdf"}],'+
+                    '"negotiation_status":null' +
                 '},' +
                 '"additionalInformation":{' +
                     '"has_related_applications":true,' +
                     '"related_applications_details":"TEST related application",' +
+                    '"has_other_information":true,' +
                     '"other_information_details":"test important information"' +
+                    ',"other_information_documents":[{"document_id":"fbcc27f3-bad2-4b17-8615-a01e199afffa","file_id":"ed549c93-f2d3-4266-a89c-933021fe36fd","filename":"important_information.pdf","fileUrl":"b6ed18fa-7c3d-43bf-97b9-a40fc9bffa03/ADDITIONAL_INFORMATION/important_information.pdf"}]' +
                 '},' +
                 '"payment":{' +
                     '"payment_id":"4646158ml3qvai0b04munb4hle",' +
+                    '"local_payment_id":979,' +
                     '"amount":23650,' +
+                    '"description":"Section 37 Application Payment - b6ed18fa-7c3d-43bf-97b9-a40fc9bffa03",' +
+                    '"reference":"b6ed18fa-7c3d-43bf-97b9-a40fc9bffa03",' +
+                    '"transaction_number":null,' +
                     '"status":"confirmed",' +
                     '"provider":"govuk-pay",' +
                     '"kind":"Credit Card",' +
-                    '"description":"Section 37 Application Payment"' +
+                    '"state":{"status":"confirmed","finished":true,"code":null,"message":null}' +
                 '}' +
             '}' +
         '}';
@@ -1000,6 +1109,66 @@ private class InboundForm_ProcessorTest {
     }
 
     @IsTest
+    static void testProcessRequests_NWLWithdrawalRequestPayload() {
+        InboundForm_Processor.clearAllCaches();
+        InboundForm_ConfigRegistry.clearCache();
+        CaseTriggerHelper.disableProcessing();
+        try {
+            String appId = 'a3d42bff-058d-4e82-9e87-dda5867da7ef';
+            String desnzRef = 'NWL07089';
+            Case__c existingCase = new Case__c(
+                Name = desnzRef,
+                Status__c = 'New',
+                AWS_Application_Id__c = appId
+            );
+            insert existingCase;
+
+            Inbound_Request__c request = new Inbound_Request__c(
+                Payload__c = getNWLWithdrawalJson(appId, desnzRef),
+                Status__c = 'Received'
+            );
+            insert request;
+
+            List<Inbound_Request__c> requests = new List<Inbound_Request__c>{
+                [SELECT Id, Payload__c FROM Inbound_Request__c WHERE Id = :request.Id]
+            };
+
+            Test.startTest();
+            Map<Id, InboundForm_Processor.ProcessingResult> results =
+                InboundForm_Processor.processRequests(requests);
+            Test.stopTest();
+
+            InboundForm_Processor.ProcessingResult result = results.get(request.Id);
+            Assert.isTrue(result.success, 'NWL withdrawal payload should process successfully');
+            Assert.areEqual('NWL_WITHDRAWAL_REQUEST', result.formType,
+                'NWL withdrawal payload should be routed to withdrawal form type');
+
+            List<Withdrawal_Request__c> inserted = [
+                SELECT Id, Case__c, Status__c, Withdrawal_Request_Reason__c
+                FROM Withdrawal_Request__c
+                WHERE Case__c = :existingCase.Id
+            ];
+
+            Assert.areEqual(2, inserted.size(), 'Should create two withdrawal requests');
+            Assert.areEqual('Pending', inserted[0].Status__c,
+                'Withdrawal request status should be normalized to Pending');
+            Assert.areEqual('test', inserted[0].Withdrawal_Request_Reason__c,
+                'Withdrawal reason should be mapped from payload');
+
+            Case__c updatedCase = [
+                SELECT Id, Status__c
+                FROM Case__c
+                WHERE Id = :existingCase.Id
+                LIMIT 1
+            ];
+            Assert.areEqual('Withdrawal Requested', updatedCase.Status__c,
+                'Case status should be updated to Withdrawal Requested');
+        } finally {
+            CaseTriggerHelper.enableProcessing();
+        }
+    }
+
+    @IsTest
     static void testProcessRequests_NWLPayload() {
         InboundForm_Processor.clearAllCaches();
         InboundForm_ConfigRegistry.clearCache();
@@ -1028,12 +1197,19 @@ private class InboundForm_ProcessorTest {
                 SELECT Id,
                        Name,
                        AWS_Application_Id__c,
+                      DNO__c,
+                      Related_Land__c,
+                      Objector__c,
+                      Landowner__c,
+                      Representative__c,
                        Case_Type__c,
                        Application_Type__c,
+                      Type_Of_NWL_That_Existed__c,
+                       Written_Removal_Notice_Issue_Date__c,
                        Written_Removal_Notice_Been_Given__c,
                        Land__c,
                        Equipment_Visible_from_Public_Road__c,
-                       Are_There_Any_Other_Related_Applications__c,
+                      Related_Applications__c,
                        Details_of_All_Related_Application__c
                 FROM Case__c
                 WHERE AWS_Application_Id__c = 'b6ed18fa-7c3d-43bf-97b9-a40fc9bffa03'
@@ -1045,8 +1221,14 @@ private class InboundForm_ProcessorTest {
                 'NWL handler should set case type');
             Assert.areEqual('Existing Line', insertedCase.Application_Type__c,
                 'NWL handler should normalize application type');
-            Assert.areEqual('No', insertedCase.Written_Removal_Notice_Been_Given__c,
-                'Written removal notice should be No when issue date is not present');
+            Assert.areEqual('Inherited Necessary Wayleave',
+                insertedCase.Type_Of_NWL_That_Existed__c,
+                'NWL handler should map inherited_necessary_wayleave to picklist value');
+            Assert.areEqual(Date.newInstance(2026, 2, 10),
+                insertedCase.Written_Removal_Notice_Issue_Date__c,
+                'Written removal notice issue date should map from notice_to_remove_date');
+            Assert.areEqual('Yes', insertedCase.Written_Removal_Notice_Been_Given__c,
+                'Written removal notice should be Yes when issue date is present');
             Assert.isNull(insertedCase.Land__c,
                 'Land registration flag should map to null when not present in payload');
             // Assert.areEqual('No', insertedCase.Land__c,
@@ -1055,11 +1237,183 @@ private class InboundForm_ProcessorTest {
                 'Visibility flag should map to null when not present in payload');
             // Assert.areEqual('Yes', insertedCase.Equipment_Visible_from_Public_Road__c,
             //     'Visibility flag should map to Yes');
-            Assert.isTrue(insertedCase.Are_There_Any_Other_Related_Applications__c,
-                'Related applications flag should map');
             Assert.areEqual('TEST related application',
                 insertedCase.Details_of_All_Related_Application__c,
                 'Related application details should map');
+
+            Land__c relatedLand = [
+                SELECT Id,
+                       Case__c,
+                      Site_Address__c,
+                       Land_Registry_Reference_Number__c,
+                       Grid_Letter__c,
+                       Land_Location__c
+                FROM Land__c
+                WHERE Case__c = :insertedCase.Id
+                LIMIT 1
+            ];
+            Assert.areEqual(relatedLand.Id, insertedCase.Related_Land__c,
+                'Case should link land details record through Related_Land__c');
+            Assert.areEqual('1234567', relatedLand.Land_Registry_Reference_Number__c,
+                'Land record should map land_registry_ref from landDetails');
+            Assert.areEqual('TE 123456 654321', relatedLand.Grid_Letter__c,
+                'Land record should map os_grid_ref from landDetails');
+            Assert.areEqual('England', relatedLand.Land_Location__c,
+                'Land location should normalize and map from landDetails.country');
+
+            Assert.isNotNull(relatedLand.Site_Address__c,
+                'Land record should have Site_Address__c populated');
+
+            Address__c siteAddress = [
+                SELECT Id,
+                       Application_Party_Identification__c,
+                       Address_Line1__c,
+                       Postcode__c
+                FROM Address__c
+                WHERE Id = :relatedLand.Site_Address__c
+                LIMIT 1
+            ];
+            Assert.areEqual(siteAddress.Id, relatedLand.Site_Address__c,
+                'Land record should link created site address through Site_Address__c');
+            Assert.areEqual('NWL_SITE_ADDRESS', siteAddress.Application_Party_Identification__c,
+                'Linked site address should be tagged as NWL site address');
+            Assert.areEqual('test', siteAddress.Address_Line1__c,
+                'Site address line 1 should map from landDetails.site_address.line1');
+            Assert.areEqual('SA14RF', siteAddress.Postcode__c,
+                'Site address postcode should map from landDetails.site_address.postcode');
+
+            Party__c objectorParty = [
+                SELECT Id
+                FROM Party__c
+                WHERE Case__c = :insertedCase.Id
+                AND Application_Party_Id__c = 'NWL_OBJECTOR'
+                LIMIT 1
+            ];
+            Assert.areEqual(objectorParty.Id, insertedCase.Objector__c,
+                'Case should link objector party through Objector__c');
+
+            Party__c representativeParty = [
+                SELECT Id, Name, Email__c, Phone__c, Party_Type__c, Application_Party_Id__c
+                FROM Party__c
+                WHERE Case__c = :insertedCase.Id
+                AND Application_Party_Id__c = 'NWL_REPRESENTATIVE'
+                LIMIT 1
+            ];
+            Assert.areEqual('test rep name', representativeParty.Name,
+                'Representative party should map representative_name');
+            Assert.areEqual('testrepresentative@test.com', representativeParty.Email__c,
+                'Representative party should map representative_email');
+            Assert.areEqual('077777777777', representativeParty.Phone__c,
+                'Representative party should map representative_phone');
+            Assert.areEqual('Representative', representativeParty.Party_Type__c,
+                'Representative party should have Representative type');
+            Assert.areEqual('NWL_REPRESENTATIVE', representativeParty.Application_Party_Id__c,
+                'Representative party should carry NWL_REPRESENTATIVE identifier');
+            Assert.areEqual(representativeParty.Id, insertedCase.Representative__c,
+                'Case should link representative party through Representative__c');
+
+            Assert.isTrue(result.collectionRecords.containsKey('Applicants'),
+                'Applicants collection should be processed from applicantDetails');
+            List<SObject> applicantRecords = result.collectionRecords.get('Applicants');
+            Assert.areEqual(1, applicantRecords.size(),
+                'Applicants should produce one party record');
+
+            SObject applicantParty = applicantRecords[0];
+            Assert.areEqual('DESNZ', (String) applicantParty.get('Name'),
+                'Applicant party should map applicant_name');
+            Assert.areEqual('ics.tester10@ics-testing.com', (String) applicantParty.get('Email__c'),
+                'Applicant party should map email');
+            Assert.areEqual('DNO', (String) applicantParty.get('Party_Type__c'),
+                'Applicant party type should be DNO');
+            Assert.areEqual('NWL_ORGANISATION', (String) applicantParty.get('Application_Party_Id__c'),
+                'Applicant party should carry NWL_ORGANISATION identifier');
+
+            Party__c applicantOrganisationParty = [
+                SELECT Id
+                FROM Party__c
+                WHERE Case__c = :insertedCase.Id
+                AND Name = 'DESNZ'
+                AND Party_Type__c = 'DNO'
+                LIMIT 1
+            ];
+            Assert.areEqual(applicantOrganisationParty.Id, insertedCase.DNO__c,
+                'Case should link applicant organisation party through DNO__c');
+
+            Assert.isTrue(result.collectionRecords.containsKey('ApplicantContacts'),
+                'ApplicantContacts collection should be processed from applicantDetails');
+            List<SObject> applicantContactRecords = result.collectionRecords.get('ApplicantContacts');
+            Assert.areEqual(1, applicantContactRecords.size(),
+                'ApplicantContacts should produce one party record');
+
+            SObject applicantContactParty = applicantContactRecords[0];
+            Assert.areEqual('ICS Test Coordinator 10', (String) applicantContactParty.get('Name'),
+                'Applicant contact party should map applicant_contact_name');
+            Assert.areEqual('ics.tester10@ics-testing.com', (String) applicantContactParty.get('Email__c'),
+                'Applicant contact party should map email');
+            Assert.areEqual('NWL_ORGANISATION', (String) applicantContactParty.get('Application_Party_Id__c'),
+                'Applicant contact party should use NWL_ORGANISATION link key');
+
+            List<Party__c> linkedApplicantParties = [
+                SELECT Id, Name, Representative__c
+                FROM Party__c
+                WHERE Case__c = :insertedCase.Id
+                AND Name IN ('DESNZ', 'ICS Test Coordinator 10')
+            ];
+            Map<String, Party__c> partiesByName = new Map<String, Party__c>();
+            for (Party__c partyRec : linkedApplicantParties) {
+                partiesByName.put(partyRec.Name, partyRec);
+            }
+
+            Assert.isTrue(partiesByName.containsKey('DESNZ'),
+                'Applicant organisation party should be inserted');
+            Assert.isTrue(partiesByName.containsKey('ICS Test Coordinator 10'),
+                'Applicant contact party should be inserted');
+            Assert.areEqual(partiesByName.get('ICS Test Coordinator 10').Id,
+                partiesByName.get('DESNZ').Representative__c,
+                'Applicant party should link to applicant contact party via Representative__c');
+
+            Assert.isTrue(result.collectionRecords.containsKey('ApplicantAddresses'),
+                'ApplicantAddresses collection should be processed from applicantDetails');
+            List<SObject> applicantAddressRecords = result.collectionRecords.get('ApplicantAddresses');
+            Assert.areEqual(1, applicantAddressRecords.size(),
+                'ApplicantAddresses should produce one address record');
+
+            SObject applicantAddress = applicantAddressRecords[0];
+            Assert.areEqual('NWL_ORGANISATION', (String) applicantAddress.get('Application_Party_Identification__c'),
+                'Applicant address should carry NWL_ORGANISATION identifier');
+
+            Assert.isTrue(result.collectionRecords.containsKey('InstalledAssets'),
+                'InstalledAssets collection should be processed from assets.installed_assets');
+            List<SObject> installedAssetRecords = result.collectionRecords.get('InstalledAssets');
+            Assert.areEqual(2, installedAssetRecords.size(),
+                'InstalledAssets should produce one record per installed asset');
+
+            Map<String, SObject> installedAssetsByCode = new Map<String, SObject>();
+            for (SObject installedAsset : installedAssetRecords) {
+                installedAssetsByCode.put((String) installedAsset.get('TORI_NOI_Code__c'), installedAsset);
+            }
+
+            Assert.isTrue(installedAssetsByCode.containsKey('966c15b0-89cf-40e2-8a73-fb8a099be0e7'),
+                'First installed asset should be mapped using asset_id');
+            Assert.isTrue(installedAssetsByCode.containsKey('3abe7869-41f5-47c1-b5c5-70048e9af76a'),
+                'Second installed asset should be mapped using asset_id');
+            Assert.areEqual('240/415v',
+                (String) installedAssetsByCode.get('966c15b0-89cf-40e2-8a73-fb8a099be0e7').get('Line_Voltage__c'),
+                'Installed asset line voltage should map and normalize from line_voltage');
+            Assert.areEqual(
+                'LV overhead line;LV overhead + wooden poles;LV overhead + poles + stays;' +
+                'LV overhead + steel towers;Wooden poles;Stays;Steel towers;LV underground cable',
+                (String) installedAssetsByCode.get('966c15b0-89cf-40e2-8a73-fb8a099be0e7').get('Line_Type_Multi__c'),
+                'Installed asset line_types should map to multiple line type picklist values');
+            Assert.areEqual('TEST',
+                (String) installedAssetsByCode.get('966c15b0-89cf-40e2-8a73-fb8a099be0e7').get('Description__c'),
+                'Installed asset component_descriptions should map to Description__c');
+            Assert.areEqual('Stays;Steel towers',
+                (String) installedAssetsByCode.get('3abe7869-41f5-47c1-b5c5-70048e9af76a').get('Line_Type_Multi__c'),
+                'Installed asset line_types should map multiple selected keys to multi-select values');
+            Assert.areEqual('TEST',
+                (String) installedAssetsByCode.get('3abe7869-41f5-47c1-b5c5-70048e9af76a').get('Description__c'),
+                'Installed asset description should use component_descriptions values');
         } finally {
             CaseTriggerHelper.enableProcessing();
         }

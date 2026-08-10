@@ -7,29 +7,41 @@ public class InboundForm_NWLConfig {
      * Get the complete NWL configuration.
      */
     public static InboundForm_MappingConfig.FormTypeConfig getConfig() {
-        InboundForm_MappingConfig.FormTypeConfig config =
-            new InboundForm_MappingConfig.FormTypeConfig()
-                .setFormType('NWL')
-                .setDescription('Necessary Wayleaves')
-                .setPrimaryObject('Case__c')
-                .setPrimaryRecordType('Necessary_Wayleaves')
-                .setApplicationIdField('AWS_Application_Id__c')
-                .setApplicationIdJsonPath('applicationId')
-                .setNameJsonPath('desnzRef')
-                .setStatusField('Status__c')
-                .setDefaultStatus('Application Received')
-                .setHandlerClass(InboundForm_NWLHandler.class);
+        try {
+            InboundForm_MappingConfig.FormTypeConfig config =
+                new InboundForm_MappingConfig.FormTypeConfig()
+                    .setFormType('NWL')
+                    .setDescription('Necessary Wayleaves')
+                    .setPrimaryObject('Case__c')
+                    .setPrimaryRecordType('Necessary_Wayleaves')
+                    .setApplicationIdField('AWS_Application_Id__c')
+                    .setApplicationIdJsonPath('applicationId')
+                    .setNameJsonPath('desnzRef')
+                    .setStatusField('Status__c')
+                    .setDefaultStatus('Application Received')
+                    .setHandlerClass(InboundForm_NWLHandler.class);
 
-        addCaseFieldMappings(config);
-        addCollectionConfigs(config);
+            addCaseFieldMappings(config);
+            addCollectionConfigs(config);
 
-        return config;
+            return config;
+        } catch (Exception e) {
+            Logger.error('Error building NWL form configuration: ' + e.getMessage());
+            Logger.setScenario('InboundForm_NWLConfig.getConfig');
+            Logger.saveLog();
+            throw e;
+        }
     }
 
     private static void addCaseFieldMappings(InboundForm_MappingConfig.FormTypeConfig config) {
         config.addFieldMapping(InboundForm_MappingConfig.stringField(
             'desnzRef',
             'Name'
+        ));
+
+        config.addFieldMapping(InboundForm_MappingConfig.dateField(
+            'submittedAt', 
+            'Date_of_Application__c'
         ));
 
         // Sections
@@ -59,9 +71,20 @@ public class InboundForm_NWLConfig {
             'Notice_to_Remove_Date__c'
         ));
 
+        // Keep legacy NWL automation populated until all downstream flows use Notice_to_Remove_Date__c.
+        config.addFieldMapping(InboundForm_MappingConfig.dateField(
+            'sections.applicationDetails.notice_to_remove_date',
+            'Written_Removal_Notice_Issue_Date__c'
+        ));
+
         config.addFieldMapping(InboundForm_MappingConfig.dateField(
             'sections.applicationDetails.notice_to_terminate_date',
             'Written_Termination_Notice_Issue_Date__c'
+        ));
+
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'sections.applicantDetails.applicant_name',
+            'DNO_Name__c'
         ));
 
         // Notice Compliance
@@ -139,9 +162,9 @@ public class InboundForm_NWLConfig {
             'Evidence_of_Negotiations__c'
         ));
 
-        config.addFieldMapping(InboundForm_MappingConfig.booleanField(
+        config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
             'sections.additionalInformation.has_related_applications',
-            'Are_There_Any_Other_Related_Applications__c'
+            'Related_Applications__c'
         ));
 
         config.addFieldMapping(InboundForm_MappingConfig.stringField(
@@ -162,15 +185,70 @@ public class InboundForm_NWLConfig {
     }
 
     private static void addCollectionConfigs(InboundForm_MappingConfig.FormTypeConfig config) {
+        config.addCollection(getApplicantConfig());
+        config.addCollection(getApplicantContactConfig());
         config.addCollection(getObjectorConfig());
         config.addCollection(getLandownerConfig());
         config.addCollection(getRepresentativeConfig());
+        config.addCollection(getApplicantAddressConfig());
         config.addCollection(getObjectorAddressConfig());
         config.addCollection(getLandownerAddressConfig());
         config.addCollection(getRepresentativeAddressConfig());
+        config.addCollection(getInstalledAssetsConfig());
         config.addCollection(getLandDetailsConfig());
         config.addCollection(getSiteAddressConfig());
         config.addCollection(getPaymentConfig());
+    }
+
+    private static InboundForm_MappingConfig.CollectionConfig getApplicantConfig() {
+        InboundForm_MappingConfig.CollectionConfig applicants =
+            new InboundForm_MappingConfig.CollectionConfig()
+                .setCollectionName('Applicants')
+                .setJsonPath('sections.applicantDetails')
+                .setTargetObject('Party__c')
+                .setTargetRecordType('Organisation')
+                .setParentLookupField('Case__c')
+                .setParentLinkSfField('Application_Party_Id__c')
+                .setProcessingOrder(19);
+
+        applicants.addFieldMapping(InboundForm_MappingConfig.stringField('applicant_name', 'Name'));
+        applicants.addFieldMapping(InboundForm_MappingConfig.stringField('email', 'Email__c'));
+        applicants.addFieldMapping(InboundForm_MappingConfig.stringField('phone', 'Phone__c'));
+        applicants.addFieldMapping(InboundForm_MappingConfig.defaultValue('DNO', 'Party_Type__c'));
+        applicants.addFieldMapping(InboundForm_MappingConfig.defaultValue(
+            'NWL_ORGANISATION',
+            'Application_Party_Id__c'
+        ));
+
+        return applicants;
+    }
+
+    private static InboundForm_MappingConfig.CollectionConfig getApplicantContactConfig() {
+        InboundForm_MappingConfig.CollectionConfig applicantContacts =
+            new InboundForm_MappingConfig.CollectionConfig()
+                .setCollectionName('ApplicantContacts')
+                .setJsonPath('sections.applicantDetails')
+                .setTargetObject('Party__c')
+                .setTargetRecordType('Individual')
+                .setParentLookupField('Case__c')
+                .setProcessingOrder(23);
+
+        applicantContacts.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'applicant_contact_name',
+            'Name'
+        ));
+        applicantContacts.addFieldMapping(InboundForm_MappingConfig.stringField('email', 'Email__c'));
+        applicantContacts.addFieldMapping(InboundForm_MappingConfig.stringField('phone', 'Phone__c'));
+        applicantContacts.addFieldMapping(InboundForm_MappingConfig.defaultValue(
+            'Representative',
+            'Party_Type__c'
+        ));
+        applicantContacts.addFieldMapping(InboundForm_MappingConfig.defaultValue(
+            'NWL_ORGANISATION',
+            'Application_Party_Id__c'
+        ));
+
+        return applicantContacts;
     }
 
     private static InboundForm_MappingConfig.CollectionConfig getObjectorConfig() {
@@ -237,7 +315,7 @@ public class InboundForm_NWLConfig {
         reps.addFieldMapping(InboundForm_MappingConfig.stringField('representative_email', 'Email__c'));
         reps.addFieldMapping(InboundForm_MappingConfig.stringField('representative_phone', 'Phone__c'));
         reps.addFieldMapping(InboundForm_MappingConfig.defaultValue(
-            'Landowner Representative',
+            'Representative',
             'Party_Type__c'
         ));
         reps.addFieldMapping(InboundForm_MappingConfig.defaultValue(
@@ -275,6 +353,39 @@ public class InboundForm_NWLConfig {
         ));
         addresses.addFieldMapping(InboundForm_MappingConfig.defaultValue(
             'NWL_OBJECTOR',
+            'Application_Party_Identification__c'
+        ));
+
+        return addresses;
+    }
+
+    private static InboundForm_MappingConfig.CollectionConfig getApplicantAddressConfig() {
+        InboundForm_MappingConfig.CollectionConfig addresses =
+            new InboundForm_MappingConfig.CollectionConfig()
+                .setCollectionName('ApplicantAddresses')
+                .setJsonPath('sections.applicantDetails')
+                .setTargetObject('Address__c')
+                .setParentLookupField('Party__c')
+                .setParentCollection('Applicants')
+                .setParentLinkJsonField('application_party_id')
+                .setParentLinkSfField('Application_Party_Id__c')
+                .setChildLinkSfField('Application_Party_Identification__c')
+                .setProcessingOrder(29);
+
+        addresses.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'address_line1',
+            'Address_Line1__c'
+        ));
+        addresses.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'address_line2',
+            'Address_Line_2__c'
+        ));
+        addresses.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'postcode',
+            'Postcode__c'
+        ));
+        addresses.addFieldMapping(InboundForm_MappingConfig.defaultValue(
+            'NWL_ORGANISATION',
             'Application_Party_Identification__c'
         ));
 
@@ -358,13 +469,38 @@ public class InboundForm_NWLConfig {
                 .setProcessingOrder(60);
 
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('payment_id', 'Payment_Id__c'));
+        payments.addFieldMapping(InboundForm_MappingConfig.stringField('payment_id', 'Item_Reference__c'));
+        payments.addFieldMapping(InboundForm_MappingConfig.stringField('payment_id', 'Invoice_Reference__c'));
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('kind', 'Payment_Method__c'));
-        payments.addFieldMapping(InboundForm_MappingConfig.currencyField('amount', 'Total_Amount__c'));
+        payments.addFieldMapping(InboundForm_MappingConfig.integerField('1', 'Quantity__c'));
+        payments.addFieldMapping(InboundForm_MappingConfig.currencyField('total_amount', 'Total_Amount__c'));
+        payments.addFieldMapping(InboundForm_MappingConfig.currencyField('subtotal', 'Subtotal__c'));
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('status', 'Status__c'));
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('provider', 'Provider__c'));
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('description', 'Description__c'));
 
         return payments;
+    }
+
+    private static InboundForm_MappingConfig.CollectionConfig getInstalledAssetsConfig() {
+        InboundForm_MappingConfig.CollectionConfig installedAssets =
+            new InboundForm_MappingConfig.CollectionConfig()
+                .setCollectionName('InstalledAssets')
+                .setJsonPath('sections.assets.installed_assets')
+                .setTargetObject('Asset_Information__c')
+                .setParentLookupField('Case__c')
+                .setProcessingOrder(42);
+
+        installedAssets.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'line_voltage',
+            'Line_Voltage__c'
+        ));
+        installedAssets.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'asset_id',
+            'TORI_NOI_Code__c'
+        ));
+
+        return installedAssets;
     }
 
     private static InboundForm_MappingConfig.CollectionConfig getLandDetailsConfig() {
@@ -374,6 +510,7 @@ public class InboundForm_NWLConfig {
                 .setJsonPath('sections.landDetails')
                 .setTargetObject('Land__c')
                 .setParentLookupField('Case__c')
+                .setParentLinkSfField('Land_Identification__c')
                 .setProcessingOrder(40);
 
         landDetails.addFieldMapping(InboundForm_MappingConfig.yesNoField(
@@ -386,11 +523,15 @@ public class InboundForm_NWLConfig {
         ));
         landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
             'os_grid_ref',
-            'Land_Reference__c'
+            'Grid_Letter__c'
         ));
         landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
             'land_identification',
             'Other_Info_To_Identify_Land__c'
+        ));
+        landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'land_identification',
+            'Land_Identification__c'
         ));
         landDetails.addFieldMapping(InboundForm_MappingConfig.yesNoField(
             'visible_from_road',
@@ -407,16 +548,33 @@ public class InboundForm_NWLConfig {
     private static InboundForm_MappingConfig.CollectionConfig getSiteAddressConfig() {
         InboundForm_MappingConfig.CollectionConfig siteAddress =
             new InboundForm_MappingConfig.CollectionConfig()
-                .setCollectionName('SiteAddresses')
+                .setCollectionName('SiteAddress')
                 .setJsonPath('sections.landDetails')
                 .setTargetObject('Address__c')
+                .setParentLookupField('Case__c')
                 .setParentLinkSfField('Application_Party_Identification__c')
                 .setProcessingOrder(41);
 
-        // siteAddress.addFieldMapping(InboundForm_MappingConfig.stringField(
-        //     'site_address',
-        //     'Full_Address__c'
-        // ));
+        siteAddress.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'site_address.line1',
+            'Address_Line1__c'
+        ));
+        siteAddress.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'site_address.line2',
+            'Address_Line_2__c'
+        ));
+        siteAddress.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'site_address.county',
+            'County__c'
+        ));
+        siteAddress.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'site_address.postcode',
+            'Postcode__c'
+        ));
+        siteAddress.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'site_address.town_city',
+            'Town_City__c'
+        ));
         siteAddress.addFieldMapping(InboundForm_MappingConfig.stringField(
             'country',
             'Country__c'

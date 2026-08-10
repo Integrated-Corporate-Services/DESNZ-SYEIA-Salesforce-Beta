@@ -3,6 +3,10 @@
     <label>Submitted for Approval</label>
     <protected>false</protected>
     <values>
+        <field>Case_RecordType__c</field>
+        <value xsi:type="xsd:string">Section_37</value>
+    </values>
+    <values>
         <field>Controlling_Status__c</field>
         <value xsi:type="xsd:string">Submitted for Approval</value>
     </values>

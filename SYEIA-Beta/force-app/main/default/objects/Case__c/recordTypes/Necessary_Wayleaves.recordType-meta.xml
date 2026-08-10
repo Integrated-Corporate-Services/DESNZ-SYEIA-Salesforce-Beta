@@ -68,6 +68,28 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Agreed_With_Inspector_s_Recommendation__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Any_Other_Important_Information__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Application_Fee_Paid__c</picklist>
         <values>
             <fullName>No</fullName>
@@ -86,6 +108,17 @@
         </values>
         <values>
             <fullName>New Line</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Assets_Match_Application_Plan__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
             <default>false</default>
         </values>
     </picklistValues>
@@ -362,7 +395,148 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>DESNZ_Decision__c</picklist>
+        <values>
+            <fullName>Abeyance Letter Issued</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Acknowledgement Letter Issued</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Awaiting Update From The Parties</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Awaiting Validation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CTWR Letter Issued</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Decision In Progress</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Further Information Requested From Applicant</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Further Information Requested From Both Parties</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Further Information Requested From Landowner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Further Statement Of Evidence Exchanged</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inspector Appointed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Judicial Review In Progress</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NW Granted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NW Granted Against Inspector Recommendation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NW Refused</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NW Refused Against Inspector Recommendation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ongoing Negotiations</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Post Decision Correspondence</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pre-Action Protocol Letter Received</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Procedural Notice Issued</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Referred To PINS%2FPEDW</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seeking Further Information From Inspector</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seeking Further Information From The Parties</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seeking Legal Advice</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Statement Of Evidence Exchanged</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TL Order Granted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TL Order Granted Against Inspector Recommendation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TL Order Refused</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TL Order Refused Against Inspector Recommendation</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Does_Application_Include_a_Title_Plan__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Does_Objector_Have_Representative__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Equipment_Visible_from_Public_Road__c</picklist>
         <values>
             <fullName>No</fullName>
             <default>false</default>
@@ -439,6 +613,17 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Is_Objector_also_Landowner__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Is_The_Mapping_Complete__c</picklist>
         <values>
             <fullName>No</fullName>
@@ -461,6 +646,17 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Land__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Landowner_Inherited_a_Necessary__c</picklist>
         <values>
             <fullName>No</fullName>
@@ -472,7 +668,55 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Legislation_Applicable__c</picklist>
+        <values>
+            <fullName>No wayleave exists 8%281%29%28c%29 and 8%282%29%28c%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>The wayleave has been terminated 8%281%29%28b%29 and 8%282%29%28b%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>The wayleave has expired para 8%281%29%28a%29 and 8%282%29%28a%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>MoD_Checks_Required__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Negotiations_in_Progress__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Notice_Clearly_Refers_to_Line_Removal__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Oral_Hearing_Requested_By_Either_Party__c</picklist>
         <values>
             <fullName>No</fullName>
             <default>false</default>
@@ -616,6 +860,28 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Site_Address_Same_as_Objector_Address__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Standard_15_Year_Term__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Status__c</picklist>
         <values>
             <fullName>Application Received</fullName>
@@ -634,7 +900,15 @@
             <default>false</default>
         </values>
         <values>
+            <fullName>In Abeyance</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>In-Progress</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Invalid</fullName>
             <default>false</default>
         </values>
         <values>
@@ -663,6 +937,133 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Sub_Status__c</picklist>
+        <values>
+            <fullName>Abeyance Letter Issued</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Acknowledgement Letter Issued</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Awaiting Update From The Parties</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Awaiting Validation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CTWR Letter Issued</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Decision In Progress</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Further Information Requested From Applicant</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Further Information Requested From Both Parties</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Further Information Requested From Landowner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Further Statement Of Evidence Exchanged</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inspector Appointed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Judicial Review In Progress</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NW Granted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NW Granted Against Inspector Recommendation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NW Refused</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NW Refused Against Inspector Recommendation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ongoing Negotiations</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Post Decision Correspondence</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pre-Action Protocol Letter Received</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Procedural Notice Issued</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Referred To PINS%2FPEDW</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seeking Further Information From Inspector</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seeking Further Information From The Parties</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seeking Legal Advice</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Statement Of Evidence Exchanged</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TL Order Granted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TL Order Granted Against Inspector Recommendation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TL Order Refused</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TL Order Refused Against Inspector Recommendation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Withdrawal Requested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Withdrawn</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Subject_To_An_EIA__c</picklist>
         <values>
             <fullName>No</fullName>
@@ -670,6 +1071,43 @@
         </values>
         <values>
             <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Submitted_Within_3_Months_Of_Notice__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Termination_Period_Expired__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type_Of_NWL_That_Existed__c</picklist>
+        <values>
+            <fullName>Implied Wayleave</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inherited Necessary Wayleave</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wayleave</fullName>
             <default>false</default>
         </values>
     </picklistValues>

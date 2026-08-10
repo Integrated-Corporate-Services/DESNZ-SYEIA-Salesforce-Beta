@@ -20,9 +20,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
+          check-latest: true
+
+      - name: Check versions
+        run: |
+          which node
+          node --version
+          npm --version
 
       - name: Install SF CLI and jq
         run: |

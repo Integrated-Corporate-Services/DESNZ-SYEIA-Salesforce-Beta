@@ -3,6 +3,29 @@
     <apiVersion>65.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
+        <name>Assign_Application_Fee_and_Date</name>
+        <label>Assign Application Fee and Date</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Application_Fee_Paid__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Yes</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Date_of_Fee_Paid__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Date_of_Application__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Decision_NWL_Status_Changes</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Assign_Case_Actual_Completed_Date_Time</name>
         <label>Assign Case Actual Completed Date/Time</label>
         <locationX>0</locationX>
@@ -19,6 +42,22 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assign_CTWR_Deadline_Date</name>
+        <label>Assign CTWR Deadline Date</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.CTWR_Deadline__c</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>30.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Is_NWL_Owner_Changed_and_Status_is_Application_Received</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Assign_Date_case_sent_for_approval</name>
         <label>Assign Date case sent for approval</label>
         <locationX>0</locationX>
@@ -32,6 +71,45 @@
         </assignmentItems>
         <connector>
             <targetReference>Is_Payment_BACS_and_Paid</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Date_Of_Fee_Paid</name>
+        <label>Assign Date Of Fee Paid</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Date_of_Fee_Paid__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Date_of_Application__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Application_Fee_Paid__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Yes</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Decision_NWL_Status_Changes</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Deadline_Further_Representation</name>
+        <label>Assign Deadline Further Representation</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Deadline_For_Further_Representations__c</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>10.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Decision_CTWR_Letter_Changes</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -64,6 +142,59 @@
         </assignmentItems>
         <connector>
             <targetReference>Loop_Case_Status_History_Records</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_In_Abeyance_Defaults</name>
+        <label>Assign In Abeyance Defaults</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.X1st_Abeyance_Start_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>varNow</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.X1st_Abeyance_Duration_In_Days__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>form_1st_Abeyance_Duration</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.X2nd_Abeyance_Duration_In_Days__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>form_2nd_Abeyance_Duration</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Decision_On_Procedural_Letter_Changes</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_In_Abeyance_Defaults_Not_changed</name>
+        <label>Assign In Abeyance Defaults Not changed</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.X1st_Abeyance_Duration_In_Days__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>form_1st_Abeyance_Duration</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.X2nd_Abeyance_Duration_In_Days__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>form_2nd_Abeyance_Duration</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Decision_On_Procedural_Letter_Changes</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -115,6 +246,22 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assign_Procedural_Letter_Default</name>
+        <label>Assign Procedural Letter Default</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Deadline_For_Statement_Of_Evidence__c</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>30.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Decision_Deadline_Further_Representation_Changes</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Assign_Screening_needed_NL_Target_Completion_Date</name>
         <label>Assign Screening needed NL Target Completion Date</label>
         <locationX>0</locationX>
@@ -160,6 +307,51 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assign_Time_to_Decision_after_Inspector_report</name>
+        <label>Assign Time to Decision after Inspector report</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Time_To_Decision_After_Inspector_Report__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>form_TimeToDecisionInspectorReport</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Assign_Total_Time_Excluding_Abeyance</name>
+        <label>Assign Total Time Excluding Abeyance</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Total_Time_Excluding_Abeyance_In_Days__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>form_TotalTimeExAbeyanceInDays</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Check_Total_Time_including_Abeyance_In_Days</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Total_time_Including_Abeyance</name>
+        <label>Assign Total time Including Abeyance</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Total_Time_Including_Abeyance_In_Days__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>form_TotalTimeIncAbeyanceInDays</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>check_Time_to_Decision_after_Inspector_report</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>AssignNoScreeningTargetCompletion_Date</name>
         <label>Assign No Screening Target Completion_Date</label>
         <locationX>0</locationX>
@@ -173,6 +365,45 @@
         </assignmentItems>
         <connector>
             <targetReference>Is_Case_New_or_Updated</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Clear_CTWR_Deadline_Date</name>
+        <label>Clear CTWR Deadline Date</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.CTWR_Deadline__c</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+        <connector>
+            <targetReference>Is_NWL_Owner_Changed_and_Status_is_Application_Received</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Clear_Deadline_for_Further_Representation</name>
+        <label>Clear Deadline for Further Representation</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Deadline_For_Further_Representations__c</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+        <connector>
+            <targetReference>Decision_CTWR_Letter_Changes</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Clear_Deadline_For_Statement_of_Evidence</name>
+        <label>Clear Deadline For Statement of Evidence</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Deadline_For_Statement_Of_Evidence__c</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+        <connector>
+            <targetReference>Decision_Deadline_Further_Representation_Changes</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -235,6 +466,112 @@
                 <elementReference>$Flow.CurrentDate</elementReference>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>Decision_NWL_Status_Changes</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Update_Status_to_Post_Decision</name>
+        <label>Update Status to Post Decision</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Post Decision</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Check_Total_Time_Excluding_Abeyance_In_Days</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Update_Status_to_Representation_Stage</name>
+        <label>Update Status to Representation Stage</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Representation Stage</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Check_Total_Time_Excluding_Abeyance_In_Days</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Update_Status_to_Under_Review</name>
+        <label>Update Status to Under Review</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Under Review</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Sub_Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Awaiting Validation</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>NWL_Status_Check</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Update_Sub_Status_to_Awaiting_validation</name>
+        <label>Update Sub Status to Awaiting validation</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Sub_Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Awaiting Validation</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>NWL_Sub_Status_Changed</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Update_SubStatus_to_Withdrawal_Requested</name>
+        <label>Update SubStatus to Withdrawal Requested</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Sub_Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Withdrawal Requested</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>NWL_Sub_Status_Changed</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Update_SubStatus_to_Withdrawn</name>
+        <label>Update SubStatus to Withdrawn</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Sub_Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Withdrawn</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>NWL_Sub_Status_Changed</targetReference>
+        </connector>
     </assignments>
     <assignments>
         <name>Update_Traget_Completion_Date</name>
@@ -279,7 +616,7 @@
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>$Record.Date_case_sent_for_approval__c</leftValueReference>
+                <leftValueReference>$Record.Date_Case_Sent_For_Approval__c</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
@@ -365,6 +702,99 @@
                 <targetReference>Update_Completion_Status_to_Withdrawn</targetReference>
             </connector>
             <label>Is Withdrawn</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>check_Time_to_Decision_after_Inspector_report</name>
+        <label>check Time to Decision after Inspector report</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Time_to_Decision_after_Inspector_report</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Time_To_Decision_After_Inspector_Report__c</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Time_To_Decision_After_Inspector_Report__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Time_to_Decision_after_Inspector_report</targetReference>
+            </connector>
+            <label>Time to Decision after Inspector report</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Total_Time_Excluding_Abeyance_In_Days</name>
+        <label>Check Total Time Excluding Abeyance In Days</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Check_Total_Time_including_Abeyance_In_Days</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Total_Time_Excluding_Abeyance_In_Days</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Total_Time_Excluding_Abeyance_In_Days__c</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Total_Time_Excluding_Abeyance_In_Days__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Total_Time_Excluding_Abeyance</targetReference>
+            </connector>
+            <label>Total Time Excluding Abeyance In Days</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Total_Time_including_Abeyance_In_Days</name>
+        <label>Check Total Time including Abeyance In Days</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>check_Time_to_Decision_after_Inspector_report</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Total_Time_including_Abeyance_In_Days</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Total_Time_Including_Abeyance_In_Days__c</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Total_Time_Including_Abeyance_In_Days__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Total_time_Including_Abeyance</targetReference>
+            </connector>
+            <label>Total Time including Abeyance In Days</label>
         </rules>
     </decisions>
     <decisions>
@@ -499,6 +929,250 @@
         </rules>
     </decisions>
     <decisions>
+        <name>Decision_CTWR_Letter_Changes</name>
+        <label>Decision  CTWR Letter Changes</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Is_NWL_Owner_Changed_and_Status_is_Application_Received</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>On_CTWR_Letter_Date_Change</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.CTWR_Letter_Date__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.CTWR_Letter_Date__c</leftValueReference>
+                <operator>HasValue</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_CTWR_Deadline_Date</targetReference>
+            </connector>
+            <label>On CTWR Letter Date Change</label>
+        </rules>
+        <rules>
+            <name>On_CTWR_Letter_Date_Empty</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.CTWR_Letter_Date__c</leftValueReference>
+                <operator>HasNoValue</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Clear_CTWR_Deadline_Date</targetReference>
+            </connector>
+            <label>On CTWR Letter Date Empty</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Decision_Deadline_Further_Representation_Changes</name>
+        <label>Decision Deadline Further Representation Changes</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Decision_CTWR_Letter_Changes</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>On_Statement_Of_Evidence_Exchange_Date</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Statement_Of_Evidence_Exchange_Date__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Statement_Of_Evidence_Exchange_Date__c</leftValueReference>
+                <operator>HasValue</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Deadline_Further_Representation</targetReference>
+            </connector>
+            <label>On Statement Of Evidence Exchange Date</label>
+        </rules>
+        <rules>
+            <name>On_Statement_Of_Evidence_Empty</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Statement_Of_Evidence_Exchange_Date__c</leftValueReference>
+                <operator>HasNoValue</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Clear_Deadline_for_Further_Representation</targetReference>
+            </connector>
+            <label>On Statement Of Evidence Empty</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Decision_NWL_Status_Changes</name>
+        <label>Decision NWL Status Changes</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Decision_On_Procedural_Letter_Changes</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>In_Abeyance_Changed</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>In Abeyance</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_In_Abeyance_Defaults</targetReference>
+            </connector>
+            <label>In Abeyance Changed</label>
+        </rules>
+        <rules>
+            <name>In_Abeyance</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>In Abeyance</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_In_Abeyance_Defaults_Not_changed</targetReference>
+            </connector>
+            <label>In Abeyance</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Decision_On_Procedural_Letter_Changes</name>
+        <label>Decision On Procedural Letter Changes</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Decision_Deadline_Further_Representation_Changes</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>On_Procedural_Notice_Letter_Change</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Procedural_Notice_Letter_Date__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Procedural_Notice_Letter_Date__c</leftValueReference>
+                <operator>HasValue</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Procedural_Letter_Default</targetReference>
+            </connector>
+            <label>On Procedural Notice Letter</label>
+        </rules>
+        <rules>
+            <name>On_Procedural_Notice_Letter_Empty1</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Procedural_Notice_Letter_Date__c</leftValueReference>
+                <operator>HasNoValue</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Clear_Deadline_For_Statement_of_Evidence</targetReference>
+            </connector>
+            <label>On Procedural Notice Letter Empty</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Has_DNO_Lookup_Value_Changed</name>
         <label>Has DNO Lookup Value Changed</label>
         <locationX>0</locationX>
@@ -509,7 +1183,7 @@
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>DNO_Is_Changed</name>
-            <conditionLogic>or</conditionLogic>
+            <conditionLogic>1 OR (2 AND 3 AND 4)</conditionLogic>
             <conditions>
                 <leftValueReference>$Record.DNO__c</leftValueReference>
                 <operator>IsChanged</operator>
@@ -522,6 +1196,20 @@
                 <operator>WasSet</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.DNO__r.Name</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.DNO_Name__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record.DNO__r.Name</elementReference>
                 </rightValue>
             </conditions>
             <connector>
@@ -588,10 +1276,59 @@
         </rules>
     </decisions>
     <decisions>
+        <name>Is_NWL_Owner_Changed_and_Status_is_Application_Received</name>
+        <label>Is NWL Owner Changed and Status is Application Received</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>NWL_Status_Check</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes_NWL_and_Owner_Changed</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Application Received</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.OwnerId</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.OwnerId</leftValueReference>
+                <operator>StartsWith</operator>
+                <rightValue>
+                    <stringValue>005</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary_Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Status_to_Under_Review</targetReference>
+            </connector>
+            <label>Yes NWL and Owner Changed</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Is_Payment_BACS_and_Paid</name>
         <label>Is Payment BACS and Paid</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Decision_NWL_Status_Changes</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>BACS_and_Paid</name>
@@ -635,6 +1372,71 @@
                 <targetReference>Update_Date_Fee_Paid</targetReference>
             </connector>
             <label>BACS and Paid</label>
+        </rules>
+        <rules>
+            <name>Credit_Card_and_Paid</name>
+            <conditionLogic>((1 OR 2) AND 3 AND 4) OR (1 AND 5)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Payment__r.Payment_Method__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Credit Card</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Payment__r.Payment_Method__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Debit Card</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Date_of_Application__c</leftValueReference>
+                <operator>HasValue</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Date_of_Fee_Paid__c</leftValueReference>
+                <operator>HasNoValue</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Application_Fee_Paid__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Yes</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Date_Of_Fee_Paid</targetReference>
+            </connector>
+            <label>Credit Card and Paid</label>
+        </rules>
+        <rules>
+            <name>Credit_Card_and_Debit_Card</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Payment__r.Payment_Method__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Credit Card</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Payment__r.Payment_Method__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Debit Card</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Application_Fee_and_Date</targetReference>
+            </connector>
+            <label>Credit Card and Debit Card</label>
         </rules>
     </decisions>
     <decisions>
@@ -826,6 +1628,206 @@
         </rules>
     </decisions>
     <decisions>
+        <name>NWL_Status_Check</name>
+        <label>NWL Status Check</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>NWL_Sub_Status_Changed</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Is_Application_Received</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Application Received</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary_Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Sub_Status_to_Awaiting_validation</targetReference>
+            </connector>
+            <label>Is Application Received</label>
+        </rules>
+        <rules>
+            <name>Withdrawal_Requested</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Withdrawal Requested</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Sub_Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Withdrawal Requested</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary_Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_SubStatus_to_Withdrawal_Requested</targetReference>
+            </connector>
+            <label>Withdrawal Requested</label>
+        </rules>
+        <rules>
+            <name>Withdrawn</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Withdrawn</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Sub_Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Withdrawn</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary_Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_SubStatus_to_Withdrawn</targetReference>
+            </connector>
+            <label>Withdrawn</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>NWL_Sub_Status_Changed</name>
+        <label>NWL Sub Status Changed</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Check_Total_Time_Excluding_Abeyance_In_Days</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Changed_to_Seeking_further_information_from_inspector</name>
+            <conditionLogic>(1 OR 4 ) AND 2 AND 3</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Seeking Further Information From The Parties</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary_Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Sub_Status__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Seeking Further Information From Inspector</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Status_to_Representation_Stage</targetReference>
+            </connector>
+            <label>Changed to Seeking further information from inspector</label>
+        </rules>
+        <rules>
+            <name>Changed_to_Pre_Action_Protocol_Letter_received_Or</name>
+            <conditionLogic>(1 OR 2 OR 3) AND 4 AND 5</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Pre-Action Protocol Letter Received</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Judicial Review In Progress</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Post Decision Correspondence</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary_Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Sub_Status__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Status_to_Post_Decision</targetReference>
+            </connector>
+            <label>Changed to Pre-Action Protocol Letter received Or</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Record_Type_Retrieved</name>
         <label>Record Type Retrieved?</label>
         <locationX>0</locationX>
@@ -857,12 +1859,69 @@
             <label>Failed To Find RT</label>
         </rules>
     </decisions>
-    <description>SYEIA-77</description>
+    <description>SYEIA-77
+SYEIA-1962
+SYEIA-1953</description>
     <environments>Default</environments>
     <formulas>
         <name>FIR_DateDiffrence_Today</name>
         <dataType>Number</dataType>
         <expression>$Flow.CurrentDate - DATEVALUE(FurtherInformationStatusUpdatedDateTime ) + 1</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>form_1st_Abeyance_Duration</name>
+        <dataType>Number</dataType>
+        <expression>IF(
+NOT(OR(
+ ISBLANK( {!$Record.X1st_Abeyance_End_Date__c}) ,
+ ISBLANK({!$Record.X1st_Abeyance_Start_Date__c}) )),
+  {!$Record.X1st_Abeyance_End_Date__c} - {!$Record.X1st_Abeyance_Start_Date__c}, 0)</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>form_2nd_Abeyance_Duration</name>
+        <dataType>Number</dataType>
+        <expression>IF(
+NOT(OR(
+ ISBLANK( {!$Record.X2nd_Abeyance_End_Date__c}) ,
+ ISBLANK({!$Record.X2nd_Abeyance_Start_Date__c}) )),
+  {!$Record.X2nd_Abeyance_End_Date__c} - {!$Record.X2nd_Abeyance_Start_Date__c}, 0)</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>form_DeadlineForStatementOfEvidence</name>
+        <dataType>Date</dataType>
+        <expression>{!$Record.Procedural_Notice_Letter_Date__c} + 30</expression>
+    </formulas>
+    <formulas>
+        <name>form_TimeToDecisionInspectorReport</name>
+        <dataType>Number</dataType>
+        <expression>{!$Record.Decision_Date__c} - {!$Record.Inspector_s_Report_Received_Date__c}</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <description>Date the procedural letter was issued and Decision Letter date, excluding abeyance time</description>
+        <name>form_TotalTimeExAbeyanceInDays</name>
+        <dataType>Number</dataType>
+        <expression>IF(NOT(OR(
+ISBLANK({!$Record.Procedural_Notice_Letter_Date__c}), ISBLANK({!$Record.Decision_Date__c}))),
+({!$Record.Decision_Date__c} - {!$Record.Procedural_Notice_Letter_Date__c}) - ({!form_1st_Abeyance_Duration} +{!form_2nd_Abeyance_Duration}), 0)</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>form_TotalTimeIncAbeyanceInDays</name>
+        <dataType>Number</dataType>
+        <expression>IF(
+    NOT(
+        OR(
+            ISBLANK({!$Record.Procedural_Notice_Letter_Date__c}),
+            ISBLANK({!$Record.Decision_Date__c})
+        )
+    ),
+    ({!$Record.Decision_Date__c} - {!$Record.Procedural_Notice_Letter_Date__c}),
+    0
+)</expression>
         <scale>0</scale>
     </formulas>
     <formulas>

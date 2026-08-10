@@ -4,6 +4,7 @@
     <columns>NAME</columns>
     <columns>External_System__c</columns>
     <columns>Status__c</columns>
+    <columns>CREATED_DATE</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>

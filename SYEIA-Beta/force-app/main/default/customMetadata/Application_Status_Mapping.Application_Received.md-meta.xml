@@ -7,6 +7,10 @@
         <value xsi:type="xsd:string">Application Submitted</value>
     </values>
     <values>
+        <field>RecordType_Dev_Name__c</field>
+        <value xsi:type="xsd:string">Section_37</value>
+    </values>
+    <values>
         <field>Salesforce_Status__c</field>
         <value xsi:type="xsd:string">Application Received</value>
     </values>

@@ -19,7 +19,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
+                <stringValue>Screen_DocGen_NW14_Withdrawal_letter_LO</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -88,7 +88,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
+                <stringValue>Screen_DocGen_NW14_Withdrawal_letter_LO</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -157,7 +157,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
+                <stringValue>Screen_DocGen_NW14_Withdrawal_letter_LO</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -226,7 +226,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
+                <stringValue>Screen_DocGen_NW14_Withdrawal_letter_LO</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -295,7 +295,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
+                <stringValue>Screen_DocGen_NW14_Withdrawal_letter_LO</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -410,7 +410,7 @@
             <name>flowName</name>
             <value>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
-                <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
+                <stringValue>Screen_DocGen_NW14_Withdrawal_letter_LO</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -527,6 +527,11 @@
     </decisions>
     <environments>Default</environments>
     <formulas>
+        <name>formula_Applicant_Reference</name>
+        <dataType>String</dataType>
+        <expression>IF(NOT(ISBLANK({!Get_Case.Applicant_Reference__c})), {!Get_Case.Applicant_Reference__c}, &quot;-&quot;)</expression>
+    </formulas>
+    <formulas>
         <name>formula_CurrentDate</name>
         <dataType>String</dataType>
         <expression>TEXT(
@@ -579,7 +584,7 @@ TEXT(YEAR(TODAY()))</expression>
         <dataType>String</dataType>
         <expression>&apos;{&apos; &amp;
 &apos;&quot;DESNZ_Reference&quot;: &quot;&apos; &amp; {!Get_Case.Name} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;OwnerOrOccuppier_Reference&quot;: &quot;&apos; &amp; {!Get_Case.Applicant_Reference__c} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;OwnerOrOccuppier_Reference&quot;: &quot;&apos; &amp; {!formula_Applicant_Reference} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;DNO_Name&quot;: &quot;&apos; &amp; {!Get_Case.DNO__r.Name} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;App_Name&quot;: &quot;&apos; &amp; {!Get_Case.DNO__r.Representative__r.Name} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;App_Email&quot;: &quot;&apos; &amp; {!var_Owner_Or_Rep_Email} &amp; &apos;&quot;, &apos; &amp;
@@ -734,17 +739,17 @@ TEXT(YEAR(TODAY()))</expression>
             </value>
         </filters>
         <filters>
-            <field>Party_Type__c</field>
+            <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Landowner</stringValue>
+                <elementReference>Get_Case.Landowner__c</elementReference>
             </value>
         </filters>
         <filters>
-            <field>Party_Type__c</field>
+            <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Landowner Representative</stringValue>
+                <elementReference>Get_Case.Representative__c</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -866,6 +871,7 @@ TEXT(YEAR(TODAY()))</expression>
             <dataType>Date</dataType>
             <fieldText>Date</fieldText>
             <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <styleProperties>
                 <verticalAlignment>

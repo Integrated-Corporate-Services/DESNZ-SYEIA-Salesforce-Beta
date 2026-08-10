@@ -56,6 +56,9 @@
         <name>choice_NW01_General_Letter_Land_Owner</name>
         <choiceText>NW01. General Letter - LO</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW01. General Letter - LO</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW02_Invalid_Unclear_NTR_Applicant</name>
@@ -93,11 +96,17 @@
         <name>choice_NW04_Invalid_New_Lines_Applicant</name>
         <choiceText>NW04. Invalid (New Lines) - Applicant</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW04. Invalid (New Lines) - Applicant</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW04_Invalid_New_Lines_Land_Owner</name>
         <choiceText>NW04. Invalid (New Lines) - LO</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW04. Invalid (New Lines) - LO</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW05_Request_For_Further_Information_Applicant</name>
@@ -119,36 +128,57 @@
         <name>choice_NW06_Acknowledgement_Letter_Applicant</name>
         <choiceText>NW06. Acknowledgement letter - Applicant</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW06. Acknowledgement letter - Applicant</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW06_Ackowledgement_Letter_Land_Owner</name>
         <choiceText>NW06. Acknowledgement letter - LO</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW06. Acknowledgement letter - LO</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW07_Abeyance_Letter_Applicant</name>
         <choiceText>NW07. Abeyance letter - Applicant</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW07. Abeyance letter - Applicant</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW07_Abeyance_Letter_Land_Owner</name>
         <choiceText>NW07. Abeyance letter - LO</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW07. Abeyance letter - LO</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW08_CTWR_Letter_Applicant</name>
         <choiceText>NW08. CTWR letter - Applicant</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW08. CTWR letter - Applicant</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW08_CTWR_Letter_Land_Owner</name>
         <choiceText>NW08. CTWR letter - LO</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW08. CTWR letter - LO</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW09_Procedural_Notice_WR_Applicant</name>
         <choiceText>NW09. Procedural notice (WR) - Applicant</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW09. Procedural notice (WR) - Applicant</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW09_Procedural_Notice_WR_Land_Owner</name>
@@ -178,6 +208,9 @@
         <name>choice_NW11_Further_Representations_Exchange_Applicant</name>
         <choiceText>NW11. Further representations exchange - Applicant</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW11. Further representations exchange - Applicant</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW11_Further_Representations_Exchange_Land_Owner</name>
@@ -207,6 +240,9 @@
         <name>choice_NW13_Decision_Letter_Applicant</name>
         <choiceText>NW13. Decision letter - Applicant</choiceText>
         <dataType>String</dataType>
+        <value>
+            <stringValue>NW13. Decision letter - Applicant</stringValue>
+        </value>
     </choices>
     <choices>
         <name>choice_NW14_Withdrawal_Letter_Applicant</name>
@@ -347,9 +383,12 @@
                 <leftValueReference>NWL_Document_Library_CS</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <elementReference>choice_NW01_General_Letter_Land_Owner</elementReference>
+                    <stringValue>NW01. General Letter - LO</stringValue>
                 </rightValue>
             </conditions>
+            <connector>
+                <targetReference>NW01_General_Letter_LO_SubFlow</targetReference>
+            </connector>
             <label>NW01 General Letter - LO</label>
         </rules>
         <rules>
@@ -413,6 +452,36 @@
             <label>NW03. Invalid - NTT only (including implied wayleaves) - LO</label>
         </rules>
         <rules>
+            <name>NW04_Invalid_New_Lines_Applicant</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW04. Invalid (New Lines) - Applicant</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW04_Invalid_New_Lines_Applicant_SubFlow</targetReference>
+            </connector>
+            <label>NW04. Invalid (New Lines) - Applicant</label>
+        </rules>
+        <rules>
+            <name>NW04_Invalid_New_Lines_LO</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW04. Invalid (New Lines) - LO</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW04_Invalid_New_Lines_Landowner_SubFlow</targetReference>
+            </connector>
+            <label>NW04. Invalid (New Lines) - LO</label>
+        </rules>
+        <rules>
             <name>NW05_Request_for_further_information_Applicant</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
@@ -441,6 +510,111 @@
                 <targetReference>NW05_Request_for_further_information_Landowner</targetReference>
             </connector>
             <label>NW05. Request for further information - LO</label>
+        </rules>
+        <rules>
+            <name>NW06_Acknowledgement_letter_Applicant</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW06. Acknowledgement letter - Applicant</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW06_Acknowledgement_letter_Applicant_SubFlow</targetReference>
+            </connector>
+            <label>NW06. Acknowledgement letter - Applicant</label>
+        </rules>
+        <rules>
+            <name>NW06_Acknowledgement_letter_LO</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW06. Acknowledgement letter - LO</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW06_Acknowledgement_letter_LO_Subflow</targetReference>
+            </connector>
+            <label>NW06. Acknowledgement letter - LO</label>
+        </rules>
+        <rules>
+            <name>NW07_Abeyance_letter_Applicant</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW07. Abeyance letter - Applicant</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW07_Abeyance_letter_Applicant_SubFlow</targetReference>
+            </connector>
+            <label>NW07. Abeyance letter - Applicant</label>
+        </rules>
+        <rules>
+            <name>NW07_Abeyance_letter_LO</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW07. Abeyance letter - LO</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW07_Abeyance_letter_LO_SubFlow</targetReference>
+            </connector>
+            <label>NW07. Abeyance letter - LO</label>
+        </rules>
+        <rules>
+            <name>NW08_CTWR_letter_Applicant</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW08. CTWR letter - Applicant</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW08_CTWR_letter_Applicant_SubFlow</targetReference>
+            </connector>
+            <label>NW08. CTWR letter - Applicant</label>
+        </rules>
+        <rules>
+            <name>NW08_CTWR_letter_LO</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW08. CTWR letter - LO</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW08_CTWR_letter_LO_Sub_Flow</targetReference>
+            </connector>
+            <label>NW08. CTWR letter - LO</label>
+        </rules>
+        <rules>
+            <name>NW09_Procedural_notice_WR_Applicant</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW09. Procedural notice (WR) - Applicant</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW09_Procedural_notice_WR_Applicant_SubFlow</targetReference>
+            </connector>
+            <label>NW09. Procedural notice (WR) - Applicant</label>
         </rules>
         <rules>
             <name>NW09_Procedural_notice_WR_LO</name>
@@ -488,6 +662,21 @@
             <label>NW10. Statement of evidence exchange - LO</label>
         </rules>
         <rules>
+            <name>NW11_Further_representations_exchange_Applicant</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW11. Further representations exchange - Applicant</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW11_Further_representations_exchange_Applicant_SubFlow</targetReference>
+            </connector>
+            <label>NW11. Further representations exchange - Applicant</label>
+        </rules>
+        <rules>
             <name>NW11_Further_representations_exchange_LO</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
@@ -531,6 +720,21 @@
                 <targetReference>NW12_Procedural_notice_OH_LO_SubFlow</targetReference>
             </connector>
             <label>NW12. Procedural notice (OH) - LO</label>
+        </rules>
+        <rules>
+            <name>NW13_Decision_letter_Applicant</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NWL_Document_Library_CS</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NW13. Decision letter - Applicant</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW13_Decision_letter_Applicant_SubFlow</targetReference>
+            </connector>
+            <label>NW13. Decision letter - Applicant</label>
         </rules>
         <rules>
             <name>NW14_Withdrawal_letter_Applicant</name>
@@ -798,6 +1002,19 @@
     </start>
     <status>Active</status>
     <subflows>
+        <name>NW01_General_Letter_LO_SubFlow</name>
+        <label>NW01_General_Letter_LO</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW01_General_Letter_LO</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
         <name>NW02_Invalid_Unclear_NTR_LO_1</name>
         <label>NW02 Invalid - Unclear NTR - LO</label>
         <locationX>0</locationX>
@@ -824,6 +1041,32 @@
         </inputAssignments>
     </subflows>
     <subflows>
+        <name>NW04_Invalid_New_Lines_Applicant_SubFlow</name>
+        <label>NW04. Invalid (New Lines) - Applicant</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW04_Invalid_New_Lines_Applicant</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW04_Invalid_New_Lines_Landowner_SubFlow</name>
+        <label>NW04_Invalid_New_Lines_Landowner</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW04_Invalid_New_Lines_Landowner</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
         <name>NW05_Request_for_further_information_Applicant_SubFlow</name>
         <label>NW05. Request for further information - Applicant</label>
         <locationX>0</locationX>
@@ -842,6 +1085,97 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <flowName>NW05_Request_for_further_information_Landowner</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW06_Acknowledgement_letter_Applicant_SubFlow</name>
+        <label>NW06. Acknowledgement letter - Applicant</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW06_Acknowledgement_letter_Applicant</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW06_Acknowledgement_letter_LO_Subflow</name>
+        <label>NW06. Acknowledgement letter - LO</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW06_Acknowledgement_letter_LO</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW07_Abeyance_letter_Applicant_SubFlow</name>
+        <label>NW07. Abeyance letter - Applicant</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW07_Abeyance_letter_Applicant_2026</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW07_Abeyance_letter_LO_SubFlow</name>
+        <label>NW07. Abeyance letter - LO</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW07_Abeyance_letter_LO_2026</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW08_CTWR_letter_Applicant_SubFlow</name>
+        <label>NW08. CTWR letter - Applicant</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW08_CTWR_letter_Applicant_2026</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW08_CTWR_letter_LO_Sub_Flow</name>
+        <label>NW08. CTWR letter - LO</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW08_CTWR_letter_LO_2026</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW09_Procedural_notice_WR_Applicant_SubFlow</name>
+        <label>NW09. Procedural notice (WR) - Applicant</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW09_Procedural_notice_WR_Applicant</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>
@@ -889,6 +1223,19 @@
         </inputAssignments>
     </subflows>
     <subflows>
+        <name>NW11_Further_representations_exchange_Applicant_SubFlow</name>
+        <label>NW11. Further representations exchange - Applicant</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW11_Further_representations_exchange_Applicant</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
         <name>NW11_Further_representations_exchange_LO_SubFlow</name>
         <label>NW11. Further representations exchange - LO</label>
         <locationX>0</locationX>
@@ -920,6 +1267,19 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <flowName>Screen_DocGen_NW12_Procedural_notice_OH_LO</flowName>
+        <inputAssignments>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>NW13_Decision_letter_Applicant_SubFlow</name>
+        <label>NW13. Decision letter - Applicant</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <flowName>Screen_DocGen_NW13_Decision_letter_Applicant_2026</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>

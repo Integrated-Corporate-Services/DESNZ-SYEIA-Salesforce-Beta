@@ -5,7 +5,9 @@
 public with sharing class InboundForm_Processor {
     private static final String WITHDRAWAL_EVENT_TYPE = 'WITHDRAWAL_REQUESTED';
     private static final String S37_FORM_TYPE = 'S37';
+    private static final String NWL_FORM_TYPE = 'NWL';
     private static final String S37_WITHDRAWAL_FORM_TYPE = 'S37_WITHDRAWAL_REQUEST';
+    private static final String NWL_WITHDRAWAL_FORM_TYPE = 'NWL_WITHDRAWAL_REQUEST';
     
     // Schema cache to avoid repeated getGlobalDescribe calls
     private static Map<String, Schema.SObjectType> sObjectTypeCache = 
@@ -103,6 +105,9 @@ public with sharing class InboundForm_Processor {
             } catch (Exception e) {
                 System.debug(LoggingLevel.ERROR, 'Failed to instantiate handler for ' + 
                     config.formType + ': ' + e.getMessage());
+                Logger.error('Failed to instantiate handler for ' + config.formType + ': ' + e.getMessage());
+                Logger.setScenario('InboundForm_Processor.getHandler');
+                Logger.saveLog();
                 return null;
             }
         }
@@ -186,6 +191,8 @@ public with sharing class InboundForm_Processor {
                 } catch (Exception e) {
                     Logger.error('Error in afterBuild handler: ' + e.getMessage());
                     Logger.setScenario('InboundForm_Processor.afterBuild');
+                    Logger.saveLog();
+                    result.addWarning('After-build handler error: ' + e.getMessage());
                     System.debug(LoggingLevel.WARN, 'After-build handler error: ' + e.getMessage());
                 }
             }
@@ -205,21 +212,30 @@ public with sharing class InboundForm_Processor {
 
     /**
      * Resolve inbound payload into a configured form type key.
-     * S37 withdrawal events are processed by a dedicated withdrawal config.
+     * S37 and NWL withdrawal events are processed by a dedicated withdrawal config.
      */
     private static String resolveConfiguredFormType(InboundForm_JSONParser parser, String payloadFormType) {
-        if (isS37WithdrawalPayload(parser, payloadFormType)) {
-            return S37_WITHDRAWAL_FORM_TYPE;
+        if (isWithdrawalPayload(parser, payloadFormType)) {
+            return getWithdrawalConfiguredFormType(payloadFormType);
         }
         return payloadFormType;
     }
 
-    private static Boolean isS37WithdrawalPayload(InboundForm_JSONParser parser, String payloadFormType) {
-        if (payloadFormType == S37_WITHDRAWAL_FORM_TYPE) {
+    private static String getWithdrawalConfiguredFormType(String payloadFormType) {
+        if (payloadFormType == NWL_WITHDRAWAL_FORM_TYPE || payloadFormType == NWL_FORM_TYPE) {
+            return NWL_WITHDRAWAL_FORM_TYPE;
+        }
+
+        return S37_WITHDRAWAL_FORM_TYPE;
+    }
+
+    private static Boolean isWithdrawalPayload(InboundForm_JSONParser parser, String payloadFormType) {
+        if (payloadFormType == S37_WITHDRAWAL_FORM_TYPE ||
+            payloadFormType == NWL_WITHDRAWAL_FORM_TYPE) {
             return true;
         }
 
-        if (payloadFormType != S37_FORM_TYPE) {
+        if (!supportsWithdrawalRouting(payloadFormType)) {
             return false;
         }
 
@@ -229,6 +245,10 @@ public with sharing class InboundForm_Processor {
         }
 
         return parser.hasValue('Withdraw') || parser.hasValue('Withdraw.withdrawalReason');
+    }
+
+    private static Boolean supportsWithdrawalRouting(String payloadFormType) {
+        return payloadFormType == S37_FORM_TYPE || payloadFormType == NWL_FORM_TYPE;
     }
 
     private static Boolean isWithdrawalRequestedEvent(String eventType) {
@@ -329,7 +349,7 @@ public with sharing class InboundForm_Processor {
                     result.collectionRecords.put(collConfig.collectionName, records);
                 }
             } catch (Exception e) {
-                result.addError('Error processing collection ' + collConfig.collectionName + 
+                result.addWarning('Error processing collection ' + collConfig.collectionName + 
                     ': ' + e.getMessage());
                 Logger.error('Error processing collection ' + collConfig.collectionName + ': ' + e.getMessage());
                 Logger.setScenario('InboundForm_Processor.buildChildRecords');
@@ -810,15 +830,31 @@ public with sharing class InboundForm_Processor {
         
         // Step 1: Insert all primary records (single DML)
         List<SObject> allPrimaryRecords = new List<SObject>();
+        List<ProcessingResult> primaryRecordOwners = new List<ProcessingResult>();
         for (ProcessingResult result : results) {
             if (result.createdRecords.containsKey(config.primaryObject)) {
-                allPrimaryRecords.addAll(result.createdRecords.get(config.primaryObject));
+                for (SObject primaryRecord : result.createdRecords.get(config.primaryObject)) {
+                    allPrimaryRecords.add(primaryRecord);
+                    primaryRecordOwners.add(result);
+                }
             }
         }
 
         if (!allPrimaryRecords.isEmpty()) {
             Database.SaveResult[] saveResults = Database.insert(allPrimaryRecords, false);
             logDmlErrors(saveResults, config.primaryObject);
+
+            for (Integer i = 0; i < saveResults.size(); i++) {
+                if (saveResults[i].isSuccess()) {
+                    continue;
+                }
+
+                ProcessingResult owner = primaryRecordOwners[i];
+                owner.addError(
+                    'Failed to create ' + config.primaryObject + ' record: ' +
+                    formatDmlErrors(saveResults[i].getErrors())
+                );
+            }
         }
 
         // Build inbound to primary map for linking child records
@@ -841,6 +877,10 @@ public with sharing class InboundForm_Processor {
                     try {
                         handler.afterPrimaryInsert(result.parser, primaryId, result);
                     } catch (Exception e) {
+                        Logger.error('After-primary-insert handler error: ' + e.getMessage());
+                        Logger.setScenario('InboundForm_Processor.afterPrimaryInsert');
+                        Logger.saveLog();
+                        result.addWarning('After-primary-insert handler error: ' + e.getMessage());
                         System.debug(LoggingLevel.WARN, 'After-primary-insert handler error: ' + e.getMessage());
                     }
                 }
@@ -849,14 +889,21 @@ public with sharing class InboundForm_Processor {
         
         // Step 1.6: Insert all postPrimaryRecords (records created by afterPrimaryInsert)
         Map<String, List<SObject>> allPostPrimaryByObject = new Map<String, List<SObject>>();
+        Map<String, List<ProcessingResult>> postPrimaryOwnersByObject =
+            new Map<String, List<ProcessingResult>>();
         for (ProcessingResult result : results) {
             if (!result.success) continue;
             
             for (String objectType : result.postPrimaryRecords.keySet()) {
                 if (!allPostPrimaryByObject.containsKey(objectType)) {
                     allPostPrimaryByObject.put(objectType, new List<SObject>());
+                    postPrimaryOwnersByObject.put(objectType, new List<ProcessingResult>());
                 }
-                allPostPrimaryByObject.get(objectType).addAll(result.postPrimaryRecords.get(objectType));
+
+                for (SObject record : result.postPrimaryRecords.get(objectType)) {
+                    allPostPrimaryByObject.get(objectType).add(record);
+                    postPrimaryOwnersByObject.get(objectType).add(result);
+                }
             }
         }
         
@@ -865,6 +912,18 @@ public with sharing class InboundForm_Processor {
             if (!recordsToInsert.isEmpty()) {
                 Database.SaveResult[] saveResults = Database.insert(recordsToInsert, false);
                 logDmlErrors(saveResults, objectType);
+
+                List<ProcessingResult> owners = postPrimaryOwnersByObject.get(objectType);
+                for (Integer i = 0; i < saveResults.size(); i++) {
+                    if (saveResults[i].isSuccess()) {
+                        continue;
+                    }
+
+                    owners[i].addWarning(
+                        'Failed to create ' + objectType + ' record: ' +
+                        formatDmlErrors(saveResults[i].getErrors())
+                    );
+                }
             }
         }
         
@@ -876,6 +935,12 @@ public with sharing class InboundForm_Processor {
         // Each level contains collections that can be inserted together
         // (collections in the same level don't depend on each other)
         Map<String, Map<String, Id>> allLinkMaps = new Map<String, Map<String, Id>>();
+        Set<String> collectionsUsedAsParents = new Set<String>();
+        for (InboundForm_MappingConfig.CollectionConfig coll : config.collections) {
+            if (String.isNotBlank(coll.parentCollection)) {
+                collectionsUsedAsParents.add(coll.parentCollection);
+            }
+        }
         
         // Track all inserted records by object type for afterAllInserts hook
         Map<String, List<SObject>> allInsertedByObject = new Map<String, List<SObject>>();
@@ -883,20 +948,27 @@ public with sharing class InboundForm_Processor {
         for (List<InboundForm_MappingConfig.CollectionConfig> level : collectionLevels) {
             // Group all records at this level by target object for consolidated DML
             Map<String, List<SObject>> recordsByObject = new Map<String, List<SObject>>();
-            Map<String, InboundForm_MappingConfig.CollectionConfig> configByObject = 
+            Map<String, List<ProcessingResult>> ownersByObject =
+                new Map<String, List<ProcessingResult>>();
+            Map<String, List<SObject>> recordsByCollection = new Map<String, List<SObject>>();
+            Map<String, InboundForm_MappingConfig.CollectionConfig> configByCollection =
                 new Map<String, InboundForm_MappingConfig.CollectionConfig>();
             
             for (InboundForm_MappingConfig.CollectionConfig collConfig : level) {
-                List<SObject> collectionRecords = gatherCollectionRecords(
+                CollectionGatherResult gathered = gatherCollectionRecords(
                     collConfig, results, inboundToPrimaryMap, allLinkMaps);
                 
-                if (!collectionRecords.isEmpty()) {
+                if (!gathered.records.isEmpty()) {
                     String targetObj = collConfig.targetObject;
                     if (!recordsByObject.containsKey(targetObj)) {
                         recordsByObject.put(targetObj, new List<SObject>());
+                        ownersByObject.put(targetObj, new List<ProcessingResult>());
                     }
-                    recordsByObject.get(targetObj).addAll(collectionRecords);
-                    configByObject.put(targetObj, collConfig);
+                    recordsByObject.get(targetObj).addAll(gathered.records);
+                    ownersByObject.get(targetObj).addAll(gathered.owners);
+
+                    recordsByCollection.put(collConfig.collectionName, gathered.records);
+                    configByCollection.put(collConfig.collectionName, collConfig);
                 }
             }
             
@@ -906,19 +978,39 @@ public with sharing class InboundForm_Processor {
                 if (!recordsToInsert.isEmpty()) {
                     Database.SaveResult[] saveResults = Database.insert(recordsToInsert, false);
                     logDmlErrors(saveResults, objectType);
+
+                    List<ProcessingResult> owners = ownersByObject.get(objectType);
+                    for (Integer i = 0; i < saveResults.size(); i++) {
+                        if (saveResults[i].isSuccess()) {
+                            continue;
+                        }
+
+                        owners[i].addWarning(
+                            'Failed to create ' + objectType + ' record: ' +
+                            formatDmlErrors(saveResults[i].getErrors())
+                        );
+                    }
                     
                     // Track inserted records for afterAllInserts
                     if (!allInsertedByObject.containsKey(objectType)) {
                         allInsertedByObject.put(objectType, new List<SObject>());
                     }
                     allInsertedByObject.get(objectType).addAll(recordsToInsert);
-                    
-                    // Update link maps for next level's parent-child linking
-                    InboundForm_MappingConfig.CollectionConfig collConfig = configByObject.get(objectType);
-                    if (collConfig != null && String.isNotBlank(collConfig.parentLinkSfField)) {
-                        Map<String, Id> linkMap = buildLinkMapFromRecords(recordsToInsert, collConfig.parentLinkSfField);
-                        allLinkMaps.put(collConfig.collectionName, linkMap);
-                    }
+                }
+            }
+
+            // Update link maps for next level's parent-child linking per collection.
+            for (String collectionName : recordsByCollection.keySet()) {
+                InboundForm_MappingConfig.CollectionConfig collConfig =
+                    configByCollection.get(collectionName);
+                if (collConfig != null
+                        && collectionsUsedAsParents.contains(collectionName)
+                        && String.isNotBlank(collConfig.parentLinkSfField)) {
+                    Map<String, Id> linkMap = buildLinkMapFromRecords(
+                        recordsByCollection.get(collectionName),
+                        collConfig.parentLinkSfField
+                    );
+                    allLinkMaps.put(collectionName, linkMap);
                 }
             }
         }
@@ -929,6 +1021,11 @@ public with sharing class InboundForm_Processor {
                 if (!result.success) continue;
                 
                 Id primaryId = inboundToPrimaryMap.get(result.inboundRequestId);
+                if (primaryId == null
+                        && result.createdRecords.containsKey(config.primaryObject)
+                        && !result.createdRecords.get(config.primaryObject).isEmpty()) {
+                    primaryId = result.createdRecords.get(config.primaryObject)[0].Id;
+                }
 
                 if (primaryId != null) {
                     try {
@@ -939,7 +1036,9 @@ public with sharing class InboundForm_Processor {
                     } catch (Exception e) {
                         System.debug(LoggingLevel.WARN, 'After-all-inserts handler error: ' + e.getMessage());
                         Logger.error('After-all-inserts handler error: ' + e.getMessage());
+                        Logger.setScenario('InboundForm_Processor.afterAllInserts');
                         Logger.saveLog();
+                        result.addWarning('After-all-inserts handler error: ' + e.getMessage());
                     }
                 }
             }
@@ -1101,13 +1200,14 @@ public with sharing class InboundForm_Processor {
         return linkMap;
     }
     
-    private static List<SObject> gatherCollectionRecords(
+    private static CollectionGatherResult gatherCollectionRecords(
             InboundForm_MappingConfig.CollectionConfig collConfig,
             List<ProcessingResult> results,
             Map<Id, Id> inboundToPrimaryMap,
             Map<String, Map<String, Id>> allLinkMaps) {
-        
-        List<SObject> recordsToInsert = new List<SObject>();
+
+        CollectionGatherResult gathered = new CollectionGatherResult();
+        List<SObject> recordsToInsert = gathered.records;
         
         // Get parent link map if this collection links to another collection
         Map<String, Id> parentLinkMap = new Map<String, Id>();
@@ -1138,10 +1238,19 @@ public with sharing class InboundForm_Processor {
                     record.put(collConfig.parentLookupField, primaryId);
                 }
                 recordsToInsert.add(record);
+                gathered.owners.add(result);
             }
         }
-        
-        return recordsToInsert;
+
+        return gathered;
+    }
+
+    private static String formatDmlErrors(Database.Error[] errors) {
+        List<String> details = new List<String>();
+        for (Database.Error err : errors) {
+            details.add(err.getMessage() + ' [Fields: ' + err.getFields() + ']');
+        }
+        return String.join(details, '; ');
     }
     
     private static void logDmlErrors(Database.SaveResult[] results, String objectName) {
@@ -1153,6 +1262,7 @@ public with sharing class InboundForm_Processor {
                         ' [Fields: ' + err.getFields() + ']');
                     Logger.error('DML Error on ' + objectName + ': ' + err.getMessage() + 
                         ' [Fields: ' + err.getFields() + ']');
+                    Logger.setScenario('InboundForm_Processor.logDmlErrors');
                     Logger.saveLog();
                 }
             }
@@ -1219,13 +1329,20 @@ public with sharing class InboundForm_Processor {
         }
         
         if (!statusUpdates.isEmpty()) {
-            Id jobId = System.enqueueJob(new InboundForm_StatusUpdateQueueable(statusUpdates));
-            //logging is handled in the queueable class, but we can log the enqueueing here
-            Logger.info('Enqueued status update job: ' + jobId + 
-                ' for ' + statusUpdates.size() + ' records');
-            Logger.saveLog();
-            System.debug(LoggingLevel.INFO, 'Enqueued status update job: ' + jobId + 
-                ' for ' + statusUpdates.size() + ' records');
+            try {
+                Id jobId = System.enqueueJob(new InboundForm_StatusUpdateQueueable(statusUpdates));
+                // logging is handled in the queueable class, but we can log the enqueueing here
+                Logger.info('Enqueued status update job: ' + jobId + 
+                    ' for ' + statusUpdates.size() + ' records');
+                Logger.saveLog();
+                System.debug(LoggingLevel.INFO, 'Enqueued status update job: ' + jobId + 
+                    ' for ' + statusUpdates.size() + ' records');
+            } catch (Exception e) {
+                Logger.error('Failed to enqueue status update job: ' + e.getMessage());
+                Logger.setScenario('InboundForm_Processor.queueStatusUpdates');
+                Logger.saveLog();
+                System.debug(LoggingLevel.ERROR, 'Failed to enqueue status update job: ' + e.getMessage());
+            }
         }
     }
     
@@ -1247,6 +1364,11 @@ public with sharing class InboundForm_Processor {
     // ========================================================================
     // INNER CLASSES
     // ========================================================================
+
+    private class CollectionGatherResult {
+        public List<SObject> records = new List<SObject>();
+        public List<ProcessingResult> owners = new List<ProcessingResult>();
+    }
     
     /**
      * Processing result for a single request
