@@ -19,6 +19,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          check-latest: true
 
       - name: Install dependencies
         run: npm install
@@ -39,7 +40,7 @@ jobs:
 
       - name: Authenticate to Salesforce Production
         env:
-          SFDX_AUTH_URL: ${{ secrets.SFDX_AUTH_URL }}
+          SFDX_AUTH_URL: ${{ secrets.SFDX_AUTH_URL_PROD }}
         run: |
           echo "$SFDX_AUTH_URL" > sfdx_auth_url.txt
           sf org login sfdx-url \
