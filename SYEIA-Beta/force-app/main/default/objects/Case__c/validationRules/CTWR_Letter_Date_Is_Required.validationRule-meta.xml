@@ -3,6 +3,7 @@
     <fullName>CTWR_Letter_Date_Is_Required</fullName>
     <active>true</active>
     <errorConditionFormula>AND(
+NOT($Permission.Bypass_Validation_Rule),
 NOT(ISBLANK(PRIORVALUE( CTWR_Letter_Date__c ))),
 ISBLANK(CTWR_Letter_Date__c)
 )</errorConditionFormula>

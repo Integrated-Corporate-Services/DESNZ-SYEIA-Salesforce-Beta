@@ -3,6 +3,7 @@
     <fullName>CTWR_Deadline_Is_Required</fullName>
     <active>true</active>
     <errorConditionFormula>AND(
+NOT($Permission.Bypass_Validation_Rule),
 NOT(ISBLANK(PRIORVALUE( CTWR_Deadline__c ))),
 ISBLANK(CTWR_Deadline__c)
 )</errorConditionFormula>

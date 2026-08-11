@@ -3,6 +3,7 @@
     <fullName>Assessment_Date_Is_Required</fullName>
     <active>true</active>
     <errorConditionFormula>AND(
+NOT($Permission.Bypass_Validation_Rule),
 NOT(ISBLANK(PRIORVALUE( Assessment_Date__c ))),
 ISBLANK(Assessment_Date__c)
 )</errorConditionFormula>
