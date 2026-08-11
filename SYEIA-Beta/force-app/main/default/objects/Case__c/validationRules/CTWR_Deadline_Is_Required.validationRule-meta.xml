@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CTWR_Deadline_Is_Required</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+NOT(ISBLANK(PRIORVALUE( CTWR_Deadline__c ))),
+ISBLANK(CTWR_Deadline__c)
+)</errorConditionFormula>
+    <errorDisplayField>CTWR_Deadline__c</errorDisplayField>
+    <errorMessage>CTWR Deadline cannot be blank once the CTWR Deadline letter has been sent.</errorMessage>
+</ValidationRule>

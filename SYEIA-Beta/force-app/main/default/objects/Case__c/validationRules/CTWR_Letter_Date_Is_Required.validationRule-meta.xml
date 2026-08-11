@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CTWR_Letter_Date_Is_Required</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+NOT(ISBLANK(PRIORVALUE( CTWR_Letter_Date__c ))),
+ISBLANK(CTWR_Letter_Date__c)
+)</errorConditionFormula>
+    <errorDisplayField>CTWR_Letter_Date__c</errorDisplayField>
+    <errorMessage>CTWR Letter Date cannot be blank once the CTWR letter has been sent.</errorMessage>
+</ValidationRule>
