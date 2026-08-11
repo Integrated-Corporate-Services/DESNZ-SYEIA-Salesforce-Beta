@@ -1833,6 +1833,13 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Evidence_of_Negotiations__c</fieldItem>
                 <identifier>RecordEvidence_of_Negotiations_cField</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Negotiations_in_Progress__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Yes</rightValue>
+                    </criteria>
+                </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <name>Facet-a36b219d-5460-4e13-bdf7-2c325257ef81</name>
@@ -1847,6 +1854,30 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Start_Date_of_Negotiations__c</fieldItem>
                 <identifier>RecordStart_Date_of_Negotiations_cField</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Negotiations_in_Progress__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Yes</rightValue>
+                    </criteria>
+                </visibilityRule>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Explanation_No_Negotiations__c</fieldItem>
+                <identifier>RecordExplanation_No_Negotiations_cField</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Negotiations_in_Progress__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>No</rightValue>
+                    </criteria>
+                </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <name>Facet-3d5bcbad-cc96-4b3f-b64f-f6b79a95e744</name>
@@ -1874,58 +1905,6 @@
             </componentInstance>
         </itemInstances>
         <name>Facet-3b7501d1-333d-4a7e-8300-fbcca11336a4</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Negotiations_in_Progress__c</fieldItem>
-                <identifier>RecordNegotiations_in_Progress_cField2</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <name>Facet-393b563a-510b-43c5-8319-28d897530898</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Explanation_No_Negotiations__c</fieldItem>
-                <identifier>RecordExplanation_No_Negotiations_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <name>Facet-40e10606-3172-4202-b927-b50dd57ed4ce</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-393b563a-510b-43c5-8319-28d897530898</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:column</componentName>
-                <identifier>flexipage_column45</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-40e10606-3172-4202-b927-b50dd57ed4ce</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:column</componentName>
-                <identifier>flexipage_column46</identifier>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-64b15969-dc43-4371-80a7-d17345fb5cfa</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -2610,38 +2589,6 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
                 <identifier>flexipage_fieldSection19</identifier>
-                <visibilityRule>
-                    <criteria>
-                        <leftValue>{!Record.Negotiations_in_Progress__c}</leftValue>
-                        <operator>EQUAL</operator>
-                        <rightValue>Yes</rightValue>
-                    </criteria>
-                </visibilityRule>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>columns</name>
-                    <value>Facet-64b15969-dc43-4371-80a7-d17345fb5cfa</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>horizontalAlignment</name>
-                    <value>false</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>label</name>
-                    <value>Negotiations</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:fieldSection</componentName>
-                <identifier>flexipage_fieldSection24</identifier>
-                <visibilityRule>
-                    <criteria>
-                        <leftValue>{!Record.Negotiations_in_Progress__c}</leftValue>
-                        <operator>EQUAL</operator>
-                        <rightValue>No</rightValue>
-                    </criteria>
-                </visibilityRule>
             </componentInstance>
         </itemInstances>
         <itemInstances>
