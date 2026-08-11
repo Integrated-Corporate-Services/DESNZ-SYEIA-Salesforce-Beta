@@ -1912,7 +1912,7 @@
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>none</value>
+                    <value>required</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Related_Applications__c</fieldItem>
                 <identifier>RecordRelated_Applications_cField</identifier>
@@ -1924,8 +1924,15 @@
                     <name>uiBehavior</name>
                     <value>required</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Any_Other_Important_Information__c</fieldItem>
-                <identifier>RecordAny_Other_Important_Information_cField</identifier>
+                <fieldItem>Record.Details_of_All_Related_Application__c</fieldItem>
+                <identifier>RecordDetails_of_All_Related_Application_cField</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Related_Applications__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Yes</rightValue>
+                    </criteria>
+                </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <name>Facet-9f7c7600-62f1-4cb8-b367-595c7e32982c</name>
@@ -1938,15 +1945,15 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Details_of_All_Related_Application__c</fieldItem>
-                <identifier>RecordDetails_of_All_Related_Application_cField</identifier>
+                <fieldItem>Record.Any_Other_Important_Information__c</fieldItem>
+                <identifier>RecordAny_Other_Important_Information_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>required</value>
+                    <value>none</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Description_of_Important_Information__c</fieldItem>
                 <identifier>RecordDescription_of_Important_Information_cField</identifier>
@@ -1984,75 +1991,6 @@
             </componentInstance>
         </itemInstances>
         <name>Facet-2fe1f344-6f5b-4bc8-8cda-7bca44d1c1db</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Related_Applications__c</fieldItem>
-                <identifier>RecordRelated_Applications_cField2</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>required</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Description_of_Important_Information__c</fieldItem>
-                <identifier>RecordDescription_of_Important_Information_cField2</identifier>
-                <visibilityRule>
-                    <criteria>
-                        <leftValue>{!Record.Any_Other_Important_Information__c}</leftValue>
-                        <operator>EQUAL</operator>
-                        <rightValue>No</rightValue>
-                    </criteria>
-                </visibilityRule>
-            </fieldInstance>
-        </itemInstances>
-        <name>Facet-7f5157bc-e023-4c1f-bca5-e5c1acdad03e</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>required</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Any_Other_Important_Information__c</fieldItem>
-                <identifier>RecordAny_Other_Important_Information_cField2</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <name>Facet-ccbde5b4-3236-4fa2-a9f1-ec5023259ece</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-7f5157bc-e023-4c1f-bca5-e5c1acdad03e</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:column</componentName>
-                <identifier>flexipage_column47</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-ccbde5b4-3236-4fa2-a9f1-ec5023259ece</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:column</componentName>
-                <identifier>flexipage_column48</identifier>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-c00ad77c-8e62-4f61-bd3a-9f5e52b59a0d</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -2607,38 +2545,6 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
                 <identifier>flexipage_fieldSection20</identifier>
-                <visibilityRule>
-                    <criteria>
-                        <leftValue>{!Record.Related_Applications__c}</leftValue>
-                        <operator>EQUAL</operator>
-                        <rightValue>Yes</rightValue>
-                    </criteria>
-                </visibilityRule>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>columns</name>
-                    <value>Facet-c00ad77c-8e62-4f61-bd3a-9f5e52b59a0d</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>horizontalAlignment</name>
-                    <value>false</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>label</name>
-                    <value>Additional Information</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:fieldSection</componentName>
-                <identifier>flexipage_fieldSection25</identifier>
-                <visibilityRule>
-                    <criteria>
-                        <leftValue>{!Record.Related_Applications__c}</leftValue>
-                        <operator>EQUAL</operator>
-                        <rightValue>No</rightValue>
-                    </criteria>
-                </visibilityRule>
             </componentInstance>
         </itemInstances>
         <itemInstances>
