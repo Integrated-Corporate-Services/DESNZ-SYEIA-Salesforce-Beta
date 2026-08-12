@@ -3393,7 +3393,7 @@
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>none</value>
+                    <value>required</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.DESNZ_Decision__c</fieldItem>
                 <identifier>RecordDESNZ_Decision_cField</identifier>
