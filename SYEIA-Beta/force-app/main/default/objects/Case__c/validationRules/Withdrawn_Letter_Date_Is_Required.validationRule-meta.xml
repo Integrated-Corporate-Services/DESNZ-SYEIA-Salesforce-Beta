@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Withdrawal_Letter_Date_Is_Required</fullName>
+    <fullName>Withdrawn_Letter_Date_Is_Required</fullName>
     <active>true</active>
     <errorConditionFormula>AND(
     NOT($Permission.Bypass_Validation_Rule),
@@ -8,5 +8,5 @@
     ISBLANK(Withdrawn_Letter_Date__c)
 )</errorConditionFormula>
     <errorDisplayField>Withdrawn_Letter_Date__c</errorDisplayField>
-    <errorMessage>Withdrawal Letter Date cannot be blank once the withdrawal letter has been sent.</errorMessage>
+    <errorMessage>Withdrawn Letter Date cannot be blank once the Withdrawn letter has been sent.</errorMessage>
 </ValidationRule>

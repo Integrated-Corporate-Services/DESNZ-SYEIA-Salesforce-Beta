@@ -865,7 +865,7 @@
 		<members>Case__c.CTWR_Res_From_Landowner_Date_Is_Required</members>
 		<members>Case__c.CTWR_Deadline_Is_Required</members>
 		<members>Case__c.CTWR_Letter_Date_Is_Required</members>
-		<members>Case__c.Withdrawal_Letter_Date_Is_Required</members>
+		<members>Case__c.Withdrawn_Letter_Date_Is_Required</members>
 		<name>ValidationRule</name>
 	</types>
 	<version>65.0</version>
