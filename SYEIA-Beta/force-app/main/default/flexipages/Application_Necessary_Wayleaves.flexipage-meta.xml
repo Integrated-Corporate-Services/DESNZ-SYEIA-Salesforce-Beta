@@ -3381,10 +3381,13 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Withdrawal_Date_Time__c</fieldItem>
-                <identifier>RecordWithdrawal_Date_Time_cField</identifier>
+                <fieldItem>Record.Withdrawn_Letter_Date__c</fieldItem>
+                <identifier>RecordWithdrawn_Letter_Date__cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <name>Facet-6bea69ba-47ee-4dfa-98d4-ab4c9aef52af</name>
+        <type>Facet</type>
+    </flexiPageRegions>
         <name>Facet-1d39efe3-52a6-4f7b-bfb8-9ca6fd1b86ed</name>
         <type>Facet</type>
     </flexiPageRegions>
