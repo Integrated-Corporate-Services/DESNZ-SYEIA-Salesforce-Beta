@@ -17,21 +17,31 @@
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>recipientAddresses</name>
-            <value/>
+            <value>
+                <collectionElements>
+                    <elementReference>collection_ToAddresses</elementReference>
+                </collectionElements>
+            </value>
         </inputParameters>
         <inputParameters>
             <name>ccAddresses</name>
-            <value/>
+            <value>
+                <collectionElements>
+                    <elementReference>collection_CcAddresses</elementReference>
+                </collectionElements>
+            </value>
         </inputParameters>
         <inputParameters>
             <name>senderType</name>
             <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>OrgWideEmailAddress</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>senderAddress</name>
             <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>necessarywayleaves@energysecurity.gov.uk</stringValue>
             </value>
         </inputParameters>
@@ -45,12 +55,14 @@
             <name>emailSubject</name>
             <value>
                 <elementReference>formula_emailSubject_DV</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>emailBody</name>
             <value>
                 <elementReference>EmailComposer.value</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -63,6 +75,7 @@
             <name>attachmentId</name>
             <value>
                 <elementReference>Document_Table.firstSelectedRow.Id</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -72,6 +85,7 @@
             <name>relatedRecordId</name>
             <value>
                 <elementReference>recordId</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -84,12 +98,14 @@
             <name>addThreadingTokenToBody</name>
             <value>
                 <booleanValue>false</booleanValue>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>addThreadingTokenToSubject</name>
             <value>
                 <booleanValue>false</booleanValue>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <nameSegment>emailSimple</nameSegment>
@@ -1067,6 +1083,28 @@
             </connector>
             <label>NW13. Decision letter - Applicant</label>
         </rules>
+        <rules>
+            <name>NW14_Withdrawal_letter</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>NW14_Withdrawalletter_Applicant</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Email_Type_Selector.selectedChoiceValues</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>NW14_Withdrawalletter_LO</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NW14_Withdrawal_letter_Date</targetReference>
+            </connector>
+            <label>NW14. Withdrawal letter</label>
+        </rules>
     </decisions>
     <decisions>
         <name>Organisation_Email_Or_Applicant_Email</name>
@@ -1682,6 +1720,30 @@ CTWR Letter Sent</description>
             <field>Status__c</field>
             <value>
                 <stringValue>Decision Issued</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Case__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>NW14_Withdrawal_letter_Date</name>
+        <label>NW14. Withdrawal letter Date</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Email_Tracking_Record</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Withdrawn_Letter_Date__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
             </value>
         </inputAssignments>
         <object>Case__c</object>
