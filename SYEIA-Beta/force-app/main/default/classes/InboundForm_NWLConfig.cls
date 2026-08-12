@@ -162,6 +162,11 @@ public class InboundForm_NWLConfig {
             'Evidence_of_Negotiations__c'
         ));
 
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'sections.negotiations.no_negotiations_reason',
+            'Explanation_No_Negotiations__c'
+        ));
+
         config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
             'sections.additionalInformation.has_related_applications',
             'Related_Applications__c'
