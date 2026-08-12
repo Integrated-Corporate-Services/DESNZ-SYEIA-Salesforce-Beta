@@ -866,6 +866,7 @@
 		<members>Case__c.CTWR_Deadline_Is_Required</members>
 		<members>Case__c.CTWR_Letter_Date_Is_Required</members>
 		<members>Case__c.Withdrawn_Letter_Date_Is_Required</members>
+		<members>Case__c.Lock_Submitted_for_approval_Case</members>		
 		<name>ValidationRule</name>
 	</types>
 	<version>65.0</version>
