@@ -82,6 +82,11 @@ public class InboundForm_NWLConfig {
             'Written_Termination_Notice_Issue_Date__c'
         ));
 
+        config.addFieldMapping(InboundForm_MappingConfig.dateField(
+            'sections.applicationDetails.wayleave_offer_date',
+            'Wayleave_Notice_Date__c'
+        ));
+
         config.addFieldMapping(InboundForm_MappingConfig.stringField(
             'sections.applicantDetails.applicant_name',
             'DNO_Name__c'
