@@ -811,6 +811,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Land__c.Explanation_Land_not_Registered__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Land__c.Grid_Letter__c</field>
         <readable>true</readable>
     </fieldPermissions>

@@ -537,6 +537,14 @@ public class InboundForm_NWLConfig {
             'Grid_Letter__c'
         ));
         landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'easting',
+            'Easting__c'
+        ));
+        landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'northing',
+            'Northing__c'
+        ));
+        landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
             'land_identification',
             'Other_Info_To_Identify_Land__c'
         ));

@@ -1703,7 +1703,7 @@
                 <identifier>RecordRelated_Land_rExplanation_Land_not_Registered_cField</identifier>
                 <visibilityRule>
                     <criteria>
-                        <leftValue>{!Record.Land__c}</leftValue>
+                        <leftValue>{!Record.Related_Land__r.Land_Registered_with_Land_Registry__c}</leftValue>
                         <operator>EQUAL</operator>
                         <rightValue>No</rightValue>
                     </criteria>
