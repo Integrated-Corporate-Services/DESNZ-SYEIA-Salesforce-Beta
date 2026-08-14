@@ -3,7 +3,7 @@
     <fullName>Grid_Letter__c</fullName>
     <defaultValue>&apos;-&apos;</defaultValue>
     <externalId>false</externalId>
-    <label>Grid Letter</label>
+    <label>Grid Letters</label>
     <length>255</length>
     <required>false</required>
     <trackHistory>false</trackHistory>
