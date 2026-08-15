@@ -593,6 +593,13 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Explanation_Notice_Omits_Line_Removal__c</fieldItem>
                 <identifier>RecordExplanation_Notice_Omits_Line_Removal_cField</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Notice_Clearly_Refers_to_Line_Removal__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>No</rightValue>
+                    </criteria>
+                </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -603,6 +610,13 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Explanation_Submitted_Beyond_3_Months__c</fieldItem>
                 <identifier>RecordExplanation_Submitted_Beyond_3_Months_cField</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Submitted_Within_3_Months_Of_Notice__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>No</rightValue>
+                    </criteria>
+                </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
