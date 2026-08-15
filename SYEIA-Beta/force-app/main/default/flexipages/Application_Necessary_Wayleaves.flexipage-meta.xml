@@ -2921,14 +2921,20 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Payment__r.Item_Reference__c</fieldItem>
-                <identifier>RecordPayment_rItem_Reference_cField</identifier>
+                <fieldItem>Record.Payment__r.Description__c</fieldItem>
+                <identifier>RecordPayment_rDescription_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-3537dc02-bd42-4735-beca-9892190faf70</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>flexipage:blankSpace</componentName>
+                <identifier>flexipage_blankSpace5</identifier>
+            </componentInstance>
+        </itemInstances>
         <itemInstances>
             <fieldInstance>
                 <fieldItem>Record.Payment__r.Quantity__c</fieldItem>
@@ -2939,6 +2945,12 @@
             <fieldInstance>
                 <fieldItem>Record.Payment__r.Subtotal__c</fieldItem>
                 <identifier>RecordPayment_rSubtotal_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Payment__r.Total_Amount__c</fieldItem>
+                <identifier>RecordPayment_rTotal_Amount_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-6cdaefa9-fa4b-4d7b-85c0-ffd5cbe9dc2c</name>
@@ -2970,30 +2982,6 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Payment__r.Description__c</fieldItem>
-                <identifier>RecordPayment_rDescription_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <name>Facet-bba9093c-bf3a-4c18-b20f-622b26dfce0c</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-bba9093c-bf3a-4c18-b20f-622b26dfce0c</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:column</componentName>
-                <identifier>flexipage_column11</identifier>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-6c8aa8b8-e837-4719-8af8-95db3ad483f4</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
                     <name>columns</name>
@@ -3009,24 +2997,6 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
                 <identifier>flexipage_fieldSection2</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>columns</name>
-                    <value>Facet-6c8aa8b8-e837-4719-8af8-95db3ad483f4</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>horizontalAlignment</name>
-                    <value>false</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>label</name>
-                    <value>Description</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:fieldSection</componentName>
-                <identifier>flexipage_fieldSection6</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-294o6h2cokz</name>
