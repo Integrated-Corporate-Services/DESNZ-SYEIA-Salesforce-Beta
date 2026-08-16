@@ -224,6 +224,10 @@ public class InboundForm_NWLConfig {
         applicants.addFieldMapping(InboundForm_MappingConfig.stringField('applicant_name', 'Name'));
         applicants.addFieldMapping(InboundForm_MappingConfig.stringField('email', 'Email__c'));
         applicants.addFieldMapping(InboundForm_MappingConfig.stringField('applicant_name', 'Organisation__c'));
+        applicants.addFieldMapping(InboundForm_MappingConfig.csvStringListField(
+            'additional_contacts',
+            'Additional_Contact_Email_Addresses__c'
+        ));
         applicants.addFieldMapping(InboundForm_MappingConfig.stringField('phone', 'Phone__c'));
         applicants.addFieldMapping(InboundForm_MappingConfig.defaultValue('DNO', 'Party_Type__c'));
         applicants.addFieldMapping(InboundForm_MappingConfig.defaultValue(

@@ -286,7 +286,7 @@ private class InboundForm_ProcessorTest {
                     '"postcode":null,' +
                     '"email":"ics.tester10@ics-testing.com",' +
                     '"phone":null,' +
-                    '"additional_contacts":[]' +
+                    '"additional_contacts":["applicantcontactdetaila@test.com","applicantcontactdetailb@test.com"]' +
                 '},' +
                 '"applicationDetails":{' +
                     '"application_type":"Existing line",' +
@@ -1329,7 +1329,7 @@ private class InboundForm_ProcessorTest {
                 'Applicant party should carry NWL_ORGANISATION identifier');
 
             Party__c applicantOrganisationParty = [
-                SELECT Id
+                SELECT Id, Additional_Contact_Email_Addresses__c
                 FROM Party__c
                 WHERE Case__c = :insertedCase.Id
                 AND Name = 'DESNZ'
@@ -1338,6 +1338,11 @@ private class InboundForm_ProcessorTest {
             ];
             Assert.areEqual(applicantOrganisationParty.Id, insertedCase.DNO__c,
                 'Case should link applicant organisation party through DNO__c');
+            Assert.areEqual(
+                'applicantcontactdetaila@test.com,applicantcontactdetailb@test.com',
+                applicantOrganisationParty.Additional_Contact_Email_Addresses__c,
+                'Applicant additional contacts should map as a comma-separated value'
+            );
 
             Assert.isTrue(result.collectionRecords.containsKey('ApplicantContacts'),
                 'ApplicantContacts collection should be processed from applicantDetails');

@@ -265,6 +265,7 @@ public class InboundForm_MappingConfig {
      */
     public enum DataType {
         STRING_TYPE,
+        CSV_STRING_LIST,
         INTEGER_TYPE,
         DECIMAL_TYPE,
         CURRENCY_TYPE,
@@ -280,6 +281,10 @@ public class InboundForm_MappingConfig {
     
     public static FieldMapping stringField(String jsonPath, String targetField) {
         return new FieldMapping(jsonPath, targetField, DataType.STRING_TYPE);
+    }
+
+    public static FieldMapping csvStringListField(String jsonPath, String targetField) {
+        return new FieldMapping(jsonPath, targetField, DataType.CSV_STRING_LIST);
     }
     
     public static FieldMapping integerField(String jsonPath, String targetField) {
