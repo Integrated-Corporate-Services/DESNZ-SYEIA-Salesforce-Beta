@@ -353,6 +353,11 @@ private class InboundForm_ProcessorTest {
                         '"postcode":"SA14RF",' +
                         '"town_city":"test"' +
                     '},' +
+                    '"os_grid_reference": {'+
+                        '"easting": "123",'+
+                        '"northing": "45",'+
+                        '"grid_letter": "OS"'+
+                    '},'+
                     '"country":"england",' +
                     '"land_registry_ref":"1234567",' +
                     '"land_registry_reference_document":{"document_id":"d3adb166-5942-4fae-aeb1-0a40315df684","file_id":"4a470cd4-acb6-4d5c-8640-a31379e5b34e","filename":"evidence-request.pdf","fileUrl":"b6ed18fa-7c3d-43bf-97b9-a40fc9bffa03/LAND_REGISTRY/evidence-request.pdf"},'+
@@ -1256,7 +1261,7 @@ private class InboundForm_ProcessorTest {
                 'Case should link land details record through Related_Land__c');
             Assert.areEqual('1234567', relatedLand.Land_Registry_Reference_Number__c,
                 'Land record should map land_registry_ref from landDetails');
-            Assert.areEqual('TE 123456 654321', relatedLand.Grid_Letter__c,
+            Assert.areEqual('OS', relatedLand.Grid_Letter__c,
                 'Land record should map os_grid_ref from landDetails');
             Assert.areEqual('England', relatedLand.Land_Location__c,
                 'Land location should normalize and map from landDetails.country');
