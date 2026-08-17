@@ -92,6 +92,11 @@ public class InboundForm_NWLConfig {
             'DNO_Name__c'
         ));
 
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'sections.applicantDetails.operator_ref',
+            'Applicant_Reference__c'
+        ));
+
         // Notice Compliance
         config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
             'sections.noticeCompliance.notice_clearly_refers_to_removal',
@@ -542,15 +547,15 @@ public class InboundForm_NWLConfig {
             'Land_Registry_Reference_Number__c'
         ));
         landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
-            'os_grid_ref',
+            'os_grid_reference.grid_letter',
             'Grid_Letter__c'
         ));
         landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
-            'easting',
+            'os_grid_reference.easting',
             'Easting__c'
         ));
         landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
-            'northing',
+            'os_grid_reference.northing',
             'Northing__c'
         ));
         landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
