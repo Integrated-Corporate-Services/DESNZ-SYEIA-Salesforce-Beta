@@ -587,6 +587,9 @@ public with sharing class InboundForm_Processor {
             when STRING_TYPE {
                 return String.valueOf(value);
             }
+            when CSV_STRING_LIST {
+                return convertToCsvString(value);
+            }
             when INTEGER_TYPE {
                 return convertToInteger(value);
             }
@@ -614,6 +617,31 @@ public with sharing class InboundForm_Processor {
                 return String.valueOf(value);
             }
         }
+    }
+
+    /**
+     * Convert a list-like JSON value to comma-separated text.
+     */
+    private static String convertToCsvString(Object value) {
+        if (value == null) {
+            return null;
+        }
+
+        if (value instanceof List<Object>) {
+            List<String> parts = new List<String>();
+            for (Object item : (List<Object>) value) {
+                if (item != null) {
+                    String text = String.valueOf(item).trim();
+                    if (String.isNotBlank(text)) {
+                        parts.add(text);
+                    }
+                }
+            }
+            return parts.isEmpty() ? null : String.join(parts, ',');
+        }
+
+        String singleValue = String.valueOf(value).trim();
+        return String.isNotBlank(singleValue) ? singleValue : null;
     }
     
     /**

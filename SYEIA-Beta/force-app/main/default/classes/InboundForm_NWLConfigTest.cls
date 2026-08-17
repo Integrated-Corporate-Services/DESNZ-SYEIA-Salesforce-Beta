@@ -231,6 +231,18 @@ private class InboundForm_NWLConfigTest {
             applicantMappingsByTarget.get('Email__c').jsonPath,
             'Applicant email should map from email'
         );
+        Assert.isTrue(applicantMappingsByTarget.containsKey('Additional_Contact_Email_Addresses__c'),
+            'Applicant additional contact emails should be mapped');
+        Assert.areEqual(
+            'additional_contacts',
+            applicantMappingsByTarget.get('Additional_Contact_Email_Addresses__c').jsonPath,
+            'Applicant additional contact emails should map from additional_contacts'
+        );
+        Assert.areEqual(
+            InboundForm_MappingConfig.DataType.CSV_STRING_LIST,
+            applicantMappingsByTarget.get('Additional_Contact_Email_Addresses__c').dataType,
+            'Applicant additional contact emails should map as CSV string list'
+        );
 
         InboundForm_MappingConfig.CollectionConfig applicantContactConfig;
         for (InboundForm_MappingConfig.CollectionConfig coll : config.collections) {
