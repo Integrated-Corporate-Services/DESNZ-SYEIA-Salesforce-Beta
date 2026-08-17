@@ -852,6 +852,7 @@
 		<members>Case__c.Lock_Case_When_Archived</members>
 		<members>Case__c.Lock_Completed_Case</members>
 		<members>Case__c.Lock_Rejected_Case</members>
+		<members>Case__c.Lock_Submited_For_Approval_CaseOfficer</members>		
 		<members>Case__c.Lock_Withdrawn_Case</members>
 		<members>Case__c.Restrict_Admin_Edit_On_Status</members>
 		<members>Case__c.Validate_DNO_Party_Type</members>
