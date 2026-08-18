@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Applicant_Reference__c</fullName>
+    <defaultValue>&apos;-&apos;</defaultValue>
     <description>The internal DNO Reference for this particular project</description>
     <externalId>false</externalId>
     <label>Applicant Reference</label>
