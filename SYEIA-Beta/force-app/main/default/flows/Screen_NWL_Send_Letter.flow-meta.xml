@@ -42,7 +42,7 @@
             <name>senderAddress</name>
             <value>
                 <inputConfiguratorMode>Custom</inputConfiguratorMode>
-                <stringValue>necessarywayleaves@energysecurity.gov.uk</stringValue>
+                <stringValue>joshua.eze@ics.gov.uk</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -737,6 +737,46 @@
         </rules>
     </decisions>
     <decisions>
+        <name>Check_The_letter_Time</name>
+        <label>Check The letter Time</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Update_NW07_In_Abeyance_Status_only</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>X1st_Strat_Date_is_Blank</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Case.X1st_Abeyance_Start_Date__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_NW07_In_Abeyance_Status</targetReference>
+            </connector>
+            <label>1st Strat Date is Blank</label>
+        </rules>
+        <rules>
+            <name>X2nd_Start_Date</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Case.X2nd_Abeyance_Start_Date__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_NW07_2nd_In_Abeyance_Status</targetReference>
+            </connector>
+            <label>2nd Start Date</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Decision_Check_For_Attachment_Letter</name>
         <label>Decision Check For Attachment Letter</label>
         <locationX>0</locationX>
@@ -962,7 +1002,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Update_NW07_In_Abeyance_Status</targetReference>
+                <targetReference>Check_The_letter_Time</targetReference>
             </connector>
             <label>W07. Abeyance letter</label>
         </rules>
@@ -1899,6 +1939,42 @@ CTWR Letter Sent</description>
         <object>Case__c</object>
     </recordUpdates>
     <recordUpdates>
+        <name>Update_NW07_2nd_In_Abeyance_Status</name>
+        <label>Update NW07 2nd In Abeyance Status</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Email_Tracking_Record</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>In Abeyance</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Sub_Status__c</field>
+            <value>
+                <stringValue>Abeyance Letter Issued</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>X2nd_Abeyance_Start_Date__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Case__c</object>
+    </recordUpdates>
+    <recordUpdates>
         <name>Update_NW07_In_Abeyance_Status</name>
         <label>Update NW07 In Abeyance Status</label>
         <locationX>0</locationX>
@@ -1906,10 +1982,42 @@ CTWR Letter Sent</description>
         <connector>
             <targetReference>Create_Email_Tracking_Record</targetReference>
         </connector>
-        <faultConnector>
-            <isGoTo>true</isGoTo>
-            <targetReference>Add_Error_LogNWLLetterDate</targetReference>
-        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>In Abeyance</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Sub_Status__c</field>
+            <value>
+                <stringValue>Abeyance Letter Issued</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>X1st_Abeyance_Start_Date__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Case__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_NW07_In_Abeyance_Status_only</name>
+        <label>Update NW07 In Abeyance Status only</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Email_Tracking_Record</targetReference>
+        </connector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
