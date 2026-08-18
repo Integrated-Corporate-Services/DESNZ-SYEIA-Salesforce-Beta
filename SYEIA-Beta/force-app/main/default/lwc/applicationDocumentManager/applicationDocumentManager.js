@@ -57,13 +57,6 @@ export default class ApplicationDocumentManager extends NavigationMixin(Lightnin
         {
             type: 'button',
             typeAttributes: {
-                label: 'Preview',
-                name: 'preview'
-            }
-        },
-        {
-            type: 'button',
-            typeAttributes: {
                 label: 'Download',
                 name: 'download'
             }
@@ -205,9 +198,6 @@ export default class ApplicationDocumentManager extends NavigationMixin(Lightnin
         const action = event.detail.action.name;
         const row = event.detail.row;
 
-        if (action === 'preview') {
-            this.previewFile(row.url);
-        }
         if (action === 'download') {
             this.downloadFile(row.url, row.Title);
         }
