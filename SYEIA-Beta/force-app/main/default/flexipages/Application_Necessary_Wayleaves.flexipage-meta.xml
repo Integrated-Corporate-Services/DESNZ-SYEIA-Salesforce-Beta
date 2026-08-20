@@ -4310,6 +4310,9 @@
                         <valueListItems>
                             <value>Line_Type_Multi__c</value>
                         </valueListItems>
+                        <valueListItems>
+                            <value>Description__c</value>
+                        </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
