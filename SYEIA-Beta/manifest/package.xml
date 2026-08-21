@@ -5,10 +5,6 @@
 		<name>ContentAsset</name>
 	</types>
 <types>
-		<members>Case_Management_Suite</members>
-		<name>CustomApplication</name>
-	</types>
-<types>
 		<members>Address__c.Address_Line_2__c</members>
 		<members>Address__c.Address_Line1__c</members>
 		<members>Address__c.Application_Party_Identification__c</members>
