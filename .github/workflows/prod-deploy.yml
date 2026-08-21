@@ -38,24 +38,32 @@ jobs:
           sudo apt-get update && sudo apt-get install -y jq
           echo "✅ SF CLI and dependencies installed"
 
-      - name: Authenticate to Salesforce Production
-        env:
-          SFDX_AUTH_URL: ${{ secrets.SFDX_AUTH_URL_PROD }}
+      - name: Create JWT key file
         run: |
           set -e
-          if [ -z "$SFDX_AUTH_URL" ]; then
-            echo "❌ SFDX_AUTH_URL_PROD secret not configured"
+          printf '%s' '${{ secrets.SF_PRIVATE_KEY }}' > server.key
+          chmod 600 server.key
+          echo "✅ JWT key file created"
+
+      - name: Authenticate to Salesforce Production
+        run: |
+          set -e
+          if [ -z "${{ secrets.SF_USERNAME_PROD }}" ] || [ -z "${{ secrets.SF_CLIENT_ID_PROD }}" ] || [ -z "${{ secrets.SF_PRIVATE_KEY }}" ]; then
+            echo "❌ Required secrets not configured: SF_USERNAME_PROD, SF_CLIENT_ID_PROD, SF_PRIVATE_KEY"
             exit 1
           fi
-          echo "$SFDX_AUTH_URL" > sfdx_auth_url.txt
-          sf org login sfdx-url \
-            --sfdx-url-file sfdx_auth_url.txt \
+          sf org login jwt \
+            --username "${{ secrets.SF_USERNAME_PROD }}" \
+            --client-id "${{ secrets.SF_CLIENT_ID_PROD }}" \
+            --jwt-key-file server.key \
+            --instance-url https://login.salesforce.com \
             --alias production \
             --set-default
-          rm -f sfdx_auth_url.txt
           # Verify authentication
           sf org list --json | jq '.' > /dev/null
-          echo "✅ Successfully authenticated to Salesforce Production"
+          # Clean up JWT key file
+          rm -f server.key
+          echo "✅ Successfully authenticated to Salesforce Production via JWT"
 
       - name: Validate main deployment
         run: |
@@ -63,7 +71,7 @@ jobs:
           echo "🔍 Validating main deployment package..."
           sf project deploy validate \
             --target-org production \
-            --source-dir force-app \
+            --manifest manifest/package.xml \
             --test-level RunLocalTests \
             --wait 120 \
             --json > deploy_validate_result.json
@@ -111,7 +119,7 @@ jobs:
           echo "🚀 Deploying main package to production..."
           sf project deploy start \
             --target-org production \
-            --source-dir force-app \
+            --manifest manifest/package.xml \
             --test-level RunLocalTests \
             --wait 120 \
             --json > deploy_result.json
@@ -161,3 +169,4 @@ jobs:
             echo "   - No rollback required (validation would have caught errors)"
             exit 1
           fi
+
