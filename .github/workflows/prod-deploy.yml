@@ -11,7 +11,7 @@ permissions:
 jobs:
   validate-and-deploy:
     runs-on: ubuntu-latest
-    environment: production
+    environment: PROD
 
     steps:
       - name: Checkout repository
