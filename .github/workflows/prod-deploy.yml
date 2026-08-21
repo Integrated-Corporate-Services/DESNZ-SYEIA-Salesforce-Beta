@@ -104,13 +104,49 @@ jobs:
       - name: Validate main deployment
         run: |
           set -e
+          set -o pipefail
           echo "🔍 Validating main deployment package..."
+          echo "ℹ️ Working directory: $(pwd)"
+          echo "ℹ️ SF CLI version: $(sf --version)"
+          echo "ℹ️ Checking deployment manifest..."
+          ls -la manifest || true
+          if [ ! -f manifest/package.xml ]; then
+            echo "❌ manifest/package.xml not found"
+            exit 1
+          fi
+
+          set +e
           sf project deploy validate \
             --target-org production \
             --manifest manifest/package.xml \
             --test-level RunLocalTests \
             --wait 120 \
-            --json > deploy_validate_result.json
+            --json > deploy_validate_result.json 2> deploy_validate_error.log
+          VALIDATE_EXIT=$?
+          set -e
+
+          echo "ℹ️ Validate command exit code: ${VALIDATE_EXIT}"
+          if [ -s deploy_validate_error.log ]; then
+            echo "ℹ️ Validate stderr output:"
+            cat deploy_validate_error.log
+          fi
+          if [ ! -s deploy_validate_result.json ]; then
+            echo "❌ deploy_validate_result.json is missing or empty"
+            exit 1
+          fi
+          if ! jq '.' deploy_validate_result.json > /dev/null 2>&1; then
+            echo "❌ deploy_validate_result.json is not valid JSON"
+            cat deploy_validate_result.json
+            exit 1
+          fi
+          echo "ℹ️ Validate JSON summary:"
+          jq '{status, resultStatus: .result.status, errorMessage: .message, details: .result.details}' deploy_validate_result.json
+
+          if [ "$VALIDATE_EXIT" -ne 0 ]; then
+            echo "❌ Validate command returned non-zero exit code"
+            jq '.' deploy_validate_result.json
+            exit 1
+          fi
           
           # Check validation success
           VALIDATION_STATUS=$(jq -r '.status' deploy_validate_result.json)
