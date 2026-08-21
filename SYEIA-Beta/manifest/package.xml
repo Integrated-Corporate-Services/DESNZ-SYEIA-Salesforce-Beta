@@ -1,86 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
-		<members>Application_StatusUpdateQueueable</members>
-		<members>Application_StatusUpdateQueueableTest</members>
-		<members>ApplicationStatusService</members>
-		<members>ApplicationStatusServiceTest</members>
-		<members>BusinessDaysCalculator</members>
-		<members>BusinessDaysCalculatorTest</members>
-		<members>CaseTriggerHandler</members>
-		<members>CaseTriggerHandlerTest</members>
-		<members>CaseTriggerHelper</members>
-		<members>CaseTriggerHelperTest</members>
-		<members>ChangePasswordControllerTest</members>
-		<members>CommunitiesLandingControllerTest</members>
-		<members>CommunitiesLoginControllerTest</members>
-		<members>CommunitiesSelfRegConfirmControllerTest</members>
-		<members>ContentVersionTriggerHandler</members>
-		<members>ContentVersionTriggerHelper</members>
-		<members>ContentVersionTriggerHelperTest</members>
-		<members>DocGen_DocumentGenerationWrapper</members>
-		<members>DocGen_DocumentGenerationWrapperTest</members>
-		<members>DynamicPathController</members>
-		<members>DynamicPathControllerTest</members>
-		<members>FileController</members>
-		<members>FileControllerTest</members>
-		<members>GovUKNotify_Invocable</members>
-		<members>GovUKNotify_InvocableTest</members>
-		<members>GovUKNotify_JWTGenerator</members>
-		<members>GovUKNotify_JWTGenerator</members>
-		<members>GovUKNotify_JWTGeneratorTest</members>
-		<members>GovUKNotify_JWTGeneratorTest</members>
-		<members>GovUKNotify_Service</members>
-		<members>GovUKNotify_ServiceTest</members>
-		<members>GovUKNotifyInvocable</members>
-		<members>GovUKNotifyInvocableTest</members>
-		<members>GovUKNotifyService</members>
-		<members>GovUKNotifyServiceTest</members>
-		<members>InboundForm_ConfigRegistry</members>
-		<members>InboundForm_ConfigRegistryTest</members>
-		<members>InboundForm_JSONParser</members>
-		<members>InboundForm_JSONParserTest</members>
-		<members>InboundForm_MappingConfig</members>
-		<members>InboundForm_MappingConfigTest</members>
-		<members>InboundForm_NWLConfig</members>
-		<members>InboundForm_NWLConfigTest</members>
-		<members>InboundForm_NWLHandler</members>
-		<members>InboundForm_NWLWithdrawalConfig</members>
-		<members>InboundForm_NWLWithdrawalHandler</members>
-		<members>InboundForm_Processor</members>
-		<members>InboundForm_ProcessorTest</members>
-		<members>InboundForm_S37Config</members>
-		<members>InboundForm_S37ConfigTest</members>
-		<members>InboundForm_S37Handler</members>
-		<members>InboundForm_S37HandlerTest</members>
-		<members>InboundForm_S37WithdrawalConfig</members>
-		<members>InboundForm_S37WithdrawalHandler</members>
-		<members>InboundForm_StatusUpdateQueueable</members>
-		<members>InboundForm_StatusUpdateQueueableTest</members>
-		<members>InboundRequestTriggerHandler</members>
-		<members>InboundRequestTriggerHandlerTest</members>
-		<members>InboundRequestTriggerHelper</members>
-		<members>InboundRequestTriggerHelperTest</members>
-		<members>JitHandler</members>
-		<members>JitHandlerTest</members>
-		<members>JWTGenerator</members>
-		<members>JWTGeneratorTest</members>
-		<members>OAuthTokenService</members>
-		<members>TriggerHandler</members>
-		<members>Utilities</members>
-		<name>ApexClass</name>
-	</types>
-<types>
-		<members>CaseTrigger</members>
-		<members>ContentVersionTrigger</members>
-		<members>InboundRequestTrigger</members>
-		<name>ApexTrigger</name>
-	</types>
-<types>
-		<members>*</members>
-		<name>ApprovalProcess</name>
-	</types>
-<types>
 		<members>*</members>
 		<name>ContentAsset</name>
 	</types>
@@ -615,22 +535,6 @@
 		<name>CustomPermission</name>
 	</types>
 <types>
-		<members>Address__c</members>
-		<members>Asset_Information__c</members>
-		<members>Case__c</members>
-		<members>Case_Management_Dashboard</members>
-		<members>Case_Management_Dashboard_NWL</members>
-		<members>Case_Management_Dashboard_TL</members>
-		<members>Consultation__c</members>
-		<members>Document_Approval_Request__c</members>
-		<members>Inbound_Request__c</members>
-		<members>Related_Case__c</members>
-		<members>Route__c</members>
-		<members>Sensitive_Area_Check__c</members>
-		<members>Withdrawal_Request__c</members>
-		<name>CustomTab</name>
-	</types>
-<types>
 		<members>Address_Record_Page</members>
 		<members>Application_Necessary_Wayleaves</members>
 		<members>Application_Section_37</members>
@@ -832,20 +736,6 @@
 		<members>Payment__c</members>
 		<members>Related_Case__c</members>
 		<name>SharingRules</name>
-	</types>
-<types>
-		<members>PSG_Finance</members>
-		<members>UAP_Case_Type_NWL</members>
-		<members>UAP_Case_Type_S37</members>
-		<members>UAP_Case_Type_TL</members>
-		<members>UAP_Persona_Case_Officer</members>
-		<members>UAP_Persona_Decision_Manager</members>
-		<members>UAP_Persona_Legal</members>
-		<members>UAP_Persona_PEDW</members>
-		<members>UAP_Persona_PINS</members>
-		<members>UAP_Persona_Super_User</members>
-		<members>UAP_Profile_System_Administrator</members>
-		<name>UserAccessPolicy</name>
 	</types>
 <types>
 		<members>Case__c.Active_Withdrawal_Request</members>
