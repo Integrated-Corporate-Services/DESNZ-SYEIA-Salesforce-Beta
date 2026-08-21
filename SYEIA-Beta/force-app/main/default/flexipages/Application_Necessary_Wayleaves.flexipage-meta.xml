@@ -387,6 +387,13 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Explanation_Notice_Omits_Line_Removal__c</fieldItem>
                 <identifier>RecordExplanation_Notice_Omits_Line_Removal_cField2</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Notice_Clearly_Refers_to_Line_Removal__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>No</rightValue>
+                    </criteria>
+                </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -397,6 +404,13 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Explanation_Submitted_Beyond_3_Months__c</fieldItem>
                 <identifier>RecordExplanation_Submitted_Beyond_3_Months_cField2</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Submitted_Within_3_Months_Of_Notice__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>No</rightValue>
+                    </criteria>
+                </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -407,6 +421,13 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Term_Length_Requested_with_Explanation__c</fieldItem>
                 <identifier>RecordTerm_Length_Requested_with_Explanation_cField2</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Standard_15_Year_Term__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>No</rightValue>
+                    </criteria>
+                </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <name>Facet-a8fe015e-2391-420b-a834-b4aef8bdd80b</name>
@@ -690,8 +711,32 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
+                <fieldItem>Record.Explanation_Notice_Omits_Line_Removal__c</fieldItem>
+                <identifier>RecordExplanation_Notice_Omits_Line_Removal_cField3</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Notice_Clearly_Refers_to_Line_Removal__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>No</rightValue>
+                    </criteria>
+                </visibilityRule>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Explanation_Submitted_Beyond_3_Months__c</fieldItem>
                 <identifier>RecordExplanation_Submitted_Beyond_3_Months_cField3</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Submitted_Within_3_Months_Of_Notice__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>No</rightValue>
+                    </criteria>
+                </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -702,6 +747,13 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Term_Length_Requested_with_Explanation__c</fieldItem>
                 <identifier>RecordTerm_Length_Requested_with_Explanation_cField3</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Standard_15_Year_Term__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>No</rightValue>
+                    </criteria>
+                </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <name>Facet-aaf32741-708f-4f4e-b7cf-51092fb08ead</name>
