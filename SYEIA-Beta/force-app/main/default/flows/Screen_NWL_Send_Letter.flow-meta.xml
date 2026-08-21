@@ -200,8 +200,8 @@
         </connector>
     </assignments>
     <assignments>
-        <name>Set_Applicant_Email_to_CC_Address</name>
-        <label>Set Applicant Email to CC Address</label>
+        <name>Set_Applicant_Email_to_TO_Address</name>
+        <label>Set Applicant Email to To Address</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
@@ -255,8 +255,8 @@
         </connector>
     </assignments>
     <assignments>
-        <name>Set_Landlord_Email_To_Address_Value</name>
-        <label>Set Landlord Email To Address Value</label>
+        <name>Set_Landlord_Email_CC_Address_Value</name>
+        <label>Set Landlord Email CC Address Value</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
@@ -267,7 +267,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Set_Applicant_Email_to_CC_Address</targetReference>
+            <targetReference>Set_Applicant_Email_to_TO_Address</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -1241,7 +1241,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Set_Landlord_Email_To_Address_Value</targetReference>
+                <targetReference>Set_Landlord_Email_CC_Address_Value</targetReference>
             </connector>
             <label>Londowner and Applicant(Rep) Email exist</label>
         </rules>
