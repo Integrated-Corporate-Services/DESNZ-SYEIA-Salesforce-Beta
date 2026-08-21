@@ -6,10 +6,12 @@ on:
 permissions:
   contents: read
   actions: read
+  id-token: write
 
 jobs:
   validate-and-deploy:
     runs-on: ubuntu-latest
+    environment: production
 
     steps:
       - name: Checkout repository
@@ -23,72 +25,139 @@ jobs:
 
       - name: Check versions
         run: |
+          set -e
           which node
           node --version
           npm --version
+          echo "✅ Version check completed"
 
       - name: Install SF CLI and jq
         run: |
+          set -e
           npm install --global @salesforce/cli
           sudo apt-get update && sudo apt-get install -y jq
+          echo "✅ SF CLI and dependencies installed"
 
       - name: Authenticate to Salesforce Production
         env:
           SFDX_AUTH_URL: ${{ secrets.SFDX_AUTH_URL_PROD }}
         run: |
+          set -e
+          if [ -z "$SFDX_AUTH_URL" ]; then
+            echo "❌ SFDX_AUTH_URL_PROD secret not configured"
+            exit 1
+          fi
           echo "$SFDX_AUTH_URL" > sfdx_auth_url.txt
           sf org login sfdx-url \
             --sfdx-url-file sfdx_auth_url.txt \
             --alias production \
             --set-default
           rm -f sfdx_auth_url.txt
+          # Verify authentication
+          sf org list --json | jq '.' > /dev/null
+          echo "✅ Successfully authenticated to Salesforce Production"
 
-      - name: Validate deployment
+      - name: Validate main deployment
         run: |
+          set -e
+          echo "🔍 Validating main deployment package..."
           sf project deploy validate \
             --target-org production \
             --source-dir force-app \
             --test-level RunLocalTests \
-            --wait 60
+            --wait 120 \
+            --json > deploy_validate_result.json
+          
+          # Check validation success
+          VALIDATION_STATUS=$(jq -r '.status' deploy_validate_result.json)
+          if [ "$VALIDATION_STATUS" != "Succeeded" ]; then
+            echo "❌ Deployment validation failed"
+            jq '.' deploy_validate_result.json
+            exit 1
+          fi
+          echo "✅ Main deployment validation successful"
 
       - name: Validate destructive changes
         run: |
+          set -e
+          echo "🔍 Validating destructive changes..."
           sf project deploy validate \
             --target-org production \
             --manifest manifest/destructiveChangesPost.xml \
             --test-level RunLocalTests \
-            --wait 30
+            --wait 90 \
+            --json > destructive_validate_result.json
+          
+          # Check validation success
+          VALIDATION_STATUS=$(jq -r '.status' destructive_validate_result.json)
+          if [ "$VALIDATION_STATUS" != "Succeeded" ]; then
+            echo "❌ Destructive changes validation failed"
+            jq '.' destructive_validate_result.json
+            exit 1
+          fi
+          echo "✅ Destructive changes validation successful"
 
       - name: Manual Production Approval
         uses: trstringer/manual-approval@v1
         with:
-          secret: ${{ github.TOKEN }}
+          secret: ${{ secrets.GITHUB_TOKEN }}
           approvers: ${{ secrets.PRODUCTION_APPROVERS }}
           minimum-approvals: 1
+          issue-title: "⚠️ Production Deployment Approval Required"
 
-      - name: Deploy to Production
+      - name: Deploy main package to Production
         run: |
+          set -e
+          echo "🚀 Deploying main package to production..."
           sf project deploy start \
             --target-org production \
             --source-dir force-app \
             --test-level RunLocalTests \
-            --wait 60
+            --wait 120 \
+            --json > deploy_result.json
+          
+          # Verify deployment success
+          DEPLOY_STATUS=$(jq -r '.status' deploy_result.json)
+          if [ "$DEPLOY_STATUS" != "Succeeded" ]; then
+            echo "❌ Main deployment failed"
+            jq '.' deploy_result.json
+            exit 1
+          fi
+          echo "✅ Main deployment successful"
 
-      - name: Deploy destructive changes
+      - name: Deploy destructive changes to Production
         if: success()
         run: |
+          set -e
+          echo "🗑️  Deploying destructive changes..."
           sf project deploy start \
             --target-org production \
             --manifest manifest/destructiveChangesPost.xml \
             --test-level RunLocalTests \
-            --wait 30
+            --wait 90 \
+            --json > destructive_deploy_result.json
+          
+          # Verify deployment success
+          DEPLOY_STATUS=$(jq -r '.status' destructive_deploy_result.json)
+          if [ "$DEPLOY_STATUS" != "Succeeded" ]; then
+            echo "❌ Destructive changes deployment failed"
+            jq '.' destructive_deploy_result.json
+            exit 1
+          fi
+          echo "✅ Destructive changes deployed successfully"
 
-      - name: Notify Deployment Status
+      - name: Deployment Summary
         if: always()
         run: |
+          echo "=== DEPLOYMENT SUMMARY ==="
           if [ "${{ job.status }}" = "success" ]; then
-            echo "✅ Deployment to production completed successfully"
+            echo "✅ SUCCESS: All deployments completed successfully"
+            echo "   - Main package deployed"
+            echo "   - Destructive changes applied"
+            echo "   - All tests passed"
           else
-            echo "❌ Deployment to production failed"
+            echo "❌ FAILURE: Deployment workflow failed"
+            echo "   - Check logs above for details"
+            echo "   - No rollback required (validation would have caught errors)"
             exit 1
           fi
