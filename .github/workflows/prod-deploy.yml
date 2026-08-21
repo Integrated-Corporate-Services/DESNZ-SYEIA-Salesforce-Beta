@@ -105,6 +105,12 @@ jobs:
         run: |
           set -e
           set -o pipefail
+          if [ -d ./SYEIA-Beta ]; then
+            cd ./SYEIA-Beta
+            echo "ℹ️ Changed directory to $(pwd)"
+          else
+            echo "ℹ️ Directory ./SYEIA-Beta not found, using $(pwd)"
+          fi
           echo "🔍 Validating main deployment package..."
           echo "ℹ️ Working directory: $(pwd)"
           echo "ℹ️ SF CLI version: $(sf --version)"
@@ -160,6 +166,12 @@ jobs:
       - name: Validate destructive changes
         run: |
           set -e
+          if [ -d ./SYEIA-Beta ]; then
+            cd ./SYEIA-Beta
+            echo "ℹ️ Changed directory to $(pwd)"
+          else
+            echo "ℹ️ Directory ./SYEIA-Beta not found, using $(pwd)"
+          fi
           echo "🔍 Validating destructive changes..."
           sf project deploy validate \
             --target-org production \
@@ -188,6 +200,12 @@ jobs:
       - name: Deploy main package to Production
         run: |
           set -e
+          if [ -d ./SYEIA-Beta ]; then
+            cd ./SYEIA-Beta
+            echo "ℹ️ Changed directory to $(pwd)"
+          else
+            echo "ℹ️ Directory ./SYEIA-Beta not found, using $(pwd)"
+          fi
           echo "🚀 Deploying main package to production..."
           sf project deploy start \
             --target-org production \
@@ -209,6 +227,12 @@ jobs:
         if: success()
         run: |
           set -e
+          if [ -d ./SYEIA-Beta ]; then
+            cd ./SYEIA-Beta
+            echo "ℹ️ Changed directory to $(pwd)"
+          else
+            echo "ℹ️ Directory ./SYEIA-Beta not found, using $(pwd)"
+          fi
           echo "🗑️  Deploying destructive changes..."
           sf project deploy start \
             --target-org production \
