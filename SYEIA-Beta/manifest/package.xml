@@ -214,11 +214,6 @@
 		<members>Case__c.X2nd_Abeyance_Duration_In_Days__c</members>
 		<members>Case__c.X2nd_Abeyance_End_Date__c</members>
 		<members>Case__c.X2nd_Abeyance_Start_Date__c</members>
-		<members>Case_Email_Config__mdt.Active__c</members>
-		<members>Case_Email_Config__mdt.Hours_Threshold__c</members>
-		<members>Case_Email_Config__mdt.Queue_Name__c</members>
-		<members>Case_Email_Config__mdt.Recipient_Email__c</members>
-		<members>Case_Email_Config__mdt.Template_Id__c</members>
 		<members>Case_Note__c.Case__c</members>
 		<members>Case_Note__c.Comment__c</members>
 		<members>Case_Note__c.Consultation__c</members>
@@ -264,8 +259,6 @@
 		<members>Document_Approval_Request__c.Related_Case_Type__c</members>
 		<members>Document_Approval_Request__c.Requesting_User__c</members>
 		<members>Document_Approval_Request__c.Token_Data__c</members>
-		<members>Dynamic_Application_Status_Routing__mdt.Current_Status__c</members>
-		<members>Dynamic_Application_Status_Routing__mdt.Next_Status__c</members>
 		<members>Email_Tracking__c.Document_Type__c</members>
 		<members>Email_Tracking__c.Email_Unique_Key__c</members>
 		<members>Email_Tracking__c.Recipient_Email__c</members>
@@ -274,7 +267,6 @@
 		<members>Email_Tracking__c.Related_Case__c</members>
 		<members>Email_Tracking__c.Sent_By__c</members>
 		<members>Email_Tracking__c.Sent_Date_Time__c</members>
-		<members>Environment_Setting__mdt.Base_URL__c</members>
 		<members>Further_Information_Requested__c.Additional_Information_Required__c</members>
 		<members>Further_Information_Requested__c.Case__c</members>
 		<members>Further_Information_Requested__c.Comment_From_Applicant__c</members>
@@ -287,8 +279,6 @@
 		<members>Further_Information_Requested__c.Reminder_Sent__c</members>
 		<members>Further_Information_Requested__c.Reminders_Sent_Count__c</members>
 		<members>Further_Information_Requested__c.Type_of_Information_Requested__c</members>
-		<members>GOV_UK_Notify_Config__mdt.Issuer_UUID__c</members>
-		<members>GOV_UK_Notify_Config__mdt.Secret_Key__c</members>
 		<members>Inbound_Request__c.Error_Log_Text__c</members>
 		<members>Inbound_Request__c.External_System__c</members>
 		<members>Inbound_Request__c.Payload__c</members>
@@ -416,9 +406,6 @@
 	</types>
 <types>
 		<members>Address__c</members>
-		<members>Application_Deadline_Reminder_Config__mdt</members>
-		<members>Application_Status_Mapping__mdt</members>
-		<members>Application_Status_Path_Setting__mdt</members>
 		<members>Asset_Information__c</members>
 		<members>AWS_EndPoints__c</members>
 		<members>Case__c</members>
@@ -428,20 +415,15 @@
 		<members>Consultation_Organisation__c</members>
 		<members>Consultation_Response__c</members>
 		<members>Document_Approval_Request__c</members>
-		<members>Dynamic_Application_Status_Routing__mdt</members>
 		<members>Email_Tracking__c</members>
         <members>Further_Information_Requested__c</members>
-		<members>GOV_UK_Notify_Config__mdt</members>
 		<members>Inbound_Request__c</members>
 		<members>Land__c</members>
-		<members>Mark_Status_as_Complete_Setting__mdt</members>
 		<members>Negotiation__c</members>
 		<members>Parish__c</members>
 		<members>Party__c</members>
 		<members>Payment__c</members>
 		<members>Post_Consultation__c</members>	
-		<members>Prior_Application_Status_Setting__mdt</members>	
-        <members>Project_Target_Completion_Date_Conifg__mdt</members>
 		<members>Related_Case__c</members>
 		<members>Route__c</members>
 		<members>Route_Point__c</members>
