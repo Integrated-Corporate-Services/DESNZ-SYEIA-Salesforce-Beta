@@ -15,12 +15,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: 22
+          node-version: 24
           check-latest: true
 
       - name: Check versions
@@ -52,17 +52,53 @@ jobs:
             echo "❌ Required secrets not configured: SF_USERNAME_PROD, SF_CLIENT_ID_PROD, SF_PRIVATE_KEY"
             exit 1
           fi
+
+          # Preflight checks to fail fast with clearer error messages.
+          if [ ! -s server.key ]; then
+            echo "❌ server.key is missing or empty"
+            exit 1
+          fi
+          if ! grep -q "BEGIN .*PRIVATE KEY" server.key; then
+            echo "❌ SF_PRIVATE_KEY does not appear to be a valid PEM private key"
+            exit 1
+          fi
+
+          USERNAME="${{ secrets.SF_USERNAME_PROD }}"
+          CLIENT_ID="${{ secrets.SF_CLIENT_ID_PROD }}"
+          echo "ℹ️ Using username: ${USERNAME}"
+          echo "ℹ️ Using client id: ${CLIENT_ID:0:8}...${CLIENT_ID: -4}"
+
+          set +e
           sf org login jwt \
-            --username "${{ secrets.SF_USERNAME_PROD }}" \
-            --client-id "${{ secrets.SF_CLIENT_ID_PROD }}" \
+            --username "$USERNAME" \
+            --client-id "$CLIENT_ID" \
             --jwt-key-file server.key \
             --instance-url https://login.salesforce.com \
             --alias production \
-            --set-default
+            --set-default 2>&1 | tee jwt_login_output.log
+          JWT_EXIT=${PIPESTATUS[0]}
+          set -e
+
+          if [ "$JWT_EXIT" -ne 0 ]; then
+            echo "❌ JWT authentication failed"
+            if grep -qi "user hasn't approved this consumer" jwt_login_output.log; then
+              echo "➡️ Salesforce fix: Pre-authorize this user for the Connected App (Permitted Users: Admin approved users are pre-authorized)."
+            fi
+            if grep -qi "External client app is not installed in this org" jwt_login_output.log; then
+              echo "➡️ Salesforce fix: SF_CLIENT_ID_PROD does not match a Connected App available in this Production org."
+            fi
+            if grep -qi "invalid_grant\|audience is invalid\|aud is invalid" jwt_login_output.log; then
+              echo "➡️ Salesforce fix: Verify --instance-url and ensure the connected app/certificate are for Production login."
+            fi
+            echo "➡️ Verify SF_USERNAME_PROD, SF_CLIENT_ID_PROD, and that the Connected App certificate matches SF_PRIVATE_KEY."
+            rm -f server.key
+            exit 1
+          fi
+
           # Verify authentication
           sf org list --json | jq '.' > /dev/null
           # Clean up JWT key file
-          rm -f server.key
+          rm -f server.key jwt_login_output.log
           echo "✅ Successfully authenticated to Salesforce Production via JWT"
 
       - name: Validate main deployment
