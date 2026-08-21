@@ -365,10 +365,6 @@
 		<members>Route_Point__c.Route_Id__c</members>
 		<members>Route_Point__c.Route_Point_Id__c</members>
 		<members>Route_Point__c.Sequence_Number__c</members>
-		<members>SalesforceSettings__c.client_id__c</members>
-		<members>SalesforceSettings__c.client_secret__c</members>
-		<members>SalesforceSettings__c.Endpoint_Url__c</members>
-		<members>SalesforceSettings__c.grant_type__c</members>
 		<members>Sensitive_Area_Check__c.Case__c</members>
 		<members>Sensitive_Area_Check__c.Consultation__c</members>
 		<members>Sensitive_Area_Check__c.Sensitive_Area_Check_Name__c</members>
@@ -427,7 +423,6 @@
 		<members>Related_Case__c</members>
 		<members>Route__c</members>
 		<members>Route_Point__c</members>
-		<members>SalesforceSettings__c</members>
 		<members>Sensitive_Area_Check__c</members>
         <members>Sensitive_Area_Review__c</members>
 		<members>Withdrawal_Request__c</members>
@@ -452,10 +447,6 @@
 		<members>PG_Section_37</members>
 		<members>PG_Tree_Lopping</members>
 		<name>Group</name>
-	</types>
-<types>
-		<members>*</members>
-		<name>LightningComponentBundle</name>
 	</types>
 <types>
 		<members>Case__c.All_Assigned_Cases</members>
@@ -494,10 +485,6 @@
 		<members>Queue_S37_Cases</members>
 		<members>Queue_TL_Cases</members>
 		<name>Queue</name>
-	</types>
-<types>
-		<members>*</members>
-		<name>QuickAction</name>
 	</types>
 <types>
 		<members>Case__c.Necessary_Wayleaves</members>
