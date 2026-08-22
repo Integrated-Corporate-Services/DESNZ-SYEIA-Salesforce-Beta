@@ -5,6 +5,10 @@
 		<name>ContentAsset</name>
 	</types>
 	<types>
+		<members>Sensitive_Area_Review__c.Application_Id__c</members>
+		<name>CustomField</name>
+	</types>
+	<types>
 		<members>Environment_Setting.EIP_Portal_Link</members>
 		<name>CustomMetadata</name>
 	</types>
