@@ -5,6 +5,10 @@
 		<name>ContentAsset</name>
 	</types>
 	<types>
+		<members>Environment_Setting.EIP_Portal_Link</members>
+		<name>CustomMetadata</name>
+	</types>
+	<types>
 		<members>Case_Assigned_to_Case_Officer_Notification</members>
 		<members>Consent_Letter_Approved</members>
 		<members>FIR_Response_Notification</members>

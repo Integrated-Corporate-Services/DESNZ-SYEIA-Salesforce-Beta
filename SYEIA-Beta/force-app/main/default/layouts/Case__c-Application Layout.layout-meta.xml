@@ -350,7 +350,6 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Sensitive_Area_Review_Id__c</fields>
         <fields>Application_Id__c</fields>
         <fields>Asset_Presence_Option_Id__c</fields>
         <fields>Route_Id__c</fields>
