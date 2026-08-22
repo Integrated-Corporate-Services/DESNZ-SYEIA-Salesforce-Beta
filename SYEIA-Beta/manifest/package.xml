@@ -449,21 +449,6 @@
 		<name>Group</name>
 	</types>
 <types>
-		<members>Case__c.All_Assigned_Cases</members>
-		<members>Case__c.All_Assigned_Cases_NWL</members>
-		<members>Case__c.All_Assigned_Cases_TL</members>
-		<members>Case__c.New_Cases</members>
-		<members>Case__c.New_Cases_Necessary_Wayleaves_Case</members>
-		<members>Case__c.New_Cases_Tree_Lopping_Case</members>
-		<members>Case__c.Your_Cases</members>
-		<members>Case__c.Your_Cases_NWL</members>
-		<members>Case__c.Your_Cases_TL</members>
-		<members>Inbound_Request__c.All</members>
-		<members>Inbound_Request__c.This_Week_Inbound_Requests</members>
-		<members>Inbound_Request__c.Today_Inbound_Requests</members>
-		<name>ListView</name>
-	</types>
-<types>
 		<members>*</members>
 		<name>NamedCredential</name>
 	</types>
