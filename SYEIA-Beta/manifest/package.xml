@@ -47,6 +47,7 @@
 		<members>Sensitive_Area_Check__c</members>
         <members>Sensitive_Area_Review__c</members>
 		<members>Withdrawal_Request__c</members>
+		<members>Environment_Setting__mdt</members>
 		<name>CustomObject</name>
 	</types>
 <types>
@@ -113,6 +114,33 @@
 		<members>Case__c.CTWR_Letter_Date_Is_Required</members>
 		<members>Case__c.Withdrawn_Letter_Date_Is_Required</members>
 		<name>ValidationRule</name>
+	</types>
+	<types>
+		<members>Address__c-Address Layout</members>
+		<members>Asset_Information__c-Asset Information Layout</members>
+		<members>Case__c-Application Layout</members>
+		<members>Case_Email_Config__mdt-Case Email Config Layout</members>
+		<members>Case_Note__c-Case Note Layout</members>
+		<members>Case_Party__c-Case Party Layout</members>
+		<members>Consultation__c-Consultation Layout</members>
+		<members>Consultation_Organisation__c-Consultation Organisation Layout</members>
+		<members>Consultation_Response__c-Consultation Response Layout</members>
+		<members>Document_Approval_Request__c-Document Layout</members>
+		<members>Email_Tracking__c-Email Tracking Layout</members>
+		<members>Environment_Setting__mdt-Environment Setting Layout</members>
+		<members>Further_Information_Requested__c-Further Information Requested Layout</members>
+		<members>Inbound_Request__c-Inbound Request Layout</members>
+		<members>Parish__c-Parish Layout</members>
+		<members>Party__c-Party Layout</members>
+		<members>Payment__c-Payment Layout</members>
+		<members>Related_Case__c-Related Application Layout</members>
+		<members>Route__c-Route Layout</members>
+		<members>Route_Point__c-Route Grid Reference Layout</members>
+		<members>Sensitive_Area_Check__c-Sensitive Area Check Layout</members>
+		<members>Sensitive_Area_Review__c-Sensitive Area Review Layout</members>
+		<members>User-User Layout</members>
+		<members>Withdrawal_Request__c-Withdrawal Request Layout</members>
+		<name>Layout</name>
 	</types>
 	<version>65.0</version>
 </Package>
