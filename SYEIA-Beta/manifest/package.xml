@@ -104,6 +104,10 @@
 		<name>Layout</name>
 	</types>
 	<types>
+		<members>alertNotification</members>
+		<name>LightningComponentBundle</name>
+	</types>
+	<types>
 		<members>*</members>
 		<name>NamedCredential</name>
 	</types>
@@ -120,7 +124,6 @@
 		<members>Queue_NWL_Cases</members>
 		<members>Queue_S37_Cases</members>
 		<members>Queue_TL_Cases</members>
-		<members>New_Cases</members>
 		<name>Queue</name>
 	</types>
 	<types>
