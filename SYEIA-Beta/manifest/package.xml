@@ -70,10 +70,6 @@
 		<name>FlexiPage</name>
 	</types>
 	<types>
-		<members>Application_Status</members>
-		<name>GlobalValueSet</name>
-	</types>
-	<types>
 		<members>PG_Case_Officer</members>
 		<members>PG_Decision_Manager</members>
 		<members>PG_External_PEDW</members>
