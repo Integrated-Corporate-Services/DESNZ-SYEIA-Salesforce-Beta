@@ -688,7 +688,6 @@
 		<name>FlexiPage</name>
 	</types>
 <types>
-		<members>Case_After_Save</members>
 		<members>Case_Before_Save</members>
 		<members>Case_Unassigned_Case_Notifications</members>
 		<members>Consultation_Before_Save</members>

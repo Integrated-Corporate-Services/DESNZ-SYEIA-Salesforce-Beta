@@ -59,19 +59,4 @@
         </criteriaItems>
         <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
     </sharingCriteriaRules>
-    <sharingCriteriaRules>
-        <fullName>Test_Dev_only</fullName>
-        <accessLevel>Edit</accessLevel>
-        <description>Acknowledged,In-Progress,Consultation,Requested More Information,Decision Issued,Rejected,Withdrawal Requested,Withdrawn,Archived</description>
-        <label>Test Dev only</label>
-        <sharedTo>
-            <group>PG_System_Admin</group>
-        </sharedTo>
-        <criteriaItems>
-            <field>Status__c</field>
-            <operation>equals</operation>
-            <value>In-Progress,Application Received,Further Information Requested,Rejected,Decision Issued,Withdrawal Requested,Withdrawn,Archived</value>
-        </criteriaItems>
-        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
-    </sharingCriteriaRules>
 </SharingRules>
