@@ -593,6 +593,7 @@
 		<members>Consultation_Response__c</members>
 		<members>Document_Approval_Request__c</members>
 		<members>Dynamic_Application_Status_Routing__mdt</members>
+		<members>Case_Email_Config__mdt</members>
 		<members>Email_Tracking__c</members>
         <members>Further_Information_Requested__c</members>
 		<members>GOV_UK_Notify_Config__mdt</members>
