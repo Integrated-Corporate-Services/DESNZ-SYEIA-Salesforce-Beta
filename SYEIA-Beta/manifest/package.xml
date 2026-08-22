@@ -834,7 +834,11 @@
 		<name>Queue</name>
 	</types>
 <types>
-		<members>*</members>
+		<members>Case_Note__c.Lock</members>
+		<members>Case__c.Case_Send_Email</members>
+		<members>Case__c.Change_Owner</members>
+		<members>Case__c.Generate_Document</members>
+		<members>Case__c.Send_NWL_Letter</members>
 		<name>QuickAction</name>
 	</types>
 <types>
