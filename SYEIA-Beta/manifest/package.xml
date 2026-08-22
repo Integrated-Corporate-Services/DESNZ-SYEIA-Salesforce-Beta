@@ -190,7 +190,6 @@
 		<members>Case__c.Type_of_Info_Requested_From_DNO__c</members>
 		<members>Case__c.Type_Of_NWL_That_Existed__c</members>
 		<members>Case__c.Type_of_Project__c</members>
-		<members>Case__c.UK_Energy_Portal_Link__c</members>
 		<members>Case__c.Upcoming_Task__c</members>
 		<members>Case__c.Vegetation_Clearance_Required__c</members>
 		<members>Case__c.Vehicles_Required_On_Site__c</members>
