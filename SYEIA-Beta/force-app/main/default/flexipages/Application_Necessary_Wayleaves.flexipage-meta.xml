@@ -3798,8 +3798,6 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <itemInstances>
-        </itemInstances>
-        <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
                     <name>columns</name>
