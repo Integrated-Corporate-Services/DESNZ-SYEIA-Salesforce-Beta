@@ -3,7 +3,7 @@
     <sharingCriteriaRules>
         <fullName>Share_on_Status_To_CO</fullName>
         <accessLevel>Read</accessLevel>
-        <description>Share Case Read-only access To Case Officer When status are Withdrawn, Acknowledged, In-Progress, Completed</description>
+        <description>Share Case Read-only access To Case Officer When status are Withdrawn, Acknowledged, In-Progress, Decision Issued</description>
         <label>Share on Status To CO</label>
         <sharedTo>
             <group>PG_Case_Officer</group>
@@ -11,14 +11,14 @@
         <criteriaItems>
             <field>Status__c</field>
             <operation>equals</operation>
-            <value>Withdrawn,In-Progress,Application Received,Completed</value>
+            <value>Withdrawn,In-Progress,Application Received,Decision Issued</value>
         </criteriaItems>
         <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
     </sharingCriteriaRules>
     <sharingCriteriaRules>
         <fullName>Share_on_Status_To_DM</fullName>
         <accessLevel>Edit</accessLevel>
-        <description>Share Case record To Decision Managers When Status is Withdrawn, Acknowledged, In-Progress, Completed</description>
+        <description>Share Case record To Decision Managers When Status is Withdrawn, Acknowledged, In-Progress, Decision Issued</description>
         <label>Share on Status To DM</label>
         <sharedTo>
             <group>PG_Decision_Manager</group>
@@ -26,7 +26,7 @@
         <criteriaItems>
             <field>Status__c</field>
             <operation>equals</operation>
-            <value>Withdrawn,In-Progress,Application Received,Completed</value>
+            <value>Withdrawn,In-Progress,Application Received,Decision Issued</value>
         </criteriaItems>
         <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
     </sharingCriteriaRules>
@@ -56,6 +56,21 @@
             <field>Status__c</field>
             <operation>equals</operation>
             <value>Completed,In-Progress</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Test_Dev_only</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Acknowledged,In-Progress,Consultation,Requested More Information,Decision Issued,Rejected,Withdrawal Requested,Withdrawn,Archived</description>
+        <label>Test Dev only</label>
+        <sharedTo>
+            <group>PG_System_Admin</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In-Progress,Application Received,Further Information Requested,Rejected,Decision Issued,Withdrawal Requested,Withdrawn,Archived</value>
         </criteriaItems>
         <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
     </sharingCriteriaRules>
