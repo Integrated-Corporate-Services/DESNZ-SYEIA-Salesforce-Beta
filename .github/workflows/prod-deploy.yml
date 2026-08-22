@@ -163,32 +163,6 @@ jobs:
           fi
           echo "✅ Main deployment validation successful"
 
-      - name: Validate destructive changes
-        run: |
-          set -e
-          if [ -d ./SYEIA-Beta ]; then
-            cd ./SYEIA-Beta
-            echo "ℹ️ Changed directory to $(pwd)"
-          else
-            echo "ℹ️ Directory ./SYEIA-Beta not found, using $(pwd)"
-          fi
-          echo "🔍 Validating destructive changes..."
-          sf project deploy validate \
-            --target-org production \
-            --manifest manifest/destructiveChangesPost.xml \
-            --test-level RunLocalTests \
-            --wait 90 \
-            --json > destructive_validate_result.json
-          
-          # Check validation success
-          VALIDATION_STATUS=$(jq -r '.status' destructive_validate_result.json)
-          if [ "$VALIDATION_STATUS" != "Succeeded" ]; then
-            echo "❌ Destructive changes validation failed"
-            jq '.' destructive_validate_result.json
-            exit 1
-          fi
-          echo "✅ Destructive changes validation successful"
-
       - name: Manual Production Approval
         uses: trstringer/manual-approval@v1
         with:
@@ -223,32 +197,6 @@ jobs:
           fi
           echo "✅ Main deployment successful"
 
-      - name: Deploy destructive changes to Production
-        if: success()
-        run: |
-          set -e
-          if [ -d ./SYEIA-Beta ]; then
-            cd ./SYEIA-Beta
-            echo "ℹ️ Changed directory to $(pwd)"
-          else
-            echo "ℹ️ Directory ./SYEIA-Beta not found, using $(pwd)"
-          fi
-          echo "🗑️  Deploying destructive changes..."
-          sf project deploy start \
-            --target-org production \
-            --manifest manifest/destructiveChangesPost.xml \
-            --test-level RunLocalTests \
-            --wait 90 \
-            --json > destructive_deploy_result.json
-          
-          # Verify deployment success
-          DEPLOY_STATUS=$(jq -r '.status' destructive_deploy_result.json)
-          if [ "$DEPLOY_STATUS" != "Succeeded" ]; then
-            echo "❌ Destructive changes deployment failed"
-            jq '.' destructive_deploy_result.json
-            exit 1
-          fi
-          echo "✅ Destructive changes deployed successfully"
 
       - name: Deployment Summary
         if: always()
