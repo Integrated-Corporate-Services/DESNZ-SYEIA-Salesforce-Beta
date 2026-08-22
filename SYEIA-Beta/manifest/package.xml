@@ -1,66 +1,73 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
 		<members>*</members>
 		<name>ContentAsset</name>
 	</types>
-<types>
-		<members>*</members>
-		<name>CustomLabel</name>
-	</types>
-<types>
+	<types>
 		<members>Case_Assigned_to_Case_Officer_Notification</members>
 		<members>Consent_Letter_Approved</members>
 		<members>FIR_Response_Notification</members>
+		<members>NWL_Withdrawal_Request_Notification</members>
 		<members>New_NWL_Case_Notification</members>
 		<members>New_S37_Case_Notification</members>
 		<members>Notify_File_Approvers</members>
 		<members>Section_37_Deadline_Reminder</members>
 		<members>Section_37_Withdrawal_Request_Notification</members>
-		<members>NWL_Withdrawal_Request_Notification</members>
 		<members>Unassigned_Case_Notifications</members>
 		<name>CustomNotificationType</name>
 	</types>
-<types>
+	<types>
+		<members>AWS_EndPoints__c</members>
 		<members>Address__c</members>
 		<members>Asset_Information__c</members>
-		<members>AWS_EndPoints__c</members>
-		<members>Case__c</members>
 		<members>Case_Note__c</members>
 		<members>Case_Party__c</members>
-		<members>Consultation__c</members>
+		<members>Case__c</members>
 		<members>Consultation_Organisation__c</members>
 		<members>Consultation_Response__c</members>
+		<members>Consultation__c</members>
 		<members>Document_Approval_Request__c</members>
 		<members>Email_Tracking__c</members>
-        <members>Further_Information_Requested__c</members>
+		<members>Environment_Setting__mdt</members>
+		<members>Further_Information_Requested__c</members>
 		<members>Inbound_Request__c</members>
 		<members>Land__c</members>
 		<members>Negotiation__c</members>
 		<members>Parish__c</members>
 		<members>Party__c</members>
 		<members>Payment__c</members>
-		<members>Post_Consultation__c</members>	
+		<members>Post_Consultation__c</members>
 		<members>Related_Case__c</members>
-		<members>Route__c</members>
 		<members>Route_Point__c</members>
+		<members>Route__c</members>
 		<members>Sensitive_Area_Check__c</members>
-        <members>Sensitive_Area_Review__c</members>
+		<members>Sensitive_Area_Review__c</members>
 		<members>Withdrawal_Request__c</members>
-		<members>Environment_Setting__mdt</members>
 		<name>CustomObject</name>
 	</types>
-<types>
+	<types>
 		<members>*</members>
 		<name>CustomPermission</name>
 	</types>
-<types>
-        <members>Application_Status</members>
-        <name>GlobalValueSet</name>
-    </types>
-<types>
+	<types>
+		<members>Address_Record_Page</members>
+		<members>Case_Note_Record_Page</members>
+		<members>Consultation_Response_Record_Page</members>
+		<members>Land_Record_Page</members>
+		<members>Route_Record_Page</members>
+		<members>Sensitive_Area_Check_Record_Page</members>
+		<members>Withdrawal_Request_Record_Page</members>
+		<name>FlexiPage</name>
+	</types>
+	<types>
+		<members>Application_Status</members>
+		<members>Application_Type</members>
+		<name>GlobalValueSet</name>
+	</types>
+	<types>
 		<members>PG_Case_Officer</members>
-        <members>PG_Decision_Manager</members>
+		<members>PG_Decision_Manager</members>
 		<members>PG_External_PEDW</members>
 		<members>PG_External_PINS</members>
 		<members>PG_Internal_Finance</members>
@@ -70,59 +77,14 @@
 		<members>PG_Tree_Lopping</members>
 		<name>Group</name>
 	</types>
-<types>
-		<members>*</members>
-		<name>NamedCredential</name>
-	</types>
-<types>
-		<members>Consultation_Internal</members>
-		<members>Document_Approval_Path</members>
-		<name>PathAssistant</name>
-	</types>
-<types>
-		<members>New_Cases_Necessary_Wayleaves</members>
-		<members>New_Cases_S37</members>
-		<members>New_Cases_Tree_Lopping</members>
-		<members>Queue_NWL_Cases</members>
-		<members>Queue_S37_Cases</members>
-		<members>Queue_TL_Cases</members>
-		<name>Queue</name>
-	</types>
-<types>
-		<members>*</members>
-		<name>Role</name>
-	</types>
-<types>
-		<members>Case__c.Active_Withdrawal_Request</members>
-		<members>Case__c.Lock_Case_When_Archived</members>
-		<members>Case__c.Lock_Completed_Case</members>
-		<members>Case__c.Lock_Rejected_Case</members>
-		<members>Case__c.Lock_Submited_For_Approval_CaseOfficer</members>		
-		<members>Case__c.Lock_Withdrawn_Case</members>
-		<members>Case__c.Restrict_Admin_Edit_On_Status</members>
-		<members>Case__c.Validate_DNO_Party_Type</members>
-		<members>Case__c.Decision_Letter_Sent_Date_is_Mandatory</members>
-		<members>Case__c.Agreed_With_Inspector_Recom_is_Mandatory</members>
-		<members>Case__c.Time_To_Decision_After_Inspect_Mandatory</members>
-		<members>Case__c.Total_Time_Exc_Abeyance_is_Mandatory</members>
-		<members>Case__c.Withdrawal_Date_Time_Is_Required</members>
-		<members>Case__c.Invalid_Letter_Date_Is_Required</members>
-		<members>Case__c.Assessment_Date_Is_Required</members>
-		<members>Case__c.CTWR_Res_From_Applicant_Date_Is_Required</members>
-		<members>Case__c.CTWR_Res_From_Landowner_Date_Is_Required</members>
-		<members>Case__c.CTWR_Deadline_Is_Required</members>
-		<members>Case__c.CTWR_Letter_Date_Is_Required</members>
-		<members>Case__c.Withdrawn_Letter_Date_Is_Required</members>
-		<name>ValidationRule</name>
-	</types>
 	<types>
 		<members>Address__c-Address Layout</members>
 		<members>Asset_Information__c-Asset Information Layout</members>
-		<members>Case__c-Application Layout</members>
 		<members>Case_Party__c-Case Party Layout</members>
-		<members>Consultation__c-Consultation Layout</members>
+		<members>Case__c-Application Layout</members>
 		<members>Consultation_Organisation__c-Consultation Organisation Layout</members>
 		<members>Consultation_Response__c-Consultation Response Layout</members>
+		<members>Consultation__c-Consultation Layout</members>
 		<members>Document_Approval_Request__c-Document Layout</members>
 		<members>Email_Tracking__c-Email Tracking Layout</members>
 		<members>Environment_Setting__mdt-Environment Setting Layout</members>
@@ -132,8 +94,8 @@
 		<members>Party__c-Party Layout</members>
 		<members>Payment__c-Payment Layout</members>
 		<members>Related_Case__c-Related Application Layout</members>
-		<members>Route__c-Route Layout</members>
 		<members>Route_Point__c-Route Grid Reference Layout</members>
+		<members>Route__c-Route Layout</members>
 		<members>Sensitive_Area_Check__c-Sensitive Area Check Layout</members>
 		<members>Sensitive_Area_Review__c-Sensitive Area Review Layout</members>
 		<members>User-User Layout</members>
@@ -141,14 +103,50 @@
 		<name>Layout</name>
 	</types>
 	<types>
+		<members>*</members>
+		<name>NamedCredential</name>
+	</types>
+	<types>
+		<members>Consultation_Internal</members>
+		<members>Document_Approval_Path</members>
+		<name>PathAssistant</name>
+	</types>
+	<types>
+		<members>Document_Approvers</members>
 		<members>New_Cases_Necessary_Wayleaves</members>
 		<members>New_Cases_S37</members>
 		<members>New_Cases_Tree_Lopping</members>
 		<members>Queue_NWL_Cases</members>
 		<members>Queue_S37_Cases</members>
 		<members>Queue_TL_Cases</members>
-		<members>Document_Approvers</members>
 		<name>Queue</name>
 	</types>
-	<version>65.0</version>
+	<types>
+		<members>*</members>
+		<name>Role</name>
+	</types>
+	<types>
+		<members>Case__c.Active_Withdrawal_Request</members>
+		<members>Case__c.Agreed_With_Inspector_Recom_is_Mandatory</members>
+		<members>Case__c.Assessment_Date_Is_Required</members>
+		<members>Case__c.CTWR_Deadline_Is_Required</members>
+		<members>Case__c.CTWR_Letter_Date_Is_Required</members>
+		<members>Case__c.CTWR_Res_From_Applicant_Date_Is_Required</members>
+		<members>Case__c.CTWR_Res_From_Landowner_Date_Is_Required</members>
+		<members>Case__c.Decision_Letter_Sent_Date_is_Mandatory</members>
+		<members>Case__c.Invalid_Letter_Date_Is_Required</members>
+		<members>Case__c.Lock_Case_When_Archived</members>
+		<members>Case__c.Lock_Completed_Case</members>
+		<members>Case__c.Lock_Rejected_Case</members>
+		<members>Case__c.Lock_Submited_For_Approval_CaseOfficer</members>
+		<members>Case__c.Lock_Withdrawn_Case</members>
+		<members>Case__c.Restrict_Admin_Edit_On_Status</members>
+		<members>Case__c.Time_To_Decision_After_Inspect_Mandatory</members>
+		<members>Case__c.Total_Time_Exc_Abeyance_is_Mandatory</members>
+		<members>Case__c.Validate_DNO_Party_Type</members>
+		<members>Case__c.Withdrawal_Date_Time_Is_Required</members>
+		<members>Case__c.Withdrawn_Letter_Date_Is_Required</members>
+		<name>ValidationRule</name>
+	</types>
+	<version>67.0</version>
 </Package>
