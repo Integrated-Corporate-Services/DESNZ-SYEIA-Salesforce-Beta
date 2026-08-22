@@ -458,11 +458,6 @@
 		<name>PathAssistant</name>
 	</types>
 <types>
-		<members>Admin</members>
-		<members>Base Employee</members>
-		<name>Profile</name>
-	</types>
-<types>
 		<members>New_Cases_Necessary_Wayleaves</members>
 		<members>New_Cases_S37</members>
 		<members>New_Cases_Tree_Lopping</members>
