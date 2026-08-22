@@ -838,6 +838,7 @@
 		<members>Case__c.Change_Owner</members>
 		<members>Case__c.Generate_Document</members>
 		<members>Case__c.Send_NWL_Letter</members>
+		<members>Case__c.Reject_Case</members>
 		<name>QuickAction</name>
 	</types>
 <types>
