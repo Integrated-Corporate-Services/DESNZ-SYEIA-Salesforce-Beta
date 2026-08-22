@@ -80,6 +80,10 @@
 		<members>*</members>
 		<name>ApprovalProcess</name>
 	</types>
+	<types>
+		<members>Document_Approval_Request__c</members>
+		<name>Workflow</name>
+	</types>
 <types>
 		<members>*</members>
 		<name>ContentAsset</name>
