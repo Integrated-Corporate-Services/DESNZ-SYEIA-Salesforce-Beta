@@ -119,7 +119,6 @@
 		<members>Address__c-Address Layout</members>
 		<members>Asset_Information__c-Asset Information Layout</members>
 		<members>Case__c-Application Layout</members>
-		<members>Case_Note__c-Case Note Layout</members>
 		<members>Case_Party__c-Case Party Layout</members>
 		<members>Consultation__c-Consultation Layout</members>
 		<members>Consultation_Organisation__c-Consultation Organisation Layout</members>
