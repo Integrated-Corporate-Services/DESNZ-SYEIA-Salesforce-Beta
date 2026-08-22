@@ -71,7 +71,6 @@
 	</types>
 	<types>
 		<members>Application_Status</members>
-		<members>Application_Type</members>
 		<name>GlobalValueSet</name>
 	</types>
 	<types>
