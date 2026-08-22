@@ -1233,11 +1233,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Consultation__c.Consultee_Contact_Name__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Consultation__c.Consultee_Organisation_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
