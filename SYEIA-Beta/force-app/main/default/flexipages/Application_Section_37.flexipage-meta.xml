@@ -2413,19 +2413,25 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListDisplayType</name>
-                    <value>CARD</value>
+                    <value>ADVGRID</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListFieldAliases</name>
                     <valueList>
                         <valueListItems>
-                            <value>NAME</value>
+                            <value>Line_Type_Multi__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Line_Length__c</value>
                         </valueListItems>
                         <valueListItems>
                             <value>Line_Voltage__c</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>Line_Type_Multi__c</value>
+                            <value>TORI_NOI_Code__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Standard_Specification_Reference_Number__c</value>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
