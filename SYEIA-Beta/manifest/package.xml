@@ -82,7 +82,6 @@
 	</types>
 	<types>
 		<members>Document_Approval_Request__c</members>
-		<members>Case__c</members>
 		<name>Workflow</name>
 	</types>
 <types>
