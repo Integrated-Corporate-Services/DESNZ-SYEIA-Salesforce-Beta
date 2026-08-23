@@ -168,6 +168,32 @@
                             </visibilityRule>
                         </valueListItems>
                         <valueListItems>
+                            <value>Case__c.Create_Internal_Consultation</value>
+                            <visibilityRule>
+                                <criteria>
+                                    <leftValue>{!Record.Status__c}</leftValue>
+                                    <operator>EQUAL</operator>
+                                    <rightValue>In-Progress</rightValue>
+                                </criteria>
+                            </visibilityRule>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Case__c.Send_S37_Letter</value>
+                            <visibilityRule>
+                                <booleanFilter>1 OR 2</booleanFilter>
+                                <criteria>
+                                    <leftValue>{!$User.Persona__c}</leftValue>
+                                    <operator>EQUAL</operator>
+                                    <rightValue>Decision Manager</rightValue>
+                                </criteria>
+                                <criteria>
+                                    <leftValue>{!$User.Profile.Name}</leftValue>
+                                    <operator>CONTAINS</operator>
+                                    <rightValue>Admin</rightValue>
+                                </criteria>
+                            </visibilityRule>
+                        </valueListItems>
+                        <valueListItems>
                             <value>Share</value>
                         </valueListItems>
                         <valueListItems>
@@ -2063,6 +2089,31 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
+                    <name>flowArguments</name>
+                    <value>[{&quot;label&quot;:&quot;varCaseRecordId&quot;,&quot;dataType&quot;:&quot;String&quot;,&quot;supportsRecordId&quot;:true,&quot;value&quot;:&quot;{!Record.Id}&quot;}]</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>flowLayout</name>
+                    <value>oneColumn</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>flowName</name>
+                    <value>Screen_Create_New_Further_Information_Requested</value>
+                </componentInstanceProperties>
+                <componentName>flowruntime:interview</componentName>
+                <identifier>flowruntime_interview2</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Status__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Further Information Requested</rightValue>
+                    </criteria>
+                </visibilityRule>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
                     <name>columns</name>
                     <value>Facet-9d7fd80a-dac8-454e-8c4d-a676a4423bc3</value>
                 </componentInstanceProperties>
@@ -2362,25 +2413,19 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListDisplayType</name>
-                    <value>ADVGRID</value>
+                    <value>CARD</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListFieldAliases</name>
                     <valueList>
                         <valueListItems>
-                            <value>Line_Type_Multi__c</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>Line_Length__c</value>
+                            <value>NAME</value>
                         </valueListItems>
                         <valueListItems>
                             <value>Line_Voltage__c</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>TORI_NOI_Code__c</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>Standard_Specification_Reference_Number__c</value>
+                            <value>Line_Type_Multi__c</value>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
