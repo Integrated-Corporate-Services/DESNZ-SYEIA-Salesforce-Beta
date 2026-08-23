@@ -347,7 +347,7 @@
 		<members>Consultation_Response__c.Conditions_Not_Accepted_Reason__c</members>
 		<members>Consultation_Response__c.Consultation__c</members>
 		<members>Consultation_Response__c.Consultation_Conditions_Accepted__c</members>
-		<members>Consultation_Response__c.Consultation_Recommendations_Accepted__Environment_Setting__mdt.c</members>
+		<members>Consultation_Response__c.Consultation_Recommendations_Accepted__c</members>
 		<members>Consultation_Response__c.Consultation_Response_Id__c</members>
 		<members>Consultation_Response__c.Email_of_Responder__c</members>
 		<members>Consultation_Response__c.Full_Name_of_Responder__c</members>
@@ -365,7 +365,7 @@
 		<members>Document_Approval_Request__c.File_Id__c</members>
 		<members>Document_Approval_Request__c.Related_Case_Type__c</members>
 		<members>Document_Approval_Request__c.Requesting_User__c</members>
-		<members>Document_Approval_Request__c.Token_Data__c</members>Environment_Setting__mdt.
+		<members>Document_Approval_Request__c.Token_Data__c</members>
 		<members>Dynamic_Application_Status_Routing__mdt.Current_Status__c</members>
 		<members>Dynamic_Application_Status_Routing__mdt.Next_Status__c</members>
 		<members>Email_Tracking__c.Document_Type__c</members>
@@ -834,7 +834,7 @@
 	</types>
 <types>
 		<members>Case_Note__c.Lock</members>
-		<members>Case__c.Case_Send_Email</members>
+		<members>SendEmail</members>
 		<members>Case__c.Change_Owner</members>
 		<members>Case__c.Generate_Document</members>
 		<members>Case__c.Send_NWL_Letter</members>
