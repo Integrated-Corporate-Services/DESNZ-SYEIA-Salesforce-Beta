@@ -42,7 +42,7 @@
             <name>senderAddress</name>
             <value>
                 <inputConfiguratorMode>Custom</inputConfiguratorMode>
-                <stringValue>necessarywayleaves@energysecurity.gov.uk</stringValue>
+                <stringValue>joshua.eze@ics.gov.uk</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -200,15 +200,15 @@
         </connector>
     </assignments>
     <assignments>
-        <name>Set_Applicant_Email_to_CC_Address</name>
-        <label>Set Applicant Email to CC Address</label>
+        <name>Assign_LandOwner_email_address</name>
+        <label>Assign LandOwner email address</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>var_defaultToAddressValue</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Get_Case.DNO__r.Email__c</elementReference>
+                <elementReference>Get_Case.Landowner__r.Email__c</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -216,15 +216,15 @@
         </connector>
     </assignments>
     <assignments>
-        <name>Set_Applicant_Email_to_To_Address_Value</name>
-        <label>Set Applicant Email to To Address Value</label>
+        <name>Assign_Objector_Email_Address_as_LandOwner_email</name>
+        <label>Assign Objector Email Address as LandOwner email</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>var_defaultToAddressValue</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Get_Case.DNO__r.Representative__r.Email__c</elementReference>
+                <elementReference>Get_Case.Objector__r.Email__c</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -255,31 +255,22 @@
         </connector>
     </assignments>
     <assignments>
-        <name>Set_Landlord_Email_To_Address_Value</name>
-        <label>Set Landlord Email To Address Value</label>
+        <name>Set_Landlord_Email_to_Representative_Email_Address_Value</name>
+        <label>Set Landlord Email to Representative Email Address Value</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>var_defaultCCAddress</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Find_Landowner_Party.Email__c</elementReference>
+                <elementReference>Get_Case.Landowner__r.Email__c</elementReference>
             </value>
         </assignmentItems>
-        <connector>
-            <targetReference>Set_Applicant_Email_to_CC_Address</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
-        <name>Set_Landlord_Email_to_To_Address_Value</name>
-        <label>Set Landlord Email to To Address Value</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>var_defaultToAddressValue</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Find_Landowner_Party.Email__c</elementReference>
+                <elementReference>Get_Case.Representative__r.Email__c</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -287,15 +278,22 @@
         </connector>
     </assignments>
     <assignments>
-        <name>Set_Organisation_Email_to_To_Address_Value</name>
-        <label>Set Organisation Email to To Address Value</label>
+        <name>Set_objector_Landlord_and_Represent_Email</name>
+        <label>Set objector Landlord and Represent Email</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_defaultCCAddress</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Case.Objector__r.Email__c</elementReference>
+            </value>
+        </assignmentItems>
         <assignmentItems>
             <assignToReference>var_defaultToAddressValue</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Get_Case.DNO__r.Email__c</elementReference>
+                <elementReference>Get_Case.Representative__r.Email__c</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -1147,46 +1145,6 @@
         </rules>
     </decisions>
     <decisions>
-        <name>Organisation_Email_Or_Applicant_Email</name>
-        <label>Organisation Email Or Applicant Email</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <defaultConnector>
-            <targetReference>Email_Builder_Screen</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
-        <rules>
-            <name>Organisation_Email</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Get_Case.DNO__r.Email__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Set_Organisation_Email_to_To_Address_Value</targetReference>
-            </connector>
-            <label>Organisation Email</label>
-        </rules>
-        <rules>
-            <name>Organisation_Applicant_email</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Get_Case.DNO__r.Representative__r.Email__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Set_Applicant_Email_to_To_Address_Value</targetReference>
-            </connector>
-            <label>Organisation Applicant email</label>
-        </rules>
-    </decisions>
-    <decisions>
         <name>SetToAndCCAddress</name>
         <label>SetToAndCCAddress</label>
         <locationX>0</locationX>
@@ -1196,31 +1154,74 @@
         </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
-            <name>Londowner_and_Applicant_Email_exist</name>
-            <conditionLogic>(1 OR (2 AND 3)) AND (4 AND (5 AND 6))</conditionLogic>
+            <name>Object_is_Londowner_and_Representative_exist</name>
+            <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Find_Landowner_Party.Email__c</leftValueReference>
+                <leftValueReference>Get_Case.Is_Objector_also_Landowner__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Yes</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Case.Does_Objector_Have_Representative__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Yes</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Case.Representative__r.Email__c</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>Find_Landowner_Party.Representative__c</leftValueReference>
+                <leftValueReference>Get_Case.Objector__r.Additional_Contact_Email_Addresses__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_objector_Landlord_and_Represent_Email</targetReference>
+            </connector>
+            <label>Object is Londowner and Representative exist</label>
+        </rules>
+        <rules>
+            <name>Objector_is_Not_LandOwner_and_Representative_exist</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Case.Is_Objector_also_Landowner__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Case.Landowner__c</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>Find_Landowner_Party.Representative__r.Email__c</leftValueReference>
+                <leftValueReference>Get_Case.Does_Objector_Have_Representative__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Yes</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Case.Representative__c</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>Get_Case.DNO__r.Email__c</leftValueReference>
+                <leftValueReference>Get_Case.Representative__r.Email__c</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
@@ -1233,40 +1234,19 @@
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
-            <conditions>
-                <leftValueReference>Get_Case.DNO__r.Representative__r.Email__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
             <connector>
-                <targetReference>Set_Landlord_Email_To_Address_Value</targetReference>
+                <targetReference>Set_Landlord_Email_to_Representative_Email_Address_Value</targetReference>
             </connector>
-            <label>Londowner and Applicant(Rep) Email exist</label>
+            <label>Objector is Not LandOwner and Representative exist</label>
         </rules>
         <rules>
-            <name>Landowner_Email_only_exist</name>
-            <conditionLogic>(1 AND 2 AND 3) OR ((4 AND 5) OR 6 OR 7)</conditionLogic>
+            <name>Only_LandLord_Email_address_and_Objector_is_LandOwner</name>
+            <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Find_Landowner_Party.Email__c</leftValueReference>
-                <operator>IsNull</operator>
+                <leftValueReference>Get_Case.Is_Objector_also_Landowner__c</leftValueReference>
+                <operator>EqualTo</operator>
                 <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Find_Landowner_Party.Representative__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Find_Landowner_Party.Representative__r.Email__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
+                    <stringValue>Yes</stringValue>
                 </rightValue>
             </conditions>
             <conditions>
@@ -1276,11 +1256,19 @@
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
+            <connector>
+                <targetReference>Assign_Objector_Email_Address_as_LandOwner_email</targetReference>
+            </connector>
+            <label>Only LandLord Email address and Objector is LandOwner</label>
+        </rules>
+        <rules>
+            <name>Only_LandLord_Email_address_and_Objector_is_Not_LandOwner</name>
+            <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>Get_Case.Is_Objector_also_Landowner__c</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <stringValue>Yes</stringValue>
+                    <stringValue>No</stringValue>
                 </rightValue>
             </conditions>
             <conditions>
@@ -1291,38 +1279,16 @@
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>Get_Case.Landowner__r.Representative__r.Email__c</leftValueReference>
-                <operator>IsNull</operator>
+                <leftValueReference>Get_Case.Does_Objector_Have_Representative__c</leftValueReference>
+                <operator>EqualTo</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Set_Landlord_Email_to_To_Address_Value</targetReference>
+                <targetReference>Assign_LandOwner_email_address</targetReference>
             </connector>
-            <label>Landowner Email only exist</label>
-        </rules>
-        <rules>
-            <name>Organisation_or_Applicant_Email_Exist</name>
-            <conditionLogic>or</conditionLogic>
-            <conditions>
-                <leftValueReference>Get_Case.DNO__r.Email__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Get_Case.DNO__r.Representative__r.Email__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Organisation_Email_Or_Applicant_Email</targetReference>
-            </connector>
-            <label>Organisation or Applicant Email Exist</label>
+            <label>Only LandLord Email address and Objector is Not LandOwner</label>
         </rules>
     </decisions>
     <description>PDF Warning message.
