@@ -1178,7 +1178,7 @@
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>Get_Case.Objector__r.Additional_Contact_Email_Addresses__c</leftValueReference>
+                <leftValueReference>Get_Case.Objector__r.Email__c</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
@@ -1274,13 +1274,6 @@
             <conditions>
                 <leftValueReference>Get_Case.Landowner__r.Email__c</leftValueReference>
                 <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Get_Case.Does_Objector_Have_Representative__c</leftValueReference>
-                <operator>EqualTo</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
                 </rightValue>
