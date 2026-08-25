@@ -3,7 +3,7 @@
     <fullName>Explanation_Notice_Omits_Line_Removal__c</fullName>
     <description>Explanation Notice Does Not Clearly Refer to Line Removal</description>
     <inlineHelpText>Explanation Notice Does Not Clearly Refer to Line Removal</inlineHelpText>
-    <label>Explanation - Notice Omits Line Removal</label>
+    <label>Explanation: Notice to Remove is unclear</label>
     <length>32768</length>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
