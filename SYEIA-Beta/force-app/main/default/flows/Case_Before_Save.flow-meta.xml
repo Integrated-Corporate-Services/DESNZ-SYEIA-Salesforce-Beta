@@ -744,19 +744,19 @@
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Total_Time_Excluding_Abeyance_In_Days</name>
-            <conditionLogic>or</conditionLogic>
+            <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>$Record.Total_Time_Excluding_Abeyance_In_Days__c</leftValueReference>
-                <operator>IsBlank</operator>
+                <operator>NotEqualTo</operator>
                 <rightValue>
-                    <booleanValue>true</booleanValue>
+                    <elementReference>form_TotalTimeExAbeyanceInDays</elementReference>
                 </rightValue>
             </conditions>
             <conditions>
                 <leftValueReference>$Record.Total_Time_Excluding_Abeyance_In_Days__c</leftValueReference>
-                <operator>IsNull</operator>
+                <operator>EqualTo</operator>
                 <rightValue>
-                    <booleanValue>true</booleanValue>
+                    <elementReference>$Record__Prior.Total_Time_Excluding_Abeyance_In_Days__c</elementReference>
                 </rightValue>
             </conditions>
             <connector>
@@ -776,19 +776,19 @@
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Total_Time_including_Abeyance_In_Days</name>
-            <conditionLogic>or</conditionLogic>
+            <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>$Record.Total_Time_Including_Abeyance_In_Days__c</leftValueReference>
-                <operator>IsBlank</operator>
+                <operator>NotEqualTo</operator>
                 <rightValue>
-                    <booleanValue>true</booleanValue>
+                    <elementReference>form_TotalTimeIncAbeyanceInDays</elementReference>
                 </rightValue>
             </conditions>
             <conditions>
                 <leftValueReference>$Record.Total_Time_Including_Abeyance_In_Days__c</leftValueReference>
-                <operator>IsNull</operator>
+                <operator>EqualTo</operator>
                 <rightValue>
-                    <booleanValue>true</booleanValue>
+                    <elementReference>$Record__Prior.Total_Time_Including_Abeyance_In_Days__c</elementReference>
                 </rightValue>
             </conditions>
             <connector>
