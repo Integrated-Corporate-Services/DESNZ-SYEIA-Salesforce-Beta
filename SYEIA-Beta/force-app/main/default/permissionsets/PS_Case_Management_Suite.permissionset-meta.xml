@@ -241,6 +241,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Case__c.Decision_Deadline__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Case__c.Description_Of_Overhead_Lines__c</field>
         <readable>true</readable>
     </fieldPermissions>
