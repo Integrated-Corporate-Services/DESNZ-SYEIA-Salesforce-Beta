@@ -2,7 +2,7 @@
 
 A Salesforce-based application for managing cases, applications, and document approvals. This project is built using Salesforce DX (SFDX) and includes Lightning Web Components (LWC), Apex classes, and automated workflows.
 
-## ?? Table of Contents
+## Table of Contents
 
 - [Overview](#overview)
 - [Prerequisites](#prerequisites)
