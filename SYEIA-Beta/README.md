@@ -353,7 +353,7 @@ sfdx project default set sourceApiVersion 65.0
 
 ## License
 
-This project is licensed under the [Salesforce Proprietary License]. See LICENSE file for details.
+See LICENSE file for details.
 
 ## Support
 
