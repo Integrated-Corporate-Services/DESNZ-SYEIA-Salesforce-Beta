@@ -70,6 +70,11 @@ public class InboundForm_NWLConfig {
             'sections.applicationDetails.notice_to_remove_date',
             'Notice_to_Remove_Date__c'
         ));
+        
+        config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
+            'sections.applicationDetails.termination_period_expired',
+            'Termination_Period_Expired__c'
+        ).setBooleanTrueValue('Yes').setBooleanFalseValue('No'));
 
         // Keep legacy NWL automation populated until all downstream flows use Notice_to_Remove_Date__c.
         config.addFieldMapping(InboundForm_MappingConfig.dateField(
