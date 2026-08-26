@@ -88,16 +88,6 @@ jobs:
               --set-default
           fi
 
-      # - name: PMD (Apex)
-      #  run: |
-      #    cd ./SYEIA-Beta
-      #    bash ./scripts/pmd.sh
-
-      # ESLint (LWC) - Disabled for now.
-      # - name: ESLint (LWC)
-        # run: |
-        #   npx eslint "force-app/**/lwc/**/*.js"
-
       - name: Validate (checkonly) deploy to ${{ env.TARGET_ENV }}
         run: |
           cd ./SYEIA-Beta
