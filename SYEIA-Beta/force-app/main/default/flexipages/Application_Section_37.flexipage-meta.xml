@@ -476,8 +476,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Any_Chemical_Treatments_Proposed__c</fieldItem>
-                <identifier>RecordAny_Chemical_Treatments_Proposed_cField</identifier>
+                <fieldItem>Record.Number_Of_Poles_Being_Added__c</fieldItem>
+                <identifier>RecordNumber_Of_Poles_Being_Added_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -510,8 +510,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Number_Of_Poles_Being_Added__c</fieldItem>
-                <identifier>RecordNumber_Of_Poles_Being_Added_cField</identifier>
+                <fieldItem>Record.Any_Chemical_Treatments_Proposed__c</fieldItem>
+                <identifier>RecordAny_Chemical_Treatments_Proposed_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -928,8 +928,8 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Post_Consultation__r.CON_Recommendations_Not_Accepted_Reason__c</fieldItem>
-                <identifier>RecordPost_Consultation_rCON_Recommendations_Not_Accepted_Reason_cField</identifier>
+                <fieldItem>Record.Post_Consultation__r.IPA_Conditions_Imposed__c</fieldItem>
+                <identifier>RecordPost_Consultation_rIPA_Conditions_Imposed_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-e35e88ac-2187-4d8c-8f88-2b5c41f71c1f</name>
@@ -965,8 +965,8 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Post_Consultation__r.IPA_Conditions_Imposed__c</fieldItem>
-                <identifier>RecordPost_Consultation_rIPA_Conditions_Imposed_cField</identifier>
+                <fieldItem>Record.Post_Consultation__r.CON_Recommendations_Not_Accepted_Reason__c</fieldItem>
+                <identifier>RecordPost_Consultation_rCON_Recommendations_Not_Accepted_Reason_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
