@@ -1466,6 +1466,16 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
+                <fieldItem>Record.Date_of_Fee_Paid__c</fieldItem>
+                <identifier>RecordDate_of_Fee_Paid_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Date_Consent_Sent_to_DNO__c</fieldItem>
                 <identifier>RecordDate_Consent_Sent_to_DNO_cField</identifier>
             </fieldInstance>

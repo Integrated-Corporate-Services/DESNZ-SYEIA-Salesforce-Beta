@@ -46,11 +46,6 @@
                 <label>Carmarthenshire</label>
             </value>
             <value>
-                <fullName>Ceredigion</fullName>
-                <default>false</default>
-                <label>Ceredigion</label>
-            </value>
-            <value>
                 <fullName>Cornwall</fullName>
                 <default>false</default>
                 <label>Cornwall</label>
@@ -239,6 +234,16 @@
                 <fullName>Yorkshire</fullName>
                 <default>false</default>
                 <label>Yorkshire</label>
+            </value>
+            <value>
+                <fullName>Worcestershire</fullName>
+                <default>false</default>
+                <label>Worcestershire</label>
+            </value>
+            <value>
+                <fullName>Berkshire</fullName>
+                <default>false</default>
+                <label>Berkshire</label>
             </value>
         </valueSetDefinition>
     </valueSet>
