@@ -21,6 +21,11 @@
                 <label>Bedfordshire</label>
             </value>
             <value>
+                <fullName>Berkshire</fullName>
+                <default>false</default>
+                <label>Berkshire</label>
+            </value>
+            <value>
                 <fullName>Brecknockshire</fullName>
                 <default>false</default>
                 <label>Brecknockshire</label>
@@ -226,6 +231,11 @@
                 <label>Wiltshire</label>
             </value>
             <value>
+                <fullName>Worcestershire</fullName>
+                <default>false</default>
+                <label>Worcestershire</label>
+            </value>
+            <value>
                 <fullName>Wrexham</fullName>
                 <default>false</default>
                 <label>Wrexham</label>
@@ -234,16 +244,6 @@
                 <fullName>Yorkshire</fullName>
                 <default>false</default>
                 <label>Yorkshire</label>
-            </value>
-            <value>
-                <fullName>Worcestershire</fullName>
-                <default>false</default>
-                <label>Worcestershire</label>
-            </value>
-            <value>
-                <fullName>Berkshire</fullName>
-                <default>false</default>
-                <label>Berkshire</label>
             </value>
         </valueSetDefinition>
     </valueSet>
