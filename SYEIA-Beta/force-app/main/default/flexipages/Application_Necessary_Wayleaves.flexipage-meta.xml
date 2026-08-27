@@ -2086,7 +2086,7 @@
                     <criteria>
                         <leftValue>{!Record.Any_Other_Important_Information__c}</leftValue>
                         <operator>EQUAL</operator>
-                        <rightValue>No</rightValue>
+                        <rightValue>Yes</rightValue>
                     </criteria>
                 </visibilityRule>
             </fieldInstance>
