@@ -552,6 +552,10 @@ public class InboundForm_NWLConfig {
             'Land_Registry_Reference_Number__c'
         ));
         landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'land_ownership_unknown_reason',
+            'Explanation_Land_not_Registered__c'
+        ));
+        landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
             'os_grid_reference.grid_letter',
             'Grid_Letter__c'
         ));
