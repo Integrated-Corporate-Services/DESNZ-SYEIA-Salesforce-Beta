@@ -74,7 +74,7 @@
         <inputParameters>
             <name>attachmentId</name>
             <value>
-                <elementReference>Document_Table.firstSelectedRow.Id</elementReference>
+                <elementReference>SelectedAttachmentIds</elementReference>
                 <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
@@ -114,6 +114,45 @@
     </actionCalls>
     <apiVersion>65.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Add_Comma_Separated_value_to_SelectedAttachmentIds</name>
+        <label>Add Comma Separated value to SelectedAttachmentIds</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>SelectedAttachmentIds</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>,</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>SelectedAttachmentIds</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_Selected_Attachments.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Selected_Attachments</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Add_value_to_SelectedAttachmentIds</name>
+        <label>Add value to SelectedAttachmentIds</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>SelectedAttachmentIds</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Loop_Selected_Attachments.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Selected_Attachments</targetReference>
+        </connector>
+    </assignments>
     <assignments>
         <name>Assign_ContentDocId</name>
         <label>Assign ContentDocId</label>
@@ -200,15 +239,15 @@
         </connector>
     </assignments>
     <assignments>
-        <name>Set_Applicant_Email_to_CC_Address</name>
-        <label>Set Applicant Email to CC Address</label>
+        <name>Assign_LandOwner_email_address</name>
+        <label>Assign LandOwner email address</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>var_defaultToAddressValue</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Get_Case.DNO__r.Email__c</elementReference>
+                <elementReference>Get_Case.Landowner__r.Email__c</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -216,15 +255,15 @@
         </connector>
     </assignments>
     <assignments>
-        <name>Set_Applicant_Email_to_To_Address_Value</name>
-        <label>Set Applicant Email to To Address Value</label>
+        <name>Assign_Objector_Email_Address_as_LandOwner_email</name>
+        <label>Assign Objector Email Address as LandOwner email</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>var_defaultToAddressValue</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Get_Case.DNO__r.Representative__r.Email__c</elementReference>
+                <elementReference>Get_Case.Objector__r.Email__c</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -255,31 +294,22 @@
         </connector>
     </assignments>
     <assignments>
-        <name>Set_Landlord_Email_To_Address_Value</name>
-        <label>Set Landlord Email To Address Value</label>
+        <name>Set_Landlord_Email_to_Representative_Email_Address_Value</name>
+        <label>Set Landlord Email to Representative Email Address Value</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>var_defaultCCAddress</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Find_Landowner_Party.Email__c</elementReference>
+                <elementReference>Get_Case.Landowner__r.Email__c</elementReference>
             </value>
         </assignmentItems>
-        <connector>
-            <targetReference>Set_Applicant_Email_to_CC_Address</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
-        <name>Set_Landlord_Email_to_To_Address_Value</name>
-        <label>Set Landlord Email to To Address Value</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>var_defaultToAddressValue</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Find_Landowner_Party.Email__c</elementReference>
+                <elementReference>Get_Case.Representative__r.Email__c</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -287,15 +317,22 @@
         </connector>
     </assignments>
     <assignments>
-        <name>Set_Organisation_Email_to_To_Address_Value</name>
-        <label>Set Organisation Email to To Address Value</label>
+        <name>Set_objector_Landlord_and_Represent_Email</name>
+        <label>Set objector Landlord and Represent Email</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_defaultCCAddress</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Case.Objector__r.Email__c</elementReference>
+            </value>
+        </assignmentItems>
         <assignmentItems>
             <assignToReference>var_defaultToAddressValue</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Get_Case.DNO__r.Email__c</elementReference>
+                <elementReference>Get_Case.Representative__r.Email__c</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -827,6 +864,60 @@
         </rules>
     </decisions>
     <decisions>
+        <name>Is_First_Attachment</name>
+        <label>Is First Attachment</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Loop_Selected_Attachments</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>SelectedAttachmentIds</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>SelectedAttachmentIds</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Add_value_to_SelectedAttachmentIds</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+        <rules>
+            <name>No</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>SelectedAttachmentIds</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>SelectedAttachmentIds</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Add_Comma_Separated_value_to_SelectedAttachmentIds</targetReference>
+            </connector>
+            <label>No</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>LandOwner_OR_Applicant_OR_Internal</name>
         <label>LandOwner OR Applicant Or Internal</label>
         <locationX>0</locationX>
@@ -1147,46 +1238,6 @@
         </rules>
     </decisions>
     <decisions>
-        <name>Organisation_Email_Or_Applicant_Email</name>
-        <label>Organisation Email Or Applicant Email</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <defaultConnector>
-            <targetReference>Email_Builder_Screen</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
-        <rules>
-            <name>Organisation_Email</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Get_Case.DNO__r.Email__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Set_Organisation_Email_to_To_Address_Value</targetReference>
-            </connector>
-            <label>Organisation Email</label>
-        </rules>
-        <rules>
-            <name>Organisation_Applicant_email</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Get_Case.DNO__r.Representative__r.Email__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Set_Applicant_Email_to_To_Address_Value</targetReference>
-            </connector>
-            <label>Organisation Applicant email</label>
-        </rules>
-    </decisions>
-    <decisions>
         <name>SetToAndCCAddress</name>
         <label>SetToAndCCAddress</label>
         <locationX>0</locationX>
@@ -1196,77 +1247,27 @@
         </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
-            <name>Londowner_and_Applicant_Email_exist</name>
-            <conditionLogic>(1 OR (2 AND 3)) AND (4 AND (5 AND 6))</conditionLogic>
+            <name>Object_is_Londowner_and_Representative_exist</name>
+            <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Find_Landowner_Party.Email__c</leftValueReference>
-                <operator>IsNull</operator>
+                <leftValueReference>Get_Case.Is_Objector_also_Landowner__c</leftValueReference>
+                <operator>EqualTo</operator>
                 <rightValue>
-                    <booleanValue>false</booleanValue>
+                    <stringValue>Yes</stringValue>
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>Find_Landowner_Party.Representative__c</leftValueReference>
-                <operator>IsNull</operator>
+                <leftValueReference>Get_Case.Does_Objector_Have_Representative__c</leftValueReference>
+                <operator>EqualTo</operator>
                 <rightValue>
-                    <booleanValue>false</booleanValue>
+                    <stringValue>Yes</stringValue>
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>Find_Landowner_Party.Representative__r.Email__c</leftValueReference>
+                <leftValueReference>Get_Case.Representative__r.Email__c</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Get_Case.DNO__r.Email__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Get_Case.Landowner__r.Email__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Get_Case.DNO__r.Representative__r.Email__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Set_Landlord_Email_To_Address_Value</targetReference>
-            </connector>
-            <label>Londowner and Applicant(Rep) Email exist</label>
-        </rules>
-        <rules>
-            <name>Landowner_Email_only_exist</name>
-            <conditionLogic>(1 AND 2 AND 3) OR ((4 AND 5) OR 6 OR 7)</conditionLogic>
-            <conditions>
-                <leftValueReference>Find_Landowner_Party.Email__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Find_Landowner_Party.Representative__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Find_Landowner_Party.Representative__r.Email__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
             <conditions>
@@ -1276,11 +1277,47 @@
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
+            <connector>
+                <targetReference>Set_objector_Landlord_and_Represent_Email</targetReference>
+            </connector>
+            <label>Object is Londowner and Representative exist</label>
+        </rules>
+        <rules>
+            <name>Objector_is_Not_LandOwner_and_Representative_exist</name>
+            <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>Get_Case.Is_Objector_also_Landowner__c</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Case.Landowner__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Case.Does_Objector_Have_Representative__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
                     <stringValue>Yes</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Case.Representative__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Case.Representative__r.Email__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
             <conditions>
@@ -1290,39 +1327,54 @@
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
-            <conditions>
-                <leftValueReference>Get_Case.Landowner__r.Representative__r.Email__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
             <connector>
-                <targetReference>Set_Landlord_Email_to_To_Address_Value</targetReference>
+                <targetReference>Set_Landlord_Email_to_Representative_Email_Address_Value</targetReference>
             </connector>
-            <label>Landowner Email only exist</label>
+            <label>Objector is Not LandOwner and Representative exist</label>
         </rules>
         <rules>
-            <name>Organisation_or_Applicant_Email_Exist</name>
-            <conditionLogic>or</conditionLogic>
+            <name>Only_LandLord_Email_address_and_Objector_is_LandOwner</name>
+            <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Get_Case.DNO__r.Email__c</leftValueReference>
-                <operator>IsNull</operator>
+                <leftValueReference>Get_Case.Is_Objector_also_Landowner__c</leftValueReference>
+                <operator>EqualTo</operator>
                 <rightValue>
-                    <booleanValue>false</booleanValue>
+                    <stringValue>Yes</stringValue>
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>Get_Case.DNO__r.Representative__r.Email__c</leftValueReference>
+                <leftValueReference>Get_Case.Objector__r.Email__c</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Organisation_Email_Or_Applicant_Email</targetReference>
+                <targetReference>Assign_Objector_Email_Address_as_LandOwner_email</targetReference>
             </connector>
-            <label>Organisation or Applicant Email Exist</label>
+            <label>Only LandLord Email address and Objector is LandOwner</label>
+        </rules>
+        <rules>
+            <name>Only_LandLord_Email_address_and_Objector_is_Not_LandOwner</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Case.Is_Objector_also_Landowner__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>No</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Case.Landowner__r.Email__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_LandOwner_email_address</targetReference>
+            </connector>
+            <label>Only LandLord Email address and Objector is Not LandOwner</label>
         </rules>
     </decisions>
     <description>PDF Warning message.
@@ -1460,6 +1512,20 @@ CTWR Letter Sent</description>
         </noMoreValuesConnector>
     </loops>
     <loops>
+        <name>Loop_Selected_Attachments</name>
+        <label>Loop Selected Attachments</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>Document_Table.selectedRows</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Is_First_Attachment</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Send_Email_Action</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
         <name>Loop_Through_Selected_Attachments</name>
         <label>Loop Through Selected Attachments</label>
         <locationX>0</locationX>
@@ -1470,7 +1536,7 @@ CTWR Letter Sent</description>
             <targetReference>Decision_Selected_Attachment</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
-            <targetReference>Send_Email_Action</targetReference>
+            <targetReference>Loop_Selected_Attachments</targetReference>
         </noMoreValuesConnector>
     </loops>
     <processMetadataValues>
@@ -2361,13 +2427,13 @@ CTWR Letter Sent</description>
                     <inputParameters>
                         <name>selectionMode</name>
                         <value>
-                            <stringValue>SINGLE_SELECT</stringValue>
+                            <stringValue>MULTI_SELECT</stringValue>
                         </value>
                     </inputParameters>
                     <inputParameters>
                         <name>minRowSelection</name>
                         <value>
-                            <numberValue>1.0</numberValue>
+                            <numberValue>0.0</numberValue>
                         </value>
                     </inputParameters>
                     <inputParameters>
@@ -2400,12 +2466,6 @@ CTWR Letter Sent</description>
                         <name>shouldDisplayLabel</name>
                         <value>
                             <booleanValue>true</booleanValue>
-                        </value>
-                    </inputParameters>
-                    <inputParameters>
-                        <name>maxRowSelection</name>
-                        <value>
-                            <numberValue>1.0</numberValue>
                         </value>
                     </inputParameters>
                     <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -2746,6 +2806,13 @@ CTWR Letter Sent</description>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>SelectedAttachmentIds</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
         <isOutput>false</isOutput>
     </variables>
     <variables>

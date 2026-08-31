@@ -153,19 +153,6 @@
                         </valueListItems>
                         <valueListItems>
                             <value>Case__c.Generate_Document</value>
-                            <visibilityRule>
-                                <booleanFilter>1 AND 2</booleanFilter>
-                                <criteria>
-                                    <leftValue>{!Record.Status__c}</leftValue>
-                                    <operator>EQUAL</operator>
-                                    <rightValue>In-Progress</rightValue>
-                                </criteria>
-                                <criteria>
-                                    <leftValue>{!Record.Case_Owner__c}</leftValue>
-                                    <operator>NE</operator>
-                                    <rightValue>New Cases</rightValue>
-                                </criteria>
-                            </visibilityRule>
                         </valueListItems>
                         <valueListItems>
                             <value>Case__c.Create_Internal_Consultation</value>
@@ -179,19 +166,6 @@
                         </valueListItems>
                         <valueListItems>
                             <value>Case__c.Send_S37_Letter</value>
-                            <visibilityRule>
-                                <booleanFilter>1 OR 2</booleanFilter>
-                                <criteria>
-                                    <leftValue>{!$User.Persona__c}</leftValue>
-                                    <operator>EQUAL</operator>
-                                    <rightValue>Decision Manager</rightValue>
-                                </criteria>
-                                <criteria>
-                                    <leftValue>{!$User.Profile.Name}</leftValue>
-                                    <operator>CONTAINS</operator>
-                                    <rightValue>Admin</rightValue>
-                                </criteria>
-                            </visibilityRule>
                         </valueListItems>
                         <valueListItems>
                             <value>Share</value>
@@ -502,8 +476,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Any_Chemical_Treatments_Proposed__c</fieldItem>
-                <identifier>RecordAny_Chemical_Treatments_Proposed_cField</identifier>
+                <fieldItem>Record.Number_Of_Poles_Being_Added__c</fieldItem>
+                <identifier>RecordNumber_Of_Poles_Being_Added_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -536,8 +510,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Number_Of_Poles_Being_Added__c</fieldItem>
-                <identifier>RecordNumber_Of_Poles_Being_Added_cField</identifier>
+                <fieldItem>Record.Any_Chemical_Treatments_Proposed__c</fieldItem>
+                <identifier>RecordAny_Chemical_Treatments_Proposed_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -954,8 +928,8 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Post_Consultation__r.CON_Recommendations_Not_Accepted_Reason__c</fieldItem>
-                <identifier>RecordPost_Consultation_rCON_Recommendations_Not_Accepted_Reason_cField</identifier>
+                <fieldItem>Record.Post_Consultation__r.IPA_Conditions_Imposed__c</fieldItem>
+                <identifier>RecordPost_Consultation_rIPA_Conditions_Imposed_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-e35e88ac-2187-4d8c-8f88-2b5c41f71c1f</name>
@@ -991,8 +965,8 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Post_Consultation__r.IPA_Conditions_Imposed__c</fieldItem>
-                <identifier>RecordPost_Consultation_rIPA_Conditions_Imposed_cField</identifier>
+                <fieldItem>Record.Post_Consultation__r.CON_Recommendations_Not_Accepted_Reason__c</fieldItem>
+                <identifier>RecordPost_Consultation_rCON_Recommendations_Not_Accepted_Reason_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -1484,6 +1458,16 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Application_Fee_Paid__c</fieldItem>
                 <identifier>RecordApp_Fee_Paid_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Date_of_Fee_Paid__c</fieldItem>
+                <identifier>RecordDate_of_Fee_Paid_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>

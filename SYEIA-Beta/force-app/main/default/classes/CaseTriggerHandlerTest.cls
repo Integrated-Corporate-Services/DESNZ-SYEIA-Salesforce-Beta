@@ -6,8 +6,8 @@ public class CaseTriggerHandlerTest {
         SalesforceSettings__c settings = new SalesforceSettings__c(
             SetupOwnerId = UserInfo.getOrganizationId(), // KEY LINE
             Endpoint_Url__c = 'https://saas-page-9942--devsyeia2.sandbox.my.salesforce.com/services/oauth2/token',
-            client_id__c ='SAMPL3C1ENT1D',
-            client_secret__c='SAMPL3C1ENTS3CR3T',
+            client_id__c ='CLIENT_ID_SAMPLE',
+            client_secret__c='CLIENT_SECRET_SAMPLE',
             grant_type__c = 'client_credentials'
         );
         insert settings;

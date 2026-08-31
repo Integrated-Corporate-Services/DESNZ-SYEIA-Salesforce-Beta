@@ -207,6 +207,10 @@
             <default>false</default>
         </values>
         <values>
+            <fullName>Berkshire</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>Brecknockshire</fullName>
             <default>false</default>
         </values>
@@ -224,10 +228,6 @@
         </values>
         <values>
             <fullName>Carmarthenshire</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Ceredigion</fullName>
             <default>false</default>
         </values>
         <values>
@@ -372,6 +372,10 @@
         </values>
         <values>
             <fullName>Wiltshire</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Worcestershire</fullName>
             <default>false</default>
         </values>
         <values>

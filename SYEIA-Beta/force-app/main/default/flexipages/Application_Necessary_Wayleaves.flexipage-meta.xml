@@ -124,13 +124,6 @@
                         </valueListItems>
                         <valueListItems>
                             <value>Case__c.Generate_Document</value>
-                            <visibilityRule>
-                                <criteria>
-                                    <leftValue>{!Record.Status__c}</leftValue>
-                                    <operator>EQUAL</operator>
-                                    <rightValue>In-Progress</rightValue>
-                                </criteria>
-                            </visibilityRule>
                         </valueListItems>
                         <valueListItems>
                             <value>ChangeOwnerOne</value>
@@ -144,19 +137,6 @@
                         </valueListItems>
                         <valueListItems>
                             <value>Case__c.Send_NWL_Letter</value>
-                            <visibilityRule>
-                                <booleanFilter>1 OR 2</booleanFilter>
-                                <criteria>
-                                    <leftValue>{!$User.Persona__c}</leftValue>
-                                    <operator>EQUAL</operator>
-                                    <rightValue>Case Officer</rightValue>
-                                </criteria>
-                                <criteria>
-                                    <leftValue>{!$User.Persona__c}</leftValue>
-                                    <operator>EQUAL</operator>
-                                    <rightValue>Decision Manager</rightValue>
-                                </criteria>
-                            </visibilityRule>
                         </valueListItems>
                         <valueListItems>
                             <value>Case__c.Reject_Case</value>
@@ -229,6 +209,16 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Rejected_On__c</fieldItem>
                 <identifier>RecordRejected_On_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Decision_Deadline__c</fieldItem>
+                <identifier>RecordDecision_Deadline__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-6bea69ba-47ee-4dfa-98d4-ab4c9aef52af</name>
@@ -2096,7 +2086,7 @@
                     <criteria>
                         <leftValue>{!Record.Any_Other_Important_Information__c}</leftValue>
                         <operator>EQUAL</operator>
-                        <rightValue>No</rightValue>
+                        <rightValue>Yes</rightValue>
                     </criteria>
                 </visibilityRule>
             </fieldInstance>
@@ -3377,8 +3367,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Decision_Deadline_Formula__c</fieldItem>
-                <identifier>RecordDecision_Deadline_Formula_cField</identifier>
+                <fieldItem>Record.Decision_Deadline__c</fieldItem>
+                <identifier>RecordDecision_Deadline_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>

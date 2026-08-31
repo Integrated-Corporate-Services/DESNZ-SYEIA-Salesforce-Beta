@@ -7,8 +7,8 @@ public class Application_StatusUpdateQueueableTest {
         SalesforceSettings__c settings = new SalesforceSettings__c(
             SetupOwnerId = UserInfo.getOrganizationId(),
             Endpoint_Url__c = 'https://saas-page-9942--devsyeia2.sandbox.my.salesforce.com/services/oauth2/token',
-            client_id__c ='TestSampleClientId',
-            client_secret__c='TESTSAMPLECLIENTSECRET',
+            client_id__c ='SAMPL3C1ENT1D',
+            client_secret__c='SAMPL3C1ENTS3CR3T',
             grant_type__c = 'client_credentials'
         );
         insert settings;

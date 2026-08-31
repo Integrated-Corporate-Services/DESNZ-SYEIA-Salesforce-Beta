@@ -180,6 +180,7 @@
 		<members>Case__c.Deadline_For_Further_Representations__c</members>
 		<members>Case__c.Deadline_For_Statement_Of_Evidence__c</members>
 		<members>Case__c.Decision_Date__c</members>
+		<members>Case__c.Decision_Deadline__c</members>
 		<members>Case__c.Decision_Deadline_Display__c</members>
 		<members>Case__c.Decision_Deadline_Formula__c</members>
 		<members>Case__c.Decision_Letter_Issued_in_Time_Formula__c</members>
