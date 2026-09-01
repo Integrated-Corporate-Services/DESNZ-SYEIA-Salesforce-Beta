@@ -129,6 +129,51 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assign_Default_Acknowledgement_Letter_Date</name>
+        <label>Assign Default Acknowledgement Letter Date</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Acknowledgement_Letter_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <dateValue>1700-01-01</dateValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Description_of_Important_Information_is_Blank</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_default_DESNZ_Decision</name>
+        <label>Assign default DESNZ Decision</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.DESNZ_Decision__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>N/A</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Default_Acknowledgement_Letter_Date_is_Blank</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Default_to_Description_of_Important_Information</name>
+        <label>Assign Default to Description of Important Information</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Description_of_Important_Information__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>N/A</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
         <name>Assign_Further_Information_Status_Updated_Date</name>
         <label>Assign Further Information Status Updated Date</label>
         <locationX>0</locationX>
@@ -241,6 +286,9 @@
                 <elementReference>formula_NWL_Decision_Deadline</elementReference>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>Is_New_and_NWL_Record_Type</targetReference>
+        </connector>
     </assignments>
     <assignments>
         <name>Assign_Previous_Status</name>
@@ -275,6 +323,22 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assign_Procedure_Default_Value</name>
+        <label>Assign Procedure Default Value</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Procedure__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>N/A</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Default_DESNZ_Decision_is_Blank</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Assign_S37_Decision_Deadline</name>
         <label>Assign S37 Decision Deadline</label>
         <locationX>0</locationX>
@@ -286,6 +350,9 @@
                 <elementReference>formula_S37_Decision_Deadline</elementReference>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>Is_New_and_NWL_Record_Type</targetReference>
+        </connector>
     </assignments>
     <assignments>
         <name>Assign_Screening_needed_NL_Target_Completion_Date</name>
@@ -360,6 +427,9 @@
                 <elementReference>formula_TL_Decision_Deadline</elementReference>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>Is_New_and_NWL_Record_Type</targetReference>
+        </connector>
     </assignments>
     <assignments>
         <name>Assign_Total_Time_Excluding_Abeyance</name>
@@ -751,6 +821,9 @@
         <label>Check  Date of Application and App Type</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Is_New_and_NWL_Record_Type</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Application_Type_S37_and_Date_of_Application</name>
@@ -1312,6 +1385,78 @@
         </rules>
     </decisions>
     <decisions>
+        <name>Default_Acknowledgement_Letter_Date_is_Blank</name>
+        <label>Default Acknowledgement Letter Date is Blank</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Description_of_Important_Information_is_Blank</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Acknowledgement_Letter_Date</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Acknowledgement_Letter_Date__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Default_Acknowledgement_Letter_Date</targetReference>
+            </connector>
+            <label>Acknowledgement Letter Date</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Default_DESNZ_Decision_is_Blank</name>
+        <label>Default DESNZ Decision is Blank</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Default_Acknowledgement_Letter_Date_is_Blank</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>DESNZ_Decision</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.DESNZ_Decision__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_default_DESNZ_Decision</targetReference>
+            </connector>
+            <label>DESNZ Decision</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Description_of_Important_Information_is_Blank</name>
+        <label>Description of Important Information is Blank</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Description_of_Important_Information</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Description_of_Important_Information__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Default_to_Description_of_Important_Information</targetReference>
+            </connector>
+            <label>Description of Important Information</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Has_DNO_Lookup_Value_Changed</name>
         <label>Has DNO Lookup Value Changed</label>
         <locationX>0</locationX>
@@ -1383,6 +1528,31 @@
         </rules>
     </decisions>
     <decisions>
+        <name>Is_Default_Procedure_Blank</name>
+        <label>Is Default Procedure Blank</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Default_DESNZ_Decision_is_Blank</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Procedure</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Procedure__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Procedure_Default_Value</targetReference>
+            </connector>
+            <label>Procedure</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Is_Mapping_owner_blank</name>
         <label>Is Mapping owner blank</label>
         <locationX>0</locationX>
@@ -1412,6 +1582,35 @@
                 <targetReference>Assign_Mapping_Owner</targetReference>
             </connector>
             <label>Yes Mapping Owner is blank</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Is_New_and_NWL_Record_Type</name>
+        <label>Is New and NWL Record Type</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes_NWL_RecordType</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_IsNew</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary_Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Is_Default_Procedure_Blank</targetReference>
+            </connector>
+            <label>Yes</label>
         </rules>
     </decisions>
     <decisions>

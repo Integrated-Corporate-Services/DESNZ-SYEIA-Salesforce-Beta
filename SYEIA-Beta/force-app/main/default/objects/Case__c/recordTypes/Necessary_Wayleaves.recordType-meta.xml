@@ -449,6 +449,10 @@
             <default>false</default>
         </values>
         <values>
+            <fullName>N%2FA</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>NW Granted</fullName>
             <default>false</default>
         </values>
@@ -749,6 +753,21 @@
         </values>
         <values>
             <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Procedure__c</picklist>
+        <values>
+            <fullName>N%2FA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Oral Hearing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Written Reps</fullName>
             <default>false</default>
         </values>
     </picklistValues>
