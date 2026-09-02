@@ -4,8 +4,6 @@
     <description>Time to decision after Inspector’s report (In days)
 The system to calculate the inspector’s Report Received Date and the Decision date = the interim period</description>
     <externalId>false</externalId>
-    <inlineHelpText>Time to decision after Inspector’s report (In days)
-The system to calculate the inspector’s Report Received Date and the Decision date = the interim period</inlineHelpText>
     <label>Time To Decision After Inspector Report</label>
     <precision>18</precision>
     <required>false</required>

@@ -4,7 +4,6 @@
     <description>1st Abeyance Duration (In Days) 
 The system to calculate the difference between Start Date and the End Date</description>
     <externalId>false</externalId>
-    <inlineHelpText>1st Abeyance Duration (In Days) 
 The system to calculate the difference between Start Date and the End Date</inlineHelpText>
     <label>1st Abeyance Duration (In Days)</label>
     <precision>18</precision>

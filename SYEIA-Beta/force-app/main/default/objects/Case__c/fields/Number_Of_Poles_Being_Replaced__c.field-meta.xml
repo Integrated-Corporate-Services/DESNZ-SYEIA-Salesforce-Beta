@@ -2,7 +2,6 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Number_Of_Poles_Being_Replaced__c</fullName>
     <externalId>false</externalId>
-    <inlineHelpText>How many are being replacing?</inlineHelpText>
     <label>Number Of Poles Being Replaced?</label>
     <precision>18</precision>
     <required>false</required>
