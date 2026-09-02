@@ -242,6 +242,49 @@
         <nameSegment>customNotificationAction</nameSegment>
         <offset>0</offset>
     </actionCalls>
+    <actionCalls>
+        <name>NWL_Notify_Case_Officer_That_File_Is_Approved</name>
+        <label>NWL Notify Case Officer That File Is Approved</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>customNotificationAction</actionName>
+        <actionType>customNotificationAction</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>customNotifTypeId</name>
+            <value>
+                <elementReference>NWL_Get_Consent_Letter_NotificationType.Id</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientIds</name>
+            <value>
+                <elementReference>var_CollectionOfUserIds</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>title</name>
+            <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>Decision Letter has been approved!</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>body</name>
+            <value>
+                <elementReference>formula_NotificationBody</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>targetId</name>
+            <value>
+                <elementReference>triggeringRecord.Case__r.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>customNotificationAction</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
     <apiVersion>65.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
@@ -274,6 +317,22 @@
         </assignmentItems>
         <connector>
             <targetReference>Update_Approver_Lookup</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>NWL_Add_Requesting_User_to_CollectionOfUserIds</name>
+        <label>NWL Add Requesting User to CollectionOfUserIds</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_CollectionOfUserIds</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>triggeringRecord.Requesting_User__r.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>NWL_Notify_Case_Officer_That_File_Is_Approved</targetReference>
         </connector>
     </assignments>
     <decisions>
@@ -318,6 +377,21 @@
                 <targetReference>Split_on_Document_Type</targetReference>
             </connector>
             <label>S37</label>
+        </rules>
+        <rules>
+            <name>NWL</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>triggeringRecord.Case__r.Case_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Content_Document_Link</targetReference>
+            </connector>
+            <label>NWL</label>
         </rules>
     </decisions>
     <decisions>
@@ -415,6 +489,41 @@ Nebula Logger</description>
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_Content_Document_Link</name>
+        <label>Create Content Document Link</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>NWL_Get_Consent_Letter_NotificationType</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>ContentDocumentId</field>
+            <value>
+                <elementReference>Get_Content_Document_Link.ContentDocumentId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>LinkedEntityId</field>
+            <value>
+                <elementReference>triggeringRecord.Case__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ShareType</field>
+            <value>
+                <elementReference>Get_Content_Document_Link.ShareType</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Visibility</field>
+            <value>
+                <elementReference>Get_Content_Document_Link.Visibility</elementReference>
+            </value>
+        </inputAssignments>
+        <object>ContentDocumentLink</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
     <recordLookups>
         <name>Get_Consent_Letter_NotificationType</name>
         <label>Get Consent Letter NotificationType</label>
@@ -438,6 +547,27 @@ Nebula Logger</description>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>CustomNotificationType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Content_Document_Link</name>
+        <label>Get Content Document Link</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Create_Content_Document_Link</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>LinkedEntityId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>triggeringRecord.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>ContentDocumentLink</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
@@ -561,6 +691,27 @@ Nebula Logger</description>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>User</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>NWL_Get_Consent_Letter_NotificationType</name>
+        <label>NWL - Get Consent Letter NotificationType</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>NWL_Add_Requesting_User_to_CollectionOfUserIds</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Consent_Letter_Approved</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>CustomNotificationType</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
