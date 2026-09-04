@@ -3,7 +3,7 @@
     <fullName>Explanation_Submitted_Beyond_3_Months__c</fullName>
     <description>Explanation Submitted 3 Months After Notice to Remove</description>
     <inlineHelpText>Explanation Submitted 3 Months After Notice to Remove</inlineHelpText>
-    <label>Explanation - Submitted Beyond 3 Months</label>
+    <label>Explanation: Submitted after 3 months</label>
     <length>32768</length>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>

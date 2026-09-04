@@ -286,7 +286,7 @@ private class InboundForm_ProcessorTest {
                     '"postcode":null,' +
                     '"email":"ics.tester10@ics-testing.com",' +
                     '"phone":null,' +
-                    '"additional_contacts":[]' +
+                    '"additional_contacts":["applicantcontactdetaila@test.com","applicantcontactdetailb@test.com"]' +
                 '},' +
                 '"applicationDetails":{' +
                     '"application_type":"Existing line",' +
@@ -353,6 +353,11 @@ private class InboundForm_ProcessorTest {
                         '"postcode":"SA14RF",' +
                         '"town_city":"test"' +
                     '},' +
+                    '"os_grid_reference": {'+
+                        '"easting": "123",'+
+                        '"northing": "45",'+
+                        '"grid_letter": "OS"'+
+                    '},'+
                     '"country":"england",' +
                     '"land_registry_ref":"1234567",' +
                     '"land_registry_reference_document":{"document_id":"d3adb166-5942-4fae-aeb1-0a40315df684","file_id":"4a470cd4-acb6-4d5c-8640-a31379e5b34e","filename":"evidence-request.pdf","fileUrl":"b6ed18fa-7c3d-43bf-97b9-a40fc9bffa03/LAND_REGISTRY/evidence-request.pdf"},'+
@@ -1256,7 +1261,7 @@ private class InboundForm_ProcessorTest {
                 'Case should link land details record through Related_Land__c');
             Assert.areEqual('1234567', relatedLand.Land_Registry_Reference_Number__c,
                 'Land record should map land_registry_ref from landDetails');
-            Assert.areEqual('TE 123456 654321', relatedLand.Grid_Letter__c,
+            Assert.areEqual('OS', relatedLand.Grid_Letter__c,
                 'Land record should map os_grid_ref from landDetails');
             Assert.areEqual('England', relatedLand.Land_Location__c,
                 'Land location should normalize and map from landDetails.country');
@@ -1329,7 +1334,7 @@ private class InboundForm_ProcessorTest {
                 'Applicant party should carry NWL_ORGANISATION identifier');
 
             Party__c applicantOrganisationParty = [
-                SELECT Id
+                SELECT Id, Additional_Contact_Email_Addresses__c
                 FROM Party__c
                 WHERE Case__c = :insertedCase.Id
                 AND Name = 'DESNZ'
@@ -1338,6 +1343,11 @@ private class InboundForm_ProcessorTest {
             ];
             Assert.areEqual(applicantOrganisationParty.Id, insertedCase.DNO__c,
                 'Case should link applicant organisation party through DNO__c');
+            Assert.areEqual(
+                'applicantcontactdetaila@test.com,applicantcontactdetailb@test.com',
+                applicantOrganisationParty.Additional_Contact_Email_Addresses__c,
+                'Applicant additional contacts should map as a comma-separated value'
+            );
 
             Assert.isTrue(result.collectionRecords.containsKey('ApplicantContacts'),
                 'ApplicantContacts collection should be processed from applicantDetails');
@@ -1401,8 +1411,8 @@ private class InboundForm_ProcessorTest {
                 (String) installedAssetsByCode.get('966c15b0-89cf-40e2-8a73-fb8a099be0e7').get('Line_Voltage__c'),
                 'Installed asset line voltage should map and normalize from line_voltage');
             Assert.areEqual(
-                'LV overhead line;LV overhead + wooden poles;LV overhead + poles + stays;' +
-                'LV overhead + steel towers;Wooden poles;Stays;Steel towers;LV underground cable',
+                'LV overhead line;LV overhead line + wooden poles;LV overhead line + poles + stays;' +
+                'LV overhead line + steel towers;Wooden poles;Stays;Steel towers;LV underground cable',
                 (String) installedAssetsByCode.get('966c15b0-89cf-40e2-8a73-fb8a099be0e7').get('Line_Type_Multi__c'),
                 'Installed asset line_types should map to multiple line type picklist values');
             Assert.areEqual('TEST',

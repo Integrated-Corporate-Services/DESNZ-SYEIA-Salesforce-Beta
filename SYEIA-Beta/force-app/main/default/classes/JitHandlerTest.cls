@@ -5,7 +5,7 @@
 private class JitHandlerTest {
     
     private static final String TEST_FEDERATION_ID = 'test.user@example.gov.uk.testorg';
-    private static final String TEST_PROFILE_NAME = 'Case Officer';
+    private static final String TEST_PROFILE_NAME = 'Base Employee';
     
     /**
      * Test successful user creation

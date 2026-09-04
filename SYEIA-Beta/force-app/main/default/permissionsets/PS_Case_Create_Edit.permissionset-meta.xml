@@ -68,11 +68,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Asset_Information__c.Line_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Asset_Information__c.Line_Voltage__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -437,6 +432,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Case__c.Decision_Deadline__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Case__c.Decision_Deadline_Display__c</field>
         <readable>true</readable>
@@ -444,6 +444,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Case__c.Decision_Deadline_Formula__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case__c.Decision_Letter_Issued_in_Time_Formula__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1082,6 +1087,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Case__c.Withdrawn_Letter_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Case__c.Withdrawal_Request_Count__c</field>
         <readable>true</readable>
@@ -1224,11 +1234,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Consultation__c.Consultation_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Consultation__c.Consultee_Contact_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1539,6 +1544,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Party__c.Last_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Party__c.Organisation__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

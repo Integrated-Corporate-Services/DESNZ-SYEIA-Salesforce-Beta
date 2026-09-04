@@ -80,6 +80,10 @@
 		<members>*</members>
 		<name>ApprovalProcess</name>
 	</types>
+	<types>
+		<members>Document_Approval_Request__c</members>
+		<name>Workflow</name>
+	</types>
 <types>
 		<members>*</members>
 		<name>ContentAsset</name>
@@ -176,6 +180,7 @@
 		<members>Case__c.Deadline_For_Further_Representations__c</members>
 		<members>Case__c.Deadline_For_Statement_Of_Evidence__c</members>
 		<members>Case__c.Decision_Date__c</members>
+		<members>Case__c.Decision_Deadline__c</members>
 		<members>Case__c.Decision_Deadline_Display__c</members>
 		<members>Case__c.Decision_Deadline_Formula__c</members>
 		<members>Case__c.Decision_Letter_Issued_in_Time_Formula__c</members>
@@ -296,6 +301,8 @@
 		<members>Case__c.Wayleave_Payments_Previously_to_Grantor__c</members>
 		<members>Case__c.What3Words__c</members>
 		<members>Case__c.Why_Have_All_Wayleaves_Not_Been_Obtained__c</members>
+		<members>Case__c.Withdrawal_Date_Time__c</members>
+		<members>Case__c.Withdrawn_Letter_Date__c</members>
 		<members>Case__c.Withdrawal_Request_Count__c</members>
 		<members>Case__c.Works_Comply_With_ESQCR__c</members>
 		<members>Case__c.Written_Removal_Notice_Been_Given__c</members>
@@ -427,6 +434,7 @@
 		<members>Party__c.Phone__c</members>
 		<members>Party__c.Representative__c</members>
 		<members>Party__c.Salutation__c</members>
+		<members>Party__c.Organisation__c</members>
 		<members>Payment__c.Case__c</members>
 		<members>Payment__c.Created_at__c</members>
 		<members>Payment__c.Description__c</members>
@@ -585,6 +593,7 @@
 		<members>Consultation_Response__c</members>
 		<members>Document_Approval_Request__c</members>
 		<members>Dynamic_Application_Status_Routing__mdt</members>
+		<members>Case_Email_Config__mdt</members>
 		<members>Email_Tracking__c</members>
         <members>Further_Information_Requested__c</members>
 		<members>GOV_UK_Notify_Config__mdt</members>
@@ -610,6 +619,33 @@
 <types>
 		<members>*</members>
 		<name>CustomPermission</name>
+	</types>
+	<types>
+		<members>PS_AWS_API_Integration</members>
+		<members>PS_Bypass_DocGen_Approval</members>
+		<members>PS_Case_Create_Edit</members>
+		<members>PS_Case_Delete</members>
+		<members>PS_Case_Management_Suite</members>
+		<members>PS_Case_Manual_Share</members>
+		<members>PS_Case_Read</members>
+		<members>PS_Case_Reassign</members>
+		<members>PS_Document_Approve</members>
+		<members>PS_Document_Generation</members>
+		<members>PS_Gov_UK_Notify</members>
+		<members>PS_Read_Write_Locked_Case_Notes</members>
+		<members>PS_Require_MFA</members>
+		<members>PS_Withdraw_Case</members>
+		<name>PermissionSet</name>
+	</types>
+	<types>
+		<members>PSG_Case_Officer_Standard_User</members>
+		<members>PSG_Decision_Manager</members>
+		<members>PSG_Finance</members>
+		<members>PSG_Legal</members>
+		<members>PSG_PEDW</members>
+		<members>PSG_PINS</members>
+		<members>PSG_Super_User</members>
+		<name>PermissionSetGroup</name>
 	</types>
 <types>
 		<members>Address__c</members>
@@ -652,7 +688,6 @@
 		<name>FlexiPage</name>
 	</types>
 <types>
-		<members>Case_After_Save</members>
 		<members>Case_Before_Save</members>
 		<members>Case_Unassigned_Case_Notifications</members>
 		<members>Consultation_Before_Save</members>
@@ -706,7 +741,7 @@
 		<members>Task_After_Delete</members>
 		<members>Task_After_Save</members>
 		<members>Update_the_application_status_to_Archived</members>
-		<members>Screen_NWL_Create_New_Further_Information_Requested</members>
+		<members>Screen_NWL_Send_Letter</members>
 		<name>Flow</name>
 	</types>
 <types>
@@ -789,7 +824,10 @@
 		<name>Profile</name>
 	</types>
 <types>
+<types>
+		<members>Document_Approvers</members>
 		<members>New_Cases_Necessary_Wayleaves</members>
+		<members>New_Cases</members>
 		<members>New_Cases_S37</members>
 		<members>New_Cases_Tree_Lopping</members>
 		<members>Queue_NWL_Cases</members>
@@ -802,7 +840,6 @@
 		<name>QuickAction</name>
 	</types>
 <types>
-	<types>
 		<members>Case__c.Necessary_Wayleaves</members>
 		<members>Case__c.Section_37</members>
 		<members>Case__c.Tree_Lopping</members>
@@ -811,10 +848,6 @@
 		<name>RecordType</name>
 	</types>
 <types>
-		<members>*</members>
-		<name>QuickAction</name>
-	</types>
-	<types>
 		<members>*</members>
 		<name>Role</name>
 	</types>
@@ -854,17 +887,22 @@
 		<members>Case__c.Lock_Case_When_Archived</members>
 		<members>Case__c.Lock_Completed_Case</members>
 		<members>Case__c.Lock_Rejected_Case</members>
+		<members>Case__c.Lock_Submited_For_Approval_CaseOfficer</members>		
 		<members>Case__c.Lock_Withdrawn_Case</members>
 		<members>Case__c.Restrict_Admin_Edit_On_Status</members>
 		<members>Case__c.Validate_DNO_Party_Type</members>
-		<members>Case__c.CWTR_Letter_Sent_Date_Mandatory</members>
 		<members>Case__c.Decision_Letter_Sent_Date_is_Mandatory</members>
-		<members>Case__c.DESNZ_Decision_is_Mandatory</members>
 		<members>Case__c.Agreed_With_Inspector_Recom_is_Mandatory</members>
 		<members>Case__c.Time_To_Decision_After_Inspect_Mandatory</members>
 		<members>Case__c.Total_Time_Exc_Abeyance_is_Mandatory</members>
 		<members>Case__c.Withdrawal_Date_Time_Is_Required</members>
 		<members>Case__c.Invalid_Letter_Date_Is_Required</members>
+		<members>Case__c.Assessment_Date_Is_Required</members>
+		<members>Case__c.CTWR_Res_From_Applicant_Date_Is_Required</members>
+		<members>Case__c.CTWR_Res_From_Landowner_Date_Is_Required</members>
+		<members>Case__c.CTWR_Deadline_Is_Required</members>
+		<members>Case__c.CTWR_Letter_Date_Is_Required</members>
+		<members>Case__c.Withdrawn_Letter_Date_Is_Required</members>
 		<name>ValidationRule</name>
 	</types>
 	<version>65.0</version>
