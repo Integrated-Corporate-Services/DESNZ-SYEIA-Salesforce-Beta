@@ -398,56 +398,7 @@
             <default>false</default>
         </values>
     </picklistValues>
-    <picklistValues>
         <picklist>DESNZ_Decision__c</picklist>
-        <values>
-            <fullName>Abeyance Letter Issued</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Acknowledgement Letter Issued</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Awaiting Update From The Parties</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Awaiting Validation</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>CTWR Letter Issued</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Decision In Progress</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Further Information Requested From Applicant</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Further Information Requested From Both Parties</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Further Information Requested From Landowner</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Further Statement Of Evidence Exchanged</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Inspector Appointed</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Judicial Review In Progress</fullName>
-            <default>false</default>
-        </values>
         <values>
             <fullName>N%2FA</fullName>
             <default>false</default>
@@ -457,7 +408,7 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>NW Granted Against Inspector Recommendation</fullName>
+            <fullName>NW Granted against Inspector recommendation</fullName>
             <default>false</default>
         </values>
         <values>
@@ -465,59 +416,7 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>NW Refused Against Inspector Recommendation</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Ongoing Negotiations</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Post Decision Correspondence</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Pre-Action Protocol Letter Received</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Procedural Notice Issued</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Referred To PINS%2FPEDW</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Seeking Further Information From Inspector</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Seeking Further Information From The Parties</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Seeking Legal Advice</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Statement Of Evidence Exchanged</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>TL Order Granted</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>TL Order Granted Against Inspector Recommendation</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>TL Order Refused</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>TL Order Refused Against Inspector Recommendation</fullName>
+            <fullName>NW Refused against Inspector recommendation</fullName>
             <default>false</default>
         </values>
     </picklistValues>
