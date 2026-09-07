@@ -824,7 +824,6 @@
 		<name>Profile</name>
 	</types>
 <types>
-<types>
 		<members>Document_Approvers</members>
 		<members>New_Cases_Necessary_Wayleaves</members>
 		<members>New_Cases</members>
