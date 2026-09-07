@@ -2,7 +2,6 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Description_of_Important_Information__c</fullName>
     <description>Description of Important Information</description>
-    <inlineHelpText>Description of Important Information</inlineHelpText>
     <label>Description of Important Information</label>
     <length>32768</length>
     <trackHistory>false</trackHistory>

@@ -3,7 +3,6 @@
     <fullName>Related_Land__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <description>Related Land Details</description>
-    <inlineHelpText>Related Land Details</inlineHelpText>
     <label>Related Land</label>
     <referenceTo>Land__c</referenceTo>
     <relationshipLabel>Cases</relationshipLabel>

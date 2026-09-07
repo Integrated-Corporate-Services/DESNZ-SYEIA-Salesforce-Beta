@@ -2,7 +2,6 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Any_Other_Important_Information__c</fullName>
     <description>Any Other Important Information</description>
-    <inlineHelpText>Any Other Important Information</inlineHelpText>
     <label>Any Other Important Information</label>
     <required>false</required>
     <trackHistory>false</trackHistory>

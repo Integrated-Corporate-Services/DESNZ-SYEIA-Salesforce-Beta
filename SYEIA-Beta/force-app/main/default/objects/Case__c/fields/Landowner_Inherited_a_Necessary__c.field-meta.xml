@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Landowner_Inherited_a_Necessary__c</fullName>
-    <inlineHelpText>Has the current landowner inherited a necessary wayleave in relation to the specified asset schedule?</inlineHelpText>
     <label>Landowner Inherited a Necessary Wayleave</label>
     <required>false</required>
     <trackHistory>false</trackHistory>

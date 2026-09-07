@@ -2,7 +2,6 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Evidence_of_Negotiations__c</fullName>
     <description>Evidence of Negotiations</description>
-    <inlineHelpText>Evidence of Negotiations</inlineHelpText>
     <label>Evidence of Negotiations</label>
     <length>32768</length>
     <trackHistory>false</trackHistory>
