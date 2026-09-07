@@ -3,7 +3,6 @@
     <fullName>County__c</fullName>
     <description>Address County</description>
     <externalId>false</externalId>
-    <inlineHelpText>Address County</inlineHelpText>
     <label>County</label>
     <length>255</length>
     <required>false</required>

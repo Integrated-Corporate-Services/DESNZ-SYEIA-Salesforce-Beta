@@ -3,7 +3,6 @@
     <fullName>Name_Of_Inspector__c</fullName>
     <description>Name of Inspector</description>
     <externalId>false</externalId>
-    <inlineHelpText>Name of Inspector</inlineHelpText>
     <label>Name Of Inspector</label>
     <length>255</length>
     <required>false</required>
