@@ -70,27 +70,18 @@ public with sharing class FileController {
             List<Compression.ZipEntry> entries = zipReader.getEntries();
             List<TreeNode> nodes = new List<TreeNode>();
             for (Compression.ZipEntry entry : entries) {
-                // if (entry.isDirectory()) continue;
                 String path = entry.getName();
                 Integer lastSlash = path.lastIndexOf('/');
                 String folderPath = lastSlash > -1 ? path.substring(0, lastSlash) : '';
                 String fileName = lastSlash > -1 ? path.substring(lastSlash+1) : path;
                 Blob fileBlob = zipReader.getEntry(entry.getName()).getContent();
-                // ContentVersion cv = [SELECT Id, ContentDocumentId FROM ContentVersion WHERE Id = 'a00Vd00000Ld19sIAB' LIMIT 1];
+                
                 System.debug('logLevel' + fileBlob);
-                // cv.Title = fileName;
-                // cv.PathOnClient = path;
-                // cv.VersionData = fileBlob;
-                // cv.Description = 'Imported from ZIP path: ' + path;
-                // if (recordId != null) {
-                    // cv.FirstPublishLocationId = 'a00Vd00000Ld19sIAB';
-                // }
-                // insert cv;
+
                 TreeNode node = new TreeNode();
                 node.key = path;
                 node.name = fileName;
                 node.isFile = true;
-                // node.contentDocumentId = cv.ContentDocumentId;
                 node.children = new List<TreeNode>();
                 nodes.add(node);
             }
