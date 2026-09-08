@@ -5,6 +5,7 @@
 		<members>Application_StatusUpdateQueueableTest</members>
 		<members>ApplicationStatusService</members>
 		<members>ApplicationStatusServiceTest</members>
+		<members>ApplicationDocumentDownloadQueueable</members>
 		<members>BusinessDaysCalculator</members>
 		<members>BusinessDaysCalculatorTest</members>
 		<members>CaseTriggerHandler</members>
@@ -786,11 +787,6 @@
 		<members>Consultation_Internal</members>
 		<members>Document_Approval_Path</members>
 		<name>PathAssistant</name>
-	</types>
-<types>
-		<members>Admin</members>
-		<members>Base Employee</members>
-		<name>Profile</name>
 	</types>
 <types>
 		<members>New_Cases_Necessary_Wayleaves</members>
