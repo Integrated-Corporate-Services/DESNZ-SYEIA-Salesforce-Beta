@@ -51,6 +51,27 @@ private class FileControllerTest {
         public HttpResponse respond(HttpRequest req) {
             String endpoint = req.getEndpoint();
 
+            if (endpoint != null && endpoint.endsWith('/documents')) {
+                System.assertEquals('GET', req.getMethod(), 'Expected GET for document list');
+                System.assert(endpoint.contains(APPLICATION_ID + '/documents'),
+                    'Unexpected endpoint: ' + endpoint);
+                System.assertEquals('*/*', req.getHeader('Accept'));
+                System.assertEquals(UserInfo.getUserEmail(), req.getHeader('X-Acting-User-Email'));
+                System.assertEquals(UserInfo.getUserId(), req.getHeader('X-Acting-User-Id'));
+                System.assertEquals('desnz_caseworker', req.getHeader('X-Acting-User-Role'));
+                System.assertNotEquals(null, req.getHeader('X-Correlation-ID'));
+                System.assert(
+                    req.getHeader('Authorization') != null &&
+                    req.getHeader('Authorization').startsWith('Bearer '),
+                    'Authorization header must be present'
+                );
+
+                HttpResponse res = new HttpResponse();
+                res.setStatusCode(200);
+                res.setBody('[{"id":"document-123","name":"test.pdf"}]');
+                return res;
+            }
+
             if (endpoint != null && endpoint.contains('/documents/download')) {
                 if (throwDownloadException) {
                     throw new CalloutException('Forced callout failure');
@@ -70,10 +91,16 @@ private class FileControllerTest {
                     req.getHeader('Authorization').startsWith('Bearer '),
                     'Authorization header must be present'
                 );
-                System.assertEquals(
-                    JSON.serialize(new Map<String, String>{ 'scope' => 'APPLICATION' }),
-                    req.getBody()
-                );
+                Map<String, Object> requestBody =
+                    (Map<String, Object>) JSON.deserializeUntyped(req.getBody());
+                if (requestBody.get('scope') == 'SELECTION') {
+                    System.assertEquals(
+                        new List<Object>{ 'document-123' },
+                        (List<Object>) requestBody.get('documentIds')
+                    );
+                } else {
+                    System.assertEquals('APPLICATION', requestBody.get('scope'));
+                }
 
                 HttpResponse res = new HttpResponse();
                 res.setStatusCode(downloadStatusCode);
@@ -121,6 +148,58 @@ private class FileControllerTest {
 
         System.assertNotEquals(null, result);
         System.assertEquals(ZIP_BASE64, result, 'The returned base64 ZIP should match the mock response');
+    }
+
+    @IsTest
+    static void testGetApplicationDocuments_Success() {
+        Test.setMock(
+            HttpCalloutMock.class,
+            new FileControllerHttpMock(200, null, null, false)
+        );
+
+        Test.startTest();
+        String result = FileController.getApplicationDocuments(APPLICATION_ID);
+        Test.stopTest();
+
+        System.assertEquals('[{"id":"document-123","name":"test.pdf"}]', result);
+    }
+
+    @IsTest
+    static void testDownloadApplicationDocument_Success() {
+        Test.setMock(
+            HttpCalloutMock.class,
+            new FileControllerHttpMock(200, getZipBlob(), null, false)
+        );
+
+        Test.startTest();
+        String result = FileController.downloadApplicationDocument(APPLICATION_ID, 'document-123');
+        Test.stopTest();
+
+        System.assertEquals(ZIP_BASE64, result);
+    }
+
+    @IsTest
+    static void testQueueApplicationDocumentDownload_Success() {
+        Test.setMock(
+            HttpCalloutMock.class,
+            new FileControllerHttpMock(200, getZipBlob(), null, false)
+        );
+
+        Test.startTest();
+        FileController.AsyncDownloadRequest request = FileController.queueApplicationDocumentDownload(
+            APPLICATION_ID,
+            'document-123',
+            'test.pdf',
+            null
+        );
+        Test.stopTest();
+
+        FileController.AsyncDownloadStatus status = FileController.getAsyncDownloadStatus(
+            request.jobId,
+            request.requestToken
+        );
+        System.assertEquals('Completed', status.status);
+        System.assertNotEquals(null, status.contentVersionId);
     }
 
     @IsTest
