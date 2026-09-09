@@ -3,7 +3,6 @@
     <fullName>CTWR_Letter_Sent__c</fullName>
     <defaultValue>false</defaultValue>
     <description>This indicates when a CTWR Letter has been sent.</description>
-    <inlineHelpText>This indicates when a CTWR Letter has been sent.</inlineHelpText>
     <label>CTWR Letter Sent</label>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>

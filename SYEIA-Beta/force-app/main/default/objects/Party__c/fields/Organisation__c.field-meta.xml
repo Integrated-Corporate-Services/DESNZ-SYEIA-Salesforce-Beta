@@ -3,7 +3,6 @@
     <fullName>Organisation__c</fullName>
     <description>Organisation of the applicant/representative or landowner</description>
     <externalId>false</externalId>
-    <inlineHelpText>Organisation of the member</inlineHelpText>
     <label>Organisation</label>
     <length>255</length>
     <required>false</required>

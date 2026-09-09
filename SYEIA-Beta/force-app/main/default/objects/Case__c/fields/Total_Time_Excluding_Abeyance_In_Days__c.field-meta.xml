@@ -4,8 +4,6 @@
     <description>Total time excluding abeyance (In Days)
 The system to calculate the date the procedural letter was issued and Decision Letter date, excluding abeyance time = interim period</description>
     <externalId>false</externalId>
-    <inlineHelpText>Total time excluding abeyance (In Days)
-The system to calculate the date the procedural letter was issued and Decision Letter date, excluding abeyance time = interim period</inlineHelpText>
     <label>Total Time Excluding Abeyance (In Days)</label>
     <precision>18</precision>
     <required>false</required>

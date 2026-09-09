@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Road_Closures_Or_Traffic_Calming__c</fullName>
-    <inlineHelpText>Will any road closures or traffic calming measures be required?</inlineHelpText>
     <label>Road Closures Or Traffic Calming?</label>
     <required>false</required>
     <trackHistory>false</trackHistory>

@@ -5,7 +5,6 @@
     <externalId>false</externalId>
     <formula>IF(NOT(OR(ISNULL(Decision_Date__c), ISNULL(Decision_Deadline_Formula__c))),  IF(Decision_Date__c &lt;= Decision_Deadline_Formula__c , &apos;Yes&apos;, &apos;No&apos;), &apos;N/A&apos;)</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-    <inlineHelpText>Yes if the Decision Letter date is &lt;= Decision deadline</inlineHelpText>
     <label>Decision Letter Issued in Time</label>
     <required>false</required>
     <trackHistory>false</trackHistory>

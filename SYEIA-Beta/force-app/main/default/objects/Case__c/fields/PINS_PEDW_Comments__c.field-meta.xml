@@ -2,7 +2,6 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>PINS_PEDW_Comments__c</fullName>
     <description>PINS/PEDW Comments</description>
-    <inlineHelpText>PINS/PEDW Comments</inlineHelpText>
     <label>PINS/PEDW Comments</label>
     <length>32768</length>
     <trackHistory>false</trackHistory>

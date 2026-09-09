@@ -2,7 +2,6 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Submitted_Within_3_Months_Of_Notice__c</fullName>
     <description>Submitted Within 3 Months of Notice</description>
-    <inlineHelpText>Submitted Within 3 Months of Notice</inlineHelpText>
     <label>Submitted Within 3 Months Of Notice</label>
     <required>false</required>
     <trackHistory>false</trackHistory>

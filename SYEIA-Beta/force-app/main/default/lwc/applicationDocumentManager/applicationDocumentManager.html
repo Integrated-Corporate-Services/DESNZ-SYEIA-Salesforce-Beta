@@ -8,19 +8,9 @@
         </lightning-button>
 
         <lightning-button
-            label="Download Selected"
-            title="Download Selected"
-            onclick={handleDownloadSelected}
-            disabled={disableDownloadSelected}
-            class="slds-m-bottom_small">
-        </lightning-button>
-
-        <lightning-button
             label="Download All"
-            title="Download All"
-            onclick={handleDownloadAll}
-            disabled={disableDownloadAll}
-            class="slds-m-bottom_small">
+            onclick={downloadAll}
+            class="slds-m-bottom_small slds-m-left_small">
         </lightning-button>
 
         <template lwc:if={hasFiles}>
@@ -29,7 +19,6 @@
                 data={files}
                 columns={columns}
                 onrowaction={handleRowAction}
-                onrowselection={handleRowSelection}
                 class="custom-table">
             </lightning-datatable>
         </template>

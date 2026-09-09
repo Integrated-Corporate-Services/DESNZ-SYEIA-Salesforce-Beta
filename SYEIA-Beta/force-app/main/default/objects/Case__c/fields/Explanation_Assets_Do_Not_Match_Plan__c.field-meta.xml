@@ -2,7 +2,6 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Explanation_Assets_Do_Not_Match_Plan__c</fullName>
     <description>Explanation Assets Listed Do Not Match Those On Plan</description>
-    <inlineHelpText>Explanation Assets Listed Do Not Match Those On Plan</inlineHelpText>
     <label>Explanation - Assets Do Not Match Plan</label>
     <length>32768</length>
     <trackHistory>false</trackHistory>
