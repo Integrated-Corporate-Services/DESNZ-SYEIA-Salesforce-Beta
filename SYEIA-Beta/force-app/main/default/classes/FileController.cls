@@ -26,8 +26,7 @@ public with sharing class FileController {
     public static DocumentExportResponse getDocumentExport(String applicationId) {
 
         String endpoint =
-            'https://api.dev.syeia.energysecurity.gov.uk' +
-            '/api/v1/internal/applications/' +
+            'callout:Applicant_File_Download/' +
             EncodingUtil.urlEncode(applicationId, 'UTF-8') +
             '/document-export';
 
@@ -50,13 +49,13 @@ public with sharing class FileController {
             HttpResponse response = new Http().send(req);
             System.debug('Status: ' + response.getStatusCode());
             System.debug('Status: ' + response.getStatus());
-            System.debug('Body: ' + response.getBody());
-            
+
             if (response.getStatusCode() != 200) {
                 Logger.error('Failed to get document export. Status: ' + response.getStatusCode() + ', Response: ' + response.getBody());
                 Logger.saveLog();
                 throw new AuraHandledException('Failed to get document export. Status: ' + response.getStatusCode());
             }
+
 
             return (DocumentExportResponse) JSON.deserialize(response.getBody(), DocumentExportResponse.class);
         } catch (Exception e) {
