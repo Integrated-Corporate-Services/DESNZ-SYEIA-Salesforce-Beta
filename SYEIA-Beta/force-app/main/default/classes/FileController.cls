@@ -1,5 +1,16 @@
 public with sharing class FileController {
 
+    public class DocumentExportResponse {
+        @AuraEnabled public String exportId;
+        @AuraEnabled public String applicationId;
+        @AuraEnabled public String archiveS3Key;
+        @AuraEnabled public String archiveFilename;
+        @AuraEnabled public String archiveSizeBytes;
+        @AuraEnabled public String completedAt;
+        @AuraEnabled public String downloadUrl;
+        @AuraEnabled public Integer urlExpiresIn;
+    }
+
     public class AsyncDownloadStatus {
         @AuraEnabled public String status;
         @AuraEnabled public Id contentVersionId;
@@ -11,6 +22,48 @@ public with sharing class FileController {
         @AuraEnabled public String requestToken;
     }
 
+    @AuraEnabled(cacheable=true)
+    public static DocumentExportResponse getDocumentExport(String applicationId) {
+
+        String endpoint =
+            'callout:Applicant_File_Download/' +
+            EncodingUtil.urlEncode(applicationId, 'UTF-8') +
+            '/document-export';
+
+        HttpRequest req = new HttpRequest();
+
+        req.setMethod('GET');
+        req.setEndpoint(endpoint);
+
+        req.setHeader('Accept', '*/*');
+        req.setHeader('Authorization', 'Bearer ' + OAuthTokenService.getBearerToken());
+        req.setHeader('X-Acting-User-Email', UserInfo.getUserEmail());
+        req.setHeader('X-Acting-User-Id', UserInfo.getUserId());
+        req.setHeader('X-Acting-User-Role', 'desnz_caseworker');
+        req.setHeader(
+            'X-Correlation-ID',
+            String.valueOf(Crypto.getRandomLong())
+        );
+
+        try {
+            HttpResponse response = new Http().send(req);
+            System.debug('Status: ' + response.getStatusCode());
+            System.debug('Status: ' + response.getStatus());
+
+            if (response.getStatusCode() != 200) {
+                Logger.error('Failed to get document export. Status: ' + response.getStatusCode() + ', Response: ' + response.getBody());
+                Logger.saveLog();
+                throw new AuraHandledException('Failed to get document export. Status: ' + response.getStatusCode());
+            }
+
+
+            return (DocumentExportResponse) JSON.deserialize(response.getBody(), DocumentExportResponse.class);
+        } catch (Exception e) {
+            Logger.error('Error getting document export: ' + e.getMessage());
+            Logger.saveLog();
+            throw new AuraHandledException('Error getting document export: ' + e.getMessage());
+        }
+    }
 
     @AuraEnabled(cacheable=true)
     public static String getApplicationDocuments(String applicationId) {

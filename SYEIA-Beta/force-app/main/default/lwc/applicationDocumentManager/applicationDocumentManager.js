@@ -1,5 +1,6 @@
 import { LightningElement, wire, track, api } from 'lwc';
 import getApplicationDocuments from '@salesforce/apex/FileController.getApplicationDocuments';
+import getDocumentExport from '@salesforce/apex/FileController.getDocumentExport';
 import downloadApplicationDocument from '@salesforce/apex/FileController.downloadApplicationDocument';
 import queueApplicationDocumentDownload from '@salesforce/apex/FileController.queueApplicationDocumentDownload';
 import getAsyncDownloadStatus from '@salesforce/apex/FileController.getAsyncDownloadStatus';
@@ -64,6 +65,19 @@ export default class ApplicationDocumentManager extends LightningElement {
             }));
         } catch (e) {
             console.error('Error loading files:', e);
+        }
+    }
+
+    async downloadAll() {
+        try {
+            const exportResponse = await getDocumentExport({ applicationId: this.customFieldValue });
+            if (!exportResponse?.downloadUrl) {
+                throw new Error('The document export did not return a download URL.');
+            }
+            window.open(exportResponse.downloadUrl, '_blank');
+        } catch (e) {
+            console.error('Error downloading all files:', e);
+            this.showToast('Download failed', 'Unable to prepare the document export.', 'error');
         }
     }
 
