@@ -57,8 +57,8 @@ export default class ApplicationDocumentManager extends LightningElement {
                 : parsedResponse.documents || [];
 
             this.files = documents.map((document) => ({
-                Id: document.id || document.documentId || document.Id,
-                Title: document.name || document.Name,
+                Id: document.document_id,
+                Title: document.title,
                 FileType: document.contentType || document.ContentType,
                 fileSizeBytes: document.fileSizeBytes
             }));
