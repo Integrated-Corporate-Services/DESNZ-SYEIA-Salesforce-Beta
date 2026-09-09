@@ -99,7 +99,8 @@
         <inputParameters>
             <name>templateId</name>
             <value>
-                <stringValue>bbb54e45-2601-4225-b498-77c5ddce846d</stringValue>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>6d4c5344-2c65-439c-b763-c9ff735db8c8</stringValue>
             </value>
         </inputParameters>
         <nameSegment>GovUKNotify_Invocable</nameSegment>
@@ -269,7 +270,7 @@ Add Nebula Logger</description>
         <name>formula_EmailPersonalisation</name>
         <dataType>String</dataType>
         <expression>&quot;{\&quot;desnz_ref\&quot;:\&quot;&quot; &amp; {!Get_Case_Record.Name} &amp; 
-&quot;\&quot;,\&quot;withdrawal_request_reason\&quot;:\&quot;&quot; &amp; &apos;Approved&apos; &amp; 
+&quot;\&quot;,\&quot;withdrawal_request_reason\&quot;:\&quot;&quot; &amp; &apos;Rejected&apos; &amp; 
 &quot;\&quot;}&quot;</expression>
     </formulas>
     <interviewLabel>Screen - Withdrawal Process Guide {!$Flow.CurrentDateTime}</interviewLabel>
