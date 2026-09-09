@@ -7,6 +7,12 @@
             class="slds-m-bottom_small">
         </lightning-button>
 
+        <lightning-button
+            label="Download All"
+            onclick={downloadAll}
+            class="slds-m-bottom_small slds-m-left_small">
+        </lightning-button>
+
         <template lwc:if={hasFiles}>
             <lightning-datatable
                 key-field="Id"

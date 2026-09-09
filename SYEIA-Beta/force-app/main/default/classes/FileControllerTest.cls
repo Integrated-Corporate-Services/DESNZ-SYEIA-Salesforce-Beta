@@ -51,6 +51,18 @@ private class FileControllerTest {
         public HttpResponse respond(HttpRequest req) {
             String endpoint = req.getEndpoint();
 
+            if (endpoint != null && endpoint.endsWith('/document-export')) {
+                System.assertEquals('GET', req.getMethod(), 'Expected GET for document export');
+                System.assert(endpoint.contains(APPLICATION_ID + '/document-export'),
+                    'Unexpected endpoint: ' + endpoint);
+
+                HttpResponse res = new HttpResponse();
+                res.setStatusCode(downloadStatusCode);
+                res.setBody(downloadBody != null ? downloadBody :
+                    '{"exportId":"export-123","applicationId":"APP-12345","downloadUrl":"https://example.com/export.zip"}');
+                return res;
+            }
+
             if (endpoint != null && endpoint.endsWith('/documents')) {
                 System.assertEquals('GET', req.getMethod(), 'Expected GET for document list');
                 System.assert(endpoint.contains(APPLICATION_ID + '/documents'),
@@ -162,6 +174,22 @@ private class FileControllerTest {
         Test.stopTest();
 
         System.assertEquals('[{"id":"document-123","name":"test.pdf"}]', result);
+    }
+
+    @IsTest
+    static void testGetDocumentExport_Success() {
+        Test.setMock(
+            HttpCalloutMock.class,
+            new FileControllerHttpMock(200, null, null, false)
+        );
+
+        Test.startTest();
+        FileController.DocumentExportResponse result = FileController.getDocumentExport(APPLICATION_ID);
+        Test.stopTest();
+
+        System.assertEquals('export-123', result.exportId);
+        System.assertEquals(APPLICATION_ID, result.applicationId);
+        System.assertEquals('https://example.com/export.zip', result.downloadUrl);
     }
 
     @IsTest
