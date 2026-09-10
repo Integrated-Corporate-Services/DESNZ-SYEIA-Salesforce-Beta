@@ -36,8 +36,9 @@ export default class ApplicationDocumentManager extends LightningElement {
         {
             type: 'button',
             typeAttributes: {
-                label: 'Download',
-                name: 'download'
+                label: { fieldName: 'downloadLabel' },
+                name: 'download',
+                disabled: { fieldName: 'downloadDisabled' }
             }
         }
     ];
@@ -56,7 +57,9 @@ export default class ApplicationDocumentManager extends LightningElement {
                 Id: document.document_id,
                 Title: document.title,
                 FileType: document.contentType || document.ContentType,
-                downloadUrl: document.downloadUrl
+                downloadUrl: document.downloadUrl,
+                downloadLabel: document.downloadUrl ? 'Download' : 'Use Download All',
+                downloadDisabled: !document.downloadUrl
             }));
         } catch (e) {
             console.error('Error loading files:', e);
