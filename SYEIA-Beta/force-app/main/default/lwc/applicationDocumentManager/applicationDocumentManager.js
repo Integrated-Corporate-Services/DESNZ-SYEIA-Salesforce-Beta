@@ -55,7 +55,7 @@ export default class ApplicationDocumentManager extends LightningElement {
 
             this.files = documents.map((document) => ({
                 Id: document.document_id,
-                Title: document.title,
+                Title: [document.category, document.title].filter(Boolean).join('/'),
                 FileType: document.contentType || document.ContentType,
                 downloadUrl: document.downloadUrl,
                 downloadLabel: document.downloadUrl ? 'Download' : 'Use Download All',
