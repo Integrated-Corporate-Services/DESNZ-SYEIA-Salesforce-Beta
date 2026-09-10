@@ -16,5 +16,6 @@
     <permissionSets>PS_Gov_UK_Notify</permissionSets>
     <permissionSets>PS_Read_Write_Locked_Case_Notes</permissionSets>
     <permissionSets>PS_Withdraw_Case</permissionSets>
+    <permissionSets>force__DocGenUser</permissionSets>
     <status>Updated</status>
 </PermissionSetGroup>

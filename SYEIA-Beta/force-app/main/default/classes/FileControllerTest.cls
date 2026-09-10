@@ -35,6 +35,7 @@ private class FileControllerTest {
         private Blob downloadBlob;
         private String downloadBody;
         private Boolean throwDownloadException;
+        private String failedDocumentExportId;
 
         FileControllerHttpMock(
             Integer downloadStatusCode,
@@ -63,6 +64,28 @@ private class FileControllerTest {
                 return res;
             }
 
+            if (endpoint != null && endpoint.contains('/document-export/')) {
+                System.assertEquals('GET', req.getMethod(), 'Expected GET for individual document export');
+                System.assertEquals('*/*', req.getHeader('Accept'));
+                System.assertEquals(UserInfo.getUserEmail(), req.getHeader('X-Acting-User-Email'));
+                System.assertEquals(UserInfo.getUserId(), req.getHeader('X-Acting-User-Id'));
+                System.assertEquals('desnz_caseworker', req.getHeader('X-Acting-User-Role'));
+                System.assertNotEquals(null, req.getHeader('X-Correlation-ID'));
+                String documentId = endpoint.substringAfterLast('/');
+                System.assert(
+                    new Set<String>{ 'document-123', 'document-456' }.contains(documentId),
+                    'Unexpected document ID: ' + documentId
+                );
+
+                HttpResponse res = new HttpResponse();
+                res.setStatusCode(documentId == failedDocumentExportId ? 500 : 200);
+                res.setBody(
+                    '{"document_id":"' + documentId + '","downloadUrl":"https://example.com/' +
+                    documentId + '.pdf"}'
+                );
+                return res;
+            }
+
             if (endpoint != null && endpoint.endsWith('/documents')) {
                 System.assertEquals('GET', req.getMethod(), 'Expected GET for document list');
                 System.assert(endpoint.contains(APPLICATION_ID + '/documents'),
@@ -80,7 +103,10 @@ private class FileControllerTest {
 
                 HttpResponse res = new HttpResponse();
                 res.setStatusCode(200);
-                res.setBody('[{"id":"document-123","name":"test.pdf"}]');
+                res.setBody(
+                    '[{"document_id":"document-123","title":"test.pdf","contentType":"application/pdf"},' +
+                    '{"document_id":"document-456","title":"second.pdf","contentType":"application/pdf"}]'
+                );
                 return res;
             }
 
@@ -173,7 +199,30 @@ private class FileControllerTest {
         String result = FileController.getApplicationDocuments(APPLICATION_ID);
         Test.stopTest();
 
-        System.assertEquals('[{"id":"document-123","name":"test.pdf"}]', result);
+        List<Object> documents = (List<Object>) JSON.deserializeUntyped(result);
+        Map<String, Object> firstDocument = (Map<String, Object>) documents[0];
+        Map<String, Object> secondDocument = (Map<String, Object>) documents[1];
+        System.assertEquals('document-123', firstDocument.get('document_id'));
+        System.assertEquals('https://example.com/document-123.pdf', firstDocument.get('downloadUrl'));
+        System.assertEquals('document-456', secondDocument.get('document_id'));
+        System.assertEquals('https://example.com/document-456.pdf', secondDocument.get('downloadUrl'));
+    }
+
+    @IsTest
+    static void testGetApplicationDocuments_ContinuesAfterExportFailure() {
+        FileControllerHttpMock mock = new FileControllerHttpMock(200, null, null, false);
+        mock.failedDocumentExportId = 'document-123';
+        Test.setMock(HttpCalloutMock.class, mock);
+
+        Test.startTest();
+        String result = FileController.getApplicationDocuments(APPLICATION_ID);
+        Test.stopTest();
+
+        List<Object> documents = (List<Object>) JSON.deserializeUntyped(result);
+        Map<String, Object> firstDocument = (Map<String, Object>) documents[0];
+        Map<String, Object> secondDocument = (Map<String, Object>) documents[1];
+        System.assertEquals(null, firstDocument.get('downloadUrl'));
+        System.assertEquals('https://example.com/document-456.pdf', secondDocument.get('downloadUrl'));
     }
 
     @IsTest

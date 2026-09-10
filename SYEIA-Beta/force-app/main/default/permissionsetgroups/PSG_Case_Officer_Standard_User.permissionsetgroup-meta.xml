@@ -3,7 +3,12 @@
     <description>The standard Permission Set Group for Case Officers</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>PSG - Case Officer (Standard User)</label>
+    <permissionSets>PS_AWS_API_Integration</permissionSets>
+    <permissionSets>PS_Case_Create_Edit</permissionSets>
     <permissionSets>PS_Case_Management_Suite</permissionSets>
+    <permissionSets>PS_Case_Manual_Share</permissionSets>
+    <permissionSets>PS_Case_Read</permissionSets>
+    <permissionSets>PS_Case_Reassign</permissionSets>
     <permissionSets>PS_Document_Generation</permissionSets>
     <permissionSets>PS_Gov_UK_Notify</permissionSets>
     <permissionSets>PS_Withdraw_Case</permissionSets>

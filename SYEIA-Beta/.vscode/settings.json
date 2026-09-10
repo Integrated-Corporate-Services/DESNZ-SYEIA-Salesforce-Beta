@@ -5,5 +5,9 @@
     "**/.sf": true,
     "**/.sfdx": true
   },
-  "xml.preferences.showSchemaDocumentationType": "none"
+  "xml.preferences.showSchemaDocumentationType": "none",
+  "chat.tools.terminal.autoApprove": {
+    "npx eslint": true,
+    "sf": true
+  }
 }
