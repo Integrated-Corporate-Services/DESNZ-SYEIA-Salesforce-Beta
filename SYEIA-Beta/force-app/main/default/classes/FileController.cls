@@ -65,7 +65,7 @@ public with sharing class FileController {
         }
     }
 
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static String getApplicationDocuments(String applicationId) {
         HttpRequest req = new HttpRequest();
         String bearerToken = OAuthTokenService.getBearerToken();
@@ -86,13 +86,74 @@ public with sharing class FileController {
                 Logger.saveLog();
                 throw new AuraHandledException('Failed to get application documents. Status: ' + res.getStatusCode());
             }
-            System.debug('test ' + res.getBody());
-            return res.getBody();
+
+            Object parsedResponse = JSON.deserializeUntyped(res.getBody());
+            List<Object> documents;
+            if (parsedResponse instanceof List<Object>) {
+                documents = (List<Object>) parsedResponse;
+            } else {
+                documents = (List<Object>) ((Map<String, Object>) parsedResponse).get('documents');
+            }
+
+            if (documents != null) {
+                for (Object documentValue : documents) {
+                    Map<String, Object> document = (Map<String, Object>) documentValue;
+                    String documentId = (String) document.get('document_id');
+                    try {
+                        Map<String, Object> exportResponse = getApplicationDocumentExport(
+                            applicationId,
+                            documentId,
+                            bearerToken
+                        );
+                        document.put('downloadUrl', exportResponse.get('downloadUrl'));
+                        System.debug('Export response for document ' + documentId + ': ' + exportResponse);
+                        System.debug('Document after adding downloadUrl: ' + document);
+                    } catch (Exception e) {
+                        System.debug('Failed to get document export for application ' + applicationId +
+                            ', document ' + documentId + ': ' + e.getMessage()
+                        );
+                        continue;
+                    }
+                }
+            }
+
+            return JSON.serialize(parsedResponse);
         } catch (Exception e) {
             Logger.error('Error getting application documents: ' + e.getMessage());
             Logger.saveLog();
             throw new AuraHandledException('Error getting application documents: ' + e.getMessage());
         }
+    }
+
+    private static Map<String, Object> getApplicationDocumentExport(
+        String applicationId,
+        String documentId,
+        String bearerToken
+    ) {
+        HttpRequest req = new HttpRequest();
+        req.setEndpoint(
+            'callout:Applicant_File_Download/' +
+            EncodingUtil.urlEncode(applicationId, 'UTF-8') +
+            '/document-export/' +
+            EncodingUtil.urlEncode(documentId, 'UTF-8')
+        );
+        req.setMethod('GET');
+        req.setHeader('Accept', '*/*');
+        req.setHeader('Authorization', 'Bearer ' + bearerToken);
+        req.setHeader('X-Acting-User-Email', UserInfo.getUserEmail());
+        req.setHeader('X-Acting-User-Id', UserInfo.getUserId());
+        req.setHeader('X-Acting-User-Role', 'desnz_caseworker');
+        req.setHeader('X-Correlation-ID', String.valueOf(Crypto.getRandomLong()));
+
+        HttpResponse response = new Http().send(req);
+        if (response.getStatusCode() != 200) {
+            System.debug('Failed to get document export. Status: ' + response.getStatusCode() + ', Response: ' + response.getBody());
+            throw new AuraHandledException(
+                'Failed to get document export. Status: ' + response.getStatusCode()
+            );
+        }
+
+        return (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
     }
 
     @AuraEnabled
