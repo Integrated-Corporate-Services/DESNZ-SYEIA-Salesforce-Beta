@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <classAccesses>
+        <apexClass>ApplicationDocumentDownloadQueueable</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FileController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
     <description>Allows Create and Edit access to the Case Object.</description>
     <fieldPermissions>
         <editable>true</editable>
@@ -64,11 +72,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Asset_Information__c.Line_Type_Multi__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Asset_Information__c.Line_Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -444,6 +447,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Case__c.Decision_Deadline_Formula__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case__c.Decision_Letter_Issued_in_Time_Formula__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1088,6 +1096,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Case__c.Withdrawn_Letter_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Case__c.Works_Comply_With_ESQCR__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -1224,11 +1237,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Consultation__c.Consultation_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Consultation__c.Consultee_Contact_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1543,6 +1551,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Party__c.Organisation__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Party__c.Party_Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -1831,7 +1844,7 @@
         <modifyAllRecords>false</modifyAllRecords>
         <object>Payment__c</object>
         <viewAllFields>false</viewAllFields>
-        <viewAllRecords>false</viewAllRecords>
+        <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
         <allowCreate>true</allowCreate>

@@ -310,6 +310,19 @@ private class InboundForm_MappingConfigTest {
         Assert.areEqual(InboundForm_MappingConfig.DataType.STRING_TYPE, mapping.dataType, 
             'Data type should be STRING_TYPE');
     }
+
+    @IsTest
+    static void testCsvStringListField() {
+        Test.startTest();
+        InboundForm_MappingConfig.FieldMapping mapping =
+            InboundForm_MappingConfig.csvStringListField('contacts', 'Additional_Contacts__c');
+        Test.stopTest();
+
+        Assert.areEqual('contacts', mapping.jsonPath, 'JSON path should be set');
+        Assert.areEqual('Additional_Contacts__c', mapping.targetField, 'Target field should be set');
+        Assert.areEqual(InboundForm_MappingConfig.DataType.CSV_STRING_LIST, mapping.dataType,
+            'Data type should be CSV_STRING_LIST');
+    }
     
     @IsTest
     static void testIntegerField() {

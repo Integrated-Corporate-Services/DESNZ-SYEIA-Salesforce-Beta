@@ -70,6 +70,11 @@ public class InboundForm_NWLConfig {
             'sections.applicationDetails.notice_to_remove_date',
             'Notice_to_Remove_Date__c'
         ));
+        
+        config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
+            'sections.applicationDetails.termination_period_expired',
+            'Termination_Period_Expired__c'
+        ).setBooleanTrueValue('Yes').setBooleanFalseValue('No'));
 
         // Keep legacy NWL automation populated until all downstream flows use Notice_to_Remove_Date__c.
         config.addFieldMapping(InboundForm_MappingConfig.dateField(
@@ -82,9 +87,19 @@ public class InboundForm_NWLConfig {
             'Written_Termination_Notice_Issue_Date__c'
         ));
 
+        config.addFieldMapping(InboundForm_MappingConfig.dateField(
+            'sections.applicationDetails.wayleave_offer_date',
+            'Wayleave_Notice_Date__c'
+        ));
+
         config.addFieldMapping(InboundForm_MappingConfig.stringField(
             'sections.applicantDetails.applicant_name',
             'DNO_Name__c'
+        ));
+
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'sections.applicantDetails.operator_ref',
+            'Applicant_Reference__c'
         ));
 
         // Notice Compliance
@@ -162,6 +177,11 @@ public class InboundForm_NWLConfig {
             'Evidence_of_Negotiations__c'
         ));
 
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'sections.negotiations.no_negotiations_reason',
+            'Explanation_No_Negotiations__c'
+        ));
+
         config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
             'sections.additionalInformation.has_related_applications',
             'Related_Applications__c'
@@ -213,6 +233,11 @@ public class InboundForm_NWLConfig {
 
         applicants.addFieldMapping(InboundForm_MappingConfig.stringField('applicant_name', 'Name'));
         applicants.addFieldMapping(InboundForm_MappingConfig.stringField('email', 'Email__c'));
+        applicants.addFieldMapping(InboundForm_MappingConfig.stringField('applicant_name', 'Organisation__c'));
+        applicants.addFieldMapping(InboundForm_MappingConfig.csvStringListField(
+            'additional_contacts',
+            'Additional_Contact_Email_Addresses__c'
+        ));
         applicants.addFieldMapping(InboundForm_MappingConfig.stringField('phone', 'Phone__c'));
         applicants.addFieldMapping(InboundForm_MappingConfig.defaultValue('DNO', 'Party_Type__c'));
         applicants.addFieldMapping(InboundForm_MappingConfig.defaultValue(
@@ -247,6 +272,8 @@ public class InboundForm_NWLConfig {
             'NWL_ORGANISATION',
             'Application_Party_Id__c'
         ));
+        
+        applicantContacts.addFieldMapping(InboundForm_MappingConfig.stringField('phone', 'Phone__c'));
 
         return applicantContacts;
     }
@@ -266,6 +293,7 @@ public class InboundForm_NWLConfig {
         objectors.addFieldMapping(InboundForm_MappingConfig.stringField('objector_title', 'Salutation__c'));
         objectors.addFieldMapping(InboundForm_MappingConfig.stringField('objector_email', 'Email__c'));
         objectors.addFieldMapping(InboundForm_MappingConfig.stringField('objector_phone', 'Phone__c'));
+        objectors.addFieldMapping(InboundForm_MappingConfig.stringField('objector_organisation', 'Organisation__c'));
         objectors.addFieldMapping(InboundForm_MappingConfig.defaultValue('Individual', 'Party_Type__c'));
         objectors.addFieldMapping(InboundForm_MappingConfig.defaultValue(
             'NWL_OBJECTOR',
@@ -290,6 +318,7 @@ public class InboundForm_NWLConfig {
         landowners.addFieldMapping(InboundForm_MappingConfig.stringField('landowner_title', 'Salutation__c'));
         landowners.addFieldMapping(InboundForm_MappingConfig.stringField('landowner_email', 'Email__c'));
         landowners.addFieldMapping(InboundForm_MappingConfig.stringField('landowner_phone', 'Phone__c'));
+        landowners.addFieldMapping(InboundForm_MappingConfig.stringField('landowner_organisation', 'Organisation__c'));
         landowners.addFieldMapping(InboundForm_MappingConfig.defaultValue('Landowner', 'Party_Type__c'));
         landowners.addFieldMapping(InboundForm_MappingConfig.defaultValue(
             'NWL_LANDOWNER',
@@ -313,6 +342,7 @@ public class InboundForm_NWLConfig {
         reps.addFieldMapping(InboundForm_MappingConfig.stringField('representative_name', 'Name'));
         reps.addFieldMapping(InboundForm_MappingConfig.stringField('representative_title', 'Salutation__c'));
         reps.addFieldMapping(InboundForm_MappingConfig.stringField('representative_email', 'Email__c'));
+        reps.addFieldMapping(InboundForm_MappingConfig.stringField('representative_organisation', 'Organisation__c'));
         reps.addFieldMapping(InboundForm_MappingConfig.stringField('representative_phone', 'Phone__c'));
         reps.addFieldMapping(InboundForm_MappingConfig.defaultValue(
             'Representative',
@@ -522,8 +552,20 @@ public class InboundForm_NWLConfig {
             'Land_Registry_Reference_Number__c'
         ));
         landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
-            'os_grid_ref',
+            'land_ownership_unknown_reason',
+            'Explanation_Land_not_Registered__c'
+        ));
+        landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'os_grid_reference.grid_letter',
             'Grid_Letter__c'
+        ));
+        landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'os_grid_reference.easting',
+            'Easting__c'
+        ));
+        landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'os_grid_reference.northing',
+            'Northing__c'
         ));
         landDetails.addFieldMapping(InboundForm_MappingConfig.stringField(
             'land_identification',

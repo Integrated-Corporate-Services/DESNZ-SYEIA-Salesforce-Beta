@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CTWR_Res_From_Applicant_Date_Is_Required</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+NOT($Permission.Bypass_Validation_Rule),
+NOT(ISBLANK(PRIORVALUE( CTWR_Response_From_Applicant_Date__c ))),
+ISBLANK(CTWR_Response_From_Applicant_Date__c)
+)</errorConditionFormula>
+    <errorDisplayField>CTWR_Response_From_Applicant_Date__c</errorDisplayField>
+    <errorMessage>CTWR Response From Applicant Date cannot be blank once the CTWR Response From Applicant letter has been sent.</errorMessage>
+</ValidationRule>

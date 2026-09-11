@@ -83,7 +83,7 @@
             <label>Decision Issued</label>
         </rules>
         <rules>
-            <name>Withdrawal_Issued</name>
+            <name>S37_Withdrawal_Issued</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>$Record.Status__c</leftValueReference>
@@ -106,10 +106,53 @@
                     <elementReference>WithdrawlDatePlus91Days</elementReference>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Section_37</stringValue>
+                </rightValue>
+            </conditions>
             <connector>
                 <targetReference>Update_Case_Decision_Date</targetReference>
             </connector>
-            <label>Withdrawal Issued</label>
+            <label>S37 Withdrawal Issued</label>
+        </rules>
+        <rules>
+            <name>NWL_Withdrawal_Issued</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Archived</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Withdrawn</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Flow.CurrentDate</leftValueReference>
+                <operator>GreaterThanOrEqualTo</operator>
+                <rightValue>
+                    <elementReference>NWLWithdrawlDatePlus91Days</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Necessary_Wayleaves</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Case_Decision_Date</targetReference>
+            </connector>
+            <label>NWL_Withdrawal_Issued</label>
         </rules>
     </decisions>
     <environments>Default</environments>
@@ -117,6 +160,11 @@
         <name>DecisionDatePlus91Days</name>
         <dataType>Date</dataType>
         <expression>{!$Record.Decision_Date__c} + 91</expression>
+    </formulas>
+    <formulas>
+        <name>NWLWithdrawlDatePlus91Days</name>
+        <dataType>Date</dataType>
+        <expression>DATEVALUE({!$Record.Withdrawal_Date_Time__c} ) + 91</expression>
     </formulas>
     <formulas>
         <name>WithdrawlDatePlus91Days</name>

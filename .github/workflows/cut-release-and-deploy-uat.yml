@@ -52,7 +52,7 @@ jobs:
 
       - name: Open PR to main (idempotent)
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           VER="${{ inputs.version }}"
           BRANCH="release/${VER}"

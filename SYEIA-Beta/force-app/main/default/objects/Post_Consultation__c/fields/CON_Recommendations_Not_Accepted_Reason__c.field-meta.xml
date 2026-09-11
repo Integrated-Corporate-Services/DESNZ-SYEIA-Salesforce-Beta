@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>CON_Recommendations_Not_Accepted_Reason__c</fullName>
     <externalId>false</externalId>
-    <label>CON Recommendations Not Accepted Reason</label>
+    <label>Consultees Recs Not Accepted Reason</label>
     <length>255</length>
     <required>false</required>
     <trackTrending>false</trackTrending>

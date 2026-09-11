@@ -21,6 +21,11 @@
                 <label>Bedfordshire</label>
             </value>
             <value>
+                <fullName>Berkshire</fullName>
+                <default>false</default>
+                <label>Berkshire</label>
+            </value>
+            <value>
                 <fullName>Brecknockshire</fullName>
                 <default>false</default>
                 <label>Brecknockshire</label>
@@ -44,11 +49,6 @@
                 <fullName>Carmarthenshire</fullName>
                 <default>false</default>
                 <label>Carmarthenshire</label>
-            </value>
-            <value>
-                <fullName>Ceredigion</fullName>
-                <default>false</default>
-                <label>Ceredigion</label>
             </value>
             <value>
                 <fullName>Cornwall</fullName>
@@ -229,6 +229,11 @@
                 <fullName>Wiltshire</fullName>
                 <default>false</default>
                 <label>Wiltshire</label>
+            </value>
+            <value>
+                <fullName>Worcestershire</fullName>
+                <default>false</default>
+                <label>Worcestershire</label>
             </value>
             <value>
                 <fullName>Wrexham</fullName>

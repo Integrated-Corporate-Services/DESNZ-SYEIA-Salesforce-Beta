@@ -9,7 +9,7 @@ public class JitHandler implements Auth.SamlJitHandler {
     // Default values for new users
     private static final String DEFAULT_FIRST_NAME = 'Test';
     private static final String DEFAULT_LAST_NAME = 'User';
-    private static final String DEFAULT_PROFILE_NAME = 'Case Officer';
+    private static final String DEFAULT_PROFILE_NAME = 'Base Employee';
     private static final String DEFAULT_TIMEZONE = 'Europe/London';
     private static final String DEFAULT_LOCALE = 'en_GB';
     private static final String DEFAULT_EMAIL_ENCODING = 'UTF-8';

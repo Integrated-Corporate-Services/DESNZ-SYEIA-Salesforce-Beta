@@ -108,7 +108,7 @@
             <name>emailBody</name>
             <value>
                 <inputConfiguratorMode>Custom</inputConfiguratorMode>
-                <stringValue>&lt;p&gt;Dear {!varTriggeringCase.Owner:User.FirstName},&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;A new application {!varTriggeringCase.Name} for {!varTriggeringCase.Case_Type__c} has been reassigned to you. &lt;a href=&quot;{!form_CaseDetailLink}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;See your case&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Do not reply to this email.&lt;/p&gt;</stringValue>
+                <stringValue>&lt;p&gt;Dear {!varTriggeringCase.Owner:User.FirstName} {!varTriggeringCase.Owner:User.LastName},&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;A new application {!varTriggeringCase.Name} for {!varTriggeringCase.Case_Type__c} has been reassigned to you. &lt;a href=&quot;{!form_CaseDetailLink}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;See your case&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Do not reply to this email.&lt;/p&gt;</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -234,7 +234,7 @@
             <name>emailBody</name>
             <value>
                 <inputConfiguratorMode>Custom</inputConfiguratorMode>
-                <stringValue>&lt;p&gt;Dear Necessary Wayleaves Team,&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;A new application {!varTriggeringCase.Name} for {!varTriggeringCase.Case_Type__c} &lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;has been &lt;/span&gt;reassigned&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt; to you. &lt;/span&gt;&lt;a href=&quot;{!form_CaseDetailLink}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;See your case&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Do not reply to this email.&lt;/p&gt;</stringValue>
+                <stringValue>&lt;p&gt;Dear S37 Team,&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;A new application {!varTriggeringCase.Name} for {!varTriggeringCase.Case_Type__c} &lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;has been &lt;/span&gt;reassigned&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt; to you. &lt;/span&gt;&lt;a href=&quot;{!form_CaseDetailLink}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;See your case&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Do not reply to this email.&lt;/p&gt;</stringValue>
             </value>
         </inputParameters>
         <inputParameters>

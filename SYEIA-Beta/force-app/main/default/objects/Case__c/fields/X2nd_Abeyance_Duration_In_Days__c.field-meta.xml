@@ -4,8 +4,6 @@
     <description>2nd Abeyance Duration (in days)
 The system to calculate 2nd Start Date and 2nd End Date = duration in days</description>
     <externalId>false</externalId>
-    <inlineHelpText>2nd Abeyance Duration (in days)
-The system to calculate 2nd Start Date and 2nd End Date = duration in days</inlineHelpText>
     <label>2nd Abeyance Duration (In Days)</label>
     <precision>18</precision>
     <required>false</required>

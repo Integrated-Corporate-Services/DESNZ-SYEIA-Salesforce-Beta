@@ -2,7 +2,6 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Estimated_Duration_Of_Works__c</fullName>
     <externalId>false</externalId>
-    <inlineHelpText>How long is estimated for the works to take place</inlineHelpText>
     <label>Estimated Duration Of Works</label>
     <length>255</length>
     <required>false</required>
