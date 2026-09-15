@@ -59,7 +59,7 @@ public class Application_StatusUpdateQueueable implements Queueable, Database.Al
             
             if (salesforceAWSStatusMap.containsKey(key)) {
                
-                string reasonCode = 'WITHDRAWAL_REJECTED'
+                string reasonCode = 'WITHDRAWAL_REJECTED';
 
                 HttpResponse response = ApplicationStatusService.updateApplicationStatus(
                     application.AWS_Application_Id__c,
