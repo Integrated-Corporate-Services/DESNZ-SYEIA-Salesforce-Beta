@@ -58,11 +58,13 @@ public class Application_StatusUpdateQueueable implements Queueable, Database.Al
             System.debug('Application Key >> ' + key);
             
             if (salesforceAWSStatusMap.containsKey(key)) {
-                
+               
+                string reasonCode = 'WITHDRAWAL_REJECTED'
+
                 HttpResponse response = ApplicationStatusService.updateApplicationStatus(
                     application.AWS_Application_Id__c,
                     salesforceAWSStatusMap.get(key),
-                    application.Status__c,
+                    reasonCode,
                     accessToken
                 );
                 
