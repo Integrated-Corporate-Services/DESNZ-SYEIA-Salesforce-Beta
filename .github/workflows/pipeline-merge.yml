@@ -4,9 +4,7 @@ name: "Pipeline: merge deploy"
 # cleanly at the plan step rather than failing.
 on:
   push:
-    # release/** validates on its pull request but never deploys on merge, matching
-    # how release branches are used here. Everything else deploys as normal.
-    branches-ignore: ["release/**"]
+    branches: ["**"]
 
 jobs:
   pipeline:
