@@ -1,0 +1,14 @@
+name: "Pipeline: merge deploy"
+
+# Fires on every branch. A branch with no stage in pipeline-config.yml stops
+# cleanly at the plan step rather than failing.
+on:
+  push:
+    # release/** validates on its pull request but never deploys on merge, matching
+    # how release branches are used here. Everything else deploys as normal.
+    branches-ignore: ["release/**"]
+
+jobs:
+  pipeline:
+    uses: Integrated-Corporate-Services/CoE-DevOps/.github/workflows/stage-merge.yml@main
+    secrets: inherit
