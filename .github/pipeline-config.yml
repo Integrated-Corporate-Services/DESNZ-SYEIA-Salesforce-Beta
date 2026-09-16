@@ -66,15 +66,18 @@ stages:
     environments:
       - name: QA
 
-  # develop → release/* (UAT, validation only)
+  # develop → release/** (UAT, validation only)
   #
   # Merges into a release branch deploy nothing: pipeline-merge.yml ignores
-  # release/**, so only the pull request into one is validated. The ignore uses **
-  # where this uses *, deliberately - GitHub's * stops at a slash and so does this,
-  # but release/release/... exists here, and ** is what catches it on both sides.
+  # release/**, so only the pull request into one is validated.
+  #
+  # ** rather than *, and the same pattern in all three places - here, the merge
+  # workflow's branches-ignore, and pipeline-cut-release.yml's prefix test. A single *
+  # stops at a slash, which would leave release/release/... with an auto-opened pull
+  # request and no stage to validate it.
 
   develop-to-release:
-    target_branch: "release/*"
+    target_branch: "release/**"
     environments:
       - name: UAT
 

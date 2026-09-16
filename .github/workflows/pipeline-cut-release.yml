@@ -1,0 +1,36 @@
+name: "Pipeline: open release PR"
+
+# Cut a release branch and the pull request carrying it onwards opens by itself.
+#
+# `create` fires on branch creation however it happened - git push, the GitHub UI, another
+# workflow - so nothing depends on somebody remembering to run a job afterwards.
+#
+# Two things to know about `create`:
+#   - it fires for tags too, hence the ref_type check
+#   - the workflow file is read from the new branch, so this only works for branches cut
+#     from something that already has it. Cutting from develop is fine; cutting from an
+#     old branch predating this file is not.
+on:
+  create:
+
+permissions:
+  contents: read
+
+jobs:
+  open-pr:
+    # EDIT ME: which branches promote onwards. The pattern here must agree with the
+    # target_branch pattern in pipeline-config.yml, or a branch gets a pull request with
+    # no stage to validate it.
+    if: >-
+      github.event.ref_type == 'branch'
+      && startsWith(github.event.ref, 'release/')
+    uses: Integrated-Corporate-Services/CoE-DevOps/.github/workflows/stage-open-promotion-pr.yml@main
+    with:
+      head_branch: ${{ github.event.ref }}
+      # EDIT ME: where a release branch promotes into.
+      base_branch: main
+      title: "Release ${{ github.event.ref }}"
+      # Opens ready for review, matching what cut-release-and-deploy-uat.yml did.
+      # Set true to open it as a draft while the release stabilises instead.
+      draft: false
+    secrets: inherit
