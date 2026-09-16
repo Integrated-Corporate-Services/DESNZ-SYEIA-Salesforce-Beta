@@ -66,18 +66,10 @@ stages:
     environments:
       - name: QA
 
-  # develop → release/** (UAT, validation only)
-  #
-  # Merges into a release branch deploy nothing: pipeline-merge.yml ignores
-  # release/**, so only the pull request into one is validated.
-  #
-  # ** rather than *, and the same pattern in all three places - here, the merge
-  # workflow's branches-ignore, and pipeline-cut-release.yml's prefix test. A single *
-  # stops at a slash, which would leave release/release/... with an auto-opened pull
-  # request and no stage to validate it.
+  # develop → release/* (UAT, validation only)
 
   develop-to-release:
-    target_branch: "release/**"
+    target_branch: "release/*"
     environments:
       - name: UAT
 
@@ -98,14 +90,6 @@ stages:
   hotfix:
     environments:
       - name: UAT
-    # A hotfix reaches UAT without passing through develop, so it has to be carried
-    # back or it is lost at the next release. The PRs are labelled as hotfix
-    # backsyncs and need review like any other.
-    #
-    # develop only. The old workflow also opened one into the newest release/*,
-    # picked with `ls-remote | tail -n1`, which is alphabetical rather than newest -
-    # targets here are branch names, so that cannot be reproduced and is better done
-    # deliberately than guessed at.
     backsync:
       enabled: true
       targets:
