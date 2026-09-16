@@ -77,18 +77,31 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
                 'Individual',
                 'NWL_OBJECTOR'
             );
+            Party__c objector = getPartyByTypeAndApplicationPartyId(
+                insertedRecords,
+                'Individual',
+                'NWL_OBJECTOR'
+            );
             if (objectorId != null) {
                 caseToUpdate.Objector__c = objectorId;
                 shouldUpdate = true;
             }
 
-            Id representativeId = getPartyIdByTypeAndApplicationPartyId(
+            Party__c representative = getPartyByTypeAndApplicationPartyId(
                 insertedRecords,
                 'Representative',
                 'NWL_REPRESENTATIVE'
             );
+            
+            Id representativeId = representative == null ? null : representative.Id;
             if (representativeId != null) {
                 caseToUpdate.Representative__c = representativeId;
+                shouldUpdate = true;
+            }
+
+            Case__c insertedCase = getFirstCase(insertedRecords);
+            if (arePartyDetailsSame(objector, representative)) {
+                caseToUpdate.Representative__c = objectorId;
                 shouldUpdate = true;
             }
 
@@ -99,6 +112,13 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
             );
             if (landownerId != null) {
                 caseToUpdate.Landowner__c = landownerId;
+                shouldUpdate = true;
+            }
+
+            if (insertedCase != null
+                    && insertedCase.Is_Objector_also_Landowner__c
+                    && objectorId != null) {
+                caseToUpdate.Landowner__c = objectorId;
                 shouldUpdate = true;
             }
 
@@ -483,6 +503,18 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
         return null;
     }
 
+    private static Case__c getFirstCase(Map<String, List<SObject>> records) {
+        if (!records.containsKey('Case__c')) {
+            return null;
+        }
+
+        for (SObject record : records.get('Case__c')) {
+            return (Case__c) record;
+        }
+
+        return null;
+    }
+
     private static Id getPartyIdByType(Map<String, List<SObject>> insertedRecords, String partyType) {
         if (!insertedRecords.containsKey('Party__c')) {
             return null;
@@ -514,6 +546,35 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
             }
         }
         return null;
+    }
+
+    private static Party__c getPartyByTypeAndApplicationPartyId(
+            Map<String, List<SObject>> insertedRecords,
+            String partyType,
+            String applicationPartyId) {
+        if (!insertedRecords.containsKey('Party__c')) {
+            return null;
+        }
+
+        for (SObject record : insertedRecords.get('Party__c')) {
+            Party__c party = (Party__c) record;
+            if (party.Id != null
+                    && party.Party_Type__c == partyType
+                    && party.Application_Party_Id__c == applicationPartyId) {
+                return party;
+            }
+        }
+        return null;
+    }
+
+    private static Boolean arePartyDetailsSame(Party__c firstParty, Party__c secondParty) {
+        return firstParty != null
+            && secondParty != null
+            && firstParty.Name == secondParty.Name
+            && firstParty.Salutation__c == secondParty.Salutation__c
+            && firstParty.Email__c == secondParty.Email__c
+            && firstParty.Phone__c == secondParty.Phone__c
+            && firstParty.Organisation__c == secondParty.Organisation__c;
     }
 
     private static Id getApplicantOrganisationId(
