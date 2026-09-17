@@ -219,6 +219,14 @@ public class InboundForm_S37Config {
         config.addFieldMapping(InboundForm_MappingConfig.BooleanField(
             'sections.sensitiveAreaChecks.tolerance_required', 
             'Tolerance_Required__c'));
+
+        config.addFieldMapping(
+            InboundForm_MappingConfig.stringField(
+                'sections.payment.kind',
+                'Payment_Method__c'
+            )
+        );            
+
     }
     
     // ========================================================================
