@@ -116,7 +116,7 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
             }
 
             if (insertedCase != null
-                    && insertedCase.Is_Objector_also_Landowner__c
+                    && insertedCase.Is_Objector_also_Landowner__c == 'Yes'
                     && objectorId != null) {
                 caseToUpdate.Landowner__c = objectorId;
                 shouldUpdate = true;
