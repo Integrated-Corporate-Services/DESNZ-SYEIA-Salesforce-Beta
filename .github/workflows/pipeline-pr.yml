@@ -1,0 +1,18 @@
+name: "Pipeline: PR validation"
+
+# Thin caller. Everything it does lives in CoE-DevOps; this file only says where
+# the source is. Do not add steps here.
+on:
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  pipeline:
+    uses: Integrated-Corporate-Services/CoE-DevOps/.github/workflows/stage-pr.yml@main
+    with:
+      # EDIT ME if the Salesforce source moves.
+      source_path: SYEIA-Beta/force-app/main/default
+      # Leave "false" unless this repo has GitHub code scanning enabled - the SARIF
+      # upload fails noisily without it and changes nothing.
+      upload_sarif: "false"
+    secrets: inherit
