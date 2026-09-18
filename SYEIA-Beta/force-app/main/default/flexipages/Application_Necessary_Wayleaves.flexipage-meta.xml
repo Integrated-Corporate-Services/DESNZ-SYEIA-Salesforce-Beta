@@ -3089,16 +3089,6 @@
                 <identifier>RecordDate_of_Fee_Paid_cField</identifier>
             </fieldInstance>
         </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Payment_Method__c</fieldItem>
-                <identifier>RecordPayment_Method_cField</identifier>
-            </fieldInstance>
-        </itemInstances>        
         <name>Facet-c0962bbb-e060-46a2-983d-e0e7e10fbc80</name>
         <type>Facet</type>
     </flexiPageRegions>

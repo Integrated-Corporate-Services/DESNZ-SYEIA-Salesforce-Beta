@@ -219,14 +219,6 @@ public class InboundForm_S37Config {
         config.addFieldMapping(InboundForm_MappingConfig.BooleanField(
             'sections.sensitiveAreaChecks.tolerance_required', 
             'Tolerance_Required__c'));
-
-        config.addFieldMapping(
-            InboundForm_MappingConfig.stringField(
-                'sections.payment.kind',
-                'Payment_Method__c'
-            )
-        );            
-
     }
     
     // ========================================================================
@@ -514,15 +506,12 @@ public class InboundForm_S37Config {
                 .setProcessingOrder(100);
         
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('payment_id', 'Payment_Id__c'));
-        payments.addFieldMapping(InboundForm_MappingConfig.stringField('payment_id', 'Item_Reference__c'));
-        payments.addFieldMapping(InboundForm_MappingConfig.stringField('payment_id', 'Invoice_Reference__c'));        
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('kind', 'Payment_Method__c'));
         payments.addFieldMapping(InboundForm_MappingConfig.currencyField('total_amount', 'Total_Amount__c'));
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('status', 'Status__c'));
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('user_id', 'User_Id__c'));
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('provider', 'Provider__c'));
         payments.addFieldMapping(InboundForm_MappingConfig.dateTimeField('created_at', 'Created_at__c'));
-        payments.addFieldMapping(InboundForm_MappingConfig.stringField('description', 'Description__c'));
 
         return payments;
     }
