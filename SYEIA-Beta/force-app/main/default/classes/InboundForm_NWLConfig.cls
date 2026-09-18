@@ -202,6 +202,12 @@ public class InboundForm_NWLConfig {
             'Description_of_Important_Information__c'
         ));
 
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+                'sections.payment.kind',
+                'Payment_Method__c'
+            )
+        );                  
+
     }
 
     private static void addCollectionConfigs(InboundForm_MappingConfig.FormTypeConfig config) {
