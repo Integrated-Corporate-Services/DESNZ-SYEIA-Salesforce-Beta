@@ -67,6 +67,7 @@
 		<members>JWTGenerator</members>
 		<members>JWTGeneratorTest</members>
 		<members>OAuthTokenService</members>
+		<members>RouteMapController</members>
 		<members>TriggerHandler</members>
 		<members>Utilities</members>
 		<name>ApexClass</name>
@@ -651,6 +652,7 @@
 		<members>Land_Record_Page</members>
 		<members>Organisation_Party_Record_Page</members>
 		<members>Payments_Home_Default</members>
+		<members>Route_Map_App_Page</members>
 		<members>Route_Record_Page</members>
 		<members>Sensitive_Area_Check_Record_Page</members>
 		<members>Withdrawal_Request_Record_Page</members>
@@ -829,6 +831,10 @@
 		<members>Payment__c</members>
 		<members>Related_Case__c</members>
 		<name>SharingRules</name>
+	</types>
+	<types>
+		<members>leaflet</members>
+		<name>StaticResource</name>
 	</types>
 <types>
 		<members>PSG_Finance</members>
