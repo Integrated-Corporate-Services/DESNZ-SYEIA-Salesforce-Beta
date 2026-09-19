@@ -68,6 +68,7 @@
 		<members>JWTGeneratorTest</members>
 		<members>OAuthTokenService</members>
 		<members>RouteMapController</members>
+		<members>RoutePointGroupedController</members>
 		<members>TriggerHandler</members>
 		<members>Utilities</members>
 		<name>ApexClass</name>
