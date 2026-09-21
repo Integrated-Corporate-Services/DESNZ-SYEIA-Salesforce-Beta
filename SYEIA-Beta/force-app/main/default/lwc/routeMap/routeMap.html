@@ -1,0 +1,17 @@
+<template>
+    <lightning-card title="Route Map" icon-name="standard:location">
+
+        <div class="map-wrapper">
+            <div class="map-container" lwc:dom="manual"></div>
+        </div>
+
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium slds-text-align_right">
+            <lightning-button
+                label="Open Full Map"
+                icon-name="utility:new_window"
+                onclick={openFullMap}>
+            </lightning-button>
+        </div>
+
+    </lightning-card>
+</template>

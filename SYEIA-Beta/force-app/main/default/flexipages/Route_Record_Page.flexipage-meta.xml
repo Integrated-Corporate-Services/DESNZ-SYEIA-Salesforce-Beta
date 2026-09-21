@@ -230,6 +230,12 @@
                 <identifier>flexipage_tabset</identifier>
             </componentInstance>
         </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>routeMap</componentName>
+                <identifier>c_routeMap</identifier>
+            </componentInstance>
+        </itemInstances>
         <name>main</name>
         <type>Region</type>
     </flexiPageRegions>
