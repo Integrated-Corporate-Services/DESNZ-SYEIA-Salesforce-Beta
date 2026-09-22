@@ -6,7 +6,6 @@ import LEAFLET from '@salesforce/resourceUrl/leaflet';
 import { loadScript, loadStyle } from 'lightning/platformResourceLoader';
 import { openTab } from 'lightning/platformWorkspaceApi';
 
-// ✅ IMPORTANT: match your utility structure (CLASS)
 import { GeoConversionUtil } from './geoConversionUtil';
 
 export default class RouteMap extends LightningElement {
@@ -19,30 +18,53 @@ export default class RouteMap extends LightningElement {
 
     leafletLoaded = false;
 
-    // =========================
+
+    // =====================================================
+    // ROUTE COLOUR
+    // =====================================================
+
+    ROUTE_COLOR = '#1d70b8';
+
+
+    // =====================================================
     // APP PAGE PARAMS
-    // =========================
+    // =====================================================
+
     @wire(CurrentPageReference)
     setPageRef(pageRef) {
-        if (!pageRef) return;
 
-        this.recordId = this.recordId || pageRef.state?.c__caseId;
-        this.routeId = pageRef.state?.c__routeId;
+        if (!pageRef) {
+            return;
+        }
+
+        this.recordId =
+            this.recordId ||
+            pageRef.state?.c__caseId;
+
+        this.routeId =
+            pageRef.state?.c__routeId;
 
         if (this.recordId) {
             this.loadRoutes();
         }
     }
 
-    // =========================
-    // APEX WIRED (RECORD PAGE)
-    // =========================
+
+    // =====================================================
+    // APEX WIRED - RECORD PAGE
+    // =====================================================
+
     @wire(getRoutes, { recordId: '$recordId' })
     wiredRoutes({ data, error }) {
+
         if (data) {
+
             this.routes = data;
 
-            console.log('🟢 Routes received:', JSON.stringify(data));
+            console.log(
+                '🟢 Routes received:',
+                JSON.stringify(data)
+            );
 
             if (this.map) {
                 this.renderRoutes(data);
@@ -50,37 +72,70 @@ export default class RouteMap extends LightningElement {
         }
 
         if (error) {
-            console.error('❌ Apex error:', error);
+
+            console.error(
+                '❌ Apex error:',
+                error
+            );
         }
     }
 
-    // =========================
+
+    // =====================================================
     // LOAD LEAFLET
-    // =========================
+    // =====================================================
+
     renderedCallback() {
-        if (this.leafletLoaded) return;
+
+        if (this.leafletLoaded) {
+            return;
+        }
+
         this.leafletLoaded = true;
 
         Promise.all([
-            loadStyle(this, LEAFLET + '/leaflet.css'),
-            loadScript(this, LEAFLET + '/leaflet.js')
+            loadStyle(
+                this,
+                LEAFLET + '/leaflet.css'
+            ),
+
+            loadScript(
+                this,
+                LEAFLET + '/leaflet.js'
+            )
         ])
         .then(() => {
-            console.log('🟢 Leaflet loaded');
+
+            console.log(
+                '🟢 Leaflet loaded'
+            );
+
             this.initMap();
         })
         .catch(error => {
-            console.error('❌ Leaflet load failed', error);
+
+            console.error(
+                '❌ Leaflet load failed',
+                error
+            );
         });
     }
 
-    // =========================
+
+    // =====================================================
     // INIT MAP
-    // =========================
+    // =====================================================
+
     initMap() {
 
-        const container = this.template.querySelector('.map-container');
-        if (!container) return;
+        const container =
+            this.template.querySelector(
+                '.map-container'
+            );
+
+        if (!container) {
+            return;
+        }
 
         container.innerHTML = '';
 
@@ -88,70 +143,218 @@ export default class RouteMap extends LightningElement {
             this.map.remove();
         }
 
-        this.map = L.map(container).setView([51.5074, -0.1278], 6);
+        this.map = L.map(container)
+            .setView(
+                [51.5074, -0.1278],
+                6
+            );
 
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap'
-        }).addTo(this.map);
+
+        // =================================================
+        // OPEN STREET MAP
+        // =================================================
+
+        L.tileLayer(
+            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            {
+                attribution:
+                    '&copy; OpenStreetMap'
+            }
+        ).addTo(this.map);
+
+
+        // =================================================
+        // FIX INITIAL MAP SIZE
+        // =================================================
 
         setTimeout(() => {
-            this.map.invalidateSize(true);
+
+            if (this.map) {
+                this.map.invalidateSize(true);
+            }
+
         }, 200);
 
+
+        // =================================================
+        // RENDER ROUTES
+        // =================================================
+
         if (this.routes) {
-            this.renderRoutes(this.routes);
+            this.renderRoutes(
+                this.routes
+            );
         }
     }
 
-    // =========================
-    // LOAD ROUTES (APP PAGE)
-    // =========================
+
+    // =====================================================
+    // LOAD ROUTES - APP PAGE
+    // =====================================================
+
     loadRoutes() {
+
         getRoutes({
             recordId: this.recordId,
             routeId: this.routeId
         })
         .then(data => {
+
             this.routes = data;
 
-            console.log('🟡 App routes:', JSON.stringify(data));
+            console.log(
+                '🟡 App routes:',
+                JSON.stringify(data)
+            );
 
             if (this.map) {
                 this.renderRoutes(data);
             }
         })
         .catch(error => {
-            console.error('❌ Apex error:', error);
+
+            console.error(
+                '❌ Apex error:',
+                error
+            );
         });
     }
 
-    // =========================
-    // RENDER ROUTES (STRICT)
-    // =========================
+
+    // =====================================================
+    // GET ROUTE LABEL ANGLE
+    // =====================================================
+
+    getRouteLabelAngle(path, mid) {
+
+        /*
+         * Use points immediately before and after
+         * the midpoint to determine route direction.
+         */
+
+        const startIndex =
+            Math.max(
+                0,
+                mid - 1
+            );
+
+        const endIndex =
+            Math.min(
+                path.length - 1,
+                mid + 1
+            );
+
+
+        const start =
+            this.map.latLngToContainerPoint(
+                path[startIndex]
+            );
+
+        const end =
+            this.map.latLngToContainerPoint(
+                path[endIndex]
+            );
+
+
+        let angle =
+            Math.atan2(
+                end.y - start.y,
+                end.x - start.x
+            ) *
+            180 /
+            Math.PI;
+
+
+        /*
+         * Prevent route name from appearing upside down.
+         */
+
+        if (
+            angle > 90 ||
+            angle < -90
+        ) {
+            angle += 180;
+        }
+
+
+        return angle;
+    }
+
+
+    // =====================================================
+    // RENDER ROUTES
+    // =====================================================
+
     renderRoutes(routes) {
 
-        if (!this.map || !routes) return;
+        if (!this.map || !routes) {
+            return;
+        }
 
-        // clear all except tile layer
+
+        // =================================================
+        // CLEAR EXISTING ROUTE LAYERS
+        // KEEP TILE LAYER
+        // =================================================
+
         this.map.eachLayer(layer => {
+
             if (!(layer instanceof L.TileLayer)) {
-                this.map.removeLayer(layer);
+
+                this.map.removeLayer(
+                    layer
+                );
             }
+
         });
+
 
         const bounds = [];
 
+
+        // =================================================
+        // LOOP THROUGH ROUTES
+        // =================================================
+
         routes.forEach(route => {
 
-            if (!route.points || route.points.length < 2) {
-                console.error('❌ Route invalid (needs 2+ points):', route.name);
+
+            // =================================================
+            // VALIDATE ROUTE
+            // =================================================
+
+            if (
+                !route.points ||
+                route.points.length < 2
+            ) {
+
+                console.error(
+                    '❌ Route invalid (needs 2+ points):',
+                    route.name
+                );
+
                 return;
             }
 
-            const sortedPoints = [...route.points]
-                .sort((a, b) => a.sequence - b.sequence);
+
+            // =================================================
+            // SORT POINTS
+            // =================================================
+
+            const sortedPoints =
+                [...route.points]
+                    .sort(
+                        (a, b) =>
+                            a.sequence - b.sequence
+                    );
+
 
             const path = [];
+
+
+            // =================================================
+            // CONVERT OSGB -> LAT/LNG
+            // =================================================
 
             for (const p of sortedPoints) {
 
@@ -159,76 +362,243 @@ export default class RouteMap extends LightningElement {
                     typeof p.easting !== 'number' ||
                     typeof p.northing !== 'number'
                 ) {
-                    console.error('❌ Invalid OSGB point:', p);
+
+                    console.error(
+                        '❌ Invalid OSGB point:',
+                        p
+                    );
+
                     return;
                 }
 
-                // ✅ correct usage of your CLASS method
-                const latlng = GeoConversionUtil.osgbToLatLng(p.easting, p.northing);
+
+                const latlng =
+                    GeoConversionUtil.osgbToLatLng(
+                        p.easting,
+                        p.northing
+                    );
+
 
                 if (
                     !latlng ||
                     typeof latlng.lat !== 'number' ||
                     typeof latlng.lng !== 'number'
                 ) {
-                    console.error('❌ Conversion failed:', p);
+
+                    console.error(
+                        '❌ Conversion failed:',
+                        p
+                    );
+
                     return;
                 }
 
-                path.push([latlng.lat, latlng.lng]);
-                bounds.push([latlng.lat, latlng.lng]);
+
+                path.push([
+                    latlng.lat,
+                    latlng.lng
+                ]);
+
+
+                bounds.push([
+                    latlng.lat,
+                    latlng.lng
+                ]);
             }
 
-            console.log('🧭 Route path:', route.name, path);
+
+            // =================================================
+            // VALIDATE PATH
+            // =================================================
 
             if (path.length < 2) {
-                console.error('❌ Skipping route (insufficient valid points):', route.name);
+
+                console.error(
+                    '❌ Skipping route:',
+                    route.name
+                );
+
                 return;
             }
 
-            // draw line
-            L.polyline(path, {
-                color: route.color,
-                weight: 5
-            }).addTo(this.map);
 
-            // markers
+            console.log(
+                '🧭 Route path:',
+                route.name,
+                path
+            );
+
+
+            // =================================================
+            // DRAW ROUTE LINE
+            // =================================================
+
+            L.polyline(
+                path,
+                {
+                    color:
+                        this.ROUTE_COLOR,
+
+                    weight: 5,
+
+                    opacity: 1,
+
+                    lineCap: 'round',
+
+                    lineJoin: 'round'
+                }
+            ).addTo(this.map);
+
+
+            // =================================================
+            // DRAW X AT EACH ROUTE POINT
+            // =================================================
+
             path.forEach(coord => {
-                L.marker(coord).addTo(this.map);
+
+                L.marker(
+                    coord,
+                    {
+
+                        icon:
+                            L.divIcon({
+
+                                className:
+                                    'route-point-x',
+
+                                html: `
+                                    <span
+                                        class="route-x"
+                                    >&#10005;</span>
+                                `,
+
+                                iconSize: [
+                                    16,
+                                    16
+                                ],
+
+                                iconAnchor: [
+                                    8,
+                                    8
+                                ]
+
+                            }),
+
+                        interactive: false
+
+                    }
+                ).addTo(this.map);
+
             });
 
-            // label
-            const mid = Math.floor(path.length / 2);
 
-            L.marker(path[mid], {
-                icon: L.divIcon({
-                    className: 'route-label',
-                    html: `
-                        <span style="
-                            background:white;
-                            color:${route.color};
-                            font-weight:bold;
-                            padding:2px 6px;
-                            border-radius:4px;
-                            border:1px solid #ccc;
-                        ">
-                            ${route.name}
-                        </span>
-                    `
-                })
-            }).addTo(this.map);
+            // =================================================
+            // ROUTE LABEL
+            // =================================================
+
+            const mid =
+                Math.floor(
+                    path.length / 2
+                );
+
+
+            // =================================================
+            // CALCULATE ROUTE DIRECTION
+            // =================================================
+
+            const angle =
+                this.getRouteLabelAngle(
+                    path,
+                    mid
+                );
+
+
+            // =================================================
+            // CREATE ROUTE LABEL
+            // =================================================
+
+            L.marker(
+                path[mid],
+                {
+
+                    icon:
+                        L.divIcon({
+
+                            className:
+                                'route-label',
+
+                            html: `
+                                <span
+                                    class="route-label-text"
+                                    style="
+                                        transform:
+                                        translate(-50%, -50%)
+                                        rotate(${angle}deg);
+                                    "
+                                >
+                                    ${route.name}
+                                </span>
+                            `,
+
+                            /*
+                             * Invisible Leaflet anchor.
+                             */
+                            iconSize: [
+                                1,
+                                1
+                            ],
+
+                            iconAnchor: [
+                                0,
+                                0
+                            ]
+
+                        }),
+
+                    /*
+                     * Keep route name above
+                     * route line and X markers.
+                     */
+                    zIndexOffset: 1000,
+
+                    interactive: false
+
+                }
+            ).addTo(this.map);
+
         });
 
+
+        // =================================================
+        // FIT MAP TO ROUTES
+        // =================================================
+
         if (bounds.length > 0) {
-            this.map.fitBounds(bounds, { padding: [40, 40] });
+
+            this.map.fitBounds(
+                bounds,
+                {
+                    padding: [
+                        40,
+                        40
+                    ]
+                }
+            );
         }
+
+
+        // =================================================
+        // INVALIDATE MAP SIZE
+        // =================================================
 
         this.map.invalidateSize(true);
     }
 
-    // =========================
-    // OPEN APP PAGE
-    // =========================
+
+    // =====================================================
+    // OPEN FULL MAP
+    // =====================================================
+
     async openFullMap() {
 
         const url =
@@ -236,14 +606,26 @@ export default class RouteMap extends LightningElement {
             `?c__caseId=${this.recordId}` +
             `&c__routeId=${this.routeId || ''}`;
 
+
         try {
+
             await openTab({
                 url,
                 focus: true
             });
-        } catch (e) {
-            console.error('❌ Console tab failed', e);
-            window.open(url, '_blank');
+
+        }
+        catch (e) {
+
+            console.error(
+                '❌ Console tab failed',
+                e
+            );
+
+            window.open(
+                url,
+                '_blank'
+            );
         }
     }
 }
