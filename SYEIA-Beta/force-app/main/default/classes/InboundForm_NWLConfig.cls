@@ -44,6 +44,42 @@ public class InboundForm_NWLConfig {
             'Date_of_Application__c'
         ));
 
+          config.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'sections.salesforceMigration.pins_pedw_comments', 
+            'Pins_Pedw_Comments__c'
+        ));    
+        
+          config.addFieldMapping(InboundForm_MappingConfig.dateField(
+            'sections.salesforceMigration.pins_pedw_1st_referral_date', 
+            'PINS_PEDW_1st_Referral_Date__c'
+        ));  
+ 
+          config.addFieldMapping(InboundForm_MappingConfig.dateField(
+            'sections.salesforceMigration.pins_pedw_2nd_referral_date', 
+            'PINS_PEDW_2nd_Referral_Date__c'
+        )); 
+        
+          config.addFieldMapping(InboundForm_MappingConfig.dateField(
+            'sections.salesforceMigration.first_abeyance_start_date', 
+            'X1st_Abeyance_Start_Date__c'
+        )); 
+
+          config.addFieldMapping(InboundForm_MappingConfig.dateField(
+            'sections.salesforceMigration.first_abeyance_end_date', 
+            'X1st_Abeyance_End_Date__c'
+        )); 
+
+           config.addFieldMapping(InboundForm_MappingConfig.dateField(
+            'sections.salesforceMigration.procedural_notice_letter_date', 
+            'Procedural_Notice_Letter_Date__c'
+        ));
+
+        config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
+            'sections.salesforceMigration.application_fee_paid',
+            'Application_Fee_Paid__c'
+        ));        
+
+//salesforceMigration
         // Sections
         // Application Details
         config.addFieldMapping(InboundForm_MappingConfig.stringField(
@@ -514,7 +550,8 @@ public class InboundForm_NWLConfig {
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('status', 'Status__c'));
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('provider', 'Provider__c'));
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('description', 'Description__c'));
-
+        payments.addFieldMapping(InboundForm_MappingConfig.dateField('paymentDate', 'Payment_Date__c'));
+        
         return payments;
     }
 
