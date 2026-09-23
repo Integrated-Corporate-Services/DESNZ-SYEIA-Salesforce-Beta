@@ -50,18 +50,18 @@
 
 
 /* =====================================================
-   ROUTE POINT X
+   ROUTE POINT NUMBER
    ===================================================== */
 
-.route-point-x {
+.route-point-number {
 
-    background: none !important;
+    background: transparent !important;
 
     border: none !important;
 
-    width: 16px !important;
+    width: 8px !important;
 
-    height: 16px !important;
+    height: 8px !important;
 
     margin: 0 !important;
 
@@ -72,34 +72,49 @@
     align-items: center;
 
     justify-content: center;
+
+    pointer-events: none !important;
 }
 
 
 /* =====================================================
-   ACTUAL X CHARACTER
+   ROUTE POINT NUMBER TEXT
    ===================================================== */
 
-.route-x {
+.route-point-number-text {
 
-    color: #010103;
+    display: inline-block;
 
-    font-size: 12px;
+    background: #ffffff;
 
-    font-weight: bold;
+    color: #000000;
 
-    background: none;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 8px;
+
+    font-weight: 100;
+
+    line-height: 8px;
+
+    min-width: 8px;
+
+    height: 8px;
+
+    padding: 0 1px;
+
+    text-align: center;
 
     border: none;
 
-    line-height: 16px;
+    border-radius: 0;
 
-    width: 16px;
+    box-sizing: content-box;
 
-    height: 16px;
-
-    display: block;
-
-    text-align: center;
+    pointer-events: none;
 }
 
 
@@ -133,16 +148,6 @@
    ROUTE LABEL TEXT
    ===================================================== */
 
-/*
- * Route name appearance:
- *
- *   BLUE TEXT
- *   WHITE BACKGROUND
- *   NO GREY BORDER
- *
- * The complete label rotates with the route.
- */
-
 .route-label-text {
 
     position: absolute;
@@ -151,89 +156,41 @@
 
     top: 0;
 
-    display: block;
-
-
-    /* =================================================
-       FONT
-       ================================================= */
+    display: inline-block;
 
     font-family:
         Arial,
         Helvetica,
         sans-serif;
 
-    font-size: 16px;
+    font-size: 10px;
 
-    line-height: 20px;
+    line-height: 8px;
 
-    font-weight: 600;
-
-
-    /* =================================================
-       ROUTE NAME COLOUR
-       ================================================= */
+    font-weight: 200;
 
     color: #1d70b8;
 
-
-    /* =================================================
-       WHITE BACKGROUND
-       ================================================= */
-
+    /*
+     * Small white background only.
+     */
     background: #ffffff !important;
 
+    padding: 0 2px !important;
 
-    /*
-     * Small white area around the route name.
-     *
-     * This is the white rectangle visible
-     * behind "Route A" in the reference image.
-     */
-    padding: 1px 5px !important;
-
-
-    /*
-     * No grey border.
-     */
     border: none !important;
 
     border-radius: 0 !important;
 
     margin: 0;
 
-
-    /* =================================================
-       TEXT
-       ================================================= */
-
     white-space: nowrap;
 
-
-    /*
-     * No text shadow required because the
-     * entire label already has a white background.
-     */
     text-shadow: none;
-
-
-    /* =================================================
-       ROTATION
-       ================================================= */
 
     transform-origin: center center;
 
-
-    /* =================================================
-       LAYERING
-       ================================================= */
-
     z-index: 1000;
-
-
-    /* =================================================
-       MOUSE
-       ================================================= */
 
     pointer-events: none;
 }

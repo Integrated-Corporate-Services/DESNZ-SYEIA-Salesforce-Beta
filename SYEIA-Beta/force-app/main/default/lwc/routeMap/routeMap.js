@@ -227,11 +227,6 @@ export default class RouteMap extends LightningElement {
 
     getRouteLabelAngle(path, mid) {
 
-        /*
-         * Use points immediately before and after
-         * the midpoint to determine route direction.
-         */
-
         const startIndex =
             Math.max(
                 0,
@@ -264,10 +259,6 @@ export default class RouteMap extends LightningElement {
             180 /
             Math.PI;
 
-
-        /*
-         * Prevent route name from appearing upside down.
-         */
 
         if (
             angle > 90 ||
@@ -338,15 +329,23 @@ export default class RouteMap extends LightningElement {
 
 
             // =================================================
-            // SORT POINTS
+            // SORT POINTS BY SEQUENCE NUMBER
             // =================================================
 
             const sortedPoints =
                 [...route.points]
                     .sort(
                         (a, b) =>
-                            a.sequence - b.sequence
+                            Number(a.sequenceNumber) -
+                            Number(b.sequenceNumber)
                     );
+
+
+            console.log(
+                '🧭 Sorted points:',
+                route.name,
+                JSON.stringify(sortedPoints)
+            );
 
 
             const path = [];
@@ -358,9 +357,16 @@ export default class RouteMap extends LightningElement {
 
             for (const p of sortedPoints) {
 
+                const easting =
+                    Number(p.easting);
+
+                const northing =
+                    Number(p.northing);
+
+
                 if (
-                    typeof p.easting !== 'number' ||
-                    typeof p.northing !== 'number'
+                    !Number.isFinite(easting) ||
+                    !Number.isFinite(northing)
                 ) {
 
                     console.error(
@@ -374,8 +380,8 @@ export default class RouteMap extends LightningElement {
 
                 const latlng =
                     GeoConversionUtil.osgbToLatLng(
-                        p.easting,
-                        p.northing
+                        easting,
+                        northing
                     );
 
 
@@ -451,45 +457,56 @@ export default class RouteMap extends LightningElement {
 
 
             // =================================================
-            // DRAW X AT EACH ROUTE POINT
+            // DRAW SEQUENCE NUMBER AT EACH ROUTE POINT
             // =================================================
 
-            path.forEach(coord => {
+            path.forEach(
+                (coord, index) => {
 
-                L.marker(
-                    coord,
-                    {
+                    const sequenceNumber =
+                        sortedPoints[index]
+                            .sequenceNumber;
 
-                        icon:
-                            L.divIcon({
 
-                                className:
-                                    'route-point-x',
+                    L.marker(
+                        coord,
+                        {
 
-                                html: `
-                                    <span
-                                        class="route-x"
-                                    >&#10005;</span>
-                                `,
+                            icon:
+                                L.divIcon({
 
-                                iconSize: [
-                                    16,
-                                    16
-                                ],
+                                    className:
+                                        'route-point-number',
 
-                                iconAnchor: [
-                                    8,
-                                    8
-                                ]
+                                    html: `
+                                        <span
+                                            class="route-point-number-text"
+                                        >
+                                            ${sequenceNumber}
+                                        </span>
+                                    `,
 
-                            }),
+                                    iconSize: [
+                                        24,
+                                        24
+                                    ],
 
-                        interactive: false
+                                    iconAnchor: [
+                                        12,
+                                        12
+                                    ]
 
-                    }
-                ).addTo(this.map);
+                                }),
 
-            });
+                            zIndexOffset: 500,
+
+                            interactive: false
+
+                        }
+                    ).addTo(this.map);
+
+                }
+            );
 
 
             // =================================================
@@ -540,9 +557,6 @@ export default class RouteMap extends LightningElement {
                                 </span>
                             `,
 
-                            /*
-                             * Invisible Leaflet anchor.
-                             */
                             iconSize: [
                                 1,
                                 1
@@ -555,11 +569,8 @@ export default class RouteMap extends LightningElement {
 
                         }),
 
-                    /*
-                     * Keep route name above
-                     * route line and X markers.
-                     */
-                    zIndexOffset: 1000,
+                    zIndexOffset:
+                        1000,
 
                     interactive: false
 
