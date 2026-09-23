@@ -54,7 +54,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>S37 Email</shortDescription>
-        <value>s37Contents@energysecurity.gov,uk</value>
+        <value>s37Contents@energysecurity.gov.uk</value>
     </labels>
     <labels>
         <fullName>NWL_Team_Email</fullName>
