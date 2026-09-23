@@ -13,6 +13,11 @@ export default class RoutePointGroupedList extends NavigationMixin(
     collapsed = false;
     showAll = false;
 
+
+    // =========================================================
+    // Get Routes
+    // =========================================================
+
     @wire(getRoutes, { caseId: '$recordId' })
     wiredRoutes({ data, error }) {
 
@@ -27,46 +32,97 @@ export default class RoutePointGroupedList extends NavigationMixin(
 
             this.error = undefined;
 
+
+            // =====================================================
+            // Map Apex Routes
+            // =====================================================
+
             this.groups = data.map((route) => {
+
+
+                // =================================================
+                // Start Point
+                // SequenceNumber__c = 1
+                // =================================================
 
                 const startPoint = route.startPoint
                     ? {
                         id: route.startPoint.id,
-                        easting: route.startPoint.easting || '',
-                        northing: route.startPoint.northing || ''
+
+                        sequenceNumber:
+                            route.startPoint.sequenceNumber,
+
+                        easting:
+                            route.startPoint.easting || '',
+
+                        northing:
+                            route.startPoint.northing || ''
                     }
                     : null;
+
+
+                // =================================================
+                // End Point
+                // Highest SequenceNumber__c
+                // =================================================
 
                 const endPoint = route.endPoint
                     ? {
                         id: route.endPoint.id,
-                        easting: route.endPoint.easting || '',
-                        northing: route.endPoint.northing || ''
+
+                        sequenceNumber:
+                            route.endPoint.sequenceNumber,
+
+                        easting:
+                            route.endPoint.easting || '',
+
+                        northing:
+                            route.endPoint.northing || ''
                     }
                     : null;
 
+
+                // =================================================
+                // Return Route Group
+                // =================================================
+
                 return {
-                    routeId: route.routeId,
-                    routeName: route.routeName,
 
-                    pointCount: route.pointCount || 0,
+                    routeId:
+                        route.routeId,
 
-                    startPoint: startPoint,
-                    endPoint: endPoint,
+                    routeName:
+                        route.routeName,
 
-                    hasStartPoint: startPoint !== null,
-                    hasEndPoint: endPoint !== null,
+                    pointCount:
+                        route.pointCount || 0,
 
-                    collapsed: false,
+                    startPoint:
+                        startPoint,
 
-                    icon: 'utility:chevrondown'
+                    endPoint:
+                        endPoint,
+
+                    hasStartPoint:
+                        startPoint !== null,
+
+                    hasEndPoint:
+                        endPoint !== null,
+
+                    collapsed:
+                        false,
+
+                    icon:
+                        'utility:chevrondown'
                 };
             });
+
 
             console.log(
                 '>>> LWC groups:',
                 JSON.stringify(this.groups)
             );
+
 
             this.showAll = false;
 
@@ -78,6 +134,7 @@ export default class RoutePointGroupedList extends NavigationMixin(
             );
 
             this.error = error;
+
             this.groups = [];
         }
     }
@@ -88,6 +145,7 @@ export default class RoutePointGroupedList extends NavigationMixin(
     // =========================================================
 
     get totalCount() {
+
         return this.groups.length;
     }
 
@@ -97,17 +155,19 @@ export default class RoutePointGroupedList extends NavigationMixin(
     // =========================================================
 
     get hasRoutes() {
+
         return this.groups.length > 0;
     }
 
 
     // =========================================================
-    // Routes shown
+    // Routes Shown
     // =========================================================
 
     get displayedGroups() {
 
         if (this.showAll) {
+
             return this.groups;
         }
 
@@ -163,6 +223,7 @@ export default class RoutePointGroupedList extends NavigationMixin(
         const routeId =
             event.currentTarget.dataset.routeId;
 
+
         this.groups = this.groups.map((group) => {
 
             if (group.routeId === routeId) {
@@ -170,14 +231,17 @@ export default class RoutePointGroupedList extends NavigationMixin(
                 const newCollapsed =
                     !group.collapsed;
 
+
                 return {
                     ...group,
 
-                    collapsed: newCollapsed,
+                    collapsed:
+                        newCollapsed,
 
-                    icon: newCollapsed
-                        ? 'utility:chevronright'
-                        : 'utility:chevrondown'
+                    icon:
+                        newCollapsed
+                            ? 'utility:chevronright'
+                            : 'utility:chevrondown'
                 };
             }
 
@@ -193,22 +257,35 @@ export default class RoutePointGroupedList extends NavigationMixin(
     openRoute(event) {
 
         event.preventDefault();
+
         event.stopPropagation();
+
 
         const routeId =
             event.currentTarget.dataset.id;
 
+
         if (!routeId) {
+
             return;
         }
 
+
         this[NavigationMixin.Navigate]({
-            type: 'standard__recordPage',
+
+            type:
+                'standard__recordPage',
 
             attributes: {
-                recordId: routeId,
-                objectApiName: 'Route__c',
-                actionName: 'view'
+
+                recordId:
+                    routeId,
+
+                objectApiName:
+                    'Route__c',
+
+                actionName:
+                    'view'
             }
         });
     }
@@ -221,28 +298,36 @@ export default class RoutePointGroupedList extends NavigationMixin(
     get errorMessage() {
 
         if (!this.error) {
+
             return '';
         }
+
 
         if (
             this.error.body &&
             this.error.body.message
         ) {
+
             return this.error.body.message;
         }
+
 
         if (
             this.error.body &&
             Array.isArray(this.error.body)
         ) {
+
             return this.error.body
                 .map((item) => item.message)
                 .join(', ');
         }
 
+
         if (this.error.message) {
+
             return this.error.message;
         }
+
 
         return 'Unable to load Routes.';
     }

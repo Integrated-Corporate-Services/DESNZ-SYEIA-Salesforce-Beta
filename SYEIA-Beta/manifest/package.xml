@@ -480,6 +480,7 @@
 		<members>Route_Point__c.Route_Id__c</members>
 		<members>Route_Point__c.Route_Point_Id__c</members>
 		<members>Route_Point__c.Sequence_Number__c</members>
+		<members>Route_Point__c.SequenceNumber__c</members>
 		<members>SalesforceSettings__c.client_id__c</members>
 		<members>SalesforceSettings__c.client_secret__c</members>
 		<members>SalesforceSettings__c.Endpoint_Url__c</members>

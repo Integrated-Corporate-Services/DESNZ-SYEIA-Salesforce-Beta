@@ -286,7 +286,8 @@ public class InboundForm_S37Config {
             InboundForm_MappingConfig.stringField('easting', 'Easting__c'));
         routePoints.addFieldMapping(
             InboundForm_MappingConfig.stringField('northing', 'Northing__c'));
-        
+        routePoints.addFieldMapping(
+            InboundForm_MappingConfig.integerField('sequence_number', 'SequenceNumber__c'));
         return routePoints;
     }
 
