@@ -50,18 +50,20 @@
 
 
 /* =====================================================
-   ROUTE POINT NUMBER
+   NORMAL NUMBER MARKER
    ===================================================== */
 
 .route-point-number {
 
     background: transparent !important;
 
+    background-color: transparent !important;
+
     border: none !important;
 
-    width: 8px !important;
+    width: 14px !important;
 
-    height: 8px !important;
+    height: 14px !important;
 
     margin: 0 !important;
 
@@ -69,52 +71,184 @@
 
     display: flex !important;
 
-    align-items: center;
+    align-items: center !important;
 
-    justify-content: center;
+    justify-content: center !important;
 
     pointer-events: none !important;
+
+    box-shadow: none !important;
 }
 
 
 /* =====================================================
-   ROUTE POINT NUMBER TEXT
+   NORMAL NUMBER TEXT
    ===================================================== */
 
 .route-point-number-text {
 
-    display: inline-block;
+    display: flex !important;
 
-    background: #ffffff;
+    align-items: center !important;
 
-    color: #000000;
+    justify-content: center !important;
+
+    width: 10px !important;
+
+    height: 10px !important;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    background: #ffffff !important;
+
+    background-color: #ffffff !important;
+
+    color: #000000 !important;
 
     font-family:
         Arial,
         Helvetica,
         sans-serif;
 
-    font-size: 8px;
+    font-size: 10px;
 
     font-weight: 100;
 
-    line-height: 8px;
-
-    min-width: 8px;
-
-    height: 8px;
-
-    padding: 0 1px;
+    line-height: 10px;
 
     text-align: center;
 
-    border: none;
+    border: none !important;
 
-    border-radius: 0;
+    border-radius: 0 !important;
 
-    box-sizing: content-box;
+    box-sizing: border-box;
 
     pointer-events: none;
+
+    white-space: nowrap;
+
+    box-shadow: none !important;
+}
+
+
+/* =====================================================
+   X MARKER
+   ===================================================== */
+
+.route-point-x {
+
+    position: relative !important;
+
+    width: 0 !important;
+
+    height: 0 !important;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    background: transparent !important;
+
+    background-color: transparent !important;
+
+    border: none !important;
+
+    box-shadow: none !important;
+
+    pointer-events: none !important;
+
+    overflow: visible !important;
+}
+
+
+/* =====================================================
+   X TEXT
+   ===================================================== */
+
+.route-point-x-text {
+
+    position: absolute !important;
+
+    left: 0 !important;
+
+    top: 0 !important;
+
+    display: block !important;
+
+    width: auto !important;
+
+    height: auto !important;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    background: transparent !important;
+
+    background-color: transparent !important;
+
+    color: #000000 !important;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 400;
+
+    line-height: 10px;
+
+    border: none !important;
+
+    box-shadow: none !important;
+
+    pointer-events: none !important;
+
+    white-space: nowrap;
+
+    /*
+     * Centre the actual x exactly
+     * on the route coordinate.
+     */
+    transform:
+        translate(-50%, -50%) !important;
+}
+
+
+/* =====================================================
+   LEAFLET DIV ICON - X
+   ===================================================== */
+
+.leaflet-div-icon.route-point-x {
+
+    background: transparent !important;
+
+    background-color: transparent !important;
+
+    border: none !important;
+
+    box-shadow: none !important;
+}
+
+
+/* =====================================================
+   LEAFLET DIV ICON - NUMBER
+   ===================================================== */
+
+.leaflet-div-icon.route-point-number {
+
+    background: transparent !important;
+
+    background-color: transparent !important;
+
+    border: none !important;
+
+    box-shadow: none !important;
 }
 
 
@@ -125,6 +259,8 @@
 .route-label {
 
     background: transparent !important;
+
+    background-color: transparent !important;
 
     border: none !important;
 
@@ -141,6 +277,8 @@
     pointer-events: none !important;
 
     z-index: 1000 !important;
+
+    box-shadow: none !important;
 }
 
 
@@ -171,10 +309,9 @@
 
     color: #1d70b8;
 
-    /*
-     * Small white background only.
-     */
     background: #ffffff !important;
+
+    background-color: #ffffff !important;
 
     padding: 0 2px !important;
 
@@ -193,4 +330,6 @@
     z-index: 1000;
 
     pointer-events: none;
+
+    box-shadow: none !important;
 }
