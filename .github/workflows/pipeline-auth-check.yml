@@ -1,0 +1,17 @@
+name: "Pipeline: auth check"
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Org(s) to check - blank checks all of them"
+        required: false
+        default: ""
+        type: string
+
+jobs:
+  pipeline:
+    uses: Integrated-Corporate-Services/CoE-DevOps/.github/workflows/stage-auth-check.yml@main
+    with:
+      environment: ${{ inputs.environment }}
+    secrets: inherit
