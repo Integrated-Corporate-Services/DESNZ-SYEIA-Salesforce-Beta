@@ -214,7 +214,7 @@ export default class RouteMap extends LightningElement {
         .catch(error => {
 
             console.error(
-                '❌ Apex error:',
+                '❌ Apex error',
                 error
             );
         });
@@ -269,6 +269,72 @@ export default class RouteMap extends LightningElement {
 
 
         return angle;
+    }
+
+
+    // =====================================================
+    // SORT ROUTE POINTS
+    // =====================================================
+
+    sortRoutePoints(points) {
+
+        return [...points]
+            .sort((a, b) => {
+
+                const aSequence =
+                    a.sequenceNumber;
+
+                const bSequence =
+                    b.sequenceNumber;
+
+
+                // Both blank/null
+                if (
+                    aSequence == null &&
+                    bSequence == null
+                ) {
+                    return 0;
+                }
+
+
+                // A blank/null
+                // Put blank points after numbered points
+                if (aSequence == null) {
+                    return 1;
+                }
+
+
+                // B blank/null
+                // Put blank points after numbered points
+                if (bSequence == null) {
+                    return -1;
+                }
+
+
+                // Both have sequence numbers
+                return (
+                    Number(aSequence) -
+                    Number(bSequence)
+                );
+            });
+    }
+
+
+    // =====================================================
+    // GET DISPLAY SEQUENCE
+    // =====================================================
+
+    getDisplaySequence(sequenceNumber) {
+
+        if (
+            sequenceNumber === null ||
+            sequenceNumber === undefined ||
+            sequenceNumber === ''
+        ) {
+            return 'x';
+        }
+
+        return sequenceNumber;
     }
 
 
@@ -329,16 +395,13 @@ export default class RouteMap extends LightningElement {
 
 
             // =================================================
-            // SORT POINTS BY SEQUENCE NUMBER
+            // SORT POINTS
             // =================================================
 
             const sortedPoints =
-                [...route.points]
-                    .sort(
-                        (a, b) =>
-                            Number(a.sequenceNumber) -
-                            Number(b.sequenceNumber)
-                    );
+                this.sortRoutePoints(
+                    route.points
+                );
 
 
             console.log(
@@ -428,13 +491,6 @@ export default class RouteMap extends LightningElement {
             }
 
 
-            console.log(
-                '🧭 Route path:',
-                route.name,
-                path
-            );
-
-
             // =================================================
             // DRAW ROUTE LINE
             // =================================================
@@ -457,16 +513,93 @@ export default class RouteMap extends LightningElement {
 
 
             // =================================================
-            // DRAW SEQUENCE NUMBER AT EACH ROUTE POINT
+            // DRAW SEQUENCE NUMBER / X
+            //
+            // Number:
+            //   White background
+            //
+            // X:
+            //   Transparent background
+            //   Positioned directly on coordinate
             // =================================================
 
             path.forEach(
                 (coord, index) => {
 
-                    const sequenceNumber =
+                    const rawSequenceNumber =
                         sortedPoints[index]
-                            .sequenceNumber;
+                            ?.sequenceNumber;
 
+
+                    const displaySequence =
+                        this.getDisplaySequence(
+                            rawSequenceNumber
+                        );
+
+
+                    const isX =
+                        displaySequence === 'x';
+
+
+                    // =================================================
+                    // X MARKER
+                    // =================================================
+
+                    if (isX) {
+
+                        L.marker(
+                            coord,
+                            {
+
+                                icon:
+                                    L.divIcon({
+
+                                        className:
+                                            'route-point-x',
+
+                                        html: `
+                                            <span
+                                                class="route-point-x-text"
+                                            >
+                                                x
+                                            </span>
+                                        `,
+
+                                        /*
+                                         * Zero-size icon.
+                                         *
+                                         * This means the Leaflet
+                                         * coordinate is exactly
+                                         * the centre reference
+                                         * of the x.
+                                         */
+                                        iconSize: [
+                                            0,
+                                            0
+                                        ],
+
+                                        iconAnchor: [
+                                            0,
+                                            0
+                                        ]
+
+                                    }),
+
+                                zIndexOffset: 500,
+
+                                interactive: false
+
+                            }
+                        ).addTo(this.map);
+
+
+                        return;
+                    }
+
+
+                    // =================================================
+                    // NORMAL NUMBER MARKER
+                    // =================================================
 
                     L.marker(
                         coord,
@@ -482,18 +615,18 @@ export default class RouteMap extends LightningElement {
                                         <span
                                             class="route-point-number-text"
                                         >
-                                            ${sequenceNumber}
+                                            ${displaySequence}
                                         </span>
                                     `,
 
                                     iconSize: [
-                                        24,
-                                        24
+                                        14,
+                                        14
                                     ],
 
                                     iconAnchor: [
-                                        12,
-                                        12
+                                        7,
+                                        7
                                     ]
 
                                 }),

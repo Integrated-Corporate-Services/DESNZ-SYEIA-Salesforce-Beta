@@ -336,7 +336,7 @@ public class InboundForm_NWLConfig {
         objectors.addFieldMapping(InboundForm_MappingConfig.stringField('objector_email', 'Email__c'));
         objectors.addFieldMapping(InboundForm_MappingConfig.stringField('objector_phone', 'Phone__c'));
         objectors.addFieldMapping(InboundForm_MappingConfig.stringField('objector_organisation', 'Organisation__c'));
-        objectors.addFieldMapping(InboundForm_MappingConfig.defaultValue('Individual', 'Party_Type__c'));
+        objectors.addFieldMapping(InboundForm_MappingConfig.defaultValue('Objector', 'Party_Type__c'));
         objectors.addFieldMapping(InboundForm_MappingConfig.defaultValue(
             'NWL_OBJECTOR',
             'Application_Party_Id__c'

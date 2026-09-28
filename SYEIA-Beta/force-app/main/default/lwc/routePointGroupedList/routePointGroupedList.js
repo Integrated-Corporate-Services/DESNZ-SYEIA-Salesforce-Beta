@@ -1,6 +1,11 @@
 import { LightningElement, api, wire } from 'lwc';
-import getRoutes from '@salesforce/apex/RoutePointGroupedController.getRoutes';
-import { NavigationMixin } from 'lightning/navigation';
+
+import getRoutes
+    from '@salesforce/apex/RoutePointGroupedController.getRoutes';
+
+import { NavigationMixin }
+    from 'lightning/navigation';
+
 
 export default class RoutePointGroupedList extends NavigationMixin(
     LightningElement
@@ -9,8 +14,11 @@ export default class RoutePointGroupedList extends NavigationMixin(
     @api recordId;
 
     groups = [];
+
     error;
+
     collapsed = false;
+
     showAll = false;
 
 
@@ -21,7 +29,11 @@ export default class RoutePointGroupedList extends NavigationMixin(
     @wire(getRoutes, { caseId: '$recordId' })
     wiredRoutes({ data, error }) {
 
-        console.log('>>> LWC Case Id:', this.recordId);
+        console.log(
+            '>>> LWC Case Id:',
+            this.recordId
+        );
+
 
         if (data) {
 
@@ -30,92 +42,116 @@ export default class RoutePointGroupedList extends NavigationMixin(
                 JSON.stringify(data)
             );
 
+
             this.error = undefined;
 
 
-            // =====================================================
+            // =================================================
             // Map Apex Routes
-            // =====================================================
+            // =================================================
 
-            this.groups = data.map((route) => {
-
-
-                // =================================================
-                // Start Point
-                // SequenceNumber__c = 1
-                // =================================================
-
-                const startPoint = route.startPoint
-                    ? {
-                        id: route.startPoint.id,
-
-                        sequenceNumber:
-                            route.startPoint.sequenceNumber,
-
-                        easting:
-                            route.startPoint.easting || '',
-
-                        northing:
-                            route.startPoint.northing || ''
-                    }
-                    : null;
+            this.groups =
+                data.map((route) => {
 
 
-                // =================================================
-                // End Point
-                // Highest SequenceNumber__c
-                // =================================================
+                    // =========================================
+                    // Start Point
+                    //
+                    // Apex selects:
+                    //
+                    // 1. Sequence = 1
+                    // OR
+                    // 2. Earliest CreatedDate
+                    // =========================================
 
-                const endPoint = route.endPoint
-                    ? {
-                        id: route.endPoint.id,
+                    const startPoint =
+                        route.startPoint
+                            ? {
 
-                        sequenceNumber:
-                            route.endPoint.sequenceNumber,
+                                id:
+                                    route.startPoint.id,
 
-                        easting:
-                            route.endPoint.easting || '',
+                                sequenceNumber:
+                                    route.startPoint.sequenceNumber,
 
-                        northing:
-                            route.endPoint.northing || ''
-                    }
-                    : null;
+                                createdDate:
+                                    route.startPoint.createdDate,
+
+                                easting:
+                                    route.startPoint.easting || '',
+
+                                northing:
+                                    route.startPoint.northing || ''
+                            }
+                            : null;
 
 
-                // =================================================
-                // Return Route Group
-                // =================================================
+                    // =========================================
+                    // End Point
+                    //
+                    // Apex selects:
+                    //
+                    // 1. Highest Sequence
+                    // OR
+                    // 2. Latest CreatedDate
+                    // =========================================
 
-                return {
+                    const endPoint =
+                        route.endPoint
+                            ? {
 
-                    routeId:
-                        route.routeId,
+                                id:
+                                    route.endPoint.id,
 
-                    routeName:
-                        route.routeName,
+                                sequenceNumber:
+                                    route.endPoint.sequenceNumber,
 
-                    pointCount:
-                        route.pointCount || 0,
+                                createdDate:
+                                    route.endPoint.createdDate,
 
-                    startPoint:
-                        startPoint,
+                                easting:
+                                    route.endPoint.easting || '',
 
-                    endPoint:
-                        endPoint,
+                                northing:
+                                    route.endPoint.northing || ''
+                            }
+                            : null;
 
-                    hasStartPoint:
-                        startPoint !== null,
 
-                    hasEndPoint:
-                        endPoint !== null,
+                    // =========================================
+                    // Return Route Group
+                    // =========================================
 
-                    collapsed:
-                        false,
+                    return {
 
-                    icon:
-                        'utility:chevrondown'
-                };
-            });
+                        routeId:
+                            route.routeId,
+
+                        routeName:
+                            route.routeName,
+
+                        pointCount:
+                            route.pointCount || 0,
+
+                        startPoint:
+                            startPoint,
+
+                        endPoint:
+                            endPoint,
+
+                        hasStartPoint:
+                            startPoint !== null,
+
+                        hasEndPoint:
+                            endPoint !== null,
+
+                        collapsed:
+                            false,
+
+                        icon:
+                            'utility:chevrondown'
+                    };
+                });
 
 
             console.log(
@@ -126,16 +162,21 @@ export default class RoutePointGroupedList extends NavigationMixin(
 
             this.showAll = false;
 
-        } else if (error) {
+        }
+        else if (error) {
 
             console.error(
                 '>>> LWC ERROR:',
                 JSON.stringify(error)
             );
 
-            this.error = error;
 
-            this.groups = [];
+            this.error =
+                error;
+
+
+            this.groups =
+                [];
         }
     }
 
@@ -171,7 +212,11 @@ export default class RoutePointGroupedList extends NavigationMixin(
             return this.groups;
         }
 
-        return this.groups.slice(0, 3);
+
+        return this.groups.slice(
+            0,
+            3
+        );
     }
 
 
@@ -208,7 +253,8 @@ export default class RoutePointGroupedList extends NavigationMixin(
 
     toggleMainList() {
 
-        this.collapsed = !this.collapsed;
+        this.collapsed =
+            !this.collapsed;
     }
 
 
@@ -220,33 +266,39 @@ export default class RoutePointGroupedList extends NavigationMixin(
 
         event.stopPropagation();
 
+
         const routeId =
             event.currentTarget.dataset.routeId;
 
 
-        this.groups = this.groups.map((group) => {
+        this.groups =
+            this.groups.map((group) => {
 
-            if (group.routeId === routeId) {
+                if (
+                    group.routeId === routeId
+                ) {
 
-                const newCollapsed =
-                    !group.collapsed;
+                    const newCollapsed =
+                        !group.collapsed;
 
 
-                return {
-                    ...group,
+                    return {
 
-                    collapsed:
-                        newCollapsed,
+                        ...group,
 
-                    icon:
-                        newCollapsed
-                            ? 'utility:chevronright'
-                            : 'utility:chevrondown'
-                };
-            }
+                        collapsed:
+                            newCollapsed,
 
-            return group;
-        });
+                        icon:
+                            newCollapsed
+                                ? 'utility:chevronright'
+                                : 'utility:chevrondown'
+                    };
+                }
+
+
+                return group;
+            });
     }
 
 
@@ -271,7 +323,9 @@ export default class RoutePointGroupedList extends NavigationMixin(
         }
 
 
-        this[NavigationMixin.Navigate]({
+        this[
+            NavigationMixin.Navigate
+        ]({
 
             type:
                 'standard__recordPage',
@@ -314,11 +368,16 @@ export default class RoutePointGroupedList extends NavigationMixin(
 
         if (
             this.error.body &&
-            Array.isArray(this.error.body)
+            Array.isArray(
+                this.error.body
+            )
         ) {
 
             return this.error.body
-                .map((item) => item.message)
+                .map(
+                    (item) =>
+                        item.message
+                )
                 .join(', ');
         }
 

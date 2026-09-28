@@ -71,13 +71,10 @@ public with sharing class RoutePointGroupedController {
 
 
         // =====================================================
-        // 3. Get Route Points DIRECTLY by Route__c
+        // 3. Get Route Points
         //
-        // Do NOT use:
-        //
-        // WHERE Route__r.Case__c = :caseId
-        //
-        // We already know which Routes belong to the Case.
+        // CreatedDate is included because it is used as the
+        // fallback when SequenceNumber__c is blank/null.
         // =====================================================
 
         List<Route_Point__c> routePoints = [
@@ -96,7 +93,6 @@ public with sharing class RoutePointGroupedController {
 
             ORDER BY
                 Route__c ASC,
-                SequenceNumber__c ASC,
                 CreatedDate ASC
         ];
 
@@ -126,6 +122,7 @@ public with sharing class RoutePointGroupedController {
                 ' | Id=' + point.Id +
                 ' | Route=' + point.Route__c +
                 ' | Sequence=' + point.SequenceNumber__c +
+                ' | CreatedDate=' + point.CreatedDate +
                 ' | Easting=' + point.Easting__c +
                 ' | Northing=' + point.Northing__c
             );
@@ -178,9 +175,13 @@ public with sharing class RoutePointGroupedController {
 
 
             // =================================================
-            // 7. Find Start Point
+            // 7. FIND START POINT
             //
-            // SequenceNumber__c = 1
+            // Preferred:
+            //     SequenceNumber = 1
+            //
+            // Fallback:
+            //     Earliest CreatedDate
             // =================================================
 
             for (RoutePointWrapper point : points) {
@@ -198,9 +199,39 @@ public with sharing class RoutePointGroupedController {
 
 
             // =================================================
-            // 8. Find End Point
+            // FALLBACK START
             //
-            // Highest SequenceNumber__c
+            // Because points were queried in CreatedDate ASC
+            // order, the first point is the earliest created.
+            // =================================================
+
+            if (
+                startPoint == null &&
+                !points.isEmpty()
+            ) {
+
+                startPoint =
+                    points[0];
+
+
+                System.debug(
+                    '>>> START FALLBACK TO CREATED DATE' +
+                    ' | Route=' + route.Name +
+                    ' | Point=' + startPoint.id +
+                    ' | CreatedDate=' +
+                    startPoint.createdDate
+                );
+            }
+
+
+            // =================================================
+            // 8. FIND END POINT
+            //
+            // Preferred:
+            //     Highest SequenceNumber
+            //
+            // Fallback:
+            //     Latest CreatedDate
             // =================================================
 
             for (RoutePointWrapper point : points) {
@@ -218,6 +249,34 @@ public with sharing class RoutePointGroupedController {
 
                     endPoint = point;
                 }
+            }
+
+
+            // =================================================
+            // FALLBACK END
+            //
+            // Because points were queried in CreatedDate ASC
+            // order, the last point is the latest created.
+            // =================================================
+
+            if (
+                endPoint == null &&
+                !points.isEmpty()
+            ) {
+
+                endPoint =
+                    points[
+                        points.size() - 1
+                    ];
+
+
+                System.debug(
+                    '>>> END FALLBACK TO CREATED DATE' +
+                    ' | Route=' + route.Name +
+                    ' | Point=' + endPoint.id +
+                    ' | CreatedDate=' +
+                    endPoint.createdDate
+                );
             }
 
 
@@ -249,8 +308,12 @@ public with sharing class RoutePointGroupedController {
 
                 System.debug(
                     '>>> START POINT' +
+                    ' | Id=' +
+                    startPoint.id +
                     ' | Sequence=' +
                     startPoint.sequenceNumber +
+                    ' | CreatedDate=' +
+                    startPoint.createdDate +
                     ' | Easting=' +
                     startPoint.easting +
                     ' | Northing=' +
@@ -269,8 +332,12 @@ public with sharing class RoutePointGroupedController {
 
                 System.debug(
                     '>>> END POINT' +
+                    ' | Id=' +
+                    endPoint.id +
                     ' | Sequence=' +
                     endPoint.sequenceNumber +
+                    ' | CreatedDate=' +
+                    endPoint.createdDate +
                     ' | Easting=' +
                     endPoint.easting +
                     ' | Northing=' +
@@ -319,7 +386,6 @@ public with sharing class RoutePointGroupedController {
     }
 
 
-
     // =========================================================
     // Route Wrapper
     // =========================================================
@@ -350,18 +416,22 @@ public with sharing class RoutePointGroupedController {
             Integer pointCount
         ) {
 
-            this.routeId = routeId;
+            this.routeId =
+                routeId;
 
-            this.routeName = routeName;
+            this.routeName =
+                routeName;
 
-            this.startPoint = startPoint;
+            this.startPoint =
+                startPoint;
 
-            this.endPoint = endPoint;
+            this.endPoint =
+                endPoint;
 
-            this.pointCount = pointCount;
+            this.pointCount =
+                pointCount;
         }
     }
-
 
 
     // =========================================================
@@ -382,12 +452,16 @@ public with sharing class RoutePointGroupedController {
         @AuraEnabled
         public Decimal sequenceNumber;
 
+        @AuraEnabled
+        public Datetime createdDate;
+
 
         public RoutePointWrapper(
             Route_Point__c point
         ) {
 
-            this.id = point.Id;
+            this.id =
+                point.Id;
 
 
             this.easting =
@@ -404,6 +478,10 @@ public with sharing class RoutePointGroupedController {
 
             this.sequenceNumber =
                 point.SequenceNumber__c;
+
+
+            this.createdDate =
+                point.CreatedDate;
         }
     }
 }

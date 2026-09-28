@@ -2967,6 +2967,18 @@
                 <identifier>RecordPayment_rDescription_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Payment__r.Status__c</fieldItem>
+                <identifier>RecordPayment_rStatus_cField</identifier>
+            </fieldInstance>
+        </itemInstances> 
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Payment__r.Payment_Method__c</fieldItem>
+                <identifier>RecordPayment_rPayment_Method_cField</identifier>
+            </fieldInstance>
+        </itemInstances>               
         <name>Facet-3537dc02-bd42-4735-beca-9892190faf70</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -3124,7 +3136,7 @@
             </componentInstance>
         </itemInstances>
         <name>Facet-df78cd6e-0217-4172-aa54-f664fb4f2339</name>
-        <type>Facet</type>
+        <type>Facet</type>  
     </flexiPageRegions>
     <flexiPageRegions>
         <itemInstances>
