@@ -1,9 +1,5 @@
 name: "Pipeline: manual deploy"
 
-# For a public repository only: the same button as the private-repo template, but the
-# run happens in CoE-DevOps, through pipeline-external.yml. Must sit on this repo's
-# default branch or the Run workflow button will not appear.
-
 on:
   workflow_dispatch:
     inputs:

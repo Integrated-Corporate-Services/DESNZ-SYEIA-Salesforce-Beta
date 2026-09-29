@@ -1,16 +1,5 @@
 name: "Pipeline"
 
-# For a public repository only. GitHub will not let a public repository call the private
-# pipeline workflows, so this hands the event to CoE-DevOps and the pipeline runs there.
-# This run follows it and shows everything it does - each job's output, a summary, and its
-# result - so the whole pipeline can be read here. The result also comes back as a
-# "CoE pipeline" status on the commit.
-#
-# Needs the COE_DEVOPS_TRIGGER secret - Actions read and write, and Contents read, on
-# CoE-DevOps only - and this repository listed in CoE-DevOps's
-# .github/external-projects.yml. Replaces pipeline-pr.yml and pipeline-merge.yml, and the
-# other pipeline-*.yml files here call it for their buttons.
-
 on:
   pull_request:
   push:
