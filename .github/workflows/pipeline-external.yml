@@ -1,0 +1,43 @@
+name: "Pipeline"
+
+# For a public repository only. GitHub will not let a public repository call the private
+# pipeline workflows, so this hands the event to CoE-DevOps and the pipeline runs there.
+# The result comes back as a "CoE pipeline" status on the commit.
+#
+# Needs the COE_DEVOPS_TRIGGER secret, and this repository listed in CoE-DevOps's
+# .github/external-projects.yml. Replaces pipeline-pr.yml and pipeline-merge.yml.
+
+on:
+  pull_request:
+  push:
+    branches: ["**"]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  dispatch:
+    name: "Run in CoE-DevOps"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hand the event to CoE-DevOps
+        env:
+          GH_TOKEN: ${{ secrets.COE_DEVOPS_TRIGGER }}
+          ENGINE_REF: main
+          SOURCE_PATH: SYEIA-Beta/force-app/main/default
+          BEFORE: ${{ github.event.before }}
+          LABEL: "${{ github.repository }} ${{ github.event_name }} ${{ github.head_ref || github.ref_name }}"
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::notice::COE_DEVOPS_TRIGGER is not available - a pull request from a fork, or the secret is not set. Nothing was run."
+            exit 0
+          fi
+          ID_TOKEN=$(curl -sSf -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" \
+            "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=coe-devops" | jq -r '.value')
+          echo "::add-mask::${ID_TOKEN}"
+          gh workflow run external-pipeline.yml \
+            --repo Integrated-Corporate-Services/CoE-DevOps --ref "$ENGINE_REF" \
+            -f id_token="$ID_TOKEN" -f before="$BEFORE" \
+            -f source_path="$SOURCE_PATH" -f label="$LABEL"
+          echo "Handed to CoE-DevOps. The result appears as the 'CoE pipeline' status on this commit."
