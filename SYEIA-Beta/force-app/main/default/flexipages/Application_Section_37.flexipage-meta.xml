@@ -1360,7 +1360,7 @@
         </itemInstances>  
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Payment__r.Payment_Method__c </fieldItem>
+                <fieldItem>Record.Payment__r.Payment_Method__c</fieldItem>
                 <identifier>RecordPayment_rPayment_Method_cField</identifier>
             </fieldInstance>
         </itemInstances>               
