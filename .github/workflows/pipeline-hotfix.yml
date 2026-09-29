@@ -1,0 +1,34 @@
+name: "Pipeline: hotfix"
+
+# For a public repository only: the same button as the private-repo template, but the
+# run happens in CoE-DevOps, through pipeline-external.yml. Must sit on this repo's
+# default branch or the Run workflow button will not appear.
+
+on:
+  workflow_dispatch:
+    inputs:
+      hotfix_branch:
+        description: "Branch to Deploy"
+        required: true
+        type: string
+      environment:
+        description: "Org(s) to deploy to - comma-separated"
+        required: true
+        type: string
+      base_branch:
+        description: "Compare against"
+        required: false
+        default: main
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  pipeline:
+    uses: ./.github/workflows/pipeline-external.yml
+    with:
+      flow: hotfix
+      flow_inputs: ${{ toJSON(inputs) }}
+    secrets: inherit
