@@ -1,7 +1,8 @@
 name: "Pipeline: open promotion PR"
 
 on:
-  create:
+  push:
+    branches: ["release/**"]
 
 permissions:
   contents: read
@@ -9,7 +10,8 @@ permissions:
 
 jobs:
   pipeline:
-    if: github.ref_type == 'branch' && startsWith(github.ref_name, 'release/')
+    # Only the push that created the branch; later pushes to it are ordinary commits.
+    if: github.event.created
     uses: ./.github/workflows/pipeline-external.yml
     with:
       flow: open-promotion-pr
