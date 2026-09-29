@@ -1,3 +1,4 @@
+// Pipeline validation test - comment only, no behaviour change.
 public with sharing class BusinessDaysCalculator {
 
     public class Request {
