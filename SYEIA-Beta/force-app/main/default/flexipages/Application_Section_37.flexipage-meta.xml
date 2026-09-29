@@ -1357,7 +1357,7 @@
                 <fieldItem>Record.Payment__r.Status__c</fieldItem>
                 <identifier>RecordPayment_rStatus_cField</identifier>
             </fieldInstance>
-        </itemInstances>  
+        </itemInstances> 
         <itemInstances>
             <fieldInstance>
                 <fieldItem>Record.Payment__r.Payment_Method__c</fieldItem>
