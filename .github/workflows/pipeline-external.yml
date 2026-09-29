@@ -1,0 +1,62 @@
+name: "Pipeline"
+
+# For a public repository only. GitHub will not let a public repository call the private
+# pipeline workflows, so this hands the event to CoE-DevOps and the pipeline runs there.
+# This run follows it and shows everything it does - each job's output, a summary, and its
+# result - so the whole pipeline can be read here. The result also comes back as a
+# "CoE pipeline" status on the commit.
+#
+# Needs the COE_DEVOPS_TRIGGER secret - Actions read and write, and Contents read, on
+# CoE-DevOps only - and this repository listed in CoE-DevOps's
+# .github/external-projects.yml. Replaces pipeline-pr.yml and pipeline-merge.yml, and the
+# other pipeline-*.yml files here call it for their buttons.
+
+on:
+  pull_request:
+  push:
+    branches: ["**"]
+  workflow_call:
+    inputs:
+      flow:
+        description: "Which flow to run - set by the calling pipeline-*.yml"
+        type: string
+        required: true
+      flow_inputs:
+        description: "The calling form's fields, as JSON"
+        type: string
+        required: false
+        default: "{}"
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  dispatch:
+    name: "Run in CoE-DevOps"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run the pipeline in CoE-DevOps
+        env:
+          GH_TOKEN: ${{ secrets.COE_DEVOPS_TRIGGER }}
+          ENGINE_REF: main
+          SOURCE_PATH: SYEIA-Beta/force-app/main/default
+          BEFORE: ${{ github.event.before }}
+          FLOW: ${{ inputs.flow }}
+          FLOW_INPUTS: ${{ inputs.flow_inputs }}
+          LABEL: "${{ github.repository }} ${{ inputs.flow || github.event_name }} ${{ github.head_ref || github.ref_name }}"
+          # Ends the run's name in CoE-DevOps, so this run can find its own there.
+          TAG: "#${{ github.run_id }}.${{ github.run_attempt }}"
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::notice::COE_DEVOPS_TRIGGER is not available - a pull request from a fork, or the secret is not set. Nothing was run."
+            exit 0
+          fi
+          # What this does lives in CoE-DevOps, so it can improve without editing this file.
+          SCRIPT="${RUNNER_TEMP}/coe-caller.sh"
+          if ! gh api "repos/Integrated-Corporate-Services/CoE-DevOps/contents/.github/external/caller.sh?ref=${ENGINE_REF}" \
+               -H "Accept: application/vnd.github.raw" > "$SCRIPT" 2> "${SCRIPT}.err"; then
+            echo "::error::Could not fetch .github/external/caller.sh from CoE-DevOps at '${ENGINE_REF}' ($(head -c 200 "${SCRIPT}.err")). Either COE_DEVOPS_TRIGGER lacks Contents read there - it needs that as well as Actions read and write - or '${ENGINE_REF}' does not have the file."
+            exit 1
+          fi
+          bash "$SCRIPT"

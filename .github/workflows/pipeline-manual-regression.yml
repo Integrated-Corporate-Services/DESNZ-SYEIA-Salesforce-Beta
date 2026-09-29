@@ -1,0 +1,30 @@
+name: "Pipeline: manual regression"
+
+# For a public repository only: the same button as the private-repo template, but the
+# run happens in CoE-DevOps, through pipeline-external.yml. Must sit on this repo's
+# default branch or the Run workflow button will not appear.
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Org to test against"
+        required: true
+        type: string
+      apex_test_suites:
+        description: "Apex suites (blank = stage setting, 'default' = all local tests)"
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  pipeline:
+    uses: ./.github/workflows/pipeline-external.yml
+    with:
+      flow: manual-regression
+      flow_inputs: ${{ toJSON(inputs) }}
+    secrets: inherit
