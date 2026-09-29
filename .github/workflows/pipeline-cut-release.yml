@@ -2,10 +2,14 @@ name: "Pipeline: open promotion PR"
 
 # For a public repository only. Creating a release branch opens its pull request into
 # main, from CoE-DevOps through pipeline-external.yml - however the branch was made,
-# including from the GitHub UI.
+# including from the GitHub UI, since creating a branch is also a push marked as one.
+#
+# A push rather than `create`, which fires for every branch and tag and cannot be
+# filtered, so each one left a skipped run behind.
 
 on:
-  create:
+  push:
+    branches: ["release/**"]
 
 permissions:
   contents: read
@@ -13,7 +17,8 @@ permissions:
 
 jobs:
   pipeline:
-    if: github.ref_type == 'branch' && startsWith(github.ref_name, 'release/')
+    # Only the push that created the branch; later pushes to it are ordinary commits.
+    if: github.event.created
     uses: ./.github/workflows/pipeline-external.yml
     with:
       flow: open-promotion-pr
