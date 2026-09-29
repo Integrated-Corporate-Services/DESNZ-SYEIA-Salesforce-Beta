@@ -39,8 +39,7 @@ jobs:
       - name: Run the pipeline in CoE-DevOps
         env:
           GH_TOKEN: ${{ secrets.COE_DEVOPS_TRIGGER }}
-          # TEMPORARY: engine branch under test - set back to main before merging
-          ENGINE_REF: feature/external-dispatch
+          ENGINE_REF: main
           SOURCE_PATH: SYEIA-Beta/force-app/main/default
           BEFORE: ${{ github.event.before }}
           FLOW: ${{ inputs.flow }}
