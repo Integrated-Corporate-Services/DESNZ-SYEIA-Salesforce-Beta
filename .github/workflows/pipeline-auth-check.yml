@@ -1,9 +1,5 @@
 name: "Pipeline: auth check"
 
-# For a public repository only: the same button as the private-repo template, but the
-# run happens in CoE-DevOps, through pipeline-external.yml. Must sit on this repo's
-# default branch or the Run workflow button will not appear.
-
 on:
   workflow_dispatch:
     inputs:
@@ -13,10 +9,6 @@ on:
         default: ""
         type: string
 
-  # EDIT ME: uncomment to check every org weekly. A certificate that expires is otherwise
-  # found by a production release failing, which is the worst moment to learn about it.
-  # schedule:
-  #   - cron: "0 7 * * 1"
 
 permissions:
   contents: read
