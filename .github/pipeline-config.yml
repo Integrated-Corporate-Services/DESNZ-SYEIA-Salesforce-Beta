@@ -64,6 +64,7 @@ stages:
 
   feature-to-develop:
     target_branch: develop
+    severity_threshold: "0"
     environments:
       - name: QA
 
@@ -71,6 +72,7 @@ stages:
 
   develop-to-release:
     target_branch: "release/**"
+    severity_threshold: "0"
     environments:
       - name: UAT
 
@@ -78,6 +80,7 @@ stages:
 
   release-to-main:
     target_branch: main
+    severity_threshold: "0"
     environments:
       - name: PROD
         gates:
@@ -89,6 +92,7 @@ stages:
   # Hotfix (UAT)
 
   hotfix:
+    severity_threshold: "0"
     environments:
       - name: UAT
     backsync:
@@ -99,6 +103,7 @@ stages:
   # Manual Deploy
 
   manual-deploy:
+    severity_threshold: "0"
     environments:
       - name: DEV1
       - name: DEV2
@@ -114,6 +119,7 @@ stages:
   # Manual Regression
 
   manual-regression:
+    severity_threshold: "0"
     environments:
       - name: QA
       - name: UAT
