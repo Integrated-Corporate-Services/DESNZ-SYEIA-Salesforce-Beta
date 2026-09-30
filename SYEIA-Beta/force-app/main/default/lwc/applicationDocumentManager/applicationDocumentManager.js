@@ -58,9 +58,9 @@ export default class ApplicationDocumentManager extends LightningElement {
                 Id: document.document_id,
                 Title: [document.category, document.title].filter(Boolean).join('/'),
                 FileType: document.contentType || document.ContentType,
-                downloadUrl: document.downloadUrl,
-                downloadLabel: document.downloadUrl ? 'Download' : 'Use Download All',
-                downloadDisabled: !document.downloadUrl
+                downloadUrl: null,
+                downloadLabel: 'Download',
+                downloadDisabled: false
             }));
         } catch (e) {
             console.error('Error loading files:', e);
