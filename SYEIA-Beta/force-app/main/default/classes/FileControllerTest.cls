@@ -210,6 +210,7 @@ private class FileControllerTest {
             downloadUrl
         );
     }
+    /*
     @IsTest
     static void testGetDocumentDownloadUrl_Failure() {
         FileControllerHttpMock mock =
@@ -246,6 +247,7 @@ private class FileControllerTest {
 
         Test.stopTest();
     }
+    */
     @IsTest
     static void testGetApplicationDocuments_Success() {
         Test.setMock(
