@@ -3,7 +3,8 @@ name: "Pipeline"
 on:
   pull_request:
   push:
-    branches: ["**"]
+    # Release branches validate on their pull requests but never deploy on a push.
+    branches: ["**", "!release/**"]
   workflow_call:
     inputs:
       flow:
