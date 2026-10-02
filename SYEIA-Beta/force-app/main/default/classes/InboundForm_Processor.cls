@@ -8,7 +8,8 @@ public with sharing class InboundForm_Processor {
     private static final String NWL_FORM_TYPE = 'NWL';
     private static final String S37_WITHDRAWAL_FORM_TYPE = 'S37_WITHDRAWAL_REQUEST';
     private static final String NWL_WITHDRAWAL_FORM_TYPE = 'NWL_WITHDRAWAL_REQUEST';
-    
+    private static final String BACS_PAYMENT_EVENT = 'BACS_PAYMENT_EVENT';
+
     // Schema cache to avoid repeated getGlobalDescribe calls
     private static Map<String, Schema.SObjectType> sObjectTypeCache = 
         new Map<String, Schema.SObjectType>();
@@ -28,6 +29,7 @@ public with sharing class InboundForm_Processor {
     public static Map<Id, ProcessingResult> processRequests(List<Inbound_Request__c> requests) {
         Map<Id, ProcessingResult> results = new Map<Id, ProcessingResult>();
         
+
         // Clear handler cache at start of each batch
         handlerCache.clear();
         
@@ -48,7 +50,149 @@ public with sharing class InboundForm_Processor {
         
         return results;
     }
-    
+
+    private static void handlePaymentEvent(
+            InboundForm_JSONParser parser,
+            ProcessingResult result)
+        {
+            try
+            {
+                
+                String applicationId = parser.getString('applicationId');
+				 System.debug('Raghu-test-applicationId' + applicationId);
+                
+                if (String.isBlank(applicationId))
+                {
+                    result.addError(
+                        'applicationId missing from payment event payload'
+                    );
+                     System.debug('Raghu-test-applicationId missing' + applicationId);
+                    return;
+                }
+
+                // Find Case using Application ID
+                List<Case__c> cases = [
+                    SELECT Id,
+                        AWS_Application_Id__c
+                    FROM Case__c
+                    WHERE AWS_Application_Id__c = :applicationId
+                    LIMIT 1
+                ];
+
+                if (cases.isEmpty())
+                {
+                    result.addError(
+                        'No Case found for applicationId: ' +
+                        applicationId
+                    );
+                    return;
+                }
+					
+                Case__c parentCase = cases[0];
+				System.debug('Raghu-test-parentCase found ' + parentCase.Id);
+                // Find existing payment
+                List<Payment__c> existingPayments = [
+                    SELECT Id,
+                        Case__c
+                    FROM Payment__c
+                    WHERE Case__c = :parentCase.Id
+                    LIMIT 1
+                ];
+
+                Payment__c payment;
+
+                if (!existingPayments.isEmpty())
+                {
+                    payment = existingPayments[0];
+                }
+                else
+                {
+                    payment = new Payment__c();
+                    payment.Case__c = parentCase.Id;
+                }
+				
+                /*
+                Object amountObj =
+                    getValueFromMap(
+                        parser.getRootMap(),
+                        'payment.amount'
+                    ); */
+
+                /*
+                if (amountObj != null)
+                {
+                    payment.Total_Amount__c =
+                        convertToCurrency(amountObj);
+                } */
+
+                payment.Status__c =
+                    parser.getString('payment.status');
+
+
+                //payment.Item_Reference__c =
+                //    parser.getString('payment.bacsReference');
+
+                //payment.Payment_Reference__c =
+                   // parser.getString('payment.paymentReference');
+
+                String paymentDate =
+                    parser.getString('payment.paymentDate');
+
+                if (String.isNotBlank(paymentDate))
+                {
+                    System.debug('Raghu-payment-date' + paymentDate);
+                    System.debug('Raghu-payment-convertdate' + convertToDate(paymentDate));
+                    
+                    payment.Payment_Date__c =
+                        convertToDate(paymentDate);
+                }
+                /*
+                String receivedAt =
+                    parser.getString('payment.receivedAt');
+
+                if (String.isNotBlank(receivedAt))
+                {
+                    payment.Received_At__c =
+                        convertToDateTime(receivedAt);
+                } */
+
+                if (payment.Id == null)
+                {
+                    insert payment;
+                }
+                else
+                {
+                    update payment;
+                }
+
+                result.formType = 'BACS_PAYMENT_EVENT';
+
+                Logger.info(
+                    'Payment processed successfully. ' +
+                    'AWS_Application_Id__c=' + applicationId +
+                    ', CaseId=' + parentCase.Id +
+                    ', PaymentId=' + payment.Id
+                );
+            }
+            catch (Exception e)
+            {
+                result.addError(
+                    'Payment processing failed: ' +
+                    e.getMessage()
+                );
+
+                Logger.error(
+                    'Payment processing failed: ' +
+                    e.getMessage()
+                );
+
+                Logger.setScenario(
+                    'InboundForm_Processor.handlePaymentEvent'
+                );
+
+                Logger.saveLog();
+            }
+        }    
     /**
      * Initialize schema cache for all registered objects
      */
@@ -132,6 +276,15 @@ public with sharing class InboundForm_Processor {
             // Store parser in result for use in afterPrimaryInsert hook
             result.parser = parser;
             
+            String eventType = parser.getString('event_type');
+    
+            if(eventType == BACS_PAYMENT_EVENT)
+            {
+                System.debug('Raghu-test' + eventType);
+                handlePaymentEvent(parser, result);
+                return result;
+            }
+
             // Get configured form type (may be derived from event type)
             String payloadFormType = parser.getString('formType');
             if (String.isBlank(payloadFormType)) {
