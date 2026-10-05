@@ -84,12 +84,12 @@ stages:
     environments:
       - name: PROD
 
-  # Hotfix (UAT)
+  # Hotfix (PROD)
 
   hotfix:
     severity_threshold: "0"
     environments:
-      - name: UAT
+      - name: PROD
     backsync:
       enabled: true
       targets:
