@@ -83,18 +83,13 @@ stages:
     severity_threshold: "0"
     environments:
       - name: PROD
-        gates:
-          - trigger: merge
-            on: any_change
-            level: require_approval
-            approval_environment: PROD-Approval
 
-  # Hotfix (UAT)
+  # Hotfix (PROD)
 
   hotfix:
     severity_threshold: "0"
     environments:
-      - name: UAT
+      - name: PROD
     backsync:
       enabled: true
       targets:
@@ -110,11 +105,6 @@ stages:
       - name: QA
       - name: UAT
       - name: PROD
-        gates:
-          - trigger: merge
-            on: any_change
-            level: require_approval
-            approval_environment: PROD-Approval
 
   # Manual Regression
 
