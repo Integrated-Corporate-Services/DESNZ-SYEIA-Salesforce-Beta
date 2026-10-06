@@ -225,6 +225,12 @@ public class InboundForm_S37Config {
                 'Payment_Method__c'
             )
         );
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+                'sections.payment.proofOfPayment.transactionNumber',
+                'Transaction_Number__c'
+            )
+        );
+
     }
     
     // ========================================================================
