@@ -449,6 +449,7 @@
 		<members>Payment__c.Subtotal__c</members>
 		<members>Payment__c.Total_Amount__c</members>
 		<members>Payment__c.User_Id__c</members>
+		<members>Payment__c.Transaction_Number__c</members>
 		<members>Post_Consultation__c.Case__c</members>
 		<members>Post_Consultation__c.CON_Recommendations_Not_Accepted_Reason__c</members>
 		<members>Post_Consultation__c.Consultees_Recommendations_Accepted__c</members>
