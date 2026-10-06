@@ -52,147 +52,123 @@ public with sharing class InboundForm_Processor {
     }
 
     private static void handlePaymentEvent(
-            InboundForm_JSONParser parser,
-            ProcessingResult result)
+        InboundForm_JSONParser parser,
+        ProcessingResult result)
+    {
+        try
         {
-            try
-            {
-                
-                String applicationId = parser.getString('applicationId');
-				 System.debug('Raghu-test-applicationId' + applicationId);
-                
-                if (String.isBlank(applicationId))
-                {
-                    result.addError(
-                        'applicationId missing from payment event payload'
-                    );
-                     System.debug('Raghu-test-applicationId missing' + applicationId);
-                    return;
-                }
+            String applicationId = parser.getString('applicationId');
 
-                // Find Case using Application ID
-                List<Case__c> cases = [
-                    SELECT Id,
-                        AWS_Application_Id__c
-                    FROM Case__c
-                    WHERE AWS_Application_Id__c = :applicationId
-                    LIMIT 1
-                ];
-
-                if (cases.isEmpty())
-                {
-                    result.addError(
-                        'No Case found for applicationId: ' +
-                        applicationId
-                    );
-                    return;
-                }
-					
-                Case__c parentCase = cases[0];
-				System.debug('Raghu-test-parentCase found ' + parentCase.Id);
-                // Find existing payment
-                List<Payment__c> existingPayments = [
-                    SELECT Id,
-                        Case__c
-                    FROM Payment__c
-                    WHERE Case__c = :parentCase.Id
-                    LIMIT 1
-                ];
-
-                Payment__c payment;
-
-                if (!existingPayments.isEmpty())
-                {
-                    payment = existingPayments[0];
-                }
-                else
-                {
-                    payment = new Payment__c();
-                    payment.Case__c = parentCase.Id;
-                }
-				
-                /*
-                Object amountObj =
-                    getValueFromMap(
-                        parser.getRootMap(),
-                        'payment.amount'
-                    ); */
-
-                /*
-                if (amountObj != null)
-                {
-                    payment.Total_Amount__c =
-                        convertToCurrency(amountObj);
-                } */
-
-                payment.Status__c =
-                    parser.getString('payment.status');
-
-
-                //payment.Item_Reference__c =
-                //    parser.getString('payment.bacsReference');
-
-                //payment.Payment_Reference__c =
-                   // parser.getString('payment.paymentReference');
-
-                String paymentDate =
-                    parser.getString('payment.paymentDate');
-
-                if (String.isNotBlank(paymentDate))
-                {
-                    System.debug('Raghu-payment-date' + paymentDate);
-                    System.debug('Raghu-payment-convertdate' + convertToDate(paymentDate));
-                    
-                    payment.Payment_Date__c =
-                        convertToDate(paymentDate);
-                }
-                /*
-                String receivedAt =
-                    parser.getString('payment.receivedAt');
-
-                if (String.isNotBlank(receivedAt))
-                {
-                    payment.Received_At__c =
-                        convertToDateTime(receivedAt);
-                } */
-
-                if (payment.Id == null)
-                {
-                    insert payment;
-                }
-                else
-                {
-                    update payment;
-                }
-
-                result.formType = 'BACS_PAYMENT_EVENT';
-
-                Logger.info(
-                    'Payment processed successfully. ' +
-                    'AWS_Application_Id__c=' + applicationId +
-                    ', CaseId=' + parentCase.Id +
-                    ', PaymentId=' + payment.Id
-                );
-            }
-            catch (Exception e)
+            if (String.isBlank(applicationId))
             {
                 result.addError(
-                    'Payment processing failed: ' +
-                    e.getMessage()
+                    'applicationId missing from payment event payload'
                 );
-
-                Logger.error(
-                    'Payment processing failed: ' +
-                    e.getMessage()
-                );
-
-                Logger.setScenario(
-                    'InboundForm_Processor.handlePaymentEvent'
-                );
-
-                Logger.saveLog();
+                return;
             }
-        }    
+
+            // Find Case using AWS Application Id
+            List<Case__c> cases = [
+                SELECT Id,
+                    AWS_Application_Id__c
+                FROM Case__c
+                WHERE AWS_Application_Id__c = :applicationId
+                LIMIT 1
+            ];
+
+            if (cases.isEmpty())
+            {
+                result.addError(
+                    'No Case found for applicationId: ' +
+                    applicationId
+                );
+                return;
+            }
+
+            Case__c parentCase = cases[0];
+
+            // Find existing Payment record
+            List<Payment__c> existingPayments = [
+                SELECT Id,
+                    Case__c,
+                    Total_Amount__c,
+                    Status__c,
+                    Payment_Date__c
+                FROM Payment__c
+                WHERE Case__c = :parentCase.Id
+                LIMIT 1
+            ];
+
+            if (existingPayments.isEmpty())
+            {
+                result.addError(
+                    'No Payment record found for Case: ' +
+                    parentCase.Id
+                );
+                return;
+            }
+
+            Payment__c payment = existingPayments[0];
+
+            Object amountObj = getValueFromMap(
+                parser.getRootMap(),
+                'payment.amount'
+            );
+
+            if (amountObj != null)
+            {
+                payment.Total_Amount__c =
+                    convertToCurrency(amountObj)
+                    .divide(100, 2);
+            }
+
+            String paymentStatus =
+                parser.getString('payment.status');
+
+            if (String.isNotBlank(paymentStatus))
+            {
+                payment.Status__c = paymentStatus;
+            }
+
+            String paymentDate =
+                parser.getString('payment.paymentDate');
+
+            if (String.isNotBlank(paymentDate))
+            {
+                payment.Payment_Date__c =
+                    convertToDate(paymentDate);
+            }
+
+            update payment;
+
+            result.formType = 'BACS_PAYMENT_EVENT';
+
+            Logger.info(
+                'Payment updated successfully. ' +
+                'ApplicationId=' + applicationId +
+                ', CaseId=' + parentCase.Id +
+                ', PaymentId=' + payment.Id
+            );
+        }
+        catch (Exception e)
+        {
+            result.addError(
+                'Payment processing failed: ' +
+                e.getMessage()
+            );
+
+            Logger.error(
+                'Payment processing failed: ' +
+                e.getMessage()
+            );
+
+            Logger.setScenario(
+                'InboundForm_Processor.handlePaymentEvent'
+            );
+
+            Logger.saveLog();
+        }
+    }    
     /**
      * Initialize schema cache for all registered objects
      */

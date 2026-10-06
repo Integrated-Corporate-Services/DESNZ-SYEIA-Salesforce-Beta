@@ -242,7 +242,13 @@ public class InboundForm_NWLConfig {
                 'sections.payment.kind',
                 'Payment_Method__c'
             )
-        );                  
+        );
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+                'sections.payment.proofOfPayment.transactionNumber',
+                'Transaction_Number__c'
+            )
+        );        
+        
 
     }
 
