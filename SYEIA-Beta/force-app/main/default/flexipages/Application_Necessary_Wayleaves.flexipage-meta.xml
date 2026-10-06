@@ -2977,12 +2977,6 @@
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentName>flexipage:blankSpace</componentName>
-                <identifier>flexipage_blankSpace5</identifier>
-            </componentInstance>
-        </itemInstances>
          <itemInstances>
             <fieldInstance>
                 <fieldItem>Record.Payment__r.Payment_Date__c</fieldItem>
