@@ -2453,10 +2453,6 @@
         </itemInstances>
         <itemInstances>
             <componentInstance>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
                 <componentName>routeMap</componentName>
                 <identifier>c_routeMap</identifier>
             </componentInstance>
