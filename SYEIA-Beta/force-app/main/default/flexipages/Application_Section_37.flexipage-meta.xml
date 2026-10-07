@@ -2453,8 +2453,6 @@
         </itemInstances>
         <itemInstances>
             <componentInstance>
-                <componentName>routePointGroupedList</componentName>
-                <identifier>c_routePointGroupedList</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
