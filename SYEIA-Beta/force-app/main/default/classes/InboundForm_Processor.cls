@@ -706,7 +706,7 @@ public with sharing class InboundForm_Processor {
             Map<String, Object> dataMap, 
             InboundForm_MappingConfig.FieldMapping mapping) {
         
-        Object value = getValueFromMap(dataMap, mapping.jsonPath);
+            Object value = getValueFromMap(dataMap, mapping.jsonPath);
             // Payment Method fallback
             if (mapping.targetField == 'Payment_Method__c'
             && (value == null || String.isBlank(String.valueOf(value)))) {
@@ -718,7 +718,7 @@ public with sharing class InboundForm_Processor {
                     value = providerValue;
                 }
             }       
-             
+
         if (value == null) {
             return null;
         }
