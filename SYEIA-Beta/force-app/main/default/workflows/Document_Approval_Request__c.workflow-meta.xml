@@ -23,10 +23,9 @@
     <fieldUpdates>
         <fullName>Set_Approver_to_User</fullName>
         <field>Approval_Comments__c</field>
-        <formula>$User.Id</formula>
         <name>Set Approver to User</name>
         <notifyAssignee>false</notifyAssignee>
-        <operation>Formula</operation>
+        <operation>Null</operation>
         <protected>false</protected>
         <reevaluateOnChange>false</reevaluateOnChange>
     </fieldUpdates>

@@ -76,11 +76,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Asset_Information__c.Line_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Asset_Information__c.Line_Voltage__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -1242,11 +1237,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Consultation__c.Consultation_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Consultation__c.Consultee_Contact_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

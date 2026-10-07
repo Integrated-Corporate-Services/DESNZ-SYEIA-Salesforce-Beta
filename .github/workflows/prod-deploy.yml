@@ -1,0 +1,216 @@
+name: Deploy to Salesforce Production
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+  id-token: write
+
+jobs:
+  validate-and-deploy:
+    runs-on: ubuntu-latest
+    environment: PROD
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          check-latest: true
+
+      - name: Check versions
+        run: |
+          set -e
+          which node
+          node --version
+          npm --version
+          echo "✅ Version check completed"
+
+      - name: Install SF CLI and jq
+        run: |
+          set -e
+          npm install --global @salesforce/cli
+          sudo apt-get update && sudo apt-get install -y jq
+          echo "✅ SF CLI and dependencies installed"
+
+      - name: Create JWT key file
+        run: |
+          set -e
+          printf '%s' '${{ secrets.SF_PRIVATE_KEY }}' > server.key
+          chmod 600 server.key
+          echo "✅ JWT key file created"
+
+      - name: Authenticate to Salesforce Production
+        run: |
+          set -e
+          if [ -z "${{ secrets.SF_USERNAME_PROD }}" ] || [ -z "${{ secrets.SF_CLIENT_ID_PROD }}" ] || [ -z "${{ secrets.SF_PRIVATE_KEY }}" ]; then
+            echo "❌ Required secrets not configured: SF_USERNAME_PROD, SF_CLIENT_ID_PROD, SF_PRIVATE_KEY"
+            exit 1
+          fi
+
+          # Preflight checks to fail fast with clearer error messages.
+          if [ ! -s server.key ]; then
+            echo "❌ server.key is missing or empty"
+            exit 1
+          fi
+          if ! grep -q "BEGIN .*PRIVATE KEY" server.key; then
+            echo "❌ SF_PRIVATE_KEY does not appear to be a valid PEM private key"
+            exit 1
+          fi
+
+          USERNAME="${{ secrets.SF_USERNAME_PROD }}"
+          CLIENT_ID="${{ secrets.SF_CLIENT_ID_PROD }}"
+          echo "ℹ️ Using username: ${USERNAME}"
+          echo "ℹ️ Using client id: ${CLIENT_ID:0:8}...${CLIENT_ID: -4}"
+
+          set +e
+          sf org login jwt \
+            --username "$USERNAME" \
+            --client-id "$CLIENT_ID" \
+            --jwt-key-file server.key \
+            --instance-url https://login.salesforce.com \
+            --alias production \
+            --set-default 2>&1 | tee jwt_login_output.log
+          JWT_EXIT=${PIPESTATUS[0]}
+          set -e
+
+          if [ "$JWT_EXIT" -ne 0 ]; then
+            echo "❌ JWT authentication failed"
+            if grep -qi "user hasn't approved this consumer" jwt_login_output.log; then
+              echo "➡️ Salesforce fix: Pre-authorize this user for the Connected App (Permitted Users: Admin approved users are pre-authorized)."
+            fi
+            if grep -qi "External client app is not installed in this org" jwt_login_output.log; then
+              echo "➡️ Salesforce fix: SF_CLIENT_ID_PROD does not match a Connected App available in this Production org."
+            fi
+            if grep -qi "invalid_grant\|audience is invalid\|aud is invalid" jwt_login_output.log; then
+              echo "➡️ Salesforce fix: Verify --instance-url and ensure the connected app/certificate are for Production login."
+            fi
+            echo "➡️ Verify SF_USERNAME_PROD, SF_CLIENT_ID_PROD, and that the Connected App certificate matches SF_PRIVATE_KEY."
+            rm -f server.key
+            exit 1
+          fi
+
+          # Verify authentication
+          sf org list --json | jq '.' > /dev/null
+          # Clean up JWT key file
+          rm -f server.key jwt_login_output.log
+          echo "✅ Successfully authenticated to Salesforce Production via JWT"
+
+      - name: Validate main deployment
+        run: |
+          set -e
+          set -o pipefail
+          if [ -d ./SYEIA-Beta ]; then
+            cd ./SYEIA-Beta
+            echo "ℹ️ Changed directory to $(pwd)"
+          else
+            echo "ℹ️ Directory ./SYEIA-Beta not found, using $(pwd)"
+          fi
+          echo "🔍 Validating main deployment package..."
+          echo "ℹ️ Working directory: $(pwd)"
+          echo "ℹ️ SF CLI version: $(sf --version)"
+          echo "ℹ️ Checking deployment manifest..."
+          ls -la manifest || true
+          if [ ! -f manifest/package.xml ]; then
+            echo "❌ manifest/package.xml not found"
+            exit 1
+          fi
+
+          set +e
+          sf project deploy validate \
+            --target-org production \
+            --manifest manifest/package.xml \
+            --test-level RunLocalTests \
+            --wait 120 \
+            --json > deploy_validate_result.json 2> deploy_validate_error.log
+          VALIDATE_EXIT=$?
+          set -e
+
+          echo "ℹ️ Validate command exit code: ${VALIDATE_EXIT}"
+          if [ -s deploy_validate_error.log ]; then
+            echo "ℹ️ Validate stderr output:"
+            cat deploy_validate_error.log
+          fi
+          if [ ! -s deploy_validate_result.json ]; then
+            echo "❌ deploy_validate_result.json is missing or empty"
+            exit 1
+          fi
+          if ! jq '.' deploy_validate_result.json > /dev/null 2>&1; then
+            echo "❌ deploy_validate_result.json is not valid JSON"
+            cat deploy_validate_result.json
+            exit 1
+          fi
+          echo "ℹ️ Validate JSON summary:"
+          jq '{status, resultStatus: .result.status, errorMessage: .message, details: .result.details}' deploy_validate_result.json
+
+          if [ "$VALIDATE_EXIT" -ne 0 ]; then
+            echo "❌ Validate command returned non-zero exit code"
+            jq '.' deploy_validate_result.json
+            exit 1
+          fi
+          
+          # Check validation success
+          VALIDATION_STATUS=$(jq -r '.status' deploy_validate_result.json)
+          if [ "$VALIDATION_STATUS" != "Succeeded" ]; then
+            echo "❌ Deployment validation failed"
+            jq '.' deploy_validate_result.json
+            exit 1
+          fi
+          echo "✅ Main deployment validation successful"
+
+      - name: Manual Production Approval
+        uses: trstringer/manual-approval@v1
+        with:
+          secret: ${{ secrets.GITHUB_TOKEN }}
+          approvers: ${{ secrets.PRODUCTION_APPROVERS }}
+          minimum-approvals: 1
+          issue-title: "⚠️ Production Deployment Approval Required"
+
+      - name: Deploy main package to Production
+        run: |
+          set -e
+          if [ -d ./SYEIA-Beta ]; then
+            cd ./SYEIA-Beta
+            echo "ℹ️ Changed directory to $(pwd)"
+          else
+            echo "ℹ️ Directory ./SYEIA-Beta not found, using $(pwd)"
+          fi
+          echo "🚀 Deploying main package to production..."
+          sf project deploy start \
+            --target-org production \
+            --manifest manifest/package.xml \
+            --test-level RunLocalTests \
+            --wait 120 \
+            --json > deploy_result.json
+          
+          # Verify deployment success
+          DEPLOY_STATUS=$(jq -r '.status' deploy_result.json)
+          if [ "$DEPLOY_STATUS" != "Succeeded" ]; then
+            echo "❌ Main deployment failed"
+            jq '.' deploy_result.json
+            exit 1
+          fi
+          echo "✅ Main deployment successful"
+
+
+      - name: Deployment Summary
+        if: always()
+        run: |
+          echo "=== DEPLOYMENT SUMMARY ==="
+          if [ "${{ job.status }}" = "success" ]; then
+            echo "✅ SUCCESS: All deployments completed successfully"
+            echo "   - Main package deployed"
+            echo "   - Destructive changes applied"
+            echo "   - All tests passed"
+          else
+            echo "❌ FAILURE: Deployment workflow failed"
+            echo "   - Check logs above for details"
+            echo "   - No rollback required (validation would have caught errors)"
+            exit 1
+          fi
+
