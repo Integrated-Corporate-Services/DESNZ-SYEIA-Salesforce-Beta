@@ -707,7 +707,18 @@ public with sharing class InboundForm_Processor {
             InboundForm_MappingConfig.FieldMapping mapping) {
         
         Object value = getValueFromMap(dataMap, mapping.jsonPath);
-        
+            // Payment Method fallback
+            if (mapping.targetField == 'Payment_Method__c'
+            && (value == null || String.isBlank(String.valueOf(value)))) {
+            
+                Object providerValue = getValueFromMap(dataMap, 'provider');
+            
+            if (providerValue != null
+                && !String.isBlank(String.valueOf(providerValue))) {
+                    value = providerValue;
+                }
+            }       
+             
         if (value == null) {
             return null;
         }
