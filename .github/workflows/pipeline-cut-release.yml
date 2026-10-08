@@ -1,0 +1,19 @@
+name: "Pipeline: open promotion PR"
+
+on:
+  push:
+    branches: ["release/**"]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  pipeline:
+    # Only the push that created the branch; later pushes to it are ordinary commits.
+    if: github.event.created
+    uses: ./.github/workflows/pipeline-external.yml
+    with:
+      flow: open-promotion-pr
+      flow_inputs: '{"base_branch": "main", "draft": false}'
+    secrets: inherit

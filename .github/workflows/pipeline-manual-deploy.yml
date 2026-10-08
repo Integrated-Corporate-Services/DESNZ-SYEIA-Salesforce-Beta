@@ -1,0 +1,46 @@
+name: "Pipeline: manual deploy"
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Org(s) to deploy to - comma-separated"
+        required: true
+        type: string
+      deploy_mode:
+        description: "How to deploy"
+        required: true
+        default: delta
+        type: choice
+        options:
+          - delta
+          - full
+      run_mode:
+        description: "What this run should do"
+        required: true
+        default: deploy
+        type: choice
+        options:
+          - deploy
+          - validate
+      to_branch:
+        description: "Branch to Deploy"
+        required: true
+        type: string
+      base_branch:
+        description: "Compare against (delta only - ignored for a full deploy)"
+        required: false
+        default: HEAD
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  pipeline:
+    uses: ./.github/workflows/pipeline-external.yml
+    with:
+      flow: manual-deploy
+      flow_inputs: ${{ toJSON(inputs) }}
+    secrets: inherit

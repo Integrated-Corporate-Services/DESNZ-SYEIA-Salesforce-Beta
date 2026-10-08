@@ -1,6 +1,7 @@
 import { LightningElement, wire, track, api } from 'lwc';
 import getApplicationDocuments from '@salesforce/apex/FileController.getApplicationDocuments';
 import getDocumentExport from '@salesforce/apex/FileController.getDocumentExport';
+import getDocumentDownloadUrl from '@salesforce/apex/FileController.getDocumentDownloadUrl';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import CUSTOM_FIELD from '@salesforce/schema/Case__c.AWS_Application_Id__c';
@@ -57,9 +58,9 @@ export default class ApplicationDocumentManager extends LightningElement {
                 Id: document.document_id,
                 Title: [document.category, document.title].filter(Boolean).join('/'),
                 FileType: document.contentType || document.ContentType,
-                downloadUrl: document.downloadUrl,
-                downloadLabel: document.downloadUrl ? 'Download' : 'Use Download All',
-                downloadDisabled: !document.downloadUrl
+                downloadUrl: null,
+                downloadLabel: 'Download',
+                downloadDisabled: false
             }));
         } catch (e) {
             console.error('Error loading files:', e);
@@ -78,7 +79,7 @@ export default class ApplicationDocumentManager extends LightningElement {
             this.showToast('Download failed', 'Unable to prepare the document export.', 'error');
         }
     }
-
+    /*
     handleRowAction(event) {
         const action = event.detail.action.name;
         const row = event.detail.row;
@@ -94,6 +95,27 @@ export default class ApplicationDocumentManager extends LightningElement {
                 this.showToast('Download failed', 'Unable to download the document.', 'error');
             }
         }
+    } */
+
+    async handleRowAction(event) {
+    const row = event.detail.row;
+
+    try {
+        const downloadUrl = await getDocumentDownloadUrl({
+            applicationId: this.customFieldValue,
+            documentId: row.Id
+        });
+
+        window.open(downloadUrl, '_blank');
+
+    } catch (e) {
+        console.error('Error downloading document:', e);
+        this.showToast(
+            'Download failed',
+            'Unable to download the document.',
+            'error'
+        );
+     }
     }
 
     showToast(title, message, variant) {
