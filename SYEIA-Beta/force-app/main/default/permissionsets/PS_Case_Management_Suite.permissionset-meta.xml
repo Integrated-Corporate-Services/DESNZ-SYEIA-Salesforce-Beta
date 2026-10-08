@@ -8,6 +8,14 @@
         <apexClass>DynamicPathController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
+    <classAccesses>
+        <apexClass>RouteMapController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses> 
+    <classAccesses>
+        <apexClass>RoutePointGroupedController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses> 
     <description>Grants read/write access to all default objects related to the Case__c object as well as access to the EIP App.</description>
     <fieldPermissions>
         <editable>true</editable>
@@ -1025,18 +1033,23 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Route_Point__c.Easting__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Route_Point__c.Northing__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Route_Point__c.Sequence_Number__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Route_Point__c.SequenceNumber__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1353,6 +1366,10 @@
     </tabSettings>
     <tabSettings>
         <tab>Case__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
+        <tab>Route_Map_App_Page</tab>
         <visibility>Visible</visibility>
     </tabSettings>
     <userPermissions>
