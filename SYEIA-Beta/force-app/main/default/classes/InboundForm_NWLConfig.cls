@@ -44,6 +44,42 @@ public class InboundForm_NWLConfig {
             'Date_of_Application__c'
         ));
 
+          config.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'salesforceMigration.pins_pedw_comments', 
+            'Pins_Pedw_Comments__c'
+        ));    
+        
+          config.addFieldMapping(InboundForm_MappingConfig.dateField(
+            'salesforceMigration.pins_pedw_1st_referral_date', 
+            'PINS_PEDW_1st_Referral_Date__c'
+        ));  
+ 
+          config.addFieldMapping(InboundForm_MappingConfig.dateField(
+            'salesforceMigration.pins_pedw_2nd_referral_date', 
+            'PINS_PEDW_2nd_Referral_Date__c'
+        )); 
+        
+          config.addFieldMapping(InboundForm_MappingConfig.dateField(
+            'salesforceMigration.first_abeyance_start_date', 
+            'X1st_Abeyance_Start_Date__c'
+        )); 
+
+          config.addFieldMapping(InboundForm_MappingConfig.dateField(
+            'salesforceMigration.first_abeyance_end_date', 
+            'X1st_Abeyance_End_Date__c'
+        )); 
+
+           config.addFieldMapping(InboundForm_MappingConfig.dateField(
+            'salesforceMigration.procedural_notice_letter_date', 
+            'Procedural_Notice_Letter_Date__c'
+        ));
+
+        config.addFieldMapping(InboundForm_MappingConfig.yesNoField(
+            'salesforceMigration.application_fee_paid',
+            'Application_Fee_Paid__c'
+        ));        
+
+//salesforceMigration
         // Sections
         // Application Details
         config.addFieldMapping(InboundForm_MappingConfig.stringField(
@@ -202,6 +238,12 @@ public class InboundForm_NWLConfig {
             'Description_of_Important_Information__c'
         ));
 
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+                'sections.payment.kind',
+                'Payment_Method__c'
+            )
+        );                  
+
     }
 
     private static void addCollectionConfigs(InboundForm_MappingConfig.FormTypeConfig config) {
@@ -294,7 +336,7 @@ public class InboundForm_NWLConfig {
         objectors.addFieldMapping(InboundForm_MappingConfig.stringField('objector_email', 'Email__c'));
         objectors.addFieldMapping(InboundForm_MappingConfig.stringField('objector_phone', 'Phone__c'));
         objectors.addFieldMapping(InboundForm_MappingConfig.stringField('objector_organisation', 'Organisation__c'));
-        objectors.addFieldMapping(InboundForm_MappingConfig.defaultValue('Individual', 'Party_Type__c'));
+        objectors.addFieldMapping(InboundForm_MappingConfig.defaultValue('Objector', 'Party_Type__c'));
         objectors.addFieldMapping(InboundForm_MappingConfig.defaultValue(
             'NWL_OBJECTOR',
             'Application_Party_Id__c'
@@ -508,7 +550,8 @@ public class InboundForm_NWLConfig {
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('status', 'Status__c'));
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('provider', 'Provider__c'));
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('description', 'Description__c'));
-
+        payments.addFieldMapping(InboundForm_MappingConfig.dateField('paymentDate', 'Payment_Date__c'));
+        
         return payments;
     }
 

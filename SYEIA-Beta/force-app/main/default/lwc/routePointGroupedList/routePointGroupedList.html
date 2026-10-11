@@ -1,0 +1,295 @@
+<template>
+
+    <article class="slds-card">
+
+        <!-- ================================================= -->
+        <!-- HEADER                                            -->
+        <!-- ================================================= -->
+
+        <div class="slds-card__header slds-grid">
+
+            <header
+                class="slds-media slds-media_center slds-has-flexi-truncate">
+
+                <div class="slds-media__figure">
+
+                    <lightning-icon
+                        icon-name="utility:trail"
+                        alternative-text="Route"
+                        size="small"
+                        class="route-icon">
+                    </lightning-icon>
+
+                </div>
+
+                <div class="slds-media__body">
+
+                    <h2 class="slds-card__header-title">
+
+                        <span class="slds-truncate">
+                            Route ({totalCount})
+                        </span>
+
+                    </h2>
+
+                </div>
+
+            </header>
+
+
+            <div class="slds-no-flex">
+
+                <lightning-button-icon
+                    icon-name={mainCollapseIcon}
+                    alternative-text="Expand / Collapse"
+                    title="Expand / Collapse"
+                    variant="bare"
+                    onclick={toggleMainList}>
+                </lightning-button-icon>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- BODY                                              -->
+        <!-- ================================================= -->
+
+        <template if:false={collapsed}>
+
+            <div class="slds-card__body slds-card__body_inner">
+
+
+                <!-- ================================================= -->
+                <!-- ERROR                                             -->
+                <!-- ================================================= -->
+
+                <template if:true={error}>
+
+                    <div class="slds-text-color_error slds-p-around_small">
+
+                        {errorMessage}
+
+                    </div>
+
+                </template>
+
+
+                <!-- ================================================= -->
+                <!-- NO ROUTES                                         -->
+                <!-- ================================================= -->
+
+                <template if:false={error}>
+
+                    <template if:false={hasRoutes}>
+
+                        <div class="slds-p-around_medium">
+
+                            No Routes found.
+
+                        </div>
+
+                    </template>
+
+
+                    <!-- ================================================= -->
+                    <!-- ROUTES                                            -->
+                    <!-- ================================================= -->
+
+                    <template if:true={hasRoutes}>
+
+                        <template
+                            for:each={displayedGroups}
+                            for:item="group">
+
+                            <section
+                                key={group.routeId}
+                                class="route-group">
+
+
+                                <!-- ===================================== -->
+                                <!-- ROUTE HEADER                           -->
+                                <!-- ===================================== -->
+
+                                <div class="route-header">
+
+
+                                    <!-- Route Name -->
+
+                                    <div
+                                        class="route-name-container"
+                                        data-id={group.routeId}
+                                        onclick={openRoute}>
+
+                                        <a
+                                            href="#"
+                                            class="route-name">
+
+                                            {group.routeName}
+
+                                        </a>
+
+                                    </div>
+
+
+                                    <!-- Collapse -->
+
+                                    <button
+                                        class="group-collapse-button"
+                                        data-route-id={group.routeId}
+                                        onclick={toggleGroup}
+                                        title="Expand / Collapse">
+
+                                        <lightning-icon
+                                            icon-name={group.icon}
+                                            alternative-text="Expand / Collapse"
+                                            size="x-small">
+                                        </lightning-icon>
+
+                                    </button>
+
+                                </div>
+
+
+                                <!-- ===================================== -->
+                                <!-- ROUTE DETAILS                          -->
+                                <!-- ===================================== -->
+
+                                <template if:false={group.collapsed}>
+
+                                    <div class="route-points">
+
+
+                                        <!-- ================================= -->
+                                        <!-- START POINT                        -->
+                                        <!-- ================================= -->
+
+                                        <template if:true={group.hasStartPoint}>
+
+                                            <div class="route-point">
+
+                                                <div class="field-row">
+
+                                                    <span class="field-label">
+                                                        Start Point Easting:
+                                                    </span>
+
+                                                    <span class="field-value">
+                                                        {group.startPoint.easting}
+                                                    </span>
+
+                                                </div>
+
+                                                <div class="field-row">
+
+                                                    <span class="field-label">
+                                                        Start Point Northing:
+                                                    </span>
+
+                                                    <span class="field-value">
+                                                        {group.startPoint.northing}
+                                                    </span>
+
+                                                </div>
+
+                                            </div>
+
+                                        </template>
+
+
+                                        <!-- ================================= -->
+                                        <!-- END POINT                          -->
+                                        <!-- ================================= -->
+
+                                        <template if:true={group.hasEndPoint}>
+
+                                            <div class="route-point">
+
+                                                <div class="field-row">
+
+                                                    <span class="field-label">
+                                                        End Point Easting:
+                                                    </span>
+
+                                                    <span class="field-value">
+                                                        {group.endPoint.easting}
+                                                    </span>
+
+                                                </div>
+
+                                                <div class="field-row">
+
+                                                    <span class="field-label">
+                                                        End Point Northing:
+                                                    </span>
+
+                                                    <span class="field-value">
+                                                        {group.endPoint.northing}
+                                                    </span>
+
+                                                </div>
+
+                                            </div>
+
+                                        </template>
+
+
+                                        <!-- ================================= -->
+                                        <!-- NO POINTS                          -->
+                                        <!-- ================================= -->
+
+                                        <template if:false={group.hasStartPoint}>
+
+                                            <template if:false={group.hasEndPoint}>
+
+                                                <div class="no-points">
+
+                                                    No Route Points found.
+
+                                                </div>
+
+                                            </template>
+
+                                        </template>
+
+                                    </div>
+
+                                </template>
+
+                            </section>
+
+                        </template>
+
+
+                        <!-- ============================================= -->
+                        <!-- VIEW ALL                                        -->
+                        <!-- ============================================= -->
+
+                        <template if:true={showViewAll}>
+
+                            <div class="view-all-container">
+
+                                <button
+                                    class="view-all-button"
+                                    onclick={handleViewAll}>
+
+                                    View All
+
+                                </button>
+
+                            </div>
+
+                        </template>
+
+                    </template>
+
+                </template>
+
+            </div>
+
+        </template>
+
+    </article>
+
+</template>

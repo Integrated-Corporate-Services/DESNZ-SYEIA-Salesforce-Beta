@@ -24,10 +24,9 @@ public with sharing class ApplicationStatusService {
         req.setHeader('X-Acting-User-Role', 'desnz_caseworker');
         req.setHeader('X-Correlation-ID', String.valueOf(Crypto.getRandomLong()));
         
-
         Map<String,String> payload = new Map<String,String>{
             'targetStatus' => targetStatus,
-            'reason' => reason
+            'reasonCode' => reason
         };
 
         req.setBody(JSON.serialize(payload));

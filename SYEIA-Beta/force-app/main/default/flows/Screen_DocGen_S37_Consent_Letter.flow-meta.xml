@@ -437,6 +437,22 @@
         </connector>
     </assignments>
     <assignments>
+        <name>No_Bypass_Approval</name>
+        <label>No Bypass Approval?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_CanBypassApproval</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Get_S37_Consent_Letter_DocumentTemplate</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Set_refereneObjectId_to_Document_Id</name>
         <label>Set refereneObjectId to Document Id</label>
         <locationX>0</locationX>
@@ -480,7 +496,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <targetReference>Get_S37_Consent_Letter_DocumentTemplate</targetReference>
+            <targetReference>No_Bypass_Approval</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>No</defaultConnectorLabel>
         <rules>
@@ -500,6 +516,31 @@
         </rules>
     </decisions>
     <decisions>
+        <name>Is_Approval_Required</name>
+        <label>Is Approval Required</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Was_Approval_Requested</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Approval_Required</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>var_CanBypassApproval</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Approval_Screen</targetReference>
+            </connector>
+            <label>Yes Approval Required</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Was_Approval_Requested</name>
         <label>Was Approval Requested?</label>
         <locationX>0</locationX>
@@ -510,17 +551,10 @@
         <defaultConnectorLabel>Approval Not Requested</defaultConnectorLabel>
         <rules>
             <name>Approval_Requested</name>
-            <conditionLogic>or</conditionLogic>
+            <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>Request_Approval.value</leftValueReference>
                 <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Request_Approval.value</leftValueReference>
-                <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
                 </rightValue>
@@ -546,13 +580,6 @@
             <conditions>
                 <leftValueReference>Request_Approval.value</leftValueReference>
                 <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Request_Approval.value</leftValueReference>
-                <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
                 </rightValue>
@@ -1275,29 +1302,6 @@ TEXT(YEAR(TODAY()))</expression>
                     <leftValueReference>var_CanBypassApproval</leftValueReference>
                     <operator>EqualTo</operator>
                     <rightValue>
-                        <booleanValue>true</booleanValue>
-                    </rightValue>
-                </conditions>
-            </visibilityRule>
-        </fields>
-        <fields>
-            <name>Approval_Screen_Title_2</name>
-            <fieldText>&lt;h1&gt;&lt;strong&gt;Please Select An Approver Below&lt;/strong&gt;&lt;/h1&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-            <visibilityRule>
-                <conditionLogic>and</conditionLogic>
-                <conditions>
-                    <leftValueReference>var_CanBypassApproval</leftValueReference>
-                    <operator>EqualTo</operator>
-                    <rightValue>
                         <booleanValue>false</booleanValue>
                     </rightValue>
                 </conditions>
@@ -1328,7 +1332,7 @@ TEXT(YEAR(TODAY()))</expression>
             <inputParameters>
                 <name>value</name>
                 <value>
-                    <booleanValue>true</booleanValue>
+                    <booleanValue>false</booleanValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -1346,6 +1350,29 @@ TEXT(YEAR(TODAY()))</expression>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
                     <leftValueReference>var_CanBypassApproval</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>false</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Approval_Screen_Title_2</name>
+            <fieldText>&lt;h1&gt;&lt;strong&gt;Please Select An Approver Below&lt;/strong&gt;&lt;/h1&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Request_Approval.value</leftValueReference>
                     <operator>EqualTo</operator>
                     <rightValue>
                         <booleanValue>true</booleanValue>
@@ -1448,13 +1475,6 @@ TEXT(YEAR(TODAY()))</expression>
                         <booleanValue>true</booleanValue>
                     </rightValue>
                 </conditions>
-                <conditions>
-                    <leftValueReference>var_CanBypassApproval</leftValueReference>
-                    <operator>EqualTo</operator>
-                    <rightValue>
-                        <booleanValue>false</booleanValue>
-                    </rightValue>
-                </conditions>
             </visibilityRule>
         </fields>
         <nextOrFinishButtonLabel>Generate Consent Letter</nextOrFinishButtonLabel>
@@ -1470,7 +1490,7 @@ TEXT(YEAR(TODAY()))</expression>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Approval_Screen</targetReference>
+            <targetReference>Is_Approval_Required</targetReference>
         </connector>
         <fields>
             <name>Condition_Library_Title</name>

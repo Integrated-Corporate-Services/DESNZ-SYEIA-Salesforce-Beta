@@ -427,6 +427,38 @@
     <apiVersion>66.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
+        <name>Assign_case_Objector_to_Party</name>
+        <label>Assign case Objector to Party</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>PartyRecord</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Objector</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Condition_Library</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Landowner_or_Rep_to_Party</name>
+        <label>Assign Landowner or Rep to Party</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>PartyRecord</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Land_Owner_Or_Rep</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Condition_Library</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Bypass_Approval</name>
         <label>Bypass Approval?</label>
         <locationX>0</locationX>
@@ -471,6 +503,31 @@
                 <targetReference>Bypass_Approval</targetReference>
             </connector>
             <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Is_Objector_also_Landowner</name>
+        <label>Is Objector also Landowner</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Get_Land_Owner_Or_Rep</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Objector_also_Landowner</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Case_Using_recordId.Is_Objector_also_Landowner__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Yes</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Objector</targetReference>
+            </connector>
+            <label>Yes Objector also Landowner</label>
         </rules>
     </decisions>
     <environments>Default</environments>
@@ -542,8 +599,8 @@ TEXT(YEAR(TODAY()))</expression>
 &apos;&quot;Site_Address_Line2&quot;: &quot;&apos; &amp; {!Get_Site_Address.Address_Line_2__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;Site_Address_TownCity&quot;: &quot;&apos; &amp; {!Get_Site_Address.Town_City__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;Site_Address_Postcode&quot;: &quot;&apos; &amp; {!Get_Site_Address.Postcode__c} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;NameofOwner_or_occupier_contact&quot;: &quot;&apos; &amp; {!Get_Owner_Rep.Name} &amp; &apos;&quot;, &apos; &amp;
-&apos;&quot;Owner_or_occupier_contact_Email&quot;: &quot;&apos; &amp; {!Get_Owner_Rep.Email__c} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;NameofOwner_or_occupier_contact&quot;: &quot;&apos; &amp; {!PartyRecord.Name} &amp; &apos;&quot;, &apos; &amp;
+&apos;&quot;Owner_or_occupier_contact_Email&quot;: &quot;&apos; &amp; {!Get_Land_Owner_Or_Rep.Email__c} &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;Date_of_Application__c&quot;: &quot;&apos; &amp; TEXT({!Get_Case_Using_recordId.Date_of_Application__c}) &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;Written_Removal_Notice_Issue_Date__c&quot;: &quot;&apos; &amp; TEXT({!Get_Case_Using_recordId.Written_Removal_Notice_Issue_Date__c}) &amp; &apos;&quot;, &apos; &amp;
 &apos;&quot;Reasons&quot;: &quot;&apos; &amp; {!formula_Reasons} &amp; &apos;&quot;, &apos; &amp;
@@ -621,6 +678,44 @@ TEXT(YEAR(TODAY()))</expression>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
+        <name>Get_Land_Owner_Or_Rep</name>
+        <label>Get Land Owner Or Rep</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_Landowner_or_Rep_to_Party</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Copy_4_of_Generate_Document_Nebula_Logger</targetReference>
+        </faultConnector>
+        <filterLogic>1 AND ( 2 OR 3 )</filterLogic>
+        <filters>
+            <field>Case__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Case_Using_recordId.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Case_Using_recordId.Landowner__c</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Case_Using_recordId.Representative__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Party__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
         <name>Get_NW02_Invalid_UN_NTR_LO_DocumentTemplateContentDoc</name>
         <label>Get NW02 Invalid UN NTR LO DocumentTemplateContentDoc</label>
         <locationX>0</locationX>
@@ -669,18 +764,15 @@ TEXT(YEAR(TODAY()))</expression>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <name>Get_Owner_Rep</name>
-        <label>Get Owner Or Rep</label>
+        <name>Get_Objector</name>
+        <label>Get Objector</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Condition_Library</targetReference>
+            <targetReference>Assign_case_Objector_to_Party</targetReference>
         </connector>
-        <faultConnector>
-            <targetReference>Copy_4_of_Generate_Document_Nebula_Logger</targetReference>
-        </faultConnector>
-        <filterLogic>1 AND ( 2 OR 3 )</filterLogic>
+        <filterLogic>1 AND 2</filterLogic>
         <filters>
             <field>Case__c</field>
             <operator>EqualTo</operator>
@@ -692,14 +784,7 @@ TEXT(YEAR(TODAY()))</expression>
             <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>Get_Case_Using_recordId.Landowner__c</elementReference>
-            </value>
-        </filters>
-        <filters>
-            <field>Id</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>Get_Case_Using_recordId.Representative__c</elementReference>
+                <elementReference>Get_Case_Using_recordId.Objector__c</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -713,7 +798,7 @@ TEXT(YEAR(TODAY()))</expression>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Get_Owner_Rep</targetReference>
+            <targetReference>Is_Objector_also_Landowner</targetReference>
         </connector>
         <faultConnector>
             <targetReference>Copy_3_of_Generate_Document_Nebula_Logger</targetReference>
@@ -862,6 +947,14 @@ TEXT(YEAR(TODAY()))</expression>
         </connector>
     </start>
     <status>Active</status>
+    <variables>
+        <name>PartyRecord</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Party__c</objectType>
+    </variables>
     <variables>
         <name>recordId</name>
         <dataType>String</dataType>

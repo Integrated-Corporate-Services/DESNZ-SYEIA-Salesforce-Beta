@@ -70,9 +70,62 @@ public with sharing class FileController {
         HttpRequest req = new HttpRequest();
         String bearerToken = OAuthTokenService.getBearerToken();
 
-        req.setEndpoint('callout:Applicant_File_Download/' + applicationId + '/documents');
+        req.setEndpoint(
+            'callout:Applicant_File_Download/' +
+            EncodingUtil.urlEncode(applicationId, 'UTF-8') +
+            '/documents'
+        );
         req.setMethod('GET');
         req.setHeader('Accept', '*/*');
+        req.setHeader('Authorization', 'Bearer ' + bearerToken);
+        req.setHeader('X-Acting-User-Email', UserInfo.getUserEmail());
+        req.setHeader('X-Acting-User-Id', UserInfo.getUserId());
+        req.setHeader('X-Acting-User-Role', 'desnz_caseworker');
+        req.setHeader('X-Correlation-ID', String.valueOf(Crypto.getRandomLong()));
+
+        try {
+            HttpResponse res = new Http().send(req);
+
+            if (res.getStatusCode() != 200) {
+                Logger.error(
+                    'Failed to get application documents. Status: ' +
+                    res.getStatusCode() +
+                    ', Response: ' +
+                    res.getBody()
+                );
+                Logger.saveLog();
+
+                throw new AuraHandledException(
+                    'Failed to get application documents. Status: ' +
+                    res.getStatusCode()
+                );
+            }
+
+            return res.getBody();
+
+        } catch (Exception e) {
+            Logger.error(
+                'Error getting application documents: ' +
+                e.getMessage()
+            );
+            Logger.saveLog();
+
+            throw new AuraHandledException(
+                'Error getting application documents: ' +
+                e.getMessage()
+            );
+        }
+    }
+    
+    /*
+    @AuraEnabled
+    public static String getApplicationDocuments(String applicationId) {
+        HttpRequest req = new HttpRequest();
+        String bearerToken = OAuthTokenService.getBearerToken();
+
+        req.setEndpoint('callout:Applicant_File_Download/' + applicationId + '/documents');
+        req.setMethod('GET');
+        req.setHeader('Accept', '*');
         req.setHeader('Authorization', 'Bearer ' + bearerToken);
         req.setHeader('X-Acting-User-Email', UserInfo.getUserEmail());
         req.setHeader('X-Acting-User-Id', UserInfo.getUserId());
@@ -123,7 +176,7 @@ public with sharing class FileController {
             Logger.saveLog();
             throw new AuraHandledException('Error getting application documents: ' + e.getMessage());
         }
-    }
+    } */
 
     private static Map<String, Object> getApplicationDocumentExport(
         String applicationId,
@@ -292,6 +345,23 @@ public with sharing class FileController {
         }
 
         return EncodingUtil.base64Encode(zipBlob);
+    }
+
+    @AuraEnabled
+    public static String getDocumentDownloadUrl(
+        String applicationId,
+        String documentId
+    ) {
+        String bearerToken = OAuthTokenService.getBearerToken();
+
+        Map<String, Object> exportResponse =
+            getApplicationDocumentExport(
+                applicationId,
+                documentId,
+                bearerToken
+            );
+
+        return (String) exportResponse.get('downloadUrl');
     }
 
     public class TreeNode {

@@ -3,7 +3,7 @@
     <fullName>Sequence_Number__c</fullName>
     <description>Order of the point in the route</description>
     <externalId>false</externalId>
-    <label>Sequence Number</label>
+    <label>Point Id</label>
     <precision>18</precision>
     <required>false</required>
     <scale>0</scale>

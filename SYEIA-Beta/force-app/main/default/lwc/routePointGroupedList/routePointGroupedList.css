@@ -1,0 +1,262 @@
+/* =========================================================
+   MAIN CARD
+   ========================================================= */
+
+.slds-card {
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   ROUTE ICON
+   ========================================================= */
+
+.route-icon {
+    --slds-c-icon-color-foreground-default: #e75480;
+}
+
+
+/* =========================================================
+   ROUTE GROUP
+   ========================================================= */
+
+.route-group {
+    border-top: 1px solid #dddbda;
+}
+
+.route-group:first-child {
+    border-top: 0;
+}
+
+
+/* =========================================================
+   ROUTE HEADER
+   ========================================================= */
+
+.route-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 2.75rem;
+
+    padding: 0.5rem 0.75rem;
+
+    background-color: #ffffff;
+}
+
+
+/* =========================================================
+   ROUTE NAME
+   ========================================================= */
+
+.route-name-container {
+    flex: 1;
+    min-width: 0;
+
+    cursor: pointer;
+}
+
+.route-name {
+    color: #0176d3;
+
+    font-size: 0.95rem;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.route-name:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   ROUTE COLLAPSE BUTTON
+   ========================================================= */
+
+.group-collapse-button {
+    border: 0;
+
+    background: transparent;
+
+    padding: 0.25rem;
+
+    margin-left: 0.5rem;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+}
+
+.group-collapse-button:hover {
+    background-color: #f3f3f3;
+
+    border-radius: 0.25rem;
+}
+
+
+/* =========================================================
+   ROUTE POINTS CONTAINER
+   ========================================================= */
+
+.route-points {
+    padding: 0 0.75rem 0.5rem 0.75rem;
+
+    background-color: #fafaf9;
+}
+
+
+/* =========================================================
+   INDIVIDUAL ROUTE POINT
+   ========================================================= */
+
+.route-point {
+    padding: 0.55rem 0.75rem;
+
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.route-point:last-child {
+    border-bottom: 0;
+}
+
+
+/* =========================================================
+   FIELD ROW
+   ========================================================= */
+
+.field-row {
+    display: flex;
+
+    align-items: center;
+
+    min-height: 1.75rem;
+
+    margin-bottom: 0.2rem;
+}
+
+.field-row:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   FIELD LABEL
+   ========================================================= */
+
+.field-label {
+    font-size: 0.875rem;
+
+    font-weight: 600;
+
+    color: #444444;
+
+    white-space: nowrap;
+
+    width: 155px;
+
+    flex: 0 0 155px;
+
+    margin-right: 0.5rem;
+}
+
+
+/* =========================================================
+   FIELD VALUE
+   ========================================================= */
+
+.field-value {
+    font-size: 0.875rem;
+
+    color: #181818;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   NO ROUTE POINTS
+   ========================================================= */
+
+.no-points {
+    padding: 0.75rem;
+
+    color: #706e6b;
+
+    font-size: 0.875rem;
+
+    font-style: italic;
+}
+
+
+/* =========================================================
+   VIEW ALL
+   ========================================================= */
+
+.view-all-container {
+    display: flex;
+
+    justify-content: center;
+
+    padding: 0.75rem 0 0.25rem;
+}
+
+.view-all-button {
+    border: 0;
+
+    background: transparent;
+
+    color: #0176d3;
+
+    font-size: 0.875rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    padding: 0.25rem 0.75rem;
+}
+
+.view-all-button:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   MOBILE / SMALL WIDTH
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .field-label {
+        width: 145px;
+
+        flex: 0 0 145px;
+
+        font-size: 0.8rem;
+    }
+
+    .field-value {
+        font-size: 0.8rem;
+    }
+
+    .route-name {
+        font-size: 0.9rem;
+    }
+}
