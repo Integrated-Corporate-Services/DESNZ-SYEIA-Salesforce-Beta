@@ -876,5 +876,21 @@
 		<members>Case__c.Withdrawn_Letter_Date_Is_Required</members>
 		<name>ValidationRule</name>
 	</types>
+	<types>
+		<members>PINS_PEDW1</members>
+		<name>ExperienceBundle</name>
+	</types>
+    <types>
+        <members>*</members>
+        <name>Network</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>NetworkBranding</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>NavigationMenu</name>
+    </types>
 	<version>65.0</version>
 </Package>
