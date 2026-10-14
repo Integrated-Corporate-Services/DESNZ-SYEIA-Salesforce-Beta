@@ -877,7 +877,11 @@
 		<name>ValidationRule</name>
 	</types>
 	<types>
-		<members>PINS_PEDW1</members>
+        <members>*</members>
+        <name>CustomSite</name>
+    </types>
+	<types>
+		<members>*</members>
 		<name>ExperienceBundle</name>
 	</types>
     <types>
