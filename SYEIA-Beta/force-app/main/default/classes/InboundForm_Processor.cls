@@ -22,7 +22,116 @@ public with sharing class InboundForm_Processor {
     
     // Handler cache to avoid multiple instantiations per request
     private static Map<String, IFormHandler> handlerCache = new Map<String, IFormHandler>();
+
+    private static final String DEFAULT_PAYMENT_PATH = 'sections.payment';
+
+ 
+    /**
+    * Single entry point for payment rules.
+    */
+    public static void applyPaymentRules(InboundForm_JSONParser parser,
+                                        Map<String, List<SObject>> records) {
+        applyPaymentRules(parser, records, DEFAULT_PAYMENT_PATH);
+    } 
+
+    private static void applyPaymentRules(InboundForm_JSONParser parser,
+                                        Map<String, List<SObject>> records,
+                                        String paymentJsonPath) {
+        if (parser == null || records == null) {
+            return;
+        }
+        List<SObject> payments = records.get('Payment__c');
+        if (payments == null || payments.isEmpty()) {
+            return;
+        }
+
+        setPaymentDateFromSubmittedAt(parser, records, paymentJsonPath);
+        setBacsPaymentDetails(parser, payments, paymentJsonPath);
+        setGovUkPayCardDetails(parser, payments, paymentJsonPath);
+    }
+
+    /**
+     * Overload for forms whose payment object is at a different JSON path.
+     */
+    public static void setPaymentDateFromSubmittedAt(InboundForm_JSONParser parser,
+                                                     Map<String, List<SObject>> records,
+                                                     String paymentJsonPath) {
+        if (parser == null || records == null) {
+            return;
+        }
     
+        List<SObject> payments = records.get('Payment__c');
+        if (payments == null || payments.isEmpty()) {
+            return;
+        }
+    
+        String kind = parser.getString(paymentJsonPath + '.kind');
+        Boolean isCardPayment = String.isNotBlank(kind)
+            && (kind.toLowerCase().contains('credit') || kind.toLowerCase().contains('debit'));
+        if (!isCardPayment) {
+            return;
+        }
+    
+        // Reuses the processor's own date conversion ("2026-10-12T14:05:00Z" -> 2026-10-12)
+        Date submittedDate = convertToDate(parser.getString('submittedAt'));
+        if (submittedDate == null) {
+            return;
+        }
+    
+        for (SObject payment : payments) {
+            payment.put('Payment_Date__c', submittedDate);
+        }
+    }
+
+    private static void setBacsPaymentDetails(InboundForm_JSONParser parser,
+                                            List<SObject> payments,
+                                            String paymentJsonPath) {
+        Boolean isBacs = 'bacs'.equalsIgnoreCase(parser.getString(paymentJsonPath + '.provider'));
+
+        String transactionNumber = isBacs
+            ? parser.getString(paymentJsonPath + '.proofOfPayment.transactionNumber')
+            : null;
+
+        for (SObject payment : payments) {
+            if (isBacs) {
+                payment.put('Payment_Method__c', 'BACS');
+            }
+            payment.put('Transaction_Number__c',
+                String.isNotBlank(transactionNumber) ? transactionNumber : null);
+        }
+    }
+
+    private static void setGovUkPayCardDetails(InboundForm_JSONParser parser,
+                                            List<SObject> payments,
+                                            String paymentJsonPath) {
+        String provider = parser.getString(paymentJsonPath + '.provider');
+        if (!'govuk-pay'.equalsIgnoreCase(provider)
+                || !isCardPayment(parser.getString(paymentJsonPath + '.kind'))) {
+            return;
+        }
+
+        String status = parser.getString(paymentJsonPath + '.status');
+        Boolean isSuccess = 'success'.equalsIgnoreCase(status);
+
+        for (SObject payment : payments) {
+            if (String.isBlank((String) payment.get('Transaction_Number__c'))) {
+                payment.put('Transaction_Number__c', 'N/A');
+            }
+            if (isSuccess) {
+                payment.put('Status__c', 'PAID');
+            }
+        }
+    }   
+      
+
+    private static Boolean isCardPayment(String kind) {
+        if (String.isBlank(kind)) {
+            return false;
+        }
+        String k = kind.toLowerCase();
+        return k.contains('credit') || k.contains('debit');
+    }    
+
     /**
      * Process a list of Inbound Request records
      */
@@ -706,19 +815,64 @@ public with sharing class InboundForm_Processor {
             Map<String, Object> dataMap, 
             InboundForm_MappingConfig.FieldMapping mapping) {
         
-        Object value = getValueFromMap(dataMap, mapping.jsonPath);
+            Object value = getValueFromMap(dataMap, mapping.jsonPath);
+
+             // Payment Method fallback: use provider when kind is blank
+            if (mapping.targetField == 'Payment_Method__c' && isBlankValue(value)) {
+                Object provider = getValueFromMap(dataMap, 'provider');
+                if (!isBlankValue(provider)) {
+                    value = provider;
+                }
+            }   
             // Payment Method fallback
-            if (mapping.targetField == 'Payment_Method__c'
+            /*if (mapping.targetField == 'Payment_Method__c'
             && (value == null || String.isBlank(String.valueOf(value)))) {
             
+                  Object providerValue = getValueFromMap(dataMap, 'provider');
+                
+                   if (providerValue != null
+                    && !String.isBlank(String.valueOf(providerValue))) {
+                           value = providerValue;
+                    }
+            }   
                 Object providerValue = getValueFromMap(dataMap, 'provider');
-            
-            if (providerValue != null
-                && !String.isBlank(String.valueOf(providerValue))) {
-                    value = providerValue;
+                Object kind = getValueFromMap(dataMap, 'kind');
+            if (mapping.targetField == 'Payment_Date__c' && providerValue != null && kind != null)
+             {
+                Object createdAt = getValueFromMap(dataMap, 'created_at');
+
+                    if (createdAt != null
+                        && !String.isBlank(String.valueOf(createdAt))
+                        && kind != null
+                        && (
+                            String.valueOf(kind).toLowerCase().contains('credit') ||
+                            String.valueOf(kind).toLowerCase().contains('debit')
+                        )
+                    ) {
+                        value = createdAt;
+                    }
+
+            } */
+            /*
+            if (mapping.targetField == 'Transaction_Number__c'
+                && (value == null || String.isBlank(String.valueOf(value))))
+            {
+                Object transNumber = getValueFromMap(dataMap, 'transactionNumber');
+                Object providerValue = getValueFromMap(dataMap, 'provider');
+
+                if (transNumber != null
+                    && !String.isBlank(String.valueOf(transNumber))
+                    && providerValue != null
+                    && 'bacs'.equalsIgnoreCase(String.valueOf(providerValue)))
+                {
+                    value = transNumber;
                 }
-            }       
-             
+                else
+                {
+                    value = 'N/A';
+                }
+            } */            
+
         if (value == null) {
             return null;
         }
@@ -759,6 +913,9 @@ public with sharing class InboundForm_Processor {
         }
     }
 
+    private static Boolean isBlankValue(Object v) {
+        return v == null || String.isBlank(String.valueOf(v));
+    }     
     /**
      * Convert a list-like JSON value to comma-separated text.
      */
