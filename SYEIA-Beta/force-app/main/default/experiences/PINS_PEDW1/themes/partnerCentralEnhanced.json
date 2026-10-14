@@ -125,7 +125,7 @@
         }, {
           "components" : [ {
             "componentAttributes" : {
-              "NavigationMenuEditorRefresh" : "Default_Navigation4",
+              "NavigationMenuEditorRefresh" : "SFDC_Default_Navigation_PINSUU002dPEDW",
               "alignment" : "left",
               "showAppLauncher" : false,
               "showBackLabel" : false,
@@ -268,7 +268,7 @@
         }, {
           "components" : [ {
             "componentAttributes" : {
-              "NavigationMenuEditorRefresh" : "Default_Navigation4",
+              "NavigationMenuEditorRefresh" : "SFDC_Default_Navigation_PINSUU002dPEDW",
               "alignment" : "left",
               "showAppLauncher" : false,
               "showBackLabel" : true,
