@@ -8,6 +8,8 @@
 		<members>ApplicationDocumentDownloadQueueable</members>
 		<members>BusinessDaysCalculator</members>
 		<members>BusinessDaysCalculatorTest</members>
+		<members>CaseEventRelatedListController</members> 
+		<members>CaseEventRelatedListControllerTest</members>
 		<members>CaseTriggerHandler</members>
 		<members>CaseTriggerHandlerTest</members>
 		<members>CaseTriggerHelper</members>
