@@ -248,7 +248,11 @@ public class InboundForm_NWLConfig {
                 'Transaction_Number__c'
             )
         );        
-        
+        /*
+        config.addFieldMapping(InboundForm_MappingConfig.dateField(
+            'submittedAt', 
+            'Payment_Date__c'
+        )); */         
 
     }
 
@@ -556,8 +560,10 @@ public class InboundForm_NWLConfig {
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('status', 'Status__c'));
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('provider', 'Provider__c'));
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('description', 'Description__c'));
-        payments.addFieldMapping(InboundForm_MappingConfig.dateField('paymentDate', 'Payment_Date__c'));
-        
+        //payments.addFieldMapping(InboundForm_MappingConfig.dateField('paymentDate', 'Payment_Date__c'));
+        payments.addFieldMapping(InboundForm_MappingConfig.stringField('transactionNumber', 'Transaction_Number__c'));
+        //payments.addFieldMapping(InboundForm_MappingConfig.dateField('created_at', 'Payment_Date__c'));
+
         return payments;
     }
 
