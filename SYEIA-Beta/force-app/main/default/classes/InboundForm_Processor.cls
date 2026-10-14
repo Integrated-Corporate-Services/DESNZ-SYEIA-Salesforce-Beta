@@ -45,7 +45,7 @@ public with sharing class InboundForm_Processor {
             return;
         }
 
-        setPaymentDateFromSubmittedAt(parser, payments, paymentJsonPath);
+        setPaymentDateFromSubmittedAt(parser, records, paymentJsonPath);
         setBacsPaymentDetails(parser, payments, paymentJsonPath);
         setGovUkPayCardDetails(parser, payments, paymentJsonPath);
     }
@@ -81,7 +81,7 @@ public with sharing class InboundForm_Processor {
         for (SObject payment : payments) {
             payment.put('Payment_Date__c', submittedDate);
         }
-    } 
+    }
 
     private static void setBacsPaymentDetails(InboundForm_JSONParser parser,
                                             List<SObject> payments,
@@ -913,6 +913,9 @@ public with sharing class InboundForm_Processor {
         }
     }
 
+    private static Boolean isBlankValue(Object v) {
+        return v == null || String.isBlank(String.valueOf(v));
+    }     
     /**
      * Convert a list-like JSON value to comma-separated text.
      */
