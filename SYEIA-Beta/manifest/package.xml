@@ -474,6 +474,7 @@
 		<members>Route__c.Tolerance__c</members>
 		<members>Route__c.Tolerance_Required__c</members>
 		<members>Route__c.Total_Route_Points__c</members>
+		<members>Route__c.Type_of_Route__c</members>
 		<members>Route_Point__c.Easting__c</members>
 		<members>Route_Point__c.Northing__c</members>
 		<members>Route_Point__c.Route__c</members>
