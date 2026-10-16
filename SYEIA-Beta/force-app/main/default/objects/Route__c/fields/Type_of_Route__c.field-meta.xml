@@ -3,7 +3,7 @@
     <fullName>Type_of_Route__c</fullName>
     <description>This holds the type of Route</description>
     <externalId>false</externalId>
-    <label>Type of Route</label>
+    <label>Type of route</label>
     <length>255</length>
     <required>false</required>
     <trackHistory>false</trackHistory>
