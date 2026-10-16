@@ -277,7 +277,7 @@ public class InboundForm_S37Config {
             'disconnectedroute_justification', 
             'Disconnected_Route_Justification__c'
         ));
-        
+        routes.addFieldMapping(InboundForm_MappingConfig.stringField('routeType', 'Type_of_Route__c'));
         return routes;
     }
     
