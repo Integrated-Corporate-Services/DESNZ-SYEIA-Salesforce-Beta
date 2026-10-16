@@ -55,6 +55,12 @@
                 <identifier>RecordTolerance_Required_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Type_of_Route__c</fieldItem>
+                <identifier>RecordType_of_Route__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-1ad8bdb9-8cdc-4e60-a17e-75df817ca46f</name>
         <type>Facet</type>
     </flexiPageRegions>
