@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Disconnected_Route_Justification__c</fullName>
     <inlineHelpText>Explanation as to why this additional route should be included with the main route of this application</inlineHelpText>
-    <label>Disconnected Route Justification</label>
+    <label>Justification</label>
     <length>4000</length>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
