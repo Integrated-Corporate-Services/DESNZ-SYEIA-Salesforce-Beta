@@ -1,0 +1,15 @@
+{
+  "appPageId" : "0c8977c8-bd73-4503-941a-5b01665d2605",
+  "componentName" : "siteforce:dynamicLayout",
+  "dataProviders" : [ ],
+  "id" : "cec67426-93c2-4748-a959-60667078ee03",
+  "label" : "View MDF",
+  "regions" : [ {
+    "id" : "94a0fadd-e85b-4f1e-8db7-d91c668f0f7c",
+    "regionName" : "content",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "mdf"
+}

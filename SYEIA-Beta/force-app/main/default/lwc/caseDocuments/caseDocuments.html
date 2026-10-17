@@ -1,0 +1,16 @@
+<template>
+    <div class="documents-shell">
+        <template if:true={effectiveRecordId}>
+            <div class="documents-content">
+                <c-application-document-manager record-id={effectiveRecordId}>
+                </c-application-document-manager>
+                <c-case-files-panel record-id={effectiveRecordId}></c-case-files-panel>
+            </div>
+        </template>
+        <template if:false={effectiveRecordId}>
+            <div class="slds-p-around_medium" role="alert">
+                The Case record ID is unavailable.
+            </div>
+        </template>
+    </div>
+</template>

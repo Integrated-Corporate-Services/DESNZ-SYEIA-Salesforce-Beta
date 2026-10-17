@@ -1,0 +1,15 @@
+{
+  "appPageId" : "0c8977c8-bd73-4503-941a-5b01665d2605",
+  "componentName" : "siteforce:dynamicLayout",
+  "dataProviders" : [ ],
+  "id" : "509faaf8-0c9f-47ff-aa45-eecd8f45c6e1",
+  "label" : "View Vouchers",
+  "regions" : [ {
+    "id" : "fef8bc15-4e4c-4078-ae58-7c2e489c29e3",
+    "regionName" : "content",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "voucher-list"
+}
