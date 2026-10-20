@@ -80,6 +80,50 @@ public with sharing class CaseTriggerHelper {
     public void processBeforeUpdate() {
         // No processing needed before update
     }
+
+    private without sharing class SystemModeDml {
+        void updatePayments(List<Payment__c> payments) {
+            update payments;
+        }
+    }    
+
+    @TestVisible
+    private static void markBacsPaymentsPaid(List<Case__c> applications) {
+        // Applications (Cases) that have a Payment Date and a linked Payment
+        Set<Id> paymentIds = new Set<Id>();
+        for (Case__c app : applications) {
+            if (app.Payment_Date__c != null && app.Payment__c != null) {
+                paymentIds.add(app.Payment__c);
+            }
+        }
+    
+        System.debug(LoggingLevel.DEBUG,
+            'Raghu BACS Payment - markBacsPaymentsPaid: ' + paymentIds + ' paymentIds received');
+    
+        if (paymentIds.isEmpty()) {
+            return;
+        }
+    
+        // Payment__r isn't populated in triggers, so query the linked Payments
+        List<Payment__c> toUpdate = new List<Payment__c>();
+        for (Payment__c p : [
+                SELECT Id, Payment_Method__c, Status__c
+                FROM Payment__c
+                WHERE Id IN :paymentIds]) {
+            if ('BACS'.equalsIgnoreCase(p.Payment_Method__c)
+                    && p.Status__c != 'PAID') {
+                p.Status__c = 'PAID';
+                toUpdate.add(p);
+            }
+        }
+    
+        System.debug(LoggingLevel.DEBUG,
+            'Raghu BACS Payment - payments to mark PAID: ' + toUpdate.size());
+    
+        if (!toUpdate.isEmpty()) {
+            new SystemModeDml().updatePayments(toUpdate);
+        }
+    }   
     
     public void processBeforeDelete() {
         // No processing needed before delete
@@ -107,11 +151,15 @@ public with sharing class CaseTriggerHelper {
             Utilities.logMethodExit('CaseTriggerHelper.processAfterInsert');
             return;
         }
+ 
+        // Mark linked BACS payments PAID when the Case has a Payment Date
+        markBacsPaymentsPaid(applications);          // <-- here        
         
          System.debug(LoggingLevel.INFO, 'updateStatusCallout started');
         //Update Application Satatus Callout
         updateStatusCallout(applications, applicationsMap);
         
+       
     }
     
     @TestVisible

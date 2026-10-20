@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Card_Payment_Date_Never_be_Entered</fullName>
+    <active>true</active>
+    <description>Card payments: the date can never be entered or edited</description>
+    <errorConditionFormula>AND(
+  NOT($Setup.Validation_Bypass__c.Disable_payment_Date_Rules__c),
+    CONTAINS(UPPER(TEXT(Payment__r.Payment_Method__c)), &quot;CARD&quot;),
+    OR(
+        AND(ISNEW(), NOT(ISBLANK(Payment_Date__c))),
+        ISCHANGED(Payment_Date__c)
+    )
+)</errorConditionFormula>
+    <errorMessage>Payment Date can’t be entered or edited for card payments.</errorMessage>
+</ValidationRule>
