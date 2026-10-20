@@ -73,7 +73,7 @@ public class CaseTriggerHelperTest {
 
         CaseTriggerHelper helper = new CaseTriggerHelper();
 
-        List<Case__c> updatedCases = [SELECT Id, Status__c FROM Case__c WHERE Id IN :cases];
+        List<Case__c> updatedCases = [SELECT Id, Status__c, Payment__c, Payment_Date__c FROM Case__c WHERE Id IN :cases];
         Map<Id, SObject> updatedMap = new Map<Id, SObject>();
         for(Case__c c : cases) updatedMap.put(c.Id, c.clone(false, true, false, false));
 
