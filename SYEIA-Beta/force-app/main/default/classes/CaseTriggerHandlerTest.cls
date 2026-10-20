@@ -1,5 +1,5 @@
 @IsTest
-public class CaseTriggerHelperTest {
+public class CaseTriggerHandlerTest {
 
     @testSetup
     static void createSalesforceSetting(){
