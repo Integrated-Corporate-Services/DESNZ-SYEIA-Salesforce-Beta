@@ -29,6 +29,12 @@ public with sharing class InboundForm_Processor {
     /**
     * Single entry point for payment rules.
     */
+    public static void setPaymentDateRulesDisabled(Boolean disabled) {
+           Validation_Bypass__c s = Validation_Bypass__c.getOrgDefaults();
+           s.Disable_Payment_Date_Rules__c = disabled;
+           upsert s;
+     }
+
     public static void applyPaymentRules(InboundForm_JSONParser parser,
                                         Map<String, List<SObject>> records) {
         applyPaymentRules(parser, records, DEFAULT_PAYMENT_PATH);
@@ -61,6 +67,8 @@ public with sharing class InboundForm_Processor {
         }
     
         List<SObject> payments = records.get('Payment__c');
+        List<SObject> cases = records.get('Case__c');
+
         if (payments == null || payments.isEmpty()) {
             return;
         }
@@ -81,23 +89,32 @@ public with sharing class InboundForm_Processor {
         for (SObject payment : payments) {
             payment.put('Payment_Date__c', submittedDate);
         }
+
+        if (cases != null && !cases.isEmpty()) {
+         setPaymentDateRulesDisabled(true);     
+            for (SObject caseRecord : cases) {
+                caseRecord.put('Payment_Date__c', submittedDate);
+            }
+         setPaymentDateRulesDisabled(false);
+        }
+        
     }
 
-    private static void setBacsPaymentDetails(InboundForm_JSONParser parser,
-                                            List<SObject> payments,
-                                            String paymentJsonPath) {
+   private static void setBacsPaymentDetails(InboundForm_JSONParser parser,
+                                              List<SObject> payments,
+                                              String paymentJsonPath) {
         Boolean isBacs = 'bacs'.equalsIgnoreCase(parser.getString(paymentJsonPath + '.provider'));
+        if (!isBacs) {
+            return;
+        }
 
-        String transactionNumber = isBacs
-            ? parser.getString(paymentJsonPath + '.proofOfPayment.transactionNumber')
-            : null;
+        String transactionNumber =
+            parser.getString(paymentJsonPath + '.proofOfPayment.transactionNumber');
 
         for (SObject payment : payments) {
-            if (isBacs) {
-                payment.put('Payment_Method__c', 'BACS');
-            }
+            payment.put('Payment_Method__c', 'BACS');
             payment.put('Transaction_Number__c',
-                String.isNotBlank(transactionNumber) ? transactionNumber : null);
+                String.isNotBlank(transactionNumber) ? transactionNumber : 'N/A');
         }
     }
 
@@ -112,11 +129,14 @@ public with sharing class InboundForm_Processor {
 
         String status = parser.getString(paymentJsonPath + '.status');
         Boolean isSuccess = 'success'.equalsIgnoreCase(status);
-
+        String transactionNumber =
+            parser.getString(paymentJsonPath + '.proofOfPayment.transactionNumber');
+                                                
         for (SObject payment : payments) {
-            if (String.isBlank((String) payment.get('Transaction_Number__c'))) {
-                payment.put('Transaction_Number__c', 'N/A');
-            }
+            
+            payment.put('Transaction_Number__c',
+                String.isNotBlank(transactionNumber) ? transactionNumber : 'N/A');
+            
             if (isSuccess) {
                 payment.put('Status__c', 'PAID');
             }
@@ -167,7 +187,7 @@ public with sharing class InboundForm_Processor {
         try
         {
             String applicationId = parser.getString('applicationId');
-
+            List<Case__c> cases;
             if (String.isBlank(applicationId))
             {
                 result.addError(
@@ -177,9 +197,9 @@ public with sharing class InboundForm_Processor {
             }
 
             // Find Case using AWS Application Id
-            List<Case__c> cases = [
+                cases = [
                 SELECT Id,
-                    AWS_Application_Id__c
+                    AWS_Application_Id__c,Payment_Date__c
                 FROM Case__c
                 WHERE AWS_Application_Id__c = :applicationId
                 LIMIT 1
@@ -246,9 +266,14 @@ public with sharing class InboundForm_Processor {
             {
                 payment.Payment_Date__c =
                     convertToDate(paymentDate);
+                    parentCase.Payment_Date__c = 
+                                convertToDate(paymentDate);
             }
 
             update payment;
+            setPaymentDateRulesDisabled(true);
+             update parentCase;
+            setPaymentDateRulesDisabled(false);
 
             result.formType = 'BACS_PAYMENT_EVENT';
 
@@ -824,54 +849,6 @@ public with sharing class InboundForm_Processor {
                     value = provider;
                 }
             }   
-            // Payment Method fallback
-            /*if (mapping.targetField == 'Payment_Method__c'
-            && (value == null || String.isBlank(String.valueOf(value)))) {
-            
-                  Object providerValue = getValueFromMap(dataMap, 'provider');
-                
-                   if (providerValue != null
-                    && !String.isBlank(String.valueOf(providerValue))) {
-                           value = providerValue;
-                    }
-            }   
-                Object providerValue = getValueFromMap(dataMap, 'provider');
-                Object kind = getValueFromMap(dataMap, 'kind');
-            if (mapping.targetField == 'Payment_Date__c' && providerValue != null && kind != null)
-             {
-                Object createdAt = getValueFromMap(dataMap, 'created_at');
-
-                    if (createdAt != null
-                        && !String.isBlank(String.valueOf(createdAt))
-                        && kind != null
-                        && (
-                            String.valueOf(kind).toLowerCase().contains('credit') ||
-                            String.valueOf(kind).toLowerCase().contains('debit')
-                        )
-                    ) {
-                        value = createdAt;
-                    }
-
-            } */
-            /*
-            if (mapping.targetField == 'Transaction_Number__c'
-                && (value == null || String.isBlank(String.valueOf(value))))
-            {
-                Object transNumber = getValueFromMap(dataMap, 'transactionNumber');
-                Object providerValue = getValueFromMap(dataMap, 'provider');
-
-                if (transNumber != null
-                    && !String.isBlank(String.valueOf(transNumber))
-                    && providerValue != null
-                    && 'bacs'.equalsIgnoreCase(String.valueOf(providerValue)))
-                {
-                    value = transNumber;
-                }
-                else
-                {
-                    value = 'N/A';
-                }
-            } */            
 
         if (value == null) {
             return null;

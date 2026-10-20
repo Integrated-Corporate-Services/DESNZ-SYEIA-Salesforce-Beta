@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Invoice_url__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    ISBLANK(Invoice_Reference__c),
+    &quot;&quot;,
+    HYPERLINK(
+        &quot;/lightning/cmp/c__invoiceDownload&quot; &amp;
+        &quot;?c__recordId=&quot; &amp; Case__c &amp;
+        &quot;&amp;c__appId=&quot; &amp; Case__r.AWS_Application_Id__c &amp;
+        &quot;&amp;c__ref=&quot; &amp; SUBSTITUTE(Invoice_Reference__c, &quot;/&quot;, &quot;%2F&quot;),
+        Invoice_Reference__c,
+        &quot;_self&quot;
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Invoice Reference</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
