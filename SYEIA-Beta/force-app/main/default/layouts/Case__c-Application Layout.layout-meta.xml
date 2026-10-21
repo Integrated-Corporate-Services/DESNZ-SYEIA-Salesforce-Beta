@@ -351,8 +351,6 @@
     <relatedLists>
         <fields>NAME</fields>
         <fields>Application_Id__c</fields>
-        <fields>Route_Id__c</fields>
-        <fields>Settings_Id__c</fields>
         <fields>Updated_at__c</fields>
         <relatedList>Sensitive_Area_Review__c.Case__c</relatedList>
     </relatedLists>
