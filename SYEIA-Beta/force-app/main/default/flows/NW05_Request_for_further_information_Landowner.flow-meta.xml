@@ -12,20 +12,17 @@
             <name>faultMessage</name>
             <value>
                 <elementReference>$Flow.FaultMessage</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>flowName</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>loggingLevelName</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>ERROR</stringValue>
             </value>
         </inputParameters>
@@ -33,21 +30,18 @@
             <name>message</name>
             <value>
                 <elementReference>$Flow.FaultMessage</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>recordId</name>
             <value>
                 <elementReference>recordId</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>saveLog</name>
             <value>
                 <booleanValue>true</booleanValue>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -81,20 +75,17 @@
             <name>faultMessage</name>
             <value>
                 <elementReference>$Flow.FaultMessage</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>flowName</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>loggingLevelName</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>ERROR</stringValue>
             </value>
         </inputParameters>
@@ -102,21 +93,18 @@
             <name>message</name>
             <value>
                 <elementReference>$Flow.FaultMessage</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>recordId</name>
             <value>
                 <elementReference>recordId</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>saveLog</name>
             <value>
                 <booleanValue>true</booleanValue>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -150,20 +138,17 @@
             <name>faultMessage</name>
             <value>
                 <elementReference>$Flow.FaultMessage</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>flowName</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>loggingLevelName</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>ERROR</stringValue>
             </value>
         </inputParameters>
@@ -171,21 +156,18 @@
             <name>message</name>
             <value>
                 <elementReference>$Flow.FaultMessage</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>recordId</name>
             <value>
                 <elementReference>recordId</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>saveLog</name>
             <value>
                 <booleanValue>true</booleanValue>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -219,20 +201,17 @@
             <name>faultMessage</name>
             <value>
                 <elementReference>$Flow.FaultMessage</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>flowName</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>loggingLevelName</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>ERROR</stringValue>
             </value>
         </inputParameters>
@@ -240,21 +219,18 @@
             <name>message</name>
             <value>
                 <elementReference>$Flow.FaultMessage</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>recordId</name>
             <value>
                 <elementReference>recordId</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>saveLog</name>
             <value>
                 <booleanValue>true</booleanValue>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -288,20 +264,17 @@
             <name>faultMessage</name>
             <value>
                 <elementReference>$Flow.FaultMessage</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>flowName</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>loggingLevelName</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>ERROR</stringValue>
             </value>
         </inputParameters>
@@ -309,21 +282,18 @@
             <name>message</name>
             <value>
                 <elementReference>$Flow.FaultMessage</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>recordId</name>
             <value>
                 <elementReference>recordId</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>saveLog</name>
             <value>
                 <booleanValue>true</booleanValue>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -363,28 +333,24 @@
             <name>documentTitle</name>
             <value>
                 <elementReference>formula_DocumentTitle</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>referenceObject</name>
             <value>
                 <elementReference>recordId</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>templateContentVersionId</name>
             <value>
                 <elementReference>Get_NW05_Request_for_further_information_Landowner_ContentDoc.LatestContentVersionId</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>tokenData</name>
             <value>
                 <elementReference>formula_TokenData</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <nameSegment>DocGen_DocumentGenerationWrapper</nameSegment>
@@ -403,20 +369,17 @@
             <name>faultMessage</name>
             <value>
                 <elementReference>$Flow.FaultMessage</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>flowName</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>NW05_Request_for_further_information_Applicant</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>loggingLevelName</name>
             <value>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>ERROR</stringValue>
             </value>
         </inputParameters>
@@ -424,21 +387,18 @@
             <name>message</name>
             <value>
                 <elementReference>$Flow.FaultMessage</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>recordId</name>
             <value>
                 <elementReference>recordId</elementReference>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>saveLog</name>
             <value>
                 <booleanValue>true</booleanValue>
-                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>

@@ -66,9 +66,7 @@
         <inputParameters>
             <name>recipientAddresses</name>
             <value>
-                <collectionElements>
-                    <stringValue>necessarywayleaves@energysecurity.gov.uk</stringValue>
-                </collectionElements>
+                <elementReference>varNWLRecipientAddresses</elementReference>
             </value>
         </inputParameters>
         <inputParameters>
@@ -172,9 +170,7 @@
         <inputParameters>
             <name>recipientAddresses</name>
             <value>
-                <collectionElements>
-                    <stringValue>s37consents@energysecurity.gov.uk</stringValue>
-                </collectionElements>
+                <elementReference>varS37RecipientAddresses</elementReference>
             </value>
         </inputParameters>
         <inputParameters>
@@ -231,6 +227,29 @@
     </actionCalls>
     <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Initialize_Recipient_Addresses</name>
+        <label>Initialize Recipient Addresses</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>varNWLRecipientAddresses</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>necessarywayleaves@energysecurity.gov.uk</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varS37RecipientAddresses</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>s37consents@energysecurity.gov.uk</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Decision_NWL_Case</targetReference>
+        </connector>
+    </assignments>
     <assignments>
         <name>Assign_Case_NWL_Queue_Id</name>
         <label>Assign Case NWL Queue Id</label>
@@ -374,7 +393,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Decision_NWL_Case</targetReference>
+            <targetReference>Initialize_Recipient_Addresses</targetReference>
         </connector>
     </start>
     <status>Draft</status>
@@ -385,6 +404,20 @@
     </textTemplates>
     <variables>
         <name>varCaseNWL_QueueIdList</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>varNWLRecipientAddresses</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>varS37RecipientAddresses</name>
         <dataType>String</dataType>
         <isCollection>true</isCollection>
         <isInput>false</isInput>
