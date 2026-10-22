@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSetGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>This Permission Set Group extends the access granted through the Case Officer Profile giving users &apos;Super User&apos; privileges</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Case Officer - Super User</label>
+    <permissionSets>PS_Read_Write_Locked_Case_Notes</permissionSets>
+    <status>Updated</status>
+</PermissionSetGroup>
