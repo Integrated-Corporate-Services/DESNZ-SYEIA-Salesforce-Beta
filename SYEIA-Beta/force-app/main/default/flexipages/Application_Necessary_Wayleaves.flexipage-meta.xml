@@ -2957,14 +2957,20 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Payment__r.Invoice_Reference__c</fieldItem>
-                <identifier>RecordPayment_rInvoice_Reference_cField</identifier>
+                <fieldItem>Record.Payment__r.Payment_Method__c</fieldItem>
+                <identifier>RecordPayment_rPayment_Method_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Payment__r.Description__c</fieldItem>
-                <identifier>RecordPayment_rDescription_cField</identifier>
+                <fieldItem>Record.Payment__r.Transaction_Number__c</fieldItem>
+                <identifier>RecordPayment_rTransaction_Number_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Payment__r.Total_Amount__c</fieldItem>
+                <identifier>RecordPayment_rTotal_Amount_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -2984,27 +2990,25 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <itemInstances>
-            <componentInstance>
-                <componentName>flexipage:blankSpace</componentName>
-                <identifier>flexipage_blankSpace5</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Payment__r.Quantity__c</fieldItem>
-                <identifier>RecordPayment_rQuantity_cField</identifier>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Payment_Date__c</fieldItem>
+                <identifier>RecordPayment_Date_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Payment__r.Subtotal__c</fieldItem>
-                <identifier>RecordPayment_rSubtotal_cField</identifier>
+                <fieldItem>Record.Payment__r.Invoice_url__c</fieldItem>
+                <identifier>RecordPayment_rInvoice_url_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Payment__r.Total_Amount__c</fieldItem>
-                <identifier>RecordPayment_rTotal_Amount_cField</identifier>
+                <fieldItem>Record.Payment__r.Status__c</fieldItem>
+                <identifier>RecordPayment_rStatus_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-6cdaefa9-fa4b-4d7b-85c0-ffd5cbe9dc2c</name>
@@ -3110,7 +3114,7 @@
                 <fieldItem>Record.Payment_Method__c</fieldItem>
                 <identifier>RecordPayment_Method_cField</identifier>
             </fieldInstance>
-        </itemInstances>               
+        </itemInstances>
         <name>Facet-c0962bbb-e060-46a2-983d-e0e7e10fbc80</name>
         <type>Facet</type>
     </flexiPageRegions>

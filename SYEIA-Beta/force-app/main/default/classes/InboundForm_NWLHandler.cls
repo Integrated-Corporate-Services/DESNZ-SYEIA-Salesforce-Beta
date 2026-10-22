@@ -29,6 +29,7 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
             normalizeInstalledAssets(records);
             enrichInstalledAssets(parser, records);
             normalizeLandLocation(records);
+            InboundForm_Processor.applyPaymentRules(parser, records);
         } catch (Exception e) {
             Logger.error('Error in NWL afterBuild: ' + e.getMessage());
             Logger.setScenario('InboundForm_NWLHandler.afterBuild');
@@ -150,7 +151,7 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
                 'Landowner',
                 'NWL_LANDOWNER'
             );
-          System.debug(LoggingLevel.INFO, 'Raghu details-16 '+ landownerId);
+          //System.debug(LoggingLevel.INFO, 'Raghu details-16 '+ landownerId);
                       //System.debug(LoggingLevel.INFO, 'Raghu details-17 '+ landowner);
             if (insertedCase != null
                     && insertedCase.Is_Objector_also_Landowner__c != 'Yes'

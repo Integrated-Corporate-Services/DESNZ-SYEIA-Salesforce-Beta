@@ -22,7 +22,136 @@ public with sharing class InboundForm_Processor {
     
     // Handler cache to avoid multiple instantiations per request
     private static Map<String, IFormHandler> handlerCache = new Map<String, IFormHandler>();
+
+    private static final String DEFAULT_PAYMENT_PATH = 'sections.payment';
+
+ 
+    /**
+    * Single entry point for payment rules.
+    */
+    public static void setPaymentDateRulesDisabled(Boolean disabled) {
+           Validation_Bypass__c s = Validation_Bypass__c.getOrgDefaults();
+           s.Disable_Payment_Date_Rules__c = disabled;
+           upsert s;
+     }
+
+    public static void applyPaymentRules(InboundForm_JSONParser parser,
+                                        Map<String, List<SObject>> records) {
+        applyPaymentRules(parser, records, DEFAULT_PAYMENT_PATH);
+    } 
+
+    private static void applyPaymentRules(InboundForm_JSONParser parser,
+                                        Map<String, List<SObject>> records,
+                                        String paymentJsonPath) {
+        if (parser == null || records == null) {
+            return;
+        }
+        List<SObject> payments = records.get('Payment__c');
+        if (payments == null || payments.isEmpty()) {
+            return;
+        }
+
+        setPaymentDateFromSubmittedAt(parser, records, paymentJsonPath);
+        setBacsPaymentDetails(parser, payments, paymentJsonPath);
+        setGovUkPayCardDetails(parser, payments, paymentJsonPath);
+    }
+
+    /**
+     * Overload for forms whose payment object is at a different JSON path.
+     */
+    public static void setPaymentDateFromSubmittedAt(InboundForm_JSONParser parser,
+                                                     Map<String, List<SObject>> records,
+                                                     String paymentJsonPath) {
+        if (parser == null || records == null) {
+            return;
+        }
     
+        List<SObject> payments = records.get('Payment__c');
+        List<SObject> cases = records.get('Case__c');
+
+        if (payments == null || payments.isEmpty()) {
+            return;
+        }
+    
+        String kind = parser.getString(paymentJsonPath + '.kind');
+        Boolean isCardPayment = String.isNotBlank(kind)
+            && (kind.toLowerCase().contains('credit') || kind.toLowerCase().contains('debit'));
+        if (!isCardPayment) {
+            return;
+        }
+    
+        // Reuses the processor's own date conversion ("2026-10-12T14:05:00Z" -> 2026-10-12)
+        Date submittedDate = convertToDate(parser.getString('submittedAt'));
+        if (submittedDate == null) {
+            return;
+        }
+    
+        for (SObject payment : payments) {
+            payment.put('Payment_Date__c', submittedDate);
+        }
+
+        if (cases != null && !cases.isEmpty()) {
+         setPaymentDateRulesDisabled(true);     
+            for (SObject caseRecord : cases) {
+                caseRecord.put('Payment_Date__c', submittedDate);
+            }
+         setPaymentDateRulesDisabled(false);
+        }
+        
+    }
+
+   private static void setBacsPaymentDetails(InboundForm_JSONParser parser,
+                                              List<SObject> payments,
+                                              String paymentJsonPath) {
+        Boolean isBacs = 'bacs'.equalsIgnoreCase(parser.getString(paymentJsonPath + '.provider'));
+        if (!isBacs) {
+            return;
+        }
+
+        String transactionNumber =
+            parser.getString(paymentJsonPath + '.proofOfPayment.transactionNumber');
+
+        for (SObject payment : payments) {
+            payment.put('Payment_Method__c', 'BACS');
+            payment.put('Transaction_Number__c',
+                String.isNotBlank(transactionNumber) ? transactionNumber : 'N/A');
+        }
+    }
+
+    private static void setGovUkPayCardDetails(InboundForm_JSONParser parser,
+                                            List<SObject> payments,
+                                            String paymentJsonPath) {
+        String provider = parser.getString(paymentJsonPath + '.provider');
+        if (!'govuk-pay'.equalsIgnoreCase(provider)
+                || !isCardPayment(parser.getString(paymentJsonPath + '.kind'))) {
+            return;
+        }
+
+        String status = parser.getString(paymentJsonPath + '.status');
+        Boolean isSuccess = 'success'.equalsIgnoreCase(status);
+        String transactionNumber =
+            parser.getString(paymentJsonPath + '.proofOfPayment.transactionNumber');
+                                                
+        for (SObject payment : payments) {
+            
+            payment.put('Transaction_Number__c',
+                String.isNotBlank(transactionNumber) ? transactionNumber : 'N/A');
+            
+            if (isSuccess) {
+                payment.put('Status__c', 'PAID');
+            }
+        }
+    }   
+      
+
+    private static Boolean isCardPayment(String kind) {
+        if (String.isBlank(kind)) {
+            return false;
+        }
+        String k = kind.toLowerCase();
+        return k.contains('credit') || k.contains('debit');
+    }    
+
     /**
      * Process a list of Inbound Request records
      */
@@ -52,147 +181,128 @@ public with sharing class InboundForm_Processor {
     }
 
     private static void handlePaymentEvent(
-            InboundForm_JSONParser parser,
-            ProcessingResult result)
+        InboundForm_JSONParser parser,
+        ProcessingResult result)
+    {
+        try
         {
-            try
-            {
-                
-                String applicationId = parser.getString('applicationId');
-				 System.debug('Raghu-test-applicationId' + applicationId);
-                
-                if (String.isBlank(applicationId))
-                {
-                    result.addError(
-                        'applicationId missing from payment event payload'
-                    );
-                     System.debug('Raghu-test-applicationId missing' + applicationId);
-                    return;
-                }
-
-                // Find Case using Application ID
-                List<Case__c> cases = [
-                    SELECT Id,
-                        AWS_Application_Id__c
-                    FROM Case__c
-                    WHERE AWS_Application_Id__c = :applicationId
-                    LIMIT 1
-                ];
-
-                if (cases.isEmpty())
-                {
-                    result.addError(
-                        'No Case found for applicationId: ' +
-                        applicationId
-                    );
-                    return;
-                }
-					
-                Case__c parentCase = cases[0];
-				System.debug('Raghu-test-parentCase found ' + parentCase.Id);
-                // Find existing payment
-                List<Payment__c> existingPayments = [
-                    SELECT Id,
-                        Case__c
-                    FROM Payment__c
-                    WHERE Case__c = :parentCase.Id
-                    LIMIT 1
-                ];
-
-                Payment__c payment;
-
-                if (!existingPayments.isEmpty())
-                {
-                    payment = existingPayments[0];
-                }
-                else
-                {
-                    payment = new Payment__c();
-                    payment.Case__c = parentCase.Id;
-                }
-				
-                /*
-                Object amountObj =
-                    getValueFromMap(
-                        parser.getRootMap(),
-                        'payment.amount'
-                    ); */
-
-                /*
-                if (amountObj != null)
-                {
-                    payment.Total_Amount__c =
-                        convertToCurrency(amountObj);
-                } */
-
-                payment.Status__c =
-                    parser.getString('payment.status');
-
-
-                //payment.Item_Reference__c =
-                //    parser.getString('payment.bacsReference');
-
-                //payment.Payment_Reference__c =
-                   // parser.getString('payment.paymentReference');
-
-                String paymentDate =
-                    parser.getString('payment.paymentDate');
-
-                if (String.isNotBlank(paymentDate))
-                {
-                    System.debug('Raghu-payment-date' + paymentDate);
-                    System.debug('Raghu-payment-convertdate' + convertToDate(paymentDate));
-                    
-                    payment.Payment_Date__c =
-                        convertToDate(paymentDate);
-                }
-                /*
-                String receivedAt =
-                    parser.getString('payment.receivedAt');
-
-                if (String.isNotBlank(receivedAt))
-                {
-                    payment.Received_At__c =
-                        convertToDateTime(receivedAt);
-                } */
-
-                if (payment.Id == null)
-                {
-                    insert payment;
-                }
-                else
-                {
-                    update payment;
-                }
-
-                result.formType = 'BACS_PAYMENT_EVENT';
-
-                Logger.info(
-                    'Payment processed successfully. ' +
-                    'AWS_Application_Id__c=' + applicationId +
-                    ', CaseId=' + parentCase.Id +
-                    ', PaymentId=' + payment.Id
-                );
-            }
-            catch (Exception e)
+            String applicationId = parser.getString('applicationId');
+            List<Case__c> cases;
+            if (String.isBlank(applicationId))
             {
                 result.addError(
-                    'Payment processing failed: ' +
-                    e.getMessage()
+                    'applicationId missing from payment event payload'
                 );
-
-                Logger.error(
-                    'Payment processing failed: ' +
-                    e.getMessage()
-                );
-
-                Logger.setScenario(
-                    'InboundForm_Processor.handlePaymentEvent'
-                );
-
-                Logger.saveLog();
+                return;
             }
-        }    
+
+            // Find Case using AWS Application Id
+                cases = [
+                SELECT Id,
+                    AWS_Application_Id__c,Payment_Date__c
+                FROM Case__c
+                WHERE AWS_Application_Id__c = :applicationId
+                LIMIT 1
+            ];
+
+            if (cases.isEmpty())
+            {
+                result.addError(
+                    'No Case found for applicationId: ' +
+                    applicationId
+                );
+                return;
+            }
+
+            Case__c parentCase = cases[0];
+
+            // Find existing Payment record
+            List<Payment__c> existingPayments = [
+                SELECT Id,
+                    Case__c,
+                    Total_Amount__c,
+                    Status__c,
+                    Payment_Date__c
+                FROM Payment__c
+                WHERE Case__c = :parentCase.Id
+                LIMIT 1
+            ];
+
+            if (existingPayments.isEmpty())
+            {
+                result.addError(
+                    'No Payment record found for Case: ' +
+                    parentCase.Id
+                );
+                return;
+            }
+
+            Payment__c payment = existingPayments[0];
+
+            Object amountObj = getValueFromMap(
+                parser.getRootMap(),
+                'payment.amount'
+            );
+
+            if (amountObj != null)
+            {
+                payment.Total_Amount__c =
+                    convertToCurrency(amountObj)
+                    .divide(100, 2);
+            }
+
+            String paymentStatus =
+                parser.getString('payment.status');
+
+            if (String.isNotBlank(paymentStatus))
+            {
+                payment.Status__c = paymentStatus;
+            }
+
+            String paymentDate =
+                parser.getString('payment.paymentDate');
+
+            if (String.isNotBlank(paymentDate))
+            {
+                payment.Payment_Date__c =
+                    convertToDate(paymentDate);
+                    parentCase.Payment_Date__c = 
+                                convertToDate(paymentDate);
+            }
+
+            update payment;
+            setPaymentDateRulesDisabled(true);
+             update parentCase;
+            setPaymentDateRulesDisabled(false);
+
+            result.formType = 'BACS_PAYMENT_EVENT';
+
+            Logger.info(
+                'Payment updated successfully. ' +
+                'ApplicationId=' + applicationId +
+                ', CaseId=' + parentCase.Id +
+                ', PaymentId=' + payment.Id
+            );
+        }
+        catch (Exception e)
+        {
+            result.addError(
+                'Payment processing failed: ' +
+                e.getMessage()
+            );
+
+            Logger.error(
+                'Payment processing failed: ' +
+                e.getMessage()
+            );
+
+            Logger.setScenario(
+                'InboundForm_Processor.handlePaymentEvent'
+            );
+
+            Logger.saveLog();
+        }
+    }    
     /**
      * Initialize schema cache for all registered objects
      */
@@ -730,8 +840,16 @@ public with sharing class InboundForm_Processor {
             Map<String, Object> dataMap, 
             InboundForm_MappingConfig.FieldMapping mapping) {
         
-        Object value = getValueFromMap(dataMap, mapping.jsonPath);
-        
+            Object value = getValueFromMap(dataMap, mapping.jsonPath);
+
+             // Payment Method fallback: use provider when kind is blank
+            if (mapping.targetField == 'Payment_Method__c' && isBlankValue(value)) {
+                Object provider = getValueFromMap(dataMap, 'provider');
+                if (!isBlankValue(provider)) {
+                    value = provider;
+                }
+            }   
+
         if (value == null) {
             return null;
         }
@@ -772,6 +890,9 @@ public with sharing class InboundForm_Processor {
         }
     }
 
+    private static Boolean isBlankValue(Object v) {
+        return v == null || String.isBlank(String.valueOf(v));
+    }     
     /**
      * Convert a list-like JSON value to comma-separated text.
      */

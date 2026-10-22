@@ -66,9 +66,7 @@
         <inputParameters>
             <name>recipientAddresses</name>
             <value>
-                <collectionElements>
-                    <elementReference>varTriggeringCase.Owner:User.Email</elementReference>
-                </collectionElements>
+                <elementReference>var_CaseOwnerEmails</elementReference>
             </value>
         </inputParameters>
         <inputParameters>
@@ -182,9 +180,7 @@
         <inputParameters>
             <name>recipientAddresses</name>
             <value>
-                <collectionElements>
-                    <elementReference>varTriggeringCase.Owner:User.Email</elementReference>
-                </collectionElements>
+                <elementReference>var_CaseOwnerEmails</elementReference>
             </value>
         </inputParameters>
         <inputParameters>
@@ -281,8 +277,24 @@
         <nameSegment>customNotificationAction</nameSegment>
         <offset>0</offset>
     </actionCalls>
-    <apiVersion>67.0</apiVersion>
+    <apiVersion>64.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Assign_Case_Owner_Email</name>
+        <label>Assign Case Owner Email</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_CaseOwnerEmails</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>varTriggeringCase.Owner:User.Email</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Decision_NWL_Case</targetReference>
+        </connector>
+    </assignments>
     <assignments>
         <name>Assign_Case_OwnerId</name>
         <label>Assign Case OwnerId</label>
@@ -434,7 +446,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Decision_NWL_Case</targetReference>
+            <targetReference>Assign_Case_Owner_Email</targetReference>
         </connector>
     </start>
     <status>Active</status>
@@ -443,6 +455,13 @@
         <isViewedAsPlainText>true</isViewedAsPlainText>
         <text>A new case has been assigned to you.</text>
     </textTemplates>
+    <variables>
+        <name>var_CaseOwnerEmails</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
     <variables>
         <name>var_CaseOwnerId</name>
         <dataType>String</dataType>

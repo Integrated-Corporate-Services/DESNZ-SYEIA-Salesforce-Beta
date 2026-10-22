@@ -21,6 +21,7 @@ public class InboundForm_S37Handler implements InboundForm_Processor.IFormHandle
         processCaseRecords(parser, records);
         processPartyRecords(records);
         processRouteRecords(parser, records);
+        InboundForm_Processor.applyPaymentRules(parser, records);
     }
     
     /**
