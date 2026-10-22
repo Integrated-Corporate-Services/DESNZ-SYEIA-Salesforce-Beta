@@ -1391,11 +1391,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Sensitive_Area_Review__c.Add_Other_Areas_Choice__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Sensitive_Area_Review__c.Application_Id__c</field>
         <readable>true</readable>
     </fieldPermissions>
