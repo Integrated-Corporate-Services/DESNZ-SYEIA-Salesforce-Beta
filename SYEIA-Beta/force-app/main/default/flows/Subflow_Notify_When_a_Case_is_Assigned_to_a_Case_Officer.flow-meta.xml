@@ -64,7 +64,7 @@
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
-            <name>recipientAddresses</name>
+            <name>emailAddressesArray</name>
             <value>
                 <elementReference>var_CaseOwnerEmails</elementReference>
             </value>
@@ -178,7 +178,7 @@
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
-            <name>recipientAddresses</name>
+            <name>emailAddressesArray</name>
             <value>
                 <elementReference>var_CaseOwnerEmails</elementReference>
             </value>

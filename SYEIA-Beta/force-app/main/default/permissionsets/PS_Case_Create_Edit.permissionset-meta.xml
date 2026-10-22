@@ -1406,11 +1406,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Sensitive_Area_Review__c.Updated_at__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Withdrawal_Request__c.Actioned_By__c</field>
         <readable>true</readable>
     </fieldPermissions>
