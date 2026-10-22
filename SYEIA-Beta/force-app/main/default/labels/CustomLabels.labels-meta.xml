@@ -64,4 +64,12 @@
         <shortDescription>NWL Team Email</shortDescription>
         <value>necessarywayleaves@energysecurity.gov.uk</value>
     </labels>
+    <labels>
+        <fullName>DEFAULT_PROFILE_NAME</fullName>
+        <categories>Common</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DEFAULT_PROFILE_NAME</shortDescription>
+        <value>Base Employee</value>
+    </labels>
 </CustomLabels>
