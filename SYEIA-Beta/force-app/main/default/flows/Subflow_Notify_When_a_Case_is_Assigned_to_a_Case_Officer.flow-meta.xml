@@ -12,17 +12,20 @@
             <name>faultMessage</name>
             <value>
                 <elementReference>$Flow.FaultMessage</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>flowName</name>
             <value>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>Subflow_Notify_Team_On_New_NWL_Case</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>loggingLevelName</name>
             <value>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>ERROR</stringValue>
             </value>
         </inputParameters>
@@ -30,18 +33,21 @@
             <name>message</name>
             <value>
                 <elementReference>$Flow.FaultMessage</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>recordId</name>
             <value>
                 <elementReference>varTriggeringCase.Id</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>saveLog</name>
             <value>
                 <booleanValue>true</booleanValue>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <nameSegment>FlowLogEntry</nameSegment>
@@ -64,20 +70,24 @@
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
-            <name>emailAddressesArray</name>
+            <name>recipientAddresses</name>
             <value>
-                <elementReference>var_CaseOwnerEmails</elementReference>
+                <collectionElements>
+                    <elementReference>varTriggeringCase.Owner:User.Email</elementReference>
+                </collectionElements>
             </value>
         </inputParameters>
         <inputParameters>
             <name>senderType</name>
             <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>OrgWideEmailAddress</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>senderAddress</name>
             <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>necessarywayleaves@energysecurity.gov.uk</stringValue>
             </value>
         </inputParameters>
@@ -90,12 +100,14 @@
         <inputParameters>
             <name>emailSubject</name>
             <value>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>A new case has been assigned to you</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>emailBody</name>
             <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>&lt;p&gt;Dear {!varTriggeringCase.Owner:User.FirstName},&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;A new application {!varTriggeringCase.Name} for {!varTriggeringCase.Case_Type__c} has been assigned to you. &lt;a href=&quot;{!form_CaseDetailLink}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;See your case&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Do not reply to this email.&lt;/p&gt;</stringValue>
             </value>
         </inputParameters>
@@ -103,12 +115,14 @@
             <name>sendRichBody</name>
             <value>
                 <booleanValue>true</booleanValue>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>relatedRecordId</name>
             <value>
                 <elementReference>varTriggeringCase.Id</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -133,6 +147,7 @@
             <name>customNotifTypeId</name>
             <value>
                 <elementReference>Get_NWL_Custom_Notification.Id</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -144,6 +159,7 @@
         <inputParameters>
             <name>title</name>
             <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>New Case</stringValue>
             </value>
         </inputParameters>
@@ -151,12 +167,14 @@
             <name>body</name>
             <value>
                 <elementReference>TEMP_CaseOwnerChnageNotification_Body</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>targetId</name>
             <value>
                 <elementReference>varTriggeringCase.Id</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <nameSegment>customNotificationAction</nameSegment>
@@ -178,20 +196,24 @@
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
-            <name>emailAddressesArray</name>
+            <name>recipientAddresses</name>
             <value>
-                <elementReference>var_CaseOwnerEmails</elementReference>
+                <collectionElements>
+                    <elementReference>varTriggeringCase.Owner:User.Email</elementReference>
+                </collectionElements>
             </value>
         </inputParameters>
         <inputParameters>
             <name>senderType</name>
             <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>OrgWideEmailAddress</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>senderAddress</name>
             <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>s37consents@energysecurity.gov.uk</stringValue>
             </value>
         </inputParameters>
@@ -204,12 +226,14 @@
         <inputParameters>
             <name>emailSubject</name>
             <value>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
                 <stringValue>A new SYEIA application has been submitted</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>emailBody</name>
             <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>&lt;p&gt;Dear {!varTriggeringCase.Owner:User.FirstName},&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;A new application {!varTriggeringCase.Name} for {!varTriggeringCase.Case_Type__c} &lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;has been assigned to you. &lt;/span&gt;&lt;a href=&quot;{!form_CaseDetailLink}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;See your case&lt;/a&gt; &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Do not reply to this email.&lt;/p&gt;</stringValue>
             </value>
         </inputParameters>
@@ -217,12 +241,14 @@
             <name>sendRichBody</name>
             <value>
                 <booleanValue>true</booleanValue>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>relatedRecordId</name>
             <value>
                 <elementReference>varTriggeringCase.Id</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -248,6 +274,7 @@
             <name>customNotifTypeId</name>
             <value>
                 <elementReference>Get_S37_Custom_Notification.Id</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
@@ -259,6 +286,7 @@
         <inputParameters>
             <name>title</name>
             <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>New Case</stringValue>
             </value>
         </inputParameters>
@@ -266,35 +294,21 @@
             <name>body</name>
             <value>
                 <elementReference>TEMP_CaseOwnerChnageNotification_Body</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <inputParameters>
             <name>targetId</name>
             <value>
                 <elementReference>varTriggeringCase.Id</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
             </value>
         </inputParameters>
         <nameSegment>customNotificationAction</nameSegment>
         <offset>0</offset>
     </actionCalls>
-    <apiVersion>64.0</apiVersion>
+    <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
-    <assignments>
-        <name>Assign_Case_Owner_Email</name>
-        <label>Assign Case Owner Email</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <assignmentItems>
-            <assignToReference>var_CaseOwnerEmails</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <elementReference>varTriggeringCase.Owner:User.Email</elementReference>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>Decision_NWL_Case</targetReference>
-        </connector>
-    </assignments>
     <assignments>
         <name>Assign_Case_OwnerId</name>
         <label>Assign Case OwnerId</label>
@@ -446,22 +460,15 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Assign_Case_Owner_Email</targetReference>
+            <targetReference>Decision_NWL_Case</targetReference>
         </connector>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <textTemplates>
         <name>TEMP_CaseOwnerChnageNotification_Body</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
         <text>A new case has been assigned to you.</text>
     </textTemplates>
-    <variables>
-        <name>var_CaseOwnerEmails</name>
-        <dataType>String</dataType>
-        <isCollection>true</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
     <variables>
         <name>var_CaseOwnerId</name>
         <dataType>String</dataType>

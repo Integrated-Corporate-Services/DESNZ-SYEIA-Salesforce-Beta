@@ -1367,7 +1367,7 @@
         <itemInstances>
             <fieldInstance>
                 <fieldItem>Record.Payment__r.Payment_Method__c</fieldItem>
-                <identifier>RecordPayment_rPayment_Method_cField</identifier>
+                <identifier>RecordPayment_rPayment_Method_cField2</identifier>
             </fieldInstance>
         </itemInstances>               
         <name>Facet-u8aw0tgjfd9</name>
@@ -1393,7 +1393,7 @@
         <itemInstances>
             <fieldInstance>
                 <fieldItem>Record.Payment__r.Status__c</fieldItem>
-                <identifier>RecordPayment_rStatus_cField</identifier>
+                <identifier>RecordPayment_rStatus_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-fuc85t22wl</name>
