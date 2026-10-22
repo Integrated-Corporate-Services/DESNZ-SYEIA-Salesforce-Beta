@@ -1401,11 +1401,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Sensitive_Area_Review__c.Settings_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Sensitive_Area_Review__c.Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
