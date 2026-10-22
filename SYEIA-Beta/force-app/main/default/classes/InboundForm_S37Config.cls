@@ -225,6 +225,17 @@ public class InboundForm_S37Config {
                 'Payment_Method__c'
             )
         );
+        config.addFieldMapping(InboundForm_MappingConfig.stringField(
+                'sections.payment.proofOfPayment.transactionNumber',
+                'Transaction_Number__c'
+            )
+        );
+        /*
+        config.addFieldMapping(InboundForm_MappingConfig.dateField(
+            'submittedAt', 
+            'Payment_Date__c'
+        ));  */      
+
     }
     
     // ========================================================================
@@ -266,7 +277,7 @@ public class InboundForm_S37Config {
             'disconnectedroute_justification', 
             'Disconnected_Route_Justification__c'
         ));
-        
+        routes.addFieldMapping(InboundForm_MappingConfig.stringField('routeType', 'Type_of_Route__c'));
         return routes;
     }
     
@@ -522,7 +533,9 @@ public class InboundForm_S37Config {
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('provider', 'Provider__c'));
         payments.addFieldMapping(InboundForm_MappingConfig.dateTimeField('created_at', 'Created_at__c'));
         payments.addFieldMapping(InboundForm_MappingConfig.stringField('description', 'Description__c'));
-        
+        payments.addFieldMapping(InboundForm_MappingConfig.stringField('transactionNumber', 'Transaction_Number__c'));
+        //payments.addFieldMapping(InboundForm_MappingConfig.dateField('created_at', 'Payment_Date__c'));
+       
         return payments;
     }
 

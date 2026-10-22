@@ -9,6 +9,9 @@
         </users>
     </queueMembers>
     <queueSobject>
+        <sobjectType>Case</sobjectType>
+    </queueSobject>
+    <queueSobject>
         <sobjectType>Case__c</sobjectType>
     </queueSobject>
 </Queue>

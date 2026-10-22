@@ -21,7 +21,6 @@ public class CaseTriggerHandler implements TriggerHandler {
     
     public void beforeUpdate(List<SObject> oldRecords, List<SObject> newRecords, 
                              Map<Id, SObject> oldRecordMap, Map<Id, SObject> newRecordMap) {
-        helper.processBeforeUpdate();
     }
     
     public void beforeDelete(List<SObject> oldRecords, Map<Id, SObject> oldRecordMap) {

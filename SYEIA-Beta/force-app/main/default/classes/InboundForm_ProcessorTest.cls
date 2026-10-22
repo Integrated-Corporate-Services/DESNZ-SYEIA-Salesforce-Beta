@@ -1214,7 +1214,8 @@ private class InboundForm_ProcessorTest {
                        Written_Removal_Notice_Been_Given__c,
                        Land__c,
                        Equipment_Visible_from_Public_Road__c,
-                      Related_Applications__c
+                      Related_Applications__c,
+                       Details_of_All_Related_Application__c
                 FROM Case__c
                 WHERE AWS_Application_Id__c = 'b6ed18fa-7c3d-43bf-97b9-a40fc9bffa03'
                 LIMIT 1
@@ -1241,9 +1242,9 @@ private class InboundForm_ProcessorTest {
                 'Visibility flag should map to null when not present in payload');
             // Assert.areEqual('Yes', insertedCase.Equipment_Visible_from_Public_Road__c,
             //     'Visibility flag should map to Yes');
-            // Assert.areEqual('TEST related application',
-            //     insertedCase.Details_of_All_Related_Application__c,
-            //     'Related application details should map');
+            Assert.areEqual('TEST related application',
+                insertedCase.Details_of_All_Related_Application__c,
+                'Related application details should map');
 
             Land__c relatedLand = [
                 SELECT Id,
@@ -1455,4 +1456,109 @@ private class InboundForm_ProcessorTest {
         InboundForm_Processor.ProcessingResult result = results.get(request.Id);
         Assert.isNotNull(result.parser, 'Parser should be stored in result');
     }
+
+@IsTest
+static void testProcessRequests_BacsPaymentEvent_UpdatePayment() {
+    InboundForm_Processor.clearAllCaches();
+    InboundForm_ConfigRegistry.clearCache();
+
+    CaseTriggerHelper.disableProcessing();
+
+    try {
+
+        Case__c testCase = new Case__c(
+            Name = 'NWL00116',
+            Status__c = 'New',
+            AWS_Application_Id__c = 'APP-PAYMENT-001'
+        );
+        insert testCase;
+
+        Payment__c payment = new Payment__c(
+            Case__c = testCase.Id,
+            Status__c = 'Pending',
+            Total_Amount__c = 0
+        );
+        insert payment;
+
+        Inbound_Request__c request = new Inbound_Request__c(
+            Payload__c = getBacsPaymentEventJson('APP-PAYMENT-001'),
+            Status__c = 'Received'
+        );
+        insert request;
+
+        List<Inbound_Request__c> requests = new List<Inbound_Request__c>{
+            [
+                SELECT Id,
+                       Payload__c
+                FROM Inbound_Request__c
+                WHERE Id = :request.Id
+            ]
+        };
+
+        Test.startTest();
+
+        Map<Id, InboundForm_Processor.ProcessingResult> results =
+            InboundForm_Processor.processRequests(requests);
+
+        Test.stopTest();
+
+        Payment__c updatedPayment = [
+            SELECT Id,
+                   Total_Amount__c,
+                   Status__c,
+                   Payment_Date__c,
+                   Case__c
+            FROM Payment__c
+            WHERE Id = :payment.Id
+        ];
+
+        Assert.areEqual(
+            Decimal.valueOf('236.50'),
+            updatedPayment.Total_Amount__c,
+            'Amount should be divided by 100 before saving'
+        );
+
+        Assert.areEqual(
+            'PAID',
+            updatedPayment.Status__c,
+            'Status should be updated'
+        );
+
+        Assert.areEqual(
+            Date.newInstance(2026, 10, 2),
+            updatedPayment.Payment_Date__c,
+            'Payment date should be updated'
+        );
+
+        InboundForm_Processor.ProcessingResult result =
+            results.get(request.Id);
+
+        Assert.isTrue(
+            result.success,
+            'Payment event should process successfully'
+        );
+
+        Assert.areEqual(
+            'BACS_PAYMENT_EVENT',
+            result.formType,
+            'Form type should be set correctly'
+        );
+
+    } finally {
+        CaseTriggerHelper.enableProcessing();
+    }
+}    
+private static String getBacsPaymentEventJson(String applicationId) {
+    return '{' +
+        '"formType":"NWL",' +
+        '"event_type":"BACS_PAYMENT_EVENT",' +
+        '"applicationId":"' + applicationId + '",' +
+        '"payment":{' +
+            '"amount":23650,' +
+            '"status":"PAID",' +
+            '"paymentDate":"2026-10-02"' +
+        '}' +
+    '}';
+}
+
 }
