@@ -57,12 +57,50 @@ public class Application_StatusUpdateQueueableTest {
     }
 
     /**
+     * Returns a metadata mapping for a specific Salesforce status.
+     */
+    private static Application_Status_Mapping__mdt getMappingForStatus(String salesforceStatus) {
+
+        return [
+            SELECT Salesforce_Status__c,
+                   AWS_Status__c,
+                   RecordType_Dev_Name__c
+            FROM Application_Status_Mapping__mdt
+            WHERE Salesforce_Status__c = :salesforceStatus
+            LIMIT 1
+        ];
+    }
+
+    private static Id getRecordTypeId(String devName) {
+
+        Schema.RecordTypeInfo rtInfo =
+            Schema.SObjectType.Case__c
+                .getRecordTypeInfosByDeveloperName()
+                .get(devName);
+
+        System.assertNotEquals(null, rtInfo, 'Record type not found: ' + devName);
+        return rtInfo.getRecordTypeId();
+    }
+
+    /**
      * Creates Cases for the supplied Record Type and Status.
      */
     private static List<Case__c> getCases(
         Integer count,
         String status,
         Id recordTypeId
+    ) {
+        return getCases(count, status, recordTypeId, null);
+    }
+
+    /**
+     * Creates Cases for the supplied Record Type and Status, optionally linked to a Payment.
+     */
+    private static List<Case__c> getCases(
+        Integer count,
+        String status,
+        Id recordTypeId,
+        Id paymentId
     ) {
 
         List<Case__c> cases = new List<Case__c>();
@@ -72,7 +110,8 @@ public class Application_StatusUpdateQueueableTest {
             cases.add(new Case__c(
                 Name = 'Case ' + i,
                 AWS_Application_Id__c = 'AWS' + i,
-                RecordTypeId = recordTypeId
+                RecordTypeId = recordTypeId,
+                Payment__c = paymentId
             ));
         }
 
@@ -85,6 +124,20 @@ public class Application_StatusUpdateQueueableTest {
         update cases;
 
         return cases;
+    }
+
+    /**
+     * Builds the previous-status map that CaseTriggerHelper passes in.
+     */
+    private static Map<Id, String> previousStatusMap(List<Case__c> cases, String previousStatus) {
+
+        Map<Id, String> previousStatusById = new Map<Id, String>();
+
+        for(Case__c c : cases){
+            previousStatusById.put(c.Id, previousStatus);
+        }
+
+        return previousStatusById;
     }
 
     @IsTest
@@ -129,17 +182,10 @@ public class Application_StatusUpdateQueueableTest {
 
         Application_Status_Mapping__mdt mapping = getMapping();
 
-        Schema.RecordTypeInfo rtInfo =
-            Schema.SObjectType.Case__c
-                .getRecordTypeInfosByDeveloperName()
-                .get(mapping.RecordType_Dev_Name__c);
-
-        System.assertNotEquals(null, rtInfo);
-
         List<Case__c> cases = getCases(
             2,
             mapping.Salesforce_Status__c,
-            rtInfo.getRecordTypeId()
+            getRecordTypeId(mapping.RecordType_Dev_Name__c)
         );
 
         List<Id> ids = new List<Id>();
@@ -169,15 +215,10 @@ public class Application_StatusUpdateQueueableTest {
 
         Application_Status_Mapping__mdt mapping = getMapping();
 
-        Schema.RecordTypeInfo rtInfo =
-            Schema.SObjectType.Case__c
-                .getRecordTypeInfosByDeveloperName()
-                .get(mapping.RecordType_Dev_Name__c);
-
         List<Case__c> cases = getCases(
             1,
             'Some Invalid Status',
-            rtInfo.getRecordTypeId()
+            getRecordTypeId(mapping.RecordType_Dev_Name__c)
         );
 
         Test.startTest();
@@ -203,15 +244,10 @@ public class Application_StatusUpdateQueueableTest {
 
         Application_Status_Mapping__mdt mapping = getMapping();
 
-        Schema.RecordTypeInfo rtInfo =
-            Schema.SObjectType.Case__c
-                .getRecordTypeInfosByDeveloperName()
-                .get(mapping.RecordType_Dev_Name__c);
-
         List<Case__c> cases = getCases(
             99,
             mapping.Salesforce_Status__c,
-            rtInfo.getRecordTypeId()
+            getRecordTypeId(mapping.RecordType_Dev_Name__c)
         );
 
         List<Id> ids = new List<Id>();
@@ -229,5 +265,131 @@ public class Application_StatusUpdateQueueableTest {
         Test.stopTest();
 
         System.assertEquals(99, ids.size());
+    }
+
+    // ------------------------------------------------------------------
+    // NEW: Withdrawal Requested -> Application Received + BACS payment
+    // Covers: withdrawal block, paymentMethod line, 'Processing Payment',
+    //         reasonCode = 'WITHDRAWAL_REJECTED'
+    // ------------------------------------------------------------------
+    @IsTest
+    static void testWithdrawalRejectedWithBacsPayment() {
+
+        Test.setMock(HttpCalloutMock.class,
+            new MockHttpResponseGenerator());
+
+        createAWSSetting();
+
+        Payment__c bacsPayment = new Payment__c(Payment_Method__c = 'BACS');
+        insert bacsPayment;
+
+        Application_Status_Mapping__mdt mapping = getMappingForStatus('Application Received');
+
+        List<Case__c> cases = getCases(
+            1,
+            'Application Received',
+            getRecordTypeId(mapping.RecordType_Dev_Name__c),
+            bacsPayment.Id
+        );
+
+        Test.startTest();
+
+        Id jobId = System.enqueueJob(
+            new Application_StatusUpdateQueueable(
+                new List<Id>{ cases[0].Id },
+                previousStatusMap(cases, 'Withdrawal Requested')
+            )
+        );
+
+        Test.stopTest();
+
+        System.assertNotEquals(null, jobId);
+    }
+
+    // ------------------------------------------------------------------
+    // NEW: Withdrawal Requested -> Application Received, no payment
+    // Covers: withdrawal block where the inner BACS condition is false
+    // ------------------------------------------------------------------
+    @IsTest
+    static void testWithdrawalRejectedWithoutPayment() {
+
+        Test.setMock(HttpCalloutMock.class,
+            new MockHttpResponseGenerator());
+
+        createAWSSetting();
+
+        Application_Status_Mapping__mdt mapping = getMappingForStatus('Application Received');
+
+        List<Case__c> cases = getCases(
+            1,
+            'Application Received',
+            getRecordTypeId(mapping.RecordType_Dev_Name__c)
+        );
+
+        Test.startTest();
+
+        Id jobId = System.enqueueJob(
+            new Application_StatusUpdateQueueable(
+                new List<Id>{ cases[0].Id },
+                previousStatusMap(cases, 'Withdrawal Requested')
+            )
+        );
+
+        Test.stopTest();
+
+        System.assertNotEquals(null, jobId);
+    }
+
+    // ------------------------------------------------------------------
+    // NEW: Withdrawal Requested -> Withdrawn (approved, no reason code)
+    // Covers: the "!= 'Withdrawn'" side of the condition
+    // ------------------------------------------------------------------
+    @IsTest
+    static void testWithdrawalApproved() {
+
+        Test.setMock(HttpCalloutMock.class,
+            new MockHttpResponseGenerator());
+
+        createAWSSetting();
+
+        Application_Status_Mapping__mdt mapping = getMappingForStatus('Withdrawn');
+
+        List<Case__c> cases = getCases(
+            1,
+            'Withdrawn',
+            getRecordTypeId(mapping.RecordType_Dev_Name__c)
+        );
+
+        Test.startTest();
+
+        Id jobId = System.enqueueJob(
+            new Application_StatusUpdateQueueable(
+                new List<Id>{ cases[0].Id },
+                previousStatusMap(cases, 'Withdrawal Requested')
+            )
+        );
+
+        Test.stopTest();
+
+        System.assertNotEquals(null, jobId);
+    }
+
+    // ------------------------------------------------------------------
+    // NEW: two-argument constructor with a null map
+    // ------------------------------------------------------------------
+    @IsTest
+    static void testTwoArgConstructorWithNullMap() {
+
+        createAWSSetting();
+
+        Test.startTest();
+
+        Id jobId = System.enqueueJob(
+            new Application_StatusUpdateQueueable(new List<Id>(), null)
+        );
+
+        Test.stopTest();
+
+        System.assertNotEquals(null, jobId);
     }
 }
