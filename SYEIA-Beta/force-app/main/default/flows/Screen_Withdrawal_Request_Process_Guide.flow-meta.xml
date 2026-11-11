@@ -99,7 +99,6 @@
         <inputParameters>
             <name>templateId</name>
             <value>
-                <inputConfiguratorMode>Custom</inputConfiguratorMode>
                 <stringValue>6d4c5344-2c65-439c-b763-c9ff735db8c8</stringValue>
             </value>
         </inputParameters>
@@ -159,6 +158,9 @@
         </inputParameters>
         <inputParameters>
             <name>shouldThrowFaultMessageException</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
         </inputParameters>
         <inputParameters>
             <name>tagsString</name>
@@ -195,6 +197,31 @@
         </value>
     </customProperties>
     <decisions>
+        <name>Approve_Has_DNO_Email</name>
+        <label>Approve Has DNO Email</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>No_DNO_Email_Found_For_Approval</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Approve_Has_DNO_Email_found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Case_Record.DNO__r.Email__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Request_Approved_to_Applicant</targetReference>
+            </connector>
+            <label>Approve Has DNO Email found</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Decision_Case_Type</name>
         <label>Decision Case Type</label>
         <locationX>0</locationX>
@@ -214,6 +241,31 @@
                 <targetReference>Get_Metadata_Settings_For_Withdrawal_Notification</targetReference>
             </connector>
             <label>Section 37</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Has_DNO_Email</name>
+        <label>Has DNO Email</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>No_DNO_Email</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Has_DNO_Email_found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Case_Record.DNO__r.Email__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Request_Rejected_to_Applicant</targetReference>
+            </connector>
+            <label>Has DNO Email found</label>
         </rules>
     </decisions>
     <decisions>
@@ -399,7 +451,7 @@ Add Nebula Logger</description>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Send_Request_Rejected_to_Applicant</targetReference>
+            <targetReference>Has_DNO_Email</targetReference>
         </connector>
         <faultConnector>
             <isGoTo>true</isGoTo>
@@ -427,7 +479,7 @@ Add Nebula Logger</description>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Send_Request_Approved_to_Applicant</targetReference>
+            <targetReference>Approve_Has_DNO_Email</targetReference>
         </connector>
         <faultConnector>
             <isGoTo>true</isGoTo>
@@ -555,6 +607,57 @@ Add Nebula Logger</description>
         </inputAssignments>
         <object>Withdrawal_Request__c</object>
     </recordUpdates>
+    <screens>
+        <name>No_DNO_Email</name>
+        <label>No DNO Email</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Disp_Message</name>
+            <fieldText>&lt;p&gt;This application has no DNO email address, so the rejection notification was not sent.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>No_DNO_Email_Found_For_Approval</name>
+        <label>No_DNO_Email_Found_For_Approval</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Decision_Case_Type</targetReference>
+        </connector>
+        <fields>
+            <name>Disp_text</name>
+            <fieldText>&lt;p&gt;No DNO email address found for this application. The approval notification has not been sent.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
     <screens>
         <name>Withdrawal_Guide_Screen_1</name>
         <label>Withdrawal Guide Screen 1</label>
