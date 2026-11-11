@@ -161,51 +161,50 @@ public with sharing class CaseTriggerHelper {
         
        
     }
-    
+
     @TestVisible
-    private void updateStatusCallout(List<Case__c> applications,  Map<Id, SObject> applicationsMap){
-
+    private void updateStatusCallout(List<Case__c> applications, Map<Id, SObject> applicationsMap) {
+    
         Utilities.logMethodEntry('CaseTriggerHelper.updateStatusCallout');
-
-        // Filter records: exclude already processed and currently processing
-        List<Id> applicationIds = new List<Id>();
-        
+    
+        // Collect changed records with their OLD status (applicationsMap = Trigger.oldMap)
+        Map<Id, String> previousStatusById = new Map<Id, String>();
+    
         for (Case__c app : applications) {
-            if(app.Status__c != ((Case__c)applicationsMap.get(app.Id)).Status__c){                
-                applicationIds.add(app.Id);
+            Case__c oldApp = (Case__c) applicationsMap.get(app.Id);
+            if (app.Status__c != oldApp.Status__c) {
+                previousStatusById.put(app.Id, oldApp.Status__c);
             }
         }
-        
-        Integer count = 0;
+    
+        if (previousStatusById.isEmpty()) {
+            return;
+        }
+    
+        Integer chunkSize = 90; // 1 token callout + 90 status callouts stays under the 100-callout limit
         List<Id> chunk = new List<Id>();
-        
-        for (Id recId : applicationIds) {
-            
+        Map<Id, String> chunkPrevious = new Map<Id, String>();
+    
+        for (Id recId : previousStatusById.keySet()) {
+    
             chunk.add(recId);
-            count++;
-            
-            if (count == 100) {
-                
-                System.debug(LoggingLevel.INFO, 'chunk size 100');
-                System.debug(LoggingLevel.INFO, 'Started enqueueJob Application_StatusUpdateQueueable');
-                
-                System.enqueueJob(new Application_StatusUpdateQueueable(chunk));
+            chunkPrevious.put(recId, previousStatusById.get(recId));
+    
+            if (chunk.size() == chunkSize) {
+                System.debug(LoggingLevel.INFO, 'Started enqueueJob Application_StatusUpdateQueueable (full chunk)');
+                System.enqueueJob(new Application_StatusUpdateQueueable(chunk, chunkPrevious));
                 chunk = new List<Id>();
-                count = 0;
+                chunkPrevious = new Map<Id, String>();
             }
         }
-        
-        System.debug(LoggingLevel.INFO, chunk.size());
-
+    
         // enqueue remaining records
-        if (chunk.size() > 0) {
-                System.debug(LoggingLevel.INFO, 'chunk size > 0');
-                System.debug(LoggingLevel.INFO, 'Started enqueueJob Application_StatusUpdateQueueable');
+        if (!chunk.isEmpty()) {
+            System.debug(LoggingLevel.INFO, 'Started enqueueJob Application_StatusUpdateQueueable (remaining ' + chunk.size() + ')');
             Logger.info('Started enqueueJob Application_StatusUpdateQueueable for remaining records');
             Logger.saveLog();
-            System.enqueueJob(new Application_StatusUpdateQueueable(chunk));
+            System.enqueueJob(new Application_StatusUpdateQueueable(chunk, chunkPrevious));
         }
-        
     }
     
 }
