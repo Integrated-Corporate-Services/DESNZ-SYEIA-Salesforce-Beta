@@ -12,6 +12,7 @@ public class CaseTriggerHelperTest {
             client_id__c     = 'CLIENT_ID_SAMPLE',
             client_secret__c = 'ClIENT_SECRET_SAMPLE',
             grant_type__c    = 'client_credentials'
+            
         );
 
         // Bypass payment-date validation rules so Payment_Date__c can be set on Case__c in tests

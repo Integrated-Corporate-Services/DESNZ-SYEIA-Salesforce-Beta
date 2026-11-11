@@ -152,7 +152,6 @@ public class Application_StatusUpdateQueueableTest {
         );
 
         Test.stopTest();
-
         System.assertNotEquals(null, jobId);
     }
 
