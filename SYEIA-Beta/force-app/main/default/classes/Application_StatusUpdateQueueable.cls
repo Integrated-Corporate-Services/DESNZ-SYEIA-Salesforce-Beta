@@ -1,17 +1,21 @@
 public class Application_StatusUpdateQueueable implements Queueable, Database.AllowsCallouts { 
     
     private List<Id> applicationIds;
+    private Map<Id, String> previousStatusById;
     
     @TestVisible
     private static final Integer BATCH_SIZE = 100;
     
     public Application_StatusUpdateQueueable(List<Id> applicationIds) {
+        this(applicationIds, new Map<Id, String>());
+    }
+    
+    public Application_StatusUpdateQueueable(List<Id> applicationIds, Map<Id, String> previousStatusById) {
         this.applicationIds = applicationIds;
+        this.previousStatusById = previousStatusById != null ? previousStatusById : new Map<Id, String>();
     }
     
     public void execute(QueueableContext ctx) {
-        
-        System.debug(LoggingLevel.INFO, 'Application_StatusUpdateQueueable applicationIds: ' + applicationIds);
         
         if (applicationIds == null || applicationIds.isEmpty()) {
             return;
@@ -28,8 +32,6 @@ public class Application_StatusUpdateQueueable implements Queueable, Database.Al
         );
         
         String accessToken = OAuthTokenService.getBearerToken();
-        
-        // Key = RecordTypeDeveloperName|SalesforceStatus
         Map<String, String> salesforceAWSStatusMap = new Map<String, String>();
         
         for (Application_Status_Mapping__mdt asm : [
@@ -45,7 +47,8 @@ public class Application_StatusUpdateQueueable implements Queueable, Database.Al
         List<Case__c> applications = [
             SELECT Id,
                    AWS_Application_Id__c,
-                   Status__c,
+                   Status__c,Sub_Status__c,
+                   Payment__r.Payment_Method__c,
                    RecordType.DeveloperName
             FROM Case__c
             WHERE Id IN :applicationIds
@@ -54,21 +57,31 @@ public class Application_StatusUpdateQueueable implements Queueable, Database.Al
         for (Case__c application : applications) {
             
             String key = application.RecordType.DeveloperName + '|' + application.Status__c;
-            
-            System.debug('Application Key >> ' + key);
-            
+			String previousStatus = previousStatusById.get(application.Id);
+           
             if (salesforceAWSStatusMap.containsKey(key)) {
-               
-                string reasonCode = 'WITHDRAWAL_REJECTED';
+                string setAWSStatus = salesforceAWSStatusMap.get(key);
+                String reasonCode;
+                
+                if (previousStatus == 'Withdrawal Requested'
+                    && application.Status__c != 'Withdrawn') {
+                    
+                    String paymentMethod = application.Payment__r?.Payment_Method__c;
+                    if (application.Status__c == 'Application Received' 
+                        && paymentMethod == 'BACS' ){
+                            setAWSStatus = 'Processing Payment';
+                    }
+                    
+                     reasonCode = 'WITHDRAWAL_REJECTED';
+                }
 
                 HttpResponse response = ApplicationStatusService.updateApplicationStatus(
                     application.AWS_Application_Id__c,
-                    salesforceAWSStatusMap.get(key),
+                    setAWSStatus,
                     reasonCode,
                     accessToken
                 );
-                
-                System.debug('execute response >> ' + response);
+
             } else {
                 System.debug('No status mapping found for key: ' + key);
             }
