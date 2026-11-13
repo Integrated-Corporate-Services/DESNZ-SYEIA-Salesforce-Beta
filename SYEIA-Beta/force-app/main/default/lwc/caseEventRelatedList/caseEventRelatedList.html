@@ -1,0 +1,86 @@
+<template>
+    <section class="related-list">
+        <header class="related-list__header">
+            <div class="related-list__heading">
+                <lightning-icon icon-name="standard:case" size="small" alternative-text="">
+                </lightning-icon>
+                <h2>{relatedListTitle}</h2>
+            </div>
+            <template if:true={canCreate}>
+                <lightning-button
+                    label="New"
+                    variant="neutral"
+                    onclick={handleNew}>
+                </lightning-button>
+            </template>
+        </header>
+        <template if:true={showInfoError}>
+            <div class="slds-p-around_medium" role="alert">
+                {infoError}
+            </div>
+        </template>
+        <template if:true={recordsError}>
+            <div class="slds-p-around_medium" role="alert">
+                {recordsError}
+            </div>
+        </template>
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text={loadingAlternativeText}>
+            </lightning-spinner>
+        </template>
+        <template if:true={hasRecords}>
+            <div class="related-list__table-wrap">
+                <table class="related-list__table">
+                    <thead>
+                        <tr>
+                            <template for:each={columns} for:item="column">
+                                <th key={column.fieldName} scope="col">
+                                    <span>{column.label}</span>
+                                </th>
+                            </template>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={visibleRows} for:item="row">
+                            <tr key={row.id}>
+                                <template for:each={row.cells} for:item="cell">
+                                    <td key={cell.key}>
+                                        <template if:true={cell.isLink}>
+                                            <button
+                                                class="related-list__record-link"
+                                                type="button"
+                                                data-record-id={row.id}
+                                                onclick={handleRecordClick}>
+                                                {cell.value}
+                                            </button>
+                                        </template>
+                                        <template if:false={cell.isLink}>
+                                            <span>{cell.value}</span>
+                                        </template>
+                                    </td>
+                                </template>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+        <template if:true={hasNoRecords}>
+            <div class="slds-p-around_medium">No records found.</div>
+        </template>
+        <template if:true={hasNoColumns}>
+            <div class="slds-p-around_medium">
+                No display columns are configured for this related list in its layout.
+            </div>
+        </template>
+        <template if:true={canViewAll}>
+            <footer class="related-list__footer">
+                <lightning-button
+                    label="View All"
+                    variant="base"
+                    onclick={handleViewAll}>
+                </lightning-button>
+            </footer>
+        </template>
+    </section>
+</template>

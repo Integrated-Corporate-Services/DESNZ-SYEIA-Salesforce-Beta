@@ -1,0 +1,61 @@
+<template>
+    <lightning-card
+        title="PINS/PEDW Referred Cases"
+        icon-name="standard:case">
+
+        <!-- Loading -->
+        <template if:true={isLoading}>
+            <div class="slds-p-around_medium">
+                <lightning-spinner
+                    alternative-text="Loading cases..."
+                    size="medium">
+                </lightning-spinner>
+            </div>
+        </template>
+
+        <!-- Error -->
+        <template if:true={error}>
+            <div class="slds-p-around_medium">
+                <div class="slds-text-color_error">
+                    Unable to load the PINS/PEDW cases.
+                </div>
+
+                <div class="slds-m-top_small">
+                    {error.body.message}
+                </div>
+            </div>
+        </template>
+
+        <!-- Records -->
+        <template if:false={isLoading}>
+            <template if:false={error}>
+
+                <template if:true={records.length}>
+
+                    <div class="slds-p-around_medium">
+
+                        <lightning-datatable
+                            key-field="id"
+                            data={records}
+                            columns={columns}
+                            hide-checkbox-column>
+                        </lightning-datatable>
+
+                    </div>
+
+                </template>
+
+                <!-- No records -->
+                <template if:false={records.length}>
+
+                    <div class="slds-p-around_medium">
+                        No PINS/PEDW cases found.
+                    </div>
+
+                </template>
+
+            </template>
+        </template>
+
+    </lightning-card>
+</template>

@@ -8,6 +8,8 @@
 		<members>ApplicationDocumentDownloadQueueable</members>
 		<members>BusinessDaysCalculator</members>
 		<members>BusinessDaysCalculatorTest</members>
+		<members>CaseEventRelatedListController</members> 
+		<members>CaseEventRelatedListControllerTest</members>
 		<members>CaseTriggerHandler</members>
 		<members>CaseTriggerHandlerTest</members>
 		<members>CaseTriggerHelper</members>
@@ -877,5 +879,25 @@
 		<members>Case__c.Withdrawn_Letter_Date_Is_Required</members>
 		<name>ValidationRule</name>
 	</types>
+	<types>
+        <members>*</members>
+        <name>CustomSite</name>
+    </types>
+	<types>
+		<members>*</members>
+		<name>ExperienceBundle</name>
+	</types>
+    <types>
+        <members>*</members>
+        <name>Network</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>NetworkBranding</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>NavigationMenu</name>
+    </types>
 	<version>65.0</version>
 </Package>

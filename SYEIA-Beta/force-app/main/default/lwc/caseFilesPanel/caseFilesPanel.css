@@ -1,0 +1,112 @@
+.files-card {
+    overflow: hidden;
+    margin-top: 1rem;
+    border: 1px solid #c9c9c9;
+    border-radius: 0.75rem;
+    background-color: #fff;
+}
+
+.files-card__header {
+    display: flex;
+    min-height: 4.75rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 1.25rem;
+}
+
+.files-card__title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #163a63;
+}
+
+.files-card__title h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.files-card__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.files-card__uploader {
+    margin: 0 1.25rem 1rem;
+    padding: 0.75rem;
+    border: 1px solid #c9c9c9;
+    border-radius: 0.5rem;
+}
+
+.files-list {
+    margin: 0;
+    padding: 0 1.25rem;
+    list-style: none;
+}
+
+.files-list__item {
+    display: flex;
+    min-height: 4.25rem;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+}
+
+.files-list__icon {
+    flex: 0 0 auto;
+}
+
+.files-list__details p {
+    margin: 0.125rem 0 0;
+    color: #706e6b;
+    font-size: 0.875rem;
+}
+
+.files-list__link {
+    border: 0;
+    background: transparent;
+    color: #1769aa;
+    cursor: pointer;
+    font: inherit;
+    padding: 0;
+    text-align: left;
+}
+
+.files-list__link:hover {
+    text-decoration: underline;
+}
+
+.files-list__link:focus-visible {
+    outline: 2px solid #0176d3;
+    outline-offset: 2px;
+}
+
+.files-card__empty {
+    margin: 0;
+    padding: 1rem 1.25rem;
+    color: #706e6b;
+}
+
+.files-card__footer {
+    display: flex;
+    min-height: 3.25rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.25rem;
+    border-top: 1px solid #c9c9c9;
+}
+
+.files-card__view-all {
+    border: 0;
+    background: transparent;
+    color: #1769aa;
+    cursor: pointer;
+    font: inherit;
+}
+
+.files-card__view-all:hover {
+    text-decoration: underline;
+}

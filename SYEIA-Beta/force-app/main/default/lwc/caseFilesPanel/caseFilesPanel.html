@@ -1,0 +1,86 @@
+<template>
+    <section class="files-card" aria-label="Files">
+        <header class="files-card__header">
+            <div class="files-card__title">
+                <lightning-icon
+                    icon-name="standard:file"
+                    size="small"
+                    alternative-text="">
+                </lightning-icon>
+                <h2>Files ({fileCount})</h2>
+            </div>
+            <div class="files-card__actions">
+                <lightning-button-icon
+                    icon-name="utility:refresh"
+                    alternative-text="Refresh files"
+                    title="Refresh files"
+                    onclick={handleRefresh}>
+                </lightning-button-icon>
+                <lightning-button
+                    label="Add Files"
+                    variant="neutral"
+                    onclick={handleShowUploader}>
+                </lightning-button>
+            </div>
+        </header>
+
+        <template if:true={showUploader}>
+            <div class="files-card__uploader">
+                <lightning-file-upload
+                    name="caseFileUploader"
+                    record-id={recordId}
+                    multiple
+                    onuploadfinished={handleUploadFinished}>
+                </lightning-file-upload>
+            </div>
+        </template>
+
+        <template if:true={filesError}>
+            <div class="slds-p-around_medium" role="alert">
+                {filesError}
+            </div>
+        </template>
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading files"></lightning-spinner>
+        </template>
+        <template if:true={hasFiles}>
+            <ul class="files-list">
+                <template for:each={visibleFiles} for:item="file">
+                    <li class="files-list__item" key={file.documentId}>
+                        <lightning-icon
+                            icon-name={file.iconName}
+                            size="large"
+                            alternative-text={file.fileTypeLabel}
+                            class="files-list__icon">
+                        </lightning-icon>
+                        <div class="files-list__details">
+                            <button
+                                class="files-list__link"
+                                type="button"
+                                data-document-id={file.documentId}
+                                onclick={handlePreview}>
+                                {file.title}
+                            </button>
+                            <p>{file.metadata}</p>
+                        </div>
+                    </li>
+                </template>
+            </ul>
+        </template>
+        <template if:false={hasFiles}>
+            <template if:false={isLoading}>
+                <template if:false={filesError}>
+                    <p class="files-card__empty">No files attached.</p>
+                </template>
+            </template>
+        </template>
+
+        <template if:true={hasFiles}>
+            <footer class="files-card__footer">
+                <button class="files-card__view-all" type="button" onclick={handleViewAll}>
+                    {viewAllLabel}
+                </button>
+            </footer>
+        </template>
+    </section>
+</template>
