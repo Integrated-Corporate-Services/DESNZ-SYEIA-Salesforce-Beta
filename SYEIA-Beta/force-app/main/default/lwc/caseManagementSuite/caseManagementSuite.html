@@ -1,0 +1,59 @@
+<template>
+    <section class="suite" aria-label="Case Management Suite">
+        <header class="suite-header">
+            <lightning-icon icon-name="standard:case" size="medium" alternative-text=""></lightning-icon>
+            <h1 class="slds-text-heading_medium">Case Management Suite</h1>
+        </header>
+        <template lwc:if={isGuestUser}>
+            <p role="status">Sign in to view your cases.</p>
+        </template>
+        <template lwc:else>
+            <template lwc:if={selectedRecordId}>
+                <lightning-button label="Back to cases" icon-name="utility:back" onclick={handleBack}></lightning-button>
+                <h2 class="slds-text-heading_small slds-m-vertical_medium">{selectedRecordName}</h2>
+                <template lwc:if={detailError}>
+                    <p role="alert" class="slds-text-color_error">{detailError}</p>
+                </template>
+                <lightning-record-form
+                    record-id={selectedRecordId}
+                    object-api-name={objectApiName}
+                    fields={detailFields}
+                    mode="readonly"
+                    columns="1"
+                    onerror={handleDetailError}
+                ></lightning-record-form>
+            </template>
+            <template lwc:else>
+                <lightning-input type="search" label="Search cases" onchange={handleSearch}></lightning-input>
+                <div class="case-list" aria-busy={isLoading}>
+                    <template lwc:if={isLoading}>
+                        <lightning-spinner alternative-text="Loading cases" size="small"></lightning-spinner>
+                    </template>
+                    <template lwc:if={error}>
+                        <p role="alert" class="slds-text-color_error">{error}</p>
+                    </template>
+                    <template lwc:if={showEmptyState}>
+                        <p role="status">No cases found.</p>
+                    </template>
+                    <template lwc:if={hasRecords}>
+                        <ul aria-label="Cases">
+                            <template for:each={records} for:item="record">
+                                <li key={record.id} class="case-row">
+                                    <button class="slds-button slds-button_reset case-link" data-id={record.id} data-name={record.name} onclick={handleOpen}>
+                                        {record.name}
+                                    </button>
+                                    <span>{record.type}</span>
+                                    <span>{record.status}</span>
+                                </li>
+                            </template>
+                        </ul>
+                    </template>
+                </div>
+                <nav class="pagination" aria-label="Case list pages">
+                    <lightning-button label="Previous" icon-name="utility:chevronleft" disabled={previousDisabled} onclick={handlePrevious}></lightning-button>
+                    <lightning-button label="Next" icon-name="utility:chevronright" icon-position="right" disabled={nextDisabled} onclick={handleNext}></lightning-button>
+                </nav>
+            </template>
+        </template>
+    </section>
+</template>
