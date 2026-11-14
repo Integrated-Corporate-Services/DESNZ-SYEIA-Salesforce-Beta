@@ -150,6 +150,60 @@ sfdx project retrieve start --metadata LightningComponentBundle:*
 
 ## Testing
 
+### Experience Cloud Case Management Suite
+
+The `caseManagementSuite` LWC provides a searchable, paginated list of accessible
+`Case__c` records and read-only case reference, type, and status details. It uses
+UI API, not system-mode Apex. Salesforce enforces object permissions, field
+permissions, and record sharing. Guest users cannot load the list.
+
+The existing **Case Management Suite** Lightning console app cannot be hosted
+inside Experience Cloud. This component is a site-native alternative for case
+lists and details, not a copy of the internal dashboards, utility bar, flows,
+or record-page overrides. The internal app is unchanged.
+
+Create and publish the new site in the target org:
+
+1. Enable Digital Experiences in Setup and configure the org's domain if needed.
+2. In **All Sites**, create a **Build Your Own (LWR)** site named
+   **Case Management Suite**, with a unique URL prefix such as `case-management`.
+   Site provisioning, domain selection, and publishing are org setup steps;
+   no site has been provisioned by adding this component to the repository.
+3. Deploy the component and its access metadata to an org containing `Case__c`:
+
+   ```powershell
+   sf project deploy start --target-org <org-alias> --source-dir force-app/main/default/lwc/caseManagementSuite --source-dir force-app/main/default/objects/Case__c/listViews/Experience_Cases.listView-meta.xml --source-dir force-app/main/default/permissionsets/Experience_Case_Reader.permissionset-meta.xml
+   ```
+
+4. Confirm the external-user licence supports `Case__c` and UI API. Assign
+   **Experience Case Reader** to the intended users and add that permission set
+   to the site's membership in Experience Workspaces. Permission sets are
+   additive; this set does not remove broader permissions granted elsewhere.
+5. Keep external case sharing **Private**. Configure a narrowly scoped Sharing
+   Set or external sharing rule appropriate to the licence and your approved
+   contact/account-to-case relationship. Do not use an unrestricted sharing
+   rule. The component does not decide which records belong to an applicant.
+   The **Experience Cases** list view is visible to customer portal users;
+   list-view visibility does not grant record access. For other external
+   licence types, configure list-view visibility for the intended members.
+6. In Experience Builder, make the home page available to authenticated members
+   only and add the custom **Case Management Suite** component. Configure site
+   login, publish the site, and activate it when access testing is complete.
+7. Test as two external users with different shared cases. Each must see only
+   their permitted cases, including in search and subsequent pages. Check an
+   empty account, field restrictions, mobile layout, and a guest session before
+   publishing to your wider audience.
+
+After provisioning, retrieve the generated Network, CustomSite, and
+DigitalExperienceBundle metadata into source control using the actual site
+developer names. These are org-generated and are not included here.
+
+Run the component's focused unit tests after installing Node.js and dependencies:
+
+```powershell
+npm run test:unit -- --runInBand --runTestsByPath force-app/main/default/lwc/caseManagementSuite/__tests__/caseManagementSuite.test.js
+```
+
 ### Run Unit Tests
 
 ```bash
