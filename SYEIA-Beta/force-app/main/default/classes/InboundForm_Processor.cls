@@ -166,16 +166,11 @@ public with sharing class InboundForm_Processor {
         initializeSchemaCache();
         
         // Phase 1: Parse, validate, and build records for each request
-        List<ProcessingResult> orderedResults = new List<ProcessingResult>();
         for (Inbound_Request__c req : requests) {
             ProcessingResult result = processRequest(req);
             results.put(req.Id, result);
-            orderedResults.add(result);
         }
-
-        // Phase 1.5: Apply applicant profile updates to existing Party__c records (bulk SOQL/DML)
-        InboundForm_ProfileUpdateHandler.processBulk(orderedResults);
-
+        
         // Phase 2: Commit successful records (consolidated DML)
         commitAllRecords(results);
         
@@ -397,17 +392,6 @@ public with sharing class InboundForm_Processor {
             {
                 System.debug('Raghu-test' + eventType);
                 handlePaymentEvent(parser, result);
-                return result;
-            }
-
-            // Applicant Portal profile updates carry no formType - they update existing
-            // Party__c records, which is applied in bulk in processRequests (Phase 1.5)
-            if (InboundForm_ProfileUpdateConfig.isProfileUpdateEvent(
-                    parser.getString(InboundForm_ProfileUpdateConfig.EVENT_TYPE_PATH))) {
-                result.formType = InboundForm_ProfileUpdateConfig.FORM_TYPE;
-                for (String error : InboundForm_ProfileUpdateHandler.validate(parser)) {
-                    result.addError(error);
-                }
                 return result;
             }
 

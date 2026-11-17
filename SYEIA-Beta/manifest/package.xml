@@ -41,9 +41,6 @@
 		<members>InboundForm_ConfigRegistryTest</members>
 		<members>InboundForm_JSONParser</members>
 		<members>InboundForm_JSONParserTest</members>
-		<members>InboundForm_ProfileUpdateConfig</members>
-		<members>InboundForm_ProfileUpdateHandler</members>
-		<members>InboundForm_ProfileUpdateHandlerTest</members>
 		<members>InboundForm_MappingConfig</members>
 		<members>InboundForm_MappingConfigTest</members>
 		<members>InboundForm_NWLConfig</members>
