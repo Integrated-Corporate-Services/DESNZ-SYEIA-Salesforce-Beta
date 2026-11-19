@@ -5,15 +5,15 @@ export default class CaseDetails extends LightningElement {
     @api recordId;
     @api area = 'A';
 
-    pageRecordId;
+    pageReference;
     sections = [
         {
             area: 'A',
             name: 'event-details',
             label: 'Event Details',
             contentId: 'event-details-content',
+            readOnlyFields: ['Name'],
             fields: [
-                'Name',
                 'PINS_PEDW_1st_Referral_Date__c',
                 'PINS_PEDW_2nd_Referral_Date__c',
                 'Inspector_s_Report_Received_Date__c',
@@ -211,12 +211,13 @@ export default class CaseDetails extends LightningElement {
 
     @wire(CurrentPageReference)
     setPageReference(pageReference) {
-        this.pageRecordId =
-            pageReference?.state?.c__recordId || pageReference?.attributes?.recordId;
+        this.pageReference = pageReference;
     }
 
     get effectiveRecordId() {
-        return this.recordId || this.pageRecordId;
+        return (
+            this.pageReference?.state?.c__recordId
+        );
     }
 
     get visibleSections() {

@@ -1,0 +1,122 @@
+<template>
+    <div class="poc-panel">
+        <div class="poc-notice" role="status">
+            Demo interactions only. These sample files are not connected to Salesforce or XfilesPro.
+        </div>
+
+        <template for:each={sections} for:item="section">
+            <section key={section.key} class="document-section">
+                <header class="section-header">
+                    <h2>{section.title} <span>({section.rows.length})</span></h2>
+                    <div class="section-actions">
+                        <lightning-button
+                            label="Download all"
+                            title="Demo only; no files will be downloaded"
+                            data-action="download-all"
+                            data-section={section.title}
+                            onclick={handleDemoAction}
+                        ></lightning-button>
+                        <lightning-button
+                            label="Upload document"
+                            title="Demo only; no file will be uploaded"
+                            data-action="upload"
+                            data-section={section.title}
+                            onclick={handleDemoAction}
+                        ></lightning-button>
+                    </div>
+                </header>
+
+                <div class="table-scroll">
+                    <table class="documents-table">
+                        <thead>
+                            <tr>
+                                <template for:each={section.columns} for:item="column">
+                                    <th key={column.key} scope="col">{column.label}</th>
+                                </template>
+                                <th scope="col" class="row-action-heading">
+                                    <span class="slds-assistive-text">Actions</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={section.rows} for:item="row">
+                                <tr key={row.key}>
+                                    <template for:each={row.cells} for:item="cell">
+                                        <td key={cell.key}>
+                                            <template lwc:if={cell.isPublished}>
+                                                <lightning-input
+                                                    type="toggle"
+                                                    label="Published"
+                                                    variant="label-hidden"
+                                                    message-toggle-active="Yes (demo)"
+                                                    message-toggle-inactive="No (demo)"
+                                                    checked={cell.published}
+                                                    data-row-key={row.key}
+                                                    onchange={handlePublishedToggle}
+                                                ></lightning-input>
+                                            </template>
+                                            <template lwc:elseif={cell.isFileName}>
+                                                <button
+                                                    class="file-name-button"
+                                                    type="button"
+                                                    data-row-key={row.key}
+                                                    onclick={handlePreview}
+                                                >
+                                                    {cell.value}
+                                                </button>
+                                            </template>
+                                            <template lwc:else>
+                                                <span class={cell.valueClass} title={cell.value}>
+                                                    {cell.value}
+                                                </span>
+                                            </template>
+                                        </td>
+                                    </template>
+                                    <td class="row-action-cell">
+                                        <lightning-button-menu
+                                            alternative-text="Document actions"
+                                            title="Demo document actions"
+                                            data-row-key={row.key}
+                                            onselect={handleDocumentAction}
+                                            menu-alignment="right"
+                                        >
+                                            <lightning-menu-item label="Preview (demo)" value="preview">
+                                            </lightning-menu-item>
+                                            <lightning-menu-item label="Download (demo)" value="download">
+                                            </lightning-menu-item>
+                                        </lightning-button-menu>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </template>
+    </div>
+    <template lwc:if={previewDocument}>
+        <section
+            class="slds-modal slds-fade-in-open"
+            role="dialog"
+            tabindex="-1"
+            aria-modal="true"
+            aria-labelledby="sample-preview-title"
+        >
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 id="sample-preview-title" class="slds-modal__title">
+                        {previewDocument.fileName}
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <p class="poc-preview-notice">Sample preview only. No document was opened.</p>
+                    <p>File type: {previewDocument.fileType}</p>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Close" onclick={closePreview}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

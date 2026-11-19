@@ -37,6 +37,16 @@
                         </h2>
                         <template if:true={section.isOpen}>
                             <div id={section.contentId} class="slds-section__content">
+                                <template if:true={section.readOnlyFields}>
+                                    <lightning-record-form
+                                        record-id={effectiveRecordId}
+                                        object-api-name="Case__c"
+                                        fields={section.readOnlyFields}
+                                        mode="readonly"
+                                        density="comfy"
+                                        columns="2">
+                                    </lightning-record-form>
+                                </template>
                                 <template if:true={section.hasFields}>
                                     <lightning-record-form
                                         record-id={effectiveRecordId}

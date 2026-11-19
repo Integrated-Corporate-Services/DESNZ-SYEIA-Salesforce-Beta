@@ -299,6 +299,9 @@ sfdx project deploy validate --target-org production
 - Approval workflows for document submissions
 - Document metadata and routing logic
 - Integration with Salesforce approval processes
+- In the Case Files panel, users with Salesforce file-delete permission can delete only files they originally uploaded. After confirmation, the file is deleted from Salesforce and removed from every record it was linked to. Other users' files remain visible to users who have access, but cannot be deleted from this panel.
+- For PINS/PEDW users, deploy `PS_PINS_PEDW_Permissions` alongside the Case Files panel and its Apex controller. The permission set grants access to the controller without changing Salesforce record sharing or file permissions.
+- The PINS/PEDW Documents tab uses Salesforce file cards for previews. Preview actions follow Salesforce file permissions; on mobile devices, Salesforce downloads the selected file instead.
 
 ### Community Features
 - CommunitiesLandingController.cls: Community portal landing page

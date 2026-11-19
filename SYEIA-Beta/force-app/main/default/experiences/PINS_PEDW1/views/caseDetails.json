@@ -57,9 +57,7 @@
       "id" : "de943893-08e4-4215-b23f-c262c295c4e3",
       "regions" : [ {
         "components" : [ {
-          "componentAttributes" : {
-            "recordId" : "a00Vd00000VwVL2IAN"
-          },
+          "componentAttributes" : { },
           "componentName" : "c:caseDetails",
           "id" : "a9ac7bed-a236-4611-9ff5-e8eb6b0d496a",
           "renderPriority" : "NEUTRAL",
@@ -73,10 +71,8 @@
         "type" : "region"
       }, {
         "components" : [ {
-          "componentAttributes" : {
-            "recordId" : "a00Vd00000VwVL2IAN"
-          },
-          "componentName" : "c:caseDocuments",
+          "componentAttributes" : { },
+          "componentName" : "c:caseDocumentsWithPreview",
           "id" : "3fa84b2f-c9f4-4061-be1d-2dc79887797a",
           "renderPriority" : "NEUTRAL",
           "renditionMap" : { },
@@ -106,8 +102,7 @@
       }, {
         "components" : [ {
           "componentAttributes" : {
-            "area" : "B",
-            "recordId" : "a00Vd00000VwVL2IAN"
+            "area" : "B"
           },
           "componentName" : "c:caseDetails",
           "id" : "0c5dd1ca-02d2-4ca1-9f15-6b60e4eb593b",

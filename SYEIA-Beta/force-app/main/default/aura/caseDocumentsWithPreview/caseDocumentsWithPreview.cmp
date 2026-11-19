@@ -1,0 +1,42 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute name="files" type="Object[]" default="[]" />
+    <aura:attribute name="hasFiles" type="Boolean" default="false" />
+    <aura:attribute name="viewAllLabel" type="String" default="View All" />
+
+    <div>
+    <c:caseDocuments aura:id="documents" useFileCards="true" onfileschange="{!c.handleFilesChange}" />
+    <aura:if isTrue="{!v.hasFiles}">
+        <div class="file-cards">
+            <aura:iteration items="{!v.files}" var="file">
+                <div class="file-card">
+                    <lightning:fileCard fileId="{!file.previewId}" description="{!file.title}" />
+                    <p class="file-metadata">{!file.metadata}</p>
+                    <div class="file-actions">
+                        <button class="slds-button slds-button_icon"
+                            type="button"
+                            aria-label="Download file"
+                            title="Download file"
+                            data-document-id="{!file.documentId}"
+                            onclick="{!c.handleDownload}">
+                            <lightning:icon iconName="utility:download" size="x-small" alternativeText="" />
+                        </button>
+                        <aura:if isTrue="{!file.canDelete}">
+                            <button class="slds-button slds-button_icon"
+                                type="button"
+                                aria-label="Delete file"
+                                title="Delete file"
+                                data-document-id="{!file.documentId}"
+                                onclick="{!c.handleDelete}">
+                                <lightning:icon iconName="utility:delete" size="x-small" alternativeText="" />
+                            </button>
+                        </aura:if>
+                    </div>
+                </div>
+            </aura:iteration>
+        </div>
+        <div class="file-footer">
+            <lightning:button variant="base" label="{!v.viewAllLabel}" onclick="{!c.handleViewAll}" />
+        </div>
+    </aura:if>
+    </div>
+</aura:component>
