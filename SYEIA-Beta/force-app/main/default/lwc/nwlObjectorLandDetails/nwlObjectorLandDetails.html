@@ -1,0 +1,123 @@
+<template>
+    <div class="page-shell">
+        <template if:true={hasRecordId}>
+            <template if:false={isLoaded}>
+                <lightning-spinner alternative-text="Loading objector and land details" size="small"></lightning-spinner>
+            </template>
+            <template if:true={isLoaded}>
+                <section class={objectorSectionClass}>
+                        <h2 class="slds-section__title">
+                            <button
+                                type="button"
+                                class="slds-button slds-section__title-action section-title"
+                                aria-expanded={isObjectorOpen}
+                                aria-controls="objector-details-content"
+                                data-section="objector"
+                                onclick={toggleSection}>
+                                <lightning-icon
+                                    icon-name={objectorIconName}
+                                    size="x-small"
+                                    class="slds-section__title-action-icon slds-button__icon_left"
+                                    alternative-text="">
+                                </lightning-icon>
+                                <span class="slds-truncate" title="Objector Details">Objector Details</span>
+                            </button>
+                        </h2>
+                        <template if:true={isObjectorOpen}>
+                            <div id="objector-details-content" class="slds-section__content">
+                                <div class="slds-grid slds-wrap">
+                                    <template for:each={caseObjectorDetails} for:item="field">
+                                        <div key={field.key} class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+                                            <div class="slds-form-element">
+                                                <span class="slds-form-element__label">{field.label}</span>
+                                                <div class="slds-form-element__control">
+                                                    <lightning-formatted-text value={field.value}></lightning-formatted-text>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                                <h2 class="slds-text-heading_small slds-p-vertical_small">Objector</h2>
+                                <div class="slds-grid slds-wrap">
+                                    <template for:each={objectorDetails} for:item="field">
+                                        <div key={field.key} class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+                                            <div class="slds-form-element">
+                                                <span class="slds-form-element__label">{field.label}</span>
+                                                <div class="slds-form-element__control">
+                                                    <lightning-formatted-text value={field.value}></lightning-formatted-text>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+
+                                <h2 class="slds-text-heading_small slds-p-vertical_small">Landowner</h2>
+                                <div class="slds-grid slds-wrap">
+                                    <template for:each={landownerDetails} for:item="field">
+                                        <div key={field.key} class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+                                            <div class="slds-form-element">
+                                                <span class="slds-form-element__label">{field.label}</span>
+                                                <div class="slds-form-element__control">
+                                                    <lightning-formatted-text value={field.value}></lightning-formatted-text>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </section>
+                    <section class={landSectionClass}>
+                        <h2 class="slds-section__title">
+                            <button
+                                type="button"
+                                class="slds-button slds-section__title-action section-title"
+                                aria-expanded={isLandOpen}
+                                aria-controls="land-details-content"
+                                data-section="land"
+                                onclick={toggleSection}>
+                                <lightning-icon
+                                    icon-name={landIconName}
+                                    size="x-small"
+                                    class="slds-section__title-action-icon slds-button__icon_left"
+                                    alternative-text="">
+                                </lightning-icon>
+                                <span class="slds-truncate" title="Land Details">Land Details</span>
+                            </button>
+                        </h2>
+                        <template if:true={isLandOpen}>
+                            <div id="land-details-content" class="slds-section__content">
+                                <div class="slds-grid slds-wrap">
+                                    <template for:each={caseLandDetails} for:item="field">
+                                        <div key={field.key} class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+                                            <div class="slds-form-element">
+                                                <span class="slds-form-element__label">{field.label}</span>
+                                                <div class="slds-form-element__control">
+                                                    <lightning-formatted-text value={field.value}></lightning-formatted-text>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                                <div class="slds-grid slds-wrap">
+                                    <template for:each={landDetails} for:item="field">
+                                        <div key={field.key} class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+                                            <div class="slds-form-element">
+                                                <span class="slds-form-element__label">{field.label}</span>
+                                                <div class="slds-form-element__control">
+                                                    <lightning-formatted-text value={field.value}></lightning-formatted-text>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                </section>
+            </template>
+        </template>
+        <template if:false={hasRecordId}>
+            <p class="slds-p-around_medium" role="alert">The Case record ID is unavailable.</p>
+        </template>
+    </div>
+</template>

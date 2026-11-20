@@ -8,6 +8,8 @@
 		<members>ApplicationDocumentDownloadQueueable</members>
 		<members>BusinessDaysCalculator</members>
 		<members>BusinessDaysCalculatorTest</members>
+		<members>CaseFilesPanelController</members>
+		<members>CaseFilesPanelControllerTest</members>
 		<members>CaseTriggerHandler</members>
 		<members>CaseTriggerHandlerTest</members>
 		<members>CaseTriggerHelper</members>
@@ -86,6 +88,10 @@
 		<members>*</members>
 		<name>ApprovalProcess</name>
 	</types>
+<types>
+	<members>caseDocumentsWithPreview</members>
+	<name>AuraDefinitionBundle</name>
+</types>
 <types>
 		<members>*</members>
 		<name>ContentAsset</name>

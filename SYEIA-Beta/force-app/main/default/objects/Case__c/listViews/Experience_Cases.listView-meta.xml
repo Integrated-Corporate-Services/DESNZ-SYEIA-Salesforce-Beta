@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Experience_Cases</fullName>
+    <columns>NAME</columns>
+    <filterScope>Everything</filterScope>
+    <label>Experience Cases</label>
+    <sharedTo>
+        <allInternalUsers>true</allInternalUsers>
+        <allCustomerPortalUsers>true</allCustomerPortalUsers>
+    </sharedTo>
+</ListView>
