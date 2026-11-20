@@ -278,13 +278,12 @@ export default class CaseFilesPanel extends NavigationMixin(LightningElement) {
     downloadFile(documentId) {
         try {
             this.isDownloading = true;
-            console.log('Starting download for documentId:', documentId);
             const sitePrefix = basePath.replace(/\/s\/?$/, '');
-            window.open(`${sitePrefix}/sfc/servlet.shepherd/document/download/${documentId}`, '_self');
+            window.open(`${sitePrefix}/sfc/servlet.shepherd/document/download/${documentId}?OperationContext=S1`, '_self');
         } catch (error) {
             console.error('Error downloading documentId:', documentId, error);
+            this.isDownloading = false;
         } finally {
-            console.log('Finished download attempt for documentId:', documentId);
             this.isDownloading = false;
         }
     }

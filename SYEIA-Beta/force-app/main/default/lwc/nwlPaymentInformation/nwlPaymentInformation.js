@@ -2,8 +2,6 @@ import { LightningElement, api, wire } from 'lwc';
 import { getRecord, getFieldDisplayValue, getFieldValue } from 'lightning/uiRecordApi';
 import { CurrentPageReference } from 'lightning/navigation';
 import CASE_PAYMENT_FIELD from '@salesforce/schema/Case__c.Payment__c';
-import CASE_FEE_PAID_FIELD from '@salesforce/schema/Case__c.Application_Fee_Paid__c';
-import CASE_FEE_DATE_FIELD from '@salesforce/schema/Case__c.Date_of_Fee_Paid__c';
 import CASE_PAYMENT_METHOD_FIELD from '@salesforce/schema/Case__c.Payment_Method__c';
 import PAYMENT_DATE_FIELD from '@salesforce/schema/Payment__c.Payment_Date__c';
 import PAYMENT_METHOD_FIELD from '@salesforce/schema/Payment__c.Payment_Method__c';
@@ -19,15 +17,10 @@ const PAYMENT_FIELDS = [
     PAYMENT_TOTAL_AMOUNT_FIELD
 ];
 
-const CASE_FIELDS = [
-    CASE_PAYMENT_FIELD,
-    CASE_FEE_PAID_FIELD,
-    CASE_FEE_DATE_FIELD,
-    CASE_PAYMENT_METHOD_FIELD
-];
+const CASE_FIELDS = [CASE_PAYMENT_FIELD];
 
 const CASE_FIELD_DETAILS = [
-    // { name: 'payment-method', label: 'Payment Type', field: CASE_PAYMENT_METHOD_FIELD }
+    { name: 'payment-method', label: 'Payment Type', field: CASE_PAYMENT_METHOD_FIELD }
 ];
 
 const PAYMENT_FIELD_DETAILS = [
@@ -41,7 +34,7 @@ const PAYMENT_FIELD_DETAILS = [
 export default class NwlPaymentInformation extends LightningElement {
     @api recordId;
 
-    pageRecordId;
+    pageReference;
     caseRecord;
     paymentId;
     paymentRecord;
@@ -62,20 +55,42 @@ export default class NwlPaymentInformation extends LightningElement {
     wiredCase({ data, error }) {
         if (data) {
             this.caseRecord = data;
-            this.paymentId = getFieldValue(data, CASE_PAYMENT_FIELD);
-            this.paymentRecord = undefined;
-            this.isLoaded = true;
-        } else if (error) {
+            console.log('Case data received:', data);
+            const paymentId = getFieldValue(data, CASE_PAYMENT_FIELD) || undefined;
+            if (paymentId !== this.paymentId) {
+                this.paymentRecord = undefined;
+                this.error = undefined;
+                this.paymentId = paymentId;
+                console.log('Payment ID changed:', paymentId);
+            }
+            if (!paymentId) {
+                this.error = undefined;
+            }
+            this.isLoaded = !paymentId || Boolean(this.paymentRecord) || Boolean(this.error);
+        } 
+        else if (error) {
             this.caseRecord = undefined;
             this.paymentId = undefined;
             this.paymentRecord = undefined;
+            // this.error = 'Unable to load the case payment information.';
+            console.error(this.error, error);
             this.isLoaded = true;
         }
     }
 
     @wire(getRecord, { recordId: '$paymentId', fields: PAYMENT_FIELDS })
-    wiredPayment({ data }) {
-        this.paymentRecord = data;
+    wiredPayment({ data, error }) {
+        if (data) {
+            console.log('Payment data received:', data);
+            this.paymentRecord = data;
+            this.error = undefined;
+            this.isLoaded = true;
+        } else if (error) {
+            this.paymentRecord = undefined;
+            this.error = 'Unable to load the linked payment.';
+            console.error(this.error, error);
+            this.isLoaded = true;
+        }
     }
 
     get hasRecordId() {
@@ -83,7 +98,11 @@ export default class NwlPaymentInformation extends LightningElement {
     }
 
     get showContent() {
-        return this.isLoaded;
+        return this.isLoaded && !this.error;
+    }
+
+    get hasNoPayment() {
+        return this.isLoaded && !this.error && !this.paymentId;
     }
 
     get caseDetails() {
@@ -91,6 +110,7 @@ export default class NwlPaymentInformation extends LightningElement {
     }
 
     get paymentDetails() {
+        console.log('Payment record:', this.paymentRecord);
         return this.getFieldDetails(this.paymentRecord, PAYMENT_FIELD_DETAILS);
     }
 
