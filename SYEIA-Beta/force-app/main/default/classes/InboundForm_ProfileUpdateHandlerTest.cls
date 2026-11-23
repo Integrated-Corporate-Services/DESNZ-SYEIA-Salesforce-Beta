@@ -145,7 +145,7 @@ private class InboundForm_ProfileUpdateHandlerTest {
 
     private static Party__c getParty(Id recordTypeId) {
         return [
-            SELECT Id, Name, First_Name__c, Last_Name__c, Person_Identification__c
+            SELECT Id, Name, First_Name__c, Last_Name__c, Person_Identification__c, Salutation__c
             FROM Party__c
             WHERE RecordTypeId = :recordTypeId AND Email__c = :EMAIL
             LIMIT 1
@@ -246,6 +246,109 @@ private class InboundForm_ProfileUpdateHandlerTest {
 
         Assert.isTrue(result.success, 'Email matching should be case-insensitive: ' + result.errors);
         Assert.areEqual('Kumar AG', getParty(INDIVIDUAL_RT).Last_Name__c);
+    }
+
+    // ========================================================================
+    // TITLE UPDATE (Salutation__c)
+    // ========================================================================
+
+    /**
+     * Name-change payload carrying a title. Pass null for lastName to send a title-only change;
+     * pass null for the title value to send "title": {"newValue": null}.
+     */
+    private static String titleUpdateJson(String newTitle, String newLast) {
+        String changes = '"title":{"newValue":' + (newTitle == null ? 'null' : '"' + newTitle + '"')
+            + ',"oldValue":null}';
+        if (newLast != null) {
+            changes += ',"lastName":{"newValue":"' + newLast + '","oldValue":"Kumar"}';
+        }
+        return '{' +
+            '"email":"' + EMAIL + '",' +
+            '"source":"ApplicantPortal",' +
+            '"changes":{' + changes + '},' +
+            '"eventType":"PROFILE_UPDATE",' +
+            '"changedFields":["title"' + (newLast != null ? ',"lastName"' : '') + '],' +
+            '"personalIdentifier":"' + PERSONAL_ID + '"' +
+        '}';
+    }
+
+    @IsTest
+    static void testTitleWithNameChange_UpdatesSalutationAndName() {
+        InboundForm_Processor.ProcessingResult result = processSingle(titleUpdateJson('Dr', 'Kumar AG'));
+
+        Assert.isTrue(result.success, 'Title + name update should succeed: ' + result.errors);
+        Assert.isFalse(result.hasWarnings(), 'No warnings expected: ' + result.warnings);
+
+        Party__c individual = getParty(INDIVIDUAL_RT);
+        Assert.areEqual('Dr', individual.Salutation__c, 'Title should be written to Salutation__c');
+        Assert.areEqual('Sagar Kumar AG', individual.Name, 'Name is built from first + last only, not the title');
+        Assert.areEqual('Kumar AG', individual.Last_Name__c);
+
+        Assert.isNull(getParty(ORGANISATION_RT).Salutation__c, 'Organisation parties have no title');
+    }
+
+    @IsTest
+    static void testTitleOnly_UpdatesSalutationWithoutTouchingName() {
+        InboundForm_Processor.ProcessingResult result = processSingle(titleUpdateJson('Mr', null));
+
+        Assert.isTrue(result.success, 'Title-only update should succeed: ' + result.errors);
+        Party__c individual = getParty(INDIVIDUAL_RT);
+        Assert.areEqual('Mr', individual.Salutation__c);
+        Assert.areEqual('Sagar Kumar', individual.Name, 'Name must not change');
+        Assert.areEqual('Sagar', individual.First_Name__c, 'First name must not change');
+        Assert.areEqual('Kumar', individual.Last_Name__c, 'Last name must not change');
+    }
+
+    @IsTest
+    static void testTitle_IsMatchedToPicklistValue() {
+        InboundForm_Processor.ProcessingResult result = processSingle(titleUpdateJson('mrs.', null));
+
+        Assert.isTrue(result.success, 'Title update should succeed: ' + result.errors);
+        Assert.isTrue('Mrs'.equals(getParty(INDIVIDUAL_RT).Salutation__c),
+            'Case and trailing full stop are normalised to the picklist value');
+    }
+
+    @IsTest
+    static void testInvalidTitle_IsSkippedButNameStillUpdates() {
+        InboundForm_Processor.ProcessingResult result = processSingle(titleUpdateJson('Captain', 'Kumar AG'));
+
+        Assert.isTrue(result.success, 'An invalid title must not fail the event: ' + result.errors);
+        Assert.isTrue(String.join(result.warnings, ' ').contains('"Captain" is not a valid Salutation value'),
+            String.join(result.warnings, ' '));
+
+        Party__c individual = getParty(INDIVIDUAL_RT);
+        Assert.isNull(individual.Salutation__c, 'Invalid title is not written');
+        Assert.areEqual('Sagar Kumar AG', individual.Name, 'Name change still applied');
+    }
+
+    @IsTest
+    static void testBlankTitle_ClearsSalutation() {
+        Party__c individual = getParty(INDIVIDUAL_RT);
+        individual.Salutation__c = 'Dr';
+        update individual;
+
+        InboundForm_Processor.ProcessingResult result = processSingle(titleUpdateJson(null, null));
+
+        Assert.isTrue(result.success, 'Clearing the title should succeed: ' + result.errors);
+        Assert.isNull(getParty(INDIVIDUAL_RT).Salutation__c, 'Blank title clears Salutation__c');
+    }
+
+    @IsTest
+    static void testTitle_WarnsWhenNoIndividualParty() {
+        delete [SELECT Id FROM Party__c WHERE RecordTypeId = :INDIVIDUAL_RT];
+
+        InboundForm_Processor.ProcessingResult result = processSingle(titleUpdateJson('Dr', null));
+
+        Assert.isTrue(result.success, 'Should still succeed (personal identifier applied): ' + result.errors);
+        Assert.isTrue(String.join(result.warnings, ' ').contains('Title change ignored'));
+        Assert.isNull(getParty(ORGANISATION_RT).Salutation__c);
+    }
+
+    @IsTest
+    static void testMatchSalutationPicklistValue() {
+        Assert.areEqual('Prof', InboundForm_ProfileUpdateHandler.matchSalutationPicklistValue('PROF'));
+        Assert.areEqual('Ms', InboundForm_ProfileUpdateHandler.matchSalutationPicklistValue(' ms. '));
+        Assert.isNull(InboundForm_ProfileUpdateHandler.matchSalutationPicklistValue('Sir'));
     }
 
     // ========================================================================

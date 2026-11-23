@@ -11,6 +11,8 @@
  *
  *   changes.firstName.newValue  -> Party__c.First_Name__c + Name   (Individual parties)
  *   changes.lastName.newValue   -> Party__c.Last_Name__c  + Name   (Individual parties)
+ *   changes.title.newValue      -> Party__c.Salutation__c only     (Individual parties; must match a
+ *                                  Salutation__c picklist value, otherwise skipped with a warning)
  *   changes.workAddress.newValue -> Address__c linked to the matched parties (Address__c.Party__c)
  *        line1    -> Address_Line1__c
  *        line2    -> Address_Line_2__c
@@ -36,10 +38,11 @@ public class InboundForm_ProfileUpdateConfig {
     // ----- Change keys (children of "changes") -----
     public static final String FIRST_NAME_KEY = 'firstName';
     public static final String LAST_NAME_KEY = 'lastName';
+    public static final String TITLE_KEY = 'title';
     public static final String WORK_ADDRESS_KEY = 'workAddress';
 
     public static final Set<String> SUPPORTED_CHANGE_KEYS = new Set<String>{
-        FIRST_NAME_KEY, LAST_NAME_KEY, WORK_ADDRESS_KEY
+        FIRST_NAME_KEY, LAST_NAME_KEY, TITLE_KEY, WORK_ADDRESS_KEY
     };
 
     // ----- workAddress.newValue key -> Address__c field -----
