@@ -30,13 +30,17 @@ export default class PinsPedwCases extends LightningElement {
         {
             label: 'Status',
             fieldName: 'status'
+        },
+        {
+            label: '1st Referral Date',
+            fieldName: 'referralDate'
         }
     ];
 
     @wire(getListRecordsByName, {
         objectApiName: '$objectApiName',
         listViewApiName: '$listViewApiName',
-        fields: ['Case__c.Name', 'Case__c.Status__c', 'Case__c.DNO_Name__c', 'Case__c.Case_Type__c'],
+        fields: ['Case__c.Name', 'Case__c.Status__c', 'Case__c.DNO_Name__c', 'Case__c.Case_Type__c', 'Case__c.PINS_PEDW_1st_Referral_Date__c'],
         pageSize: 1000
     })
     wiredCases({ data, error }) {
@@ -57,7 +61,8 @@ export default class PinsPedwCases extends LightningElement {
                     desnzCaseReference,
                     caseType,
                     status,
-                    company
+                    company,
+                    referralDate: record.fields?.PINS_PEDW_1st_Referral_Date__c?.value || ''
                 };
             });
 

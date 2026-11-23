@@ -55,13 +55,11 @@ export default class NwlPaymentInformation extends LightningElement {
     wiredCase({ data, error }) {
         if (data) {
             this.caseRecord = data;
-            console.log('Case data received:', data);
             const paymentId = getFieldValue(data, CASE_PAYMENT_FIELD) || undefined;
             if (paymentId !== this.paymentId) {
                 this.paymentRecord = undefined;
                 this.error = undefined;
                 this.paymentId = paymentId;
-                console.log('Payment ID changed:', paymentId);
             }
             if (!paymentId) {
                 this.error = undefined;
@@ -72,8 +70,7 @@ export default class NwlPaymentInformation extends LightningElement {
             this.caseRecord = undefined;
             this.paymentId = undefined;
             this.paymentRecord = undefined;
-            // this.error = 'Unable to load the case payment information.';
-            console.error(this.error, error);
+            this.error = 'Unable to load the case payment information.';
             this.isLoaded = true;
         }
     }
@@ -81,7 +78,6 @@ export default class NwlPaymentInformation extends LightningElement {
     @wire(getRecord, { recordId: '$paymentId', fields: PAYMENT_FIELDS })
     wiredPayment({ data, error }) {
         if (data) {
-            console.log('Payment data received:', data);
             this.paymentRecord = data;
             this.error = undefined;
             this.isLoaded = true;

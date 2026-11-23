@@ -22,6 +22,13 @@
             "tabKey" : "1",
             "tabName" : "Application Details"
           }, {
+            "UUID" : "32c670f0-5e2d-4f75-974d-874dc40a1b22",
+            "allowGuestUser" : false,
+            "locked" : false,
+            "seedComponents" : [ ],
+            "tabKey" : "3",
+            "tabName" : "Additional Information"
+          }, {
             "UUID" : "8829b356-f0f7-41ce-a300-69b4c6c71c00",
             "allowGuestUser" : false,
             "locked" : false,
@@ -42,13 +49,6 @@
             "seedComponents" : [ ],
             "tabKey" : "ee1e2",
             "tabName" : "Assessment"
-          }, {
-            "UUID" : "32c670f0-5e2d-4f75-974d-874dc40a1b22",
-            "allowGuestUser" : false,
-            "locked" : false,
-            "seedComponents" : [ ],
-            "tabKey" : "3",
-            "tabName" : "Related"
           } ],
           "useOverflowMenu" : true
         }
@@ -57,7 +57,9 @@
       "id" : "de943893-08e4-4215-b23f-c262c295c4e3",
       "regions" : [ {
         "components" : [ {
-          "componentAttributes" : { },
+          "componentAttributes" : {
+            "recordId" : "a00Vd00000VwVL2IAN"
+          },
           "componentName" : "c:caseDetails",
           "id" : "a9ac7bed-a236-4611-9ff5-e8eb6b0d496a",
           "renderPriority" : "NEUTRAL",
@@ -71,8 +73,26 @@
         "type" : "region"
       }, {
         "components" : [ {
-          "componentAttributes" : { },
-          "componentName" : "c:caseDocumentsWithPreview",
+          "componentAttributes" : {
+            "recordId" : "a00Vd00000VwVL2IAN"
+          },
+          "componentName" : "c:caseRelatedList",
+          "id" : "e8482ae6-bbeb-41fb-8439-73d1b7dcfc19",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "32c670f0-5e2d-4f75-974d-874dc40a1b22",
+        "regionLabel" : "Additional Information",
+        "regionName" : "3",
+        "renditionMap" : { },
+        "type" : "region"
+      }, {
+        "components" : [ {
+          "componentAttributes" : {
+            "recordId" : "a00Vd00000VwVL2IAN"
+          },
+          "componentName" : "c:caseDocuments",
           "id" : "3fa84b2f-c9f4-4061-be1d-2dc79887797a",
           "renderPriority" : "NEUTRAL",
           "renditionMap" : { },
@@ -102,7 +122,8 @@
       }, {
         "components" : [ {
           "componentAttributes" : {
-            "area" : "B"
+            "area" : "B",
+            "recordId" : "a00Vd00000VwVL2IAN"
           },
           "componentName" : "c:caseDetails",
           "id" : "0c5dd1ca-02d2-4ca1-9f15-6b60e4eb593b",
@@ -113,22 +134,6 @@
         "id" : "d735bddf-ed5f-44c9-8ec1-f1db944c6693",
         "regionLabel" : "Assessment",
         "regionName" : "ee1e2",
-        "renditionMap" : { },
-        "type" : "region"
-      }, {
-        "components" : [ {
-          "componentAttributes" : {
-            "recordId" : "a00Vd00000VwVL2IAN"
-          },
-          "componentName" : "c:caseRelatedList",
-          "id" : "e8482ae6-bbeb-41fb-8439-73d1b7dcfc19",
-          "renderPriority" : "NEUTRAL",
-          "renditionMap" : { },
-          "type" : "component"
-        } ],
-        "id" : "32c670f0-5e2d-4f75-974d-874dc40a1b22",
-        "regionLabel" : "Related",
-        "regionName" : "3",
         "renditionMap" : { },
         "type" : "region"
       } ],
