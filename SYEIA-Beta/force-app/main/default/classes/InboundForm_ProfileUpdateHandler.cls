@@ -3,6 +3,7 @@
  *
  * Existing Party__c records are matched on Email__c (case-insensitive) and changes apply immediately:
  *   - firstName / lastName -> First_Name__c, Last_Name__c and Name kept in sync (Individual parties)
+ *   - title                -> Salutation__c only - Name is not changed (Individual parties)
  *   - workAddress          -> Address__c records linked to the matched parties (Address__c.Party__c).
  *                             Every existing linked address is updated; when none of the matched parties
  *                             has an address, one is created on the Individual party (else first match).
@@ -125,6 +126,10 @@ public inherited sharing class InboundForm_ProfileUpdateHandler {
         Boolean hasNameChange = changes.containsKey(InboundForm_ProfileUpdateConfig.FIRST_NAME_KEY)
             || changes.containsKey(InboundForm_ProfileUpdateConfig.LAST_NAME_KEY);
 
+        // Title -> Salutation__c (restricted picklist): resolve once per event; null result = skip
+        Boolean hasTitleChange = changes.containsKey(InboundForm_ProfileUpdateConfig.TITLE_KEY);
+        SalutationValue salutation = hasTitleChange ? resolveSalutation(changes, result) : null;
+
         Boolean anyChange = false;
         Boolean individualFound = false;
 
@@ -136,6 +141,10 @@ public inherited sharing class InboundForm_ProfileUpdateHandler {
 
             Boolean changed = false;
             if (hasNameChange && isIndividual && applyNameChange(party, changes)) {
+                changed = true;
+            }
+            if (salutation != null && isIndividual && differs(salutation.value, party.Salutation__c)) {
+                party.Salutation__c = salutation.value;
                 changed = true;
             }
             if (personalIdentifier != null && String.isBlank(party.Person_Identification__c)) {
@@ -152,6 +161,9 @@ public inherited sharing class InboundForm_ProfileUpdateHandler {
         if (hasNameChange && !individualFound) {
             result.addWarning('Name change ignored: no Individual Party__c found for email');
         }
+        if (salutation != null && !individualFound) {
+            result.addWarning('Title change ignored: no Individual Party__c found for email');
+        }
 
         // ----- Address__c -----
         if (changes.containsKey(InboundForm_ProfileUpdateConfig.WORK_ADDRESS_KEY)
@@ -160,6 +172,51 @@ public inherited sharing class InboundForm_ProfileUpdateHandler {
         }
 
         return anyChange;
+    }
+
+    /**
+     * Resolved title for Salutation__c. A wrapper so "clear the field" (value = null) can be told
+     * apart from "don't update" (no SalutationValue at all).
+     */
+    private class SalutationValue {
+        public final String value;
+        public SalutationValue(String value) {
+            this.value = value;
+        }
+    }
+
+    /**
+     * Map changes.title.newValue onto an active Salutation__c picklist value, ignoring case and a
+     * trailing full stop ("mr." -> "Mr"). A blank title clears the field. A value that isn't in the
+     * restricted picklist would fail the whole Party__c save, so it is skipped with a warning.
+     */
+    private static SalutationValue resolveSalutation(
+            Map<String, Object> changes,
+            InboundForm_Processor.ProcessingResult result) {
+
+        String title = getChangeValue(
+            changes, InboundForm_ProfileUpdateConfig.TITLE_KEY, InboundForm_ProfileUpdateConfig.NEW_VALUE_KEY);
+        if (title == null) {
+            return new SalutationValue(null);
+        }
+
+        String resolved = matchSalutationPicklistValue(title);
+        if (resolved == null) {
+            result.addWarning('Title change ignored: "' + title + '" is not a valid Salutation value');
+            return null;
+        }
+        return new SalutationValue(resolved);
+    }
+
+    @TestVisible
+    private static String matchSalutationPicklistValue(String title) {
+        String normalized = title.trim().removeEnd('.').trim();
+        for (Schema.PicklistEntry entry : Party__c.Salutation__c.getDescribe().getPicklistValues()) {
+            if (entry.isActive() && entry.getValue().equalsIgnoreCase(normalized)) {
+                return entry.getValue();
+            }
+        }
+        return null;
     }
 
     /**
@@ -368,7 +425,8 @@ public inherited sharing class InboundForm_ProfileUpdateHandler {
                         Name = party.Name,
                         First_Name__c = party.First_Name__c,
                         Last_Name__c = party.Last_Name__c,
-                        Person_Identification__c = party.Person_Identification__c
+                        Person_Identification__c = party.Person_Identification__c,
+                        Salutation__c = party.Salutation__c
                     ));
                 }
                 handleResults(Database.update(records, false), records, null, 'update Party__c');
@@ -443,7 +501,7 @@ public inherited sharing class InboundForm_ProfileUpdateHandler {
         }
 
         return [
-            SELECT Id, Name, Email__c, First_Name__c, Last_Name__c, Person_Identification__c,
+            SELECT Id, Name, Email__c, First_Name__c, Last_Name__c, Person_Identification__c, Salutation__c,
                    Case__c, RecordType.DeveloperName,
                    (SELECT Id, Address_Line1__c, Address_Line_2__c, Town_City__c, County__c, Postcode__c
                     FROM Addresses__r
