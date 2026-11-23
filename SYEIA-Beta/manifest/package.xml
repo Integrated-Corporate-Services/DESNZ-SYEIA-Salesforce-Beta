@@ -44,6 +44,8 @@
 		<members>InboundForm_ProfileUpdateConfig</members>
 		<members>InboundForm_ProfileUpdateHandler</members>
 		<members>InboundForm_ProfileUpdateHandlerTest</members>
+		<members>InboundForm_ProfileUpdateNotifier</members>
+		<members>InboundForm_ProfileUpdateNotifierTest</members>
 		<members>InboundForm_MappingConfig</members>
 		<members>InboundForm_MappingConfigTest</members>
 		<members>InboundForm_NWLConfig</members>
@@ -464,6 +466,11 @@
 		<members>Post_Consultation__c.Last_Updated_At__c</members>
 		<members>Post_Consultation__c.Last_Updated_By__c</members>
 		<members>Post_Consultation__c.Post_Consultation_Id__c</members>
+		<members>Profile_Update_Notification__mdt.Active__c</members>
+		<members>Profile_Update_Notification__mdt.Case_Types__c</members>
+		<members>Profile_Update_Notification__mdt.Recipient_Email__c</members>
+		<members>Profile_Update_Notification__mdt.Sender_Address__c</members>
+		<members>Profile_Update_Notification__mdt.Team_Name__c</members>
 		<members>Project_Target_Completion_Date_Conifg__mdt.Full_EIA_Duration_Days__c</members>
 		<members>Project_Target_Completion_Date_Conifg__mdt.No_screening_needed_Duration_Days__c</members>
 		<members>Project_Target_Completion_Date_Conifg__mdt.Screening_needed_Duration_Days__c</members>
@@ -567,6 +574,9 @@
 		<members>GOV_UK_Notify_Config.Production</members>
 		<members>Mark_Status_as_Complete_Setting.Statuses</members>
 		<members>Prior_Application_Status_Setting.Applicable_Statuses</members>
+		<members>Profile_Update_Notification.Compulsory_Purchase_Order</members>
+		<members>Profile_Update_Notification.Necessary_Wayleaves</members>
+		<members>Profile_Update_Notification.Section_37</members>
 		<name>CustomMetadata</name>
 	</types>
 <types>
@@ -608,7 +618,8 @@
 		<members>Party__c</members>
 		<members>Payment__c</members>
 		<members>Post_Consultation__c</members>	
-		<members>Prior_Application_Status_Setting__mdt</members>	
+		<members>Prior_Application_Status_Setting__mdt</members>
+		<members>Profile_Update_Notification__mdt</members>
         <members>Project_Target_Completion_Date_Conifg__mdt</members>
 		<members>Related_Case__c</members>
 		<members>Route__c</members>

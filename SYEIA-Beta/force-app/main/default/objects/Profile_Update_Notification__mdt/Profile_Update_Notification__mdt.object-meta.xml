@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Team inbox notified when an applicant changes their SYEIA profile (SYEIA-2040). One record per team; Case_Types__c lists the Case__c.Case_Type__c values the team owns. Sandbox records point at a test mailbox - set the live team mailboxes before production: S37 s37consents@energysecurity.gov.uk, NWL/TRL necessarywayleaves@energysecurity.gov.uk, CPO compulsorypurchaseorders@energysecurity.gov.uk.</description>
+    <label>Profile Update Notification</label>
+    <pluralLabel>Profile Update Notifications</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>
