@@ -9,6 +9,9 @@
  *                             has an address, one is created on the Individual party (else first match).
  *   - personalIdentifier   -> Person_Identification__c, only when currently blank (all matched parties)
  *
+ * After saving, each update that changed a name, title or address emails the relevant team inbox
+ * once (InboundForm_ProfileUpdateNotifier, configured in Profile_Update_Notification__mdt).
+ *
  * Invoked by InboundForm_Processor: validate() per request during parsing, then processBulk() once per
  * batch so that SOQL/DML stay constant regardless of the number of inbound requests.
  * See InboundForm_ProfileUpdateConfig for the payload contract.
@@ -87,6 +90,7 @@ public inherited sharing class InboundForm_ProfileUpdateHandler {
             }
 
             changeSet.commitChanges();
+            notifyTeams(changeSet.notifications);
 
         } catch (Exception e) {
             for (InboundForm_Processor.ProcessingResult result : results) {
@@ -96,6 +100,34 @@ public inherited sharing class InboundForm_ProfileUpdateHandler {
             Logger.setScenario('InboundForm_ProfileUpdateHandler.processBulk');
         } finally {
             Logger.saveLog();
+        }
+    }
+
+    /**
+     * Email the relevant team inbox(es) once per successful profile update (AC3/AC4).
+     * A notification problem never fails the profile update; it is reported as a warning.
+     */
+    private static void notifyTeams(List<InboundForm_ProfileUpdateNotifier.Notification> notifications) {
+        List<InboundForm_ProfileUpdateNotifier.Notification> toSend =
+            new List<InboundForm_ProfileUpdateNotifier.Notification>();
+        for (InboundForm_ProfileUpdateNotifier.Notification notification : notifications) {
+            if (notification.result.success) { // skip updates whose save failed
+                toSend.add(notification);
+            }
+        }
+        if (toSend.isEmpty()) {
+            return;
+        }
+
+        try {
+            InboundForm_ProfileUpdateNotifier.notify(toSend);
+        } catch (Exception e) {
+            for (InboundForm_ProfileUpdateNotifier.Notification notification : toSend) {
+                notification.result.addWarning('Team notification failed: ' + e.getMessage());
+            }
+            Logger.error('Profile update team notification failed: ' + e.getMessage()
+                + ' [Line: ' + e.getLineNumber() + ']');
+            Logger.setScenario('InboundForm_ProfileUpdateHandler.notifyTeams');
         }
     }
 
@@ -132,6 +164,8 @@ public inherited sharing class InboundForm_ProfileUpdateHandler {
 
         Boolean anyChange = false;
         Boolean individualFound = false;
+        // Name / title / address changes are what the team must be told about (not personalIdentifier)
+        Boolean profileChanged = false;
 
         // ----- Party__c fields -----
         for (Party__c party : parties) {
@@ -142,10 +176,12 @@ public inherited sharing class InboundForm_ProfileUpdateHandler {
             Boolean changed = false;
             if (hasNameChange && isIndividual && applyNameChange(party, changes)) {
                 changed = true;
+                profileChanged = true;
             }
             if (salutation != null && isIndividual && differs(salutation.value, party.Salutation__c)) {
                 party.Salutation__c = salutation.value;
                 changed = true;
+                profileChanged = true;
             }
             if (personalIdentifier != null && String.isBlank(party.Person_Identification__c)) {
                 party.Person_Identification__c = personalIdentifier;
@@ -169,6 +205,11 @@ public inherited sharing class InboundForm_ProfileUpdateHandler {
         if (changes.containsKey(InboundForm_ProfileUpdateConfig.WORK_ADDRESS_KEY)
                 && applyWorkAddressChange(result, parties, changes, changeSet)) {
             anyChange = true;
+            profileChanged = true;
+        }
+
+        if (profileChanged) {
+            changeSet.notifications.add(new InboundForm_ProfileUpdateNotifier.Notification(result, parties));
         }
 
         return anyChange;
@@ -371,6 +412,10 @@ public inherited sharing class InboundForm_ProfileUpdateHandler {
         // At most one new Address__c per party (only created when the matched parties have none),
         // so new addresses are indexed by party Id - SObjects can't be map keys once mutated.
         private final Map<Id, Integer> newAddressIndexByPartyId = new Map<Id, Integer>();
+
+        // One entry per profile update that changed name / title / address - sent after commit
+        public final List<InboundForm_ProfileUpdateNotifier.Notification> notifications =
+            new List<InboundForm_ProfileUpdateNotifier.Notification>();
 
         public ChangeSet(List<Party__c> parties) {
             for (Party__c party : parties) {
