@@ -35,10 +35,9 @@ public with sharing class CaseEventRelatedListController {
 
         Schema.DescribeFieldResult relationshipDescribe = relationshipField.getDescribe();
         if (
-            (relationshipDescribe.getType() != Schema.DisplayType.REFERENCE ||
+            relationshipDescribe.getType() != Schema.DisplayType.REFERENCE ||
             !relationshipDescribe.isAccessible() ||
-            !relationshipDescribe.getReferenceTo().contains(Case__c.SObjectType)) &&
-            !Test.isRunningTest()
+            !relationshipDescribe.getReferenceTo().contains(Case__c.SObjectType)
         ) {
             throw new AuraHandledException('The selected field is not an accessible Case relationship.');
         }
@@ -51,8 +50,7 @@ public with sharing class CaseEventRelatedListController {
                 }
 
                 Schema.SObjectField selectedField = childFields.get(fieldApiName);
-                if ((selectedField == null || !selectedField.getDescribe().isAccessible()) &&
-                    !Test.isRunningTest()) {
+                if (selectedField == null || !selectedField.getDescribe().isAccessible()) {
                     throw new AuraHandledException('A related-list column is unavailable: ' + fieldApiName);
                 }
                 selectedFields.add(selectedField.getDescribe().getName());
