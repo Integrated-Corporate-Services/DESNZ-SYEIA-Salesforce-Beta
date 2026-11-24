@@ -35,6 +35,57 @@ private class CaseEventRelatedListControllerTest {
     }
 
     @IsTest
+    static void rejectsUnknownRelatedObject() {
+        Id parentId = (Id)(Case__c.SObjectType.getDescribe().getKeyPrefix() + '000000000000');
+        Boolean exceptionThrown = false;
+        try {
+            CaseEventRelatedListController.getRelatedRecords(
+                parentId,
+                'Missing_Object__c',
+                'Case__c',
+                new List<String>{ 'Name' }
+            );
+        } catch (AuraHandledException error) {
+            exceptionThrown = true;
+        }
+        System.assert(exceptionThrown, 'Expected an unknown related object to be rejected.');
+    }
+
+    @IsTest
+    static void rejectsRelationshipColumn() {
+        Id parentId = (Id)(Case__c.SObjectType.getDescribe().getKeyPrefix() + '000000000000');
+        Boolean exceptionThrown = false;
+        try {
+            CaseEventRelatedListController.getRelatedRecords(
+                parentId,
+                'Address__c',
+                'Case__c',
+                new List<String>{ 'Case__r.Name' }
+            );
+        } catch (AuraHandledException error) {
+            exceptionThrown = true;
+        }
+        System.assert(exceptionThrown, 'Expected a relationship column to be rejected.');
+    }
+
+    @IsTest
+    static void rejectsUnknownColumn() {
+        Id parentId = (Id)(Case__c.SObjectType.getDescribe().getKeyPrefix() + '000000000000');
+        Boolean exceptionThrown = false;
+        try {
+            CaseEventRelatedListController.getRelatedRecords(
+                parentId,
+                'Address__c',
+                'Case__c',
+                new List<String>{ 'Missing_Field__c' }
+            );
+        } catch (AuraHandledException error) {
+            exceptionThrown = true;
+        }
+        System.assert(exceptionThrown, 'Expected an unknown column to be rejected.');
+    }
+
+    @IsTest
     static void queriesAccessibleRelatedRecords() {
         Id parentId = (Id)(Case__c.SObjectType.getDescribe().getKeyPrefix() + '000000000000');
 

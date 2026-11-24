@@ -35,10 +35,9 @@ public with sharing class CaseEventRelatedListController {
 
         Schema.DescribeFieldResult relationshipDescribe = relationshipField.getDescribe();
         if (
-            (relationshipDescribe.getType() != Schema.DisplayType.REFERENCE ||
+            relationshipDescribe.getType() != Schema.DisplayType.REFERENCE ||
             !relationshipDescribe.isAccessible() ||
-            !relationshipDescribe.getReferenceTo().contains(Case__c.SObjectType)) &&
-            !Test.isRunningTest()
+            !relationshipDescribe.getReferenceTo().contains(Case__c.SObjectType)
         ) {
             throw new AuraHandledException('The selected field is not an accessible Case relationship.');
         }
