@@ -1,0 +1,45 @@
+.page-shell {
+    padding: 1rem;
+    background-color: transparent;
+}
+
+.section-title {
+    display: flex;
+    width: 100%;
+    height: 2.2rem;
+    min-height: 2.2rem;
+    align-items: center;
+    background-color: #f3f3f3;
+    border: 0;
+    border-radius: 0.5rem;
+    color: #163a63;
+    padding: 0 0.75rem;
+    text-align: left;
+    font-size: 1.275rem;
+    font-weight: 400;
+}
+
+.section-title:hover,
+.section-title:focus-visible {
+    background-color: #ececec;
+}
+
+.section-title:focus-visible {
+    outline: 2px solid #0176d3;
+    outline-offset: 1px;
+}
+
+.slds-section__title-action-icon {
+    --slds-c-icon-color-foreground-default: #5c5c5c;
+    margin-right: 0.25rem;
+}
+
+.slds-section__content {
+    padding: 0.75rem 0.25rem;
+}
+
+@media (max-width: 480px) {
+    .page-shell {
+        padding: 0.5rem;
+    }
+}

@@ -1,0 +1,16 @@
+:host {
+    display: block;
+    background-color: transparent;
+}
+
+.related-lists {
+    box-sizing: border-box;
+    padding: 1rem;
+    background-color: transparent;
+}
+
+@media (max-width: 480px) {
+    .related-lists {
+        padding: 0.5rem;
+    }
+}
