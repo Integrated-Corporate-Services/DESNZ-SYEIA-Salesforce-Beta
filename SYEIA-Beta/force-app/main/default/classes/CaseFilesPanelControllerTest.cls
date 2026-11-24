@@ -1,5 +1,8 @@
 @IsTest
 private class CaseFilesPanelControllerTest {
+    private static String apexTestRunId() {
+        return String.valueOf(Math.abs(Crypto.getRandomInteger()));
+    }
     @IsTest
     static void uploaderCanDeleteDocumentSharedAcrossCases() {
         Case__c firstCase = createCase('First Case');
@@ -27,7 +30,7 @@ private class CaseFilesPanelControllerTest {
     static void anotherUserCannotDeleteVisibleFile() {
         User otherUser = new User(
             ProfileId = UserInfo.getProfileId(),
-            Username = 'case.files.' + Test.getRunId() + '@example.com',
+            Username = 'case.files.' + apexTestRunId() + '@example.com',
             LastName = 'File Panel Tester',
             Email = 'case.files@example.com',
             Alias = 'filetest',
