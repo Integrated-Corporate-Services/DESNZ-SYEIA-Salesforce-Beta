@@ -1,0 +1,136 @@
+:host {
+    display: block;
+    color: #242424;
+}
+
+.poc-panel {
+    padding: 1rem;
+    background: #f3f3f3;
+}
+
+.poc-notice {
+    margin-bottom: 0.75rem;
+    padding: 0.65rem 0.8rem;
+    border-left: 3px solid #1473e6;
+    background: #ffffff;
+    color: #444444;
+    font-size: 0.8rem;
+}
+
+.document-section {
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+    border: 1px solid #d5d5d5;
+    border-radius: 0.5rem;
+    background: #ffffff;
+}
+
+.document-section:last-child {
+    margin-bottom: 0;
+}
+
+.section-header {
+    display: flex;
+    min-height: 3.25rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem 0.75rem;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.section-header h2 span {
+    color: #666666;
+    font-weight: 400;
+}
+
+.section-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.table-scroll {
+    overflow-x: auto;
+}
+
+.documents-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.75rem;
+    white-space: nowrap;
+}
+
+.documents-table thead {
+    background: #f1f1f1;
+}
+
+.documents-table th,
+.documents-table td {
+    height: 1.8rem;
+    padding: 0.35rem 0.5rem;
+    border-top: 1px solid #e1e1e1;
+    text-align: left;
+}
+
+.documents-table th {
+    color: #555555;
+    font-weight: 600;
+}
+
+.file-name {
+    color: #0563c1;
+    text-decoration: underline;
+}
+
+.file-name-button {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #0563c1;
+    cursor: pointer;
+    font: inherit;
+    text-align: left;
+    text-decoration: underline;
+}
+
+.file-name-button:focus-visible {
+    outline: 2px solid #0563c1;
+    outline-offset: 2px;
+}
+
+.cell-value {
+    color: #555555;
+}
+
+.poc-preview-notice {
+    margin-bottom: 0.75rem;
+    color: #6b4f00;
+}
+
+.row-action-heading,
+.row-action-cell {
+    width: 2rem;
+    text-align: center !important;
+}
+
+@media (max-width: 700px) {
+    .poc-panel {
+        padding: 0.5rem;
+    }
+
+    .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .section-actions {
+        justify-content: flex-start;
+    }
+}
