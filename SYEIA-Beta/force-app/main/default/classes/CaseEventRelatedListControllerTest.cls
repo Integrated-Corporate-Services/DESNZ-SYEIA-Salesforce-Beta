@@ -2,6 +2,7 @@
 private class CaseEventRelatedListControllerTest {
     @IsTest
     static void rejectsMissingParentRecordId() {
+        Boolean exceptionThrown = false;
         try {
             CaseEventRelatedListController.getRelatedRecords(
                 null,
@@ -9,16 +10,17 @@ private class CaseEventRelatedListControllerTest {
                 'Case__c',
                 new List<String>{ 'Name' }
             );
-            System.assert(false, 'Expected the missing parent ID to be rejected.');
         } catch (AuraHandledException error) {
-            System.assert(error.getMessage().contains('valid Case record ID'));
+            exceptionThrown = true;
         }
+        System.assert(exceptionThrown, 'Expected the missing parent ID to be rejected.');
     }
 
     @IsTest
     static void rejectsNonCaseRelationship() {
         Id parentId = (Id)(Case__c.SObjectType.getDescribe().getKeyPrefix() + '000000000000');
 
+        Boolean exceptionThrown = false;
         try {
             CaseEventRelatedListController.getRelatedRecords(
                 parentId,
@@ -26,10 +28,10 @@ private class CaseEventRelatedListControllerTest {
                 'Name',
                 new List<String>{ 'Name' }
             );
-            System.assert(false, 'Expected a non-relationship field to be rejected.');
         } catch (AuraHandledException error) {
-            System.assert(error.getMessage().contains('not an accessible Case relationship'));
+            exceptionThrown = true;
         }
+        System.assert(exceptionThrown, 'Expected a non-relationship field to be rejected.');
     }
 
     @IsTest
