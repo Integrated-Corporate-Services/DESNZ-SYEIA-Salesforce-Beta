@@ -1,0 +1,24 @@
+<template>
+    <div class="related-lists">
+        <template if:true={recordError}>
+            <div class="slds-p-around_medium" role="alert">
+                {recordError}
+            </div>
+        </template>
+        <template if:true={effectiveRecordId}>
+            <template for:each={relatedLists} for:item="relatedList">
+                <c-case-event-related-list
+                    key={relatedList.relatedListId}
+                    record-id={effectiveRecordId}
+                    record-type-id={recordTypeId}
+                    related-list={relatedList}>
+                </c-case-event-related-list>
+            </template>
+        </template>
+        <template if:false={effectiveRecordId}>
+            <div class="slds-p-around_medium" role="alert">
+                The Case record ID is unavailable.
+            </div>
+        </template>
+    </div>
+</template>
