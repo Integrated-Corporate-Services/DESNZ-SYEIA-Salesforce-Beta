@@ -7,23 +7,23 @@ export default class CaseDetails extends LightningElement {
 
     pageReference;
     sections = [
-        {
-            area: 'A',
-            name: 'event-details',
-            label: 'Event Details',
-            contentId: 'event-details-content',
-            readOnlyFields: ['Name'],
-            fields: [
-                'PINS_PEDW_1st_Referral_Date__c',
-                'PINS_PEDW_2nd_Referral_Date__c',
-                'Inspector_s_Report_Received_Date__c',
-                'PINS_PEDW_Comments__c',
-                'Site_Visit_Date__c',
-                'Oral_Hearing_Date__c',
-                'Name_Of_Inspector__c'
-            ],
-            isOpen: true
-        },
+        // {
+        //     area: 'A',
+        //     name: 'event-details',
+        //     label: 'Event Details',
+        //     contentId: 'event-details-content',
+        //     readOnlyFields: ['Name'],
+        //     fields: [
+        //         'PINS_PEDW_1st_Referral_Date__c',
+        //         'PINS_PEDW_2nd_Referral_Date__c',
+        //         'Inspector_s_Report_Received_Date__c',
+        //         'PINS_PEDW_Comments__c',
+        //         'Site_Visit_Date__c',
+        //         'Oral_Hearing_Date__c',
+        //         'Name_Of_Inspector__c'
+        //     ],
+        //     isOpen: true
+        // },
         {
             area: 'A',
             name: 'applicant-details',
@@ -41,6 +41,7 @@ export default class CaseDetails extends LightningElement {
             name: 'application-details',
             label: 'Application Details',
             contentId: 'application-details-content',
+            readOnlyFields: ['Name'],
             fields: [
                 'Application_Type__c',
                 'Type_Of_NWL_That_Existed__c',
@@ -199,6 +200,22 @@ export default class CaseDetails extends LightningElement {
                 'X2nd_Abeyance_Start_Date__c',
                 'X2nd_Abeyance_End_Date__c',
                 'X2nd_Abeyance_Duration_In_Days__c'
+            ],
+            isOpen: true
+        },
+        {
+            area: 'B',
+            name: 'event-details',
+            label: 'Event Details',
+            contentId: 'event-details-content',
+            fields: [
+                'PINS_PEDW_1st_Referral_Date__c',
+                'PINS_PEDW_2nd_Referral_Date__c',
+                'Inspector_s_Report_Received_Date__c',
+                'PINS_PEDW_Comments__c',
+                'Site_Visit_Date__c',
+                'Oral_Hearing_Date__c',
+                'Name_Of_Inspector__c'
             ],
             isOpen: true
         }
