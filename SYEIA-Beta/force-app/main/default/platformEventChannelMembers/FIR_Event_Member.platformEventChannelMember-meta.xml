@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PlatformEventChannelMember xmlns="http://soap.sforce.com/2006/04/metadata">
+    <eventChannel>Casework_Event_Channel__chn</eventChannel>
+    <selectedEntity>Further_Information_Request_Event__e</selectedEntity>
+</PlatformEventChannelMember>

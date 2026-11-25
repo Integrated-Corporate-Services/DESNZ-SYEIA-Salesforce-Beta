@@ -2001,80 +2001,6 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Latest_Further_Information_Requested__r.Type_of_Information_Requested__c</fieldItem>
-                <identifier>RecordLatest_Further_Information_Requested_rType_of_Information_Requested_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Latest_Further_Information_Requested__r.Additional_Information_Required__c</fieldItem>
-                <identifier>RecordLatest_Further_Information_Requested_rAdditional_Information_Required_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Latest_Further_Information_Requested__r.Comment_From_Applicant__c</fieldItem>
-                <identifier>RecordLatest_Further_Information_Requested_rComment_From_Applicant_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <name>Facet-6233ac92-c56c-49ac-bcb0-2716e86af170</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Latest_Further_Information_Requested__r.Date_Information_was_Requested__c</fieldItem>
-                <identifier>RecordLatest_Further_Information_Requested_rDate_Information_was_Requested_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Latest_Further_Information_Requested__r.Date_Information_was_Received__c</fieldItem>
-                <identifier>RecordLatest_Further_Information_Requested_rDate_Information_was_Received_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Latest_Further_Information_Requested__r.Further_Information_Requested_Deadline__c</fieldItem>
-                <identifier>RecordLatest_Further_Information_Requested_rFurther_Information_Requested_Deadline_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Latest_Further_Information_Requested__r.Date_Further_Info_Request_Resolved__c</fieldItem>
-                <identifier>RecordLatest_Further_Information_Requested_rDate_Further_Info_Request_Resolved_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <name>Facet-386a372f-04db-431a-921c-598900ac2af2</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-6233ac92-c56c-49ac-bcb0-2716e86af170</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:column</componentName>
-                <identifier>flexipage_column30</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-386a372f-04db-431a-921c-598900ac2af2</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:column</componentName>
-                <identifier>flexipage_column31</identifier>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-b625fcd0-a1f7-4a8d-be4c-df8cf78f5d97</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
                     <name>flowArguments</name>
@@ -2173,26 +2099,8 @@
         </itemInstances>
         <itemInstances>
             <componentInstance>
-                <componentInstanceProperties>
-                    <name>columns</name>
-                    <value>Facet-b625fcd0-a1f7-4a8d-be4c-df8cf78f5d97</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>horizontalAlignment</name>
-                    <value>false</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>label</name>
-                    <value>Latest Further Information Requested</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:fieldSection</componentName>
-                <identifier>flexipage_fieldSection16</identifier>
-                <visibilityRule>
-                    <criteria>
-                        <leftValue>{!Record.Latest_Further_Information_Requested__r.Name}</leftValue>
-                        <operator>NE</operator>
-                    </criteria>
-                </visibilityRule>
+                <componentName>latestFir</componentName>
+                <identifier>c_latestFir</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-zlfxsja782f</name>
