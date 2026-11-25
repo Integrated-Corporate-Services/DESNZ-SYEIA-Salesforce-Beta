@@ -9,6 +9,8 @@ public with sharing class InboundForm_Processor {
     private static final String S37_WITHDRAWAL_FORM_TYPE = 'S37_WITHDRAWAL_REQUEST';
     private static final String NWL_WITHDRAWAL_FORM_TYPE = 'NWL_WITHDRAWAL_REQUEST';
     private static final String BACS_PAYMENT_EVENT = 'BACS_PAYMENT_EVENT';
+    
+    private static final String FIR_RESPONSE_SUBMITTED = 'FIR_RESPONSE_SUBMITTED';
 
     // Schema cache to avoid repeated getGlobalDescribe calls
     private static Map<String, Schema.SObjectType> sObjectTypeCache = 
@@ -308,6 +310,83 @@ public with sharing class InboundForm_Processor {
             Logger.saveLog();
         }
     }    
+
+   private static void handleFIRResponseSubmittedEvent(
+        InboundForm_JSONParser parser,
+        ProcessingResult result)
+    {
+        try
+        {
+            String applicationId = parser.getString('applicationId');
+            String applicantComment = parser.getString('response.comment');
+            List<Case__c> cases;
+            if (String.isBlank(applicationId))
+            {
+                result.addError(
+                    'applicationId missing from FIR response submitted event payload'
+                );
+                return;
+            }
+
+                cases = [
+                SELECT Id,
+                    AWS_Application_Id__c,
+                     (SELECT Id, Comment_From_Applicant__c,
+                        Date_Information_was_Received__c
+                FROM Further_Information_Requested__r)
+                FROM Case__c
+                WHERE AWS_Application_Id__c = :applicationId
+                ORDER BY CreatedDate DESC
+                LIMIT 1];
+            
+
+              if (cases.isEmpty() || cases[0].Further_Information_Requested__r.isEmpty()) 
+            {
+                result.addError(
+                    'No Case or FIR found for applicationId: ' +
+                    applicationId
+                );
+                return;
+            }
+
+             // 3. Assign the comment and update
+            Further_Information_Requested__c fir = 
+                    cases[0].Further_Information_Requested__r[0];
+            fir.Comment_From_Applicant__c = applicantComment;
+            fir.Date_Information_was_Received__c = System.now().date();
+            
+            update fir;
+
+            result.formType = 'FIR_RESPONSE_SUBMITTED';
+
+            Logger.info(
+                'FIR response updated successfully. ' +
+                'ApplicationId=' + applicationId +
+                ', CaseId=' + cases[0].Id +
+                ', FIRId=' + fir.Id
+            );
+        }
+        catch (Exception e)
+        {
+            result.addError(
+                'FIR response processing failed: ' +
+                e.getMessage()
+            );
+
+            Logger.error(
+                'FIR response processing failed: ' +
+                e.getMessage()
+            );
+
+            Logger.setScenario(
+                'InboundForm_Processor.handleFIRResponseSubmittedEvent'
+            );
+
+            Logger.saveLog();
+        }
+    }     
+
+    
     /**
      * Initialize schema cache for all registered objects
      */
@@ -397,6 +476,12 @@ public with sharing class InboundForm_Processor {
             {
                 System.debug('Raghu-test' + eventType);
                 handlePaymentEvent(parser, result);
+                return result;
+            }
+             if(eventType == FIR_RESPONSE_SUBMITTED)
+            {
+                System.debug('Raghu-test' + eventType);
+                handleFIRResponseSubmittedEvent(parser, result);
                 return result;
             }
 

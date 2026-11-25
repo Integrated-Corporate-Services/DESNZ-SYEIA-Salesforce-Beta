@@ -1,0 +1,11 @@
+.slds-section__title-action {
+    font-size: 1.25rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    color: #032d60;
+}
+
+.field-row {
+    border-bottom: 1px solid #dddbda;
+    margin-bottom: 0.5rem;
+}
