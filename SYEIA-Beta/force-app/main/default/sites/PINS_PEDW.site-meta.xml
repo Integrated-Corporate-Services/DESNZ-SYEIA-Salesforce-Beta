@@ -23,7 +23,7 @@
     <redirectToCustomDomain>false</redirectToCustomDomain>
     <referrerPolicyOriginWhenCrossOrigin>true</referrerPolicyOriginWhenCrossOrigin>
     <selfRegPage>CommunitiesSelfReg</selfRegPage>
-    <siteAdmin>narasimha.datla@ics.gov.uk</siteAdmin>
+    <siteAdmin>joshua.eze@ics.gov.uk</siteAdmin>
     <siteGuestRecordDefaultOwner>joshua.eze@ics.gov.uk</siteGuestRecordDefaultOwner>
     <siteType>ChatterNetwork</siteType>
 </CustomSite>

@@ -4,7 +4,6 @@
     <allowMembersToFlag>false</allowMembersToFlag>
     <changePasswordTemplate>unfiled$public/CommunityChangePasswordEmailTemplate</changePasswordTemplate>
     <communityRoles/>
-    <disablePvtPagesForPwdResetInLWR>false</disablePvtPagesForPwdResetInLWR>
     <disableReputationRecordConversations>false</disableReputationRecordConversations>
     <emailDomainSubstitutionEnabled>false</emailDomainSubstitutionEnabled>
     <emailSenderAddress>noreply@energysecurity.gov.uk</emailSenderAddress>
