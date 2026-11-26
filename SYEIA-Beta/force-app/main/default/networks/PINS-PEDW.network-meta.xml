@@ -5,7 +5,6 @@
     <changePasswordTemplate>unfiled$public/CommunityChangePasswordEmailTemplate</changePasswordTemplate>
     <communityRoles/>
     <disableReputationRecordConversations>false</disableReputationRecordConversations>
-    <emailDomainSubstitutionEnabled>false</emailDomainSubstitutionEnabled>
     <emailSenderAddress>noreply@energysecurity.gov.uk</emailSenderAddress>
     <emailSenderName>PINS/PEDW</emailSenderName>
     <embeddedLoginEnabled>false</embeddedLoginEnabled>
