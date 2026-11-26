@@ -29,7 +29,7 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
             normalizeInstalledAssets(records);
             enrichInstalledAssets(parser, records);
             normalizeLandLocation(records);
-            removeEmptyCaseNotes(records); 
+            removeEmptyCaseNotes(records);
             InboundForm_Processor.applyPaymentRules(parser, records);
         } catch (Exception e) {
             Logger.error('Error in NWL afterBuild: ' + e.getMessage());
@@ -40,7 +40,7 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
 
     public void afterPrimaryInsert(InboundForm_JSONParser parser, Id primaryCaseId,
                                     InboundForm_Processor.ProcessingResult result) {
-
+        // No-op for NWL.
     }
 
     public void afterAllInserts(Id primaryCaseId, Map<String, List<SObject>> insertedRecords) {
@@ -115,18 +115,6 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
                 caseToUpdate.Landowner__c = landowner.Id;
                 shouldUpdate = true;
 
-            Party__c landowner = getPartyByTypeAndApplicationPartyId(
-                insertedRecords,
-                'Landowner',
-                'NWL_LANDOWNER'
-            );
-          System.debug(LoggingLevel.INFO, 'Raghu details-16 '+ landownerId);
-                      //System.debug(LoggingLevel.INFO, 'Raghu details-17 '+ landowner);
-            if (insertedCase != null
-                    && insertedCase.Is_Objector_also_Landowner__c != 'Yes'
-                    && landownerId != null) {     
-                         caseToUpdate.Landowner__c = landownerId;
-                        shouldUpdate = true;
                 if (objectorIsLandowner == 'Yes' && objector != null) {
                     copyPartyDetails(objector, landowner);
                     partiesToUpdate.add(landowner);
@@ -157,7 +145,7 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
             Logger.setScenario('InboundForm_NWLHandler.afterAllInserts');
             Logger.saveLog();
         }
-    }    
+    }
 
     /**
      * Finds a Party in the inserted records; falls back to the database
@@ -694,10 +682,6 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
         }
     }
 
-    /**
-     * Drops migration Case Notes with no comment, so payloads where
-     * salesforceMigration.salesforce_notes is null don't create empty notes.
-     */
     /**
      * Drops migration Case Notes with no comment, so payloads where
      * salesforceMigration.salesforce_notes is null don't create empty notes.
