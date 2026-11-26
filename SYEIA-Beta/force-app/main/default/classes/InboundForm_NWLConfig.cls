@@ -270,6 +270,7 @@ public class InboundForm_NWLConfig {
         config.addCollection(getLandDetailsConfig());
         config.addCollection(getSiteAddressConfig());
         config.addCollection(getPaymentConfig());
+        config.addCollection(getCaseNoteConfig()); 
     }
 
     private static InboundForm_MappingConfig.CollectionConfig getApplicantConfig() {
@@ -683,4 +684,26 @@ public class InboundForm_NWLConfig {
 
         return siteAddress;
     }
+    
+    private static InboundForm_MappingConfig.CollectionConfig getCaseNoteConfig() {
+        InboundForm_MappingConfig.CollectionConfig caseNotes =
+            new InboundForm_MappingConfig.CollectionConfig()
+                .setCollectionName('MigrationCaseNotes')
+                .setJsonPath('salesforceMigration')
+                .setTargetObject('Case_Note__c')
+                .setParentLookupField('Case__c')
+                .setProcessingOrder(70);
+
+        caseNotes.addFieldMapping(InboundForm_MappingConfig.stringField(
+            'salesforce_notes',
+            'Comment__c'
+        ));
+        caseNotes.addFieldMapping(InboundForm_MappingConfig.defaultValue(
+            'Migrated Salesforce note',
+            'Name'
+        ));
+
+        return caseNotes;
+    }
+
 }

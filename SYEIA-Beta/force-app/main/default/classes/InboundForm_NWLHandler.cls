@@ -29,6 +29,7 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
             normalizeInstalledAssets(records);
             enrichInstalledAssets(parser, records);
             normalizeLandLocation(records);
+            removeEmptyCaseNotes(records); 
             InboundForm_Processor.applyPaymentRules(parser, records);
         } catch (Exception e) {
             Logger.error('Error in NWL afterBuild: ' + e.getMessage());
@@ -39,38 +40,31 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
 
     public void afterPrimaryInsert(InboundForm_JSONParser parser, Id primaryCaseId,
                                     InboundForm_Processor.ProcessingResult result) {
-        // No-op for NWL.
+
     }
 
     public void afterAllInserts(Id primaryCaseId, Map<String, List<SObject>> insertedRecords) {
         try {
             Case__c caseToUpdate = new Case__c(Id = primaryCaseId);
-            
             Boolean shouldUpdate = false;
-            Boolean landownerShouldUpdate = false;
-            Boolean representativeShouldUpdate = false;
+            List<Party__c> partiesToUpdate = new List<Party__c>();
 
+            // Saved Case values (reliable 'Yes' / 'No')
+            Case__c savedCase = [
+                SELECT Id, Is_Objector_also_Landowner__c, Does_Objector_Have_Representative__c
+                FROM Case__c
+                WHERE Id = :primaryCaseId
+                LIMIT 1
+            ];
+
+            // ---------- DNO ----------
             Id applicantOrgId = getApplicantOrganisationId(primaryCaseId, insertedRecords);
             if (applicantOrgId != null) {
-                try {
-                    update new Case__c(
-                        Id = primaryCaseId,
-                        DNO__c = applicantOrgId
-                    );
-                } catch (Exception e) {
-                    Logger.error('Error updating NWL case DNO lookup: ' + e.getMessage());
-                    Logger.setScenario('InboundForm_NWLHandler.afterAllInserts');
-                    Logger.saveLog();
-                }
+                caseToUpdate.DNO__c = applicantOrgId;
+                shouldUpdate = true;
             }
 
-            Case__c insertedCasenew = [
-    			SELECT Id, Is_Objector_also_Landowner__c, Does_Objector_Have_Representative__c
-    			FROM Case__c
-    			WHERE Id = :primaryCaseId
-    			LIMIT 1
-			];
-            
+            // ---------- Payment / Land ----------
             Id paymentId = getFirstRecordId(insertedRecords, 'Payment__c');
             if (paymentId != null) {
                 caseToUpdate.Payment__c = paymentId;
@@ -83,136 +77,63 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
                 shouldUpdate = true;
             }
 
-            Id objectorId = getPartyIdByTypeAndApplicationPartyId(
-                insertedRecords,
-                'Objector',
-                'NWL_OBJECTOR'
-            );
-            Party__c objector = getPartyByTypeAndApplicationPartyId(
-                insertedRecords,
-                'Objector',
-                'NWL_OBJECTOR'
-            );
-            if (objectorId != null) {
-                caseToUpdate.Objector__c = objectorId;
+            // ---------- Objector ----------
+            Party__c objector = findParty(primaryCaseId, insertedRecords, 'Objector', 'NWL_OBJECTOR');
+            if (objector != null) {
+                caseToUpdate.Objector__c = objector.Id;
                 shouldUpdate = true;
             }
-         
-            Party__c representative = getPartyByTypeAndApplicationPartyId(
-                insertedRecords,
-                'Representative',
-                'NWL_REPRESENTATIVE'
-            );
-            
-            Id representativeId = representative == null ? null : representative.Id;
-            
-            //System.debug(LoggingLevel.INFO, 'Raghu details-15 '+ representativeId);
-          
-            Case__c insertedCase = getFirstCase(insertedRecords);
-            
-            if (insertedCase != null
-                    && insertedCase.Does_Objector_Have_Representative__c == 'No'
-                    && objectorId != null) {     
-                         caseToUpdate.Representative__c = representativeId;
-                         shouldUpdate = true;
-            }
-            else if (insertedCasenew != null 
-                     	&& insertedCasenew.Does_Objector_Have_Representative__c == 'No'
-                   		 && representativeId != null){
-                	caseToUpdate.Representative__c = representativeId;
-                	shouldUpdate = true;
-					//System.debug(LoggingLevel.INFO, 'Raghu inside-else-represent '+ insertedCasenew);
-                
-                    //System.debug(LoggingLevel.INFO, 'Raghu landownerinside-else-represent '+ representative);
-                    
-                    representative.name  =  objector?.Name;        
-                    representative.Salutation__c = objector?.Salutation__c;
-                    representative.Phone__c = objector?.Phone__c;
-                    representative.Email__c = objector?.Email__c;
-                    representativeShouldUpdate = true;
+
+            // ---------- Representative -> Case__c.Representative__c ----------
+            Party__c representative = findParty(
+                primaryCaseId, insertedRecords, 'Representative', 'NWL_REPRESENTATIVE');
+            String hasRep = savedCase.Does_Objector_Have_Representative__c;
+
+            if (representative != null) {
+                caseToUpdate.Representative__c = representative.Id;
+                shouldUpdate = true;
+
+                // No separate representative: the objector represents themselves
+                if (hasRep == 'No' && objector != null) {
+                    copyPartyDetails(objector, representative);
+                    partiesToUpdate.add(representative);
+                }
+            } else if (hasRep == 'No' && objector != null) {
+                // No representative Party sent: point at the objector
+                caseToUpdate.Representative__c = objector.Id;
+                shouldUpdate = true;
+            } else {
+                Logger.warn('NWL: no representative Party found for case ' + primaryCaseId
+                    + ' (Does_Objector_Have_Representative__c = ' + hasRep + ')');
             }
 
-            
-            if (insertedCase != null
-                    && insertedCase.Does_Objector_Have_Representative__c == 'Yes'
-                    && representativeId != null) {     
-                         caseToUpdate.Representative__c = representativeId;
-                        shouldUpdate = true;
-            }
+            // ---------- Landowner -> Case__c.Landowner__c ----------
+            Party__c landowner = findParty(primaryCaseId, insertedRecords, 'Landowner', 'NWL_LANDOWNER');
+            String objectorIsLandowner = savedCase.Is_Objector_also_Landowner__c;
 
-            Id landownerId = getPartyIdByTypeAndApplicationPartyId(
-                insertedRecords,
-                'Landowner',
-                'NWL_LANDOWNER'
-            );
+            if (landowner != null) {
+                caseToUpdate.Landowner__c = landowner.Id;
+                shouldUpdate = true;
 
-            Party__c landowner = getPartyByTypeAndApplicationPartyId(
-                insertedRecords,
-                'Landowner',
-                'NWL_LANDOWNER'
-            );
-          //System.debug(LoggingLevel.INFO, 'Raghu details-16 '+ landownerId);
-                      //System.debug(LoggingLevel.INFO, 'Raghu details-17 '+ landowner);
-            if (insertedCase != null
-                    && insertedCase.Is_Objector_also_Landowner__c != 'Yes'
-                    && landownerId != null) {     
-                         caseToUpdate.Landowner__c = landownerId;
-                        shouldUpdate = true;
+                if (objectorIsLandowner == 'Yes' && objector != null) {
+                    copyPartyDetails(objector, landowner);
+                    partiesToUpdate.add(landowner);
+                }
+            } else if (objectorIsLandowner == 'Yes' && objector != null) {
+                // No landowner Party sent: point at the objector
+                caseToUpdate.Landowner__c = objector.Id;
+                shouldUpdate = true;
             }
-            else if (insertedCasenew != null 
-                     	&& insertedCasenew.Is_Objector_also_Landowner__c != 'Yes'
-                   		 && landownerId != null){
-                          caseToUpdate.Landowner__c = landownerId;
-                        shouldUpdate = true;
-            }
-            
-            if (insertedCase != null
-                    && insertedCase.Is_Objector_also_Landowner__c == 'Yes'
-                    && objectorId != null) {
-                	caseToUpdate.Landowner__c = objectorId;
-                	shouldUpdate = true;
-					//System.debug(LoggingLevel.INFO, 'Raghu inside'+ insertedCase);
-                    //System.debug(LoggingLevel.INFO, 'Raghu landownerinside'+ landowner);
-                    landowner.Salutation__c = objector?.Salutation__c;
-                    landowner.Phone__c = objector?.Phone__c;
-                    landowner.Email__c = objector?.Email__c;
-                    landownerShouldUpdate = true;
-            }
-             else if (insertedCasenew != null 
-                     	&& insertedCasenew.Is_Objector_also_Landowner__c == 'Yes'
-                   		 && landownerId != null){
-                	caseToUpdate.Landowner__c = landownerId;
-                	shouldUpdate = true;
-					//System.debug(LoggingLevel.INFO, 'Raghu inside-else '+ insertedCasenew);
-                    //System.debug(LoggingLevel.INFO, 'Raghu landownerinside-else '+ landowner);
-                    
-                    landowner.name  =  objector?.Name;        
-                    landowner.Salutation__c = objector?.Salutation__c;
-                    landowner.Phone__c = objector?.Phone__c;
-                    landowner.Email__c = objector?.Email__c;
-                    landownerShouldUpdate = true;
-            }
-            
 
             linkApplicantContactToApplicant(primaryCaseId);
-
             linkLandToSiteAddress(insertedRecords);
-
-            /*if (!shouldUpdate) {
-                return;
-            }*/
 
             try {
                 if (shouldUpdate) {
-                	update caseToUpdate;
-            	}
-                
-                if (landownerShouldUpdate) {
-                    update landowner;
+                    update caseToUpdate;
                 }
-                
-                if(representativeShouldUpdate){
-                    update representative;
+                if (!partiesToUpdate.isEmpty()) {
+                    update partiesToUpdate;
                 }
             } catch (Exception e) {
                 Logger.error('Error updating NWL case lookups: ' + e.getMessage());
@@ -224,6 +145,42 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
             Logger.setScenario('InboundForm_NWLHandler.afterAllInserts');
             Logger.saveLog();
         }
+    }    
+
+    /**
+     * Finds a Party in the inserted records; falls back to the database
+     * so the lookup still works if the record isn't in the map.
+     */
+    private static Party__c findParty(
+            Id primaryCaseId,
+            Map<String, List<SObject>> insertedRecords,
+            String partyType,
+            String applicationPartyId) {
+
+        Party__c party = getPartyByTypeAndApplicationPartyId(
+            insertedRecords, partyType, applicationPartyId);
+        if (party != null) {
+            return party;
+        }
+
+        List<Party__c> parties = [
+            SELECT Id, Name, Salutation__c, Phone__c, Email__c, Organisation__c
+            FROM Party__c
+            WHERE Case__c = :primaryCaseId
+              AND Party_Type__c = :partyType
+              AND Application_Party_Id__c = :applicationPartyId
+            ORDER BY CreatedDate DESC
+            LIMIT 1
+        ];
+        return parties.isEmpty() ? null : parties[0];
+    }
+
+    private static void copyPartyDetails(Party__c source, Party__c target) {
+        target.Name            = source.Name;
+        target.Salutation__c   = source.Salutation__c;
+        target.Phone__c        = source.Phone__c;
+        target.Email__c        = source.Email__c;
+        target.Organisation__c = source.Organisation__c;
     }
 
     private static void normalizeApplicationType(Case__c caseRecord) {
@@ -722,6 +679,29 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
             Logger.error('Error linking NWL applicant contact to applicant: ' + e.getMessage());
             Logger.setScenario('InboundForm_NWLHandler.linkApplicantContactToApplicant');
             Logger.saveLog();
+        }
+    }
+
+    /**
+     * Drops migration Case Notes with no comment, so payloads where
+     * salesforceMigration.salesforce_notes is null don't create empty notes.
+     */
+    /**
+     * Drops migration Case Notes with no comment, so payloads where
+     * salesforceMigration.salesforce_notes is null don't create empty notes.
+     */
+    @TestVisible
+    private static void removeEmptyCaseNotes(Map<String, List<SObject>> records) {
+        if (!records.containsKey('Case_Note__c')) {
+            return;
+        }
+
+        List<SObject> notes = records.get('Case_Note__c');
+        for (Integer i = notes.size() - 1; i >= 0; i--) {
+            Case_Note__c note = (Case_Note__c) notes[i];
+            if (String.isBlank(note.Comment__c)) {
+                notes.remove(i);
+            }
         }
     }
 }
