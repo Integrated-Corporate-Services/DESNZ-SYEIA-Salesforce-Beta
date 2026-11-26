@@ -686,15 +686,19 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
      * Drops migration Case Notes with no comment, so payloads where
      * salesforceMigration.salesforce_notes is null don't create empty notes.
      */
+    /**
+     * Drops migration Case Notes with no comment, so payloads where
+     * salesforceMigration.salesforce_notes is null don't create empty notes.
+     */
     @TestVisible
     private static void removeEmptyCaseNotes(Map<String, List<SObject>> records) {
-        if (!records.containsKey('Case_Notes__c')) {
+        if (!records.containsKey('Case_Note__c')) {
             return;
         }
 
-        List<SObject> notes = records.get('Case_Notes__c');
+        List<SObject> notes = records.get('Case_Note__c');
         for (Integer i = notes.size() - 1; i >= 0; i--) {
-            Case_Notes__c note = (Case_Notes__c) notes[i];
+            Case_Note__c note = (Case_Note__c) notes[i];
             if (String.isBlank(note.Comment__c)) {
                 notes.remove(i);
             }
