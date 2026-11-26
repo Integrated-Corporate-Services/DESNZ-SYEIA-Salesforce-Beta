@@ -65,9 +65,7 @@
         <loginPageOverrideSetting>Designer</loginPageOverrideSetting>
         <selfRegProfilePageOverrideSetting>Designer</selfRegProfilePageOverrideSetting>
     </networkPageOverrides>
-    <pendingSecondaryEmailAddress>joshua.eze@ics.gov.uk</pendingSecondaryEmailAddress>
     <picassoSite>PINS_PEDW1</picassoSite>
-    <secondaryEmailSenderEnabled>true</secondaryEmailSenderEnabled>
     <selfRegProfile>partner community user</selfRegProfile>
     <selfRegistration>true</selfRegistration>
     <sendWelcomeEmail>true</sendWelcomeEmail>
