@@ -29,7 +29,6 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
             normalizeInstalledAssets(records);
             enrichInstalledAssets(parser, records);
             normalizeLandLocation(records);
-            removeEmptyCaseNotes(records); 
         } catch (Exception e) {
             Logger.error('Error in NWL afterBuild: ' + e.getMessage());
             Logger.setScenario('InboundForm_NWLHandler.afterBuild');
@@ -39,7 +38,7 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
 
     public void afterPrimaryInsert(InboundForm_JSONParser parser, Id primaryCaseId,
                                     InboundForm_Processor.ProcessingResult result) {
-
+        // No-op for NWL.
     }
 
     public void afterAllInserts(Id primaryCaseId, Map<String, List<SObject>> insertedRecords) {
@@ -722,29 +721,6 @@ public class InboundForm_NWLHandler implements InboundForm_Processor.IFormHandle
             Logger.error('Error linking NWL applicant contact to applicant: ' + e.getMessage());
             Logger.setScenario('InboundForm_NWLHandler.linkApplicantContactToApplicant');
             Logger.saveLog();
-        }
-    }
-
-    /**
-     * Drops migration Case Notes with no comment, so payloads where
-     * salesforceMigration.salesforce_notes is null don't create empty notes.
-     */
-    /**
-     * Drops migration Case Notes with no comment, so payloads where
-     * salesforceMigration.salesforce_notes is null don't create empty notes.
-     */
-    @TestVisible
-    private static void removeEmptyCaseNotes(Map<String, List<SObject>> records) {
-        if (!records.containsKey('Case_Note__c')) {
-            return;
-        }
-
-        List<SObject> notes = records.get('Case_Note__c');
-        for (Integer i = notes.size() - 1; i >= 0; i--) {
-            Case_Note__c note = (Case_Note__c) notes[i];
-            if (String.isBlank(note.Comment__c)) {
-                notes.remove(i);
-            }
         }
     }
 }

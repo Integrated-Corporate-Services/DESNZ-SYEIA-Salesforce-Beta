@@ -286,42 +286,4 @@ private class InboundForm_NWLConfigTest {
         Assert.areEqual('Asset_Information__c', installedAssetsConfig.targetObject,
             'Installed assets should create Asset_Information__c records');
     }
-    @IsTest
-    static void testGetConfig_HasMigrationCaseNotesCollection() {
-        InboundForm_MappingConfig.FormTypeConfig config = InboundForm_NWLConfig.getConfig();
-
-        InboundForm_MappingConfig.CollectionConfig caseNoteConfig;
-        for (InboundForm_MappingConfig.CollectionConfig coll : config.collections) {
-            if (coll.collectionName == 'MigrationCaseNotes') {
-                caseNoteConfig = coll;
-                break;
-            }
-        }
-
-        Assert.isNotNull(caseNoteConfig, 'MigrationCaseNotes collection should exist');
-        Assert.areEqual('salesforceMigration', caseNoteConfig.jsonPath,
-            'Case notes should map from salesforceMigration');
-        Assert.areEqual('Case_Note__c', caseNoteConfig.targetObject,
-            'Case notes should create Case_Note__c records');
-        Assert.areEqual('Case__c', caseNoteConfig.parentLookupField,
-            'Case notes should be attached directly to Case');
-
-        Map<String, InboundForm_MappingConfig.FieldMapping> noteMappingsByTarget =
-            new Map<String, InboundForm_MappingConfig.FieldMapping>();
-        for (InboundForm_MappingConfig.FieldMapping mapping : caseNoteConfig.fieldMappings) {
-            noteMappingsByTarget.put(mapping.targetField, mapping);
-        }
-
-        Assert.isTrue(noteMappingsByTarget.containsKey('Comment__c'),
-            'Comment should be mapped');
-        Assert.areEqual(
-            'salesforce_notes',
-            noteMappingsByTarget.get('Comment__c').jsonPath,
-            'Comment should map from salesforceMigration.salesforce_notes'
-        );
-
-        Assert.isTrue(noteMappingsByTarget.containsKey('Name'),
-            'Case note name should have a default value');
-    }
-
 }
