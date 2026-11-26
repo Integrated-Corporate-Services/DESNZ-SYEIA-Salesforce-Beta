@@ -295,7 +295,7 @@ private class InboundForm_NWLConfigTest {
             if (coll.collectionName == 'MigrationCaseNotes') {
                 caseNoteConfig = coll;
                 break;
-            }`
+            }
         }
 
         Assert.isNotNull(caseNoteConfig, 'MigrationCaseNotes collection should exist');
