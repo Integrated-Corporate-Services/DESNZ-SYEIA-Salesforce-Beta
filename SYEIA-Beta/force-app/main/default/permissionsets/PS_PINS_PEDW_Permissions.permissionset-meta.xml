@@ -321,11 +321,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Case__c.Country_Formula__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Case__c.County__c</field>
         <readable>true</readable>
     </fieldPermissions>
