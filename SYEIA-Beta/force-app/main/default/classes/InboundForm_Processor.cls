@@ -11,6 +11,7 @@ public with sharing class InboundForm_Processor {
     private static final String BACS_PAYMENT_EVENT = 'BACS_PAYMENT_EVENT';
     
     private static final String FIR_RESPONSE_SUBMITTED = 'FIR_RESPONSE_SUBMITTED';
+    private static final String APPLICATION_REASSIGNED = 'APPLICATION_REASSIGNED';
 
     // Schema cache to avoid repeated getGlobalDescribe calls
     private static Map<String, Schema.SObjectType> sObjectTypeCache = 
