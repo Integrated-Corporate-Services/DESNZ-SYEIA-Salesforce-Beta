@@ -24,6 +24,11 @@
                 <default>false</default>
                 <label>Tree_Lopping</label>
             </value>
+            <value>
+                <fullName>Compulsory_Purchase_Order</fullName>
+                <default>false</default>
+                <label>Compulsory_Purchase_Order</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

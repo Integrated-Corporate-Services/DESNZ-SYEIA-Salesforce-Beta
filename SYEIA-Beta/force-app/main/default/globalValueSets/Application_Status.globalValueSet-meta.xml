@@ -95,6 +95,21 @@
         <default>false</default>
         <label>Completed</label>
     </customValue>
+    <customValue>
+        <fullName>Pre-application</fullName>
+        <default>false</default>
+        <label>Pre-application</label>
+    </customValue>
+    <customValue>
+        <fullName>Inquiry</fullName>
+        <default>false</default>
+        <label>Inquiry</label>
+    </customValue>
+    <customValue>
+        <fullName>Decision In-progress</fullName>
+        <default>false</default>
+        <label>Decision In-progress</label>
+    </customValue>
     <masterLabel>Application Status</masterLabel>
     <sorted>false</sorted>
 </GlobalValueSet>
